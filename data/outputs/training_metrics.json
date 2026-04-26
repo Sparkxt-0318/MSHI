@@ -1,0 +1,155 @@
+{
+  "n_train_total": 587,
+  "feature_cols": [
+    "soc",
+    "nitrogen",
+    "phh2o",
+    "clay",
+    "sand",
+    "silt",
+    "bdod",
+    "cec",
+    "bio01",
+    "bio04",
+    "bio05",
+    "bio06",
+    "bio12",
+    "bio14",
+    "bio15",
+    "bio17",
+    "c_n_ratio",
+    "clay_sand_ratio",
+    "ph_optimality",
+    "aridity_demartonne"
+  ],
+  "target_col": "log_rs_annual",
+  "cv": [
+    {
+      "fold": 0,
+      "n_train": 483,
+      "n_val": 104,
+      "r2": 0.027322888374328613,
+      "rmse": 0.6214237416131383,
+      "mae": 0.4682970345020294
+    },
+    {
+      "fold": 1,
+      "n_train": 499,
+      "n_val": 88,
+      "r2": 0.1242859959602356,
+      "rmse": 0.7738043945617593,
+      "mae": 0.6012497544288635
+    },
+    {
+      "fold": 2,
+      "n_train": 453,
+      "n_val": 134,
+      "r2": -0.01326441764831543,
+      "rmse": 0.47303496707257975,
+      "mae": 0.380829781293869
+    },
+    {
+      "fold": 3,
+      "n_train": 415,
+      "n_val": 172,
+      "r2": 0.17879551649093628,
+      "rmse": 0.6728777610428778,
+      "mae": 0.5276056528091431
+    },
+    {
+      "fold": 4,
+      "n_train": 498,
+      "n_val": 89,
+      "r2": 0.0844719409942627,
+      "rmse": 0.7515539125201715,
+      "mae": 0.5639182329177856
+    }
+  ],
+  "cv_mean_r2": 0.08032238483428955,
+  "cv_mean_rmse": 0.6585389553621053,
+  "shap": {
+    "ranked_features": [
+      {
+        "feature": "bio12",
+        "mean_abs_shap": 0.07252255082130432
+      },
+      {
+        "feature": "silt",
+        "mean_abs_shap": 0.06183957681059837
+      },
+      {
+        "feature": "clay_sand_ratio",
+        "mean_abs_shap": 0.05266086384654045
+      },
+      {
+        "feature": "bio01",
+        "mean_abs_shap": 0.05063924193382263
+      },
+      {
+        "feature": "bio04",
+        "mean_abs_shap": 0.05046346038579941
+      },
+      {
+        "feature": "nitrogen",
+        "mean_abs_shap": 0.04441032558679581
+      },
+      {
+        "feature": "c_n_ratio",
+        "mean_abs_shap": 0.04329029470682144
+      },
+      {
+        "feature": "aridity_demartonne",
+        "mean_abs_shap": 0.041619714349508286
+      },
+      {
+        "feature": "sand",
+        "mean_abs_shap": 0.041238266974687576
+      },
+      {
+        "feature": "bio05",
+        "mean_abs_shap": 0.03832467272877693
+      },
+      {
+        "feature": "cec",
+        "mean_abs_shap": 0.03472724184393883
+      },
+      {
+        "feature": "bdod",
+        "mean_abs_shap": 0.034701552242040634
+      },
+      {
+        "feature": "bio06",
+        "mean_abs_shap": 0.028614291921257973
+      },
+      {
+        "feature": "bio15",
+        "mean_abs_shap": 0.02766665816307068
+      },
+      {
+        "feature": "clay",
+        "mean_abs_shap": 0.02682742103934288
+      },
+      {
+        "feature": "ph_optimality",
+        "mean_abs_shap": 0.019567303359508514
+      },
+      {
+        "feature": "bio17",
+        "mean_abs_shap": 0.017992988228797913
+      },
+      {
+        "feature": "soc",
+        "mean_abs_shap": 0.016738254576921463
+      },
+      {
+        "feature": "phh2o",
+        "mean_abs_shap": 0.01284096110612154
+      },
+      {
+        "feature": "bio14",
+        "mean_abs_shap": 0.010595979169011116
+      }
+    ],
+    "shap_plot": "/home/user/MSHI/data/outputs/shap_summary.png"
+  }
+}
