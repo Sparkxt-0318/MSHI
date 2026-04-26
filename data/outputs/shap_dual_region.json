@@ -1,0 +1,202 @@
+{
+  "asia_n_train": 588,
+  "us_n_train": 270,
+  "feature_set": [
+    "soc",
+    "nitrogen",
+    "phh2o",
+    "clay",
+    "sand",
+    "silt",
+    "bdod",
+    "cec",
+    "bio01",
+    "bio04",
+    "bio05",
+    "bio06",
+    "bio12",
+    "bio14",
+    "bio15",
+    "bio17",
+    "c_n_ratio",
+    "clay_sand_ratio",
+    "ph_optimality",
+    "aridity_demartonne"
+  ],
+  "params": {
+    "n_estimators": 250,
+    "max_depth": 3,
+    "learning_rate": 0.05,
+    "subsample": 0.7,
+    "colsample_bytree": 0.85,
+    "min_child_weight": 6,
+    "reg_alpha": 0.1,
+    "reg_lambda": 2.0,
+    "n_jobs": 1,
+    "verbosity": 0
+  },
+  "asia_ranking": [
+    {
+      "feature": "bio12",
+      "mean_abs_shap": 0.07704823464155197
+    },
+    {
+      "feature": "silt",
+      "mean_abs_shap": 0.05888359621167183
+    },
+    {
+      "feature": "bio01",
+      "mean_abs_shap": 0.04753568395972252
+    },
+    {
+      "feature": "bio04",
+      "mean_abs_shap": 0.044864654541015625
+    },
+    {
+      "feature": "clay_sand_ratio",
+      "mean_abs_shap": 0.04480835050344467
+    },
+    {
+      "feature": "c_n_ratio",
+      "mean_abs_shap": 0.04325242340564728
+    },
+    {
+      "feature": "aridity_demartonne",
+      "mean_abs_shap": 0.0428699366748333
+    },
+    {
+      "feature": "bdod",
+      "mean_abs_shap": 0.03975607827305794
+    },
+    {
+      "feature": "sand",
+      "mean_abs_shap": 0.039034683257341385
+    },
+    {
+      "feature": "nitrogen",
+      "mean_abs_shap": 0.03890824317932129
+    },
+    {
+      "feature": "bio05",
+      "mean_abs_shap": 0.03868000954389572
+    },
+    {
+      "feature": "bio06",
+      "mean_abs_shap": 0.03755534067749977
+    },
+    {
+      "feature": "cec",
+      "mean_abs_shap": 0.03295213729143143
+    },
+    {
+      "feature": "bio15",
+      "mean_abs_shap": 0.031513381749391556
+    },
+    {
+      "feature": "clay",
+      "mean_abs_shap": 0.02982941083610058
+    },
+    {
+      "feature": "soc",
+      "mean_abs_shap": 0.0241059809923172
+    },
+    {
+      "feature": "ph_optimality",
+      "mean_abs_shap": 0.01915973797440529
+    },
+    {
+      "feature": "phh2o",
+      "mean_abs_shap": 0.01865803264081478
+    },
+    {
+      "feature": "bio17",
+      "mean_abs_shap": 0.017775265499949455
+    },
+    {
+      "feature": "bio14",
+      "mean_abs_shap": 0.01170363649725914
+    }
+  ],
+  "us_ranking": [
+    {
+      "feature": "bio12",
+      "mean_abs_shap": 0.09797937422990799
+    },
+    {
+      "feature": "nitrogen",
+      "mean_abs_shap": 0.0792694240808487
+    },
+    {
+      "feature": "bio05",
+      "mean_abs_shap": 0.06998489797115326
+    },
+    {
+      "feature": "phh2o",
+      "mean_abs_shap": 0.06983695924282074
+    },
+    {
+      "feature": "silt",
+      "mean_abs_shap": 0.06059304624795914
+    },
+    {
+      "feature": "bio15",
+      "mean_abs_shap": 0.058863140642642975
+    },
+    {
+      "feature": "bdod",
+      "mean_abs_shap": 0.058659762144088745
+    },
+    {
+      "feature": "bio01",
+      "mean_abs_shap": 0.03938595578074455
+    },
+    {
+      "feature": "soc",
+      "mean_abs_shap": 0.0362224280834198
+    },
+    {
+      "feature": "bio06",
+      "mean_abs_shap": 0.03502092882990837
+    },
+    {
+      "feature": "bio04",
+      "mean_abs_shap": 0.03469149395823479
+    },
+    {
+      "feature": "bio14",
+      "mean_abs_shap": 0.0291379913687706
+    },
+    {
+      "feature": "sand",
+      "mean_abs_shap": 0.02862662449479103
+    },
+    {
+      "feature": "clay",
+      "mean_abs_shap": 0.026499837636947632
+    },
+    {
+      "feature": "aridity_demartonne",
+      "mean_abs_shap": 0.025773009285330772
+    },
+    {
+      "feature": "c_n_ratio",
+      "mean_abs_shap": 0.02487792633473873
+    },
+    {
+      "feature": "bio17",
+      "mean_abs_shap": 0.023951994255185127
+    },
+    {
+      "feature": "cec",
+      "mean_abs_shap": 0.023382995277643204
+    },
+    {
+      "feature": "clay_sand_ratio",
+      "mean_abs_shap": 0.01955682970583439
+    },
+    {
+      "feature": "ph_optimality",
+      "mean_abs_shap": 0.016428420320153236
+    }
+  ]
+}
