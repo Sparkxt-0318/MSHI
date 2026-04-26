@@ -1,0 +1,7 @@
+config,description,n_features,features_kind,cv_r2,transfer_r2,transfer_bias,pred_std_us,delta_transfer_vs_climate_only
+A_baseline,depth=3 n_est=250 reg_lambda=2.0,20,all (incl. clay/sand/silt),-0.127,-0.031,-0.085,0.294,-0.158
+B_heavier_reg,depth=3 n_est=250 reg_lambda=8.0 reg_alpha=2.0,20,all (incl. clay/sand/silt),-0.083,0.02,-0.086,0.282,-0.107
+C_shallow_more,depth=2 n_est=400 reg_lambda=4.0,20,all (incl. clay/sand/silt),-0.054,-0.001,-0.084,0.295,-0.128
+D_drop_overfit,"baseline params; drop {clay,sand,silt,clay_sand_ratio}",16,selected (16 features),-0.139,-0.024,0.012,0.319,-0.151
+E_climate_plus_transferring_soil,8 bioclim + phh2o + ph_optimality + bdod + cec + aridity,13,selected (13 features),-0.128,0.008,-0.041,0.262,-0.119
+F_climate_only,8 bioclim only,8,selected (8 features),-0.067,0.127,-0.044,0.23,0.0
