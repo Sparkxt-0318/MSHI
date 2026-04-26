@@ -166,7 +166,8 @@ def main(cfg_path: Path) -> int:
              len(df), df.shape[1], feat_path)
 
     target = cfg["model"]["target"]
-    drop_cols = {target, "longitude", "latitude", "mbc", "source", "site_id"}
+    drop_cols = {target, "rs_annual", "longitude", "latitude",
+                 "site_id", "source", "region"}
     feature_cols = [c for c in df.columns if c not in drop_cols]
     df_clean = df.dropna(subset=[target] + feature_cols)
     LOG.info("After NaN drop: %d rows; %d features", len(df_clean), len(feature_cols))

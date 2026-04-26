@@ -155,33 +155,61 @@ def add_engineered_features(df: pd.DataFrame) -> pd.DataFrame:
 # ─────────────────────────────────────────────────────────────────────────────
 # Default raster registry (config-driven in run.sh)
 # ─────────────────────────────────────────────────────────────────────────────
-def default_registry(raw_dir: Path) -> Dict[str, Path]:
-    """Return the canonical mapping of feature name → raster path."""
+SOILGRIDS_VARS = ["soc", "nitrogen", "phh2o", "clay", "sand", "silt", "bdod", "cec"]
+
+
+def default_registry(raw_dir: Path, region: str = "asia",
+                     soilgrids_depth: str = "5-15cm") -> Dict[str, Path]:
+    """
+    Return the canonical mapping of feature name → raster path.
+
+    SoilGrids tiles are downloaded per region (asia / us) by download.py.
+    WorldClim and MODIS rasters are global, so the same path is used.
+    """
     sg = raw_dir / "soilgrids"
     wc = raw_dir / "worldclim"
     md = raw_dir / "modis"
-    return {
-        # SoilGrids 0–30cm means
-        "soc":      sg / "soc_0-30cm_asia_1000m.tif",
-        "nitrogen": sg / "nitrogen_0-30cm_asia_1000m.tif",
-        "phh2o":    sg / "phh2o_0-30cm_asia_1000m.tif",
-        "clay":     sg / "clay_0-30cm_asia_1000m.tif",
-        "sand":     sg / "sand_0-30cm_asia_1000m.tif",
-        "silt":     sg / "silt_0-30cm_asia_1000m.tif",
-        "bdod":     sg / "bdod_0-30cm_asia_1000m.tif",
-        "cec":      sg / "cec_0-30cm_asia_1000m.tif",
-        # WorldClim
-        "bio01":    wc / "wc2.1_30s_bio_1.tif",
-        "bio04":    wc / "wc2.1_30s_bio_4.tif",
-        "bio05":    wc / "wc2.1_30s_bio_5.tif",
-        "bio06":    wc / "wc2.1_30s_bio_6.tif",
-        "bio12":    wc / "wc2.1_30s_bio_12.tif",
-        "bio14":    wc / "wc2.1_30s_bio_14.tif",
-        "bio15":    wc / "wc2.1_30s_bio_15.tif",
-        "bio17":    wc / "wc2.1_30s_bio_17.tif",
-        # MODIS
-        "npp":        md / "npp_2020_2024_mean.tif",
-        "lst_day":    md / "lst_day_2020_2024_mean.tif",
-        "lst_night":  md / "lst_night_2020_2024_mean.tif",
-        "landcover":  md / "landcover_igbp_2023.tif",
-    }
+    suffix = f"{soilgrids_depth}_{region}_5km.tif"
+    reg: Dict[str, Path] = {v: sg / f"{v}_{suffix}" for v in SOILGRIDS_VARS}
+    reg.update({
+        # WorldClim 2.1 bioclim variables (global tifs in degrees C / mm)
+        "bio01": wc / "wc2.1_30s_bio_1.tif",
+        "bio04": wc / "wc2.1_30s_bio_4.tif",
+        "bio05": wc / "wc2.1_30s_bio_5.tif",
+        "bio06": wc / "wc2.1_30s_bio_6.tif",
+        "bio12": wc / "wc2.1_30s_bio_12.tif",
+        "bio14": wc / "wc2.1_30s_bio_14.tif",
+        "bio15": wc / "wc2.1_30s_bio_15.tif",
+        "bio17": wc / "wc2.1_30s_bio_17.tif",
+        # MODIS (manual download via Earth Engine)
+        "npp":       md / "npp_2020_2024_mean.tif",
+        "lst_day":   md / "lst_day_2020_2024_mean.tif",
+        "lst_night": md / "lst_night_2020_2024_mean.tif",
+        "landcover": md / "landcover_igbp_2023.tif",
+    })
+    return reg
+
+
+# SoilGrids 2.0 stores everything as small integers; recover physical units.
+# Reference: https://www.isric.org/explore/soilgrids/faq-soilgrids#What_do_the_units_mean
+SOILGRIDS_SCALE = {
+    "soc":      0.1,    # dg/kg → g/kg
+    "nitrogen": 0.01,   # cg/kg → g/kg
+    "phh2o":    0.1,    # pH * 10 → pH
+    "clay":     0.1,    # g/kg * 10 → g/kg
+    "sand":     0.1,
+    "silt":     0.1,
+    "bdod":     0.01,   # cg/cm3 → g/cm3
+    "cec":      0.1,    # mmol(c)/kg * 10 → mmol(c)/kg
+}
+
+
+def rescale_soilgrids(df: pd.DataFrame) -> pd.DataFrame:
+    """Apply SoilGrids integer→physical scaling and treat 0 as NaN."""
+    out = df.copy()
+    for var, scale in SOILGRIDS_SCALE.items():
+        if var in out.columns:
+            v = out[var].astype("float32")
+            v = v.where(v > 0, np.nan)
+            out[var] = v * scale
+    return out

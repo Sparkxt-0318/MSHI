@@ -79,21 +79,24 @@ SOURCES = {
         ),
     },
     "soilgrids": {
-        "name": "ISRIC SoilGrids 2.0 (250m global)",
+        "name": "ISRIC SoilGrids 2.0 (5-15cm topsoil mean)",
         "url": "https://maps.isric.org/",
         "files": [
-            "soc_0-30cm_mean.tif", "nitrogen_0-30cm_mean.tif",
-            "phh2o_0-30cm_mean.tif", "clay_0-30cm_mean.tif",
-            "sand_0-30cm_mean.tif", "silt_0-30cm_mean.tif",
-            "bdod_0-30cm_mean.tif", "cec_0-30cm_mean.tif",
+            "soc_5-15cm_asia_5km.tif", "nitrogen_5-15cm_asia_5km.tif",
+            "phh2o_5-15cm_asia_5km.tif", "clay_5-15cm_asia_5km.tif",
+            "sand_5-15cm_asia_5km.tif", "silt_5-15cm_asia_5km.tif",
+            "bdod_5-15cm_asia_5km.tif", "cec_5-15cm_asia_5km.tif",
         ],
         "instructions": (
             "SoilGrids 2.0 supports OGC WCS for bbox extraction.\n"
-            "This script will attempt automated download for the Asia bbox.\n\n"
-            "If WCS times out, fall back to soilgrids Python package:\n"
+            "Coverage IDs use depth slices (0-5cm, 5-15cm, 15-30cm, ...);\n"
+            "this script grabs the 5-15cm topsoil mean as the canonical layer.\n"
+            "Two tiles per variable are saved: Asia bbox and US bbox at ~5km.\n\n"
+            "If WCS fails, fall back to the soilgrids Python package:\n"
             "    pip install soilgrids\n"
-            "    soilgrids --service WCS --map_service phh2o --bbox 25 -10 180 80 \\\n"
-            "             --resolution 1000 --output data/raw/soilgrids/phh2o_asia_1km.tif\n"
+            "    soilgrids --service WCS --map_service phh2o \\\n"
+            "             --coverage_id phh2o_5-15cm_mean --bbox 25 -10 180 80 \\\n"
+            "             --output data/raw/soilgrids/phh2o_asia.tif\n"
         ),
     },
     "worldclim": {
@@ -180,11 +183,22 @@ def _download_file(url: str, dest: Path, chunk: int = 1024 * 256) -> bool:
 
 
 def download_soilgrids_wcs(
-    variable: str, bbox: List[float], resolution_m: int,
-    out_path: Path, depth: str = "0-30cm", stat: str = "mean",
+    variable: str, bbox: List[float],
+    out_path: Path, depth: str = "5-15cm", stat: str = "mean",
+    pixel_size_deg: float = 0.05,
 ) -> bool:
+    """
+    Fetch a SoilGrids 2.0 layer over a bbox via the OGC WCS endpoint.
+
+    SoilGrids 2.0 only exposes per-depth slices (0-5, 5-15, 15-30, ... cm).
+    The default 5-15cm topsoil mean is the canonical layer for plant/microbial
+    activity studies. We use SCALESIZE (pixel counts) rather than RESOLUTION,
+    since mapserver interprets RESOLUTION ambiguously over EPSG:4326.
+    """
     coverage_id = f"{variable}_{depth}_{stat}"
     base = "https://maps.isric.org/mapserv"
+    width  = max(1, int(round((bbox[2] - bbox[0]) / pixel_size_deg)))
+    height = max(1, int(round((bbox[3] - bbox[1]) / pixel_size_deg)))
     params = {
         "map": f"/map/{variable}.map",
         "SERVICE": "WCS", "VERSION": "2.0.1",
@@ -193,12 +207,17 @@ def download_soilgrids_wcs(
         "SUBSET": [f"long({bbox[0]},{bbox[2]})", f"lat({bbox[1]},{bbox[3]})"],
         "OUTPUTCRS": "http://www.opengis.net/def/crs/EPSG/0/4326",
         "SUBSETTINGCRS": "http://www.opengis.net/def/crs/EPSG/0/4326",
-        "RESOLUTION": f"long({resolution_m}),lat({resolution_m})",
+        "SCALESIZE": f"long({width}),lat({height})",
     }
-    print(f"[soilgrids] requesting {coverage_id} for bbox={bbox} res={resolution_m}m")
+    print(f"[soilgrids] requesting {coverage_id} bbox={bbox} ({width}x{height} px)")
     try:
         r = requests.get(base, params=params, stream=True, timeout=300)
         r.raise_for_status()
+        ctype = r.headers.get("Content-Type", "")
+        if "xml" in ctype.lower():
+            body = r.content.decode("utf-8", errors="replace")[:400]
+            print(f"[soilgrids] server returned XML error: {body}", file=sys.stderr)
+            return False
         out_path.parent.mkdir(parents=True, exist_ok=True)
         with open(out_path, "wb") as f:
             for buf in r.iter_content(chunk_size=1024 * 256):
@@ -230,13 +249,33 @@ def print_all_instructions() -> None:
         print_instructions(key)
 
 
+SOILGRIDS_VARS = ["soc", "nitrogen", "phh2o", "clay", "sand", "silt", "bdod", "cec"]
+ASIA_BBOX = [25.0, -10.0, 180.0, 80.0]
+US_BBOX   = [-125.0, 24.0, -66.0, 50.0]
+
+
+def _fetch_soilgrids_region(region: str, bbox: List[float], variables: List[str],
+                            pixel_size_deg: float, depth: str = "5-15cm") -> int:
+    n_ok = 0
+    for v in variables:
+        out = RAW / "soilgrids" / f"{v}_{depth}_{region}_5km.tif"
+        if out.exists() and out.stat().st_size > 1024:
+            print(f"  · {v} ({region}): already present, skipping")
+            n_ok += 1
+            continue
+        if download_soilgrids_wcs(v, bbox, out, depth=depth,
+                                  pixel_size_deg=pixel_size_deg):
+            n_ok += 1
+    return n_ok
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description="MSHI-Geo data downloader")
     p.add_argument("--target", default="all",
                    choices=list(SOURCES.keys()) + ["all", "instructions"])
-    p.add_argument("--bbox", nargs=4, type=float,
-                   default=[25.0, -10.0, 180.0, 80.0])
-    p.add_argument("--resolution", type=int, default=1000)
+    p.add_argument("--bbox", nargs=4, type=float, default=ASIA_BBOX)
+    p.add_argument("--pixel-size-deg", type=float, default=0.05,
+                   help="Output pixel size in degrees (~0.05 ≈ 5 km)")
     p.add_argument("--vars", type=str, default="")
     args = p.parse_args()
 
@@ -246,23 +285,17 @@ def main() -> int:
 
     if args.target == "all":
         print_all_instructions()
-        print("\nAttempting automated SoilGrids download for default Asia bbox...")
-        targets = ["soc", "nitrogen", "phh2o", "clay", "sand", "silt", "bdod", "cec"]
-        for v in targets:
-            out = RAW / "soilgrids" / f"{v}_0-30cm_asia_{args.resolution}m.tif"
-            if out.exists():
-                print(f"  · {v}: already present, skipping")
-                continue
-            download_soilgrids_wcs(v, args.bbox, args.resolution, out)
+        print("\nAttempting automated SoilGrids download for Asia + US bboxes...")
+        n1 = _fetch_soilgrids_region("asia", ASIA_BBOX, SOILGRIDS_VARS, args.pixel_size_deg)
+        n2 = _fetch_soilgrids_region("us",   US_BBOX,   SOILGRIDS_VARS, args.pixel_size_deg)
+        print(f"\nSoilGrids: {n1}/{len(SOILGRIDS_VARS)} Asia layers, "
+              f"{n2}/{len(SOILGRIDS_VARS)} US layers fetched.")
         return 0
 
     if args.target == "soilgrids":
-        variables = args.vars.split(",") if args.vars else [
-            "soc", "nitrogen", "phh2o", "clay", "sand", "silt", "bdod", "cec"
-        ]
-        for v in variables:
-            out = RAW / "soilgrids" / f"{v.strip()}_0-30cm_asia_{args.resolution}m.tif"
-            download_soilgrids_wcs(v.strip(), args.bbox, args.resolution, out)
+        variables = [v.strip() for v in args.vars.split(",")] if args.vars else SOILGRIDS_VARS
+        _fetch_soilgrids_region("asia", ASIA_BBOX, variables, args.pixel_size_deg)
+        _fetch_soilgrids_region("us",   US_BBOX,   variables, args.pixel_size_deg)
         return 0
 
     print_instructions(args.target)

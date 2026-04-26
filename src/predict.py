@@ -2,8 +2,8 @@
 predict.py — run MSHI-Geo inference across an entire Asia grid.
 
 Streams the prediction grid through the model in chunks to keep memory low.
-Writes a GeoTIFF where each pixel is predicted log_mbc (and a back-transformed
-mbc_pred column inside the parquet output).
+Writes a GeoTIFF where each pixel is predicted log_rs_annual (with a
+back-transformed rs_pred column in the parquet output).
 
 Run:
     python src/predict.py --config configs/mshi_geo.yaml --resolution 5km
@@ -107,14 +107,18 @@ def main(cfg_path: Path, resolution_label: str) -> int:
     )
     feature_cols = metrics_meta["feature_cols"]
 
-    log_mbc = predict_grid(grid_df, model, feature_cols)
-    mbc_pred = np.exp(log_mbc)
+    log_rs = predict_grid(grid_df, model, feature_cols)
+    rs_pred = np.exp(log_rs)
 
-    grid_df["log_mbc_pred"] = log_mbc
-    grid_df["mbc_pred"]     = mbc_pred
+    grid_df["log_rs_pred"] = log_rs
+    grid_df["rs_pred"]     = rs_pred
 
+    # Carry climate features through to the parquet so composite.py can compute
+    # the climate-only baseline at the same grid cells without re-sampling.
+    keep_climate = [c for c in ["bio01", "bio04", "bio12", "bio14", "bio15"]
+                    if c in grid_df.columns]
     out_parquet = grid_path.with_name(grid_path.stem + "_predictions.parquet")
-    grid_df[["longitude", "latitude", "log_mbc_pred", "mbc_pred"]].to_parquet(
+    grid_df[["longitude", "latitude", "log_rs_pred", "rs_pred"] + keep_climate].to_parquet(
         out_parquet, index=False
     )
     LOG.info("Saved predictions parquet → %s", out_parquet)
@@ -122,7 +126,7 @@ def main(cfg_path: Path, resolution_label: str) -> int:
     write_geotiff(
         grid_df["longitude"].to_numpy(),
         grid_df["latitude"].to_numpy(),
-        log_mbc,
+        log_rs,
         out_tif,
     )
     LOG.info("Saved GeoTIFF → %s", out_tif)
