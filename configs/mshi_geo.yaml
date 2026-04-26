@@ -46,17 +46,20 @@ model:
     enabled: true
     n_splits: 5
     block_size_deg: 5.0
+  # NOTE: tuned conservatively after Asia→US transfer diagnostics (2026-04-26).
+  # Default depth=6/800 trees overfits SoilGrids texture features and breaks
+  # cross-continent generalization. Shallow + strong L2 transfers best.
   xgboost_params:
-    n_estimators: 800
-    max_depth: 6
+    n_estimators: 250
+    max_depth: 3
     learning_rate: 0.05
-    subsample: 0.85
+    subsample: 0.70
     colsample_bytree: 0.85
-    min_child_weight: 4
+    min_child_weight: 6
     reg_alpha: 0.1
-    reg_lambda: 1.0
+    reg_lambda: 2.0
     objective: "reg:squarederror"
-    early_stopping_rounds: 50
+    early_stopping_rounds: 40
 
 # Climate-only baseline used to compute climate-expected Rs (for the anomaly composite)
 climate_baseline:
