@@ -1,16 +1,17 @@
 # Results — MSHI-Geo continental respiration model
 
-*Draft, internal. Working numbers from the 2026-04-26 overnight run.*
+*Draft, internal. Working numbers from the 2026-04-26 / 2026-04-27 runs.*
 
 ## 1. Training data and target
 
 We assembled a global training table from two community databases of soil
-respiration: the Soil Respiration Database (SRDB v5; Bond-Lamberty & Thomson
-2010), which compiles literature-derived annual soil respiration estimates
-(*Rs<sub>annual</sub>*, g C m⁻² yr⁻¹), and the COntinuous SOil REspiration
-database (COSORE; Bond-Lamberty et al. 2020), which provides high-frequency
-chamber-flux time series. SRDB contributed 4,771 records after dropping
-manipulated treatments and out-of-range values
+respiration: the Soil Respiration Database (SRDB; Bond-Lamberty & Thomson
+2010, with the v5 update by Jian et al. 2021), which compiles literature-
+derived annual soil respiration estimates (*Rs<sub>annual</sub>*,
+g C m⁻² yr⁻¹), and the COntinuous SOil REspiration database (COSORE;
+Bond-Lamberty et al. 2020), which provides high-frequency chamber-flux
+time series. SRDB contributed 4,771 records after dropping manipulated
+treatments and out-of-range values
 (50 ≤ *Rs<sub>annual</sub>* ≤ 4,500 g C m⁻² yr⁻¹). COSORE was integrated to
 per-port annual fluxes — only ports with ≥150 unique observation days
 spanning ≥180 calendar days were retained — and aggregated to per-site
@@ -83,15 +84,52 @@ i.e. all models compress US predictions toward the training mean by 50–63%
 — the canonical signature of a model fitting noise rather than transferable
 structure.
 
+**Table 2 — alternative metrics for the two extreme configurations on US.**
+Values from Run A; both models retrained on the full Asia table for this
+report.
+
+| Metric | F: climate-only | B: full features (20) |
+|---|---:|---:|
+| n_train (Asia, post-NaN drop) | 600 | 588 |
+| n_us (post-NaN drop) | 272 | 270 |
+| R² (log Rs) | **+0.127** | +0.020 |
+| 95% bootstrap CI on R² (n=2000) | **(+0.019, +0.216)** | (−0.141, +0.146) |
+| RMSE (log Rs) | 0.585 | 0.616 |
+| NRMSE (RMSE / observed range) | 0.155 | 0.163 |
+| Spearman ρ | **+0.277** | +0.249 |
+| MAE (Rs, g C m⁻² yr⁻¹) | 359 | 364 |
+| Tertile classification accuracy | 37.1% | 40.0% |
+
+F's bootstrap 95% CI on transfer R² excludes zero; B's CI includes zero.
+F is statistically significantly better than chance, B is not.
+
 ## 3. Asia → US transfer
 
 The held-out validation test addresses the project's primary scientific
 question: does a model trained on Asian soil-respiration measurements
-generalise to a different continent? With the climate-only configuration
-the answer is *partially* — R² = +0.127, RMSE = 0.59 log units (≈ 80%
-multiplicative error in *Rs*), bias = −4%. With any feature set that
-includes the SoilGrids texture layers (clay, sand, silt, or their ratios),
-generalisation collapses to R² ≈ 0.
+generalise to a different continent? Two answers, depending on the
+feature set:
+
+- **Climate-only (F):** R² = +0.127 (95% bootstrap CI +0.019 to +0.216,
+  n_us = 272), RMSE = 0.585 log units (NRMSE = 0.155), Spearman ρ =
+  +0.277, bias = −0.044. The CI excludes zero, so the transfer is
+  statistically significantly positive; in absolute terms the model
+  recovers the rank ordering of US sites by *Rs* and explains roughly
+  13% of `log Rs` variance, while shrinking the predicted spread to
+  about 38% of the observed σ.
+
+- **Full features (B):** R² = +0.020 (95% CI −0.141 to +0.146,
+  n_us = 270), Spearman ρ = +0.249. The CI spans zero. We cannot
+  reject the null that adding the soil layers contributes nothing to
+  cross-continental generalisation.
+
+To our knowledge no published Rs upscaling study reports a held-out
+cross-continental transfer R² as defined here; published studies
+(Hashimoto et al. 2015; Warner et al. 2019; Yao et al. 2021;
+Stell et al. 2021) report Monte-Carlo CIs on the global Rs sum or
+within-sample MAE/RMSE on the global 0.5° to 1 km grid, but not a
+site-level transfer test of this kind. Section 5 returns to this point
+in the context of spatial bias of the SRDB record.
 
 The transfer gap relative to in-distribution performance — the difference
 between Asia random-KFold CV R² and Asia → US transfer R² — is
@@ -176,14 +214,34 @@ sparseness (≈ 1,400 SRDB+COSORE sites globally for *Rs<sub>annual</sub>*)
 limits both the training signal and the validation rigour available to
 upscaling efforts.
 
-Published continental *Rs* models report similar ceilings. [NEEDS
-CITATION: Hashimoto et al. 2015, *Biogeosciences*] reports global random-
-forest *Rs* models with R² ≈ 0.40–0.55 at the site level, but does not
-report cross-continental transfer. [NEEDS CITATION: Yao et al. 2019] uses
-machine-learning upscaling on a similar feature stack and finds soil
-features marginal beyond climate, consistent with our finding here.
-[NEEDS CITATION: Chen et al. 2020] specifically reports the within-region
-versus across-region performance gap.
+Published continental *Rs* models report uncertainty as Monte-Carlo CIs
+on the global Rs sum or as within-sample MAE/RMSE on the prediction grid;
+none of the four most directly comparable studies report a held-out
+cross-continental site-level transfer R² as defined in this work
+(Section 3). Hashimoto et al. 2015 estimates global Rs at 91 Pg C yr⁻¹
+(95% CI 87–95) with a climate-driven model at 0.5° resolution, with no
+site-level R² in the abstract. Warner et al. 2019 produces a 1 km
+quantile-regression-forest map of annual Rs with within-sample MAE =
+18.6 and RMSE = 40.4 Pg C yr⁻¹. Yao et al. 2021 reports a 0.5° random-
+forest soil heterotrophic respiration product but does not report
+site-level R² in the abstract. Stell et al. 2021 explicitly characterises
+spatial bias of SRDB — the "still biased toward northern latitudes and
+temperate zones" finding — as a source of model uncertainty, and shows
+that an optimised global sample distribution lowers the global Rs
+uncertainty band. Stell et al. 2021 does not run a held-out
+cross-continental performance test, which is the gap the present work
+fills.
+
+The cross-region driver heterogeneity we report in Section 4 is the
+mechanistic dual of the spatial bias Stell et al. 2021 identify: when the
+training set is geographically uneven and the regression model is allowed
+to exploit per-region soil-property correlations, the resulting global
+map will both over-fit to the dense regions and under-fit (or mis-fit)
+the sparse ones. Our climate-only result is the conservative case —
+features whose bivariate relationship with *Rs<sub>annual</sub>* is stable
+cross-region (precipitation, temperature) generalise; features whose
+relationship inverts or vanishes across regions (clay, clay/sand ratio,
+nitrogen) do not.
 
 ## 6. Discussion — what would close the gap
 
@@ -192,11 +250,13 @@ beyond the +0.13 ceiling we observe with climate-only features.
 
 **Higher-quality vegetation activity proxies.** The dominant control on
 soil respiration at continental scale is substrate input from above-ground
-production (*Q* in the *Q*<sub>10</sub>-*Q* framework). MODIS NPP at
-500 m – 1 km has been a widely-used proxy in published *Rs* upscaling and
-typically lifts model R² by 0.10–0.20 over climate-only baselines. We
-specified MOD17A3HGF NPP in our feature configuration but did not include
-it in this run; adding it is the single highest-priority next step.
+production. MODIS NPP at 500 m–1 km is a standard predictor in published
+*Rs* upscaling (e.g. Warner et al. 2019; Yao et al. 2021); we specified
+MOD17A3HGF NPP in our feature configuration but did not include it in
+this run. Adding it is the highest-priority next step. The expected
+direction of impact is positive but the magnitude on cross-continental
+transfer R² is unknown — none of the published studies above evaluate
+the held-out cross-continental setting we use here.
 
 **Regional sub-models or biome stratification.** Because the
 feature → *Rs* relationship differs between Asia and US (Section 4), a
@@ -233,14 +293,27 @@ respire similarly. The biosensor can.
 - Fick, S.E. & Hijmans, R.J. 2017. WorldClim 2: new 1-km spatial
   resolution climate surfaces for global land areas. *International
   Journal of Climatology* 37: 4302–4315.
+- Hashimoto, S., Carvalhais, N., Ito, A., Migliavacca, M., Nishina, K.,
+  Reichstein, M. 2015. Global spatiotemporal distribution of soil
+  respiration modeled using a global database. *Biogeosciences*
+  12: 4121–4132. doi:10.5194/bg-12-4121-2015
+- Jian, J., Vargas, R., Anderson-Teixeira, K., Stell, E., Herrmann, V.,
+  Horn, M., Kholod, N., Manzon, J., Marchesi, R., Paredes, D.,
+  Bond-Lamberty, B. 2021. A restructured and updated global soil
+  respiration database (SRDB-V5). *Earth System Science Data* 13:
+  255–267. doi:10.5194/essd-13-255-2021
 - Poggio, L. *et al.* 2021. SoilGrids 2.0: producing soil information for
   the globe with quantified spatial uncertainty. *SOIL* 7: 217–240.
-- [NEEDS CITATION: Hashimoto, S. *et al.* 2015. Global spatiotemporal
-  distribution of soil respiration modeled using a global database.
-  *Biogeosciences* — verify volume/pages.]
-- [NEEDS CITATION: Yao, Y. *et al.* 2019 — soil-respiration upscaling
-  paper referenced in framing — verify exact reference.]
-- [NEEDS CITATION: Chen, S. *et al.* 2020 — within-region vs cross-region
-  performance gap — verify exact reference.]
-- [NEEDS CITATION: Zhang, H. *et al.* 2017 — continental Rs upscaling
-  — verify exact reference.]
+- Stell, E., Warner, D., Jian, J., Bond-Lamberty, B., Vargas, R. 2021.
+  Spatial biases of information influence global estimates of soil
+  respiration: How can we improve global predictions?
+  *Global Change Biology* 27 (16): 3923–3938. doi:10.1111/gcb.15666
+- Warner, D.L., Bond-Lamberty, B., Jian, J., Stell, E., Vargas, R. 2019.
+  Spatial Predictions and Associated Uncertainty of Annual Soil
+  Respiration at the Global Scale. *Global Biogeochemical Cycles* 33:
+  1733–1745. doi:10.1029/2019GB006264
+- Yao, Y., Ciais, P., Viovy, N., Li, W., Cresto Aleina, F., Yang, H.,
+  Joetzjer, E., Bond-Lamberty, B. 2021. A Data-Driven Global Soil
+  Heterotrophic Respiration Dataset and the Drivers of Its Inter-Annual
+  Variability. *Global Biogeochemical Cycles* 35 (8): e2020GB006918.
+  doi:10.1029/2020GB006918
