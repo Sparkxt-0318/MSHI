@@ -84,10 +84,12 @@ def load_cosore(cosore_dir: Path) -> Optional[pd.DataFrame]:
     """
     Load COSORE site-level annual estimates.
 
-    COSORE schema is more complex than SRDB. The R package gives clean per-site
-    annual integrals; if you exported via R, look for description.csv (sites)
-    and the per-port flux files. Here we expect at minimum a 'sites.csv' or
-    'description.csv' with columns: site, latitude, longitude, rs_annual.
+    The aggregated CSV (produced by scripts/cosore_aggregate.py) has columns:
+        site_id, source, longitude, latitude, rs_annual, n_ports_qualifying,
+        site_name, igbp
+
+    Falls back to common legacy file names (annual_summaries.csv,
+    description.csv, sites.csv, cosore_annual.csv).
     """
     if not cosore_dir.exists():
         LOG.warning("COSORE dir not found: %s — skipping", cosore_dir)
@@ -99,8 +101,8 @@ def load_cosore(cosore_dir: Path) -> Optional[pd.DataFrame]:
         return None
 
     # Try common file names in priority order
-    for name in ["annual_summaries.csv", "description.csv", "sites.csv",
-                 "cosore_annual.csv"]:
+    for name in ["cosore_annual.csv", "annual_summaries.csv",
+                 "description.csv", "sites.csv"]:
         p = cosore_dir / name
         if p.exists():
             LOG.info("Loading COSORE from %s", p)
@@ -112,28 +114,36 @@ def load_cosore(cosore_dir: Path) -> Optional[pd.DataFrame]:
         LOG.warning("If you have a different filename, edit build_target.py:load_cosore")
         return None
 
-    # Column harmonization — adjust based on actual COSORE export
-    cols_lower = {c.lower(): c for c in df.columns}
-    def col(name):
-        return cols_lower.get(name)
+    LOG.info("  COSORE columns found: %s", list(df.columns))
 
-    lat_c = col("latitude") or col("lat")
-    lon_c = col("longitude") or col("lon")
-    rs_c  = col("rs_annual") or col("annual_rs") or col("annual_flux_gc_m2_yr")
+    # If the CSV already has our canonical schema (from cosore_aggregate.py), use directly
+    if {"longitude", "latitude", "rs_annual", "site_id", "source"}.issubset(df.columns):
+        LOG.info("  COSORE pre-aggregated schema detected")
+        df = df[["site_id", "source", "longitude", "latitude", "rs_annual"]].copy()
+    else:
+        # Legacy fallback: harmonize from arbitrary column names
+        cols_lower = {c.lower(): c for c in df.columns}
 
-    if not all([lat_c, lon_c, rs_c]):
-        LOG.error("COSORE file missing lat/lon/rs_annual columns. Found: %s",
-                  list(df.columns)[:20])
-        return None
+        def col(name):
+            return cols_lower.get(name)
 
-    df = df.rename(columns={lat_c: "latitude", lon_c: "longitude", rs_c: "rs_annual"})
+        lat_c = col("latitude") or col("lat") or col("csr_latitude")
+        lon_c = col("longitude") or col("lon") or col("csr_longitude")
+        rs_c = (col("rs_annual") or col("annual_rs")
+                or col("annual_flux_gc_m2_yr") or col("rs"))
+        if not all([lat_c, lon_c, rs_c]):
+            LOG.error("COSORE file missing lat/lon/rs columns. Found: %s",
+                      list(df.columns)[:20])
+            return None
+        df = df.rename(columns={lat_c: "latitude", lon_c: "longitude",
+                                rs_c: "rs_annual"})
+        df["source"] = "cosore"
+        df["site_id"] = "cosore_" + df.index.astype(str)
+
     df = df.dropna(subset=["latitude", "longitude", "rs_annual"])
     df = df[(df["rs_annual"] >= RS_MIN) & (df["rs_annual"] <= RS_MAX)]
-    df["source"] = "cosore"
-    df["site_id"] = "cosore_" + df.index.astype(str)
-
-    LOG.info("  COSORE rows: %d", len(df))
-    return df[["latitude", "longitude", "rs_annual", "source", "site_id"]]
+    LOG.info("  COSORE rows after filtering: %d", len(df))
+    return df[["site_id", "source", "longitude", "latitude", "rs_annual"]]
 
 
 def deduplicate_spatial(df: pd.DataFrame, threshold_deg: float = 0.05) -> pd.DataFrame:
@@ -142,7 +152,7 @@ def deduplicate_spatial(df: pd.DataFrame, threshold_deg: float = 0.05) -> pd.Dat
     Prefer COSORE (higher fidelity, continuous measurements) over SRDB.
     """
     n0 = len(df)
-    df = df.sort_values("source", ascending=False).reset_index(drop=True)  # cosore first
+    df = df.sort_values("source", ascending=True).reset_index(drop=True)  # cosore (c) sorted before srdb (s)
     grid_lon = (df["longitude"] / threshold_deg).round().astype(int)
     grid_lat = (df["latitude"]  / threshold_deg).round().astype(int)
     df["__cell"] = list(zip(grid_lon, grid_lat))
