@@ -1,0 +1,22 @@
+{
+  "F_climate_only": {
+    "point_r2": 0.127,
+    "median": 0.1225,
+    "ci_low": 0.0193,
+    "ci_high": 0.216,
+    "ci_excludes_zero": true,
+    "n_train": 600,
+    "n_us": 272,
+    "n_bootstrap": 2000
+  },
+  "B_full_features": {
+    "point_r2": 0.0201,
+    "median": 0.0157,
+    "ci_low": -0.1412,
+    "ci_high": 0.1461,
+    "ci_excludes_zero": false,
+    "n_train": 588,
+    "n_us": 270,
+    "n_bootstrap": 2000
+  }
+}
