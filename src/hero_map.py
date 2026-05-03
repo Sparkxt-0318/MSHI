@@ -164,6 +164,9 @@ def render_hero_map(
     bbox: Tuple[float, float, float, float] = (25.0, -10.0, 180.0, 80.0),
     vmin: float = 0.5,
     vmax: float = 1.5,
+    model_label: Optional[str] = None,
+    model_subtitle: Optional[str] = None,
+    border_simplify_tol: float = 0.01,
 ):
     """
     Render the hero visual.
@@ -174,6 +177,13 @@ def render_hero_map(
     metadata : dict with optional keys 'cv_r2', 'transfer_r2', 'n_train', 'n_us', 'date'
     bbox : (lon_min, lat_min, lon_max, lat_max) crop
     vmin/vmax : colormap bounds; defaults span the typical 0.5x-1.5x range
+    model_label : optional short tag appended to the top-left header line
+                  (e.g. "CLIMATE-ONLY MODEL"). Header becomes
+                  "MSHI-GEO  /  ASIA  /  {model_label}".
+    model_subtitle : optional second subtitle line below the italic intro.
+    border_simplify_tol : Douglas-Peucker tolerance (degrees) applied to
+                  Natural Earth country borders. Default 0.01 ≈ 1 km;
+                  set to 0 to render full-fidelity borders.
     """
     import matplotlib
     matplotlib.use("Agg")
@@ -214,25 +224,34 @@ def render_hero_map(
     # ── Title strip ─────────────────────────────────────────────────────────
     ax_title = fig.add_subplot(gs[0, :])
     ax_title.axis("off")
+    header_text = "MSHI-GEO  /  ASIA"
+    if model_label:
+        header_text = f"{header_text}  /  {model_label}"
     ax_title.text(
-        0.0, 0.78, "MSHI-GEO  /  ASIA",
+        0.0, 0.82, header_text,
         fontsize=11, fontweight="bold", color=BEDROCK["accent"],
         family="monospace", transform=ax_title.transAxes,
     )
     ax_title.text(
-        0.0, 0.36,
+        0.0, 0.42,
         "Climate-Corrected Soil Microbial Respiration Anomaly",
         fontsize=22, fontweight="bold", color=BEDROCK["ink"],
         transform=ax_title.transAxes,
     )
     ax_title.text(
-        0.0, 0.05,
+        0.0, 0.13,
         "Predicted soil respiration ÷ climate-expected soil respiration. "
         "Values below 1.0 indicate microbial activity is suppressed relative to "
         "what climate alone would support — a signal of soil-driven degradation.",
         fontsize=10, color=BEDROCK["ink_soft"],
         transform=ax_title.transAxes, style="italic",
     )
+    if model_subtitle:
+        ax_title.text(
+            0.0, -0.02, model_subtitle,
+            fontsize=10, fontweight="bold", color=BEDROCK["accent"],
+            transform=ax_title.transAxes,
+        )
     # Hairline rule under title
     ax_title.axhline(y=-0.05, color=BEDROCK["rule"], linewidth=0.6, xmin=0.0, xmax=1.0)
 
@@ -252,11 +271,17 @@ def render_hero_map(
         zorder=2,
     )
 
-    # Country borders
+    # Country borders. A small Douglas-Peucker simplification removes
+    # degenerate hairline polygons (e.g. zero-width admin slivers in the
+    # Saudi-Yemen-Oman boundary region) that render as artefacts at this
+    # scale. Tolerance is in degrees; 0.01 ≈ ~1 km.
     borders = load_country_borders()
     if borders is not None:
         try:
-            borders.boundary.plot(
+            geom = borders.boundary
+            if border_simplify_tol and border_simplify_tol > 0:
+                geom = geom.simplify(border_simplify_tol, preserve_topology=True)
+            geom.plot(
                 ax=ax, color=BEDROCK["rule"], linewidth=0.45,
                 alpha=0.85, zorder=3,
             )
