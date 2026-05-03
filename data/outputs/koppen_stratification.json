@@ -1,0 +1,114 @@
+{
+  "asia_counts": {
+    "C": 247,
+    "D": 244,
+    "A": 57,
+    "B": 51,
+    "unk": 15,
+    "E": 1
+  },
+  "us_counts": {
+    "D": 159,
+    "C": 89,
+    "B": 24,
+    "unk": 2
+  },
+  "results": {
+    "A": {
+      "skipped": true,
+      "reason": "insufficient sites (n_asia=57, n_us=0)",
+      "n_asia_total": 57,
+      "n_us_total": 0
+    },
+    "B": {
+      "skipped": true,
+      "reason": "insufficient sites (n_asia=51, n_us=24)",
+      "n_asia_total": 51,
+      "n_us_total": 24
+    },
+    "C": {
+      "n_asia": 247,
+      "n_us": 89,
+      "transfer_r2": -0.33622801303863525,
+      "bootstrap_median": -0.3742729425430298,
+      "ci_low": -1.0597204446792603,
+      "ci_high": 0.03467229604721063,
+      "ci_excludes_zero": false,
+      "transfer_rmse": 0.6615740882532531,
+      "spearman": 0.20663795158159967,
+      "bias": -0.16850979626178741,
+      "top_shap": [
+        {
+          "feature": "bio06",
+          "mean_abs_shap": 0.11301130056381226
+        },
+        {
+          "feature": "bio17",
+          "mean_abs_shap": 0.08775142580270767
+        },
+        {
+          "feature": "bio01",
+          "mean_abs_shap": 0.08658946305513382
+        },
+        {
+          "feature": "bio04",
+          "mean_abs_shap": 0.059593312442302704
+        },
+        {
+          "feature": "bio14",
+          "mean_abs_shap": 0.05876444652676582
+        }
+      ],
+      "method": "F (climate-only, 8 bioclim)"
+    },
+    "D": {
+      "n_asia": 244,
+      "n_us": 159,
+      "transfer_r2": -0.19855988025665283,
+      "bootstrap_median": -0.20656782388687134,
+      "ci_low": -0.3918024092912674,
+      "ci_high": -0.06100714504718783,
+      "ci_excludes_zero": true,
+      "transfer_rmse": 0.5969638928032723,
+      "spearman": -0.04507134972586464,
+      "bias": 0.036668065935373306,
+      "top_shap": [
+        {
+          "feature": "bio01",
+          "mean_abs_shap": 0.10930392891168594
+        },
+        {
+          "feature": "bio15",
+          "mean_abs_shap": 0.08970958739519119
+        },
+        {
+          "feature": "bio12",
+          "mean_abs_shap": 0.0746043473482132
+        },
+        {
+          "feature": "bio05",
+          "mean_abs_shap": 0.057871680706739426
+        },
+        {
+          "feature": "bio04",
+          "mean_abs_shap": 0.04875485599040985
+        }
+      ],
+      "method": "F (climate-only, 8 bioclim)"
+    },
+    "E": {
+      "skipped": true,
+      "reason": "insufficient sites (n_asia=1, n_us=0)",
+      "n_asia_total": 1,
+      "n_us_total": 0
+    },
+    "_baseline_F_all_zones": {
+      "n_asia": 600,
+      "n_us": 272,
+      "transfer_r2": 0.1270191985421344,
+      "bootstrap_median": 0.12236375794744137,
+      "ci_low": 0.02022976868409395,
+      "ci_high": 0.21232386433268927
+    }
+  }
+}
