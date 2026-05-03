@@ -1,6 +1,7 @@
 # Results — MSHI-Geo continental respiration model
 
-*Draft, internal. Working numbers from the 2026-04-26 / 2026-04-27 runs.*
+*Draft, internal. Working numbers from the 2026-04-26 / 2026-04-27
+overnight runs and the 2026-05-03 Run-B partial (MODIS pending).*
 
 ## 1. Training data and target
 
@@ -42,8 +43,14 @@ mean: SOC, total nitrogen, pHH₂O, clay, sand, silt, bulk density, CEC) and
 bio05, bio06, bio12, bio14, bio15, bio17) at each training and validation
 point. We added 4 engineered features (C/N ratio, clay/sand ratio,
 pH-optimality, and the De Martonne aridity index), giving 20 features
-total. MODIS NPP, LST, and IGBP land-cover layers were specified in the
-configuration but were not available for this run.
+total. MODIS NPP (MOD17A3HGF), LST (MOD11A2), and IGBP land cover
+(MCD12Q1) layers are specified in the configuration; **[PENDING MODIS:
+the MOD17A3HGF NPP raster, MOD11A2 LST day/night rasters, and MCD12Q1
+2023 IGBP land-cover raster could not be exported in the current
+overnight run because Earth Engine and LP DAAC both require interactive
+authentication unavailable in this environment. The F+NPP and Full+MODIS
+analyses described in Section 2 will be added once the user runs the
+GEE export. See `RUN_B_BLOCKERS.md`.]**
 
 ## 2. Cross-validation performance across feature sets
 
@@ -183,6 +190,57 @@ distinguish "clay-rich soil under intensive Asian agriculture" from
 "clay-rich soil under any land use", because we did not provide a
 land-management covariate.
 
+## 4.5 Climate-zone stratification (substitute for IGBP biome stratification)
+
+The driver-heterogeneity result raises an obvious question: if the
+feature → *Rs* relationship differs cross-region, does training on a
+more homogeneous stratum recover transfer? The standard remedy in
+upscaling literature is to stratify by IGBP land-cover class
+(forest vs cropland vs grassland …) and fit a sub-model per class,
+which controls for land-use and so removes the confound described above.
+
+We could not run that test in the current draft because the MOD12Q1
+IGBP land-cover raster is `[PENDING MODIS]` (see `RUN_B_BLOCKERS.md`).
+As a substitute we ran a top-level Köppen-Geiger climate-zone
+stratification, computed directly from WorldClim bioclim variables
+(thresholds on bio05, bio06, bio12, bio14). This stratifies on
+climate rather than land-use, so it is an *imperfect* substitute, but
+it answers an analytically related question: does the cross-continental
+feature → *Rs* relationship hold within a more climate-homogeneous
+subset of sites? Two zones met the threshold of ≥ 80 Asian training
+sites and ≥ 30 US validation sites:
+
+| Köppen zone | n_Asia | n_US | Within-zone transfer R² | 95% CI | CI excludes 0? |
+|---|---:|---:|---:|---|---|
+| C (temperate) | 247 | 89 | −0.336 | (−1.06, +0.04) | no (spans 0) |
+| D (continental) | 244 | 159 | −0.199 | (−0.39, −0.06) | yes — significantly *negative* |
+| **Cross-zone F (reference)** | **600** | **272** | **+0.127** | **(+0.020, +0.212)** | **yes — significantly positive** |
+
+Within-zone transfer is *worse* than the cross-zone baseline in both
+classes. Köppen D's CI is fully below zero, meaning the within-zone
+F model on continental sites does worse than predicting the US-mean
+of *Rs* — a regression-to-mean failure within a more homogeneous
+training set. Köppen A (tropical), B (arid) and E (polar) lacked the
+within-class US sample size (in particular the CONUS bbox 24–50 °N
+contains no Köppen A sites).
+
+We interpret this as follows: the cross-zone F transfer R² of +0.127
+is not a residual signal that survives despite climate-zone
+heterogeneity; it *depends on* the cross-zone precipitation gradient
+that runs through the whole training and validation sample. Stripping
+that gradient (by training within a single zone) removes the
+transferable signal. This is consistent with the SHAP analysis in
+Section 4 in which annual precipitation (bio12) is the only feature
+with stable cross-region rank, magnitude and sign.
+
+The IGBP-stratified analysis pending MODIS will address a different
+question — does land-use stratification (rather than climate-zone
+stratification) recover transfer? Based on the Köppen result, the
+prior expectation is that it will not, but the test is still
+informative because cropland-only or forest-only sub-models would
+remove the land-use confound the Asia-vs-US clay correlation
+suggested.
+
 ## 5. Implications for continental-scale soil monitoring
 
 The headline finding — that soil-property layers degrade rather than
@@ -258,12 +316,20 @@ direction of impact is positive but the magnitude on cross-continental
 transfer R² is unknown — none of the published studies above evaluate
 the held-out cross-continental setting we use here.
 
-**Regional sub-models or biome stratification.** Because the
-feature → *Rs* relationship differs between Asia and US (Section 4), a
-single global model is poorly specified. Training separate sub-models per
-Köppen climate zone or per IGBP land-cover class would allow each to fit
-its local relationship. The trade-off is that each sub-model has fewer
-training points and so wider parameter uncertainty.
+**Regional sub-models or biome stratification.** Section 4.5 tested
+this for Köppen-Geiger climate zones — the climate-only stratification
+that does not require MODIS — and found within-zone transfer R² was
+*worse* than the cross-zone baseline in both qualifying zones. Köppen
+D's CI was significantly negative (the within-zone model on
+continental sites did worse than predicting the US-mean *Rs*).
+Climate-zone stratification therefore does not close the transfer gap;
+it removes the cross-zone precipitation gradient that is, per the
+SHAP analysis, the actual transferable signal. Whether **IGBP
+land-cover stratification** would close the gap is the open question
+deferred until MOD12Q1 is available; a forest-only or cropland-only
+sub-model has a chance because it removes the land-use confound the
+Asia-vs-US clay correlation hinted at, but the Köppen result lowers
+the prior.
 
 **Direct biosensor measurement networks.** The deeper argument from these
 results is that gridded soil products lack the spatial fidelity to
@@ -282,6 +348,18 @@ deployable) that no chamber or eddy-covariance instrument can match.
 Stated more directly: the satellite product cannot tell us whether a
 clay-rich Asian agricultural soil and a clay-rich US forest soil
 respire similarly. The biosensor can.
+
+The Köppen-stratification result (Section 4.5) sharpens this argument.
+The biosensor case does not depend on the IGBP-stratified analysis
+producing a particular answer. If forest-only or cropland-only
+stratification *recovers* transfer (the optimistic case), the
+implication is that gridded land-cover labels are the pivot variable
+the upscaling pipeline currently lacks at site-level fidelity — which
+is exactly what a dense in-situ network could provide. If
+stratification *fails* (the Köppen-consistent prior), the implication
+is that even continent-specific land-cover assignment is too coarse to
+predict *Rs* without the metabolic ground truth a biosensor measures
+directly. Either outcome is wedge for the same conclusion.
 
 ## References
 
