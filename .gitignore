@@ -4,5 +4,7 @@ __pycache__/
 data/raw/
 data/processed/
 data/outputs/
+deck/node_modules/
+deck/package*.json
 .DS_Store
 .env
