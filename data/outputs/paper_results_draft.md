@@ -241,6 +241,48 @@ informative because cropland-only or forest-only sub-models would
 remove the land-use confound the Asia-vs-US clay correlation
 suggested.
 
+## 4.6 IGBP land-cover stratification (Item 1 IGBP fallback, 2026-05-05)
+
+The IGBP-stratified analogue of §4.5 is now available. Sampling MOD12Q1
+2023 land-cover at the 615 Asian training sites and 274 CONUS validation
+sites and grouping into IGBP super-classes yields four buckets that meet
+the threshold (≥ 80 Asia sites, ≥ 30 US sites): forest (IGBP 1–5),
+savanna (8, 9), grassland (10), and cropland (12, 14). Smaller buckets
+(shrubland, wetland, barren) lacked the within-class US sample size for
+a defensible bootstrap.
+
+Per-biome F (climate-only, 8 bioclim) Asia → US transfer:
+
+| Biome | n_Asia | n_US | Transfer R² | 95 % CI | Excludes 0? | Spearman ρ |
+|---|---:|---:|---:|---|---|---:|
+| forest    | 187 |  82 | **−0.265** | (−0.578, −0.058) | **yes — significantly negative** | +0.067 |
+| savanna   | 146 |  86 | −0.214 | (−0.724, +0.104) | no  | +0.248 |
+| grassland |  83 |  34 | **+0.275** | (−0.060, +0.474) | no — spans 0  | +0.482 |
+| cropland  | 108 |  36 | −0.143 | (−0.472, +0.067) | no  | −0.065 |
+| **Cross-biome F (reference)** | **600** | **272** | **+0.127** | **(+0.020, +0.212)** | **yes — significantly positive** | — |
+
+Three of four qualifying biomes fail to beat the cross-biome baseline.
+Forest's CI is fully below zero — the within-biome F model on forest
+sites does worse than predicting the US-mean of *Rs*, the same
+regression-to-mean signature observed in Köppen D. Grassland is the
+only biome with a positive point estimate above the cross-biome
+baseline (+0.275 vs +0.127) and a strong rank correlation (ρ = +0.482),
+but its bootstrap 95 % CI spans zero because n_us = 34 is small. We
+cannot reject the null that grassland-stratified F transfers
+significantly above zero.
+
+Read together with §4.5, the message is consistent: **neither
+climate-zone stratification (Köppen) nor land-cover stratification
+(IGBP) recovers cross-continental transfer at this sample size**.
+The cross-biome F transfer R² of +0.127 stays the dominant honest
+result; stratification preserves or worsens it. Land-use confounding
+suggested by the clay-Rs sign-flip in §4 was the most plausible
+mechanism the IGBP test could have refuted, but the test does not
+clean up the picture. The grassland point estimate is suggestive,
+not conclusive — a higher-n CONUS sample would be required to
+adjudicate it, which is one motivation for the in-situ biosensor
+network argument developed in §5–6.
+
 ## 5. Implications for continental-scale soil monitoring
 
 The headline finding — that soil-property layers degrade rather than
@@ -316,20 +358,21 @@ direction of impact is positive but the magnitude on cross-continental
 transfer R² is unknown — none of the published studies above evaluate
 the held-out cross-continental setting we use here.
 
-**Regional sub-models or biome stratification.** Section 4.5 tested
-this for Köppen-Geiger climate zones — the climate-only stratification
-that does not require MODIS — and found within-zone transfer R² was
-*worse* than the cross-zone baseline in both qualifying zones. Köppen
-D's CI was significantly negative (the within-zone model on
-continental sites did worse than predicting the US-mean *Rs*).
-Climate-zone stratification therefore does not close the transfer gap;
-it removes the cross-zone precipitation gradient that is, per the
-SHAP analysis, the actual transferable signal. Whether **IGBP
-land-cover stratification** would close the gap is the open question
-deferred until MOD12Q1 is available; a forest-only or cropland-only
-sub-model has a chance because it removes the land-use confound the
-Asia-vs-US clay correlation hinted at, but the Köppen result lowers
-the prior.
+**Regional sub-models or biome stratification.** Sections 4.5 and 4.6
+tested both stratification axes available without the MODIS
+NPP / LST rasters. Köppen-Geiger climate-zone stratification (§4.5)
+worsened transfer in both qualifying zones, with Köppen D's CI fully
+below zero. IGBP land-cover stratification (§4.6, run after MOD12Q1
+2023 became available) likewise failed to recover transfer: forest's
+CI was fully below zero, savanna and cropland CIs spanned zero,
+and only grassland produced a positive point estimate (+0.275, ρ =
++0.482) — the only outcome that would distinguish IGBP from the
+Köppen prior — but at n_us = 34 the bootstrap CI also spans zero.
+The combined finding: at this sample size neither climate-zone nor
+land-cover stratification beats the cross-biome F transfer R² of
++0.127. The grassland point estimate is suggestive but underpowered;
+a denser US sample would be required to adjudicate it, which is one
+motivation for the in-situ biosensor network argument in §5.
 
 **Direct biosensor measurement networks.** The deeper argument from these
 results is that gridded soil products lack the spatial fidelity to
