@@ -1,0 +1,61 @@
+{
+  "config_name": "F_NPP",
+  "n_features": 12,
+  "features": [
+    "bio01",
+    "bio04",
+    "bio05",
+    "bio06",
+    "bio12",
+    "bio14",
+    "bio15",
+    "bio17",
+    "npp",
+    "lst_day",
+    "lst_night",
+    "lst_diurnal_range"
+  ],
+  "n_train": 463,
+  "n_us": 223,
+  "params": {
+    "n_estimators": 250,
+    "max_depth": 3,
+    "learning_rate": 0.05,
+    "subsample": 0.85,
+    "colsample_bytree": 0.85,
+    "min_child_weight": 4,
+    "reg_alpha": 0.5,
+    "reg_lambda": 2.0,
+    "verbosity": 0
+  },
+  "cv": {
+    "n_splits": 5,
+    "block_size_deg": 5.0,
+    "seed": 42,
+    "per_fold_r2": [
+      0.08596986532211304,
+      0.08815127611160278,
+      -0.2379699945449829,
+      -0.09447765350341797,
+      0.05110013484954834
+    ],
+    "mean_r2": -0.021445274353027344,
+    "std_r2": 0.1273019523496135,
+    "mean_rmse": 0.6585478746876021,
+    "mean_mae": 0.5128140926361084
+  },
+  "transfer": {
+    "r2": 0.1447279453277588,
+    "rmse_log": 0.5674507507514878,
+    "mae_log": 0.44198375940322876,
+    "spearman": 0.29693080584219145,
+    "bias": 0.00482962466776371,
+    "pred_std": 0.2299102395772934,
+    "obs_std": 0.6135868430137634,
+    "bootstrap_n": 2000,
+    "bootstrap_median": 0.14130756258964539,
+    "ci_low": 0.025779044628143313,
+    "ci_high": 0.2412805631756782,
+    "ci_excludes_zero": true
+  }
+}
