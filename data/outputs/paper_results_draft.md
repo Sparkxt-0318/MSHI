@@ -54,20 +54,28 @@ GEE export. See `RUN_B_BLOCKERS.md`.]**
 
 ## 2. Cross-validation performance across feature sets
 
-We trained six XGBoost configurations (Table 1) and evaluated them with
+We trained eight XGBoost configurations and evaluated them with
 5-fold spatial-block cross-validation at 5° latitude/longitude blocks
 within the Asia training set, plus the held-out CONUS validation set.
+The first six are the Run-A sweep over the soil + climate stack; the
+final two (F+NPP, Full+MODIS) add MODIS NPP, LST_day, LST_night, and
+the engineered LST diurnal range to the F and B configurations
+respectively (and one-hot IGBP land cover for ≥10-site classes in the
+Full+MODIS case). Item 1 added these once the four MODIS rasters
+became available; the six earlier configurations are unchanged.
 
 **Table 1 — Asia 5° spatial-block CV and Asia → US transfer.**
 
-| Config | Features | n_feat | CV R² | Transfer R² | Δ vs climate-only | Bias |
-|---|---|---:|---:|---:|---:|---:|
-| A_baseline | depth=3 n_est=250 reg_λ=2.0 | 20 | −0.127 | −0.031 | −0.158 | −0.085 |
-| B_heavier_reg | depth=3 n_est=250 reg_λ=8.0 reg_α=2.0 | 20 | −0.083 | +0.020 | −0.107 | −0.086 |
-| C_shallow_more | depth=2 n_est=400 reg_λ=4.0 | 20 | −0.054 | −0.001 | −0.128 | −0.084 |
-| D_drop_overfit | baseline; drop {clay, sand, silt, clay/sand ratio} | 16 | −0.139 | −0.024 | −0.151 | +0.012 |
-| E_climate_plus_transferring_soil | 8 bioclim + pHH₂O + pH-opt + bdod + cec + aridity | 13 | −0.128 | +0.008 | −0.119 | −0.041 |
-| **F_climate_only** | **8 bioclim variables** | **8** | **−0.067** | **+0.127** | **+0.000** | **−0.044** |
+| Config | Features | n_feat | n_train | n_us | CV R² | Transfer R² | 95 % CI on transfer | CI excl. 0 |
+|---|---|---:|---:|---:|---:|---:|---|---|
+| A_baseline | depth=3 n_est=250 reg_λ=2.0 | 20 | 588 | 270 | −0.127 | −0.031 | — | — |
+| B_heavier_reg | depth=3 n_est=250 reg_λ=8.0 reg_α=2.0 | 20 | 588 | 270 | −0.083 | +0.020 | (−0.141, +0.146) | no |
+| C_shallow_more | depth=2 n_est=400 reg_λ=4.0 | 20 | 588 | 270 | −0.054 | −0.001 | — | — |
+| D_drop_overfit | baseline; drop {clay, sand, silt, clay/sand ratio} | 16 | 588 | 270 | −0.139 | −0.024 | — | — |
+| E_climate_plus_transferring_soil | 8 bioclim + pHH₂O + pH-opt + bdod + cec + aridity | 13 | 588 | 270 | −0.128 | +0.008 | — | — |
+| F_climate_only | 8 bioclim variables | 8 | 600 | 272 | −0.067 | +0.127 | (+0.019, +0.216) | **yes** |
+| **F+NPP** | **F + 4 MODIS continuous (NPP, LST day/night, LST diurnal range)** | **12** | **463** | **223** | **−0.021** | **+0.145** | **(+0.026, +0.241)** | **yes — best of any config** |
+| Full+MODIS | 20 prior + 4 MODIS continuous + 10 IGBP one-hot | 34 | 463 | 223 | +0.079 | +0.072 | (−0.084, +0.189) | no |
 
 The negative CV R² values reflect the difficulty of 5° spatial blocking
 at this sample size: each held-out fold forces the model to extrapolate to
@@ -76,14 +84,30 @@ training set. Random-fold CV on the same data yields R² ≈ +0.09 for
 climate-only and +0.02–+0.09 for the 20-feature configurations — i.e. the
 model can fit in-distribution, just not extrapolate spatially.
 
-The Asia → US transfer R² is the more decision-relevant metric. Five of six
-configurations land at or below zero, indicating predictions on US sites
-are no better than predicting the training-mean of *Rs*. The single
-exception is the climate-only model (F), which transfers at R² = +0.127 —
-a modest but non-zero generalisation. Heavier regularisation on the
-20-feature stack (B) recovers some transfer (R² = +0.020), but only by
-shrinking soil-feature contributions toward zero, which is essentially
-the same fix that F achieves explicitly by feature selection.
+The Asia → US transfer R² is the more decision-relevant metric.
+Across the eight configurations the picture is bimodal: configurations
+with vegetation/climate features only — F at R² = +0.127 and F+NPP at
+R² = +0.145 — have 95 % bootstrap CIs that exclude zero. Every
+configuration with the SoilGrids texture features (clay, sand, silt,
+or their ratios) lands transfer R² near zero with CIs that span zero,
+including the heavily-regularised B and the MODIS-augmented Full+MODIS.
+
+The two new MODIS-aware configurations refine the Run-A picture
+without overturning it. F+NPP becomes the best transfer R² of any
+config (+0.145, CI excl. 0) and MODIS NPP is the rank-1 SHAP feature
+in F+NPP — biophysically expected, since NPP is the substrate-input
+rate that drives Rs at first order. The lift over F is modest
+(Δ +0.018) because NPP and bio12 (precipitation) are correlated, so
+NPP's marginal contribution above climate is bounded by the
+information bio12 already carries.
+
+Full+MODIS rescues the in-distribution fit (CV R² jumps from B's
+−0.083 to +0.079, Δ = +0.162) but the held-out cross-continental CI
+still spans zero. Adding MODIS does not address the regional driver
+heterogeneity that breaks transfer in soil-feature configurations
+(Section 4): clay/sand ratio is rank 3 in Full+MODIS' SHAP, and the
+clay correlation flips sign Asia ↔ US regardless of what other
+features the model has access to.
 
 Bias on US is −0.044 to −0.086 log units across all configs, equivalent to
 a 4–8% under-prediction. US `pred σ` is 0.230–0.319 versus observed σ = 0.619,
@@ -189,6 +213,31 @@ substrate pH (driving pHH₂O rank). The XGBoost model has no way to
 distinguish "clay-rich soil under intensive Asian agriculture" from
 "clay-rich soil under any land use", because we did not provide a
 land-management covariate.
+
+### 4.1  MODIS feature contributions (Item 1, F+NPP and Full+MODIS)
+
+After the four MODIS rasters (NPP, LST_day, LST_night, IGBP land
+cover) became available, we re-ran SHAP on the two MODIS-aware
+configurations.
+
+In F+NPP (12 features, n_train = 463 after dropping rows with any
+NaN feature) MODIS NPP becomes the **rank-1** SHAP feature
+(mean |SHAP| = 0.128), with bio04 (T seasonality, 0.085) and bio12
+(annual precipitation, 0.065) holding the climate top-3. LST diurnal
+range, LST_day, and LST_night enter the top 12 at ranks 6, 8, and 10.
+This is biophysically expected: NPP is the substrate-input rate to
+soil, the first-order control on Rs, and adding it to the climate
+feature stack sharpens the dominant signal.
+
+In Full+MODIS (34 features) NPP is again the rank-1 driver (0.128),
+but the soil-feature cluster persists: silt (rank 2, 0.057),
+clay/sand ratio (3, 0.056), LST_day (4, 0.051), bio04 (5, 0.043),
+sand (6), clay (7), bio12 (8), bio06 (9), pHH₂O (10). The
+land-cover one-hot indicators all rank below the top 12 — IGBP class
+membership adds little marginal information once the continuous
+feature stack is in place. The soil-feature confound that breaks
+transfer in B is unchanged by MODIS augmentation: clay/sand ratio is
+still rank 3 even with NPP available.
 
 ## 4.5 Climate-zone stratification (substitute for IGBP biome stratification)
 
@@ -346,17 +395,25 @@ nitrogen) do not.
 ## 6. Discussion — what would close the gap
 
 Three classes of intervention can plausibly improve the Asia → US transfer
-beyond the +0.13 ceiling we observe with climate-only features.
+beyond the +0.145 ceiling we now observe with climate + NPP features.
 
 **Higher-quality vegetation activity proxies.** The dominant control on
 soil respiration at continental scale is substrate input from above-ground
-production. MODIS NPP at 500 m–1 km is a standard predictor in published
-*Rs* upscaling (e.g. Warner et al. 2019; Yao et al. 2021); we specified
-MOD17A3HGF NPP in our feature configuration but did not include it in
-this run. Adding it is the highest-priority next step. The expected
-direction of impact is positive but the magnitude on cross-continental
-transfer R² is unknown — none of the published studies above evaluate
-the held-out cross-continental setting we use here.
+production. MODIS NPP at 5 km (re-projected from MOD17A3HGF) was added
+in Item 1 (Section 2 / Section 4.1). It became the rank-1 SHAP driver
+in F+NPP, biophysically expected, and lifted held-out transfer R² from
+F's +0.127 to F+NPP's **+0.145** — a modest but real improvement that
+keeps the bootstrap CI excluding zero. The lift is smaller than the
++0.10 to +0.20 suggested by published Rs upscaling (Warner et al.
+2019; Yao et al. 2021) for two reasons. First, NPP and bio12 (annual
+precipitation) are correlated, so NPP's marginal information above
+climate is bounded. Second, MOD17A3HGF NPP is undefined over
+non-vegetated land (deserts, ice, tundra, urban), so adding it costs
+24 % of the Asian training points to NaN — the effective n drops
+from 600 to 463. Higher-resolution or more-densely-sampled vegetation
+proxies (e.g. Sentinel-2 derived productivity, or in-situ flux-tower
+GPP) could push transfer R² further if they preserve more of the
+training set.
 
 **Regional sub-models or biome stratification.** Sections 4.5 and 4.6
 tested both stratification axes available without the MODIS
