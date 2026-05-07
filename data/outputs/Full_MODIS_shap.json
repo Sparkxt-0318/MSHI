@@ -1,0 +1,175 @@
+{
+  "config_name": "Full_MODIS",
+  "ranking": [
+    {
+      "rank": 1,
+      "feature": "npp",
+      "mean_abs_shap": 0.12792526185512543
+    },
+    {
+      "rank": 2,
+      "feature": "silt",
+      "mean_abs_shap": 0.05736132338643074
+    },
+    {
+      "rank": 3,
+      "feature": "clay_sand_ratio",
+      "mean_abs_shap": 0.055719345808029175
+    },
+    {
+      "rank": 4,
+      "feature": "lst_day",
+      "mean_abs_shap": 0.050514381378889084
+    },
+    {
+      "rank": 5,
+      "feature": "bio04",
+      "mean_abs_shap": 0.042789261788129807
+    },
+    {
+      "rank": 6,
+      "feature": "sand",
+      "mean_abs_shap": 0.042329199612140656
+    },
+    {
+      "rank": 7,
+      "feature": "clay",
+      "mean_abs_shap": 0.04075544327497482
+    },
+    {
+      "rank": 8,
+      "feature": "bio12",
+      "mean_abs_shap": 0.03993742913007736
+    },
+    {
+      "rank": 9,
+      "feature": "bio06",
+      "mean_abs_shap": 0.03862251713871956
+    },
+    {
+      "rank": 10,
+      "feature": "phh2o",
+      "mean_abs_shap": 0.033527836203575134
+    },
+    {
+      "rank": 11,
+      "feature": "c_n_ratio",
+      "mean_abs_shap": 0.02943594940006733
+    },
+    {
+      "rank": 12,
+      "feature": "aridity_demartonne",
+      "mean_abs_shap": 0.028927532956004143
+    },
+    {
+      "rank": 13,
+      "feature": "bdod",
+      "mean_abs_shap": 0.026847805827856064
+    },
+    {
+      "rank": 14,
+      "feature": "lst_diurnal_range",
+      "mean_abs_shap": 0.025941362604498863
+    },
+    {
+      "rank": 15,
+      "feature": "bio14",
+      "mean_abs_shap": 0.02363341860473156
+    },
+    {
+      "rank": 16,
+      "feature": "soc",
+      "mean_abs_shap": 0.020878752693533897
+    },
+    {
+      "rank": 17,
+      "feature": "cec",
+      "mean_abs_shap": 0.017178189009428024
+    },
+    {
+      "rank": 18,
+      "feature": "nitrogen",
+      "mean_abs_shap": 0.016376880928874016
+    },
+    {
+      "rank": 19,
+      "feature": "ph_optimality",
+      "mean_abs_shap": 0.015570098534226418
+    },
+    {
+      "rank": 20,
+      "feature": "bio15",
+      "mean_abs_shap": 0.01410605851560831
+    },
+    {
+      "rank": 21,
+      "feature": "bio05",
+      "mean_abs_shap": 0.0138670289888978
+    },
+    {
+      "rank": 22,
+      "feature": "lc_09",
+      "mean_abs_shap": 0.011058405041694641
+    },
+    {
+      "rank": 23,
+      "feature": "bio01",
+      "mean_abs_shap": 0.009551182389259338
+    },
+    {
+      "rank": 24,
+      "feature": "lst_night",
+      "mean_abs_shap": 0.008782475255429745
+    },
+    {
+      "rank": 25,
+      "feature": "bio17",
+      "mean_abs_shap": 0.00637070182710886
+    },
+    {
+      "rank": 26,
+      "feature": "lc_08",
+      "mean_abs_shap": 0.0018612879794090986
+    },
+    {
+      "rank": 27,
+      "feature": "lc_12",
+      "mean_abs_shap": 0.0016347765922546387
+    },
+    {
+      "rank": 28,
+      "feature": "lc_02",
+      "mean_abs_shap": 0.0012179124169051647
+    },
+    {
+      "rank": 29,
+      "feature": "lc_05",
+      "mean_abs_shap": 0.0011512072524055839
+    },
+    {
+      "rank": 30,
+      "feature": "lc_13",
+      "mean_abs_shap": 0.0006481066811829805
+    },
+    {
+      "rank": 31,
+      "feature": "lc_04",
+      "mean_abs_shap": 0.0004383951018098742
+    },
+    {
+      "rank": 32,
+      "feature": "lc_17",
+      "mean_abs_shap": 0.0
+    },
+    {
+      "rank": 33,
+      "feature": "lc_14",
+      "mean_abs_shap": 0.0
+    },
+    {
+      "rank": 34,
+      "feature": "lc_10",
+      "mean_abs_shap": 0.0
+    }
+  ]
+}
