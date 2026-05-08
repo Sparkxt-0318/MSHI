@@ -183,8 +183,8 @@ def main() -> int:
     cmap = plt.get_cmap("RdBu_r")
     norm = Normalize(0.5, 1.5)
 
-    fig, axes = plt.subplots(2, 3, figsize=(18, 12),
-                             gridspec_kw={"wspace": 0.10, "hspace": 0.42})
+    fig, axes = plt.subplots(2, 3, figsize=(18, 13),
+                             gridspec_kw={"wspace": 0.10, "hspace": 0.65})
 
     panels = [
         # row 0 (top): subtitle goes BELOW the map (after xlabel)
@@ -217,7 +217,7 @@ def main() -> int:
             ax.set_ylabel("latitude", fontsize=8)
             ax.tick_params(labelsize=7)
             # Subtitle sits directly beneath the xlabel, attached to this axes.
-            ax.text(0.5, -0.27, subtitle, transform=ax.transAxes,
+            ax.text(0.5, -0.20, subtitle, transform=ax.transAxes,
                     ha="center", va="top", fontsize=9, color="#3A4048")
         elif kind == "bottom_map":
             ax.imshow(data, origin="lower", extent=extent, cmap=cmap,
@@ -232,9 +232,9 @@ def main() -> int:
             # Override the second line of the multi-line title to a smaller weight
             # by re-creating the title with two ax.text calls instead.
             ax.set_title("")
-            ax.text(0.5, 1.10, title, transform=ax.transAxes,
+            ax.text(0.5, 1.16, title, transform=ax.transAxes,
                     ha="center", va="bottom", fontsize=11.5, fontweight="bold")
-            ax.text(0.5, 1.04, subtitle, transform=ax.transAxes,
+            ax.text(0.5, 1.06, subtitle, transform=ax.transAxes,
                     ha="center", va="bottom", fontsize=9, color="#3A4048")
         elif kind == "caption":
             ax.set_facecolor("#FAF8F5")
