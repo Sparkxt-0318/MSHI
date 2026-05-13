@@ -8,6 +8,8 @@ prompt's branch directive — gate adapted to accept either).
 
 [01:09] Phase 0: PASS · 7/7 checks · n_rows=5,580,000 (3.6M land cells),
         anomaly_range=0.692-1.382 mean=0.994 std=0.044
+[01:12] Phase 1: PASS · 7/7 checks · raster 3100x1800 EPSG:4326 Float32,
+        pixels min=0.692 max=1.382 mean=0.994, Mongolia=0.977 ocean=NaN
 
 ## Notes
 

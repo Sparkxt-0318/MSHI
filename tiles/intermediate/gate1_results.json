@@ -1,0 +1,37 @@
+[
+  {
+    "name": "exists",
+    "pass": true,
+    "detail": "/home/user/MSHI/tiles/intermediate/asia_anomaly_base.tif"
+  },
+  {
+    "name": "crs_4326",
+    "pass": true,
+    "detail": "EPSG:4326"
+  },
+  {
+    "name": "dtype_float32",
+    "pass": true,
+    "detail": "float32"
+  },
+  {
+    "name": "dimensions",
+    "pass": true,
+    "detail": "3100 x 1800 (W x H), expected ~3000\u00b1100 x 1800\u00b1100"
+  },
+  {
+    "name": "value_stats",
+    "pass": true,
+    "detail": "min=0.692 max=1.382 mean=0.994"
+  },
+  {
+    "name": "mongolia_pixel_finite",
+    "pass": true,
+    "detail": "lon=105 lat=45 value=0.9768"
+  },
+  {
+    "name": "indian_ocean_pixel_nan",
+    "pass": true,
+    "detail": "lon=70 lat=-5 value=nan"
+  }
+]
