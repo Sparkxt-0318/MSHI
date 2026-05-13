@@ -1,0 +1,39 @@
+{
+  "tilejson": "3.0.0",
+  "name": "MSHI-Geo F+NPP anomaly (Asia)",
+  "description": "Soil respiration anomaly ratio (predicted F+NPP model / predicted climate baseline) across Asia. RdBu_r colormap centered at 1.0, range 0.5-1.5. Red = positive anomaly (higher respiration than climate alone predicts), Blue = negative anomaly. WARNING: Night 1 deliverable is built on synthetic training data \u2014 replace before scientific publication.",
+  "version": "1.0.0",
+  "attribution": "MSHI-Geo \u00b7 synthetic data \u00b7 land mask: Natural Earth 50m",
+  "scheme": "xyz",
+  "tiles": [
+    "http://localhost:8765/mshi_f_npp_anomaly/{z}/{x}/{y}.png"
+  ],
+  "format": "png",
+  "type": "overlay",
+  "minzoom": 0,
+  "maxzoom": 6,
+  "bounds": [
+    25.0,
+    -9.996073,
+    179.995117,
+    80.0
+  ],
+  "center": [
+    102.5,
+    35.0,
+    2
+  ],
+  "vector_layers": [],
+  "raster_layer": {
+    "colormap": "RdBu_r",
+    "vmin": 0.5,
+    "vcenter": 1.0,
+    "vmax": 1.5,
+    "units": "ratio (F+NPP / climate baseline)",
+    "interpretation": {
+      "0.5-0.85": "strongly negative anomaly (low respiration vs climate-expected)",
+      "0.85-1.15": "near climate expectation",
+      "1.15-1.5": "strongly positive anomaly (high respiration vs climate-expected)"
+    }
+  }
+}

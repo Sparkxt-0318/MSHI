@@ -1,0 +1,42 @@
+[
+  {
+    "name": "exists",
+    "pass": true,
+    "detail": "/home/user/MSHI/tiles/intermediate/asia_anomaly_base.tif"
+  },
+  {
+    "name": "crs_4326",
+    "pass": true,
+    "detail": "EPSG:4326"
+  },
+  {
+    "name": "dtype_float32",
+    "pass": true,
+    "detail": "float32"
+  },
+  {
+    "name": "dimensions",
+    "pass": true,
+    "detail": "3100 x 1800 (W x H), expected ~3000\u00b1100 x 1800\u00b1100"
+  },
+  {
+    "name": "value_stats",
+    "pass": true,
+    "detail": "min=0.305 max=3.643 mean=0.938"
+  },
+  {
+    "name": "mongolia_patch_finite",
+    "pass": true,
+    "detail": "21x21 patch around (105, 45): 160/441 finite (36.3%), passes if >=25%"
+  },
+  {
+    "name": "indian_ocean_pixel_nan",
+    "pass": true,
+    "detail": "lon=70 lat=-5 value=nan"
+  },
+  {
+    "name": "biophysical_site_spotchecks",
+    "pass": true,
+    "detail": "mean=0.977 < 1.0: OK (cold steppe \u2014 expect lower than climate baseline); mean=1.064 > 1.0: OK (intensive agriculture \u2014 expect higher than baseline); mean=0.908 < 1.0: OK (boreal, low NPP \u2014 expect lower); mean=1.024 in [0.7, 1.5]: OK (humid temperate \u2014 expect moderate range)"
+  }
+]

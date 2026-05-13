@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MSHI-Geo F+NPP anomaly — local viewer</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+  <style>
+    body { margin: 0; padding: 0; font-family: system-ui, sans-serif; }
+    #map { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+    #legend {
+      position: absolute; bottom: 24px; left: 16px;
+      background: rgba(255,255,255,0.92); padding: 12px 16px;
+      border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      font-size: 13px; max-width: 280px;
+    }
+    #legend .gradient {
+      height: 16px; margin: 6px 0;
+      background: linear-gradient(to right,
+        rgb(33,102,172), rgb(67,147,195), rgb(146,197,222),
+        rgb(209,229,240), rgb(247,247,247),
+        rgb(253,219,199), rgb(244,165,130), rgb(214,96,77), rgb(178,24,43));
+      border-radius: 2px;
+    }
+    #legend .ticks {
+      display: flex; justify-content: space-between;
+      font-size: 11px; color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div id="legend">
+    <strong>F+NPP anomaly ratio</strong><br>
+    <small>predicted F+NPP / climate baseline</small>
+    <div class="gradient"></div>
+    <div class="ticks">
+      <span>0.5</span><span>0.75</span><span>1.0</span>
+      <span>1.25</span><span>1.5</span>
+    </div>
+    <small style="color: #888;">Night 1 demo · synthetic data</small>
+  </div>
+
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="https://unpkg.com/pmtiles@3.2.1/dist/pmtiles.js"></script>
+  <script>
+    const protocol = new pmtiles.Protocol();
+    maplibregl.addProtocol("pmtiles", protocol.tile);
+
+    const map = new maplibregl.Map({
+      container: "map",
+      style: {
+        version: 8,
+        sources: {
+          carto: {
+            type: "raster",
+            tiles: [
+              "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
+            ],
+            tileSize: 256,
+            attribution: "© OpenStreetMap contributors, © CARTO"
+          },
+          mshi: {
+            type: "raster",
+            // For production, change to https://<your-cdn>/tiles/mshi_f_npp_anomaly.pmtiles
+            url: "pmtiles://http://localhost:8765/mshi_f_npp_anomaly.pmtiles",
+            tileSize: 256,
+            attribution: "MSHI-Geo · synthetic data · Natural Earth 50m"
+          }
+        },
+        layers: [
+          { id: "carto", type: "raster", source: "carto" },
+          { id: "mshi", type: "raster", source: "mshi", paint: { "raster-opacity": 0.75 } }
+        ]
+      },
+      center: [102.5, 35.0],
+      zoom: 2,
+      maxBounds: [[-30, -30], [200, 90]]
+    });
+
+    map.on("error", (e) => console.error("map error", e));
+  </script>
+</body>
+</html>

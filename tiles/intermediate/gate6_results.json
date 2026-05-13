@@ -1,0 +1,22 @@
+[
+  {
+    "name": "all_three_docs_exist",
+    "pass": true,
+    "detail": "README.md=OK, PIPELINE_AUDIT.md=OK, NIGHT_1_SUMMARY.md=OK"
+  },
+  {
+    "name": "status_in_first_200_words",
+    "pass": true,
+    "detail": "first 200 words mention status: 'PARTIAL'"
+  },
+  {
+    "name": "hosting_recommendation",
+    "pass": true,
+    "detail": "concrete options mentioned: Vercel=True, Cloudflare/R2=True, Mapbox=True"
+  },
+  {
+    "name": "quality_flags_honest",
+    "pass": true,
+    "detail": "has section=True, mentions concerns=True"
+  }
+]
