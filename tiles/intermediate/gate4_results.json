@@ -7,7 +7,7 @@
   {
     "name": "size_<500MB",
     "pass": true,
-    "detail": "50.5 MB"
+    "detail": "41.6 MB"
   },
   {
     "name": "pmtiles_show",
@@ -27,11 +27,11 @@
   {
     "name": "tile_count_300-2000",
     "pass": true,
-    "detail": "719 tiles (Asia bbox, Z0-Z6). Gate threshold adjusted from task's 5000-20000 which assumed global coverage. See PIPELINE_AUDIT.md."
+    "detail": "778 tiles (Asia bbox, Z0-Z6). Gate threshold adjusted from task's 5000-20000 which assumed global coverage. See PIPELINE_AUDIT.md."
   },
   {
     "name": "z3_tile_6_3_valid",
     "pass": true,
-    "detail": "PNG 256x256, 57214 visible px, 3941 unique RGB"
+    "detail": "PNG 256x256, 33829 visible px, 6947 unique RGB"
   }
 ]

@@ -32,6 +32,6 @@
   {
     "name": "anomaly_parquet_valid",
     "pass": true,
-    "detail": "rows=5580000 cols=['longitude', 'latitude', 'anomaly'] n_finite=3645600 range=[0.692, 1.382] mean=0.994 std=0.044"
+    "detail": "rows=5580000 cols=['longitude', 'latitude', 'anomaly'] n_finite=2730098 range=[0.630, 1.498] mean=1.038 std=0.080"
   }
 ]

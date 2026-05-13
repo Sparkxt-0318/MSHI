@@ -7,17 +7,17 @@
   {
     "name": "monotonic_size",
     "pass": true,
-    "detail": "png sizes (KB): [9, 35, 153, 693, 2883, 10741, 21208], step ratios: [3.68, 4.27, 4.51, 4.16, 3.73, 1.97]"
+    "detail": "png sizes (KB): [8, 30, 124, 547, 2297, 8342, 16375], step ratios: [3.59, 4.12, 4.41, 4.2, 3.63, 1.96]"
   },
   {
     "name": "size_ratios_~4x",
     "pass": true,
-    "detail": "ratios within [1.5, 8.0]: [3.68, 4.27, 4.51, 4.16, 3.73, 1.97]"
+    "detail": "ratios within [1.5, 8.0]: [3.59, 4.12, 4.41, 4.2, 3.63, 1.96]"
   },
   {
     "name": "total_size_<200MB",
     "pass": true,
-    "detail": "176.5 MB"
+    "detail": "133.2 MB"
   },
   {
     "name": "opens_cleanly",
@@ -27,6 +27,6 @@
   {
     "name": "z3_z4_distribution_similar",
     "pass": true,
-    "detail": "max quantile diff = 0.0010 (tolerance 0.05); q3=[np.float64(0.948), np.float64(0.987), np.float64(1.029), np.float64(1.073), np.float64(1.128)], q4=[np.float64(0.947), np.float64(0.986), np.float64(1.029), np.float64(1.074), np.float64(1.129)]"
+    "detail": "max quantile diff = 0.0016 (tolerance 0.05); q3=[np.float64(0.956), np.float64(0.995), np.float64(1.034), np.float64(1.071), np.float64(1.119)], q4=[np.float64(0.955), np.float64(0.994), np.float64(1.034), np.float64(1.072), np.float64(1.121)]"
   }
 ]

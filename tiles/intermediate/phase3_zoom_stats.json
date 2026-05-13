@@ -1,55 +1,55 @@
 {
   "zooms": {
     "0": {
-      "tif_size": 35074,
-      "png_size": 10003,
+      "tif_size": 24724,
+      "png_size": 8586,
       "width": 110,
       "height": 106,
       "res_m": 156543.03
     },
     "1": {
-      "tif_size": 133066,
-      "png_size": 36844,
+      "tif_size": 94741,
+      "png_size": 30860,
       "width": 220,
       "height": 213,
       "res_m": 78271.52
     },
     "2": {
-      "tif_size": 516059,
-      "png_size": 157384,
+      "tif_size": 376211,
+      "png_size": 127108,
       "width": 441,
       "height": 426,
       "res_m": 39135.76
     },
     "3": {
-      "tif_size": 2015441,
-      "png_size": 709980,
+      "tif_size": 1492054,
+      "png_size": 560319,
       "width": 882,
       "height": 851,
       "res_m": 19567.88
     },
     "4": {
-      "tif_size": 7945968,
-      "png_size": 2952330,
+      "tif_size": 5926781,
+      "png_size": 2352327,
       "width": 1764,
       "height": 1703,
       "res_m": 9783.94
     },
     "5": {
-      "tif_size": 31344626,
-      "png_size": 10999751,
+      "tif_size": 23453479,
+      "png_size": 8543077,
       "width": 3527,
       "height": 3405,
       "res_m": 4891.97
     },
     "6": {
-      "tif_size": 106549752,
-      "png_size": 21717598,
+      "tif_size": 79917549,
+      "png_size": 16768622,
       "width": 7054,
       "height": 6811,
       "res_m": 2445.98
     }
   },
-  "total_bytes": 185123876,
-  "total_mb": 176.5478858947754
+  "total_bytes": 139676438,
+  "total_mb": 133.20583152770996
 }

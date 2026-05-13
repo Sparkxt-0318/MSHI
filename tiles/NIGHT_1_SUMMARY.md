@@ -41,11 +41,15 @@ substituted check.
 
 | Artifact | Size | Status |
 |---|---|---|
-| `tiles/mshi_f_npp_anomaly.pmtiles` | 50.5 MB | Validated by Gates 4 + 5 |
-| Zoom range | 0 to 6 | All zooms present |
+| `tiles/mshi_f_npp_anomaly.pmtiles` | 41.6 MB | Validated by Gates 4 + 5 |
+| Zoom range | 0 to 6 | All zooms present, Z0 rendered from base raster |
 | Bbox | (25, -10, 180, 80) | Within 0.005° of spec |
-| Tile count | 719 (Z0=1, Z1=2, Z2=5, Z3=14, Z4=39, Z5=137, Z6=521) | Correct for Asia at Z0-Z6 |
+| Tile count | 778 (Z0=1, Z1=2, Z2=6, Z3=19, Z4=51, Z5=160, Z6=539) | Correct for Asia at Z0-Z6 |
 | Colormap | RdBu_r 4096 LUT, centered 1.0, range 0.5-1.5 | Matches spec |
+| Land mask | Natural Earth 50m coastline | Accurate (was coarse bbox in v1) |
+| `tiles/tilejson.json` | TileJSON 3.0 manifest | Ready for MapLibre / Mapbox / OpenLayers |
+| `tiles/viewer.html` | Sample MapLibre viewer | For Night 2 quick-start |
+| `tiles/run.sh` | Idempotent pipeline runner | `bash tiles/run.sh [--force\|--gates]` |
 | Documentation | tiles/README.md, tiles/PIPELINE_AUDIT.md, this file | Complete |
 
 ## Hosting recommendation for Night 2
@@ -87,27 +91,23 @@ files, use Mapbox Tiling Service or a dedicated CDN.
    underlying data must be replaced before publication. If the goal is
    a pipeline demo, the structure and hosting decisions hold.
 
-2. **Land mask is coarse.** Oceans (Indian Ocean, Bay of Bengal, South
-   China Sea, etc.) are masked by a bbox-based heuristic in
-   `scripts/phase0_regenerate_anomaly.py`. Coastlines will look jagged
-   and a few areas (e.g., the western Pacific island arcs, the
-   Mediterranean shore) are imprecise. For production, replace with a
-   Natural Earth or GSHHG vector land mask rasterized to 0.05° before
-   Phase 1.
+2. ~~**Land mask is coarse.**~~ FIXED — Natural Earth 50m coastline
+   rasterized to 0.05° is now used (`tiles/intermediate/land_mask.tif`,
+   downloaded from naciscdn.org and committed to the runner). Land
+   fraction dropped from 65% (bbox) to 49% (NE). Caspian/Aral/
+   Mediterranean shores are now accurate.
 
-3. **Z0 tile was inserted manually.** `gdaladdo` stopped at Z1 (its
-   default behavior when an overview would be a single tile). The Z0
-   tile is a bilinear-downsampled 2×2 stitch of the Z1 tiles, which
-   may look slightly softer at Z0 than the rest of the pyramid. Visually
-   verify that Z0 looks acceptable as a "whole-world view first frame"
-   before going to production.
+3. ~~**Z0 tile was inserted manually.**~~ FIXED — `phase4_z0_from_base.py`
+   now reprojects the base Float32 raster directly to a 256x256
+   web-mercator world frame, then applies the cmap. No more
+   downsampling-of-downsampled fidelity loss.
 
 4. **Visual sanity preview never compared against a real hero map.**
    `tiles/intermediate/phase2_comparison.png` stacks the preview
    against `data/outputs/hero_mshi_geo_asia_screen.png`, but that hero
    is also synthetic-data output (from the same demo pipeline). A
    side-by-side against a real hero is impossible until real data is
-   delivered.
+   delivered. (No autonomous fix possible.)
 
 ## Open questions for user
 

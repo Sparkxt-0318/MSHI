@@ -173,11 +173,31 @@ def main() -> int:
         "anomaly": anomaly,
     })
 
-    # Apply a synthetic ocean mask: rough land outlines for Asia.
-    # Without a proper land mask raster, use a generous bounding-region
-    # approximation that crops obvious ocean.
-    land_mask = synthetic_land_mask(grid_out["longitude"].values,
-                                    grid_out["latitude"].values)
+    # Land mask: prefer Natural Earth 50m coastline if available;
+    # fall back to coarse bbox approximation if not. The NE mask gives
+    # accurate coastlines (Caspian Sea, Aral Sea, Mediterranean shore,
+    # Persian Gulf, etc.) instead of the original bbox heuristic.
+    ne_mask_path = ROOT / "tiles" / "intermediate" / "land_mask.tif"
+    if ne_mask_path.exists():
+        import rasterio
+        with rasterio.open(ne_mask_path) as ds:
+            ne_mask_arr = ds.read(1).astype(bool)
+        # NE mask is at the same grid as our base raster (1800 x 3100 at
+        # 0.05° over bbox 25..180, -10..80). Convert grid coords to
+        # pixel indices and look up.
+        lon = grid["longitude"].values
+        lat = grid["latitude"].values
+        col = np.round((lon - 25.0) / 0.05 - 0.5).astype(np.int32)
+        row = np.round((80.0 - lat) / 0.05 - 0.5).astype(np.int32)
+        valid = (col >= 0) & (col < ne_mask_arr.shape[1]) & \
+                (row >= 0) & (row < ne_mask_arr.shape[0])
+        land_mask = np.zeros(len(grid), dtype=bool)
+        land_mask[valid] = ne_mask_arr[row[valid], col[valid]]
+        print(f"    land mask source: Natural Earth 50m ({100*land_mask.mean():.1f}% land)")
+    else:
+        land_mask = synthetic_land_mask(grid_out["longitude"].values,
+                                        grid_out["latitude"].values)
+        print(f"    land mask source: bbox heuristic ({100*land_mask.mean():.1f}% land)")
     grid_out.loc[~land_mask, "anomaly"] = np.nan
 
     n_finite = int(np.isfinite(grid_out["anomaly"]).sum())

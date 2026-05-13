@@ -22,7 +22,7 @@
   {
     "name": "value_stats",
     "pass": true,
-    "detail": "min=0.630 max=1.498 mean=1.043"
+    "detail": "min=0.630 max=1.498 mean=1.038"
   },
   {
     "name": "mongolia_pixel_finite",
