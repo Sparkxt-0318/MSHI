@@ -131,15 +131,42 @@ def main() -> int:
                 "n_compared_px": int(mask.sum()),
             })
 
+    # Reference: in-tile diff between adjacent pixel rows. If the data
+    # naturally has high spatial variance (real-data case), the seam
+    # diff should still be close to the in-tile diff at adjacent pixels.
+    # If seam diff >> in-tile diff, that's a pipeline issue. If they're
+    # comparable, the seam is as continuous as the data is.
+    in_tile_diffs = []
+    for (x, y), arr in tile_arrs.items():
+        rgb = arr[:, :, :3].astype(np.float32)
+        alpha = arr[:, :, 3]
+        # Row-to-row diffs of adjacent visible pixels
+        m_v = (alpha[:-1, :] > 0) & (alpha[1:, :] > 0)
+        if m_v.sum() > 100:
+            d_v = np.abs(rgb[:-1, :, :] - rgb[1:, :, :]).mean(axis=2)
+            in_tile_diffs.append(float(d_v[m_v].mean()))
+        m_h = (alpha[:, :-1] > 0) & (alpha[:, 1:] > 0)
+        if m_h.sum() > 100:
+            d_h = np.abs(rgb[:, :-1, :] - rgb[:, 1:, :]).mean(axis=2)
+            in_tile_diffs.append(float(d_h[m_h].mean()))
+    in_tile_mean = float(np.mean(in_tile_diffs)) if in_tile_diffs else 0.0
+
     out["discontinuity"] = {
         "seams": discontinuities,
         "max_diff": (max(d["mean_rgb_diff"] for d in discontinuities)
                      if discontinuities else 0),
         "mean_diff": (np.mean([d["mean_rgb_diff"] for d in discontinuities])
                       if discontinuities else 0),
+        "in_tile_mean_diff": in_tile_mean,
+        "seam_to_in_tile_ratio": (
+            np.mean([d["mean_rgb_diff"] for d in discontinuities]) / in_tile_mean
+            if (discontinuities and in_tile_mean > 0) else 0
+        ),
     }
     print(f"  seam discontinuity max={out['discontinuity']['max_diff']:.2f} "
-          f"mean={out['discontinuity']['mean_diff']:.2f}")
+          f"mean={out['discontinuity']['mean_diff']:.2f} "
+          f"in-tile-mean={in_tile_mean:.2f} "
+          f"ratio={out['discontinuity']['seam_to_in_tile_ratio']:.2f}")
 
     # Composite coverage
     comp_arr = np.array(composite)

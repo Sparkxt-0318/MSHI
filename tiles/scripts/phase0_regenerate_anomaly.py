@@ -41,21 +41,95 @@ TARGET = "log_rs_annual"
 
 
 def main() -> int:
+    # FAST PATH (real-data run): if the anomaly parquet already exists
+    # (checked out from claude/item-1-modis), use it directly and skip
+    # all model training + grid generation. This is the documented path
+    # for the Night 1 real-data redo. We just need to rename the column
+    # if it's the source-branch convention (mshi_geo_anomaly → anomaly)
+    # and ensure the land mask is applied.
+    if OUT_PARQUET.exists():
+        existing = pd.read_parquet(OUT_PARQUET)
+        # Detect: did this come from a synthetic regen or from the
+        # real-data checkout? Real-data has 'mshi_geo_anomaly' column;
+        # synthetic regen has 'anomaly' column.
+        if "mshi_geo_anomaly" in existing.columns and "anomaly" not in existing.columns:
+            print(f"Phase 0 fast path: using existing {OUT_PARQUET} "
+                  f"(real-data checkout from claude/item-1-modis)")
+            print(f"  {len(existing)} rows, cols: {list(existing.columns)}")
+            existing = existing.rename(columns={"mshi_geo_anomaly": "anomaly"})
+            # Apply land mask if available
+            ne_mask_path = ROOT / "tiles" / "intermediate" / "land_mask.tif"
+            if ne_mask_path.exists():
+                import rasterio
+                with rasterio.open(ne_mask_path) as ds:
+                    ne_mask_arr = ds.read(1).astype(bool)
+                lon = existing["longitude"].values
+                lat = existing["latitude"].values
+                col = np.round((lon - 25.0) / 0.05 - 0.5).astype(np.int32)
+                row = np.round((80.0 - lat) / 0.05 - 0.5).astype(np.int32)
+                valid = ((col >= 0) & (col < ne_mask_arr.shape[1]) &
+                         (row >= 0) & (row < ne_mask_arr.shape[0]))
+                land_mask = np.zeros(len(existing), dtype=bool)
+                land_mask[valid] = ne_mask_arr[row[valid], col[valid]]
+                existing.loc[~land_mask, "anomaly"] = np.nan
+                print(f"  applied NE land mask: {100*land_mask.mean():.1f}% land")
+            n_finite = int(np.isfinite(existing["anomaly"]).sum())
+            print(f"  finite cells: {n_finite}/{len(existing)}")
+            print(f"  anomaly stats: min={np.nanmin(existing['anomaly']):.3f} "
+                  f"max={np.nanmax(existing['anomaly']):.3f} "
+                  f"mean={np.nanmean(existing['anomaly']):.3f} "
+                  f"std={np.nanstd(existing['anomaly']):.3f}")
+            existing.to_parquet(OUT_PARQUET, index=False)
+            stats = {
+                "n_rows": int(len(existing)),
+                "n_finite": n_finite,
+                "anomaly_min": float(np.nanmin(existing["anomaly"])),
+                "anomaly_max": float(np.nanmax(existing["anomaly"])),
+                "anomaly_mean": float(np.nanmean(existing["anomaly"])),
+                "anomaly_std": float(np.nanstd(existing["anomaly"])),
+                "bbox": [25.0, -10.0, 180.0, 80.0],
+                "resolution_deg": 0.05,
+                "source": "real (claude/item-1-modis F+NPP model output)",
+            }
+            (ROOT / "tiles" / "intermediate" / "phase0_regen_stats.json").write_text(
+                json.dumps(stats, indent=2)
+            )
+            print("  phase 0 fast path complete (real-data run).")
+            return 0
+        elif "anomaly" in existing.columns:
+            # Already in the canonical schema. Could be from a prior
+            # regen or already-renamed real-data parquet. Trust it.
+            print(f"Phase 0 fast path: {OUT_PARQUET} already in canonical "
+                  f"schema, leaving as-is")
+            return 0
+
     print("Phase 0 regen: training F+NPP and climate-baseline models...")
 
-    train_path = ROOT / "data" / "processed" / "training_features.parquet"
-    if not train_path.exists():
-        print(f"  ! No {train_path}. Generating fresh synthetic training data.")
-        df = make_synthetic_training(n=3000, seed=42)
-        df.to_parquet(train_path, index=False)
+    # Prefer real training_features_v2.parquet if present (checked out
+    # from claude/item-1-modis), fall back to v1, fall back to synthetic.
+    train_v2 = ROOT / "data" / "processed" / "training_features_v2.parquet"
+    train_v1 = ROOT / "data" / "processed" / "training_features.parquet"
+    if train_v2.exists():
+        train_path = train_v2
+    elif train_v1.exists():
+        train_path = train_v1
     else:
-        df = pd.read_parquet(train_path)
-    print(f"  training rows: {len(df)}, cols: {len(df.columns)}")
+        print(f"  ! No training data. Generating fresh synthetic training data.")
+        df = make_synthetic_training(n=3000, seed=42)
+        train_v1.parent.mkdir(parents=True, exist_ok=True)
+        df.to_parquet(train_v1, index=False)
+        train_path = train_v1
 
-    # Save training_features_v2.parquet (alias of training set) so the
-    # input check in the documentation has the v2 file too.
-    df.to_parquet(OUT_TRAIN_V2, index=False)
-    print(f"  wrote {OUT_TRAIN_V2}")
+    df = pd.read_parquet(train_path)
+    print(f"  training source: {train_path}")
+    print(f"  training rows: {len(df)}, cols: {len(df.columns)}")
+    if "source" in df.columns:
+        print(f"  data sources: {df['source'].value_counts().to_dict()}")
+
+    # If reading from real v2, we don't need to overwrite v2.
+    if train_path != OUT_TRAIN_V2:
+        df.to_parquet(OUT_TRAIN_V2, index=False)
+        print(f"  wrote {OUT_TRAIN_V2}")
 
     # Train F+NPP model
     X_fnpp = df[F_NPP_FEATURES].to_numpy("float32")

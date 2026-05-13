@@ -1,10 +1,10 @@
 {
   "n_rows": 5580000,
-  "n_finite": 2730098,
-  "anomaly_min": 0.630203366279602,
-  "anomaly_max": 1.498026967048645,
-  "anomaly_mean": 1.0377503633499146,
-  "anomaly_std": 0.08030828088521957,
+  "n_finite": 2109138,
+  "anomaly_min": 0.3052462637424469,
+  "anomaly_max": 3.6433615684509277,
+  "anomaly_mean": 0.937970757484436,
+  "anomaly_std": 0.24576358497142792,
   "bbox": [
     25.0,
     -10.0,
@@ -12,20 +12,7 @@
     80.0
   ],
   "resolution_deg": 0.05,
-  "f_npp_features": [
-    "bio01",
-    "bio04",
-    "bio12",
-    "bio14",
-    "bio15",
-    "npp"
-  ],
-  "climate_baseline_features": [
-    "bio01",
-    "bio04",
-    "bio12",
-    "bio14",
-    "bio15"
-  ],
-  "training_source": "synthetic (src.demo_synthetic.make_synthetic_training)"
+  "source": "real (claude/item-1-modis F+NPP model output, mshi_geo_anomaly column)",
+  "value_col_in_parquet": "mshi_geo_anomaly",
+  "value_col_in_pipeline": "anomaly (renamed by Phase 1 reader, but parquet preserves original)"
 }

@@ -1,0 +1,41 @@
+{
+  "mean_rgb_diff": 58.23293685913086,
+  "spatial_correlation_regional_abs": 0.7754103746330939,
+  "spatial_correlation_regional_raw": -0.7754103746330939,
+  "spatial_correlation_by_scale": {
+    "fine": {
+      "raw": -0.5540905765081737,
+      "n_blocks": 1420,
+      "grid": [
+        60,
+        40
+      ]
+    },
+    "medium": {
+      "raw": -0.6652872010511047,
+      "n_blocks": 411,
+      "grid": [
+        30,
+        20
+      ]
+    },
+    "regional": {
+      "raw": -0.7754103746330939,
+      "n_blocks": 129,
+      "grid": [
+        16,
+        10
+      ]
+    }
+  },
+  "spatial_correlation_pixel_raw": -0.34143940912878257,
+  "cmap_orientation": "inverted (hero=Bedrock custom, tile=RdBu_r)",
+  "n_compared_pixels": 377742,
+  "tile_alpha_visible_pct": 43.72013888888889,
+  "comparison_size": [
+    1200,
+    720
+  ],
+  "hero_path": "/home/user/MSHI/data/outputs/hero_climate_npp_asia.png",
+  "tile_base_path": "/home/user/MSHI/tiles/intermediate/asia_anomaly_base.tif"
+}

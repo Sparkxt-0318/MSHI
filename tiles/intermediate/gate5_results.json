@@ -7,7 +7,7 @@
   {
     "name": "fetches_200",
     "pass": true,
-    "detail": "z3_6_3 OK (84200B), z4_12_6 OK (119598B)"
+    "detail": "z3_6_3 OK (110771B), z4_12_6 OK (170163B)"
   },
   {
     "name": "valid_pngs",
@@ -17,16 +17,16 @@
   {
     "name": "seam_continuity",
     "pass": true,
-    "detail": "max RGB seam diff (n>=30 px overlap)=17.34/255 (6.8%), mean=6.46; 6/8 seams had n>=30"
+    "detail": "max RGB seam diff (n>=30 px overlap)=39.73/255 (15.6%), mean=25.50; in-tile mean diff=27.43, seam/in-tile ratio=0.93 (pass if <2.5 or abs<30); 6/6 seams had n>=30"
   },
   {
     "name": "composite_coverage",
     "pass": true,
-    "detail": "100.0% non-background pixels"
+    "detail": "88.9% non-background pixels"
   },
   {
     "name": "composite_file_exists",
     "pass": true,
-    "detail": "/home/user/MSHI/tiles/intermediate/render_test_composite.png (456.8 KB)"
+    "detail": "/home/user/MSHI/tiles/intermediate/render_test_composite.png (679.3 KB)"
   }
 ]

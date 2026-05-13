@@ -2,21 +2,21 @@
   "fetches": {
     "z3_6_3": {
       "status": 200,
-      "bytes": 84200,
+      "bytes": 110771,
       "dims": [
         256,
         256
       ],
-      "visible_px": 33829
+      "visible_px": 30641
     },
     "z4_12_6": {
       "status": 200,
-      "bytes": 119598,
+      "bytes": 170163,
       "dims": [
         256,
         256
       ],
-      "visible_px": 65498
+      "visible_px": 55611
     }
   },
   "composite": {
@@ -24,9 +24,9 @@
       768,
       768
     ],
-    "nonwhite_px": 589824,
+    "nonwhite_px": 524288,
     "total_px": 589824,
-    "coverage_pct": 100.0
+    "coverage_pct": 88.88888888888889
   },
   "discontinuity": {
     "seams": [
@@ -36,8 +36,8 @@
           -1,
           0
         ],
-        "mean_rgb_diff": 5.094614028930664,
-        "n_compared_px": 229
+        "mean_rgb_diff": 39.732322692871094,
+        "n_compared_px": 132
       },
       {
         "type": "horizontal_seam_below_x=6",
@@ -45,8 +45,8 @@
           -1,
           0
         ],
-        "mean_rgb_diff": 5.750367164611816,
-        "n_compared_px": 227
+        "mean_rgb_diff": 25.298246383666992,
+        "n_compared_px": 133
       },
       {
         "type": "horizontal_seam_below_x=6",
@@ -54,8 +54,8 @@
           0,
           1
         ],
-        "mean_rgb_diff": 17.340425491333008,
-        "n_compared_px": 94
+        "mean_rgb_diff": 21.546184539794922,
+        "n_compared_px": 83
       },
       {
         "type": "vertical_seam_right_of_y=2",
@@ -63,8 +63,8 @@
           -1,
           0
         ],
-        "mean_rgb_diff": 2.3802082538604736,
-        "n_compared_px": 256
+        "mean_rgb_diff": 19.657817840576172,
+        "n_compared_px": 226
       },
       {
         "type": "vertical_seam_right_of_y=2",
@@ -72,7 +72,7 @@
           0,
           1
         ],
-        "mean_rgb_diff": 2.8809523582458496,
+        "mean_rgb_diff": 18.45098114013672,
         "n_compared_px": 238
       },
       {
@@ -81,29 +81,13 @@
           -1,
           0
         ],
-        "mean_rgb_diff": 5.3255815505981445,
-        "n_compared_px": 129
-      },
-      {
-        "type": "vertical_seam_right_of_y=3",
-        "between_x": [
-          0,
-          1
-        ],
-        "mean_rgb_diff": 26.846153259277344,
-        "n_compared_px": 13
-      },
-      {
-        "type": "vertical_seam_right_of_y=4",
-        "between_x": [
-          0,
-          1
-        ],
-        "mean_rgb_diff": 37.599998474121094,
-        "n_compared_px": 10
+        "mean_rgb_diff": 28.34385871887207,
+        "n_compared_px": 95
       }
     ],
-    "max_diff": 37.599998474121094,
-    "mean_diff": 12.9022875726223
+    "max_diff": 39.732322692871094,
+    "mean_diff": 25.504901885986328,
+    "in_tile_mean_diff": 27.43267661333084,
+    "seam_to_in_tile_ratio": 0.9297270640223376
   }
 }

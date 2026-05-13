@@ -47,9 +47,30 @@ def main() -> int:
     n_valid = int(valid.sum())
     print(f"  in-bounds cells: {n_valid} / {len(df)}")
 
+    # Accept either column name: 'anomaly' (our canonical) or
+    # 'mshi_geo_anomaly' (claude/item-1-modis source-branch convention).
+    if "anomaly" in df.columns:
+        value_col = "anomaly"
+    elif "mshi_geo_anomaly" in df.columns:
+        value_col = "mshi_geo_anomaly"
+    else:
+        raise KeyError(f"no anomaly column in {list(df.columns)}")
+    print(f"  value column: {value_col}")
     raster = np.full((height, width), np.nan, dtype=np.float32)
-    vals = df["anomaly"].values.astype(np.float32)
+    vals = df[value_col].values.astype(np.float32)
     raster[rows[valid], cols[valid]] = vals[valid]
+
+    # Apply Natural Earth land mask if available (real-data parquet
+    # from claude/item-1-modis already has ocean as finite values
+    # because the model predicts everywhere; the land mask removes
+    # ocean cells the synthetic regen would have NaN'd out).
+    ne_mask_path = ROOT / "tiles" / "intermediate" / "land_mask.tif"
+    if ne_mask_path.exists():
+        with rasterio.open(ne_mask_path) as mds:
+            mask_arr = mds.read(1).astype(bool)
+        if mask_arr.shape == raster.shape:
+            raster[~mask_arr] = np.nan
+            print(f"  applied NE land mask: {100*mask_arr.mean():.1f}% land")
 
     transform = from_origin(lon_min, lat_max, RES, RES)
     profile = {

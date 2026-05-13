@@ -1,0 +1,32 @@
+[
+  {
+    "name": "critical_inputs",
+    "pass": true,
+    "detail": "F_NPP_model.json=OK, training_features_v2.parquet=OK"
+  },
+  {
+    "name": "modis_rasters_>=3",
+    "pass": true,
+    "detail": "4/4 present: npp_2020_2024_mean.tif=OK, lst_day_2020_2024_mean.tif=OK, lst_night_2020_2024_mean.tif=OK, landcover_igbp_2023.tif=OK"
+  },
+  {
+    "name": "training_source_real",
+    "pass": true,
+    "detail": "unique sources=['cosore', 'srdb']; has_synthetic=False, has_real=True"
+  },
+  {
+    "name": "training_row_count",
+    "pass": true,
+    "detail": "615 rows (expected 500-700)"
+  },
+  {
+    "name": "F_NPP_model_size",
+    "pass": true,
+    "detail": "254.1 KB (expected >100 KB)"
+  },
+  {
+    "name": "modis_sizes_real",
+    "pass": true,
+    "detail": "npp_2020_2024_mean.tif=20.85MB(continuous, >1024KB), lst_day_2020_2024_mean.tif=24.62MB(continuous, >1024KB), lst_night_2020_2024_mean.tif=24.77MB(continuous, >1024KB), landcover_igbp_2023.tif=0.43MB(categorical, >100KB)"
+  }
+]
