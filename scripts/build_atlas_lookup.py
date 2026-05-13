@@ -220,8 +220,23 @@ def nearest_site_distance_km(cell_lons, cell_lats, site_lons, site_lats):
 def train_climate_baseline(train_path: Path) -> Tuple[xgb.Booster, List[str]]:
     df = pd.read_parquet(train_path)
     feats = BIOCLIM_VARS
-    df = df.dropna(subset=feats + ["log_rs_annual"])
-    LOG.info("Training climate baseline on %d rows × %d features", len(df), len(feats))
+    # Match the F+NPP training subset exactly: drop rows missing ANY of the
+    # 12 F+NPP features (incl. MODIS) so the baseline and F+NPP see the
+    # same rows. Without this, the merged 3,000-row parquet trains the
+    # baseline on rows F+NPP never saw, and the anomaly ratio
+    # (exp(F+NPP - climate)) becomes meaningless because the two
+    # predictors aren't comparable.
+    full_feats = (
+        BIOCLIM_VARS + ["npp", "lst_day", "lst_night"]
+        if {"npp", "lst_day", "lst_night"}.issubset(df.columns)
+        else BIOCLIM_VARS
+    )
+    df = df.dropna(subset=full_feats + ["log_rs_annual"])
+    LOG.info(
+        "Training climate baseline on %d rows × %d features (matched F+NPP non-NaN subset)",
+        len(df),
+        len(feats),
+    )
     dtrain = xgb.DMatrix(df[feats].to_numpy("float32"), label=df["log_rs_annual"].to_numpy("float32"), feature_names=feats)
     params = dict(
         objective="reg:squarederror",
@@ -310,7 +325,7 @@ def main(out_path: Path) -> None:
     # 8. Train climate baseline (same params, only bioclim features)
     LOG.info("Training climate baseline ...")
     climate_model, climate_features = train_climate_baseline(
-        ROOT / "data/processed/training_features.parquet"
+        ROOT / "data/processed/training_features_v2.parquet"
     )
 
     # 9. Predict with both models
@@ -355,7 +370,7 @@ def main(out_path: Path) -> None:
 
     # 13. Distances to training and US validation sites
     LOG.info("Computing nearest-site distances ...")
-    train_df = pd.read_parquet(ROOT / "data/processed/training_features.parquet")
+    train_df = pd.read_parquet(ROOT / "data/processed/training_features_v2.parquet")
     us_df = pd.read_parquet(ROOT / "data/processed/us_validation_features_v2.parquet")
 
     train_lons = train_df["longitude"].to_numpy()
@@ -379,17 +394,29 @@ def main(out_path: Path) -> None:
     # 15. Serialize
     LOG.info("Serialising ...")
     cells = []
+    feat_matrix = feat_df[F_NPP_FEATURES].to_numpy()
     for i in range(len(feat_df)):
         lon = float(cell_lons[i])
         lat = float(cell_lats[i])
         idxs = top3_idx[i]
+        # Top-3 SHAP entries now also carry the raw feature key so the UI
+        # can look up the per-cell value + the description knowledge base.
         shap_top3 = [
             {
                 "feature": FEATURE_DISPLAY[feature_names_arr[j]],
+                "key": feature_names_arr[j].item() if hasattr(feature_names_arr[j], "item") else str(feature_names_arr[j]),
                 "value": round(float(shap_vals[i, j]), 4),
             }
             for j in idxs
         ]
+        # Per-cell feature values, rounded to 1 decimal where reasonable.
+        # Temperature features come from WorldClim in °C × 10 / °C scale —
+        # values are stored at native units exactly as the model received
+        # them, so the UI's local_template can interpret them correctly.
+        features = {
+            F_NPP_FEATURES[j]: round(float(feat_matrix[i, j]), 1)
+            for j in range(len(F_NPP_FEATURES))
+        }
         cells.append(
             {
                 "lat": round(lat, 2),
@@ -398,6 +425,7 @@ def main(out_path: Path) -> None:
                 "pred_climate_log_rs": round(float(pred_clim[i]), 4),
                 "anomaly": round(float(anomaly[i]), 4),
                 "shap_top3": shap_top3,
+                "features": features,
                 "biome_code": int(biome_codes[i]),
                 "biome": biome_labels[i],
                 "koppen_code": koppen_codes[i],
@@ -421,7 +449,7 @@ def main(out_path: Path) -> None:
 
     # 17. Write JSON
     payload = {
-        "schema_version": "atlas_lookup.v1",
+        "schema_version": "atlas_lookup.v2",
         "grid": {
             "resolution_deg": GRID_DEG,
             "bbox": {"min_lng": ASIA_BBOX[0], "min_lat": ASIA_BBOX[1],
