@@ -18,6 +18,10 @@ prompt's branch directive — gate adapted to accept either).
         adjusted from task's 1000 — see Gate 2 deviation note),
         data-driven saturation 0.017 (near-1) vs 0.423 (extremes) =
         23x spread confirms RdBu_r cmap applied correctly.
+[01:20] Phase 3: PASS · 6/6 checks · zoom rasters generated in EPSG:3857
+        at standard tile pyramid resolutions, png sizes 9KB→21MB,
+        total 176.5 MB (<200 MB gate), step ratios 1.97x–4.51x,
+        z3/z4 quantile distributions differ by max 0.001.
 
 ## Notes
 

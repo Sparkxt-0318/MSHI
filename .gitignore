@@ -6,3 +6,9 @@ data/processed/
 data/outputs/
 .DS_Store
 .env
+
+# Large intermediate rasters that exceed GitHub's 100MB per-file limit.
+# Regenerable from tiles/scripts/phase3_zoom_rasters.py and Phase 4.
+tiles/intermediate/zoom6.tif
+tiles/intermediate/zoom5.tif
+tiles/intermediate/master_3857.tif

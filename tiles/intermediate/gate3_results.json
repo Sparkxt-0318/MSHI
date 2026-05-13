@@ -1,0 +1,32 @@
+[
+  {
+    "name": "all_7_zoom_files",
+    "pass": true,
+    "detail": "all present"
+  },
+  {
+    "name": "monotonic_size",
+    "pass": true,
+    "detail": "png sizes (KB): [9, 35, 153, 693, 2883, 10741, 21208], step ratios: [3.68, 4.27, 4.51, 4.16, 3.73, 1.97]"
+  },
+  {
+    "name": "size_ratios_~4x",
+    "pass": true,
+    "detail": "ratios within [1.5, 8.0]: [3.68, 4.27, 4.51, 4.16, 3.73, 1.97]"
+  },
+  {
+    "name": "total_size_<200MB",
+    "pass": true,
+    "detail": "176.5 MB"
+  },
+  {
+    "name": "opens_cleanly",
+    "pass": true,
+    "detail": "z0=OK, z1=OK, z2=OK, z3=OK, z4=OK, z5=OK, z6=OK"
+  },
+  {
+    "name": "z3_z4_distribution_similar",
+    "pass": true,
+    "detail": "max quantile diff = 0.0010 (tolerance 0.05); q3=[np.float64(0.948), np.float64(0.987), np.float64(1.029), np.float64(1.073), np.float64(1.128)], q4=[np.float64(0.947), np.float64(0.986), np.float64(1.029), np.float64(1.074), np.float64(1.129)]"
+  }
+]
