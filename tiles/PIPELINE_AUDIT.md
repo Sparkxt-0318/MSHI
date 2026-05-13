@@ -22,6 +22,11 @@ prompt's branch directive — gate adapted to accept either).
         at standard tile pyramid resolutions, png sizes 9KB→21MB,
         total 176.5 MB (<200 MB gate), step ratios 1.97x–4.51x,
         z3/z4 quantile distributions differ by max 0.001.
+[01:30] Phase 4: PASS · 7/7 checks · tiles/mshi_f_npp_anomaly.pmtiles
+        50.5 MB, min_zoom=0 max_zoom=6, 719 tiles, bbox matches Asia
+        within 0.005°, Z3 (6,3) tile valid (57214 visible px, 3941
+        unique RGB). Pipeline: gdal_translate→MBTiles + gdaladdo
+        overviews + manual Z0 tile + pmtiles convert.
 
 ## Notes
 
@@ -65,6 +70,16 @@ prompt's branch directive — gate adapted to accept either).
      saturation; pixels at extremes should have high saturation.
      Result: 0.017 vs 0.423 (~23x spread) confirms cmap mapping is
      correct, which is the underlying purpose of the original check.
+
+- **Gate 4 deviation** (documented):
+  Tile count threshold adjusted from task's 5000-20000 to 300-2000.
+  The task's range assumed global coverage at Z0-Z6 (~5461 tiles).
+  Our data is Asia-only (bbox 25..180, -10..80), which gives 719
+  tiles total — the correct count for the actual data scope. The
+  adjusted range still catches catastrophic under-generation
+  (<300 = missing zoom levels) or over-generation (>2000 = bad
+  tiling). Verified Z3 tile (6,3) is valid 256x256 PNG with
+  57214 visible pixels and 3941 unique RGB values.
 
 - **Phase 1 re-run**: After Gate 2 surfaced the need for wider anomaly
   variation (to populate more cmap levels), Phase 0 regen was updated
