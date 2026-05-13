@@ -53,7 +53,7 @@ def render_tile_preview() -> Image.Image:
     with rasterio.open(BASE_TIF) as ds:
         arr = ds.read(1)
 
-    cmap = plt.get_cmap("RdBu_r").resampled(4096)
+    cmap = plt.get_cmap("RdBu").resampled(4096)
     norm = Normalize(vmin=VMIN, vmax=VMAX)
     rgba = cmap(norm(arr))
     mask = ~np.isfinite(arr)

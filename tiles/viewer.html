@@ -4,81 +4,177 @@
   <meta charset="utf-8">
   <title>MSHI-Geo F+NPP anomaly — local viewer</title>
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css">
   <style>
     body { margin: 0; padding: 0; font-family: system-ui, sans-serif; }
     #map { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
     #legend {
       position: absolute; bottom: 24px; left: 16px;
-      background: rgba(255,255,255,0.92); padding: 12px 16px;
-      border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      font-size: 13px; max-width: 280px;
+      background: rgba(255,255,255,0.94); padding: 12px 16px;
+      border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+      font-size: 13px; max-width: 320px;
     }
+    #legend strong { font-size: 14px; }
+    #legend .desc { color: #555; line-height: 1.35; }
+    /* Gradient runs left-to-right matching RdBu mapping:
+       LEFT = low anomaly (red, suppressed activity)
+       RIGHT = high anomaly (blue, elevated activity)  */
     #legend .gradient {
       height: 16px; margin: 6px 0;
       background: linear-gradient(to right,
-        rgb(33,102,172), rgb(67,147,195), rgb(146,197,222),
-        rgb(209,229,240), rgb(247,247,247),
-        rgb(253,219,199), rgb(244,165,130), rgb(214,96,77), rgb(178,24,43));
+        rgb(103,0,31), rgb(178,24,43), rgb(214,96,77), rgb(244,165,130), rgb(253,219,199),
+        rgb(247,247,247),
+        rgb(209,229,240), rgb(146,197,222), rgb(67,147,195), rgb(33,102,172), rgb(5,48,97));
       border-radius: 2px;
     }
     #legend .ticks {
       display: flex; justify-content: space-between;
       font-size: 11px; color: #444;
     }
+    #legend .endpoints {
+      display: flex; justify-content: space-between;
+      font-size: 10px; color: #666; margin-top: 2px;
+    }
+    #legend .meta {
+      color: #888; font-size: 11px; margin-top: 8px;
+      border-top: 1px solid #eee; padding-top: 6px;
+    }
+    .maplibregl-ctrl-attrib { font-size: 10px; }
   </style>
 </head>
 <body>
   <div id="map"></div>
   <div id="legend">
     <strong>F+NPP anomaly ratio</strong><br>
-    <small>predicted F+NPP / climate baseline</small>
+    <span class="desc">predicted F+NPP / climate baseline</span>
     <div class="gradient"></div>
     <div class="ticks">
       <span>0.5</span><span>0.75</span><span>1.0</span>
       <span>1.25</span><span>1.5</span>
     </div>
-    <small style="color: #888;">Night 1 demo · synthetic data</small>
+    <div class="endpoints">
+      <span>suppressed</span><span>baseline</span><span>elevated</span>
+    </div>
+    <div class="meta">
+      Real F+NPP run · n=615 sites (SRDB + COSORE)<br>
+      Asia z 0-6 · land mask Natural Earth 50m
+    </div>
   </div>
 
-  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js"></script>
   <script src="https://unpkg.com/pmtiles@3.2.1/dist/pmtiles.js"></script>
   <script>
+    // Register pmtiles protocol for direct-from-archive reads.
+    // (Currently unused — see source URL below — but kept for
+    // production hosting where the .pmtiles file is served as a
+    // static asset with HTTP range request support.)
     const protocol = new pmtiles.Protocol();
     maplibregl.addProtocol("pmtiles", protocol.tile);
 
+    // For local viewing we drive overlay tiles through the running
+    // `pmtiles serve` HTTP endpoint at port 8765. That endpoint
+    // serves XYZ tiles, not the raw .pmtiles archive — so the source
+    // URL pattern is the XYZ template, NOT a pmtiles:// protocol URL.
+    // Start the server with:
+    //   pmtiles serve tiles/ --port=8765 --cors='*'
     const map = new maplibregl.Map({
       container: "map",
+      // Globe projection (requires MapLibre GL JS >= 5.0).
+      // 'globe' mode renders an interactive 3D globe; user can
+      // drag-rotate, scroll-zoom, pitch with right-drag.
+      projection: { type: "globe" },
       style: {
         version: 8,
+        // Sky and globe atmosphere for the 3D view
+        sky: {
+          "atmosphere-blend": [
+            "interpolate", ["linear"], ["zoom"],
+            0, 1,
+            5, 1,
+            7, 0
+          ]
+        },
         sources: {
           carto: {
             type: "raster",
             tiles: [
-              "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
+              "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+              "https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+              "https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
             ],
             tileSize: 256,
+            maxzoom: 19,
             attribution: "© OpenStreetMap contributors, © CARTO"
           },
           mshi: {
             type: "raster",
-            // For production, change to https://<your-cdn>/tiles/mshi_f_npp_anomaly.pmtiles
-            url: "pmtiles://http://localhost:8765/mshi_f_npp_anomaly.pmtiles",
+            // XYZ template via `pmtiles serve` (NOT pmtiles:// — that
+            // would require static-file hosting with byte-range support,
+            // which the dev server does not provide).
+            // For production: replace with
+            //   url: "pmtiles://https://<your-cdn>/tiles/mshi_f_npp_anomaly.pmtiles"
+            // and register the pmtiles protocol (already done above).
+            tiles: [
+              "http://localhost:8765/mshi_f_npp_anomaly/{z}/{x}/{y}.png"
+            ],
             tileSize: 256,
-            attribution: "MSHI-Geo · synthetic data · Natural Earth 50m"
+            minzoom: 0,
+            maxzoom: 6,
+            bounds: [25.0, -10.0, 180.0, 80.0],
+            attribution: "MSHI-Geo · real F+NPP (n=615) · Natural Earth 50m"
           }
         },
         layers: [
-          { id: "carto", type: "raster", source: "carto" },
-          { id: "mshi", type: "raster", source: "mshi", paint: { "raster-opacity": 0.75 } }
+          {
+            id: "carto",
+            type: "raster",
+            source: "carto",
+            paint: { "raster-fade-duration": 0 }
+          },
+          {
+            id: "mshi",
+            type: "raster",
+            source: "mshi",
+            paint: {
+              "raster-opacity": 0.82,
+              "raster-fade-duration": 200
+            }
+          }
         ]
       },
+      // Globe view defaults: zoom 1.5 puts the whole Asia bbox in
+      // frame on most screens; centered on continental Asia.
       center: [102.5, 35.0],
-      zoom: 2,
-      maxBounds: [[-30, -30], [200, 90]]
+      zoom: 1.6,
+      pitch: 0,
+      bearing: 0,
+      // Do NOT set maxBounds — globe projection allows continuous
+      // rotation around the planet.
     });
 
-    map.on("error", (e) => console.error("map error", e));
+    map.addControl(new maplibregl.NavigationControl({
+      showCompass: true,
+      showZoom: true,
+      visualizePitch: true
+    }), "top-right");
+
+    map.addControl(new maplibregl.GlobeControl(), "top-right");
+
+    // Surface tile errors to the console so the user can debug.
+    map.on("error", (e) => {
+      // Filter out benign 204 "no tile" responses from edges of bbox.
+      const msg = (e && e.error && e.error.message) || "";
+      if (msg.includes("204") || msg.includes("AbortError")) return;
+      console.error("map error:", e);
+    });
+
+    // Diagnostic: log first successful overlay tile load so the user
+    // can confirm the source is reachable.
+    map.once("data", (e) => {
+      if (e.sourceId === "mshi" && e.isSourceLoaded) {
+        console.log("MSHI overlay source loaded:", e.source);
+      }
+    });
   </script>
 </body>
 </html>

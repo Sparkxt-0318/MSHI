@@ -7,12 +7,12 @@
   {
     "name": "monotonic_size",
     "pass": true,
-    "detail": "png sizes (KB): [5, 33, 166, 717, 2747, 9364, 18297], step ratios: [5.79, 4.94, 4.3, 3.83, 3.41, 1.95]"
+    "detail": "png sizes (KB): [5, 33, 166, 716, 2745, 9356, 18259], step ratios: [5.81, 4.98, 4.31, 3.83, 3.41, 1.95]"
   },
   {
     "name": "size_ratios_~4x",
     "pass": true,
-    "detail": "ratios within [1.5, 8.0]: [5.79, 4.94, 4.3, 3.83, 3.41, 1.95]"
+    "detail": "ratios within [1.5, 8.0]: [5.81, 4.98, 4.31, 3.83, 3.41, 1.95]"
   },
   {
     "name": "total_size_<200MB",

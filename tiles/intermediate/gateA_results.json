@@ -1,0 +1,32 @@
+[
+  {
+    "name": "server_ready",
+    "pass": true,
+    "detail": "server at http://localhost:8765/mshi_f_npp_anomaly/3/6/3.png"
+  },
+  {
+    "name": "http_200",
+    "pass": true,
+    "detail": "status=200, bytes=110616"
+  },
+  {
+    "name": "png_valid",
+    "pass": true,
+    "detail": "dims=(256, 256), mode=RGBA"
+  },
+  {
+    "name": "visible_pixels_>5pct",
+    "pass": true,
+    "detail": "30641/65536 = 46.8% visible"
+  },
+  {
+    "name": "unique_rgb_>100",
+    "pass": true,
+    "detail": "19016 unique RGB values in visible pixels"
+  },
+  {
+    "name": "not_all_transparent",
+    "pass": true,
+    "detail": "alpha sum = 6679879"
+  }
+]

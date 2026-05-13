@@ -1,19 +1,19 @@
 {
   "width": 3100,
   "height": 1800,
-  "size_kb": 5813.119140625,
-  "unique_rgb_sampled": 1029,
-  "center_saturation": 0.607434093952179,
+  "size_kb": 5803.955078125,
+  "unique_rgb_sampled": 1017,
+  "center_saturation": 0.5688892602920532,
   "corners_saturation": [
     0.0,
     0.0,
-    0.08627398312091827,
+    0.13034546375274658,
     0.0
   ],
   "edges_saturation": [
     0.0,
     0.0,
-    0.08090665936470032,
+    0.06704532355070114,
     0.0
   ],
   "vmin": 0.5,

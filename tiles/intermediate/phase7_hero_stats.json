@@ -1,10 +1,10 @@
 {
-  "mean_rgb_diff": 58.23293685913086,
-  "spatial_correlation_regional_abs": 0.7754103746330939,
-  "spatial_correlation_regional_raw": -0.7754103746330939,
+  "mean_rgb_diff": 52.58051300048828,
+  "spatial_correlation_regional_abs": 0.7556998677041953,
+  "spatial_correlation_regional_raw": 0.7556998677041953,
   "spatial_correlation_by_scale": {
     "fine": {
-      "raw": -0.5540905765081737,
+      "raw": 0.534474924375625,
       "n_blocks": 1420,
       "grid": [
         60,
@@ -12,7 +12,7 @@
       ]
     },
     "medium": {
-      "raw": -0.6652872010511047,
+      "raw": 0.6514436803806549,
       "n_blocks": 411,
       "grid": [
         30,
@@ -20,7 +20,7 @@
       ]
     },
     "regional": {
-      "raw": -0.7754103746330939,
+      "raw": 0.7556998677041953,
       "n_blocks": 129,
       "grid": [
         16,
@@ -28,8 +28,8 @@
       ]
     }
   },
-  "spatial_correlation_pixel_raw": -0.34143940912878257,
-  "cmap_orientation": "inverted (hero=Bedrock custom, tile=RdBu_r)",
+  "spatial_correlation_pixel_raw": 0.3126459169809658,
+  "cmap_orientation": "matching",
   "n_compared_pixels": 377742,
   "tile_alpha_visible_pct": 43.72013888888889,
   "comparison_size": [

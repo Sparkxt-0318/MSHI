@@ -60,8 +60,8 @@ def main() -> int:
             resampling=Resampling.average,
         )
 
-    # Apply RdBu_r cmap
-    cmap = plt.get_cmap("RdBu_r").resampled(4096)
+    # Apply RdBu cmap (red=low/suppressed, blue=high — hero-aligned)
+    cmap = plt.get_cmap("RdBu").resampled(4096)
     norm = Normalize(vmin=VMIN, vmax=VMAX)
     rgba = cmap(norm(dst_arr))
     mask = ~np.isfinite(dst_arr)

@@ -35,7 +35,11 @@ IN_TIF = ROOT / "tiles" / "intermediate" / "asia_anomaly_base.tif"
 INTERMED = ROOT / "tiles" / "intermediate"
 
 VMIN, VMAX = 0.5, 1.5
-CMAP = plt.get_cmap("RdBu_r").resampled(4096)
+# Colormap: RdBu (red=low/suppressed, blue=high) to align with the
+# published hero map (src/hero_map.py build_diverging_cmap). The
+# original Night 1 spec used RdBu_r; switched after the Night 1
+# hero-comparison surfaced the convention mismatch.
+CMAP = plt.get_cmap("RdBu").resampled(4096)
 NORM = Normalize(vmin=VMIN, vmax=VMAX)
 
 # Standard web mercator tile pyramid m/px at equator

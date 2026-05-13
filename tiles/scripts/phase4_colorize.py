@@ -27,7 +27,9 @@ def main() -> int:
         arr = src.read(1)
         profile = src.profile.copy()
 
-    cmap = plt.get_cmap("RdBu_r").resampled(4096)
+    # Colormap: RdBu (red=low/suppressed, blue=high) to align with the
+    # published hero map (src/hero_map.py build_diverging_cmap).
+    cmap = plt.get_cmap("RdBu").resampled(4096)
     norm = Normalize(vmin=VMIN, vmax=VMAX)
     rgba = cmap(norm(arr))
     mask = ~np.isfinite(arr)

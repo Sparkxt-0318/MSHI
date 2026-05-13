@@ -1,0 +1,22 @@
+[
+  {
+    "name": "B_projection_globe",
+    "pass": true,
+    "detail": "projection:'globe' present: True"
+  },
+  {
+    "name": "B_maplibre_>=5",
+    "pass": true,
+    "detail": "MapLibre version: 5.6.2"
+  },
+  {
+    "name": "D_no_synthetic_string",
+    "pass": true,
+    "detail": "'synthetic' present in source: False"
+  },
+  {
+    "name": "D_real_data_label",
+    "pass": true,
+    "detail": "real-data label present: True (checks: 'real', 'n=615', 'F+NPP', 'SRDB')"
+  }
+]

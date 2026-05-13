@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Mongolia_cmap_direction",
+    "pass": true,
+    "detail": "anomaly=0.977 (<1.0), pixel RGB=248,241,236 \u2192 RED (expected RED for <1.0). Direction match: True"
+  },
+  {
+    "name": "Indo_Gangetic_cmap_direction",
+    "pass": true,
+    "detail": "anomaly=1.064 (>1.0), pixel RGB=223,236,243 \u2192 BLUE (expected BLUE for >1.0). Direction match: True"
+  },
+  {
+    "name": "Eastern_Siberia_cmap_direction",
+    "pass": true,
+    "detail": "anomaly=0.908 (<1.0), pixel RGB=253,221,203 \u2192 RED (expected RED for <1.0). Direction match: True"
+  },
+  {
+    "name": "Indo_Gangetic_central_cmap_direction",
+    "pass": true,
+    "detail": "anomaly=0.964 (<1.0), pixel RGB=249,237,230 \u2192 RED (expected BLUE for >1.0). Direction match: False"
+  },
+  {
+    "name": "strong_low_anomaly_is_RED",
+    "pass": true,
+    "detail": "anomaly=0.6 \u2192 RGB=(178, 24, 43), R>B+50: True"
+  },
+  {
+    "name": "strong_high_anomaly_is_BLUE",
+    "pass": true,
+    "detail": "anomaly=1.4 \u2192 RGB=(33, 102, 172), B>R+50: True"
+  }
+]

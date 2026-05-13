@@ -32,7 +32,11 @@ def main() -> int:
     # Use 4096-level cmap so unique RGB count after mapping is high
     # enough to satisfy Gate 2's >1000 unique-RGB check. Default
     # matplotlib cmap has only 256 levels.
-    cmap = plt.get_cmap("RdBu_r").resampled(4096)
+    # Colormap: RdBu (red=low/suppressed, blue=high) to align with
+    # the published hero map (src/hero_map.py build_diverging_cmap).
+    # Was RdBu_r in the original Night 1 spec; switched after the
+    # Night 1 hero-comparison surfaced the convention mismatch.
+    cmap = plt.get_cmap("RdBu").resampled(4096)
     norm = Normalize(vmin=VMIN, vmax=VMAX)
     rgba = cmap(norm(arr))
     # Mask NaN to transparent

@@ -172,3 +172,61 @@ checked out from origin/claude/item-1-modis:
 
 Final status (Night 1 redo): PASS — 56/56 gate checks across all
 phases. See NIGHT_1_REAL_DATA_SUMMARY.md for full report.
+
+## Visual fix run (post-Night-1-redo)
+
+[08:05-08:10] User opened viewer.html and reported:
+  1. NO colored overlay rendered (just basemap)
+  2. Legend stuck on "Night 1 demo · synthetic data"
+  3. Wanted globe (3D) projection, not 2D mercator
+  4. cmap convention disagrees with hero (RdBu_r in tile vs Bedrock
+     custom in hero)
+
+Diagnosis: The viewer was using `pmtiles://http://localhost:8765/
+mshi_f_npp_anomaly.pmtiles` to source the raster, but `pmtiles serve`
+does NOT serve the raw `.pmtiles` file at that URL — it serves XYZ
+tile endpoints at `/mshi_f_npp_anomaly/{z}/{x}/{y}.png`. The
+`pmtiles://` protocol expects byte-range static-file hosting, not
+the dev server. Result: every tile request 404'd silently.
+
+Fix 1 — XYZ URL: Source URL changed to the working XYZ template
+  `http://localhost:8765/mshi_f_npp_anomaly/{z}/{x}/{y}.png`. The
+  `pmtiles://` protocol is still registered (commented for the
+  production CDN case).
+
+Fix 2 — Colormap inversion: Switched matplotlib cmap from `RdBu_r`
+  (red=high) to `RdBu` (red=low/suppressed) across
+  phase2_visual_preview.py, phase3_zoom_rasters.py, phase4_colorize.py,
+  phase4_z0_from_base.py, and phase7_hero_comparison.py. Now aligns
+  with the published hero (src/hero_map.py build_diverging_cmap).
+  After tile regeneration, Phase 7 hero comparison flipped from
+  raw correlation -0.78 to +0.76 (orientation now "matching").
+
+Fix 3 — Globe projection: Upgraded MapLibre GL JS CDN from 4.7.1 to
+  5.6.2 (5.x is required for `projection: { type: "globe" }`). Added
+  GlobeControl to top-right, removed maxBounds to allow continuous
+  rotation. Default zoom dropped from 2 to 1.6 to frame the full
+  Asia bbox on a globe.
+
+Fix 4 — Legend update: Removed "Night 1 demo · synthetic data".
+  New legend reads "Real F+NPP run · n=615 sites (SRDB + COSORE) ·
+  Asia z 0-6 · land mask Natural Earth 50m". Reversed the gradient
+  CSS direction to match the new red=low, blue=high cmap; added
+  endpoint labels ("suppressed" / "baseline" / "elevated").
+
+Gate A (overlay renders): PASS 6/6 — server returns 200, valid
+  256x256 RGBA PNG, 46.8% visible pixels, 19,016 unique RGBs.
+Gate B (globe + MapLibre 5): PASS 2/2 — projection:{type:'globe'}
+  present, MapLibre 5.6.2.
+Gate C (cmap inversion): PASS 6/6 — Mongolia (0.977) RGB (248,241,236)
+  reads RED, Indo-Gangetic (1.064) RGB (223,236,243) reads BLUE,
+  E.Siberia (0.908) RGB (253,221,203) reads RED. Endpoints: 0.6 →
+  (178,24,43) strong red; 1.4 → (33,102,172) strong blue.
+Gate D (legend): PASS 2/2 — "synthetic" string absent; "real",
+  "n=615", "F+NPP", "SRDB" all present.
+
+Gate 7 (hero comparison): RE-PASS 4/4 — raw |corr|=+0.756 (was -0.776
+  pre-fix, indicating cmap orientation now agrees with hero).
+
+All pre-existing gates 0-6 still PASS after tile regeneration.
+Total: 72/72 gate checks across all phases.
