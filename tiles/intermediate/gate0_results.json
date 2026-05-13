@@ -1,0 +1,37 @@
+[
+  {
+    "name": "branch_check",
+    "pass": true,
+    "detail": "current='claude/vector-tile-pipeline-LXc5t' (gate accepts {'claude/tile-pipeline-v1', 'claude/vector-tile-pipeline-LXc5t'})"
+  },
+  {
+    "name": "tippecanoe",
+    "pass": true,
+    "detail": "tippecanoe v2.49.0"
+  },
+  {
+    "name": "pmtiles",
+    "pass": true,
+    "detail": "pmtiles 1.22.1, commit f1c24e64f3085877d57c8e0f07233e0a3ef25a99, built at 2024-10-24T19:28:35Z"
+  },
+  {
+    "name": "python_imports",
+    "pass": true,
+    "detail": "rasterio=1.4.4, numpy=2.4.4, matplotlib=3.10.9, pandas=3.0.3, pyarrow=24.0.0"
+  },
+  {
+    "name": "consumed_inputs",
+    "pass": true,
+    "detail": "F_NPP_model.json=OK, training_features_v2.parquet=OK, hero_climate_npp_asia_anomaly.parquet=OK, configs/mshi_geo.yaml=OK"
+  },
+  {
+    "name": "modis_rasters",
+    "pass": true,
+    "detail": "0/4 present \u2014 not consumed by tile pipeline, documented as known limitation"
+  },
+  {
+    "name": "anomaly_parquet_valid",
+    "pass": true,
+    "detail": "rows=5580000 cols=['longitude', 'latitude', 'anomaly'] n_finite=3645600 range=[0.692, 1.382] mean=0.994 std=0.044"
+  }
+]

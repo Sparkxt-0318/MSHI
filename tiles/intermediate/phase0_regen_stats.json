@@ -1,0 +1,31 @@
+{
+  "n_rows": 5580000,
+  "n_finite": 3645600,
+  "anomaly_min": 0.691516101360321,
+  "anomaly_max": 1.382466435432434,
+  "anomaly_mean": 0.9939403533935547,
+  "anomaly_std": 0.044252533465623856,
+  "bbox": [
+    25.0,
+    -10.0,
+    180.0,
+    80.0
+  ],
+  "resolution_deg": 0.05,
+  "f_npp_features": [
+    "bio01",
+    "bio04",
+    "bio12",
+    "bio14",
+    "bio15",
+    "npp"
+  ],
+  "climate_baseline_features": [
+    "bio01",
+    "bio04",
+    "bio12",
+    "bio14",
+    "bio15"
+  ],
+  "training_source": "synthetic (src.demo_synthetic.make_synthetic_training)"
+}
