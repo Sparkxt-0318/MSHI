@@ -1,0 +1,23 @@
+{
+  "width": 3100,
+  "height": 1800,
+  "size_kb": 8466.923828125,
+  "unique_rgb_sampled": 553,
+  "center_saturation": 0.07547526061534882,
+  "corners_saturation": [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "edges_saturation": [
+    0.0,
+    0.2241540551185608,
+    0.0498950332403183,
+    0.0
+  ],
+  "vmin": 0.5,
+  "vcenter": 1.0,
+  "vmax": 1.5,
+  "cmap": "RdBu_r"
+}

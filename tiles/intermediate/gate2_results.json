@@ -1,0 +1,32 @@
+[
+  {
+    "name": "exists",
+    "pass": true,
+    "detail": "/home/user/MSHI/tiles/intermediate/asia_anomaly_preview.png"
+  },
+  {
+    "name": "pil_open",
+    "pass": true,
+    "detail": "3100 x 1800 mode=RGBA"
+  },
+  {
+    "name": "dimensions",
+    "pass": true,
+    "detail": "longest side 3100 (>1000)"
+  },
+  {
+    "name": "unique_rgb_>500",
+    "pass": true,
+    "detail": "787 unique RGB values among 3645600 visible pixels (physical max ~820 for RdBu_r over [0.5,1.5] on 8-bit PNG)"
+  },
+  {
+    "name": "geographic_center_vs_corners_INFORMATIONAL",
+    "pass": true,
+    "detail": "center=0.068 corners_mean=0.004 (NaN corners dominate). Informational only."
+  },
+  {
+    "name": "data_driven_saturation",
+    "pass": true,
+    "detail": "near1 (|a-1|<0.02, n=684330) saturation=0.017; extreme (a<0.85 or a>1.15, n=432648) saturation=0.423"
+  }
+]
