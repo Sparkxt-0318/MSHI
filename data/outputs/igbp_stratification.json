@@ -1,0 +1,221 @@
+{
+  "asia_counts": {
+    "forest": 188,
+    "savanna": 147,
+    "cropland": 109,
+    "grassland": 83,
+    "other": 77,
+    "barren": 8,
+    "wetland": 2,
+    "shrubland": 1
+  },
+  "us_counts": {
+    "savanna": 86,
+    "forest": 83,
+    "cropland": 36,
+    "grassland": 34,
+    "other": 24,
+    "shrubland": 6,
+    "barren": 3,
+    "wetland": 2
+  },
+  "buckets": {
+    "forest": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "shrubland": [
+      6,
+      7
+    ],
+    "savanna": [
+      8,
+      9
+    ],
+    "grassland": [
+      10
+    ],
+    "wetland": [
+      11
+    ],
+    "cropland": [
+      12,
+      14
+    ],
+    "barren": [
+      16
+    ]
+  },
+  "results": {
+    "forest": {
+      "n_asia": 187,
+      "n_us": 82,
+      "transfer_r2": -0.26473677158355713,
+      "transfer_rmse": 0.5781315210335483,
+      "spearman": 0.06744129092846972,
+      "bias": 0.0986989215016365,
+      "bootstrap_median": -0.2876209616661072,
+      "ci_low": -0.578418979048729,
+      "ci_high": -0.058068412542343156,
+      "ci_excludes_zero": true,
+      "top_shap": [
+        {
+          "feature": "bio04",
+          "mean_abs_shap": 0.14889566600322723
+        },
+        {
+          "feature": "bio05",
+          "mean_abs_shap": 0.09168072789907455
+        },
+        {
+          "feature": "bio12",
+          "mean_abs_shap": 0.07978887856006622
+        },
+        {
+          "feature": "bio01",
+          "mean_abs_shap": 0.07378549873828888
+        },
+        {
+          "feature": "bio17",
+          "mean_abs_shap": 0.05190354213118553
+        }
+      ],
+      "method": "F (climate-only, 8 bioclim)"
+    },
+    "shrubland": {
+      "skipped": true,
+      "reason": "insufficient sites (n_asia=1, n_us=6)",
+      "n_asia": 1,
+      "n_us": 6
+    },
+    "savanna": {
+      "n_asia": 146,
+      "n_us": 86,
+      "transfer_r2": -0.214302659034729,
+      "transfer_rmse": 0.6288907066936005,
+      "spearman": 0.24774745029931672,
+      "bias": -0.11754485964775085,
+      "bootstrap_median": -0.22786396741867065,
+      "ci_low": -0.7243958801031113,
+      "ci_high": 0.10412430912256233,
+      "ci_excludes_zero": false,
+      "top_shap": [
+        {
+          "feature": "bio06",
+          "mean_abs_shap": 0.1403423398733139
+        },
+        {
+          "feature": "bio04",
+          "mean_abs_shap": 0.10085377842187881
+        },
+        {
+          "feature": "bio15",
+          "mean_abs_shap": 0.09285926073789597
+        },
+        {
+          "feature": "bio05",
+          "mean_abs_shap": 0.0895957350730896
+        },
+        {
+          "feature": "bio14",
+          "mean_abs_shap": 0.07455960661172867
+        }
+      ],
+      "method": "F (climate-only, 8 bioclim)"
+    },
+    "grassland": {
+      "n_asia": 83,
+      "n_us": 34,
+      "transfer_r2": 0.27504026889801025,
+      "transfer_rmse": 0.6098895712470461,
+      "spearman": 0.4824898183714917,
+      "bias": 0.09607774019241333,
+      "bootstrap_median": 0.26268404722213745,
+      "ci_low": -0.06004765629768371,
+      "ci_high": 0.4738934069871902,
+      "ci_excludes_zero": false,
+      "top_shap": [
+        {
+          "feature": "bio12",
+          "mean_abs_shap": 0.22658054530620575
+        },
+        {
+          "feature": "bio04",
+          "mean_abs_shap": 0.19690674543380737
+        },
+        {
+          "feature": "bio05",
+          "mean_abs_shap": 0.17691655457019806
+        },
+        {
+          "feature": "bio06",
+          "mean_abs_shap": 0.10632375627756119
+        },
+        {
+          "feature": "bio01",
+          "mean_abs_shap": 0.08693849295377731
+        }
+      ],
+      "method": "F (climate-only, 8 bioclim)"
+    },
+    "wetland": {
+      "skipped": true,
+      "reason": "insufficient sites (n_asia=2, n_us=2)",
+      "n_asia": 2,
+      "n_us": 2
+    },
+    "cropland": {
+      "n_asia": 108,
+      "n_us": 36,
+      "transfer_r2": -0.14293408393859863,
+      "transfer_rmse": 0.5674591013165147,
+      "spearman": -0.0650061145711513,
+      "bias": 0.03417003154754639,
+      "bootstrap_median": -0.17038702964782715,
+      "ci_low": -0.4715678632259369,
+      "ci_high": 0.06747749149799344,
+      "ci_excludes_zero": false,
+      "top_shap": [
+        {
+          "feature": "bio01",
+          "mean_abs_shap": 0.1578579843044281
+        },
+        {
+          "feature": "bio15",
+          "mean_abs_shap": 0.10981237143278122
+        },
+        {
+          "feature": "bio06",
+          "mean_abs_shap": 0.09284201264381409
+        },
+        {
+          "feature": "bio04",
+          "mean_abs_shap": 0.08349423855543137
+        },
+        {
+          "feature": "bio17",
+          "mean_abs_shap": 0.07630673795938492
+        }
+      ],
+      "method": "F (climate-only, 8 bioclim)"
+    },
+    "barren": {
+      "skipped": true,
+      "reason": "insufficient sites (n_asia=8, n_us=3)",
+      "n_asia": 8,
+      "n_us": 3
+    },
+    "_baseline_F_all_biomes": {
+      "n_asia": 600,
+      "n_us": 272,
+      "transfer_r2": 0.1270191985421344,
+      "bootstrap_median": 0.12236375794744137,
+      "ci_low": 0.02022976868409395,
+      "ci_high": 0.21232386433268927,
+      "ci_excludes_zero": true
+    }
+  }
+}

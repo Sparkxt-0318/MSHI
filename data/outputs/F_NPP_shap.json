@@ -1,0 +1,65 @@
+{
+  "config_name": "F_NPP",
+  "ranking": [
+    {
+      "rank": 1,
+      "feature": "npp",
+      "mean_abs_shap": 0.1275157928466797
+    },
+    {
+      "rank": 2,
+      "feature": "bio04",
+      "mean_abs_shap": 0.08513101935386658
+    },
+    {
+      "rank": 3,
+      "feature": "bio12",
+      "mean_abs_shap": 0.06488388776779175
+    },
+    {
+      "rank": 4,
+      "feature": "bio06",
+      "mean_abs_shap": 0.043626196682453156
+    },
+    {
+      "rank": 5,
+      "feature": "bio15",
+      "mean_abs_shap": 0.038581665605306625
+    },
+    {
+      "rank": 6,
+      "feature": "lst_diurnal_range",
+      "mean_abs_shap": 0.03381049633026123
+    },
+    {
+      "rank": 7,
+      "feature": "bio01",
+      "mean_abs_shap": 0.032273679971694946
+    },
+    {
+      "rank": 8,
+      "feature": "lst_day",
+      "mean_abs_shap": 0.030488481745123863
+    },
+    {
+      "rank": 9,
+      "feature": "bio14",
+      "mean_abs_shap": 0.028977854177355766
+    },
+    {
+      "rank": 10,
+      "feature": "lst_night",
+      "mean_abs_shap": 0.026143265888094902
+    },
+    {
+      "rank": 11,
+      "feature": "bio05",
+      "mean_abs_shap": 0.025074459612369537
+    },
+    {
+      "rank": 12,
+      "feature": "bio17",
+      "mean_abs_shap": 0.021068541333079338
+    }
+  ]
+}

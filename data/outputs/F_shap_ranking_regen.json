@@ -1,0 +1,37 @@
+{
+  "config_name": "F_climate_only",
+  "ranking": [
+    {
+      "feature": "bio12",
+      "mean_abs_shap": 0.1049710139632225
+    },
+    {
+      "feature": "bio04",
+      "mean_abs_shap": 0.08554299175739288
+    },
+    {
+      "feature": "bio01",
+      "mean_abs_shap": 0.06131751462817192
+    },
+    {
+      "feature": "bio05",
+      "mean_abs_shap": 0.052775558084249496
+    },
+    {
+      "feature": "bio06",
+      "mean_abs_shap": 0.049509964883327484
+    },
+    {
+      "feature": "bio15",
+      "mean_abs_shap": 0.046588294208049774
+    },
+    {
+      "feature": "bio17",
+      "mean_abs_shap": 0.04023094102740288
+    },
+    {
+      "feature": "bio14",
+      "mean_abs_shap": 0.03577432781457901
+    }
+  ]
+}

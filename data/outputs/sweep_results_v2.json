@@ -1,0 +1,618 @@
+{
+  "schema_version": "v2 (Run A + Item 1 MODIS)",
+  "asia_n": 615,
+  "us_n": 274,
+  "results": [
+    {
+      "name": "A_baseline",
+      "desc": "depth=3 n_est=250 reg_lambda=2.0",
+      "n_features": 20,
+      "features": [
+        "soc",
+        "nitrogen",
+        "phh2o",
+        "clay",
+        "sand",
+        "silt",
+        "bdod",
+        "cec",
+        "bio01",
+        "bio04",
+        "bio05",
+        "bio06",
+        "bio12",
+        "bio14",
+        "bio15",
+        "bio17",
+        "c_n_ratio",
+        "clay_sand_ratio",
+        "ph_optimality",
+        "aridity_demartonne"
+      ],
+      "params": {
+        "n_estimators": 250,
+        "max_depth": 3,
+        "learning_rate": 0.05,
+        "subsample": 0.7,
+        "colsample_bytree": 0.85,
+        "min_child_weight": 6,
+        "reg_alpha": 0.1,
+        "reg_lambda": 2.0,
+        "verbosity": 0
+      },
+      "n_train": 588,
+      "n_us": 270,
+      "cv_r2_mean": -0.12740042209625244,
+      "cv_r2_per_fold": [
+        -0.19279086589813232,
+        -0.12822282314300537,
+        -0.2690068483352661,
+        0.03879439830780029,
+        -0.08577597141265869
+      ],
+      "cv_rmse_mean": 0.7272621041057775,
+      "transfer_r2": -0.03096461296081543,
+      "transfer_rmse": 0.6321624666802443,
+      "transfer_mae": 0.5051626563072205,
+      "transfer_bias": -0.08484639972448349,
+      "transfer_pred_std": 0.2940860390663147,
+      "transfer_obs_std": 0.6225967407226562,
+      "shap_top5": [
+        [
+          "bio12",
+          0.07704823464155197
+        ],
+        [
+          "silt",
+          0.05888359621167183
+        ],
+        [
+          "bio01",
+          0.04753568395972252
+        ],
+        [
+          "bio04",
+          0.044864654541015625
+        ],
+        [
+          "clay_sand_ratio",
+          0.04480835050344467
+        ]
+      ]
+    },
+    {
+      "name": "B_heavier_reg",
+      "desc": "depth=3 n_est=250 reg_lambda=8.0 reg_alpha=2.0",
+      "n_features": 20,
+      "features": [
+        "soc",
+        "nitrogen",
+        "phh2o",
+        "clay",
+        "sand",
+        "silt",
+        "bdod",
+        "cec",
+        "bio01",
+        "bio04",
+        "bio05",
+        "bio06",
+        "bio12",
+        "bio14",
+        "bio15",
+        "bio17",
+        "c_n_ratio",
+        "clay_sand_ratio",
+        "ph_optimality",
+        "aridity_demartonne"
+      ],
+      "params": {
+        "n_estimators": 250,
+        "max_depth": 3,
+        "learning_rate": 0.05,
+        "subsample": 0.7,
+        "colsample_bytree": 0.85,
+        "min_child_weight": 8,
+        "reg_alpha": 2.0,
+        "reg_lambda": 8.0,
+        "verbosity": 0
+      },
+      "n_train": 588,
+      "n_us": 270,
+      "cv_r2_mean": -0.0832107663154602,
+      "cv_r2_per_fold": [
+        -0.20544707775115967,
+        -0.063240647315979,
+        -0.20252513885498047,
+        0.1260865330696106,
+        -0.07092750072479248
+      ],
+      "cv_rmse_mean": 0.7121929745520404,
+      "transfer_r2": 0.020089924335479736,
+      "transfer_rmse": 0.6163110425015229,
+      "transfer_mae": 0.48095986247062683,
+      "transfer_bias": -0.08580159395933151,
+      "transfer_pred_std": 0.28156423568725586,
+      "transfer_obs_std": 0.6225967407226562,
+      "shap_top5": [
+        [
+          "bio12",
+          0.08141977339982986
+        ],
+        [
+          "silt",
+          0.06722158938646317
+        ],
+        [
+          "bio01",
+          0.05289364978671074
+        ],
+        [
+          "nitrogen",
+          0.05254600942134857
+        ],
+        [
+          "sand",
+          0.0522577166557312
+        ]
+      ]
+    },
+    {
+      "name": "C_shallow_more",
+      "desc": "depth=2 n_est=400 reg_lambda=4.0",
+      "n_features": 20,
+      "features": [
+        "soc",
+        "nitrogen",
+        "phh2o",
+        "clay",
+        "sand",
+        "silt",
+        "bdod",
+        "cec",
+        "bio01",
+        "bio04",
+        "bio05",
+        "bio06",
+        "bio12",
+        "bio14",
+        "bio15",
+        "bio17",
+        "c_n_ratio",
+        "clay_sand_ratio",
+        "ph_optimality",
+        "aridity_demartonne"
+      ],
+      "params": {
+        "n_estimators": 400,
+        "max_depth": 2,
+        "learning_rate": 0.04,
+        "subsample": 0.7,
+        "colsample_bytree": 0.85,
+        "min_child_weight": 6,
+        "reg_alpha": 0.1,
+        "reg_lambda": 4.0,
+        "verbosity": 0
+      },
+      "n_train": 588,
+      "n_us": 270,
+      "cv_r2_mean": -0.05405811071395874,
+      "cv_r2_per_fold": [
+        -0.13158190250396729,
+        -0.03307008743286133,
+        -0.19208502769470215,
+        0.10697788000106812,
+        -0.020531415939331055
+      ],
+      "cv_rmse_mean": 0.7026448014284927,
+      "transfer_r2": -0.0009903907775878906,
+      "transfer_rmse": 0.6229049377442893,
+      "transfer_mae": 0.4911287724971771,
+      "transfer_bias": -0.08415340632200241,
+      "transfer_pred_std": 0.29478150606155396,
+      "transfer_obs_std": 0.6225967407226562,
+      "shap_top5": [
+        [
+          "bio12",
+          0.07440543919801712
+        ],
+        [
+          "silt",
+          0.0607944019138813
+        ],
+        [
+          "clay_sand_ratio",
+          0.04714248329401016
+        ],
+        [
+          "bio06",
+          0.0470382422208786
+        ],
+        [
+          "nitrogen",
+          0.04485269635915756
+        ]
+      ]
+    },
+    {
+      "name": "D_drop_overfit",
+      "desc": "baseline params; drop {clay,sand,silt,clay_sand_ratio}",
+      "n_features": 16,
+      "features": [
+        "soc",
+        "nitrogen",
+        "phh2o",
+        "bdod",
+        "cec",
+        "bio01",
+        "bio04",
+        "bio05",
+        "bio06",
+        "bio12",
+        "bio14",
+        "bio15",
+        "bio17",
+        "c_n_ratio",
+        "ph_optimality",
+        "aridity_demartonne"
+      ],
+      "params": {
+        "n_estimators": 250,
+        "max_depth": 3,
+        "learning_rate": 0.05,
+        "subsample": 0.7,
+        "colsample_bytree": 0.85,
+        "min_child_weight": 6,
+        "reg_alpha": 0.1,
+        "reg_lambda": 2.0,
+        "verbosity": 0
+      },
+      "n_train": 588,
+      "n_us": 270,
+      "cv_r2_mean": -0.1393597364425659,
+      "cv_r2_per_fold": [
+        -0.2364940643310547,
+        -0.09782207012176514,
+        -0.3176978826522827,
+        0.03206467628479004,
+        -0.07684934139251709
+      ],
+      "cv_rmse_mean": 0.7292220146453742,
+      "transfer_r2": -0.023846149444580078,
+      "transfer_rmse": 0.6299762508669208,
+      "transfer_mae": 0.48163390159606934,
+      "transfer_bias": 0.012341308407485485,
+      "transfer_pred_std": 0.3186730742454529,
+      "transfer_obs_std": 0.6225967407226562,
+      "shap_top5": [
+        [
+          "bio12",
+          0.07847167551517487
+        ],
+        [
+          "c_n_ratio",
+          0.0665988028049469
+        ],
+        [
+          "bio04",
+          0.05504903197288513
+        ],
+        [
+          "bio06",
+          0.05220744386315346
+        ],
+        [
+          "aridity_demartonne",
+          0.049624718725681305
+        ]
+      ]
+    },
+    {
+      "name": "E_climate_plus_transferring_soil",
+      "desc": "8 bioclim + phh2o + ph_optimality + bdod + cec + aridity",
+      "n_features": 13,
+      "features": [
+        "bio01",
+        "bio04",
+        "bio05",
+        "bio06",
+        "bio12",
+        "bio14",
+        "bio15",
+        "bio17",
+        "phh2o",
+        "ph_optimality",
+        "bdod",
+        "cec",
+        "aridity_demartonne"
+      ],
+      "params": {
+        "n_estimators": 250,
+        "max_depth": 3,
+        "learning_rate": 0.05,
+        "subsample": 0.7,
+        "colsample_bytree": 0.85,
+        "min_child_weight": 6,
+        "reg_alpha": 0.1,
+        "reg_lambda": 2.0,
+        "verbosity": 0
+      },
+      "n_train": 588,
+      "n_us": 270,
+      "cv_r2_mean": -0.12820777893066407,
+      "cv_r2_per_fold": [
+        -0.20811283588409424,
+        -0.07693815231323242,
+        -0.2801135778427124,
+        0.02987062931060791,
+        -0.10574495792388916
+      ],
+      "cv_rmse_mean": 0.7267440938379643,
+      "transfer_r2": 0.00838547945022583,
+      "transfer_rmse": 0.6199808526543419,
+      "transfer_mae": 0.4835512638092041,
+      "transfer_bias": -0.04059291258454323,
+      "transfer_pred_std": 0.262235164642334,
+      "transfer_obs_std": 0.6225967407226562,
+      "shap_top5": [
+        [
+          "bio12",
+          0.0836104154586792
+        ],
+        [
+          "bio04",
+          0.06710395216941833
+        ],
+        [
+          "bio06",
+          0.06484141945838928
+        ],
+        [
+          "aridity_demartonne",
+          0.06431327760219574
+        ],
+        [
+          "bio01",
+          0.05003124102950096
+        ]
+      ]
+    },
+    {
+      "name": "F_climate_only",
+      "desc": "8 bioclim only",
+      "n_features": 8,
+      "features": [
+        "bio01",
+        "bio04",
+        "bio05",
+        "bio06",
+        "bio12",
+        "bio14",
+        "bio15",
+        "bio17"
+      ],
+      "params": {
+        "n_estimators": 200,
+        "max_depth": 3,
+        "learning_rate": 0.05,
+        "subsample": 0.7,
+        "colsample_bytree": 0.85,
+        "min_child_weight": 6,
+        "reg_alpha": 0.1,
+        "reg_lambda": 2.0,
+        "verbosity": 0
+      },
+      "n_train": 600,
+      "n_us": 272,
+      "cv_r2_mean": -0.06721290349960327,
+      "cv_r2_per_fold": [
+        -0.3681602478027344,
+        -0.00647890567779541,
+        0.007589995861053467,
+        0.011541426181793213,
+        0.019443213939666748
+      ],
+      "cv_rmse_mean": 0.72104073096782,
+      "transfer_r2": 0.12701916694641113,
+      "transfer_rmse": 0.5850102271710291,
+      "transfer_mae": 0.472250759601593,
+      "transfer_bias": -0.04404238983988762,
+      "transfer_pred_std": 0.22979533672332764,
+      "transfer_obs_std": 0.6261250972747803,
+      "shap_top5": [
+        [
+          "bio12",
+          0.1049710139632225
+        ],
+        [
+          "bio04",
+          0.08554299175739288
+        ],
+        [
+          "bio01",
+          0.06131751462817192
+        ],
+        [
+          "bio05",
+          0.052775558084249496
+        ],
+        [
+          "bio06",
+          0.049509964883327484
+        ]
+      ]
+    },
+    {
+      "name": "F_NPP",
+      "desc": "8 bioclim + 4 MODIS continuous (npp, lst_day, lst_night, lst_diurnal_range). Run A F hyperparameters.",
+      "n_features": 12,
+      "features": [
+        "bio01",
+        "bio04",
+        "bio05",
+        "bio06",
+        "bio12",
+        "bio14",
+        "bio15",
+        "bio17",
+        "npp",
+        "lst_day",
+        "lst_night",
+        "lst_diurnal_range"
+      ],
+      "params": {
+        "n_estimators": 250,
+        "max_depth": 3,
+        "learning_rate": 0.05,
+        "subsample": 0.85,
+        "colsample_bytree": 0.85,
+        "min_child_weight": 4,
+        "reg_alpha": 0.5,
+        "reg_lambda": 2.0,
+        "verbosity": 0
+      },
+      "n_train": 463,
+      "n_us": 223,
+      "cv_r2_mean": -0.021445274353027344,
+      "cv_r2_per_fold": [
+        0.08596986532211304,
+        0.08815127611160278,
+        -0.2379699945449829,
+        -0.09447765350341797,
+        0.05110013484954834
+      ],
+      "cv_rmse_mean": 0.6585478746876021,
+      "transfer_r2": 0.1447279453277588,
+      "transfer_rmse": 0.5674507507514878,
+      "transfer_mae": 0.44198375940322876,
+      "transfer_bias": 0.00482962466776371,
+      "transfer_pred_std": 0.2299102395772934,
+      "transfer_obs_std": 0.6135868430137634,
+      "transfer_spearman": 0.29693080584219145,
+      "bootstrap_n": 2000,
+      "bootstrap_median": 0.14130756258964539,
+      "bootstrap_ci_low": 0.025779044628143313,
+      "bootstrap_ci_high": 0.2412805631756782,
+      "bootstrap_ci_excludes_zero": true,
+      "shap_top5": [
+        [
+          "npp",
+          0.1275157928466797
+        ],
+        [
+          "bio04",
+          0.08513101935386658
+        ],
+        [
+          "bio12",
+          0.06488388776779175
+        ],
+        [
+          "bio06",
+          0.043626196682453156
+        ],
+        [
+          "bio15",
+          0.038581665605306625
+        ]
+      ]
+    },
+    {
+      "name": "Full_MODIS",
+      "desc": "20 prior + 4 MODIS continuous + 10 IGBP one-hot. Run A B hyperparameters.",
+      "n_features": 34,
+      "features": [
+        "soc",
+        "nitrogen",
+        "phh2o",
+        "clay",
+        "sand",
+        "silt",
+        "bdod",
+        "cec",
+        "bio01",
+        "bio04",
+        "bio05",
+        "bio06",
+        "bio12",
+        "bio14",
+        "bio15",
+        "bio17",
+        "c_n_ratio",
+        "clay_sand_ratio",
+        "ph_optimality",
+        "aridity_demartonne",
+        "npp",
+        "lst_day",
+        "lst_night",
+        "lst_diurnal_range",
+        "lc_02",
+        "lc_04",
+        "lc_05",
+        "lc_08",
+        "lc_09",
+        "lc_10",
+        "lc_12",
+        "lc_13",
+        "lc_14",
+        "lc_17"
+      ],
+      "params": {
+        "n_estimators": 250,
+        "max_depth": 3,
+        "learning_rate": 0.05,
+        "subsample": 0.85,
+        "colsample_bytree": 0.85,
+        "min_child_weight": 4,
+        "reg_alpha": 2.0,
+        "reg_lambda": 8.0,
+        "verbosity": 0
+      },
+      "n_train": 463,
+      "n_us": 223,
+      "cv_r2_mean": 0.07893439531326293,
+      "cv_r2_per_fold": [
+        0.14563840627670288,
+        0.2531353831291199,
+        -0.06171703338623047,
+        -0.023691773414611816,
+        0.08130699396133423
+      ],
+      "cv_rmse_mean": 0.6255716631409267,
+      "transfer_r2": 0.07243996858596802,
+      "transfer_rmse": 0.5909449674395747,
+      "transfer_mae": 0.4802260398864746,
+      "transfer_bias": -0.07584132999181747,
+      "transfer_pred_std": 0.2684329152107239,
+      "transfer_obs_std": 0.6135868430137634,
+      "transfer_spearman": 0.23227971759241056,
+      "bootstrap_n": 2000,
+      "bootstrap_median": 0.06684654951095581,
+      "bootstrap_ci_low": -0.08399673998355865,
+      "bootstrap_ci_high": 0.18855945616960504,
+      "bootstrap_ci_excludes_zero": false,
+      "shap_top5": [
+        [
+          "npp",
+          0.12792526185512543
+        ],
+        [
+          "silt",
+          0.05736132338643074
+        ],
+        [
+          "clay_sand_ratio",
+          0.055719345808029175
+        ],
+        [
+          "lst_day",
+          0.050514381378889084
+        ],
+        [
+          "bio04",
+          0.042789261788129807
+        ]
+      ]
+    }
+  ]
+}
