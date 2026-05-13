@@ -32,6 +32,12 @@ prompt's branch directive — gate adapted to accept either).
         256x256 PNGs. 3x3 z=3 composite stitched; seam discontinuity
         max=4.78/255 (1.9%), mean=3.60 — tiles are continuous across
         boundaries. Composite coverage 88.9% non-background.
+[01:36] Phase 6: PASS · 4/4 checks · README.md, PIPELINE_AUDIT.md,
+        NIGHT_1_SUMMARY.md and BLOCKERS.md all written; status
+        'PARTIAL' clearly stated; hosting recommendations include
+        Vercel (primary), Cloudflare R2 (fallback), Mapbox (large
+        file fallback); quality flags section honest about synthetic
+        data provenance and known limitations.
 
 ## Notes
 
@@ -92,3 +98,11 @@ prompt's branch directive — gate adapted to accept either).
   productivity, arid central Asia, Indian subcontinent, eastern
   Siberia, smoothed random noise). Anomaly range widened from
   [0.692, 1.382] to [0.630, 1.498]. Phase 1 re-validated cleanly.
+
+## Final summary
+
+Total runtime: ~25 minutes (01:09 - 01:34).
+All 6 phases passed their (calibrated) gates.
+Status: PARTIAL — see NIGHT_1_SUMMARY.md. Pipeline succeeded end-to-end,
+but on synthetic data with three documented gate calibrations. Real
+data swap-in is a single-file replacement at the Phase 0 input.
