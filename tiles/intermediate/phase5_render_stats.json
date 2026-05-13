@@ -1,0 +1,127 @@
+{
+  "fetches": {
+    "z3_6_3": {
+      "status": 200,
+      "bytes": 103562,
+      "dims": [
+        256,
+        256
+      ],
+      "visible_px": 57214
+    },
+    "z4_12_6": {
+      "status": 200,
+      "bytes": 118679,
+      "dims": [
+        256,
+        256
+      ],
+      "visible_px": 65536
+    }
+  },
+  "composite": {
+    "dims": [
+      768,
+      768
+    ],
+    "nonwhite_px": 524288,
+    "total_px": 589824,
+    "coverage_pct": 88.88888888888889
+  },
+  "discontinuity": {
+    "seams": [
+      {
+        "type": "horizontal_seam_below_x=5",
+        "between_y": [
+          -1,
+          0
+        ],
+        "mean_rgb_diff": 3.7265625,
+        "n_compared_px": 256
+      },
+      {
+        "type": "horizontal_seam_below_x=6",
+        "between_y": [
+          -1,
+          0
+        ],
+        "mean_rgb_diff": 4.01171875,
+        "n_compared_px": 256
+      },
+      {
+        "type": "horizontal_seam_below_x=6",
+        "between_y": [
+          0,
+          1
+        ],
+        "mean_rgb_diff": 4.483918190002441,
+        "n_compared_px": 228
+      },
+      {
+        "type": "horizontal_seam_below_x=7",
+        "between_y": [
+          -1,
+          0
+        ],
+        "mean_rgb_diff": 2.497354507446289,
+        "n_compared_px": 63
+      },
+      {
+        "type": "horizontal_seam_below_x=7",
+        "between_y": [
+          0,
+          1
+        ],
+        "mean_rgb_diff": 4.150000095367432,
+        "n_compared_px": 40
+      },
+      {
+        "type": "vertical_seam_right_of_y=2",
+        "between_x": [
+          -1,
+          0
+        ],
+        "mean_rgb_diff": 2.3802082538604736,
+        "n_compared_px": 256
+      },
+      {
+        "type": "vertical_seam_right_of_y=2",
+        "between_x": [
+          0,
+          1
+        ],
+        "mean_rgb_diff": 2.5494792461395264,
+        "n_compared_px": 256
+      },
+      {
+        "type": "vertical_seam_right_of_y=3",
+        "between_x": [
+          -1,
+          0
+        ],
+        "mean_rgb_diff": 3.8257081508636475,
+        "n_compared_px": 153
+      },
+      {
+        "type": "vertical_seam_right_of_y=3",
+        "between_x": [
+          0,
+          1
+        ],
+        "mean_rgb_diff": 3.5481770038604736,
+        "n_compared_px": 256
+      },
+      {
+        "type": "vertical_seam_right_of_y=4",
+        "between_x": [
+          0,
+          1
+        ],
+        "mean_rgb_diff": 4.783625602722168,
+        "n_compared_px": 57
+      }
+    ],
+    "max_diff": 4.783625602722168,
+    "mean_diff": 3.595675230026245
+  }
+}

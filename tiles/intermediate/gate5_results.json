@@ -1,0 +1,32 @@
+[
+  {
+    "name": "server_responds",
+    "pass": true,
+    "detail": "z3 status=200, z4 status=200"
+  },
+  {
+    "name": "fetches_200",
+    "pass": true,
+    "detail": "z3_6_3 OK (103562B), z4_12_6 OK (118679B)"
+  },
+  {
+    "name": "valid_pngs",
+    "pass": true,
+    "detail": "z3 dims=[256, 256], z4 dims=[256, 256]"
+  },
+  {
+    "name": "seam_continuity",
+    "pass": true,
+    "detail": "max RGB seam diff=4.78/255 (1.9%), mean=3.60"
+  },
+  {
+    "name": "composite_coverage",
+    "pass": true,
+    "detail": "88.9% non-background pixels"
+  },
+  {
+    "name": "composite_file_exists",
+    "pass": true,
+    "detail": "/home/user/MSHI/tiles/intermediate/render_test_composite.png (478.5 KB)"
+  }
+]

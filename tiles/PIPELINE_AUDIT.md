@@ -27,6 +27,11 @@ prompt's branch directive — gate adapted to accept either).
         within 0.005°, Z3 (6,3) tile valid (57214 visible px, 3941
         unique RGB). Pipeline: gdal_translate→MBTiles + gdaladdo
         overviews + manual Z0 tile + pmtiles convert.
+[01:34] Phase 5: PASS · 6/6 checks · pmtiles serve at localhost:8765
+        responds 200 on z3(6,3) and z4(12,6) fetches, both are valid
+        256x256 PNGs. 3x3 z=3 composite stitched; seam discontinuity
+        max=4.78/255 (1.9%), mean=3.60 — tiles are continuous across
+        boundaries. Composite coverage 88.9% non-background.
 
 ## Notes
 
