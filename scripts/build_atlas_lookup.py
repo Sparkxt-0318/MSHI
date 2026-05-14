@@ -59,6 +59,23 @@ BIOCLIM_VARS = ["bio01", "bio04", "bio05", "bio06", "bio12", "bio14", "bio15", "
 MODIS_VARS = ["npp", "lst_day", "lst_night"]
 F_NPP_FEATURES = BIOCLIM_VARS + MODIS_VARS + ["lst_diurnal_range"]
 
+# Full+MODIS uses 34 features. Most are shared with F+NPP; the additions are
+# the 8 SoilGrids variables, 4 engineered features, and 10 land-cover one-hots.
+SOILGRIDS_VARS = ["soc", "nitrogen", "phh2o", "clay", "sand", "silt", "bdod", "cec"]
+ENGINEERED_VARS = ["c_n_ratio", "clay_sand_ratio", "ph_optimality", "aridity_demartonne"]
+LANDCOVER_ONEHOT = [
+    "lc_02", "lc_04", "lc_05", "lc_08", "lc_09",
+    "lc_10", "lc_12", "lc_13", "lc_14", "lc_17",
+]
+FULL_MODIS_FEATURES = (
+    SOILGRIDS_VARS
+    + BIOCLIM_VARS
+    + ENGINEERED_VARS
+    + MODIS_VARS
+    + ["lst_diurnal_range"]
+    + LANDCOVER_ONEHOT
+)  # length 34
+
 WORLDCLIM_PATHS = {
     "bio01": ROOT / "data/raw/worldclim/wc2.1_10m_bio_1.tif",
     "bio04": ROOT / "data/raw/worldclim/wc2.1_10m_bio_4.tif",
@@ -161,6 +178,29 @@ FEATURE_DISPLAY = {
     "lst_day": "MODIS LST (day)",
     "lst_night": "MODIS LST (night)",
     "lst_diurnal_range": "LST diurnal range",
+    # Soil + engineered + land-cover one-hots used by Full+MODIS only
+    "soc": "Soil organic carbon",
+    "nitrogen": "Soil nitrogen",
+    "phh2o": "Soil pH (H2O)",
+    "clay": "Soil clay fraction",
+    "sand": "Soil sand fraction",
+    "silt": "Soil silt fraction",
+    "bdod": "Soil bulk density",
+    "cec": "Cation exchange capacity",
+    "c_n_ratio": "C:N ratio",
+    "clay_sand_ratio": "Clay:sand ratio",
+    "ph_optimality": "pH optimality",
+    "aridity_demartonne": "Aridity (de Martonne)",
+    "lc_02": "LC: Evergreen broadleaf",
+    "lc_04": "LC: Deciduous broadleaf",
+    "lc_05": "LC: Mixed forests",
+    "lc_08": "LC: Woody savannas",
+    "lc_09": "LC: Savannas",
+    "lc_10": "LC: Grasslands",
+    "lc_12": "LC: Croplands",
+    "lc_13": "LC: Urban",
+    "lc_14": "LC: Cropland mosaic",
+    "lc_17": "LC: Water bodies",
 }
 
 
@@ -197,6 +237,23 @@ def haversine_km(lat1, lon1, lat2, lon2):
     dlon = np.radians(lon2 - lon1)
     a = np.sin(dlat / 2) ** 2 + np.cos(lat1r) * np.cos(lat2r) * np.sin(dlon / 2) ** 2
     return 2 * R * np.arcsin(np.sqrt(a))
+
+
+def nearest_index(cell_lons, cell_lats, ref_lons, ref_lats):
+    """For each cell, return the index of the nearest reference point.
+    Used for nearest-neighbour SoilGrids imputation. Chunked for memory."""
+    n = len(cell_lons)
+    out = np.zeros(n, dtype="int64")
+    chunk = 4000
+    for start in range(0, n, chunk):
+        end = min(start + chunk, n)
+        cl_lat = cell_lats[start:end][:, None]
+        cl_lon = cell_lons[start:end][:, None]
+        s_lat = ref_lats[None, :]
+        s_lon = ref_lons[None, :]
+        d = haversine_km(cl_lat, cl_lon, s_lat, s_lon)
+        out[start:end] = d.argmin(axis=1)
+    return out
 
 
 def nearest_site_distance_km(cell_lons, cell_lats, site_lons, site_lats):
@@ -312,15 +369,78 @@ def main(out_path: Path) -> None:
     feat_df = feat_df.dropna(subset=F_NPP_FEATURES)
     LOG.info("Cells with all features non-NaN: %d / %d", len(feat_df), before)
 
-    # 7. Load F+NPP model (XGBoost). The saved JSON has empty feature_names,
-    #    so we rebuild the DMatrix with the documented feature order from
-    #    F_NPP_metrics.json.
+    # 7. Load both models (F+NPP and Full+MODIS). Each saved XGB JSON has an
+    #    empty feature_names list, so the DMatrix at predict time gets the
+    #    documented feature order from the corresponding metrics JSON.
     LOG.info("Loading F+NPP model ...")
     f_npp = xgb.Booster()
     f_npp.load_model(str(ROOT / "data/outputs/F_NPP_model.json"))
     f_npp_metrics = json.loads((ROOT / "data/outputs/F_NPP_metrics.json").read_text())
-    f_npp_features = f_npp_metrics["features"]
-    assert f_npp_features == F_NPP_FEATURES, (f_npp_features, F_NPP_FEATURES)
+    assert f_npp_metrics["features"] == F_NPP_FEATURES
+
+    LOG.info("Loading Full+MODIS model ...")
+    full_modis = xgb.Booster()
+    full_modis.load_model(str(ROOT / "data/outputs/Full_MODIS_model.json"))
+    full_modis_metrics = json.loads(
+        (ROOT / "data/outputs/Full_MODIS_metrics.json").read_text()
+    )
+    assert full_modis_metrics["features"] == FULL_MODIS_FEATURES, (
+        full_modis_metrics["features"],
+        FULL_MODIS_FEATURES,
+    )
+
+    # 7b. Augment per-cell features with the SoilGrids + engineered + land-cover
+    #     one-hots that Full+MODIS needs but F+NPP doesn't. SoilGrids rasters
+    #     aren't on disk, so we use nearest-neighbour lookup from the 615-row
+    #     training parquet (which carries soil values per training site).
+    #     This is faithful at 0.5° resolution: most lookup cells are within
+    #     a couple of training sites' worth of soil-feature distance, and the
+    #     Full+MODIS model was trained on the same SoilGrids-sampled values
+    #     at training-point coordinates. Honest caveat: Full+MODIS predictions
+    #     in cells far from any training site degrade to "what the nearest
+    #     training site's soil would look like".
+    LOG.info("Augmenting cells with SoilGrids/engineered/land-cover features ...")
+    train_for_soil = pd.read_parquet(
+        ROOT / "data/processed/training_features_v2.parquet"
+    )
+    soil_complete = train_for_soil.dropna(subset=SOILGRIDS_VARS)
+    LOG.info(
+        "  soil reference: %d / %d training sites with non-NaN SoilGrids",
+        len(soil_complete),
+        len(train_for_soil),
+    )
+    soil_lons = soil_complete["longitude"].to_numpy()
+    soil_lats = soil_complete["latitude"].to_numpy()
+    soil_matrix = soil_complete[SOILGRIDS_VARS].to_numpy()
+    nn_idx = nearest_index(
+        feat_df["_lng"].to_numpy(),
+        feat_df["_lat"].to_numpy(),
+        soil_lons,
+        soil_lats,
+    )
+    for j, var in enumerate(SOILGRIDS_VARS):
+        feat_df[var] = soil_matrix[nn_idx, j]
+
+    # Engineered features (mirrors src/features.py add_engineered_features):
+    #   c_n_ratio        = soc / nitrogen
+    #   clay_sand_ratio  = clay / sand
+    #   ph_optimality    = -|phh2o - 7.0|        (peak-shaped at pH 7)
+    #   aridity_demartonne = bio12 / (bio01 + 10)
+    feat_df["c_n_ratio"] = feat_df["soc"] / feat_df["nitrogen"].replace(0, np.nan)
+    feat_df["clay_sand_ratio"] = feat_df["clay"] / feat_df["sand"].replace(0, np.nan)
+    feat_df["ph_optimality"] = -np.abs(feat_df["phh2o"] - 7.0)
+    feat_df["aridity_demartonne"] = feat_df["bio12"] / (feat_df["bio01"] + 10.0)
+
+    # Land-cover one-hots: the 10 IGBP classes Full+MODIS was trained on.
+    for lc in LANDCOVER_ONEHOT:
+        klass = int(lc.split("_")[1])
+        feat_df[lc] = (feat_df["_igbp"] == klass).astype("float32")
+
+    # Some cells will still have NaN engineered features (e.g. nitrogen=0). Fill
+    # with the median to keep the model from refusing to predict on them.
+    for col in ENGINEERED_VARS:
+        med = float(np.nanmedian(feat_df[col]))
+        feat_df[col] = feat_df[col].fillna(med)
 
     # 8. Train climate baseline (same params, only bioclim features)
     LOG.info("Training climate baseline ...")
@@ -328,28 +448,43 @@ def main(out_path: Path) -> None:
         ROOT / "data/processed/training_features_v2.parquet"
     )
 
-    # 9. Predict with both models
-    LOG.info("Predicting with F+NPP and climate baseline ...")
-    Xf = feat_df[F_NPP_FEATURES].to_numpy("float32")
+    # 9. Predict with all three models
+    LOG.info("Predicting with F+NPP, Full+MODIS, and climate baseline ...")
+    Xf_npp = feat_df[F_NPP_FEATURES].to_numpy("float32")
+    Xfull = feat_df[FULL_MODIS_FEATURES].to_numpy("float32")
     Xc = feat_df[BIOCLIM_VARS].to_numpy("float32")
 
-    pred_f_npp = f_npp.predict(xgb.DMatrix(Xf, feature_names=F_NPP_FEATURES))
+    pred_f_npp = f_npp.predict(xgb.DMatrix(Xf_npp, feature_names=F_NPP_FEATURES))
+    pred_full_modis = full_modis.predict(
+        xgb.DMatrix(Xfull, feature_names=FULL_MODIS_FEATURES)
+    )
     pred_clim = climate_model.predict(xgb.DMatrix(Xc, feature_names=BIOCLIM_VARS))
 
-    # anomaly ratio = exp(F+NPP) / exp(climate) = exp(F+NPP - climate)
-    anomaly = np.exp(pred_f_npp - pred_clim)
+    # anomaly = exp(model_log_rs - climate_log_rs)
+    anomaly_f_npp = np.exp(pred_f_npp - pred_clim)
+    anomaly_full_modis = np.exp(pred_full_modis - pred_clim)
 
-    # 10. SHAP per-cell via TreeExplainer for the F+NPP model
+    # 10. Per-cell SHAP for both models
     LOG.info("Computing per-cell SHAP for F+NPP ...")
-    explainer = shap.TreeExplainer(f_npp)
-    # batch SHAP to keep memory bounded
-    shap_vals = np.empty((len(Xf), len(F_NPP_FEATURES)), dtype="float32")
+    explainer_npp = shap.TreeExplainer(f_npp)
+    shap_npp = np.empty((len(Xf_npp), len(F_NPP_FEATURES)), dtype="float32")
     chunk = 5000
-    for start in range(0, len(Xf), chunk):
-        end = min(start + chunk, len(Xf))
-        sv = explainer.shap_values(Xf[start:end])
-        shap_vals[start:end] = sv.astype("float32")
-        LOG.info("  SHAP %d / %d", end, len(Xf))
+    for start in range(0, len(Xf_npp), chunk):
+        end = min(start + chunk, len(Xf_npp))
+        shap_npp[start:end] = explainer_npp.shap_values(Xf_npp[start:end]).astype(
+            "float32"
+        )
+        LOG.info("  F+NPP SHAP %d / %d", end, len(Xf_npp))
+
+    LOG.info("Computing per-cell SHAP for Full+MODIS ...")
+    explainer_full = shap.TreeExplainer(full_modis)
+    shap_full = np.empty((len(Xfull), len(FULL_MODIS_FEATURES)), dtype="float32")
+    for start in range(0, len(Xfull), chunk):
+        end = min(start + chunk, len(Xfull))
+        shap_full[start:end] = explainer_full.shap_values(Xfull[start:end]).astype(
+            "float32"
+        )
+        LOG.info("  Full+MODIS SHAP %d / %d", end, len(Xfull))
 
     # 11. Köppen classification
     LOG.info("Köppen classification ...")
@@ -384,48 +519,60 @@ def main(out_path: Path) -> None:
     d_train = nearest_site_distance_km(cell_lons, cell_lats, train_lons, train_lats)
     d_us = nearest_site_distance_km(cell_lons, cell_lats, us_lons, us_lats)
 
-    # 14. Build SHAP top-3 per cell
-    LOG.info("Picking top-3 SHAP features per cell ...")
-    abs_shap = np.abs(shap_vals)
-    # argsort descending then take top 3
-    top3_idx = np.argsort(-abs_shap, axis=1)[:, :3]
-    feature_names_arr = np.array(F_NPP_FEATURES)
+    # 14. Build SHAP top-3 per cell for each model.
+    LOG.info("Picking top-3 SHAP features per cell (both models) ...")
+    npp_top3 = np.argsort(-np.abs(shap_npp), axis=1)[:, :3]
+    full_top3 = np.argsort(-np.abs(shap_full), axis=1)[:, :3]
+    npp_names = np.array(F_NPP_FEATURES)
+    full_names = np.array(FULL_MODIS_FEATURES)
 
-    # 15. Serialize
+    def shap_entries(top3_idx_row, names, shap_row):
+        out = []
+        for j in top3_idx_row:
+            key = names[j].item() if hasattr(names[j], "item") else str(names[j])
+            out.append({
+                "feature": FEATURE_DISPLAY.get(key, key),
+                "key": key,
+                "value": round(float(shap_row[j]), 4),
+            })
+        return out
+
+    # 15. Serialize. Each cell carries shared metadata (coord, biome,
+    #     Köppen, distances) plus a per-model object {prediction, anomaly,
+    #     shap_top3, features}.
     LOG.info("Serialising ...")
     cells = []
-    feat_matrix = feat_df[F_NPP_FEATURES].to_numpy()
+    f_npp_feat = feat_df[F_NPP_FEATURES].to_numpy()
+    full_feat = feat_df[FULL_MODIS_FEATURES].to_numpy()
     for i in range(len(feat_df)):
         lon = float(cell_lons[i])
         lat = float(cell_lats[i])
-        idxs = top3_idx[i]
-        # Top-3 SHAP entries now also carry the raw feature key so the UI
-        # can look up the per-cell value + the description knowledge base.
-        shap_top3 = [
-            {
-                "feature": FEATURE_DISPLAY[feature_names_arr[j]],
-                "key": feature_names_arr[j].item() if hasattr(feature_names_arr[j], "item") else str(feature_names_arr[j]),
-                "value": round(float(shap_vals[i, j]), 4),
-            }
-            for j in idxs
-        ]
-        # Per-cell feature values, rounded to 1 decimal where reasonable.
-        # Temperature features come from WorldClim in °C × 10 / °C scale —
-        # values are stored at native units exactly as the model received
-        # them, so the UI's local_template can interpret them correctly.
-        features = {
-            F_NPP_FEATURES[j]: round(float(feat_matrix[i, j]), 1)
-            for j in range(len(F_NPP_FEATURES))
+        fnpp_block = {
+            "pred_log_rs": round(float(pred_f_npp[i]), 4),
+            "pred_climate_log_rs": round(float(pred_clim[i]), 4),
+            "anomaly": round(float(anomaly_f_npp[i]), 4),
+            "shap_top3": shap_entries(npp_top3[i], npp_names, shap_npp[i]),
+            "features": {
+                F_NPP_FEATURES[j]: round(float(f_npp_feat[i, j]), 1)
+                for j in range(len(F_NPP_FEATURES))
+            },
+        }
+        fullmodis_block = {
+            "pred_log_rs": round(float(pred_full_modis[i]), 4),
+            "pred_climate_log_rs": round(float(pred_clim[i]), 4),
+            "anomaly": round(float(anomaly_full_modis[i]), 4),
+            "shap_top3": shap_entries(full_top3[i], full_names, shap_full[i]),
+            "features": {
+                FULL_MODIS_FEATURES[j]: round(float(full_feat[i, j]), 2)
+                for j in range(len(FULL_MODIS_FEATURES))
+            },
         }
         cells.append(
             {
                 "lat": round(lat, 2),
                 "lon": round(lon, 2),
-                "pred_log_rs": round(float(pred_f_npp[i]), 4),
-                "pred_climate_log_rs": round(float(pred_clim[i]), 4),
-                "anomaly": round(float(anomaly[i]), 4),
-                "shap_top3": shap_top3,
-                "features": features,
+                "fnpp": fnpp_block,
+                "fullmodis": fullmodis_block,
                 "biome_code": int(biome_codes[i]),
                 "biome": biome_labels[i],
                 "koppen_code": koppen_codes[i],
@@ -435,36 +582,58 @@ def main(out_path: Path) -> None:
             }
         )
 
-    # 16. Anomaly distribution check
-    anomaly_arr = np.array([c["anomaly"] for c in cells])
+    # 16. Anomaly distribution checks for BOTH models
+    npp_arr = np.array([c["fnpp"]["anomaly"] for c in cells])
+    full_arr = np.array([c["fullmodis"]["anomaly"] for c in cells])
     LOG.info(
-        "Anomaly: n=%d, median=%.3f, p05=%.3f, p95=%.3f, min=%.3f, max=%.3f",
-        len(anomaly_arr),
-        float(np.median(anomaly_arr)),
-        float(np.percentile(anomaly_arr, 5)),
-        float(np.percentile(anomaly_arr, 95)),
-        float(anomaly_arr.min()),
-        float(anomaly_arr.max()),
+        "F+NPP anomaly:      n=%d  median=%.3f  p05=%.3f  p95=%.3f  min=%.3f  max=%.3f",
+        len(npp_arr),
+        float(np.median(npp_arr)),
+        float(np.percentile(npp_arr, 5)),
+        float(np.percentile(npp_arr, 95)),
+        float(npp_arr.min()),
+        float(npp_arr.max()),
+    )
+    LOG.info(
+        "Full+MODIS anomaly: n=%d  median=%.3f  p05=%.3f  p95=%.3f  min=%.3f  max=%.3f",
+        len(full_arr),
+        float(np.median(full_arr)),
+        float(np.percentile(full_arr, 5)),
+        float(np.percentile(full_arr, 95)),
+        float(full_arr.min()),
+        float(full_arr.max()),
     )
 
     # 17. Write JSON
     payload = {
-        "schema_version": "atlas_lookup.v2",
+        "schema_version": "atlas_lookup.v3",
         "grid": {
             "resolution_deg": GRID_DEG,
             "bbox": {"min_lng": ASIA_BBOX[0], "min_lat": ASIA_BBOX[1],
                      "max_lng": ASIA_BBOX[2], "max_lat": ASIA_BBOX[3]},
             "n_cells": len(cells),
         },
-        "model": {
-            "name": "F+NPP",
-            "n_features": len(F_NPP_FEATURES),
-            "features": F_NPP_FEATURES,
-            "training_n_asia": int(f_npp_metrics["n_train"]),
-            "validation_n_us": int(f_npp_metrics["n_us"]),
-            "transfer_r2": round(float(f_npp_metrics["transfer"]["r2"]), 3),
-            "transfer_ci_low": round(float(f_npp_metrics["transfer"]["ci_low"]), 3),
-            "transfer_ci_high": round(float(f_npp_metrics["transfer"]["ci_high"]), 3),
+        "models": {
+            "fnpp": {
+                "name": "F+NPP",
+                "n_features": len(F_NPP_FEATURES),
+                "features": F_NPP_FEATURES,
+                "training_n_asia": int(f_npp_metrics["n_train"]),
+                "validation_n_us": int(f_npp_metrics["n_us"]),
+                "transfer_r2": round(float(f_npp_metrics["transfer"]["r2"]), 3),
+                "transfer_ci_low": round(float(f_npp_metrics["transfer"]["ci_low"]), 3),
+                "transfer_ci_high": round(float(f_npp_metrics["transfer"]["ci_high"]), 3),
+            },
+            "fullmodis": {
+                "name": "Full+MODIS",
+                "n_features": len(FULL_MODIS_FEATURES),
+                "features": FULL_MODIS_FEATURES,
+                "training_n_asia": int(full_modis_metrics["n_train"]),
+                "validation_n_us": int(full_modis_metrics["n_us"]),
+                "transfer_r2": round(float(full_modis_metrics["transfer"]["r2"]), 3),
+                "transfer_ci_low": round(float(full_modis_metrics["transfer"]["ci_low"]), 3),
+                "transfer_ci_high": round(float(full_modis_metrics["transfer"]["ci_high"]), 3),
+            },
         },
         "cells": cells,
     }
