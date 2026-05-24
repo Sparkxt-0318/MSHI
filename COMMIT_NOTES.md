@@ -192,3 +192,59 @@ metrics JSON regardless of the visualisation choice).
 - ✓ Same RdBu_r colormap, same 3-panel layout, same external horizontal
   colorbars, same suptitle
 - ⚠ Smaller PNG size (330 KB vs 3.0 MB) — 0.5° vs 5 km resolution
+
+---
+
+## Phase 3 — validation scatters for F+NPP and Full+MODIS
+
+Script: `scripts/regen_validation_scatters.py` (new).
+
+The previous `validation_scatter.png` showed R² = -0.017, n = 264 —
+this is an older v1 model artefact that no longer corresponds to any
+named config in the current sweep. Renamed to
+`validation_scatter_legacy.png` and replaced by three new figures.
+
+### Files written
+
+| File | Title | R² | n |
+|---|---|---:|---:|
+| `data/outputs/validation_scatter_fnpp.png` | F+NPP: Asia → US transfer | +0.145, CI (+0.026, +0.241) | 223 |
+| `data/outputs/validation_scatter_fullmodis.png` | Full+MODIS: Asia → US transfer | +0.072, CI (-0.084, +0.189) — CI spans zero | 223 |
+| `data/outputs/validation_scatter_comparison.png` | Held-out US validation — adding features hurts transfer | F+NPP +0.145 / Full+MODIS +0.072 | 223 / 223 |
+| `data/outputs/validation_scatter_legacy.png` | (preserved old; R² = -0.017, n = 264 — not any current config) | — | — |
+
+### Sanity check
+
+The script asserts the recomputed R² and n against
+`F_NPP_metrics.json` and `Full_MODIS_metrics.json` before plotting:
+
+```
+F+NPP       : n=223  R²=+0.1447  RMSE=0.567
+Full+MODIS  : n=223  R²=+0.0724  RMSE=0.591
+source-of-truth sanity check passed
+```
+
+So the predicted vs observed pairs really do produce the headline
+numbers when scored. CIs are taken from the metrics files (bootstrap
+2,000 iter, seed=42) — not recomputed here.
+
+### Visual style
+
+- 1:1 dashed grey line (alpha 0.55)
+- Single-pane scatters: 6.5" × 6.5", equal aspect ratio
+- Comparison panel: 13" × 6.8", shared x/y range across both pans for
+  apples-to-apples; F+NPP in blue (#3B7DBE), Full+MODIS in deep red
+  (#A4221A) — colour-coded so the "more features = worse transfer"
+  contrast is visible at a glance
+- Same matplotlib defaults as the original `src/validate.py`
+  scatter (DPI 160, alpha 0.55 markers)
+
+### Gate 3 results
+
+- ✓ Two new scatter PNGs exist with correct R² values matching source-of-truth
+  - F+NPP : `R² = +0.145, 95% CI (+0.026, +0.241), n = 223` in title — verified visually
+  - Full+MODIS: `R² = +0.072, 95% CI (-0.084, +0.189), n = 223 — CI spans zero` in title — verified
+- ✓ Combined comparison panel exists with both scatters side-by-side, shared axes
+- ✓ Old `validation_scatter.png` renamed to `validation_scatter_legacy.png`
+- ✓ Subtitle R² values verified by reading rendered images
+- ✓ Script asserts R² match against metrics JSON before saving
