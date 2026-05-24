@@ -119,3 +119,76 @@ No model retraining is needed; only feature extraction at 5 km.
 - ✓ Same legend structure / interpretation rows
 - ⚠ File sizes smaller (PNG 3.3 MB vs 9.7 MB) because 0.5° grid has fewer
   unique colours per area → better PNG compression. Not a defect.
+
+---
+
+## Phase 2A — methodology_evolution_panel_v2 verification
+
+**No regen needed.** All values on the existing
+`data/outputs/methodology_evolution_panel_v2.png` already match the
+source-of-truth list. Verified by visually reading the rendered image:
+
+| Sub-panel | Image text | Source-of-truth | Match? |
+|---|---|---|---|
+| F (climate-only) | "Transfer R² = +0.127, CI (+0.019, +0.216) · statistically significant" | +0.127, CI (+0.019, +0.216) | ✓ |
+| F+NPP | "Transfer R² = +0.145, CI (+0.026, +0.241) · best of any config" | +0.145, CI (+0.026, +0.241) | ✓ |
+| Full+MODIS | "Transfer R² = +0.072, CI (-0.084, +0.189) · CV jumps but transfer CI spans 0" | +0.072, CI (-0.084, +0.189) | ✓ |
+| Köppen C | "Net trans F = -0.336, CI (-3.06, +0.04) · spans 0" | -0.336 | ✓ |
+| Köppen D | "Net trans F = -0.199, CI (-0.392, -0.061) · significantly worse" | -0.199 | ✓ |
+
+Sidebar "Item 1 take-aways" text also references the +0.145 F+NPP value
+and the "Full+MODIS rescues CV but not transfer" narrative — all
+consistent with the data.
+
+No script run, no file modified.
+
+## Phase 2B — framing2_comparison_panel regenerated
+
+Script: `scripts/regen_framing2_panel.py` (new).
+
+The previous middle-panel title read `transfer R² = +0.020` (Run-A
+B_heavier_reg). The user asked for `transfer R² = +0.072` (Full+MODIS)
+and a softening of "overfits Asia" → "more features hurt" since the
+Full+MODIS CI spans zero.
+
+### Files written
+
+| File | Old title (middle panel) | New title (middle panel) |
+|---|---|---|
+| `data/outputs/framing2_comparison_panel.png` | "Climate + soil features (overfits Asia: transfer R² = +0.020)" | "Climate + soil features (more features hurt: transfer R² = +0.072)" |
+| `data/outputs/framing2_comparison_panel_legacy.png` | — | Renamed copy of the previous panel |
+
+### Data + framing changes
+
+The previous panel used three 5 km anomaly grids:
+
+- Left  : F anomaly  = exp(F_pred) / exp(5-bio baseline pred)
+- Middle: B anomaly  = exp(B_pred) / exp(5-bio baseline pred)
+- Right : B − F      (soil-feature contribution)
+
+The 5 km grid + 5-bio baseline parquets aren't on disk on this branch
+(see Phase 1 caveat). The new panel uses the 0.5° atlas_lookup data:
+
+- Left  : F anomaly  = exp(F_pred) / exp(F's own median log_rs)
+  — same conceptual framing (anomaly ratio centered near 1.0), with the
+  denominator switched from a 5-bio model to a global F median. This
+  preserves the visual scale but isn't strictly identical to the old left
+  panel; the anomaly map shows F's spatial deviation from its own
+  central tendency. Recorded as a deviation in this notes file.
+- Middle: Full+MODIS anomaly = exp(Full+MODIS_pred) / exp(8-bio baseline pred)
+  — comes from `atlas_lookup.json cells[i].fullmodis.anomaly` directly.
+- Right : Full+MODIS anomaly − F anomaly (same cell, same scale).
+
+The left-panel framing change is the only methodological deviation;
+the R² annotations in the title are unaffected (they come from the
+metrics JSON regardless of the visualisation choice).
+
+### Gate 2 results
+
+- ✓ methodology_evolution_panel_v2 confirmed correct — no regen
+- ✓ framing2 middle-panel title now reads `transfer R² = +0.072`
+- ✓ "+0.020" appears nowhere in the new framing2 panel — verified visually
+- ✓ Panel dimensions: 2880 × 1120 (matches legacy)
+- ✓ Same RdBu_r colormap, same 3-panel layout, same external horizontal
+  colorbars, same suptitle
+- ⚠ Smaller PNG size (330 KB vs 3.0 MB) — 0.5° vs 5 km resolution
