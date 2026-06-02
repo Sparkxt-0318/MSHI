@@ -4,10 +4,15 @@
 **Task:** Extend the interactive atlas to global land coverage, with all
 non-Asia cells flagged as cross-continental transfer predictions.
 **Date:** 2026-06-02
-**Outcome:** **HALTED at the Phase 1 gate** — a required global feature layer
-(MODIS NPP/LST/IGBP) is absent for 69% of land and cannot be obtained. See
-`BLOCKERS.md`. No feature data fabricated; Asia cells untouched; no figures or
-non-atlas artifacts produced.
+**Outcome:** Global MODIS is absent for 69% of land (see `BLOCKERS.md`), so a
+truly global build is impossible. After surfacing this, the **honest partial
+extension** was approved: predict transfer cells everywhere real MODIS exists
+(31% of land), flag them `domain: "transfer"`, and document the MODIS-absent
+remainder rather than fabricate it. No feature data fabricated; Asia cells
+preserved byte-for-byte (values); no figures or non-atlas artifacts produced.
+
+**Result:** `atlas_lookup.json` → **27,393 cells, 38 MB** = 20,678 Asia
+(`domain: "training"`) + **6,715 non-Asia (`domain: "transfer"`)**.
 
 ---
 
@@ -77,20 +82,70 @@ Detail, per-continent coverage, and exact sources attempted: `BLOCKERS.md`.
 - Brief HALT behavior: *"if a dataset cannot be obtained, HALT and write
   BLOCKERS.md … Do NOT proceed to Phase 2 for any feature set that is
   incomplete."* The global feature set is incomplete → **halt.**
-- *"A smaller honest atlas beats a complete fabricated one."* No fabrication
-  was performed. An honest **partial** extension (transfer cells over the 31%
-  of land that has real MODIS) is possible and is offered as an option in
-  `BLOCKERS.md` / the PR, pending a decision — it is not shipped unilaterally
-  because it changes the scope from "global" and would render a visibly patchy
-  map (South America blank) that needs explicit UI framing buy-in.
+- *"A smaller honest atlas beats a complete fabricated one."* The sanctioned
+  global fallback being unavailable, the **honest partial extension was
+  surfaced to the user and approved**: predict only where the full real stack
+  exists, flag those cells `transfer`, document the MODIS-absent remainder.
+
+---
+
+## Phase 2 — global grid + transfer-cell prediction
+
+Script: `scripts/build_atlas_global.py` (new; reuses `build_atlas_lookup.py`
+helpers verbatim so transfer cells are computed the same way as Asia cells).
+
+- Global 0.5° grid, **Asia bbox [25,180]×[−10,80] excluded** so the 20,678
+  Asia cells are never recomputed (all of them sit inside that rectangle —
+  verified). 203,400 candidate non-Asia cells.
+- IGBP land mask → 7,501 non-Asia land cells (MODIS footprint only).
+- Sampled: WorldClim bioclim (global), MODIS npp/lst (footprint), **real
+  SoilGrids rasters** (`data/raw/soilgrids/*_5-15cm_global_0p1.tif`, rescaled
+  per `src.features.SOILGRIDS_SCALE`) — **not** the Asia-training NN imputation.
+- Any-NaN drop on the 12 F+NPP features → **6,716** cells with the full
+  bioclim+MODIS stack. Of those, **6,715 (100%)** also had complete real
+  SoilGrids, so every transfer cell carries both `fnpp` and `fullmodis`
+  blocks (same schema as Asia). 1 cell dropped for missing soil — not imputed.
+- Predicted F+NPP, Full+MODIS, and the climate baseline (same baseline trainer
+  + training parquet as the Asia build); anomaly = exp(pred − climate). Per-cell
+  SHAP top-3 for both models. Köppen, IGBP biome, nearest-site distances.
+- Every new cell tagged **`"domain": "transfer"`**.
+
+**Gate 2 — anomaly sanity by continent (F+NPP, no degenerate collapse):**
+
+| Region | transfer cells | median anomaly |
+|---|---:|---:|
+| North America | 4,038 | 1.035 |
+| Oceania (Australia) | 2,223 | 1.101 |
+| Africa (E/S, east of 25°E) | 454 | 1.044 |
+| **South America** | **0** | — (no MODIS) |
+| **Europe** (west of 25°E) | **0** | — (no MODIS) |
+
+Spot checks: Iowa = Croplands/Dfa, nearest training site 6,943 km (true
+cross-continent extrapolation); Australian outback = Open shrublands/BSh;
+California Central Valley = Croplands/BSk. All plausible.
+
+## Phase 3 — merged atlas_lookup.json
+
+- Existing Asia cells loaded verbatim, tagged `domain: "training"`, then the
+  6,715 transfer cells appended. **27,393 cells total, 38 MB.**
+- **Gate 3 — Asia cells preserved:** diffed every Asia cell against the
+  pre-build backup → **0 value mismatches** (only the `domain` key added);
+  training cells keep their original order and positions; `models` block
+  unchanged. Schema bumped `v3 → v4` (adds per-cell `domain` + a top-level
+  `coverage` block describing the training/transfer split and the MODIS limit).
+- File size 38 MB (well under the ~120 MB / GitHub 100 MB limits) — no
+  payload reduction or grid coarsening needed.
 
 ## Status against the brief's gates
-- Data acquired vs missing: **WorldClim ✅, SoilGrids ✅, MODIS ❌** (recorded above).
-- Cell counts / file size: **n/a — no global lookup written** (halted; Asia
-  atlas unchanged at 20,678 cells / 28 MB).
-- Fallback taken: **none** (precondition for the F+NPP-only fallback not met).
-- Transfer framing: **not yet applied** (data + UI work is downstream of the
-  halted build). The per-cell `domain` flag and UI transfer badge remain to be
-  implemented once a complete global feature set exists.
-- MSHI-WEB: **untouched** (Phase 4 depends on the global lookup).
-- No figures, SHAP plots, or other non-atlas MSHI artifacts were generated.
+- Data acquired vs missing: **WorldClim ✅, SoilGrids ✅, MODIS ❌ (31% land)**.
+- Cell counts: **20,678 training + 6,715 transfer = 27,393.** File size **38 MB**.
+- Fallback taken: **honest partial extension** (predict where real MODIS exists;
+  the global F+NPP-only fallback was unavailable, precondition unmet). Both
+  models retained for transfer cells since real SoilGrids was obtained.
+- **Transfer framing in the data: present** — every non-Asia cell flagged
+  `domain: "transfer"`; Asia cells `domain: "training"`. UI badge/caveat is
+  Phase 4 (MSHI-WEB).
+- No model was trained/retrained. No figures, SHAP plots, or other non-atlas
+  MSHI artifacts were generated.
+- MODIS-absent regions (South America, most of Africa/Europe) are **omitted,
+  not fabricated** — see `BLOCKERS.md`.

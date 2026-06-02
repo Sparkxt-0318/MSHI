@@ -1,12 +1,18 @@
 # BLOCKERS — Atlas global coverage (`claude/atlas-global-lookup`)
 
-**Status: HALTED at the Phase 1 data-acquisition gate.**
+**Status: a *truly global* build is blocked; the approved honest partial
+extension shipped instead.**
 **Date:** 2026-06-02
 
-The global atlas build cannot proceed because a required feature layer —
-**MODIS NPP + LST (and IGBP land cover)** — is **not available for most of
-the globe** and **cannot be obtained** in this environment. No feature data
-was fabricated, synthesized, or substituted to fill the gap.
+A required feature layer — **MODIS NPP + LST (and IGBP land cover)** — is **not
+available for most of the globe** (69% of land) and **cannot be obtained** in
+this environment. Truly global coverage is therefore impossible without
+fabrication, which was not done. After surfacing this, the user approved the
+**honest partial extension**: predict transfer cells everywhere real MODIS
+exists (31% of land — North America, Australia, parts of Africa), flag them
+`domain: "transfer"`, and leave the MODIS-absent remainder out, documented
+here rather than invented. Final atlas: 20,678 training + **6,715 transfer**
+cells. This file remains the record of what is *still* missing and why.
 
 This is the layer the task brief assumed was already global:
 
@@ -95,25 +101,26 @@ See `data/raw/ACQUISITION_MANIFEST.json` for per-file extents and sizes.
 
 ---
 
-## Paths forward (need a decision — see PR)
+## What shipped, and how to make it truly global later
 
-The global build is blocked, but two of three missing layers are now in hand.
-Options, in order of fidelity:
+**Shipped (approved):** the honest partial extension. `atlas_lookup.json` now
+carries 6,715 `transfer` cells over the MODIS footprint outside Asia (North
+America 4,038, Australia 2,223, E/S Africa 454), each a real-feature
+extrapolation flagged `domain: "transfer"`. South America, western/central
+Africa, and Europe are **omitted** (no MODIS) — not predicted, not fabricated.
+The MSHI-WEB UI must therefore state that coverage is MODIS-limited.
 
-1. **Provide MODIS access** (Earthdata Login or a GEE service account). With
-   credentials I can fetch global MOD17A3HGF / MOD11A2 / MCD12Q1 (2020–2024
-   mean), and the full global build proceeds exactly as specified.
-2. **Honest partial extension** — build transfer cells only where real MODIS
-   already exists (the 31% of land: North America, Australia, parts of
-   Africa/Europe), flag them `domain: "transfer"`, and leave South America /
-   most of Africa & Europe out, documented as MODIS-absent. This is "a smaller
-   honest atlas." Caveat: the rendered map would be visibly patchy (South
-   America entirely blank), so it needs explicit framing in the UI.
-3. **Hold** — keep the Asia-only atlas as-is until global MODIS is available.
+**To make it truly global later — provide MODIS access** (Earthdata Login or a
+GEE service account). With credentials I can fetch global MOD17A3HGF (NPP) +
+MOD11A2 (LST) + MCD12Q1 (IGBP) as a 2020–2024 mean and re-run
+`scripts/build_atlas_global.py` over the full grid; WorldClim + SoilGrids are
+already in hand. No model retraining required.
 
-Per the brief's rules, the sanctioned reduced fallback (F+NPP-only global) is
-**not** available: it is permitted *only if* "bioclim + MODIS NPP are fully
-present globally," and MODIS NPP is present for just 31% of land.
+Per the brief's rules, the sanctioned reduced fallback (F+NPP-only **global**)
+was **not** available: it is permitted *only if* "bioclim + MODIS NPP are fully
+present globally," and MODIS NPP is present for just 31% of land. The partial
+extension predicts only cells whose full real feature stack exists, so no cell
+relies on a missing or invented layer.
 
-**Nothing downstream was fabricated.** No global `atlas_lookup.json` was
-written; Asia cells are untouched; no MSHI-WEB changes were made.
+**Nothing was fabricated.** Asia cells are byte-for-byte preserved (values);
+MODIS-absent regions are simply absent from the lookup.
