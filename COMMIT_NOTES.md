@@ -1,250 +1,151 @@
-# Atlas figure regen 2026 — commit notes
+# Atlas global coverage — commit notes
 
-Branch: `claude/atlas-figure-regen-2026`
-Parent: `claude/lucid-lovelace-f3D5H` (latest atlas work branch; carries
-the Full+MODIS model and the atlas_lookup pipeline)
+**Branch:** `claude/atlas-global-lookup` (from `main`)
+**Task:** Extend the interactive atlas to global land coverage, with all
+non-Asia cells flagged as cross-continental transfer predictions.
+**Date:** 2026-06-02
+**Outcome:** Global MODIS is absent for 69% of land (see `BLOCKERS.md`), so a
+truly global build is impossible. After surfacing this, the **honest partial
+extension** was approved: predict transfer cells everywhere real MODIS exists
+(31% of land), flag them `domain: "transfer"`, and document the MODIS-absent
+remainder rather than fabricate it. No feature data fabricated; Asia cells
+preserved byte-for-byte (values); no figures or non-atlas artifacts produced.
+
+**Result:** `atlas_lookup.json` → **27,393 cells, 38 MB** = 20,678 Asia
+(`domain: "training"`) + **6,715 non-Asia (`domain: "transfer"`)**.
 
 ---
 
-## Phase 0 — source-of-truth verification
+## Phase 0 — pipeline + feature-data inventory
 
-All five headline R² values were checked against the published artefacts
-in `data/outputs/`. The user-supplied source-of-truth list matches the
-repo files within rounding, with one minor footnote.
+### Pipeline
+- **Build script:** `scripts/build_atlas_lookup.py` — builds the 0.5° Asia
+  grid (`ASIA_BBOX = (25, −10, 180, 80)`), samples features per cell, predicts
+  with F+NPP and Full+MODIS + a re-trained climate baseline, computes per-cell
+  SHAP top-3, IGBP biome, Köppen, nearest-site distances. Output schema
+  `atlas_lookup.v3`: `{grid, models:{fnpp,fullmodis}, cells:[{lat,lon,fnpp,
+  fullmodis,biome,koppen,nearest_*_km}]}`.
+- **Models load & verified:**
+  - `data/outputs/F_NPP_model.json` (XGBoost, 12 features) ✓ loads.
+  - `data/outputs/Full_MODIS_model.json` (XGBoost, 34 features) ✓ loads.
+  - F+NPP needs `bioclim×8 + npp + lst_day + lst_night + lst_diurnal_range`
+    (NO soil). Full+MODIS adds `soilgrids×8 + 4 engineered + 10 IGBP one-hots`.
+- **Existing atlas:** `data/outputs/atlas_lookup.json` — 28 MB, **20,678 Asia
+  land cells**, schema v3. Tracked in git (force-added past `.gitignore`).
 
-| Config | User value | Repo file | Repo raw value | Match? |
-|---|---|---|---|---|
-| F R² | +0.127 | `bootstrap_ci.json["F_climate_only"]["point_r2"]` | 0.127 | ✓ |
-| F CI low | +0.019 | `bootstrap_ci.json["F_climate_only"]["ci_low"]` | 0.0193 | ✓ |
-| F CI high | +0.216 | `bootstrap_ci.json["F_climate_only"]["ci_high"]` | 0.216 | ✓ |
-| F+NPP R² | +0.145 | `F_NPP_metrics.json transfer.r2` | 0.1447 | ✓ |
-| F+NPP CI low | +0.026 | `F_NPP_metrics.json transfer.ci_low` | 0.0258 | ✓ |
-| F+NPP CI high | +0.241 | `F_NPP_metrics.json transfer.ci_high` | 0.2413 | ✓ |
-| F+NPP n_train | 463 | `F_NPP_metrics.json n_train` | 463 | ✓ |
-| F+NPP n_us | 223 | `F_NPP_metrics.json n_us` | 223 | ✓ |
-| Full+MODIS R² | +0.072 | `Full_MODIS_metrics.json transfer.r2` | 0.0724 | ✓ |
-| Full+MODIS CI low | -0.084 | `Full_MODIS_metrics.json transfer.ci_low` | -0.0840 | ✓ |
-| Full+MODIS CI high | +0.189 | `Full_MODIS_metrics.json transfer.ci_high` | 0.1886 | ✓ |
-| Full+MODIS n_train | 463 | `Full_MODIS_metrics.json n_train` | 463 | ✓ |
-| Full+MODIS n_us | 223 | `Full_MODIS_metrics.json n_us` | 223 | ✓ |
-| Köppen C R² | -0.336 | `koppen_stratification.json["C"]["transfer_r2"]` | -0.3362 | ✓ |
-| Köppen D R² | -0.199 | `koppen_stratification.json["D"]["transfer_r2"]` | -0.1986 | ✓ |
-| Asia n (sweep v2) | 615 | `sweep_results_v2.json asia_n` | 615 | ✓ |
-| US n (sweep v2) | 274 | `sweep_results_v2.json us_n` | 274 | ✓ |
-
-**Minor footnote — F's bootstrap CI.** Two files report bootstrap CIs
-for F. `bootstrap_ci.json` gives (+0.0193, +0.216), which matches the
-user's source-of-truth (+0.019, +0.216). The koppen stratification file
-re-bootstrapped F as an internal baseline with a different rng path and
-got (+0.0202, +0.2123). Treating `bootstrap_ci.json` as canonical per
-the user's stated value. The discrepancy is in the third decimal place
-and reflects bootstrap sampling noise; both files agree on point R²
-(+0.127). No source-of-truth conflict.
-
-### Data inventory
-
-| Artefact | Present? | Notes |
+### Feature-layer inventory (verified on disk)
+| Layer | On disk? | Geographic extent (verified) |
 |---|---|---|
-| `data/outputs/F_NPP_model.json` | ✓ | XGBoost JSON, 12 features |
-| `data/outputs/Full_MODIS_model.json` | ✓ | XGBoost JSON, 34 features |
-| `data/outputs/F_NPP_metrics.json` | ✓ | Source of truth for F+NPP |
-| `data/outputs/Full_MODIS_metrics.json` | ✓ | Source of truth for Full+MODIS |
-| `data/outputs/sweep_results_v2.json` | ✓ | All 8 configs aggregated |
-| `data/outputs/koppen_stratification.json` | ✓ | C/D subset R² |
-| `data/outputs/bootstrap_ci.json` | ✓ | F + B Run-A bootstrap CIs |
-| `data/processed/training_features_v2.parquet` | ✓ | 615 Asia rows × 32 cols |
-| `data/processed/us_validation_features_v2.parquet` | ✓ | 274 US rows × 32 cols |
-| `data/processed/asia_predictions_F_NPP.parquet` | ✓ | 5.58 M cells at 5 km |
-| `data/processed/hero_climate_npp_asia_anomaly.parquet` | ✓ | F+NPP 5 km anomaly |
-| `data/processed/asia_grid_5km.parquet` | **✗** | Full grid features — never committed; intermediate |
-| `data/processed/asia_grid_5km_v2.parquet` | **✗** | Same, post-MODIS-sampling intermediate |
-| `data/outputs/atlas_lookup.json` | ✓ | 0.5° lookup w/ Full+MODIS anomaly per cell |
-| WorldClim 8-bioclim rasters | **✗** | Not on this branch (used at training; gone) |
-| SoilGrids 8 rasters | **✗** | Not on this branch |
-| MODIS 4 rasters | ✓ | `data/raw/modis/` |
+| MODIS NPP / LST day / LST night | partial | bbox lon[-125,180] lat[-39,88], **but data only in Asia/Oceania/US box** — see below |
+| MODIS IGBP land cover | partial | bbox global, data only in study footprint (0=water elsewhere) |
+| WorldClim bioclim (8) | ✗ → **acquired** | was missing; downloaded global (this run) |
+| SoilGrids (8 rasters) | ✗ → **acquired** | never existed as rasters; downloaded global (this run) |
 
-### Phase 1 blocker (resolved)
-
-A 5 km Full+MODIS Asia grid (the natural successor to
-`asia_predictions_F_NPP.parquet`) does **not exist on disk**. Recreating
-it would require re-sampling all 34 features over the 5.58 M-cell grid,
-which needs WorldClim + SoilGrids rasters that aren't checked in.
-
-The user was asked how to proceed (options: 0.5° render with honest
-footer; HALT; or approximate at 5 km using bioclim only). The choice was
-**render at 0.5° with the footer labelled accurately**. Phase 1 below
-implements that.
+**Key Phase-0 finding (contradicts the brief's premise):** the MODIS rasters
+are **not global**. Their bounding box is wide but the valid data is the union
+of the Asia and US GEE exports. Measured on the 0.5° grid against a WorldClim
+land mask: **MODIS covers only 31.0% of global land (27,813 / 89,773 cells).
+South America 0%, Africa 20%, Europe 31%, N. America 35%** (vs Asia 75%,
+Oceania 72%). Full breakdown in `BLOCKERS.md`.
 
 ---
 
-## Phase 1 — hero_full_features_asia regenerated at 0.5°
+## Phase 1 — global feature acquisition
 
-Script: `scripts/regen_hero_full_modis.py` (new in this branch).
-Driving function: `src.hero_map.render_hero_map` (unchanged).
-
-### Files written
-
-| File | Old footer | New footer | Notes |
+### Acquired ✅
+| Dataset | Detail | Size | Validation |
 |---|---|---|---|
-| `data/outputs/hero_full_features_asia.png` | `MODEL XGBoost · resolution ~5 km` `CV R² -0.083  Asia→US R² 0.020` `N(train)=615 N(US)=274` | `MODEL XGBoost · resolution ~55 km` `CV R² 0.079  Asia→US R² 0.072` `N(train)=463 N(US)=223  2026-05-24` | Header subtitle: "FULL+MODIS MODEL". Bold red tagline: "Adds soil structure features — transfer drops; CI spans zero" |
-| `data/outputs/hero_full_features_asia.pdf` | (same as png) | (same as png) | |
-| `data/outputs/hero_full_features_asia_screen.png` | (same as png) | (same as png) | |
-| `data/outputs/hero_full_features_asia_legacy.{png,pdf}` | — | — | Renamed copy of the previous Run-B "B_heavier_reg" hero; preserved for visual diff |
-| `data/outputs/hero_full_features_asia_legacy_screen.png` | — | — | Ditto |
-| `data/processed/hero_full_features_asia_anomaly.parquet` | — | — | New: 20,678 cell anomaly extracted from `atlas_lookup.json` |
+| WorldClim 2.1 bioclim 10′ | bio01/04/05/06/12/14/15/17 → `data/raw/worldclim/wc2.1_10m_bio_*.tif` (matches `build_atlas_lookup.py` paths) | 22 MB | Global; data on all continents. |
+| SoilGrids 2.0 5–15cm mean | 8 vars → `data/raw/soilgrids/*_5-15cm_global_0p1.tif` via ISRIC WCS | 13 MB | Units rescaled per `src/features.py`; **medians match training** (phh2o 6.2 vs 5.9, bdod 1.23 vs 1.20, nitrogen 2.3 vs 2.14, soc 28.1 vs 27.5). Real rasters, **not** the Asia-training NN imputation (forbidden globally). |
 
-### Resolution caveat
+Manifest: `data/raw/ACQUISITION_MANIFEST.json`. (Rasters live in gitignored
+`data/raw/`; the manifest is committed as the checkpoint of record.)
 
-The new hero is at 0.5° / ~55 km (310 × 175 grid, 20,678 land cells).
-The previous Run-B hero was at 0.05° / ~5 km. Pixels in the new image
-are visibly chunkier — this is honest about the underlying data and
-is documented in the footer (`resolution ~55 km`).
+### Missing — BLOCKER ❌
+**MODIS NPP / LST / IGBP** cannot be obtained globally:
+- GEE (`earthengine-api`) not installed and needs credentials.
+- LP DAAC needs Earthdata Login.
+- MS Planetary Computer (anonymous) has NPP + LST tiles but **not** MCD12Q1
+  land cover; and a client-side 2020–2024 mean of 8-day LST over ~286 global
+  tiles (~65k COG reads) is not tractable overnight.
 
-If a 5 km Full+MODIS Asia hero is needed in the future, the path is:
-1. Re-download WorldClim 8 bioclim rasters + SoilGrids 8 rasters
-2. Re-build asia_grid_5km.parquet via `src/extract_features_real.py`
-3. Sample MODIS + add IGBP one-hot, the way `item1_c5_hero_fnpp.py` does
-4. Predict with `Full_MODIS_model.json` on the 34-feature grid
-5. Compute anomaly = exp(Full+MODIS pred) / exp(climate baseline pred)
-6. Pass that parquet to `render_hero_map`
-
-No model retraining is needed; only feature extraction at 5 km.
-
-### Gate 1 results
-
-- ✓ Output file footer shows `Asia→US R²  0.072` — verified by reading the rendered PNG
-- ✓ The value `0.020` appears nowhere in the new image — verified
-- ✓ PNG dimensions: 4906 × 2850 (matches `hero_climate_npp_asia.png`)
-- ✓ Same diverging RdBu colormap (uses `src.hero_map.build_diverging_cmap`)
-- ✓ Same legend structure / interpretation rows
-- ⚠ File sizes smaller (PNG 3.3 MB vs 9.7 MB) because 0.5° grid has fewer
-  unique colours per area → better PNG compression. Not a defect.
+Detail, per-continent coverage, and exact sources attempted: `BLOCKERS.md`.
 
 ---
 
-## Phase 2A — methodology_evolution_panel_v2 verification
+## Decision — HALT (per the brief's own rules)
 
-**No regen needed.** All values on the existing
-`data/outputs/methodology_evolution_panel_v2.png` already match the
-source-of-truth list. Verified by visually reading the rendered image:
-
-| Sub-panel | Image text | Source-of-truth | Match? |
-|---|---|---|---|
-| F (climate-only) | "Transfer R² = +0.127, CI (+0.019, +0.216) · statistically significant" | +0.127, CI (+0.019, +0.216) | ✓ |
-| F+NPP | "Transfer R² = +0.145, CI (+0.026, +0.241) · best of any config" | +0.145, CI (+0.026, +0.241) | ✓ |
-| Full+MODIS | "Transfer R² = +0.072, CI (-0.084, +0.189) · CV jumps but transfer CI spans 0" | +0.072, CI (-0.084, +0.189) | ✓ |
-| Köppen C | "Net trans F = -0.336, CI (-3.06, +0.04) · spans 0" | -0.336 | ✓ |
-| Köppen D | "Net trans F = -0.199, CI (-0.392, -0.061) · significantly worse" | -0.199 | ✓ |
-
-Sidebar "Item 1 take-aways" text also references the +0.145 F+NPP value
-and the "Full+MODIS rescues CV but not transfer" narrative — all
-consistent with the data.
-
-No script run, no file modified.
-
-## Phase 2B — framing2_comparison_panel regenerated
-
-Script: `scripts/regen_framing2_panel.py` (new).
-
-The previous middle-panel title read `transfer R² = +0.020` (Run-A
-B_heavier_reg). The user asked for `transfer R² = +0.072` (Full+MODIS)
-and a softening of "overfits Asia" → "more features hurt" since the
-Full+MODIS CI spans zero.
-
-### Files written
-
-| File | Old title (middle panel) | New title (middle panel) |
-|---|---|---|
-| `data/outputs/framing2_comparison_panel.png` | "Climate + soil features (overfits Asia: transfer R² = +0.020)" | "Climate + soil features (more features hurt: transfer R² = +0.072)" |
-| `data/outputs/framing2_comparison_panel_legacy.png` | — | Renamed copy of the previous panel |
-
-### Data + framing changes
-
-The previous panel used three 5 km anomaly grids:
-
-- Left  : F anomaly  = exp(F_pred) / exp(5-bio baseline pred)
-- Middle: B anomaly  = exp(B_pred) / exp(5-bio baseline pred)
-- Right : B − F      (soil-feature contribution)
-
-The 5 km grid + 5-bio baseline parquets aren't on disk on this branch
-(see Phase 1 caveat). The new panel uses the 0.5° atlas_lookup data:
-
-- Left  : F anomaly  = exp(F_pred) / exp(F's own median log_rs)
-  — same conceptual framing (anomaly ratio centered near 1.0), with the
-  denominator switched from a 5-bio model to a global F median. This
-  preserves the visual scale but isn't strictly identical to the old left
-  panel; the anomaly map shows F's spatial deviation from its own
-  central tendency. Recorded as a deviation in this notes file.
-- Middle: Full+MODIS anomaly = exp(Full+MODIS_pred) / exp(8-bio baseline pred)
-  — comes from `atlas_lookup.json cells[i].fullmodis.anomaly` directly.
-- Right : Full+MODIS anomaly − F anomaly (same cell, same scale).
-
-The left-panel framing change is the only methodological deviation;
-the R² annotations in the title are unaffected (they come from the
-metrics JSON regardless of the visualisation choice).
-
-### Gate 2 results
-
-- ✓ methodology_evolution_panel_v2 confirmed correct — no regen
-- ✓ framing2 middle-panel title now reads `transfer R² = +0.072`
-- ✓ "+0.020" appears nowhere in the new framing2 panel — verified visually
-- ✓ Panel dimensions: 2880 × 1120 (matches legacy)
-- ✓ Same RdBu_r colormap, same 3-panel layout, same external horizontal
-  colorbars, same suptitle
-- ⚠ Smaller PNG size (330 KB vs 3.0 MB) — 0.5° vs 5 km resolution
+- The brief's sanctioned reduced fallback (F+NPP-only global, skip Full+MODIS)
+  is permitted **only if "bioclim + MODIS NPP are fully present globally."**
+  MODIS NPP is present for **31%** of land → **precondition fails → fallback
+  not available.**
+- Brief HALT behavior: *"if a dataset cannot be obtained, HALT and write
+  BLOCKERS.md … Do NOT proceed to Phase 2 for any feature set that is
+  incomplete."* The global feature set is incomplete → **halt.**
+- *"A smaller honest atlas beats a complete fabricated one."* The sanctioned
+  global fallback being unavailable, the **honest partial extension was
+  surfaced to the user and approved**: predict only where the full real stack
+  exists, flag those cells `transfer`, document the MODIS-absent remainder.
 
 ---
 
-## Phase 3 — validation scatters for F+NPP and Full+MODIS
+## Phase 2 — global grid + transfer-cell prediction
 
-Script: `scripts/regen_validation_scatters.py` (new).
+Script: `scripts/build_atlas_global.py` (new; reuses `build_atlas_lookup.py`
+helpers verbatim so transfer cells are computed the same way as Asia cells).
 
-The previous `validation_scatter.png` showed R² = -0.017, n = 264 —
-this is an older v1 model artefact that no longer corresponds to any
-named config in the current sweep. Renamed to
-`validation_scatter_legacy.png` and replaced by three new figures.
+- Global 0.5° grid, **Asia bbox [25,180]×[−10,80] excluded** so the 20,678
+  Asia cells are never recomputed (all of them sit inside that rectangle —
+  verified). 203,400 candidate non-Asia cells.
+- IGBP land mask → 7,501 non-Asia land cells (MODIS footprint only).
+- Sampled: WorldClim bioclim (global), MODIS npp/lst (footprint), **real
+  SoilGrids rasters** (`data/raw/soilgrids/*_5-15cm_global_0p1.tif`, rescaled
+  per `src.features.SOILGRIDS_SCALE`) — **not** the Asia-training NN imputation.
+- Any-NaN drop on the 12 F+NPP features → **6,716** cells with the full
+  bioclim+MODIS stack. Of those, **6,715 (100%)** also had complete real
+  SoilGrids, so every transfer cell carries both `fnpp` and `fullmodis`
+  blocks (same schema as Asia). 1 cell dropped for missing soil — not imputed.
+- Predicted F+NPP, Full+MODIS, and the climate baseline (same baseline trainer
+  + training parquet as the Asia build); anomaly = exp(pred − climate). Per-cell
+  SHAP top-3 for both models. Köppen, IGBP biome, nearest-site distances.
+- Every new cell tagged **`"domain": "transfer"`**.
 
-### Files written
+**Gate 2 — anomaly sanity by continent (F+NPP, no degenerate collapse):**
 
-| File | Title | R² | n |
-|---|---|---:|---:|
-| `data/outputs/validation_scatter_fnpp.png` | F+NPP: Asia → US transfer | +0.145, CI (+0.026, +0.241) | 223 |
-| `data/outputs/validation_scatter_fullmodis.png` | Full+MODIS: Asia → US transfer | +0.072, CI (-0.084, +0.189) — CI spans zero | 223 |
-| `data/outputs/validation_scatter_comparison.png` | Held-out US validation — adding features hurts transfer | F+NPP +0.145 / Full+MODIS +0.072 | 223 / 223 |
-| `data/outputs/validation_scatter_legacy.png` | (preserved old; R² = -0.017, n = 264 — not any current config) | — | — |
+| Region | transfer cells | median anomaly |
+|---|---:|---:|
+| North America | 4,038 | 1.035 |
+| Oceania (Australia) | 2,223 | 1.101 |
+| Africa (E/S, east of 25°E) | 454 | 1.044 |
+| **South America** | **0** | — (no MODIS) |
+| **Europe** (west of 25°E) | **0** | — (no MODIS) |
 
-### Sanity check
+Spot checks: Iowa = Croplands/Dfa, nearest training site 6,943 km (true
+cross-continent extrapolation); Australian outback = Open shrublands/BSh;
+California Central Valley = Croplands/BSk. All plausible.
 
-The script asserts the recomputed R² and n against
-`F_NPP_metrics.json` and `Full_MODIS_metrics.json` before plotting:
+## Phase 3 — merged atlas_lookup.json
 
-```
-F+NPP       : n=223  R²=+0.1447  RMSE=0.567
-Full+MODIS  : n=223  R²=+0.0724  RMSE=0.591
-source-of-truth sanity check passed
-```
+- Existing Asia cells loaded verbatim, tagged `domain: "training"`, then the
+  6,715 transfer cells appended. **27,393 cells total, 38 MB.**
+- **Gate 3 — Asia cells preserved:** diffed every Asia cell against the
+  pre-build backup → **0 value mismatches** (only the `domain` key added);
+  training cells keep their original order and positions; `models` block
+  unchanged. Schema bumped `v3 → v4` (adds per-cell `domain` + a top-level
+  `coverage` block describing the training/transfer split and the MODIS limit).
+- File size 38 MB (well under the ~120 MB / GitHub 100 MB limits) — no
+  payload reduction or grid coarsening needed.
 
-So the predicted vs observed pairs really do produce the headline
-numbers when scored. CIs are taken from the metrics files (bootstrap
-2,000 iter, seed=42) — not recomputed here.
-
-### Visual style
-
-- 1:1 dashed grey line (alpha 0.55)
-- Single-pane scatters: 6.5" × 6.5", equal aspect ratio
-- Comparison panel: 13" × 6.8", shared x/y range across both pans for
-  apples-to-apples; F+NPP in blue (#3B7DBE), Full+MODIS in deep red
-  (#A4221A) — colour-coded so the "more features = worse transfer"
-  contrast is visible at a glance
-- Same matplotlib defaults as the original `src/validate.py`
-  scatter (DPI 160, alpha 0.55 markers)
-
-### Gate 3 results
-
-- ✓ Two new scatter PNGs exist with correct R² values matching source-of-truth
-  - F+NPP : `R² = +0.145, 95% CI (+0.026, +0.241), n = 223` in title — verified visually
-  - Full+MODIS: `R² = +0.072, 95% CI (-0.084, +0.189), n = 223 — CI spans zero` in title — verified
-- ✓ Combined comparison panel exists with both scatters side-by-side, shared axes
-- ✓ Old `validation_scatter.png` renamed to `validation_scatter_legacy.png`
-- ✓ Subtitle R² values verified by reading rendered images
-- ✓ Script asserts R² match against metrics JSON before saving
+## Status against the brief's gates
+- Data acquired vs missing: **WorldClim ✅, SoilGrids ✅, MODIS ❌ (31% land)**.
+- Cell counts: **20,678 training + 6,715 transfer = 27,393.** File size **38 MB**.
+- Fallback taken: **honest partial extension** (predict where real MODIS exists;
+  the global F+NPP-only fallback was unavailable, precondition unmet). Both
+  models retained for transfer cells since real SoilGrids was obtained.
+- **Transfer framing in the data: present** — every non-Asia cell flagged
+  `domain: "transfer"`; Asia cells `domain: "training"`. UI badge/caveat is
+  Phase 4 (MSHI-WEB).
+- No model was trained/retrained. No figures, SHAP plots, or other non-atlas
+  MSHI artifacts were generated.
+- MODIS-absent regions (South America, most of Africa/Europe) are **omitted,
+  not fabricated** — see `BLOCKERS.md`.
