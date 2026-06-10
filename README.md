@@ -1,4 +1,4 @@
-# MSHI-Geo: Continental-Scale Soil Microbial Respiration for Asia
+# MSHI-Atlas: Continental-Scale Soil Microbial Respiration for Asia
 
 Geospatial twin of the published electrochemical MSHI biosensor. Predicts
 soil respiration at 1 km resolution across Asia from environmental
