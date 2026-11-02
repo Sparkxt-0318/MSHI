@@ -1,0 +1,9 @@
+{
+ "commit": "02163a720bc0b84bd535ad0962c85735816448e8",
+ "licence_sha256": "64bd84a5d7afb8f6e9caf1e9c18960e2e8eef1214f1d7a012fc50b8c5456d971",
+ "repo": "bpbond/srdb",
+ "sha256": "c4d7714a0954a0c9b8d4d41ae758defa8c46cb208aa50ef148e762655f892911",
+ "sha256_pinned": "c4d7714a0954a0c9b8d4d41ae758defa8c46cb208aa50ef148e762655f892911",
+ "source": "srdb",
+ "url": "https://raw.githubusercontent.com/bpbond/srdb/02163a720bc0b84bd535ad0962c85735816448e8/srdb-data.csv"
+}

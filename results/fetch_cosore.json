@@ -1,0 +1,9 @@
+{
+ "commit": "02f32e8e7f9a0f1c26c9dad61c574aef863f1df1",
+ "licence_sha256": "d60376da85facfc893b51524c02c6ef0662b66fc7986de1ab4ba18355fce5df7",
+ "n_dataset_dirs": 94,
+ "n_test_dirs": 3,
+ "repo_url": "https://github.com/bpbond/cosore",
+ "source": "cosore",
+ "version": "v0.8.0"
+}

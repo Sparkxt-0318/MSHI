@@ -1,0 +1,22 @@
+[project]
+name = "mshi"
+version = "3.0.0.dev0"
+description = "MSHI v3: soil respiration site data, transfer evaluation and plot-vs-landscape upscaling bias"
+requires-python = ">=3.11"
+authors = [{ name = "Siyeong Park" }]
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["mshi*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "network: needs a pinned remote source (skipped when it cannot be reached)",
+    "data: needs pipeline outputs under data/derived and results/ (skipped when absent)",
+    "slow: takes more than ~30 s",
+]
+filterwarnings = ["ignore::DeprecationWarning"]

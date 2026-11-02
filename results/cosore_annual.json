@@ -1,0 +1,175 @@
+{
+ "bad_metadata": [],
+ "igbp_counts": {
+  "Cropland": 2,
+  "Deciduous broadleaf forest": 19,
+  "Deciduous needleleaf forest": 2,
+  "Evergreen broadleaf forest": 8,
+  "Evergreen needleleaf forest": 17,
+  "Evergreen needleleaf plantation": 1,
+  "Grassland": 4,
+  "Mixed forests": 3,
+  "Open shrubland": 4,
+  "Savannas": 1,
+  "Wetland": 3,
+  "Woody savanna": 2
+ },
+ "n_bad_metadata": 0,
+ "n_by_kind": {
+  "no_qualifying_port": 17,
+  "no_rds": 6,
+  "unusable_content": 1
+ },
+ "n_dataset_dirs": 94,
+ "n_out_of_rs_range": 1,
+ "n_sites": 66,
+ "n_test_skipped": 3,
+ "n_unreadable_or_no_data": 24,
+ "out_of_rs_range": [
+  {
+   "dataset": "d20200331_PEICHL",
+   "rs_annual": 26.092373127241377
+  }
+ ],
+ "rs_annual_summary": {
+  "25%": 481.78,
+  "50%": 895.34,
+  "75%": 1312.36,
+  "count": 66.0,
+  "max": 2691.83,
+  "mean": 949.43,
+  "min": 117.62,
+  "std": 605.57
+ },
+ "rule": {
+  "factor_gC_per_umol": 378.778896,
+  "flux_clip_umol": [
+   -2.0,
+   50.0
+  ],
+  "min_obs_days": 150,
+  "min_span_days": 180
+ },
+ "unreadable_or_no_data": [
+  {
+   "dataset": "d20190504_SAVAGE_hf006-03",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20190520_RUEHR",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20190526_MINIONS_BNZ",
+   "kind": "no_rds",
+   "reason": "data/data.RDS missing"
+  },
+  {
+   "dataset": "d20190526_RAICH_diel",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20190526_RAICH_survey",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20190527_GOULDEN",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20190619_GU",
+   "kind": "no_rds",
+   "reason": "data/data.RDS missing"
+  },
+  {
+   "dataset": "d20190722_GORRES",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20191017_BALDOCCHI",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20200109_KISHIMOTO-MO",
+   "kind": "no_rds",
+   "reason": "data/data.RDS missing"
+  },
+  {
+   "dataset": "d20200114_CARBONE_BURNS",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20200114_CARBONE_OWENS_GRASS",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20200114_CARBONE_OWENS_SHRUB",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20200213_SEIBT",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20200214_SZUTU_BOULDINC",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20200214_SZUTU_VAIRA",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20200221_MATHES",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20200229_PHILLIPS",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20200304_GALVAGNO",
+   "kind": "no_rds",
+   "reason": "data/data.RDS missing"
+  },
+  {
+   "dataset": "d20200304_ZANCHI",
+   "kind": "no_rds",
+   "reason": "data/data.RDS missing"
+  },
+  {
+   "dataset": "d20200407_WANG",
+   "kind": "unusable_content",
+   "reason": "no complete flux/port/timestamp rows"
+  },
+  {
+   "dataset": "d20200808_MINIAT",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20200825_MINIAT",
+   "kind": "no_qualifying_port",
+   "reason": "no port with >= 150 observation days spanning >= 180 days"
+  },
+  {
+   "dataset": "d20201013_LIANG",
+   "kind": "no_rds",
+   "reason": "data/data.RDS missing"
+  }
+ ]
+}

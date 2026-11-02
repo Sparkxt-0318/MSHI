@@ -1,0 +1,236 @@
+{
+ "npp_check": null,
+ "rows": [
+  {
+   "diff": 0.0,
+   "handoff": 66,
+   "note": "",
+   "quantity": "COSORE sites with an annual value",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "exact",
+   "v3": 66
+  },
+  {
+   "diff": 0.0,
+   "handoff": 4771,
+   "note": "",
+   "quantity": "SRDB records after repo filters",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "exact",
+   "v3": 4771
+  },
+  {
+   "diff": 0.0,
+   "handoff": 4781,
+   "note": "",
+   "quantity": "Records after coordinate check",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "±1%",
+   "v3": 4781
+  },
+  {
+   "diff": 0.0,
+   "handoff": 3694,
+   "note": "",
+   "quantity": "Records after QC",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "±1%",
+   "v3": 3694
+  },
+  {
+   "diff": 0.0,
+   "handoff": 450,
+   "note": "",
+   "quantity": "QC removals: f_method",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "±2%",
+   "v3": 450
+  },
+  {
+   "diff": 0.0,
+   "handoff": 260,
+   "note": "",
+   "quantity": "QC removals: f_quality",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "±2%",
+   "v3": 260
+  },
+  {
+   "diff": 0.0,
+   "handoff": 252,
+   "note": "",
+   "quantity": "QC removals: f_coverage",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "±2%",
+   "v3": 252
+  },
+  {
+   "diff": 0.0,
+   "handoff": 243,
+   "note": "",
+   "quantity": "QC removals: f_ecosys",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "±2%",
+   "v3": 243
+  },
+  {
+   "diff": 0.0,
+   "handoff": 57,
+   "note": "",
+   "quantity": "QC removals: f_dup",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "±2%",
+   "v3": 57
+  },
+  {
+   "diff": 0.0,
+   "handoff": 387,
+   "note": "",
+   "quantity": "QC sites: Asia",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "±2%",
+   "v3": 387
+  },
+  {
+   "diff": 0.0,
+   "handoff": 257,
+   "note": "",
+   "quantity": "QC sites: North America",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "±2%",
+   "v3": 257
+  },
+  {
+   "diff": 0.0,
+   "handoff": 236,
+   "note": "",
+   "quantity": "QC sites: Europe",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "±2%",
+   "v3": 236
+  },
+  {
+   "diff": 0.0,
+   "handoff": 42,
+   "note": "",
+   "quantity": "QC sites: South America",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "±2%",
+   "v3": 42
+  },
+  {
+   "diff": 0.0,
+   "handoff": 26,
+   "note": "",
+   "quantity": "QC sites: Africa",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "±2%",
+   "v3": 26
+  },
+  {
+   "diff": 0.0,
+   "handoff": 23,
+   "note": "",
+   "quantity": "QC sites: Oceania",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "±2%",
+   "v3": 23
+  },
+  {
+   "diff": 0.0,
+   "handoff": 971,
+   "note": "",
+   "quantity": "QC sites: total",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "±2%",
+   "v3": 971
+  },
+  {
+   "diff": 0.0,
+   "handoff": 1225,
+   "note": "",
+   "quantity": "Repo-filter sites: total",
+   "rel_diff": 0.0,
+   "status": "PASS",
+   "tolerance": "±2%",
+   "v3": 1225
+  },
+  {
+   "handoff": "OLS-TP",
+   "note": "source blocked by network policy: fetch_worldclim (geodata.ucdavis.edu), fetch_soilgrids (maps.isric.org), modis_points (planetarycomputer.microsoft.com)",
+   "quantity": "Locked test: selected model",
+   "status": "NOT RUN",
+   "tolerance": "same model",
+   "v3": null
+  },
+  {
+   "handoff": 0.143,
+   "note": "source blocked by network policy: fetch_worldclim (geodata.ucdavis.edu), fetch_soilgrids (maps.isric.org), modis_points (planetarycomputer.microsoft.com)",
+   "quantity": "Locked test: Asia spatial-CV R²",
+   "status": "NOT RUN",
+   "tolerance": "±0.01",
+   "v3": null
+  },
+  {
+   "handoff": 235,
+   "note": "source blocked by network policy: fetch_worldclim (geodata.ucdavis.edu), fetch_soilgrids (maps.isric.org), modis_points (planetarycomputer.microsoft.com)",
+   "quantity": "Locked test: Europe n",
+   "status": "NOT RUN",
+   "tolerance": "±2%",
+   "v3": null
+  },
+  {
+   "handoff": 0.079,
+   "note": "source blocked by network policy: fetch_worldclim (geodata.ucdavis.edu), fetch_soilgrids (maps.isric.org), modis_points (planetarycomputer.microsoft.com)",
+   "quantity": "Locked test: Europe R²",
+   "status": "NOT RUN",
+   "tolerance": "±0.01",
+   "v3": null
+  },
+  {
+   "handoff": 0.013,
+   "note": "source blocked by network policy: fetch_worldclim (geodata.ucdavis.edu), fetch_soilgrids (maps.isric.org), modis_points (planetarycomputer.microsoft.com)",
+   "quantity": "Locked test: site-bootstrap CI low",
+   "status": "NOT RUN",
+   "tolerance": "±0.01",
+   "v3": null
+  },
+  {
+   "handoff": 0.125,
+   "note": "source blocked by network policy: fetch_worldclim (geodata.ucdavis.edu), fetch_soilgrids (maps.isric.org), modis_points (planetarycomputer.microsoft.com)",
+   "quantity": "Locked test: site-bootstrap CI high",
+   "status": "NOT RUN",
+   "tolerance": "±0.01",
+   "v3": null
+  },
+  {
+   "handoff": 0.982,
+   "note": "source blocked by network policy: modis_points (planetarycomputer.microsoft.com)",
+   "quantity": "NPP r vs committed NPP (original 889 sites)",
+   "status": "NOT RUN",
+   "tolerance": "±0.01",
+   "v3": null
+  }
+ ],
+ "summary": {
+  "FAIL": 0,
+  "NOT RUN": 7,
+  "PASS": 17
+ }
+}

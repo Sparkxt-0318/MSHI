@@ -1,0 +1,234 @@
+# MSHI v3 pipeline configuration.
+# Every source version, path, threshold and seed used by `python -m mshi.run` lives here.
+# Changing a value here changes results: log every change in docs/DECISIONS.md.
+
+version: 3
+
+paths:                       # relative to the repository root
+  raw: data/raw              # downloads (gitignored), fetched by the pipeline
+  interim: data/interim      # regenerable intermediates (gitignored)
+  derived: data/derived      # small derived tables (committed)
+  results: results           # JSON results, run log, run times (committed)
+  figures: figures           # figures produced by mshi/figures (committed)
+  handoff: docs/handoff      # 2026-11-02 handoff bundle (provenance, read-only)
+
+# Files under legacy/ are never read, except these (reproduction checks against the v1/v2 pipeline).
+legacy_allowlist:
+  - legacy/data/processed/training_features_v2.parquet
+  - legacy/data/processed/us_validation_features_v2.parquet
+
+# Tables the pipeline must refuse to read under any name (SHA-256 of file contents).
+forbidden_sha256:
+  - 2ffe0fe50df3e5532cef932227a3081ec03e6899c5443fd7c8481c195ac9e016   # 3,000-row synthetic demo table (v1)
+
+sources:
+  srdb:
+    description: Global Soil Respiration Database v5 (Jian et al. 2021, ESSD 13:255), MIT licence
+    repo: bpbond/srdb
+    commit: 02163a720bc0b84bd535ad0962c85735816448e8
+    file: srdb-data.csv
+    url: https://raw.githubusercontent.com/bpbond/srdb/{commit}/{file}
+    sha256: c4d7714a0954a0c9b8d4d41ae758defa8c46cb208aa50ef148e762655f892911
+    licence_url: https://raw.githubusercontent.com/bpbond/srdb/{commit}/LICENSE
+  cosore:
+    description: COSORE continuous soil respiration database v0.8.0 (Bond-Lamberty et al. 2020, GCB 26:7268), CC-BY-4.0 (LICENSE at the pinned commit; NOT MIT)
+    repo_url: https://github.com/bpbond/cosore
+    version: v0.8.0
+    commit: 02f32e8e7f9a0f1c26c9dad61c574aef863f1df1
+    datasets_dir: inst/extdata/datasets
+    licence_file: LICENSE
+  naturalearth:
+    description: Natural Earth vector v5.1.2 (public domain), GeoJSON from nvkelso/natural-earth-vector
+    version: v5.1.2
+    commit: f1890d9f152c896d250a77557a5751a93d494776
+    url: https://raw.githubusercontent.com/nvkelso/natural-earth-vector/{commit}/geojson/{file}
+    files:
+      ne_50m_admin_0_countries.geojson: 3e458fc036ad0a66411f2c1e6cac49c5d7bfb81cb1123bc513b22511a2b7fdeb
+      ne_110m_land.geojson: 9e0729ee253ca7d7a5c4ae9395fb1902264c5377c52e224d13dd85010e2835d9
+      ne_50m_land.geojson: e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b
+  worldclim:
+    description: WorldClim 2.1 bioclimatic variables, 1970-2000, 2.5 arc-min (Fick & Hijmans 2017)
+    version: "2.1"
+    resolution: 2.5m
+    url: https://geodata.ucdavis.edu/climate/worldclim/2_1/base/wc2.1_2.5m_bio.zip
+    sha256: null             # WorldClim publishes no checksum; the first download's hash is recorded in results/fetch_worldclim.json
+    file_pattern: wc2.1_2.5m_bio_{i}.tif
+    nodata_below: -1.0e+30   # values below this are missing
+  soilgrids:
+    description: SoilGrids 2.0 (Poggio et al. 2021), 5-15 cm mean, resampled by the ISRIC WCS to 0.05 deg, CC-BY-4.0
+    version: "2.0"
+    wcs_url: https://maps.isric.org/mapserv
+    variables: [soc, nitrogen, phh2o, clay, sand, silt, bdod, cec]
+    depth: 5-15cm
+    statistic: mean
+    lon: [-180, 180]
+    lat: [-56, 82.7]
+    size: [7200, 2774]       # columns, rows (0.05 deg)
+    file_pattern: "{var}_5-15cm_global_0p05.tif"
+    min_valid_bytes: 10000
+    # mapped units -> conventional units (as in legacy/src/features.py SOILGRIDS_SCALE)
+    scale: {soc: 0.1, nitrogen: 0.01, phh2o: 0.1, clay: 0.1, sand: 0.1, silt: 0.1, bdod: 0.01, cec: 0.1}
+    zero_is_missing: true    # handoff features_v3.py: values <= 0 -> NaN
+  modis:
+    description: MODIS Collection 6.1 MOD17A3HGF NPP and MOD11A2 LST via Microsoft Planetary Computer COGs
+    stac_url: https://planetarycomputer.microsoft.com/api/stac/v1
+    # SAS token for the STORAGE CONTAINER, not the collection (the collection token returns 403)
+    sas_token_url: https://planetarycomputer.microsoft.com/api/sas/v1/token/modiseuwest/modis-061-cogs
+    token_refresh_s: 240     # refresh the shared token every 4 minutes; forced refresh on any 403
+    threads: 32
+    datetime: 2020-01-01/2024-12-31
+    max_items_per_tile: 500
+    window_deg: 0.05         # mean over valid pixels in a 0.05 x 0.05 deg window centred on the site
+    sinusoidal_proj: "+proj=sinu +R=6371007.181 +nadgrids=@null +wktext"
+    tile_size_m: 1111950.5197
+    x_origin_m: -20015109.354
+    y_origin_m: 10007554.677
+    retries: 4
+    npp:
+      collection: modis-17A3HGF-061
+      item_prefix: MOD17A3HGF
+      asset: Npp_500m
+      valid_range: [0, 32700]
+      scale: 0.1             # -> g C m-2 yr-1
+      offset: 0.0
+    lst:
+      collection: modis-11A2-061
+      item_prefix: MOD11A2
+      assets: {lst_day: LST_Day_1km, lst_night: LST_Night_1km}
+      valid_min_exclusive: 0
+      scale: 0.02
+      offset: -273.15        # -> deg C
+      composite: first_of_month
+
+cosore_annual:
+  min_obs_days: 150          # unique observation days per port
+  min_span_days: 180         # calendar span per port
+  flux_clip_umol: [-2.0, 50.0]
+  # umol CO2 m-2 s-1 sustained for a year -> g C m-2 yr-1 = 12.011 * 31,536,000 / 1e6
+  molar_mass_c: 12.011
+  seconds_per_year: 31536000
+  rs_range: [50.0, 4500.0]
+  skip_prefix: TEST
+
+site_build:
+  rs_range: [50.0, 4500.0]
+  manipulation_keep: ["None", "Control", "control"]   # plus missing (NA)
+  qc:
+    method_regex: "alkali|soda"        # case-insensitive, on Meas_method
+    quality_regex: "Q1[0-4]"           # on Quality_flag
+    min_annual_coverage: 0.5           # Annual_coverage < 0.5 dropped (missing kept)
+    ecosystem_exclude: [Wetland, Urban]
+    cosore_ecosystem_exclude_upper: [WET, WETLAND, URB]   # as in handoff build_sites_v3.py (see DECISIONS.md D-P1-...)
+  coord_check:
+    max_km: 100.0
+    distance_crs: EPSG:3857            # as in the handoff (Web Mercator distances; see DECISIONS.md)
+    aliases:
+      USA: United States of America
+      United States: United States of America
+      US: United States of America
+      Florida: United States of America
+      Alaska: United States of America
+      Korea: South Korea
+      South Korea: South Korea
+      Republic of Korea: South Korea
+      UK: United Kingdom
+      England: United Kingdom
+      Scotland: United Kingdom
+      Wales: United Kingdom
+      Malyasia: Malaysia
+      Isreal: Israel
+      Czech Republic: Czechia
+      Democratic Republic of Congo: Democratic Republic of the Congo
+      Congo: Republic of the Congo
+      Tanzania: United Republic of Tanzania
+      Serbia: Republic of Serbia
+      Taiwan: Taiwan
+      Puerto Rico: Puerto Rico
+      Hong Kong: Hong Kong S.A.R.
+    # (reported country after aliasing, polygon country) pairs that are not coordinate errors
+    territory_exceptions:
+      - [United States of America, Puerto Rico]
+      - [Denmark, Greenland]
+      - [France, New Caledonia]
+      - [Denmark, Norway]              # Svalbard records reported as Denmark
+  continent:
+    nearest_max_m: 50000.0             # nearest polygon within 50 km for points off the 1:50m coastline
+    nearest_crs: EPSG:3857
+    russia_split_lon: 60.0             # Russia west of 60E -> Europe
+  merge_radius_km: 5.0                 # records within 5 km merged (connected components)
+  earth_radius_km: 6371.0
+  variants: [qc, repo]                 # qc = primary; repo = repo filters only (sensitivity)
+
+features:
+  worldclim_vars: 19
+  site_key_round: 5                    # site_key = round(lat,5)_round(lon,5), as in the handoff
+
+clean_test:
+  # The locked Asia -> Europe test. The stage refuses to run unless BOTH hashes match.
+  plan: docs/handoff/ANALYSIS_PLAN_LOCKED.md
+  plan_sha256: 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac
+  plan_locked_utc: "2026-11-01T07:28:35Z"
+  # SHA-256 of the canonical JSON of `locked` below; editing the candidate set or rule makes the stage refuse.
+  locked_sha256: 822f2ce128ff431f0dc991acea978a725247998d9ed67cdf2625edd54817cafa
+  locked:
+    train_continent: Asia
+    test_continent: Europe
+    target: log_rs
+    sets:
+      C8: [bio01, bio04, bio05, bio06, bio12, bio14, bio15, bio17]
+      C8+NPP: [bio01, bio04, bio05, bio06, bio12, bio14, bio15, bio17, npp]
+      C8+MODIS: [bio01, bio04, bio05, bio06, bio12, bio14, bio15, bio17, npp, lst_day, lst_night, lst_diurnal_range]
+      C8+SOIL: [bio01, bio04, bio05, bio06, bio12, bio14, bio15, bio17, soc, nitrogen, phh2o, clay, sand, silt, bdod, cec]
+      ALL: [bio01, bio04, bio05, bio06, bio12, bio14, bio15, bio17, soc, nitrogen, phh2o, clay, sand, silt, bdod, cec, npp, lst_day, lst_night, lst_diurnal_range]
+    ols_tp: [bio01, bio12]             # log Rs ~ bio01 + ln(bio12)
+    xgb: {n_estimators: 250, max_depth: 3, learning_rate: 0.05, subsample: 0.85, colsample_bytree: 0.85,
+          min_child_weight: 4, reg_alpha: 0.5, reg_lambda: 2.0, n_jobs: 2, verbosity: 0}
+    rf: {n_estimators: 500, min_samples_leaf: 5, max_features: 0.5, n_jobs: 2}
+    model_seed: 0
+    cv_block_deg: 5.0
+    cv_folds: 5
+    cv_seeds: [42, 43, 44]
+    tie_margin: 0.01
+    bootstrap_n: 2000
+    bootstrap_seed: 42
+    block_bootstrap_deg: 2.0
+    seed_spread: [0, 19]
+    aoa_cv_seed: 42
+    aoa_perm_repeats: 10
+    aoa_perm_seed: 0
+    aoa_diff_seed: 7
+    aoa_min_group: 10
+  variants: [qc, repo]                 # qc = primary; repo = plan-specified sensitivity
+
+reproduction_targets:                  # handoff values and tolerances (PROMPT section 4); checked by repro_checks and tests/
+  srdb_repo_filter_records: {value: 4771, abs: 0}
+  cosore_sites: {value: 66, abs: 0}
+  records_after_coord_check: {value: 4781, rel: 0.01}
+  records_after_qc: {value: 3694, rel: 0.01}
+  qc_removed_by:
+    f_method: {value: 450, rel: 0.02}
+    f_quality: {value: 260, rel: 0.02}
+    f_coverage: {value: 252, rel: 0.02}
+    f_ecosys: {value: 243, rel: 0.02}
+    f_dup: {value: 57, rel: 0.02}
+  sites_qc_by_continent:
+    Asia: {value: 387, rel: 0.02}
+    North America: {value: 257, rel: 0.02}
+    Europe: {value: 236, rel: 0.02}
+    South America: {value: 42, rel: 0.02}
+    Africa: {value: 26, rel: 0.02}
+    Oceania: {value: 23, rel: 0.02}
+  sites_qc_total: {value: 971, rel: 0.02}
+  sites_repo_total: {value: 1225, rel: 0.02}
+  locked_test:
+    selected: OLS-TP
+    asia_cv_r2: {value: 0.143, abs: 0.01}
+    europe_n: {value: 235, rel: 0.02}
+    europe_r2: {value: 0.079, abs: 0.01}
+    europe_ci_lo: {value: 0.013, abs: 0.01}
+    europe_ci_hi: {value: 0.125, abs: 0.01}
+  npp_corr_original_sites: {value: 0.982, abs: 0.01, n_sites: 889}
+
+smoke:
+  n_sites: 50
+  seed: 20261102

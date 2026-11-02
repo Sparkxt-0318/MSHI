@@ -1,0 +1,25 @@
+{
+ "config_sha256": "49a0fa9a23e4e7e17470515645ce3e3dacaaf25ce79a50920a466c10d9a00586",
+ "git_commit": "a809a979ec383e89fb49f28a96a7da9a01499b0e+dirty",
+ "versions": {
+  "gdal": "3.12.2",
+  "geopandas": "1.2.0",
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.4",
+  "pandas": "3.1.0",
+  "pyarrow": "26.0.0",
+  "pyogrio": "0.13.0",
+  "pyproj": "3.8.0",
+  "pystac_client": "0.9.1",
+  "python": "3.13.18",
+  "rasterio": "1.5.2",
+  "rdata": "1.1.0",
+  "requests": "2.34.2",
+  "scipy": "1.18.1",
+  "shapely": "2.2.0",
+  "sklearn": "1.9.1",
+  "statsmodels": "0.15.0",
+  "xgboost": "2.1.4",
+  "yaml": "6.0.3"
+ }
+}

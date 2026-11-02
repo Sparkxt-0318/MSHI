@@ -1,0 +1,235 @@
+{
+ "coord_check": {
+  "changed_records": [
+   {
+    "Country": "India",
+    "dist_to_reported_country_km": 114.043,
+    "f_coverage": false,
+    "f_dup": false,
+    "f_ecosys": false,
+    "f_method": true,
+    "f_quality": false,
+    "geo_country": "Pakistan",
+    "lat": 33.0,
+    "lon": 73.0,
+    "rec_id": "srdb_3051",
+    "true_km": 95.589
+   },
+   {
+    "Country": "India",
+    "dist_to_reported_country_km": 114.043,
+    "f_coverage": false,
+    "f_dup": false,
+    "f_ecosys": false,
+    "f_method": true,
+    "f_quality": false,
+    "geo_country": "Pakistan",
+    "lat": 33.0,
+    "lon": 73.0,
+    "rec_id": "srdb_3052",
+    "true_km": 95.589
+   },
+   {
+    "Country": "India",
+    "dist_to_reported_country_km": 114.043,
+    "f_coverage": false,
+    "f_dup": false,
+    "f_ecosys": false,
+    "f_method": true,
+    "f_quality": false,
+    "geo_country": "Pakistan",
+    "lat": 33.0,
+    "lon": 73.0,
+    "rec_id": "srdb_3053",
+    "true_km": 95.589
+   },
+   {
+    "Country": "India",
+    "dist_to_reported_country_km": 114.043,
+    "f_coverage": false,
+    "f_dup": false,
+    "f_ecosys": false,
+    "f_method": true,
+    "f_quality": false,
+    "geo_country": "Pakistan",
+    "lat": 33.0,
+    "lon": 73.0,
+    "rec_id": "srdb_3054",
+    "true_km": 95.589
+   },
+   {
+    "Country": "India",
+    "dist_to_reported_country_km": 114.043,
+    "f_coverage": false,
+    "f_dup": false,
+    "f_ecosys": false,
+    "f_method": true,
+    "f_quality": false,
+    "geo_country": "Pakistan",
+    "lat": 33.0,
+    "lon": 73.0,
+    "rec_id": "srdb_3055",
+    "true_km": 95.589
+   },
+   {
+    "Country": "India",
+    "dist_to_reported_country_km": 114.043,
+    "f_coverage": false,
+    "f_dup": false,
+    "f_ecosys": false,
+    "f_method": true,
+    "f_quality": false,
+    "geo_country": "Pakistan",
+    "lat": 33.0,
+    "lon": 73.0,
+    "rec_id": "srdb_3056",
+    "true_km": 95.589
+   },
+   {
+    "Country": "China",
+    "dist_to_reported_country_km": 104.164,
+    "f_coverage": false,
+    "f_dup": false,
+    "f_ecosys": false,
+    "f_method": false,
+    "f_quality": false,
+    "geo_country": "Vietnam",
+    "lat": 21.744,
+    "lon": 104.314,
+    "rec_id": "srdb_7329",
+    "true_km": 96.043
+   },
+   {
+    "Country": "Italy",
+    "dist_to_reported_country_km": 122.01,
+    "f_coverage": false,
+    "f_dup": false,
+    "f_ecosys": false,
+    "f_method": false,
+    "f_quality": false,
+    "geo_country": "Malta",
+    "lat": 35.843,
+    "lon": 14.569,
+    "rec_id": "srdb_11712",
+    "true_km": 98.06
+   },
+   {
+    "Country": "Italy",
+    "dist_to_reported_country_km": 121.928,
+    "f_coverage": false,
+    "f_dup": false,
+    "f_ecosys": false,
+    "f_method": false,
+    "f_quality": false,
+    "geo_country": "Malta",
+    "lat": 35.844,
+    "lon": 14.567,
+    "rec_id": "srdb_11713",
+    "true_km": 97.994
+   },
+   {
+    "Country": "Italy",
+    "dist_to_reported_country_km": 122.134,
+    "f_coverage": false,
+    "f_dup": false,
+    "f_ecosys": false,
+    "f_method": false,
+    "f_quality": false,
+    "geo_country": "Malta",
+    "lat": 35.842,
+    "lon": 14.57,
+    "rec_id": "srdb_11714",
+    "true_km": 98.16
+   }
+  ],
+  "flagged_mercator": 52,
+  "flagged_mercator_only": 10,
+  "flagged_true_distance": 42,
+  "flagged_true_only": 0,
+  "mercator_over_true_median": 1.3502284347877578,
+  "n_mismatch_checked": 138,
+  "reported_country_not_in_naturalearth": [
+   {
+    "Country": "Czechoslovakia",
+    "geo_country": "Austria",
+    "n": 2
+   },
+   {
+    "Country": "French Guiana",
+    "geo_country": "France",
+    "n": 4
+   },
+   {
+    "Country": "Micronesia",
+    "geo_country": "Federated States of Micronesia",
+    "n": 4
+   },
+   {
+    "Country": "Republic of Congo",
+    "geo_country": "Republic of the Congo",
+    "n": 2
+   }
+  ]
+ },
+ "offland": {
+  "n": 4,
+  "records": [
+   {
+    "lat": 32.0,
+    "lon": 135.42,
+    "nearest_country": "Japan",
+    "rec_id": "srdb_793",
+    "true_km": 166.9
+   },
+   {
+    "lat": 53.05,
+    "lon": 3.47,
+    "nearest_country": "Netherlands",
+    "rec_id": "srdb_1528",
+    "true_km": 83.1
+   },
+   {
+    "lat": -42.15,
+    "lon": -147.133,
+    "nearest_country": null,
+    "rec_id": "srdb_11103",
+    "true_km": null
+   },
+   {
+    "lat": 1.315,
+    "lon": 193.911,
+    "nearest_country": null,
+    "rec_id": "srdb_13828",
+    "true_km": null
+   }
+  ]
+ },
+ "site_diameter_qc": {
+  "largest": {
+   "v3qc_00017": 9.6,
+   "v3qc_00058": 10.8,
+   "v3qc_00082": 7.9,
+   "v3qc_00116": 8.7,
+   "v3qc_00519": 15.7
+  },
+  "max_km": 15.723927442184124,
+  "n_gt_10km": 2,
+  "n_gt_20km": 0,
+  "n_gt_5km": 17,
+  "n_multi_record_sites": 605
+ },
+ "site_diameter_repo": {
+  "largest": {
+   "v3repo_00021": 9.6,
+   "v3repo_00088": 11.3,
+   "v3repo_00183": 8.7,
+   "v3repo_00709": 15.7,
+   "v3repo_00897": 11.1
+  },
+  "max_km": 15.723927442184124,
+  "n_gt_10km": 3,
+  "n_gt_20km": 0,
+  "n_gt_5km": 25,
+  "n_multi_record_sites": 776
+ }
+}

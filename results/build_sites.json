@@ -1,0 +1,231 @@
+{
+ "coord_mismatch_examples": [
+  [
+   "Canada",
+   "United States of America",
+   "40.4",
+   "-75.6",
+   "502.631972843548"
+  ],
+  [
+   "Congo",
+   "Democratic Republic of the Congo",
+   "0.8",
+   "23.73",
+   "629.3874913154074"
+  ],
+  [
+   "India",
+   "Pakistan",
+   "33.0",
+   "73.0",
+   "114.04273452619424"
+  ],
+  [
+   "Indonesia",
+   "Malaysia",
+   "2.82",
+   "111.85",
+   "155.3644756761848"
+  ],
+  [
+   "Indonesia",
+   "Malaysia",
+   "2.78",
+   "111.83",
+   "152.00223750260923"
+  ],
+  [
+   "New Zealand",
+   "New Caledonia",
+   "-21.71138889",
+   "165.8183333",
+   "1786.1158311482243"
+  ],
+  [
+   "USA",
+   "Canada",
+   "48.87833333",
+   "-76.125",
+   "647.6830047350053"
+  ],
+  [
+   "Norway",
+   "Estonia",
+   "58.33055556",
+   "26.52638889",
+   "1610.0266470169047"
+  ],
+  [
+   "Norway",
+   "Estonia",
+   "57.70944444",
+   "26.75583333",
+   "1670.5187810662792"
+  ],
+  [
+   "Italy",
+   "Nigeria",
+   "10.29",
+   "13.05",
+   "3252.1068859320208"
+  ],
+  [
+   "China",
+   "Vietnam",
+   "21.744",
+   "104.314",
+   "104.1640601419233"
+  ],
+  [
+   "China",
+   "Taiwan",
+   "23.68",
+   "120.8",
+   "242.1005014444811"
+  ],
+  [
+   "Denmark",
+   "Russia",
+   "55.5",
+   "55.65",
+   "4510.596665687731"
+  ],
+  [
+   "Spain",
+   "Algeria",
+   "36.9",
+   "3.5",
+   "327.621229357018"
+  ],
+  [
+   "USA",
+   "Canada",
+   "44.73",
+   "-78.34",
+   "170.58429812544063"
+  ],
+  [
+   "Mexico",
+   "Thailand",
+   "19.41",
+   "99.13",
+   "20687.1680643985"
+  ],
+  [
+   "Italy",
+   "Malta",
+   "35.84278",
+   "14.56865",
+   "122.0098997509212"
+  ],
+  [
+   "Italy",
+   "Malta",
+   "35.84372",
+   "14.56652",
+   "121.92826729818576"
+  ],
+  [
+   "Italy",
+   "Malta",
+   "35.8417",
+   "14.5697",
+   "122.1335056954967"
+  ],
+  [
+   "Turkey",
+   "Iran",
+   "37.16",
+   "58.98",
+   "1578.9437263697457"
+  ],
+  [
+   "Iran",
+   "Russia",
+   "53.27",
+   "36.51",
+   "2377.3244008580637"
+  ],
+  [
+   "Congo",
+   "Democratic Republic of the Congo",
+   "0.153",
+   "25.295",
+   "817.9014321704777"
+  ],
+  [
+   "Canada",
+   "Russia",
+   "50.873",
+   "111.875",
+   "18324.010223010653"
+  ],
+  [
+   "Canada",
+   "Russia",
+   "50.894",
+   "111.881",
+   "18324.792773138397"
+  ],
+  [
+   "Mongolia",
+   "China",
+   "51.172",
+   "121.811",
+   "617.6611665269995"
+  ],
+  [
+   "Malaysia",
+   "Cameroon",
+   "3.426663889",
+   "10.33572222",
+   "9947.625829523455"
+  ]
+ ],
+ "coord_mismatch_records": 52,
+ "coord_reported_country_not_in_naturalearth": [
+  "Czechoslovakia",
+  "French Guiana",
+  "Micronesia",
+  "Republic of Congo"
+ ],
+ "cosore_records": 66,
+ "offland_records": 4,
+ "qc_removed_any": 1087,
+ "qc_removed_by": {
+  "f_coverage": 252,
+  "f_dup": 57,
+  "f_ecosys": 243,
+  "f_method": 450,
+  "f_quality": 260
+ },
+ "records_after_coord_check": 4781,
+ "records_after_qc": 3694,
+ "sites_qc": {
+  "by_continent": {
+   "Africa": 26,
+   "Asia": 387,
+   "Europe": 236,
+   "North America": 257,
+   "Oceania": 23,
+   "South America": 42
+  },
+  "n": 971,
+  "sites_with_2plus_records": 605
+ },
+ "sites_repo": {
+  "by_continent": {
+   "Africa": 30,
+   "Asia": 482,
+   "Europe": 284,
+   "North America": 328,
+   "Oceania": 40,
+   "South America": 61
+  },
+  "n": 1225,
+  "sites_with_2plus_records": 776
+ },
+ "srdb_repo_filter_records": 4771,
+ "srdb_rows": 14169
+}
