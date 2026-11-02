@@ -7,7 +7,7 @@ reproduction table: `results/reproduction_check.md`; reviews: `docs/review/2026-
 
 ## 1. Reproduction table
 
-From `make all` at the clean commit `a6c00bc` (`results/reproduction_check.md`):
+From `make all` at the clean commit `7f7263c` (`results/reproduction_check.md`):
 
 | Quantity | Handoff | v3 | Tolerance | Status |
 |---|---|---|---|---|
@@ -53,23 +53,24 @@ None of these changes a reproduced number.
 - **Locked test, config representation.** Constants that were literals in the prototype (learner list,
   ln(bio12), AOA whisker, CI quantiles, DI terciles) now sit in the hashed config block. Its hash changed
   (`822f2ce1…` → `ef029090…`); the plan and its hash did not. On synthetic data the old and new code give
-  bit-identical results except random-forest entries, which differ at the 1e-16 level (D-P1-9).
+  bit-identical results except random-forest entries, which differ at the 1e-16 to 1e-15 level (D-P1-9).
 - **Random-forest predictions single-threaded.** The handoff summed trees in thread order, so its RF
-  values were not reproducible run to run. The effect is ~1e-16 and data-dependent; OLS-TP (the locked
-  model) and XGB values are bit-identical (DEV-P1-15).
+  values were not reproducible run to run. The effect is 1e-16 to 1e-15 in RF table entries and
+  data-dependent; OLS-TP (the locked model) and XGB values are bit-identical (DEV-P1-15).
 - **MODIS stage** (DEV-P1-16). A raster read that still fails after retries now fails the stage, and so
-  does a catalog that lacks an expected year or month (the prototype averaged whatever it got). Means are
-  taken in a fixed order. The cache is keyed on the MODIS config, the point set, the module source and
-  library versions, and bound to the cached table's bytes. LST items with the same date are ordered by
-  id, which can change an LST mean only if the catalog has such ties; each tie is listed in
-  `results/modis_points.json`.
+  does a catalog that lacks an expected year, month or a month's first 8-day composite (the prototype
+  averaged whatever it got). Means are taken in a fixed order. The cache is keyed on the MODIS config,
+  the point set, the module source and library versions, and bound to the cached table's bytes. LST
+  items with the same date are ordered by id, which can change an LST mean only if the catalog has such
+  ties; each tie is listed in `results/modis_points.json`, as is any period outside 2020–2024 that the
+  catalog returns (used, as in the prototype).
 - **Europe n is checked exactly.** The brief gives no tolerance, and the test set is closed (D-P1-10).
 - **NPP r method `[UNVERIFIED]`.** No handoff script computes 0.982, so the v3 check is a reconstruction
   (F-P1-19).
 
 ## 4. Run times (4 vCPU)
 
-`make all` with cached raw inputs, from the clean commit `a6c00bc`: 48 s (cosore_annual 38 s, build_sites 4 s, site_diagnostics 2 s, each cached fetch ≤ 0.4 s, each blocked stage 0.3–0.4 s); exit code 2 (three sources blocked). First fetches: SRDB 1.7 s, COSORE 11 s (374 MB). Tests (`make test`): 140 tests, 136 passed and 4 skipped (the two locked-test re-runs, the locked-test targets and the NPP check, all not run), 68 s. Not measurable here: WorldClim, SoilGrids and MODIS (the handoff reports ≈ 45 min for the LST points).
+`make all` with cached raw inputs, from the clean commit `7f7263c`: 49 s (cosore_annual 38 s, build_sites 4 s, site_diagnostics 2 s, each cached fetch ≤ 0.6 s, each blocked stage 0.4 s); exit code 2 (three sources blocked). First fetches: SRDB 1.7 s, COSORE 11 s (374 MB). Tests (`make test`): 171 tests, 167 passed and 4 skipped (the two locked-test re-runs, the locked-test targets and the NPP check, all not run), 69 s. Not measurable here: WorldClim, SoilGrids and MODIS (the handoff reports ≈ 45 min for the LST points).
 
 ## 5. What in the handoff is wrong
 
@@ -128,11 +129,29 @@ F-P1-7, D-P1-8). The ones that matter most:
   problems, all confirmed and all low. None changed a reproduced number. The main ones: a stage run on
   upstream outputs from another config looked current (provenance was per stage, not transitive); the
   MODIS cache key missed part of the extraction code and did not bind the cached table's bytes; a short
-  STAC catalog was accepted as complete; rasters were not verified when read. All 20 are fixed. Results
-  now record the hash of every file they wrote, every stage refuses inputs that are not the outputs of a
-  current upstream result, and stages after the reproduction table run only if it has no FAIL or STALE
-  row. Tests: 140 tests, 136 passed, 4 skipped (the checks that need the blocked sources).
-- **Third check** (on the second round of fixes): *pending* (a review of the second round of fixes is running; outcome to be recorded here and in `docs/DECISIONS.md`).
+  STAC catalog was accepted as complete; rasters were not verified when read. All 20 were fixed in
+  `a6c00bc`: results record the hash of the files they write for later stages, a stage reads another
+  stage's files only if they are recorded outputs of a current result, and stages after the
+  reproduction table run only if it has no FAIL or STALE row.
+- **Third check** (`fix_verification_3.md`, R-P1-21): the 20 fixes re-run (16 hold, 4 partly), and the
+  whole pipeline run end to end on stand-ins for the blocked sources (synthetic rasters, a fake STAC
+  catalog, a synthetic target; nothing real scored). The end-to-end run works: every stage ran, a
+  second run made no download and wrote byte-identical results, and the 17 site-build rows equal the
+  committed values. 18 new problems (22 reports), all low; none changed a reproduced number. Several
+  came from the second-round fixes themselves. The main ones: results were not bound to the upstream
+  results they read, so a re-fetched unpinned source (WorldClim, SoilGrids, MODIS) could leave stale
+  locked-test rows looking current; committed results would have read as stale on a fresh clone
+  (gitignored outputs absent); a failed upstream stage could turn FAIL rows into NOT RUN and open the
+  gate; pinning the WorldClim hash deleted the downloaded data; a Finder `.DS_Store` in the COSORE
+  checkout stopped `make all`; a Windows (CRLF) checkout made every result stale. All 18 are fixed in
+  `7f7263c`, with tests that fail on the previous commit. Results now also record the upstream results
+  they read and are current only if those are unchanged and current; the gate also requires no NOT RUN
+  row. Tests: 171 tests, 167 passed, 4 skipped (the checks that need the blocked sources).
+- **Stopping here.** The three rounds found 27, 20 and 18 problems, of falling severity (1 high, 7
+  medium and 19 low; then 20 low; then 18 low), none of which changed a reproduced number. The main
+  remaining risk is the code that cannot run here (rasters, MODIS, the locked-test re-run on real
+  features), which the end-to-end run exercised only on stand-ins; it will be checked when the sources
+  are reachable (Q-1).
 
 ## 7. Decisions needed
 

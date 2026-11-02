@@ -1,10 +1,14 @@
 {
+ "_inputs": {
+  "build_sites.json": "89a2ea3e7478bca494672d6bf8de9a960c6dc10d18c1759b0c69088476524895",
+  "cosore_annual.json": "42d4f282e99f72e27fa16891ee8c4e0de1929a518474c55a60384cd022ae83c8"
+ },
  "_outputs": {
   "results:reproduction_check.md": "86ebf908240e50ad79c9d1343455f75575df155ceb1c06308905c971225cc18b"
  },
  "_provenance": {
-  "code_sha256": "e3d4bf1e8ddf276e0a0662606620304df9b70c1a58577d56ab5e6e8314cddeb4",
-  "config_sha256": "dfde8e429a9bb547adc214e5a03203ae0def14f4378cd84b9f04616d88dc5f28"
+  "code_sha256": "53b20a6b3ec3923b7eb05d5a3658d9174545149223d9caa173e35b2bf1ded304",
+  "config_sha256": "9db84120bbafd84172efc668e64efca7f3e0f320eb912f6f5dae0517248752a9"
  },
  "npp_check": null,
  "rows": [

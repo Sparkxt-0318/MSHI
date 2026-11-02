@@ -235,7 +235,12 @@ WCS (8 × global 0.05° GeoTIFF), MODIS points (handoff: LST ≈ 45 min for 1,53
 *Updated 2026-11-02 (R-P1-20):* `make all` from the clean commit `a6c00bc`: 48 s (cosore_annual 37.7 s,
 build_sites 3.9 s, site_diagnostics 1.8 s, cached fetches ≤ 0.4 s, blocked stages 0.3–0.4 s), exit code 2;
 `data/derived/` byte-identical to before. `make test`: 140 tests, 136 passed, 4 skipped (the two
-locked-test re-runs, the locked-test targets and the NPP check), 68 s.
+locked-test re-runs, the locked-test targets and the NPP check), 68 s. *Updated 2026-11-02 (R-P1-21):*
+`make all` from the clean commit `7f7263c`: 49 s (cosore_annual 38.0 s, build_sites 3.6 s,
+site_diagnostics 2.1 s, cached fetches ≤ 0.6 s, blocked stages 0.4 s), exit code 2; `data/derived/` and
+`results/reproduction_check.md` byte-identical to before (the result JSONs gain `_inputs`, new hashes and,
+in `site_diagnostics.json`, the recorded search radius). `make test`: 171 tests, 167 passed, 4 skipped
+(the same four), 69 s.
 
 **R-P1-14 Package review (2026-11-02).** The Phase-1 package was reviewed by three independent
 reviewers (fidelity to the handoff scripts, guards and robustness, conformance to the brief), and every
@@ -487,7 +492,9 @@ Config changes (the config hash changes; the locked block and its hash do not): 
 `site_diagnostics.offland_search_deg: 5.0` and `diameter_bins_km: [5, 10, 20]`,
 `repro_checks.npp_min_sites: 3`; comments corrected. New `.gitattributes`. The syntax-tree pin of
 `clean_test.py` changed (D-P1-9); the `LockedTest` pin did not. Record:
-`docs/review/2026-11-02/fix_verification_3.md` (scripts in `fixcheck3_scripts/`). Reviews stop here for
+`docs/review/2026-11-02/fix_verification_3.md` (scripts in `fixcheck3_scripts/`). Results regenerated from
+the clean commit `7f7263c` (V-P1-13): the same 17 PASS and 10 NOT RUN; 171 tests, 167 passed, 4 skipped
+(the locked-test re-runs and the NPP check, which need the blocked sources). Reviews stop here for
 Checkpoint 1: the three rounds found 27, 20 and 18 problems, of falling severity (1 high, 7 medium and 19
 low; then 20 low; then 18 low), none of which changed a reproduced number; the code that cannot run here
 (rasters, MODIS, the locked-test re-run on real features) remains the main risk until the sources are
