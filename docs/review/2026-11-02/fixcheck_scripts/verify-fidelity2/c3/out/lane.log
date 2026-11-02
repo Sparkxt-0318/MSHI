@@ -1,0 +1,25 @@
+mshi from /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/verify-fidelity2/c3/old/mshi/__init__.py
+mshi from /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/verify-fidelity2/c3/old/mshi/__init__.py
+old V1_ols.parquet force_rf=False: selected TP/OLS-TP in 93s
+old data/V1_ols.parquet out/old_V1.json rc=0 94s
+mshi from /home/user/MSHI/mshi/__init__.py
+old V2_rf.parquet force_rf=False: selected C8/RF in 122s
+old data/V2_rf.parquet out/old_V2.json rc=0 124s
+mshi from /home/user/MSHI/mshi/__init__.py
+new V1_ols.parquet force_rf=False: selected TP/OLS-TP in 87s
+new data/V1_ols.parquet out/new_V1.json rc=0 90s
+mshi from /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/verify-fidelity2/c3/old/mshi/__init__.py
+new V2_rf.parquet force_rf=False: selected C8/RF in 106s
+new data/V2_rf.parquet out/new_V2.json rc=0 108s
+mshi from /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/verify-fidelity2/c3/old/mshi/__init__.py
+old S1_ols.parquet force_rf=False: selected TP/OLS-TP in 92s
+old /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/fidelity/ct/data/S1_ols.parquet out/old_S1.json rc=0 93s
+mshi from /home/user/MSHI/mshi/__init__.py
+old V2_rf.parquet force_rf=True: selected C8/RF in 129s
+old data/V2_rf.parquet out/old_V2_forcerf.json force_rf rc=0 131s
+mshi from /home/user/MSHI/mshi/__init__.py
+new S1_ols.parquet force_rf=False: selected TP/OLS-TP in 93s
+new /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/fidelity/ct/data/S1_ols.parquet out/new_S1.json rc=0 95s
+new V2_rf.parquet force_rf=True: selected C8/RF in 106s
+new data/V2_rf.parquet out/new_V2_forcerf.json force_rf rc=0 108s
+ALLDONE

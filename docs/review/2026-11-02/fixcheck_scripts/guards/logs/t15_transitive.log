@@ -1,0 +1,7 @@
+config B, cosore_annual + build_sites: exit 0
+config B, build_sites + repro_checks on the config-A cosore_annual.csv: exit 0
+   cosore_records       full chain B:    41 | partial run B:    66
+   records_after_qc     full chain B:  3669 | partial run B:  3694
+   QC sites by continent, full B vs partial B: {'Africa': 26, 'Asia': 386, 'Europe': 236, 'North America': 256, 'Oceania': 23, 'South America': 42} {'Africa': 26, 'Asia': 387, 'Europe': 236, 'North America': 257, 'Oceania': 23, 'South America': 42}
+   partial-run build_sites.json staleness under config B: None
+   repro summary (partial): {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 16, 'STALE': 0} | COSORE row: [('NOT RUN', 'no result (stage not run)')]

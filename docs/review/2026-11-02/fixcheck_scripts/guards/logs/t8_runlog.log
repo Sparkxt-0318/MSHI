@@ -1,0 +1,7 @@
+  clean                                                      -> 7babe03fac09e3c29d216c012c0389c5de53d758
+  README.md modified (outside provenance paths)              -> 7babe03fac09e3c29d216c012c0389c5de53d758
+  committed input table data/derived/*.csv modified          -> 7babe03fac09e3c29d216c012c0389c5de53d758
+  untracked mshi/new_module.py                               -> 7babe03fac09e3c29d216c012c0389c5de53d758+dirty
+  ignored mshi/__pycache__/*.pyc                             -> 7babe03fac09e3c29d216c012c0389c5de53d758
+  .git/index rewritten by git_commit after a stat change: False
+  control: plain 'git status' (optional locks on) rewrites it: True

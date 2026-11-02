@@ -1,0 +1,5 @@
+cosore_annual.csv assert_frame_equal: equal
+sites_v3_qc.parquet assert_frame_equal: DIFFERENT -> ['DataFrame.iloc[:, 2] (column name="log_rs") are different', '', 'DataFrame.iloc[:, 2] (column name="log_rs") values are different (4.42842 %)']
+sites_v3_repo.parquet assert_frame_equal: DIFFERENT -> ['DataFrame.iloc[:, 2] (column name="log_rs") are different', '', 'DataFrame.iloc[:, 2] (column name="log_rs") values are different (3.5102 %)']
+records_v3.parquet assert_frame_equal: DIFFERENT -> ['DataFrame.iloc[:, 4] (column name="rs") are different', '', 'DataFrame.iloc[:, 4] (column name="rs") values are different (1.36448 %)']
+exit=0

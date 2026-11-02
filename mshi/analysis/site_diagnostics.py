@@ -7,7 +7,11 @@ Quantifies the impact of choices kept from the handoff for reproduction (docs/DE
 3. 5-km connected components can chain records that are more than 5 km apart;
 4. the continent comes from the Natural Earth CONTINENT of the country polygon containing the site, so
    overseas parts of European countries (French Guiana, the Canary Islands) are labelled "Europe";
-   sites outside a broad geographic box per continent are listed (``site_diagnostics.continent_boxes``).
+   sites outside a broad geographic box per continent are listed (``site_diagnostics.continent_boxes``);
+5. Europe test sites that were already in the original (v1/v2) "Asia" training table (25-180 E box),
+   i.e. scored as held-out sites in the original cross-validation (docs/DECISIONS.md F-H2): sites holding
+   the identical SRDB/COSORE record (same record id; v2 ids are SRDB CSV row ids, as in v3) and sites
+   with a record within ``site_build.merge_radius_km`` of an original training site.
 Writes results/site_diagnostics.json.
 """
 from __future__ import annotations
@@ -19,8 +23,10 @@ from pyproj import CRS
 
 from ..config import Config
 from ..data.fetch import naturalearth_path
-from ..io import read_table, write_result
+from ..io import read_table, require_outputs, write_result
 from ..netutil import verify_sha256
+
+SITE_TABLES = ("records_v3.parquet", "sites_v3_qc.parquet", "sites_v3_repo.parquet")
 
 
 def _true_km_to_polygon(lon: float, lat: float, geom, geom_crs) -> float:
@@ -37,8 +43,33 @@ def _haversine_km(lat1, lon1, lat2, lon2, R=6371.0):
     return 2 * R * np.arcsin(np.sqrt(a))
 
 
+def in_original_asia_table(cfg: Config, r: pd.DataFrame, st: pd.DataFrame, tag: str) -> dict:
+    """Item 5: Europe sites of variant ``tag`` already present in the original v2 'Asia' training table."""
+    sd = cfg["site_diagnostics"]
+    km = cfg["site_build"]["merge_radius_km"]
+    tr = read_table(cfg, cfg.repo_path(sd["original_asia_table"]))
+    eu = st[st.continent == "Europe"]
+    rr = r[r[f"site_id_{tag}"].isin(eu.site_id)]
+    same = set(rr.loc[rr.rec_id.isin(tr.site_id), f"site_id_{tag}"])
+    d = _haversine_km(rr.lat.values[:, None], rr.lon.values[:, None],
+                      tr.latitude.values[None, :], tr.longitude.values[None, :]).min(1)
+    near = set(rr.loc[d <= km, f"site_id_{tag}"])
+    lon0, lon1, lat0, lat1 = sd["original_asia_box"]
+    in_box = eu[(eu.lon >= lon0) & (eu.lon <= lon1) & (eu.lat >= lat0) & (eu.lat <= lat1)]
+    sub = eu[eu.site_id.isin(near | same)].sort_values("site_id")
+    return {"original_table": sd["original_asia_table"], "n_original_sites": int(len(tr)),
+            "n_europe_sites": int(len(eu)), "km": km,
+            "n_with_identical_record": len(same), "n_within_km": len(near),
+            "n_in_original_box": int(len(in_box)), "original_box_lon0_lon1_lat0_lat1": sd["original_asia_box"],
+            "by_country_within_km": eu[eu.site_id.isin(near)].country.value_counts().sort_index().to_dict(),
+            "sites": [{"site_id": s.site_id, "country": s.country, "lat": round(float(s.lat), 4),
+                       "lon": round(float(s.lon), 4), "identical_record": s.site_id in same,
+                       "within_km": s.site_id in near} for s in sub.itertuples()]}
+
+
 def site_diagnostics(cfg: Config) -> dict:
     cc = cfg["site_build"]["coord_check"]
+    require_outputs(cfg, "build_sites.json", [cfg.path("derived", f) for f in SITE_TABLES])
     r = read_table(cfg, cfg.path("derived", "records_v3.parquet"))
     ne_file = "ne_50m_admin_0_countries.geojson"
     verify_sha256(naturalearth_path(cfg, ne_file), cfg["sources"]["naturalearth"]["files"][ne_file])
@@ -113,6 +144,10 @@ def site_diagnostics(cfg: Config) -> dict:
                              "countries": sorted(set(rec.geo_country.dropna()) | set(rec.Country.dropna())),
                              "site_names": sorted(set(rec.Site_name.dropna().astype(str)))[:3]})
         out[f"continent_outside_box_{tag}"] = {"boxes_lon0_lon1_lat0_lat1": boxes, "n": len(rows), "sites": rows}
+    # 5. Europe test sites already in the original "Asia" training table (exploratory; no table changes)
+    for tag in cfg["site_build"]["variants"]:
+        st = read_table(cfg, cfg.path("derived", f"sites_v3_{tag}.parquet"))
+        out[f"europe_in_original_asia_table_{tag}"] = in_original_asia_table(cfg, r, st, tag)
     write_result(cfg, out, "site_diagnostics.json")
     return {k: (v if not isinstance(v, dict) else {kk: vv for kk, vv in v.items() if not isinstance(vv, list)})
             for k, v in out.items()}

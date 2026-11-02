@@ -55,8 +55,8 @@ v3 rebuilds the data from pinned public sources (SRDB, COSORE, Natural Earth, Wo
 
 | File | Read by | Purpose |
 |---|---|---|
-| `legacy/data/processed/training_features_v2.parquet` | `mshi.analysis.repro_checks`; `mshi.data.modis.modis_point_set` | NPP correlation with the original pipeline at the original sites (the 889 original site coordinates are added to the MODIS point set; not in smoke runs); E4 ablation (Phase 2). |
-| `legacy/data/processed/us_validation_features_v2.parquet` | same | same |
+| `legacy/data/processed/training_features_v2.parquet` | `mshi.analysis.repro_checks`; `mshi.data.modis.modis_point_set`; `mshi.analysis.site_diagnostics` | NPP correlation with the original pipeline at the original sites (the 889 original site coordinates are added to the MODIS point set; not in smoke runs); Europe test sites already in the original "Asia" training table (exploratory, DECISIONS F-H2); E4 ablation (Phase 2). |
+| `legacy/data/processed/us_validation_features_v2.parquet` | `mshi.analysis.repro_checks`; `mshi.data.modis.modis_point_set` | NPP correlation at the original sites (added to the MODIS point set; not in smoke runs); E4 ablation (Phase 2). |
 
 The allow-list lives in `configs/v3.yaml` (`legacy_allowlist`), with each file's SHA-256: an allow-listed
 path whose bytes change is refused like any other legacy file.

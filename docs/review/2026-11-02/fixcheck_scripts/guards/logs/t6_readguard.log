@@ -1,0 +1,22 @@
+demo columns: ['site_id', 'source', 'longitude', 'latitude', 'soc', 'nitrogen', 'phh2o', 'clay'] ... n_cols 30 source values <ArrowStringArray>
+['synthetic']
+Length: 1, dtype: str
+  refused re-saved parquet                                        ForbiddenInputError: refusing to use /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratch
+  refused re-saved parquet read with columns= (no source)         ForbiddenInputError: refusing to use /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratch
+  READ    re-saved, source column dropped                         shape=(3000, 29) source=no source col
+  READ    re-saved, source column renamed 'Source'                shape=(3000, 30) source=no source col
+  refused directory dataset of a re-saved copy                    ForbiddenInputError: refusing to use /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratch
+  refused hive-partitioned on source                              ForbiddenInputError: refusing to use /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratch
+  refused symlink -> demo                                         ForbiddenInputError: refusing to read /home/user/MSHI/legacy/data/processed/training_features_SYNTHETIC_DEMO.pa
+  refused symlink -> legacy v1 table                              ForbiddenInputError: refusing to read /home/user/MSHI/legacy/data/processed/training_features.parquet: files un
+  READ    directory dataset containing symlink -> legacy v1       shape=(615, 28) source=['cosore', 'srdb']
+  refused dataset with a symlinked SUBDIR -> legacy/data/processed ArrowInvalid: Error creating dataset. Could not read schema from '/tmp/claude-0/-home-user-MSHI/efd5d835
+  READ    plain copy of the legacy v1 table outside legacy/       shape=(615, 28) source=['cosore', 'srdb']
+  READ    relative 'legacy/...v2' (cwd=repo)                      shape=(615, 32) source=['cosore', 'srdb']
+  refused relative 'legacy/...v1' (cwd=repo)                      ForbiddenInputError: refusing to read /home/user/MSHI/legacy/data/processed/training_features.parquet: files un
+  refused relative 'legacy/...v2' (cwd=scratch)                   FileNotFoundError: /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/gua
+  refused non-existent path                                       FileNotFoundError: /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/gua
+  refused '..' traversal into legacy                              ForbiddenInputError: refusing to read /home/user/MSHI/legacy/data/processed/training_features.parquet: files un
+  refused upper-case LEGACY path (Linux: no such dir)             ForbiddenInputError: refusing to read /home/user/MSHI/LEGACY/data/processed/training_features_v2.parquet: files
+  READ    allow-listed v2 table                                   shape=(615, 32) source=['cosore', 'srdb']
+check_readable on a directory returns: /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/guards/work/t6/dataset.parquet

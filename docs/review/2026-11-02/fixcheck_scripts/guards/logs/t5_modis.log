@@ -1,0 +1,14 @@
+expected npp 620.0 expected lst_day (first composite/month) 8.17
+1. failing reads: exit 1 | status incomplete: no values written | n_failed 2 | parquet exists False | meta exists False
+   failed_reads[0]: /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/guards/work/t5/cogs/npp_2023.tif: RasterioIOError: /t
+   run_log: error: ModisIncompleteError: 2 of 29 MODIS raster reads failed after retries (first: /tmp/claude-0/-home-user-MSHI/efd5d
+   load_modis_points -> FileNotFoundError
+2. restored: exit 0 | reads 29 | npp [620.0, 620.0, 620.0] | npp_n [5, 5, 5] | lst_day [8.17] | lst_day_n [12]
+3. cache hit: exit 0 | reads 0 | probes 0 | json identical: True
+4. re-extraction parquet SHA-256 identical: True
+5. load with window_deg 0.25 -> StaleModisError
+   stage re-extracted: True
+6. 3 of 5 NPP items in the catalog: exit 0 | npp [400.0, 400.0, 400.0] | npp_n [3, 3, 3] | n_failed 0 | n_raster_reads 27 | load_modis_points accepts: True
+   0 NPP items: exit 0 | npp [nan, nan, nan] | npp_n [0, 0, 0] | missing {'lst_day': 0, 'lst_night': 0, 'npp': 3}
+7. edited parquet, meta unchanged: load_modis_points npp = [1240.0, 1240.0, 1240.0] | stage reports cache hit: True
+8. functions hashed in the cache key: False | hashed list: ['site_key', 'sinusoidal_tiles', 'scale_values', 'read_windows', 'item_datetime', 'plan_jobs', '_read_job', 'aggregate', 'hashlib']

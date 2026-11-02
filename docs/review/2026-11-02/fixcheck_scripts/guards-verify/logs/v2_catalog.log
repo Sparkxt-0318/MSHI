@@ -1,0 +1,12 @@
+[complete catalog (5 NPP years, 60 LST months)] status ok; n_raster_reads=125, n_failed_reads=0, missing={'npp': 0, 'lst_day': 0, 'lst_night': 0}, cached=None
+     load_modis_points: accepted: npp=[620.0, 620.0] npp_n=[5, 5] lst_day_n=[60, 60]
+[catalog returns 3 of 5 NPP years] status ok; n_raster_reads=123, n_failed_reads=0, missing={'npp': 0, 'lst_day': 0, 'lst_night': 0}, cached=None
+     load_modis_points: accepted: npp=[400.0, 400.0] npp_n=[3, 3] lst_day_n=[60, 60]
+[  ... same cache, catalog complete again (re-run)] status ok; n_raster_reads=123, n_failed_reads=0, missing={'lst_day': 0, 'lst_night': 0, 'npp': 0}, cached=True
+     load_modis_points: accepted: npp=[400.0, 400.0] npp_n=[3, 3] lst_day_n=[60, 60]
+[catalog returns 0 NPP items] status ok; n_raster_reads=120, n_failed_reads=0, missing={'npp': 2, 'lst_day': 0, 'lst_night': 0}, cached=None
+     load_modis_points: accepted: npp=[nan, nan] npp_n=[0, 0] lst_day_n=[60, 60]
+[catalog returns LST for 2020 only (12 of 60 months)] status ok; n_raster_reads=29, n_failed_reads=0, missing={'npp': 0, 'lst_day': 0, 'lst_night': 0}, cached=None
+     load_modis_points: accepted: npp=[620.0, 620.0] npp_n=[5, 5] lst_day_n=[12, 12]
+max_items_per_tile: 500 | datetime: 2020-01-01/2024-12-31 | MOD11A2 8-day composites per year 46 -> Terra+Aqua items in range ~ 460
+exit=0

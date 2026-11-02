@@ -70,8 +70,11 @@ manuscript under review.
 **D-P1-1 Package.** `mshi/` with one entry point `python -m mshi.run --stage all` (also `make all`).
 Stages: fetch_srdb, fetch_cosore, fetch_naturalearth, cosore_annual, build_sites, site_diagnostics,
 fetch_worldclim, fetch_soilgrids, modis_points, features, clean_test, repro_checks (+ smoke_subset in
-`--smoke` runs). Every source version, path, threshold and seed is in `configs/v3.yaml`. A stage whose
-source cannot be reached is logged as `blocked` and its dependants are skipped (never mocked).
+`--smoke` runs). Every source version, path, analysis threshold, reproduction tolerance and seed is in
+`configs/v3.yaml` (*amended 2026-11-02, R-P1-20:* the re-run deviation tolerance was a code literal and is
+now `clean_test.deviation_atol`; the code keeps only numerical slack, 1e-12 in tolerance comparisons, and
+network retry/timeout defaults). A stage whose source cannot be reached is logged as `blocked` and its
+dependants are skipped (never mocked).
 Output layout: `data/raw/` (downloads, gitignored), `data/interim/` (regenerable; gitignored),
 `data/derived/` (small committed tables), `results/` (committed JSON; `run_log.jsonl` holds the
 timestamps and run times, so result JSON files carry none). *Corrected 2026-11-02 (R-P1-14):* this entry
@@ -176,12 +179,18 @@ its hash are unchanged, no value changed, and no Europe data were used. Evidence
 new `LockedTest` run on two synthetic feature tables (real 971-site geometry, synthetic covariates and
 target; one selects OLS-TP, the other XGB/ALL, which exercises the seed spread and the permutation-importance
 AOA) give bit-identical selection tables, selected models, primary metrics, bootstrap CIs and AOA
-results; only the 19 random-forest entries differ, by ≤ 5e-16 (DEV-P1-15).
+results; only random-forest entries differ, at the 1e-16 level (*corrected 2026-11-02, R-P1-20:* this
+said "the 19 entries, by ≤ 5e-16"; the size is data-dependent, see DEV-P1-15).
 Re-runs write `results/clean_test_rerun_{qc,repo}.json` with `lock`, `_provenance` and a `vs_locked`
-block (`identical` = same model and every primary metric within 1e-9); the locked result in
-`docs/handoff/results/` stays primary and is never overwritten. `LockedTest` itself verifies the lock
-(only tests on synthetic data may opt out). The stage also refuses feature tables whose
-`results/features.json` comes from other code or config. Tests: refusal for a modified plan (also with
+block (`identical` = same model and every primary metric within `clean_test.deviation_atol` = 1e-9); the
+locked result in `docs/handoff/results/` stays primary and is never overwritten. `LockedTest` itself
+verifies the lock (only tests on synthetic data may opt out). The stage also refuses feature tables that
+are not the recorded outputs of a current `results/features.json` (other code or config, or bytes changed
+since; D-P1-17). *Amended 2026-11-02 (R-P1-20):* the lock check also requires `clean_test.variants` to
+re-run every locked result (`qc` and the plan-specified `repo` sensitivity), and the reproduction table
+reports both re-runs. These edits to the stage wrapper changed the syntax-tree pin of `clean_test.py`
+(`66368bfa…` → `31e2f191…`); the `LockedTest` class (selection, scoring, metrics, AOA) is unchanged, and
+a second pin now fixes it alone (`9487b2b4…`, identical at `b74e590`, `9e17a36` and now). Tests: refusal for a modified plan (also with
 config and sidecar re-hashed), a whitespace change, a mismatched sidecar, 22 kinds of edit to the locked
 block each with and without a re-hashed config (the refusal message never prints a replacement hash), an
 alternative `--config` file, a modified locked result; every value the plan states is compared with the
@@ -192,7 +201,10 @@ with the prototype `docs/handoff/scripts/clean_test.py`.
 *Amended 2026-11-02 (R-P1-14):* Europe n has no tolerance in the brief. It was first checked at ±2%;
 it is now **exact**, because the Europe test set is closed and any change in it is a deviation to report
 (ground rule 4). The table also has a row "re-run identical to the locked result" (DEVIATION if the
-selected model or any primary metric differs by more than 1e-9).
+selected model or any primary metric differs by more than 1e-9). *Amended 2026-11-02 (R-P1-20):* a
+second such row covers the repo-filter sensitivity re-run, and `tests/test_guards.py` holds a literal copy
+of the brief's target table (checked against `PROMPT_mshi_v3.md`), so loosening a target in the config
+fails the tests instead of only changing the table.
 
 **D-P1-11 Additions that change no reproduced number.** Records table carries extra SRDB columns
 for later phases (`srdb_row` = original CSV row index, raw coordinate strings `lat_str`/`lon_str` for
@@ -216,7 +228,8 @@ WCS (8 × global 0.05° GeoTIFF), MODIS points (handoff: LST ≈ 45 min for 1,53
 **R-P1-14 Package review (2026-11-02).** The Phase-1 package was reviewed by three independent
 reviewers (fidelity to the handoff scripts, guards and robustness, conformance to the brief), and every
 finding was then checked by an adversarial verifier, who re-ran it. Result: 27 findings, all
-confirmed (1 high, 8 medium, 18 low); no reproduced number was wrong. Confirmed **correct**: the COSORE and
+confirmed (1 high, 7 medium, 19 low; *corrected 2026-11-02, R-P1-20:* this said 8 medium and 18 low);
+no reproduced number was wrong. Confirmed **correct**: the COSORE and
 site-build ports (prototype and port produce byte-identical site tables on the same inputs), the features
 and MODIS window logic (identical on synthetic rasters, including the edge quirk), the locked-test port
 (bit-identical except random-forest noise), the config values against the prototype literals, the
@@ -226,10 +239,10 @@ All 27 are fixed in this commit; the main ones:
   on re-runs and erased the failure record (DEV-P1-16).
 - *Medium:* the lock was anchored only in the config it guards, and locked constants sat in code
   (D-P1-9); the reproduction table reported PASS from a stale file when the producing stage had just
-  failed, and a FAIL did not stop the run (D-P1-17, D-P1-18); HTTP 404/5xx and server-side 403 were
-  reported as "blocked by network policy" (D-P1-18); committed results named the pre-v3 base commit as
-  their provenance (D-P1-17); the NPP check's method is reconstructed, not the handoff's (F-P1-19).
-- *Low:* RF and MODIS outputs not bit-reproducible (DEV-P1-15/16); checksum verified after the file was
+  failed (D-P1-17); HTTP 404/5xx and server-side 403 were reported as "blocked by network policy"
+  (D-P1-18); committed results named the pre-v3 base commit as their provenance (D-P1-17).
+- *Low:* a FAIL did not stop the run (D-P1-18); the NPP check's method is reconstructed, not the
+  handoff's (F-P1-19); RF and MODIS outputs not bit-reproducible (DEV-P1-15/16); checksum verified after the file was
   moved into place, and pinned raw files not re-verified at read time (both fixed: verified before the
   move, and SRDB/Natural Earth hashes and the COSORE checkout, commit plus clean worktree, are checked by
   the stages that read them); SRDB `LICENSE` re-downloaded on every run (now hash-pinned); `git status`
@@ -243,31 +256,65 @@ All 27 are fixed in this commit; the main ones:
 scikit-learn then sums the per-tree predictions in thread-completion order, so identical fits give
 predictions differing by ~1e-16 between runs. v3 fits with `n_jobs=2` (identical forests) and predicts
 with one thread (`rf.predict_n_jobs: 1`, part of the locked block), which fixes the summation order.
-Effect: RF entries of the selection table and of `all_candidates_on_test` move by ≤ 5e-16 relative to
-the previous code; no other value changes, and OLS-TP (the locked result's model) is unaffected.
+Effect (*corrected 2026-11-02, R-P1-20*; this said "≤ 5e-16, no other value changes"): RF entries of the
+selection table and of `all_candidates_on_test` change at the 1e-16 level. The size depends on the data:
+the second review measured up to 6.7e-16 absolute on synthetic tables at the locked settings (relative
+differences are larger where an R² is near 0). If RF were the selected model, its primary metrics, seed
+spread and AOA results would change by similar amounts (up to 5.7e-14 absolute was measured). OLS-TP and
+XGB values are bit-identical, so the locked result's model (OLS-TP, CV R² 0.143 vs 0.132 for the best
+RF) and every reported number are unaffected. The previous code was not reproducible with itself on RF
+entries; the new code is.
 
-**DEV-P1-16 MODIS stage.** Differences from the prototype `modis_points_lst.py`, none of which changes a
-value when every raster read succeeds:
+**DEV-P1-16 MODIS stage** (*rewritten 2026-11-02, R-P1-20*). Differences from the prototype
+`modis_points_lst.py`. When every raster read succeeds and the catalog is complete, (1)-(5) and (7) change
+no value; (6) can change an LST mean, and only if two Terra items share the earliest date of a month:
 (1) a read still failing after its 4 attempts is retried once more in a second pass with a fresh token;
 if any read still fails the stage fails and writes no values (the prototype printed the failure and
-averaged the remaining rasters, silently changing those sites' means; `max_failed_reads: 0`);
-(2) per-site means are taken over rasters in sorted (kind, date, href) order, so they do not depend on
+averaged the remaining rasters, silently changing those sites' means). The former `max_failed_reads`
+setting was removed: any value above 0 made the stage report ok with partial means that `features` then
+refused;
+(2) the STAC search is checked before any raster is read: every tile needs one NPP item per year of
+`datetime` and an LST composite in every month, and no search may return `max_items_per_tile` items
+(possible truncation). A gap fails the stage, with the gaps listed in `results/modis_points.json`, unless
+it is listed in `sources.modis.accepted_catalog_gaps` (empty; entries only after review, with a logged
+decision). The prototype averaged whatever the catalog returned, and the v3 cache would have kept such a
+partial mean after the catalog recovered;
+(3) per-site means are taken over rasters in sorted (kind, date, href) order, so they do not depend on
 thread completion order;
-(3) the cache in `data/interim/` carries a key (SHA-256 of `sources.modis`, of the point set and of the
-extraction code); it is reused only if the key matches exactly and the cached run had no failed reads,
-a cache hit rewrites the original run's record, and `features` refuses MODIS values whose key does not
-match the current config and code;
-(4) the blob-storage host of the first COG is probed before extraction, so a policy block of that host
+(4) the cache in `data/interim/` carries a key: SHA-256 of `sources.modis`, of the point set, of the whole
+`mshi/data/modis.py` source (the first version hashed eight functions, leaving out `extract_points`), and
+the numpy, rasterio, GDAL, pyproj and PROJ versions. The sidecar also records the SHA-256 of the cached
+table. The cache is reused, and `load_modis_points` (used by `features` and the NPP check) accepts the
+table, only if the key and the table's bytes match and the cached run had no failed reads; a cache hit
+rewrites the original run's record;
+(5) the blob-storage host of the first COG is probed before extraction, so a policy block of that host
 is reported as `blocked` instead of yielding all-NaN values;
-(5) `lst.composite` is read and validated (only `first_of_month`, the handoff rule, is implemented);
 (6) LST items are ordered by (date, item id) before taking the first composite of each month; the
-prototype ordered by date only, keeping the API's order for identical dates (relevant only if the
-catalog held two Terra items with the same date).
+prototype ordered by date only, keeping the API's order for identical dates. If the catalog holds two
+Terra items on the earliest date of a month, the smaller id is used, and every such tie is listed in
+`results/modis_points.json` (`lst_same_date_ties`), so a difference from the handoff can be traced. Whether
+the real catalog has such ties is unknown here (blocked). LST enters only the C8+MODIS and ALL
+candidates; the locked results select OLS-TP, which uses no LST;
+(7) `lst.composite` is read and validated (only `first_of_month`, the handoff rule, is implemented).
 
 **D-P1-17 Provenance and stale results.** Every stage result JSON now carries `_provenance`: SHA-256 of
 the config and of the `mshi` package source. The reproduction table marks a row STALE if its result
 came from another config or code, and NOT RUN, with the reason, if the producing stage did not complete
 in the current invocation, even when an older file exists. The regression tests fail on a stale result.
+*Amended 2026-11-02 (R-P1-20):* provenance was checked per result only, so a stage run on upstream
+outputs from another config was stamped current (e.g. `make features` after a config change, without
+re-running `build_sites`). Now (a) each result also records `_outputs`, the SHA-256 of every file the
+stage wrote, and a result is current only if its config and code hashes match and every recorded output
+still has its recorded bytes; (b) every stage that reads another stage's files first calls
+`require_outputs` (the upstream result is current, records a complete run, and lists those files as its
+outputs): `build_sites` for the COSORE table, `site_diagnostics`, `modis_points` and `features` for the
+site tables, `features` for the MODIS table and every WorldClim/SoilGrids raster, `clean_test` for the
+feature tables; otherwise the stage stops with status `stale`; (c) results carry the config and code
+hashes taken when the run started, not when the result was written, so a result never claims code that
+was edited while the stage ran; (d) the raster fetches keep a `*.source.json` sidecar with the request
+that produced each file and re-fetch when the configured request (e.g. SoilGrids depth or statistic,
+WorldClim URL or pinned hash) or the file changes; the SoilGrids file name now includes depth and
+statistic.
 Each `run_log.jsonl` record carries the git commit (`+dirty` if code, config, tests, environment files
 or the handoff bundle have uncommitted or untracked changes), the config and code hashes, and the
 requested stages. `results/environment.json` is written only by full (`--stage all`) runs. The
@@ -282,7 +329,17 @@ retries); `skipped` (an upstream stage of this invocation did not complete); `er
 including HTTP 4xx other than 407/408/429 at once, HTTP 408/429/5xx or truncated transfers after
 retries, a non-TIFF SoilGrids response, a checksum mismatch, a reproduction FAIL). Exit codes: 0 all ok;
 1 any error; 2 no error but something blocked, unavailable or skipped. `repro_checks` writes the table
-and then fails if any row is FAIL, so later stages (Phases 2–4) will not run on non-reproducing inputs.
+and then fails if any row is FAIL. *Amended 2026-11-02 (R-P1-20):* (a) new status `stale` (an input
+result is not current, D-P1-17, or a reproduction row is STALE), counted in exit code 2; a table whose
+rows are all STALE used to exit 0; (b) "later stages will not run on non-reproducing inputs" was not
+enforced. Now `run()` skips every stage ordered after `repro_checks` unless `repro_checks` finished `ok`
+in the same invocation or, when it is not part of the invocation, the stored table is current and has
+no FAIL or STALE row; (c) a policy block is recognised by the tunnel status only (`Tunnel connection
+failed: 403/407` from requests, `CONNECT tunnel failed, response 403/407` from git, checked against this
+container's proxy). Before, any "403"/"407" in the message counted, so a dead proxy on a port such as
+1403 was reported as `blocked`; (d) the COSORE checkout check also refuses gitignored files (the pinned
+commit ignores `doc` and `Meta`, so a dataset directory with such a name was read but invisible to
+`git status`).
 
 **F-P1-19 The NPP reproduction check is a reconstruction `[UNVERIFIED method]`.** No handoff script
 computes "NPP r = 0.982 vs committed" (prep_log D8): `validate_features.py` compares the committed GEE
@@ -291,6 +348,41 @@ both tables, joined on `site_key`, which follows the handoff's other "r with com
 computation (`validate_features.py`), but whether the handoff used this subset, Pearson or Spearman, raw or
 log NPP, is not recorded. The row says so. prep_log D8's second number ("recovers 189 sites lost to masked
 pixels") has no tolerance in the brief and is reported as an INFO row.
+
+**R-P1-20 Second review: the fixes verified (2026-11-02).** After `b74e590`, three reviewers (fidelity,
+guards, conformance to the brief) re-ran each of the 27 fixes in sandboxes and looked for new problems in
+the fixed code; an adversarial verifier re-ran every new finding. Result: **all 27 fixes hold**; **20 new
+findings, all confirmed, all low** after verification (the transitive-provenance finding was rated medium
+by its finder). None changes a reproduced number: the site build and its tables are unchanged (byte-
+identical), and the stages concerned (rasters, MODIS, locked-test re-run) cannot run here. All 20 are fixed
+in this commit, with tests (140 tests: guards, robustness, smoke, regression):
+- MODIS cache: the key left out `extract_points`, and nothing bound the cached table's bytes, so a
+  replaced table, or one written by older code, was accepted as current → DEV-P1-16 (4);
+- MODIS catalog shortfall (a missing year or month) was accepted as complete, and cached → DEV-P1-16 (2);
+- same-date LST ties changed values without a trace, while the docs said no value changes → DEV-P1-16 (6);
+- `max_failed_reads > 0` made the stage report ok with output that `features` refused → removed;
+- provenance was not transitive (a stage on upstream outputs from another config looked current); results
+  were stamped with the code on disk at write time; rasters were not verified when read, and SoilGrids or
+  WorldClim config edits were ignored once files existed → D-P1-17 (a)-(d);
+- an all-STALE reproduction table exited 0; "later stages will not run after a FAIL" was not enforced;
+  any "403"/"407" in a proxy error counted as a policy block; gitignored files escaped the COSORE
+  worktree check → D-P1-18 (a)-(d);
+- the repo-filter re-run had no row in the table (a deviation there went unreported), and dropping it
+  from `clean_test.variants` was accepted; NPP rows said NOT RUN where STALE or FAIL was right; a re-run
+  without `vs_locked` showed NOT RUN with no note → D-P1-9, D-P1-10 and `repro_checks`;
+- reproduction targets were anchored only in the config they gate → literal test (D-P1-10); the
+  deviation tolerance was a code literal → config (D-P1-1);
+- directory datasets: members were only hash-checked (a symlinked legacy table inside a directory was
+  read) and a column projection skipped the `source` check → `read_table` refuses directories and checks
+  `source` under any projection (none of this was reachable from a pipeline call);
+- documentation: the RF effect was overstated as "≤ 5e-16, no other value changes" (DEV-P1-15, D-P1-9);
+  R-P1-14 misstated the severity counts.
+Also new: `site_diagnostics` item 5, which makes F-H2 a pipeline number. Config changes (the config hash
+changes; no reproduced number changes; the locked block and its hash do not change): removed
+`sources.modis.max_failed_reads`; added `sources.modis.accepted_catalog_gaps: []`,
+`clean_test.deviation_atol: 1.0e-9`, `site_diagnostics.original_asia_table` and `original_asia_box`;
+SoilGrids `file_pattern` is now `{var}_{depth}_{statistic}_global_0p05.tif`. Record:
+`docs/review/2026-11-02/fix_verification.md` (with the reviewers' scripts in `fixcheck_scripts/`).
 
 ## 2026-11-02 — Checkpoint 1: what in the handoff is wrong (F-H)
 
@@ -318,9 +410,13 @@ reported as a deviation, with the locked result kept primary. For exploratory an
 continent column with an explicit override table (French Guiana → South America, Canary Islands →
 Africa, Hawaii flagged). North America also includes 5 Hawaiian QC sites. Decision for the author (Q-5).
 
-**F-H2 (medium) "Europe has never been used to score any model" is not true.** About 30 of the 235
-Europe test sites (13%) were in the original 25–180° E "Asia" box tables: Estonia, Finland, Romania and
-Russia west of 60° E. 28 of them contain the identical SRDB record. The original k-fold CV
+**F-H2 (medium) "Europe has never been used to score any model" is not true.** 30 of the 236 QC Europe
+sites (12.7%; the locked test scored 235 of them) were in the original 25–180° E "Asia" training table:
+Estonia 13, Finland 8, Russia (west of 60° E) 7, Latvia 1, Romania 1. 28 of them contain the identical
+SRDB record (same CSV row); the other 2 have a record within 5 km of an original training site. These are
+exactly the Europe sites inside the old Asia box. Repo-filter variant: 38 of 284. *Pipeline numbers
+since R-P1-20* (`site_diagnostics` item 5, `results/site_diagnostics.json`; the first version of this
+entry was the critique's estimate, "about 30"). The original k-fold CV
 (`task2_sweep.py`, `item1_c2_train_fnpp.py`, `item1_c3_train_full_modis.py`, the audit's `reproduce.py`)
 had no region filter, so these rows were scored as held-out sites, and those fold scores fed the audit's
 "Asia-only selection would have picked Full+MODIS" argument. prep_log §3 itself lists the 65 European

@@ -7,10 +7,19 @@
 
 Requested stages always run in pipeline order, whatever the order on the command line. Statuses in
 results/run_log.jsonl: ``ok``; ``blocked`` (the egress proxy refused a pinned source: a network-policy
-block); ``unavailable`` (a source could not be reached); ``skipped`` (an upstream stage in this
-invocation did not complete; dependants are never mocked); ``error``.
+block); ``unavailable`` (a source could not be reached); ``stale`` (an input result is missing, from
+another config or code, or its files changed after it was written: re-run the upstream stages, e.g.
+``make all``; also used by ``repro_checks`` when a row is STALE); ``skipped`` (an upstream stage in this
+invocation did not complete, or the reproduction gate is closed; dependants are never mocked); ``error``.
 Exit code: 0 all ok; 1 any error (including a reproduction target outside tolerance); 2 no error, but
-some stage was blocked, unavailable or skipped.
+some stage was blocked, unavailable, stale or skipped.
+
+Results are stamped with the config and code hashes taken when the run started (``Config.invocation``),
+so a result never claims code that was edited while the stage ran.
+
+Reproduction gate: a stage ordered after ``repro_checks`` (later phases) runs only if ``repro_checks``
+finished ``ok`` in this invocation or, when it is not part of the invocation, if the stored
+results/reproduction_check.json is current and has no FAIL or STALE row.
 """
 from __future__ import annotations
 
@@ -23,11 +32,13 @@ from dataclasses import dataclass, field
 import numpy as np
 
 from .config import Config, load_config
-from .io import read_table, write_json, write_result, write_table
+from .io import StaleInputError, read_table, require_current, require_outputs, write_json, write_result, write_table
 from .netutil import SourceUnavailableError
 from .runlog import git_commit, package_versions, provenance, stage_timer
 
 log = logging.getLogger("mshi")
+
+GATE = "repro_checks"      # stages ordered after it need a passing reproduction table (module docstring)
 
 
 @dataclass
@@ -68,10 +79,17 @@ def _stages() -> list[Stage]:
     ]
 
 
+SITE_TABLES = ("records_v3.parquet", "sites_v3_qc.parquet", "sites_v3_repo.parquet")
+
+
 def smoke_subset(cfg: Config) -> dict:
-    """Smoke runs only: reduce both site tables to a seeded subset of ``smoke.n_sites`` sites."""
+    """Smoke runs only: reduce both site tables to a seeded subset of ``smoke.n_sites`` sites. The sandbox's
+    results/build_sites.json is re-recorded with the subset tables as its outputs, so later stages accept
+    them as current inputs."""
     if cfg.out_root is None:
         return {"skipped": "not a smoke run"}
+    tables = [cfg.path("derived", f) for f in SITE_TABLES]
+    b = require_outputs(cfg, "build_sites.json", tables)
     n, seed = cfg["smoke"]["n_sites"], cfg["smoke"]["seed"]
     out = {}
     for tag in cfg["site_build"]["variants"]:
@@ -81,57 +99,80 @@ def smoke_subset(cfg: Config) -> dict:
         sub = st.iloc[idx].reset_index(drop=True)
         write_table(sub, p)
         out[tag] = {"n": int(len(sub)), "by_continent": sub.continent.value_counts().to_dict()}
-    write_result(cfg, out, "smoke_subset.json")
+    write_result(cfg, {**b, "smoke_subset": out}, "build_sites.json", outputs=tables)
+    write_result(cfg, out, "smoke_subset.json", outputs=tables[1:])
     return out
+
+
+def _gate_status(cfg: Config, status: dict[str, str], names: list[str]) -> str:
+    """'ok' if the reproduction gate is open (module docstring), else the reason it is closed."""
+    if GATE in names:
+        return status.get(GATE, "not run")
+    try:
+        rc = require_current(cfg, "reproduction_check.json")
+    except StaleInputError as e:
+        return f"stale: {e}"
+    bad = {k: rc["summary"].get(k, 0) for k in ("FAIL", "STALE") if rc["summary"].get(k, 0)}
+    return f"results/reproduction_check.json has {bad}" if bad else "ok"
 
 
 def run(stage_names: list[str], cfg: Config, full: bool = False) -> int:
     """Run ``stage_names`` in pipeline order; see the module docstring for statuses and exit codes."""
-    all_stages = _stages()
+    all_stages = _stages()          # imports every stage module before the code hash is taken
     order = [s.name for s in all_stages]
     stages = {s.name: s for s in all_stages}
     names = sorted(dict.fromkeys(stage_names), key=order.index)
     smoke = cfg.out_root is not None
     log_path = cfg.path("results", "run_log.jsonl")
     commit = git_commit(cfg.repo_root)
-    prov = {"git_commit": commit, **provenance(cfg), "invocation": ["all"] if full else names, "smoke": smoke}
+    snapshot = provenance(cfg)
+    prov = {"git_commit": commit, **snapshot, "invocation": ["all"] if full else names, "smoke": smoke}
     if full:   # the environment record describes the last full run (stage results carry their own provenance)
-        write_json({"git_commit": commit, **provenance(cfg), "versions": package_versions()},
+        write_json({"git_commit": commit, **snapshot, "versions": package_versions()},
                    cfg.path("results", "environment.json"))
     status: dict[str, str] = {}
-    cfg.invocation = {"stages": names, "status": status}
+    cfg.invocation = {"stages": names, "status": status, "provenance": snapshot}
     errors = False
-    for name in names:
-        st = stages[name]
-        if name == "smoke_subset" and not smoke:
-            continue
-        if smoke and name in ("clean_test", "repro_checks", "site_diagnostics"):
-            log.info("%-18s not part of smoke runs (locked test and targets need the full site set)", name)
-            continue
-        absent = [d for d in st.deps if d not in names]
-        if absent and not full:
-            log.info("%-18s uses existing outputs of %s (not requested)", name, ", ".join(absent))
-        up = [d for d in st.deps if d in status and status[d] != "ok"]
-        if up:
-            msg = f"skipped: upstream {', '.join(up)} not available"
-            with stage_timer(log_path, name, prov) as rec:
-                rec["status_override"] = msg
-            status[name] = msg
-            log.warning("%-18s %s", name, msg)
-            continue
-        log.info("%-18s start", name)
-        try:
-            with stage_timer(log_path, name, prov) as rec:
-                try:
-                    rec["result"] = st.func(cfg)
-                except SourceUnavailableError as e:
-                    rec["status_override"] = f"{'blocked' if e.kind == 'proxy_denied' else 'unavailable'}: {e}"
-            status[name] = rec["status"]
-            log.info("%-18s %s (%.1fs)", name, status[name].split(":")[0].upper(), rec["seconds"])
-        except Exception as e:  # noqa: BLE001 - record and continue with independent stages
-            status[name] = f"error: {type(e).__name__}: {e}"
-            errors = True
-            log.exception("%s failed", name)
+    try:
+        for name in names:
+            st = stages[name]
+            if name == "smoke_subset" and not smoke:
+                continue
+            if smoke and name in ("clean_test", "repro_checks", "site_diagnostics"):
+                log.info("%-18s not part of smoke runs (locked test and targets need the full site set)", name)
+                continue
+            absent = [d for d in st.deps if d not in names]
+            if absent and not full:
+                log.info("%-18s uses existing outputs of %s (not requested; checked for currency)", name,
+                         ", ".join(absent))
+            up = [d for d in st.deps if d in status and status[d] != "ok"]
+            msg = f"skipped: upstream {', '.join(up)} not available" if up else None
+            if msg is None and GATE in order and order.index(name) > order.index(GATE):
+                gate = _gate_status(cfg, status, names)
+                msg = None if gate == "ok" else f"skipped: reproduction gate closed ({GATE}: {gate})"
+            if msg:
+                with stage_timer(log_path, name, prov) as rec:
+                    rec["status_override"] = msg
+                status[name] = msg
+                log.warning("%-18s %s", name, msg)
+                continue
+            log.info("%-18s start", name)
+            try:
+                with stage_timer(log_path, name, prov) as rec:
+                    try:
+                        rec["result"] = st.func(cfg)
+                    except SourceUnavailableError as e:
+                        rec["status_override"] = f"{'blocked' if e.kind == 'proxy_denied' else 'unavailable'}: {e}"
+                    except StaleInputError as e:
+                        rec["status_override"] = f"stale: {e}"
+                status[name] = rec["status"]
+                log.info("%-18s %s (%.1fs)", name, status[name].split(":")[0].upper(), rec["seconds"])
+            except Exception as e:  # noqa: BLE001 - record and continue with independent stages
+                status[name] = f"error: {type(e).__name__}: {e}"
+                errors = True
+                log.exception("%s failed", name)
+    finally:
+        cfg.invocation.pop("provenance", None)       # later direct calls stamp their own provenance
     not_ok = {k: v for k, v in status.items() if v != "ok"}
     if not_ok:
         log.warning("stages not completed: %s", not_ok)

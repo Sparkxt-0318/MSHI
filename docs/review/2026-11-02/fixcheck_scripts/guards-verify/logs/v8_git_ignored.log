@@ -1,0 +1,9 @@
+first checkout: {'commit': 'db966e7942365d58d71c9746abd73d38eb146f90', 'tree': '32db08a496dc8fdba8ce9acc76c5517bf8af10bc', 'downloaded': True}
+  pristine checkout                                          -> ACCEPTED as clean; cosore_annual dataset loop = ['d20200228_RENCHON', 'dA']
+  control: new dataset dir 'dB' (untracked)                  -> refused:  ['?? inst/extdata/datasets/dB/DESCRIPTION.txt']; delete /tmp/claude-0/-home-use; cosore_annual dataset loop = ['d20200228_RENCHON', 'dA', 'dB']
+  new dataset dir 'doc' with DESCRIPTION.txt + data/data.RDS -> ACCEPTED as clean; cosore_annual dataset loop = ['d20200228_RENCHON', 'dA', 'doc']
+  new dataset dir 'Meta' with DESCRIPTION.txt + data/data.RDS -> ACCEPTED as clean; cosore_annual dataset loop = ['Meta', 'd20200228_RENCHON', 'dA']
+  data/data.RDS added to the embargoed RENCHON dataset       -> ACCEPTED as clean; cosore_annual dataset loop = ['d20200228_RENCHON', 'dA']
+  git status --porcelain --untracked-files=all          : []
+  git status --porcelain --untracked-files=all --ignored: ['!!', 'inst/extdata/datasets/d20200228_RENCHON/data/data.RDS']
+exit=0

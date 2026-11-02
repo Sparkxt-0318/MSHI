@@ -13,7 +13,8 @@ What the lock covers (``verify_lock``; the stage refuses to run, and writes noth
    spread, AOA settings) == ``LOCKED_SHA256`` anchored here == ``clean_test.locked_sha256``; editing the
    config, or passing another ``--config``, therefore cannot change the definition;
 3. the locked result files have the SHA-256s anchored in ``LOCKED_RESULT_SHA256`` (the reference for the
-   deviation report cannot change silently).
+   deviation report cannot change silently), and ``clean_test.variants`` re-runs every one of them (the
+   plan-specified repo-filter sensitivity cannot be dropped from the re-run).
 The algorithm (selection loop and tie rule, scoring, metrics, AOA) is the code below; it is pinned by
 tests/test_guards.py::test_locked_code_unchanged (hash of its syntax tree). Changing it or any anchor is
 a deviation from the locked plan and must be logged in docs/DECISIONS.md (ground rule 4).
@@ -35,7 +36,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 
 from ..config import Config, canonical_sha256
-from ..io import read_json, read_table, result_staleness, sha256_file, write_result
+from ..io import read_json, read_table, require_outputs, sha256_file, write_result
 from ..spatial import block_folds, bootstrap_ci
 
 log = logging.getLogger("mshi.clean_test")
@@ -80,6 +81,9 @@ def verify_lock(cfg: Config) -> dict:
         if f.get("sha256") != digest or not p.is_file() or sha256_file(p) != digest:
             raise LockedPlanError(f"locked result for '{tag}' ({f.get('file')}) is missing or does not match the "
                                   f"anchored SHA-256 {digest}. Refusing to run.")
+    if sorted(ct.get("variants", [])) != sorted(LOCKED_RESULT_SHA256):
+        raise LockedPlanError(f"clean_test.variants must re-run every locked variant {sorted(LOCKED_RESULT_SHA256)}, "
+                              f"got {ct.get('variants')}. Refusing to run.")
     return {"plan": str(plan.relative_to(cfg.repo_root)), "plan_sha256": PLAN_SHA256,
             "locked_sha256": LOCKED_SHA256, "locked_results_sha256": dict(LOCKED_RESULT_SHA256)}
 
@@ -233,10 +237,10 @@ class LockedTest:
         return R
 
 
-def compare_with_locked(R: dict, locked: dict, atol: float = 1e-9) -> dict:
+def compare_with_locked(R: dict, locked: dict, atol: float) -> dict:
     """Differences between this re-run and the locked result. ``identical`` is True only if the same model
-    is selected and every primary metric agrees to ``atol``; otherwise the re-run is a deviation to report
-    (ground rule 4), and the locked result stays primary."""
+    is selected and every primary metric agrees to ``atol`` (``clean_test.deviation_atol``); otherwise the
+    re-run is a deviation to report (ground rule 4), and the locked result stays primary."""
     out = {"selected_same": (R["selected"]["set"], R["selected"]["learner"]) ==
            (locked["selected"]["set"], locked["selected"]["learner"])}
     diffs = []
@@ -255,22 +259,20 @@ def compare_with_locked(R: dict, locked: dict, atol: float = 1e-9) -> dict:
 def clean_test(cfg: Config) -> dict:
     lt = LockedTest(cfg)            # verifies the lock first; nothing is read or written if it is refused
     lr = cfg["clean_test"]["locked_results"]
-    stale = result_staleness(cfg, read_json(cfg.path("results", "features.json"))
-                             if cfg.path("results", "features.json").exists() else None)
-    if stale:
-        raise RuntimeError(f"results/features.json is {stale}; re-run stage features before the locked test")
+    variants = cfg["clean_test"]["variants"]
+    # features tables must be the recorded outputs of a current features run (StaleInputError otherwise)
+    require_outputs(cfg, "features.json", [cfg.path("interim", f"features_v3_{t}.parquet") for t in variants])
     res = {}
-    for tag in cfg["clean_test"]["variants"]:
+    for tag in variants:
         fp = cfg.path("interim", f"features_v3_{tag}.parquet")
-        if not fp.exists():
-            raise FileNotFoundError(f"{fp} missing; run stage features first")
         d = read_table(cfg, fp)
         R = lt.run(d)
         R["lock"] = lt.lock
         R["variant"] = tag
         R["note"] = ("Reproducibility re-run of the locked test. The locked, primary result is "
                      f"{lr[tag]['file']}; it is never overwritten.")
-        R["vs_locked"] = compare_with_locked(R, read_json(cfg.repo_path(lr[tag]["file"])))
+        R["vs_locked"] = compare_with_locked(R, read_json(cfg.repo_path(lr[tag]["file"])),
+                                             cfg["clean_test"]["deviation_atol"])
         write_result(cfg, R, f"clean_test_rerun_{tag}.json")
         res[tag] = {"selected": R["selected"], "primary_r2": R["primary"]["r2"], "n": R["primary"]["n"],
                     "identical_to_locked": R["vs_locked"]["identical"]}

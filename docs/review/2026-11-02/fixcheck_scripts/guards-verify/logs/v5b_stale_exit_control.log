@@ -1,0 +1,3 @@
+[control (results stamped by this config)] exit 0; summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 9, 'PASS': 17, 'STALE': 0}; console: ['INFO mshi: repro_checks       start', 'INFO mshi: repro_checks       OK (0.0s)']
+[smoke.seed edited] exit 0; summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 9, 'PASS': 0, 'STALE': 17}; console: ['INFO mshi: repro_checks       start', 'INFO mshi: repro_checks       OK (0.0s)']
+exit=0

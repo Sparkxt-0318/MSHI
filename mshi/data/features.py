@@ -5,6 +5,11 @@ Port of ``docs/handoff/scripts/features_v3.py``: nearest-pixel sampling of World
 (values <= 0 are missing; scaled to conventional units), plus the MODIS window means from
 ``modis_points`` merged on ``site_key``; lst_diurnal_range = lst_day - lst_night.
 
+Inputs are used only if they are the recorded outputs of current upstream results: the site tables
+(build_sites.json), the MODIS table (modis_points.json, plus its own cache key) and every raster
+(fetch_worldclim.json, fetch_soilgrids.json); so a raster replaced on disk, or fetched under another
+config, is refused (mshi.io.require_outputs).
+
 Feature tables go to data/interim/ (gitignored): they contain WorldClim-derived values and
 WorldClim's redistribution terms are [UNVERIFIED] (see docs/DECISIONS.md).
 """
@@ -16,7 +21,7 @@ import numpy as np
 import pandas as pd
 
 from ..config import Config
-from ..io import read_json, read_table, write_result, write_table
+from ..io import read_json, read_table, require_outputs, write_result, write_table
 from .modis import load_modis_points, site_key
 from .rasters import soilgrids_path, worldclim_path
 
@@ -53,19 +58,32 @@ def attach_features(cfg: Config, d: pd.DataFrame, modis: pd.DataFrame | None) ->
     return d
 
 
+def verify_inputs(cfg: Config) -> None:
+    """Refuse (StaleInputError) unless every input file is a recorded output of a current upstream result."""
+    tags = cfg["site_build"]["variants"]
+    require_outputs(cfg, "build_sites.json", [cfg.path("derived", f"sites_v3_{t}.parquet") for t in tags])
+    require_outputs(cfg, "modis_points.json", [cfg.path("interim", "modis_points.parquet")])
+    require_outputs(cfg, "fetch_worldclim.json",
+                    [worldclim_path(cfg, i) for i in range(1, cfg["features"]["worldclim_vars"] + 1)])
+    require_outputs(cfg, "fetch_soilgrids.json",
+                    [soilgrids_path(cfg, v) for v in cfg["sources"]["soilgrids"]["variables"]])
+
+
 def features(cfg: Config) -> dict:
     nd = cfg["features"]["site_key_round"]
+    verify_inputs(cfg)
     sites = {tag: read_table(cfg, cfg.path("derived", f"sites_v3_{tag}.parquet"))
              for tag in cfg["site_build"]["variants"]}
     keys = set().union(*(site_key(d.lat, d.lon, nd) for d in sites.values()))
-    # refuses MODIS values from another MODIS config/extraction code, from a run with failed reads,
-    # or not covering every site
+    # refuses MODIS values from another MODIS config/extraction code/libraries, from a run with failed
+    # reads, changed after the extraction, or not covering every site
     modis = load_modis_points(cfg, keys)
     res = {"modis_cache_key": read_json(cfg.path("interim", "modis_points.meta.json"))["key"]}
+    outputs = []
     for tag, d in sites.items():
         d = attach_features(cfg, d, modis)
-        write_table(d, cfg.path("interim", f"features_v3_{tag}.parquet"))
+        outputs.append(write_table(d, cfg.path("interim", f"features_v3_{tag}.parquet")))
         res[tag] = {"shape": list(d.shape),
                     "missing": d[["bio01", "bio12", "clay", "npp", "lst_day"]].isna().sum().to_dict()}
-    write_result(cfg, res, "features.json")
+    write_result(cfg, res, "features.json", outputs=outputs)
     return res

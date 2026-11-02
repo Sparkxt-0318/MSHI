@@ -3,7 +3,9 @@
 Failures are classified so that the run log says what actually happened:
 
 - ``SourceUnavailableError(kind="proxy_denied")``: the egress proxy refused the connection (CONNECT
-  answered 403/407). This is a network-policy block; the run log records the stage as ``blocked``.
+  answered 403/407: ``Tunnel connection failed: 403`` from requests, ``CONNECT tunnel failed, response
+  403`` from git). This is a network-policy block; the run log records the stage as ``blocked``. Only the
+  tunnel status is matched, so a dead proxy is ``unreachable`` even if its port or the URL contains 403.
 - ``SourceUnavailableError(kind="unreachable")``: DNS or connection failures, or timeouts, still failing
   after the retries. The run log records ``unavailable``.
 - ``DownloadError``: the server answered with an error (HTTP 4xx other than 407/408/429 at once;
@@ -16,6 +18,7 @@ from __future__ import annotations
 
 import logging
 import os
+import re
 import subprocess
 import time
 from pathlib import Path
@@ -46,9 +49,16 @@ class ChecksumMismatchError(RuntimeError):
     pass
 
 
+_TUNNEL_DENIED = re.compile(r"Tunnel connection failed: 40[37]\b")              # http.client, via requests
+_GIT_TUNNEL_DENIED = re.compile(r"CONNECT tunnel failed, response 40[37]\b")      # curl, via git
+
+
 def _is_proxy_denial(e: Exception) -> bool:
-    s = str(e)
-    return isinstance(e, requests.exceptions.ProxyError) and ("403" in s or "407" in s)
+    return isinstance(e, requests.exceptions.ProxyError) and bool(_TUNNEL_DENIED.search(str(e)))
+
+
+def _git_proxy_denial(stderr: str) -> bool:
+    return bool(_GIT_TUNNEL_DENIED.search(stderr))
 
 
 def verify_sha256(path: Path, expected: str) -> None:
@@ -147,7 +157,8 @@ def _git(*args: str, cwd: Path | None = None) -> subprocess.CompletedProcess:
 
 
 def verify_git_checkout(dest: Path, commit: str) -> dict:
-    """Raise unless ``dest`` is a checkout of ``commit`` with no modified, deleted or untracked files."""
+    """Raise unless ``dest`` is a checkout of ``commit`` with no modified, deleted, untracked or ignored
+    files (an ignored file, e.g. a dataset directory matching the repository's .gitignore, would be read)."""
     dest = Path(dest)
     head = _git("rev-parse", "HEAD", cwd=dest) if (dest / ".git").exists() else None
     if head is None or head.returncode != 0:
@@ -155,7 +166,8 @@ def verify_git_checkout(dest: Path, commit: str) -> dict:
     got = head.stdout.strip()
     if got != commit:
         raise ChecksumMismatchError(f"{dest}: HEAD {got} != pinned {commit}")
-    st = _git("--no-optional-locks", "status", "--porcelain", "--untracked-files=all", cwd=dest)
+    st = _git("--no-optional-locks", "status", "--porcelain", "--untracked-files=all", "--ignored=matching",
+              cwd=dest)
     if st.returncode != 0 or st.stdout.strip():
         changed = st.stdout.strip().splitlines()[:10]
         raise ChecksumMismatchError(f"{dest}: checkout of the pinned commit has local changes {changed}; "
@@ -182,7 +194,7 @@ def git_checkout_commit(repo_url: str, commit: str, dest: Path, retries: int = 4
             break
         last = r.stderr.strip()
         low = last.lower()
-        if "tunnel failed" in low and ("403" in low or "407" in low):
+        if _git_proxy_denial(last):
             raise SourceUnavailableError(f"{repo_url}@{commit}: blocked by proxy ({last})", kind="proxy_denied")
         if not any(k in low for k in ("could not resolve", "failed to connect", "timed out", "connection",
                                       "early eof", "rpc failed", "unexpected disconnect")):

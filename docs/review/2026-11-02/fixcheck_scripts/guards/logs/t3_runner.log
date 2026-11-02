@@ -1,0 +1,54 @@
+A. build_sites + repro_checks (fresh sandbox): exit 0
+   log: [('build_sites', 'ok'), ('repro_checks', 'ok')]
+   summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 16, 'STALE': 0}
+   environment.json written (non-full)? False
+ERROR:mshi:build_sites failed
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+    s, info = load_srdb_records(cfg)
+              ~~~~~~~~~~~~~~~~~^^^^^
+    verify_sha256(path, cfg["sources"]["srdb"]["sha256"])       # pinned bytes only
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    raise ChecksumMismatchError(f"{path}: SHA-256 {got} != pinned {expected}; delete it and re-fetch")
+mshi.netutil.ChecksumMismatchError: /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/guards/work/t3/raw/srdb/02163a72/srdb-data.csv: SHA-256 67f16edf88e6b13d0728652cfa5675269068e62394360139a788dac6ad1e4ce6 != pinned c4d7714a0954a0c9b8d4d41ae758defa8c46cb208aa50ef148e762655f892911; delete it and re-fetch
+B. corrupted SRDB, build_sites+repro_checks: exit 1
+   log: [('build_sites', 'error: ChecksumMismatchError: /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fi'), ('repro_checks', 'ok')]
+   summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 26, 'PASS': 0, 'STALE': 0}
+   first build row: ('SRDB records after repo filters', 'NOT RUN', 'build_sites: error (ChecksumMismatchError)')
+   build_sites.json unchanged: True
+C. repro_checks alone after the failed build: exit 0
+   summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 16, 'STALE': 0} | first build row: ('SRDB records after repo filters', 'PASS', '')
+ERROR:mshi:build_sites failed
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+    s, info = load_srdb_records(cfg)
+              ~~~~~~~~~~~~~~~~~^^^^^
+    verify_sha256(path, cfg["sources"]["srdb"]["sha256"])       # pinned bytes only
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    raise ChecksumMismatchError(f"{path}: SHA-256 {got} != pinned {expected}; delete it and re-fetch")
+mshi.netutil.ChecksumMismatchError: /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/guards/work/t3/raw/srdb/02163a72/srdb-data.csv: SHA-256 67f16edf88e6b13d0728652cfa5675269068e62394360139a788dac6ad1e4ce6 != pinned c4d7714a0954a0c9b8d4d41ae758defa8c46cb208aa50ef148e762655f892911; delete it and re-fetch
+D. --stage build_sites alone with corrupted SRDB: exit 1 [('build_sites', 'error: ChecksumMismatchError: /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fi')]
+ERROR:mshi:fetch_srdb failed
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+    info = download(url, srdb_csv_path(cfg), sha256=s["sha256"])
+    raise DownloadError(f"{url}: HTTP {r.status_code} {r.reason}")
+mshi.netutil.DownloadError: http://127.0.0.1:44651/missing/02163a720bc0b84bd535ad0962c85735816448e8/srdb-data.csv: HTTP 404 Not Found
+E. SRDB url 404, fetch_srdb+repro_checks: exit 1
+   log: [('fetch_srdb', 'error: DownloadError: http://127.0.0.1:44651/missing/02163a720bc0b84bd535ad0962c85735816448e8/srdb-data.csv: H'), ('repro_checks', 'ok')]
+   summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 26, 'PASS': 0, 'STALE': 0}
+   build row: ('SRDB records after repo filters', 'NOT RUN', 'fetch_srdb: error (DownloadError)')
+F0. rebuild: 0
+F. repro_checks after an unrelated config change: exit 0
+   summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 0, 'STALE': 16} ('SRDB records after repo filters', 'STALE', 'build_sites.json produced with a different config; re-run `make all`')
+ERROR:mshi:repro_checks failed
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+    raise ReproductionFailure(f"{summary['FAIL']} reproduction target(s) outside tolerance: {bad}; "
+                              "see results/reproduction_check.md. Stop and report (ground rule 2).")
+mshi.analysis.repro_checks.ReproductionFailure: 1 reproduction target(s) outside tolerance: ['SRDB records after repo filters']; see results/reproduction_check.md. Stop and report (ground rule 2).
+G. build_sites+repro_checks with a target outside tolerance: exit 1
+   log: [('repro_checks', "error: ReproductionFailure: 1 reproduction target(s) outside tolerance: ['SRDB records after repo filters']; s")]
+H. environment.json before full run: False
+   full run of a cheap subset -> exit 0 env written: True
+   env: {'code_sha256': '682cad1246354513940ea2481024ff14476136a66c723e1b2610a291e45d2f80', 'config_sha256': '72cd1591918b7bfaaa7df12e9992828f056eef9fb920f72e13a80f9b27845468', 'git_commit': '9e17a36b0be7d2f80d8250f947b2b5317caa2701', 'versions': '...'}

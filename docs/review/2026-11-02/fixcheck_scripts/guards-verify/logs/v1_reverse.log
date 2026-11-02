@@ -1,0 +1,13 @@
+[reverse] full chain under C: exit 0
+[reverse] step 1 run([build_sites, repro_checks]) exit 0
+   repro summary after step 1: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 9, 'PASS': 16, 'STALE': 1}
+   regression emulation after step 1: {'cosore_annual.json': 'FAIL (stale: produced with a different config)', 'build_sites.json': 'loaded', 'reproduction_check.json': 'loaded', 'test_record_and_site_counts(core rows)': 'pass', 'test_reproduction_table_has_no_fail': 'fail', 'test_cosore_sites': 'fail'}
+[reverse] step 2 run([cosore_annual, repro_checks]) exit 0
+   repro summary after step 2: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 9, 'PASS': 17, 'STALE': 0}
+   staleness after step 2: {'build_sites.json': None, 'cosore_annual.json': None, 'environment.json': 'no provenance recorded', 'fetch_cosore.json': 'produced with a different config', 'fetch_naturalearth.json': 'produced with a different config', 'fetch_srdb.json': 'produced with a different config', 'reproduction_check.json': None, 'site_diagnostics.json': 'produced with a different config'}
+   regression emulation after step 2: {'cosore_annual.json': 'loaded', 'build_sites.json': 'loaded', 'reproduction_check.json': 'loaded', 'test_record_and_site_counts(core rows)': 'pass', 'test_reproduction_table_has_no_fail': 'pass', 'test_cosore_sites': 'pass'}
+   build_sites.json (sans provenance) equal full-C vs reverse-C: True
+   sites_v3_qc: n 971 vs 971; sites with COSORE records 46; max |log_rs full-C - reverse-C| 9.162e-04; sites differing 46
+   sites_v3_repo: n 1225 vs 1225; sites with COSORE records 48; max |log_rs full-C - reverse-C| 9.162e-04; sites differing 48
+   cosore_annual.csv equal (full-C vs reverse-C, after step 2): True
+exit=0

@@ -1,6 +1,6 @@
 # Reviews of 2026-11-02 (Checkpoint 1)
 
-Two independent reviews were run at the end of Phase 1. Each finding was produced by one reviewer and
+Three reviews were run at the end of Phase 1 (the third checks the fixes made after the first). Each finding was produced by one reviewer and
 then checked by a second, adversarial reviewer who re-ran it; the verdicts and corrections are included.
 Summaries and decisions are in `docs/DECISIONS.md` (R-P1-14 for the package review, F-H-* for the
 handoff critique).
@@ -10,6 +10,8 @@ handoff critique).
 | `package_review.md` | Review of the v3 `mshi/` package (fidelity to the handoff scripts, guards and robustness, conformance to the brief): 27 findings, all confirmed and all fixed in the same commit (tests in `tests/test_guards.py`, `tests/test_robustness.py`). |
 | `handoff_critique.md` | Critique of the handoff scripts and results (data build, locked test, transfer/noise experiments, the plot-vs-landscape argument): 42 findings, 41 confirmed, 1 uncertain. |
 | `critique_scripts/` | The critique's scripts and small text outputs, by lens (`<lens>/` = reviewer, `verify-<lens>/` = verifier). |
+| `fix_verification.md` | Second review, after the fixes (`b74e590`): every one of the 27 fixes re-run (all hold), and 20 new findings (all confirmed, all low), each with the verifier's notes and the fix applied (DECISIONS R-P1-20). |
+| `fixcheck_scripts/` | The second review's scripts and small logs (`fidelity/`, `guards/`, `spec/` = reviewers; `verify-fidelity2/`, `guards-verify/`, `spec-adv/` = verifiers). Some copy the package or handoff scripts into a sandbox; they ran against offline fakes (local rasters, fake STAC catalogs, local servers). |
 
 Status of these files: **exploratory review material, not part of the pipeline.** The scripts were run
 once in the build container against the pinned inputs (SRDB `c4d7714a…`, COSORE v0.8.0, Natural Earth

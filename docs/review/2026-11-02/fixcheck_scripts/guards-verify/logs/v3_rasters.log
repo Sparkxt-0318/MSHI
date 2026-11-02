@@ -1,0 +1,12 @@
+(1) rasters on disk: fetch_worldclim ok (downloads 0, zip_sha256=None), fetch_soilgrids ok (downloads 0)
+    bio01 sha256 now == fetch_worldclim.json tif_sha256: False
+    features ran (shape [971, 46]); bio01 range used: 99.00..100.00 (replaced raster, no hash comparison)
+(2) SoilGrids config edited {'statistic': 'Q0.5', 'depth': '0-5cm', 'size': [3600, 1387], 'lat': [-60, 84], 'wcs_url': 'http://127.0.0.1:37311/wcs'}:
+    fetch_soilgrids ok; download calls 0; HTTP requests to the local WCS 0
+    fetch_soilgrids.json records statistic='Q0.5' depth='0-5cm' size=[3600, 1387] wcs_url=http://127.0.0.1:37311/wcs; files unchanged: True
+    file path depends on: {var}_5-15cm_global_0p05.tif + version 2.0
+(3) WorldClim url -> local server and sha256 pinned to 000…0: fetch_worldclim ok; download calls 0; HTTP 0; records url=37311/other/wc2.1_2.5m_bio.zip zip_sha256_pinned=000000… zip_sha256=None
+(4) mshi/data/features.py: mentions verify_sha256=False, read_json(fetch_=False
+(4) mshi/data/rasters.py: mentions verify_sha256=False, read_json(fetch_=False
+    io.py docstring lines 11-12: ['Other inputs (GeoJSON via geopandas, COSORE ``.RDS`` via rdata, rasters via rasterio) are not tables', 'and are checked against pinned hashes or commits by the stages that read them.']
+exit=0

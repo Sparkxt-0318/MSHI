@@ -20,7 +20,7 @@ import numpy as np
 import pandas as pd
 
 from ..config import Config
-from ..io import read_table, write_result, write_table
+from ..io import read_table, require_outputs, write_result, write_table
 from ..netutil import verify_sha256
 from ..spatial import cluster_within_km
 from .fetch import naturalearth_path, srdb_csv_path
@@ -63,7 +63,9 @@ def load_srdb_records(cfg: Config) -> tuple[pd.DataFrame, dict]:
 
 def load_cosore_records(cfg: Config) -> pd.DataFrame:
     sb = cfg["site_build"]
-    c = read_table(cfg, cfg.path("derived", "cosore_annual.csv"))
+    path = cfg.path("derived", "cosore_annual.csv")
+    require_outputs(cfg, "cosore_annual.json", [path])       # current config/code, bytes as written
+    c = read_table(cfg, path)
     c = c.rename(columns={"latitude": "lat", "longitude": "lon", "rs_annual": "rs"})
     lo, hi = sb["rs_range"]
     c = c[(c.rs >= lo) & (c.rs <= hi)].copy()
@@ -172,13 +174,14 @@ def build_sites(cfg: Config) -> dict:
     S["records_after_qc"] = int(len(qc))
     S["qc_removed_by"] = {f: int(base[f].sum()) for f in QC_FLAGS}
     S["qc_removed_any"] = int(base[QC_FLAGS].any(axis=1).sum())
+    outputs = []
     for name, rr in [("qc", qc), ("repo", base)]:
         st, site_of_record = to_sites(cfg, rr.reset_index(drop=True), name)
         r.loc[rr.index, f"site_id_{name}"] = site_of_record
-        write_table(st, cfg.path("derived", f"sites_v3_{name}.parquet"))
+        outputs.append(write_table(st, cfg.path("derived", f"sites_v3_{name}.parquet")))
         S[f"sites_{name}"] = {"n": int(len(st)), "by_continent": st.continent.value_counts().to_dict(),
                               "sites_with_2plus_records": int((st.n_rec >= 2).sum())}
-    write_table(r, cfg.path("derived", "records_v3.parquet"))
-    write_result(cfg, S, "build_sites.json")
+    outputs.append(write_table(r, cfg.path("derived", "records_v3.parquet")))
+    write_result(cfg, S, "build_sites.json", outputs=outputs)
     log.info("sites: qc %d, repo %d", S["sites_qc"]["n"], S["sites_repo"]["n"])
     return S

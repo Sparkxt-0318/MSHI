@@ -36,12 +36,36 @@ def test_demo_table_refused_by_hash_anywhere(cfg, tmp_path):
         read_table(cfg, copy_)
 
 
-def test_demo_table_refused_inside_a_directory_dataset(cfg, tmp_path):
+def test_directory_datasets_refused(cfg, tmp_path):
+    """read_table reads single files only, so no member of a directory can escape the checks (a symlinked
+    legacy table or a symlinked sub-directory inside a dataset used to be read)."""
     ds = tmp_path / "training_features.parquet"
     ds.mkdir()
     shutil.copy(cfg.repo_path(DEMO), ds / "part-0.parquet")
-    with pytest.raises(ForbiddenInputError, match="forbidden"):
+    with pytest.raises(ForbiddenInputError, match="directory"):
         read_table(cfg, ds)
+    link = tmp_path / "dirlink.parquet"
+    link.mkdir()
+    (link / "part-0.parquet").symlink_to(cfg.repo_path("legacy/data/processed/training_features.parquet"))
+    with pytest.raises(ForbiddenInputError, match="directory"):
+        read_table(cfg, link)
+    with pytest.raises(ForbiddenInputError, match="legacy"):            # the member itself: legacy rule
+        read_table(cfg, link / "part-0.parquet")
+
+
+def test_source_column_checked_even_when_the_read_projects_other_columns(cfg, tmp_path):
+    d = pd.read_parquet(cfg.repo_path(DEMO))          # direct read, test only
+    d.to_parquet(tmp_path / "resaved.parquet", index=False, compression="gzip")
+    d.to_csv(tmp_path / "export.csv", index=False)
+    with pytest.raises(ForbiddenInputError, match="synthetic"):
+        read_table(cfg, tmp_path / "resaved.parquet", columns=["longitude", "latitude"])
+    with pytest.raises(ForbiddenInputError, match="synthetic"):
+        read_table(cfg, tmp_path / "export.csv", usecols=["longitude", "latitude"])
+    with pytest.raises(ForbiddenInputError, match="synthetic"):
+        read_table(cfg, tmp_path / "export.csv", usecols=lambda c: c != "source")
+    ok = d.assign(source="srdb")[["longitude", "latitude", "source"]]
+    ok.to_parquet(tmp_path / "real.parquet", index=False)
+    assert read_table(cfg, tmp_path / "real.parquet", columns=["longitude"]).shape == (3000, 1)
 
 
 def test_reencoded_demo_table_refused_by_content(cfg, tmp_path):
@@ -99,6 +123,53 @@ def test_no_direct_table_reads_outside_io():
     offenders = [f"{f.relative_to(PKG)}:{i}" for f in PKG.rglob("*.py") if f.name != "io.py"
                  for i, line in enumerate(f.read_text().splitlines(), 1) if pat.search(line)]
     assert offenders == []
+
+
+# ---------------------------------------------------------------- reproduction targets
+
+# A literal copy of docs/handoff/PROMPT_mshi_v3.md section 4 "Reproduction targets", in the encoding of
+# docs/DECISIONS.md D-P1-10 ("exact" -> abs 0; ±x% -> rel; "±0.01 R²" -> abs 0.01 for the R² and its CI
+# bounds; Europe n, given without tolerance, -> exact). COSORE 66 comes from the handoff's prep_log
+# (sources table) and the 189 row is INFO only (prep_log D8). The targets gate Phase 1 (ground rule 2), so
+# loosening one in the config must fail this test, not only change the table.
+BRIEF_TARGETS = {
+    "srdb_repo_filter_records": {"value": 4771, "abs": 0},
+    "cosore_sites": {"value": 66, "abs": 0},
+    "records_after_coord_check": {"value": 4781, "rel": 0.01},
+    "records_after_qc": {"value": 3694, "rel": 0.01},
+    "qc_removed_by": {"f_method": {"value": 450, "rel": 0.02}, "f_quality": {"value": 260, "rel": 0.02},
+                      "f_coverage": {"value": 252, "rel": 0.02}, "f_ecosys": {"value": 243, "rel": 0.02},
+                      "f_dup": {"value": 57, "rel": 0.02}},
+    "sites_qc_by_continent": {"Asia": {"value": 387, "rel": 0.02}, "North America": {"value": 257, "rel": 0.02},
+                              "Europe": {"value": 236, "rel": 0.02}, "South America": {"value": 42, "rel": 0.02},
+                              "Africa": {"value": 26, "rel": 0.02}, "Oceania": {"value": 23, "rel": 0.02}},
+    "sites_qc_total": {"value": 971, "rel": 0.02},
+    "sites_repo_total": {"value": 1225, "rel": 0.02},
+    "locked_test": {"selected": "OLS-TP", "asia_cv_r2": {"value": 0.143, "abs": 0.01},
+                    "europe_n": {"value": 235, "abs": 0}, "europe_r2": {"value": 0.079, "abs": 0.01},
+                    "europe_ci_lo": {"value": 0.013, "abs": 0.01}, "europe_ci_hi": {"value": 0.125, "abs": 0.01}},
+    "npp_corr_original_sites": {"value": 0.982, "abs": 0.01, "n_sites": 889},
+    "npp_recovered_sites": {"value": 189, "info_only": True},
+}
+BRIEF_ROWS = [
+    "| SRDB records after repo filters | 4,771 | exact |",
+    "| Records after coordinate check / after QC | 4,781 / 3,694 | ±1% |",
+    "| QC removals: method / quality / coverage / ecosystem / duplicate | 450 / 260 / 252 / 243 / 57 | ±2% |",
+    "| QC sites by continent: Asia / N America / Europe / S America / Africa / Oceania | 387 / 257 / 236 / 42 / "
+    "26 / 23 (total 971) | ±2% |",
+    "| Repo-filter sites total | 1,225 | ±2% |",
+    "| Locked test: selected model; Asia spatial-CV R²; Europe n; Europe R² and site-bootstrap CI | OLS-TP; 0.143; "
+    "235; 0.079 [0.013, 0.125] | same model; ±0.01 R² |",
+    "| NPP correlation with the repo's committed NPP at the original 889 sites | r = 0.982 | ±0.01 |",
+]
+
+
+def test_reproduction_targets_are_the_briefs(cfg):
+    text = cfg.path("handoff", "PROMPT_mshi_v3.md").read_text()
+    for row in BRIEF_ROWS:                     # the literal copy above still matches its source
+        assert row in text, row
+    assert "reproduces exactly 66 sites" in cfg.path("handoff", "prep_log.md").read_text()
+    assert cfg["reproduction_targets"] == BRIEF_TARGETS
 
 
 # ---------------------------------------------------------------- locked plan
@@ -208,6 +279,13 @@ def test_alternative_config_file_cannot_change_the_test(cfg, tmp_path):
         verify_lock(load_config(p))
 
 
+def test_lock_refuses_dropping_a_locked_variant(cfg, tmp_path):
+    data = copy.deepcopy(cfg.data)
+    data["clean_test"]["variants"] = ["qc"]          # the plan-specified repo-filter sensitivity dropped
+    with pytest.raises(LockedPlanError, match="every locked variant"):
+        verify_lock(Config(data, source=cfg.source))
+
+
 def test_lock_refuses_modified_locked_result(cfg, tmp_path):
     data = copy.deepcopy(cfg.data)
     src = cfg.repo_path(data["clean_test"]["locked_results"]["qc"]["file"])
@@ -290,26 +368,45 @@ def test_locked_constants_match_prototype(cfg):
     assert "n_jobs=2" in src and L["rf"]["n_jobs"] == 2 and L["xgb"]["n_jobs"] == 2
 
 
-# Hash of the syntax tree (docstrings removed) of the locked-test code. If this test fails, the locked
+# Hashes of the syntax tree (docstrings removed) of the locked-test code. If a test fails, the locked
 # analysis code changed: if the change alters nothing the plan defines, record why in docs/DECISIONS.md and
 # update the pin; otherwise it is a deviation from the locked plan (ground rule 4).
-LOCKED_CODE_AST_SHA256 = "66368bfad339558031a911988b60ba714b16fd3caeef08fbf9537e3d2c0eac35"
+# - the whole of clean_test.py (anchors, lock checks, the stage wrapper) and spatial.py: updated in R-P1-20
+#   (stage wrapper: require_outputs, deviation_atol from the config, every locked variant required);
+# - the LockedTest class alone (selection, scoring, metrics, AOA): unchanged since D-P1-9.
+LOCKED_CODE_AST_SHA256 = "31e2f1916e1c19a551e66d37f239beae397ad8ab0e3c2c2a13f9c927baf78685"
+LOCKED_TEST_CLASS_AST_SHA256 = "9487b2b4a22e06f1326f58fbf008ee5de0067fc25f0263e80f7ca18952b11a66"
+
+
+def _strip_docstrings(tree):
+    for node in ast.walk(tree):
+        body = getattr(node, "body", None)
+        if (isinstance(node, (ast.Module, ast.FunctionDef, ast.ClassDef, ast.AsyncFunctionDef)) and body
+                and isinstance(body[0], ast.Expr) and isinstance(getattr(body[0], "value", None), ast.Constant)
+                and isinstance(body[0].value.value, str)):
+            node.body = body[1:] or [ast.Pass()]
+    return tree
 
 
 def _ast_digest(paths) -> str:
     h = hashlib.sha256()
     for p in paths:
-        tree = ast.parse(Path(p).read_text())
-        for node in ast.walk(tree):
-            body = getattr(node, "body", None)
-            if (isinstance(node, (ast.Module, ast.FunctionDef, ast.ClassDef, ast.AsyncFunctionDef)) and body
-                    and isinstance(body[0], ast.Expr) and isinstance(getattr(body[0], "value", None), ast.Constant)
-                    and isinstance(body[0].value.value, str)):
-                node.body = body[1:] or [ast.Pass()]
+        tree = _strip_docstrings(ast.parse(Path(p).read_text()))
         h.update(ast.dump(tree, annotate_fields=True, include_attributes=False).encode())
     return h.hexdigest()
+
+
+def _class_digest(path, name) -> str:
+    tree = _strip_docstrings(ast.parse(Path(path).read_text()))
+    node = next(n for n in tree.body if isinstance(n, ast.ClassDef) and n.name == name)
+    return hashlib.sha256(ast.dump(node, include_attributes=False).encode()).hexdigest()
 
 
 @pytest.mark.skipif(sys.version_info[:2] != (3, 13), reason="AST dumps are pinned for Python 3.13 (environment.yml)")
 def test_locked_code_unchanged():
     assert _ast_digest([PKG / "analysis" / "clean_test.py", PKG / "spatial.py"]) == LOCKED_CODE_AST_SHA256
+
+
+@pytest.mark.skipif(sys.version_info[:2] != (3, 13), reason="AST dumps are pinned for Python 3.13 (environment.yml)")
+def test_locked_computation_unchanged():
+    assert _class_digest(PKG / "analysis" / "clean_test.py", "LockedTest") == LOCKED_TEST_CLASS_AST_SHA256

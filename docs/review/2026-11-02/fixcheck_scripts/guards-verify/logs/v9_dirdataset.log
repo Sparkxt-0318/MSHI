@@ -1,0 +1,13 @@
+v1 allow-listed: False | demo hash forbidden: True
+  symlink file -> legacy v1 table                                        refused (refusing to read /home/user/MSHI/legacy/data/processed/training_featur...)
+  directory dataset whose member is a symlink -> legacy v1 table         READ (615, 28)
+  rglob members seen by check_readable: ['ds.parquet/sub'] | files hashed: []
+  dir dataset, symlinked sub-dir with byte-identical demo, no projection refused (refusing to use /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-...)
+  same, columns=['longitude','latitude']                                 READ (3000, 2)
+  control: dir dataset, demo copy as a plain member                      refused (refusing to read /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46...)
+  re-saved demo hash differs from forbidden: True
+  re-saved demo, no projection                                           refused (refusing to use /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-...)
+  re-saved demo, columns=['longitude','latitude','soc']                  READ (3000, 3)
+  read_table calls with a projection in mshi/:
+     mshi/data/sites.py:43: raw_coords = read_table(cfg, path, usecols=["Latitude", "Longitude"], dtype=str, keep_default_na=False)
+exit=0

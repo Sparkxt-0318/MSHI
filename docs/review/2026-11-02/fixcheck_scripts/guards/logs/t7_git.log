@@ -1,0 +1,20 @@
+first checkout: True
+  modified DESCRIPTION.txt                                               -> refused (5-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/guards/work/t7/co and re-fetch)
+  modified tracked data.RDS (matches *.RDS ignore)                       -> refused (5-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/guards/work/t7/co and re-fetch)
+  deleted tracked data.RDS                                               -> refused (5-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/guards/work/t7/co and re-fetch)
+  new untracked dataset dir dNEW                                         -> refused (5-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/guards/work/t7/co and re-fetch)
+  new untracked file matching '*.RDS' in dA/data                         -> accepted as clean
+  new dataset dir named 'doc' (top-level ignore pattern)                 -> accepted as clean
+  datasets the cosore_annual loop would iterate: ['dA', 'doc']
+  ignore rules at the real pinned COSORE commit (git check-ignore -v):
+    inst/extdata/datasets/doc/DESCRIPTION.txt                      -> .gitignore:2:doc	inst/extdata/datasets/doc/DESCRIPTION.txt
+    inst/extdata/datasets/Meta/data/data.RDS                       -> .gitignore:1:Meta	inst/extdata/datasets/Meta/data/data.RDS
+    inst/extdata/datasets/d20200228_RENCHON/data/extra.RDS         -> inst/extdata/datasets/d20200228_RENCHON/data/.gitignore:2:*.RDS	inst/extdata/datasets/d20200228_RENCHON/data/extra.RDS
+    inst/extdata/datasets/d20190526_MINIONS_BNZ/data/data.RDS      -> not ignored
+fetch: origin path does not exist   -> DownloadError(kind=-) sleeps=[] | pository.
+
+Please make sure you have the correct access rights
+and the repository exists.)
+fetch: commit not in origin         -> DownloadError(kind=-) sleeps=[] | 00
+fatal: remote error: upload-pack: not our ref 0000000000000000000000000000000000000000)
+fetch: host cannot be resolved      -> SourceUnavailableError(kind=proxy_denied) sleeps=[] |  unable to access 'https://nonexistent.invalid/x/y/': CONNECT tunnel failed, response 403)

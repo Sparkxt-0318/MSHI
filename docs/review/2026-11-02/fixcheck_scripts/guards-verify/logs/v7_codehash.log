@@ -1,0 +1,8 @@
+exit 0
+code hash at start of run       682cad124635
+run_log record code_sha256      682cad124635
+result _provenance.code_sha256  b50e30b2a395
+code hash on disk now           b50e30b2a395
+result_staleness(result)        None
+anything compares run_log vs result hash? (grep below)
+exit=0

@@ -1,0 +1,7 @@
+dead proxy on port 1403, url https://example.invalid/srdb-data.csv: kind=proxy_denied sleeps=[]
+    https://example.invalid/srdb-data.csv: blocked by proxy (HTTPSConnectionPool(host='example.invalid', port=443): Max retries exceeded with url: /srdb-data.csv (Caused by ProxyError('Unable to connect to proxy', NewConnectionError("HTTPSConnection(host='127.0.0.1', port=1403): Failed to establish a new connection: [Errno 111] Conn
+dead proxy on port 1407, url https://example.invalid/srdb-data.csv: kind=proxy_denied sleeps=[]
+    https://example.invalid/srdb-data.csv: blocked by proxy (HTTPSConnectionPool(host='example.invalid', port=443): Max retries exceeded with url: /srdb-data.csv (Caused by ProxyError('Unable to connect to proxy', NewConnectionError("HTTPSConnection(host='127.0.0.1', port=1407): Failed to establish a new connection: [Errno 111] Conn
+dead proxy on port 35669, url https://example.invalid/MOD11A2.A2020407_LST.tif: kind=proxy_denied sleeps=[]
+    https://example.invalid/MOD11A2.A2020407_LST.tif: blocked by proxy (HTTPSConnectionPool(host='example.invalid', port=443): Max retries exceeded with url: /MOD11A2.A2020407_LST.tif (Caused by ProxyError('Unable to connect to proxy', NewConnectionError("HTTPSConnection(host='127.0.0.1', port=35669): Failed to establish a new conne
+check_reachable via dead proxy port 1403: kind=proxy_denied

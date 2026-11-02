@@ -1,0 +1,12 @@
+proto S4 reduced2 rc=0 30s
+mshi from /home/user/MSHI/mshi/__init__.py
+new reduced2 S4_xgb.parquet: selected ALL/XGB in 23s
+mshi from /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/fidelity/ct/old_pkg/mshi/__init__.py
+old reduced2 S4_xgb.parquet: selected ALL/XGB in 24s
+proto S1_ols full rc=0 116s
+mshi from /home/user/MSHI/mshi/__init__.py
+new full S1_ols.parquet: selected TP/OLS-TP in 102s
+proto S4_xgb full rc=0 107s
+mshi from /home/user/MSHI/mshi/__init__.py
+new full S4_xgb.parquet: selected ALL/XGB in 97s
+DONE

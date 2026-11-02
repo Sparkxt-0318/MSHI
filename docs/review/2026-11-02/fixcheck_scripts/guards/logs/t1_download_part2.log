@@ -1,0 +1,24 @@
+[200 pinned] hits=1 sleeps=[] files=['ok.txt']
+    -> OK {'path': '/tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/guards/work/t1/ok.txt', 'sha256': 'ceebb2a573b5e0e36b9d7ddc62b93c353f302dbff63674b72f12478d142da651', 'downloaded': True}
+[200 pinned again (skip)] hits=1 sleeps=[] files=['ok.txt']
+    -> OK {'path': '/tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/guards/work/t1/ok.txt', 'sha256': 'ceebb2a573b5e0e36b9d7ddc62b93c353f302dbff63674b72f12478d142da651', 'downloaded': False}
+[connection refused] hits=n/a sleeps=[2, 4] files=[]
+    -> SourceUnavailableError(kind=unreachable) http://127.0.0.1:36275/x: unreachable after 3 attempts (ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=36275): Max retries exceeded with url: /x (Ca
+[checksum mismatch] hits=2 sleeps=[] files=[]
+    -> ChecksumMismatchError(kind=-) http://127.0.0.1:43421/ok: SHA-256 ceebb2a573b5e0e36b9d7ddc62b93c353f302dbff63674b72f12478d142da651 != pinned 00000000000000000000000000000000000000000000000000
+[pre-existing bad + mismatch] hits=1 sleeps=[] files=['pre.csv']
+    -> ChecksumMismatchError(kind=-) http://127.0.0.1:43421/html200: SHA-256 13a31fb5a2d1e7d6c62108d530e51f4e68a386dc30ff0aa638482f25994bd584 != pinned ceebb2a573b5e0e36b9d7ddc62b93c353f302dbff6367
+    pre.csv still at dest: True b'Record_number,Latitude\n'
+[unpinned html 200 (reuse_existing)] hits=2 sleeps=[] files=['wc.zip']
+    -> OK {'path': '/tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/guards/work/t1/wc.zip', 'sha256': '13a31fb5a2d1e7d6c62108d530e51f4e68a386dc30ff0aa638482f25994bd584', 'downloaded': True}
+[unpinned again (server now fixed)] hits=2 sleeps=[] files=['wc.zip']
+    -> OK {'path': '/tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/guards/work/t1/wc.zip', 'sha256': '13a31fb5a2d1e7d6c62108d530e51f4e68a386dc30ff0aa638482f25994bd584', 'downloaded': False}
+    wc.zip content: b'<html>Access denied by policy</html>'
+--- check_reachable
+check_reachable 404 require_ok=True: DownloadError(kind=-)
+check_reachable 404 require_ok=False: passes
+check_reachable 403 require_ok=True: DownloadError(kind=-)
+check_reachable 403 require_ok=False: passes
+check_reachable 500 require_ok=True: DownloadError(kind=-)
+check_reachable 500 require_ok=False: passes
+check_reachable refused: SourceUnavailableError unreachable

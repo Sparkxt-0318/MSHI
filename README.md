@@ -20,14 +20,18 @@ make test                                      # regression, guard, unit, robust
 With conda instead: `conda env create -f environment.yml`, activate it, then the same `make` targets
 (the Makefile uses `.venv/bin/python` if it exists, otherwise `python`). `python -m mshi.run --list`
 shows the stages. Exit codes: 0 all stages ok; 1 a stage failed or a reproduction target is outside
-its tolerance; 2 no failure, but a source was blocked or unreachable and its dependants were skipped.
+its tolerance; 2 no failure, but a source was blocked or unreachable, an input was stale (re-run the
+upstream stages, e.g. `make all`), or a stage was skipped because of one of these. Stages of later
+phases run only after a passing reproduction table (no FAIL or STALE row).
 
-Every source version, path, threshold and seed is in `configs/v3.yaml`. Downloads go to `data/raw/`
-(gitignored), regenerable intermediates to `data/interim/` (gitignored), small derived tables to
-`data/derived/`, results (JSON) and the run log to `results/`. `results/reproduction_check.md` compares
-the outputs with the handoff numbers. Each result JSON carries `_provenance` (hashes of the config and of
-the `mshi` code that produced it); a result from other code or config is reported as STALE, and the
-regression tests fail on it. `results/run_log.jsonl` is the append-only log of every stage run (times,
+Every source version, path, analysis threshold, reproduction tolerance and seed is in `configs/v3.yaml`.
+Downloads go to `data/raw/` (gitignored), regenerable intermediates to `data/interim/` (gitignored), small
+derived tables to `data/derived/`, results (JSON) and the run log to `results/`.
+`results/reproduction_check.md` compares the outputs with the handoff numbers. Each result JSON carries
+`_provenance` (hashes of the config and of the `mshi` code of the run) and `_outputs` (SHA-256 of every
+file the stage wrote). A result is current only if both hashes match and its output files are unchanged;
+a stage refuses inputs that are not the outputs of a current upstream result, the reproduction table
+reports such results as STALE, and the regression tests fail on them. `results/run_log.jsonl` is the append-only log of every stage run (times,
 statuses, commit) on the machines that produced the committed results; its `blocked` entries describe
 that machine's network policy, not a property of the pipeline.
 

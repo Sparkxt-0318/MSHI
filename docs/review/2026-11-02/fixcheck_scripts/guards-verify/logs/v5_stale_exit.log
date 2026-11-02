@@ -1,0 +1,5 @@
+[config A, run([repro_checks])] exit 0; run_log last record: stage=repro_checks status='ok'; summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 9, 'PASS': 0, 'STALE': 17}
+[smoke.seed edited, run([repro_checks])] exit 0; run_log last record: stage=repro_checks status='ok'; summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 9, 'PASS': 0, 'STALE': 17}
+[CLI python -m mshi.run --stage repro_checks --config <smoke.seed edited>] exit 0; summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 9, 'PASS': 0, 'STALE': 17}
+   distinct row notes: ['build_sites.json produced with a different config; re-run `make all`', 'cosore_annual.json produced with a different config; re-run `make all`']
+exit=0

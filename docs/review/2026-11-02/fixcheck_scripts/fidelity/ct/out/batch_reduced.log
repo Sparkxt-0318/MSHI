@@ -1,0 +1,22 @@
+mshi from /home/user/MSHI/mshi/__init__.py
+new reduced S1_ols.parquet: selected TP/OLS-TP in 13s
+mshi from /home/user/MSHI/mshi/__init__.py
+new reduced S1_ols.parquet: selected TP/OLS-TP in 13s
+mshi from /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/fidelity/ct/old_pkg/mshi/__init__.py
+old reduced S1_ols.parquet: selected TP/OLS-TP in 14s
+proto S1_ols rc=0 16s
+mshi from /home/user/MSHI/mshi/__init__.py
+new reduced S2_ml.parquet: selected ALL/RF in 14s
+mshi from /home/user/MSHI/mshi/__init__.py
+new reduced S2_ml.parquet: selected ALL/RF in 14s
+mshi from /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/fidelity/ct/old_pkg/mshi/__init__.py
+old reduced S2_ml.parquet: selected ALL/RF in 20s
+proto S2_ml rc=0 24s
+mshi from /home/user/MSHI/mshi/__init__.py
+new reduced S3_rf.parquet: selected C8+SOIL/RF in 15s
+mshi from /home/user/MSHI/mshi/__init__.py
+new reduced S3_rf.parquet: selected C8+SOIL/RF in 13s
+mshi from /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/fidelity/ct/old_pkg/mshi/__init__.py
+old reduced S3_rf.parquet: selected C8+SOIL/RF in 18s
+proto S3_rf rc=0 22s
+DONE

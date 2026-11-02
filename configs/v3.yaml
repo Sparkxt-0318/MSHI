@@ -1,6 +1,7 @@
 # MSHI v3 pipeline configuration.
-# Every source version, path, threshold and seed used by `python -m mshi.run` lives here.
-# Changing a value here changes results: log every change in docs/DECISIONS.md.
+# Every source version, path, analysis threshold, reproduction tolerance and seed used by `python -m mshi.run`
+# lives here. The code keeps only numerical slack (1e-12 in tolerance comparisons) and network retry/timeout
+# defaults. Changing a value here changes results: log every change in docs/DECISIONS.md.
 
 version: 3
 
@@ -66,7 +67,7 @@ sources:
     lon: [-180, 180]
     lat: [-56, 82.7]
     size: [7200, 2774]       # columns, rows (0.05 deg)
-    file_pattern: "{var}_5-15cm_global_0p05.tif"
+    file_pattern: "{var}_{depth}_{statistic}_global_0p05.tif"   # a new depth/statistic gets a new file
     min_valid_bytes: 10000
     # mapped units -> conventional units (as in legacy/src/features.py SOILGRIDS_SCALE)
     scale: {soc: 0.1, nitrogen: 0.01, phh2o: 0.1, clay: 0.1, sand: 0.1, silt: 0.1, bdod: 0.01, cec: 0.1}
@@ -86,8 +87,12 @@ sources:
     x_origin_m: -20015109.354
     y_origin_m: 10007554.677
     retries: 4               # attempts per raster read
-    second_pass_threads: 4   # reads still failing are retried once more, with a fresh token
-    max_failed_reads: 0      # any read still failing after that fails the stage (no partial means)
+    second_pass_threads: 4   # reads still failing are retried once more, with a fresh token; any read still
+                             # failing after that fails the stage (no partial means are written or cached)
+    # Expected catalog items that are genuinely absent (strings as reported in results/modis_points.json,
+    # e.g. "h18v04 npp 2023"). Any other gap fails the stage before a raster is read. Add an entry only
+    # after review, and log the decision in docs/DECISIONS.md.
+    accepted_catalog_gaps: []
     npp:
       collection: modis-17A3HGF-061
       item_prefix: MOD17A3HGF
@@ -167,6 +172,10 @@ site_diagnostics:                      # exploratory checks only; no table is ch
   # broad geographic boxes [lon0, lon1, lat0, lat1]; sites whose continent label falls outside are listed
   continent_boxes:
     Europe: [-32.0, 70.0, 34.0, 82.0]
+  # the original (v1/v2) "Asia" training table (allow-listed above) and its box [lon0, lon1, lat0, lat1]
+  # (prep_log section 3: 25-180 E, -10-80 N); Europe test sites already in it are listed (F-H2)
+  original_asia_table: legacy/data/processed/training_features_v2.parquet
+  original_asia_box: [25.0, 180.0, -10.0, 80.0]
 
 features:
   worldclim_vars: 19
@@ -218,7 +227,10 @@ clean_test:
     aoa_diff_seed: 7
     aoa_min_group: 10
     di_groups: 3                       # squared error by DI tercile
-  variants: [qc, repo]                 # qc = primary; repo = plan-specified sensitivity
+  variants: [qc, repo]                 # qc = primary; repo = plan-specified sensitivity (both required)
+  # a re-run is "identical" to the locked result if the same model is selected and every primary metric
+  # agrees to within this absolute tolerance; otherwise it is reported as a DEVIATION (ground rule 4)
+  deviation_atol: 1.0e-9
 
 reproduction_targets:                  # handoff values and tolerances (PROMPT section 4); checked by repro_checks and tests/
   srdb_repo_filter_records: {value: 4771, abs: 0}

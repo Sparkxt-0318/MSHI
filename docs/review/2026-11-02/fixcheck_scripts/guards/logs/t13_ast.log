@@ -1,0 +1,6 @@
+unchanged == pin: True
+tie rule < -> <=     changed text: True | pin still matches: False
+comment only         changed text: True | pin still matches: True
+docstring only       changed text: True | pin still matches: True
+sd==0 guard          changed text: True | pin still matches: False
+spatial shuffle edit pin matches: False

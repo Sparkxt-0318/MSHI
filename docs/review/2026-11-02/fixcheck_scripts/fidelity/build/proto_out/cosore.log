@@ -1,0 +1,13 @@
+Scanning 94 COSORE datasets...
+
+Processed: 66 sites with annual estimate
+  skipped (no/bad metadata):     0
+  skipped (RDS unreadable):      24
+  skipped (no qualifying port):  1
+
+Wrote /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/fidelity/build/proto_out/cosore/cosore_annual.csv
+
+Summary:
+  rs_annual: median=895  mean=949  min=118  max=2692
+  IGBP types: {'Deciduous broadleaf forest': np.int64(19), 'Evergreen needleleaf forest': np.int64(17), 'Evergreen broadleaf forest': np.int64(8), 'Open shrubland': np.int64(4), 'Grassland': np.int64(4), 'Wetland': np.int64(3), 'Mixed forests': np.int64(3), 'Woody savanna': np.int64(2)}
+  Asia: 12 sites,  US: 35 sites,  Other: 19

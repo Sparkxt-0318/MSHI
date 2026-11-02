@@ -1,0 +1,34 @@
+[200 pinned] hits=1 sleeps=[] files=['ok.txt']
+    -> OK {'path': '/tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/guards/work/t1/ok.txt', 'sha256': 'ceebb2a573b5e0e36b9d7ddc62b93c353f302dbff63674b72f12478d142da651', 'downloaded': True}
+[200 pinned again (skip)] hits=1 sleeps=[] files=['ok.txt']
+    -> OK {'path': '/tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/guards/work/t1/ok.txt', 'sha256': 'ceebb2a573b5e0e36b9d7ddc62b93c353f302dbff63674b72f12478d142da651', 'downloaded': False}
+[HTTP 404] hits=1 sleeps=[] files=[]
+    -> DownloadError(kind=-) http://127.0.0.1:34727/404: HTTP 404 Not Found
+[HTTP 403] hits=1 sleeps=[] files=[]
+    -> DownloadError(kind=-) http://127.0.0.1:34727/403: HTTP 403 Forbidden
+[HTTP 401] hits=1 sleeps=[] files=[]
+    -> DownloadError(kind=-) http://127.0.0.1:34727/401: HTTP 401 Unauthorized
+[HTTP 407] hits=1 sleeps=[] files=[]
+    -> SourceUnavailableError(kind=proxy_denied) http://127.0.0.1:34727/407: HTTP 407 from proxy
+[HTTP 429] hits=4 sleeps=[2, 4, 8] files=[]
+    -> DownloadError(kind=-) http://127.0.0.1:34727/429: failed after 4 attempts (HTTP 429)
+[HTTP 500] hits=4 sleeps=[2, 4, 8] files=[]
+    -> DownloadError(kind=-) http://127.0.0.1:34727/500: failed after 4 attempts (HTTP 500)
+[HTTP 503] hits=4 sleeps=[2, 4, 8] files=[]
+    -> DownloadError(kind=-) http://127.0.0.1:34727/503: failed after 4 attempts (HTTP 503)
+[redirect loop] hits=31 sleeps=[] files=[]
+    -> TooManyRedirects(kind=-) Exceeded 30 redirects.
+[truncated (CL>body)] hits=4 sleeps=[2, 4, 8] files=[]
+    -> DownloadError(kind=-) http://127.0.0.1:34727/trunc: failed after 4 attempts (truncated transfer (ChunkedEncodingError))
+[truncated unpinned] hits=7 sleeps=[2, 4] files=[]
+    -> DownloadError(kind=-) http://127.0.0.1:34727/trunc: failed after 3 attempts (truncated transfer (ChunkedEncodingError))
+[reset mid-body] hits=3 sleeps=[2, 4] files=[]
+    -> DownloadError(kind=-) http://127.0.0.1:34727/reset: failed after 3 attempts (truncated transfer (ChunkedEncodingError))
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/guards/scripts/t1_download.py", line 57, in <module>
+    attempt("connection refused", f"http://127.0.0.1:{port}/x", W / "refused", retries=3)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/fixcheck/guards/scripts/t1_download.py", line 45, in attempt
+    print(f"[{name}] hits={Behaviour.hits.get(url.split(base)[1].split('?')[0])} sleeps={sleeps} files={left}\n    -> {out}")
+                                              ~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range

@@ -1,0 +1,10 @@
+proxy answers CONNECT with '403 Forbidden': SourceUnavailableError kind=proxy_denied sleeps=[]
+    msg: https://example.invalid/data.csv: blocked by proxy (HTTPSConnectionPool(host='example.invalid', port=443): Max retries exceeded with url: /data.csv (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection fai
+proxy answers CONNECT with '407 Proxy Authentication Required': SourceUnavailableError kind=proxy_denied sleeps=[]
+    msg: https://example.invalid/data.csv: blocked by proxy (HTTPSConnectionPool(host='example.invalid', port=443): Max retries exceeded with url: /data.csv (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection fai
+proxy answers CONNECT with '502 Bad Gateway': SourceUnavailableError kind=unreachable sleeps=[2, 4, 8]
+    msg: https://example.invalid/data.csv: unreachable after 4 attempts (proxy connection failed (HTTPSConnectionPool(host='example.invalid', port=443): Max retries exceeded with url: /data.csv (Caused by ProxyError('Unable to connect to p
+proxy answers CONNECT with '503 Service Unavailable': SourceUnavailableError kind=unreachable sleeps=[2, 4, 8]
+    msg: https://example.invalid/data.csv: unreachable after 4 attempts (proxy connection failed (HTTPSConnectionPool(host='example.invalid', port=443): Max retries exceeded with url: /data.csv (Caused by ProxyError('Unable to connect to p
+dead proxy, 3000 attempts (retries=1): {'unreachable': 3000}
+  example unreachable: https://example.invalid/srdb-data.csv: unreachable after 1 attempts (proxy connection failed (HTTPSConnectionPool(host='example.invalid', port=443): Max retries exceeded with url: /srdb-data.csv (Caused by ProxyError('Unable to connect to proxy', NewConnectionError("HTTPSConnection(host='127.0.0.1', port=52809): Failed to establish a new connection: [Errno 111] Connection refused")))))

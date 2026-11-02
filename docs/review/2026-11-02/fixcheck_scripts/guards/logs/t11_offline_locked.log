@@ -1,0 +1,13 @@
+pinned licence sha256 matches file: True
+offline (proxy -> dead port) fetch_srdb+fetch_naturalearth+build_sites: exit 0 [('fetch_srdb', 'ok'), ('fetch_naturalearth', 'ok'), ('build_sites', 'ok')]
+offline, LICENSE missing: exit 2 [('fetch_srdb', 'unavailable: https://raw.githubusercontent.com/bpbond/srdb/02163a720bc'), ('build_sites', 'skipped: upstream fetch_srdb not available')]
+modified locked result, sha field updated: False -> refused
+modified locked result, sha field updated: True -> refused
+committed build_sites.json             staleness: None
+committed cosore_annual.json           staleness: None
+committed environment.json             staleness: no _provenance (environment record)
+committed fetch_cosore.json            staleness: None
+committed fetch_naturalearth.json      staleness: None
+committed fetch_srdb.json              staleness: None
+committed reproduction_check.json      staleness: None
+committed site_diagnostics.json        staleness: None

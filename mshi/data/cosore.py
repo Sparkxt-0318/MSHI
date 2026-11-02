@@ -18,7 +18,6 @@ import logging
 import warnings
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 
 from ..config import Config
@@ -138,7 +137,7 @@ def cosore_annual(cfg: Config) -> dict:
     out = pd.DataFrame(rows, columns=["site_id", "source", "longitude", "latitude", "rs_annual",
                                       "n_ports_qualifying", "site_name", "igbp", "primary_publication",
                                       "other_publications", "acknowledgment"])
-    write_table(out, cfg.path("derived", "cosore_annual.csv"))
+    out_path = write_table(out, cfg.path("derived", "cosore_annual.csv"))
     res = {"n_dataset_dirs": len(datasets), "n_test_skipped": len(test_skipped),
            "n_sites": int(len(out)), "n_bad_metadata": len(bad_meta), "bad_metadata": bad_meta,
            "n_unreadable_or_no_data": len(unreadable), "unreadable_or_no_data": unreadable,
@@ -148,6 +147,6 @@ def cosore_annual(cfg: Config) -> dict:
            "rs_annual_summary": out["rs_annual"].describe().round(2).to_dict() if len(out) else {},
            "rule": {"min_obs_days": p["min_obs_days"], "min_span_days": p["min_span_days"],
                     "flux_clip_umol": p["flux_clip_umol"], "factor_gC_per_umol": factor}}
-    write_result(cfg, res, "cosore_annual.json")
+    write_result(cfg, res, "cosore_annual.json", outputs=[out_path])
     log.info("COSORE: %d sites, %d datasets unreadable/no data", len(out), len(unreadable))
     return res

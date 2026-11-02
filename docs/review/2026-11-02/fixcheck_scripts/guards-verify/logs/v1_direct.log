@@ -1,0 +1,17 @@
+[direct] full chain under B: run([cosore_annual, build_sites]) exit 0
+[direct] committed state, config B: staleness before any run: ['no provenance recorded', 'produced with a different config']
+[direct] run([build_sites, repro_checks]) under B on committed (config-A) cosore_annual.csv: exit 0
+   cosore_records             full chain B    41 | partial B    66
+   records_after_qc           full chain B  3669 | partial B  3694
+   records_after_coord_check  full chain B  4756 | partial B  4781
+   sites_qc by continent full B: {'Africa': 26, 'Asia': 386, 'Europe': 236, 'North America': 256, 'Oceania': 23, 'South America': 42}
+   sites_qc by continent part B: {'Africa': 26, 'Asia': 387, 'Europe': 236, 'North America': 257, 'Oceania': 23, 'South America': 42}
+   staleness after partial run: {'build_sites.json': None, 'cosore_annual.json': 'produced with a different config', 'environment.json': 'no provenance recorded', 'fetch_cosore.json': 'produced with a different config', 'fetch_naturalearth.json': 'produced with a different config', 'fetch_srdb.json': 'produced with a different config', 'reproduction_check.json': None, 'site_diagnostics.json': 'produced with a different config'}
+   repro summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 9, 'PASS': 16, 'STALE': 1}
+      ('COSORE sites with an annual value', 66, 'STALE', 'cosore_annual.json produced with a different config; re-run ')
+      ('SRDB records after repo filters', 4771, 'PASS', '')
+      ('Records after coordinate check', 4781, 'PASS', '')
+      ('Records after QC', 3694, 'PASS', '')
+      ('QC removals: f_method', 450, 'PASS', '')
+   regression-test emulation: {'cosore_annual.json': 'FAIL (stale: produced with a different config)', 'build_sites.json': 'loaded', 'reproduction_check.json': 'loaded', 'test_record_and_site_counts(core rows)': 'pass', 'test_reproduction_table_has_no_fail': 'fail', 'test_cosore_sites': 'fail'}
+exit=0

@@ -1,0 +1,4 @@
+(1) COG host denied by the proxy: exit 2 | status: blocked: https://modiseuwest.blob.core.windows.net/: blocked by proxy (HTTPSConnectionPool(host='mod | proxy saw: ['CONNECT modiseuwest.blob.core.windows.net:443 HTTP/1.1']
+(2) fetch_worldclim/fetch_soilgrids with files present: 0
+    bio01 hash now differs from the recorded one: True
+    features: exit 0 | bio01 used: [99.]

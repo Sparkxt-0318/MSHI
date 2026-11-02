@@ -1,0 +1,14 @@
+test_NA                  verify_lock: refused  | main exit 1 | files written: ['results/run_log.jsonl']
+tie_0.05                 verify_lock: refused  | main exit 1 | files written: ['results/run_log.jsonl']
+C8+NPP_no_npp            verify_lock: refused  | main exit 1 | files written: ['results/run_log.jsonl']
+rf_predict_2             verify_lock: refused  | main exit 1 | files written: ['results/run_log.jsonl']
+anchors_too              verify_lock: refused  | main exit 1 | files written: ['results/run_log.jsonl']
+plan_sha_field           verify_lock: refused  | main exit 1 | files written: ['results/run_log.jsonl']
+locked_result_sha_field  verify_lock: refused  | main exit 1 | files written: ['results/run_log.jsonl']
+reordered sets: verify_lock passes: True | candidate order: ['ALL/XGB', 'ALL/RF', 'C8+SOIL/XGB', 'C8+SOIL/RF'] ... vs default ['C8/XGB', 'C8/RF', 'C8+NPP/XGB', 'C8+NPP/RF']
+site_build edit: verify_lock passes: True | config_sha256 differs from default: True
+/home/user/MSHI/mshi/analysis/clean_test.py:88:    """The locked analysis. ``require_lock=False`` is for tests that run the machinery with lighter,
+/home/user/MSHI/mshi/analysis/clean_test.py:91:    def __init__(self, cfg: Config, *, require_lock: bool = True):
+/home/user/MSHI/mshi/analysis/clean_test.py:92:        self.lock = verify_lock(cfg) if require_lock else None
+/home/user/MSHI/tests/test_smoke.py:80:    R = LockedTest(Config(data, source=cfg.source, out_root=tmp_path), require_lock=False).run(d)
+

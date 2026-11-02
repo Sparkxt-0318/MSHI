@@ -1,0 +1,4 @@
+['features', 'modis_points', 'build_sites'] -> ran ['build_sites', 'modis_points', 'features'] exit 0 | environment.json: False
+['repro_checks', 'clean_test', 'features', 'features'] -> ran ['features', 'clean_test', 'repro_checks'] exit 0 | environment.json: False
+modis_points errors, features requested after it on the CLI -> [('modis_points', 'error: RuntimeError: boom'), ('features', 'skipped: upstream modis_points not available')] exit 1
+--stage all -> 12 stages, exit 0 | environment.json: True | smoke_subset ran: False

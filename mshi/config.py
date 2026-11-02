@@ -29,7 +29,8 @@ class Config:
         self.source = source
         self.repo_root = REPO_ROOT
         self.out_root = Path(out_root) if out_root else None
-        # set by mshi.run.run(): {"stages": [...], "status": {stage: status}} for the current invocation
+        # set by mshi.run.run(): {"stages": [...], "status": {stage: status}, "provenance": {...}} for the
+        # current invocation ("provenance" is the config/code snapshot taken when the run started)
         self.invocation: dict | None = None
 
     def __getitem__(self, key: str) -> Any:
@@ -54,6 +55,26 @@ class Config:
     def repo_path(self, rel: str | Path) -> Path:
         p = Path(rel)
         return p if p.is_absolute() else self.repo_root / p
+
+    def root_key(self, p: str | Path) -> str:
+        """``<root>:<relative path>`` for a file under one of the ``paths`` roots (the most specific one).
+        Portable across machines and sandboxes; used to record a stage's output files in its result."""
+        p = Path(p).resolve()
+        best: tuple[str, Path] | None = None
+        for root in self._d["paths"]:
+            try:
+                rel = p.relative_to(self.path(root).resolve())
+            except ValueError:
+                continue
+            if best is None or len(rel.parts) < len(best[1].parts):
+                best = (root, rel)
+        if best is None:
+            raise ValueError(f"{p} is not under any configured path root ({sorted(self._d['paths'])})")
+        return f"{best[0]}:{best[1].as_posix()}"
+
+    def from_root_key(self, key: str) -> Path:
+        root, _, rel = key.partition(":")
+        return self.path(root, *rel.split("/"))
 
     def sha256(self) -> str:
         """Hash of the canonical JSON of the whole config (recorded with results)."""

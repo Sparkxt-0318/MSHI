@@ -1,0 +1,5 @@
+  READ    re-saved demo, columns=['longitude','latitude','soc']          shape=(3000, 3)
+  refused byte-identical demo copy, columns=['longitude','latitude']     ForbiddenInputError
+  rglob under ds sees: ['sub']
+  refused dataset -> symlinked subdir -> byte-identical demo copy        ForbiddenInputError
+  READ    same, with columns=['longitude','latitude']                    shape=(3000, 2)

@@ -1,0 +1,8 @@
+[features] step 1 (make features without make data) run([features]) exit 0
+   features.json staleness: None | build_sites.json staleness: produced with a different config
+[features] step 2 (make data stages) run([cosore_annual, build_sites, repro_checks]) exit 0
+   repro summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 9, 'PASS': 17, 'STALE': 0}
+   staleness of every result JSON: {'build_sites.json': None, 'cosore_annual.json': None, 'environment.json': 'no provenance recorded', 'features.json': None, 'fetch_cosore.json': 'produced with a different config', 'fetch_naturalearth.json': 'produced with a different config', 'fetch_srdb.json': 'produced with a different config', 'reproduction_check.json': None, 'site_diagnostics.json': 'produced with a different config'}
+   clean_test features.json check (clean_test.py:258-261) -> passes
+   features_v3_qc.log_rs vs current sites_v3_qc.log_rs: max |diff| 9.162e-04, rows differing 46 of 971
+exit=0

@@ -14,26 +14,35 @@ Planetary Computer pitfalls handled here (see PROMPT section 4):
 Known quirk kept for fidelity (see docs/DECISIONS.md): reads are ``boundless`` with fill 0, and 0 is a
 valid NPP value, so window cells beyond the edge of a MODIS tile count as NPP = 0.
 
-Differences from the prototype (none changes a value when every read succeeds; docs/DECISIONS.md):
-- a read that still fails after its retries is retried once more in a second pass with a fresh token;
-  if any read still fails, the stage FAILS and writes no values (the prototype printed the failure and
-  averaged the remaining rasters, which silently changes a site's mean);
-- per-site means are taken over rasters in a fixed (kind, date, href) order, so the result does not
-  depend on thread completion order (bit-reproducible);
-- the output is cached in data/interim/ together with a key (SHA-256 of ``sources.modis``, of the point
-  set and of the extraction code); the cache is reused only if the key matches exactly and the cached
-  run had no failed reads, and ``load_modis_points`` refuses a table whose key does not match;
-- before extracting, the blob-storage host of the first asset is probed, so a policy block of the
-  COG host is reported as ``blocked`` instead of producing all-NaN values.
+Differences from the prototype (docs/DECISIONS.md DEV-P1-16). When every read succeeds and the catalog is
+complete, items (1)-(5) change no value; (6) can change an LST mean, and only if two Terra items share the
+earliest date of a month (each such tie is recorded):
+(1) a read that still fails after its retries is retried once more in a second pass with a fresh token;
+    if any read still fails, the stage FAILS and writes no values (the prototype printed the failure and
+    averaged the remaining rasters, which silently changes a site's mean);
+(2) the STAC search is checked before any raster is read: every tile must have one NPP item per year of
+    ``datetime`` and an LST composite in every month, and no search may return ``max_items_per_tile``
+    items (possible truncation). A gap fails the stage, unless it is listed in
+    ``sources.modis.accepted_catalog_gaps`` after review (the prototype averaged whatever was returned);
+(3) per-site means are taken over rasters in a fixed (kind, date, href) order, so the result does not
+    depend on thread completion order (bit-reproducible);
+(4) the output is cached in data/interim/ with a key: SHA-256 of ``sources.modis``, of the point set, of
+    this module's source file and the versions of numpy, rasterio, GDAL, pyproj and PROJ. The sidecar also
+    records the SHA-256 of the cached table. The cache is reused, and ``load_modis_points`` accepts the
+    table, only if the key and the table's bytes match and the cached run had no failed reads;
+(5) before extracting, the blob-storage host of the first asset is probed, so a policy block of the
+    COG host is reported as ``blocked`` instead of producing all-NaN values;
+(6) LST items are sorted by (date, id), so a same-date tie is broken by id (the prototype kept the
+    API's order). Ties are counted and listed in results/modis_points.json.
 """
 from __future__ import annotations
 
 import hashlib
-import inspect
 import logging
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
 from urllib.parse import urlparse
 
 import numpy as np
@@ -41,13 +50,13 @@ import pandas as pd
 import requests
 
 from ..config import Config, canonical_sha256
-from ..io import read_json, read_table, write_json, write_result, write_table
+from ..io import read_json, read_table, require_outputs, sha256_file, write_json, write_result, write_table
 
 log = logging.getLogger("mshi.modis")
 
 
 class ModisIncompleteError(RuntimeError):
-    """Some raster reads failed after all retries; no values were written."""
+    """Some raster reads failed after all retries, or the catalog lacks expected items; no values written."""
 
 
 class StaleModisError(RuntimeError):
@@ -127,36 +136,65 @@ def item_datetime(it):
     return it.datetime or pd.Timestamp(it.properties["start_datetime"]).to_pydatetime()
 
 
-def plan_jobs(pts: pd.DataFrame, m: dict, catalog, kinds: tuple[str, ...] = ("npp", "lst")) -> list[tuple]:
+def expected_periods(m: dict) -> tuple[list[int], list[tuple[int, int]]]:
+    """Years (NPP) and (year, month)s (LST) that ``sources.modis.datetime`` asks for."""
+    start, end = (pd.Timestamp(x) for x in m["datetime"].split("/"))
+    return (list(range(start.year, end.year + 1)),
+            [(p.year, p.month) for p in pd.period_range(start, end, freq="M")])
+
+
+def plan_jobs(pts: pd.DataFrame, m: dict, catalog, kinds: tuple[str, ...] = ("npp", "lst"),
+              stats: dict | None = None) -> list[tuple]:
     """One job per (tile, raster): (kind, href, points in the tile, item datetime).
 
     NPP: every annual item in ``datetime``; LST: the first 8-day composite of each month (the only
     ``lst.composite`` rule implemented, as in the handoff). Items whose ``datetime`` is None use
     ``start_datetime``; only items whose id starts with the configured prefix (Terra) are used.
+    ``stats`` (if given) receives ``catalog_gaps`` (``"h18v04 npp 2023"``: an expected year or month with
+    no item, or ``"h18v04 lst truncated"``: the search returned ``max_items_per_tile`` items),
+    ``lst_same_date_ties`` and ``npp_duplicate_years`` (recorded, not failures).
     """
     if "lst" in kinds and m["lst"].get("composite") != "first_of_month":
         raise ValueError(f"sources.modis.lst.composite = {m['lst'].get('composite')!r} is not implemented; "
                          "only 'first_of_month' (the handoff rule) is")
+    stats = {} if stats is None else stats
+    gaps, ties, dups = (stats.setdefault(k, []) for k in ("catalog_gaps", "lst_same_date_ties",
+                                                          "npp_duplicate_years"))
+    years, months = expected_periods(m)
 
-    def items_for(col, prefix, h, v):
+    def items_for(col, prefix, h, v, tile, kind):
         q = {"modis:horizontal-tile": {"eq": int(h)}, "modis:vertical-tile": {"eq": int(v)}}
-        its = catalog.search(collections=[col], datetime=m["datetime"], query=q,
-                             max_items=m["max_items_per_tile"]).item_collection()
-        return [i for i in its if i.id.startswith(prefix)]
+        its = list(catalog.search(collections=[col], datetime=m["datetime"], query=q,
+                                  max_items=m["max_items_per_tile"]).item_collection())
+        if len(its) >= m["max_items_per_tile"]:
+            gaps.append(f"{tile} {kind} truncated")
+        return [(item_datetime(i), i.id, i) for i in its if i.id.startswith(prefix)]
 
     jobs = []
     for (h, v), sub in pts.groupby(["h", "v"]):
+        tile = f"h{int(h):02d}v{int(v):02d}"
         if "npp" in kinds:
-            for it in items_for(m["npp"]["collection"], m["npp"]["item_prefix"], h, v):
-                jobs.append(("npp", it.assets[m["npp"]["asset"]].href, sub, item_datetime(it)))
+            its = items_for(m["npp"]["collection"], m["npp"]["item_prefix"], h, v, tile, "npp")
+            got = [d.year for d, _, _ in its]
+            gaps += [f"{tile} npp {y}" for y in years if y not in got]
+            dups += [f"{tile} npp {y}" for y in sorted(set(got)) if got.count(y) > 1]
+            for d, _, it in its:
+                jobs.append(("npp", it.assets[m["npp"]["asset"]].href, sub, d))
         if "lst" in kinds:
-            firsts = {}
-            for it in sorted(items_for(m["lst"]["collection"], m["lst"]["item_prefix"], h, v),
-                             key=lambda i: (item_datetime(i), i.id)):
-                firsts.setdefault((item_datetime(it).year, item_datetime(it).month), it)
-            for it in firsts.values():
+            its = sorted(items_for(m["lst"]["collection"], m["lst"]["item_prefix"], h, v, tile, "lst"),
+                         key=lambda t: (t[0], t[1]))
+            firsts: dict = {}
+            same_date: dict = {}
+            for d, iid, it in its:
+                firsts.setdefault((d.year, d.month), (d, iid, it))
+                same_date.setdefault(d, []).append(iid)
+            gaps += [f"{tile} lst {y}-{mo:02d}" for y, mo in months if (y, mo) not in firsts]
+            for (y, mo), (d, iid, it) in sorted(firsts.items()):
+                others = [j for j in same_date[d] if j != iid]
+                if others:
+                    ties.append({"tile": tile, "month": f"{y}-{mo:02d}", "chosen": iid, "others": others})
                 for kind, asset in m["lst"]["assets"].items():
-                    jobs.append((kind, it.assets[asset].href, sub, item_datetime(it)))
+                    jobs.append((kind, it.assets[asset].href, sub, d))
     return jobs
 
 
@@ -196,7 +234,9 @@ def aggregate(results: list[tuple], site_keys, kinds: list[str]) -> pd.DataFrame
 
 def extract_points(pts: pd.DataFrame, m: dict, kinds: tuple[str, ...] = ("npp", "lst"),
                    catalog=None, tokens: TokenCache | None = None) -> tuple[pd.DataFrame, dict]:
-    """Window means for every point; returns (table, info) with info = n_jobs, n_tiles, failed_reads."""
+    """Window means for every point; returns (table, info): n_jobs, n_tiles, failed_reads, catalog_gaps
+    (not accepted; if any, nothing is read and the table is empty), accepted_catalog_gaps,
+    lst_same_date_ties, npp_duplicate_years."""
     from ..netutil import check_reachable
     pts = pts.copy()
     pts["h"], pts["v"] = sinusoidal_tiles(pts.lon.values, pts.lat.values, m)
@@ -204,8 +244,20 @@ def extract_points(pts: pd.DataFrame, m: dict, kinds: tuple[str, ...] = ("npp", 
         import pystac_client
         catalog = pystac_client.Client.open(m["stac_url"])
     tokens = tokens or TokenCache(m["sas_token_url"], m["token_refresh_s"])
-    jobs = plan_jobs(pts, m, catalog, kinds)
+    stats: dict = {}
+    jobs = plan_jobs(pts, m, catalog, kinds, stats=stats)
     n_tiles = int(pts.groupby(["h", "v"]).ngroups)
+    accepted = set(m.get("accepted_catalog_gaps") or [])
+    gaps = sorted(set(stats["catalog_gaps"]) - accepted)
+    info = {"n_jobs": len(jobs), "n_tiles": n_tiles, "catalog_gaps": gaps,
+            "accepted_catalog_gaps": sorted(set(stats["catalog_gaps"]) & accepted),
+            "lst_same_date_ties": stats["lst_same_date_ties"], "npp_duplicate_years": stats["npp_duplicate_years"]}
+    if stats["lst_same_date_ties"]:
+        log.warning("%d month(s) have two Terra LST items on the earliest date; the smaller id is used (listed "
+                    "in results/modis_points.json)", len(stats["lst_same_date_ties"]))
+    if gaps:
+        log.warning("catalog lacks %d expected item(s), e.g. %s; no raster read", len(gaps), gaps[:5])
+        return pd.DataFrame(), {**info, "failed_reads": []}
     log.info("%d points, %d tiles, %d raster reads", len(pts), n_tiles, len(jobs))
     if jobs and urlparse(jobs[0][1]).scheme in ("http", "https"):
         check_reachable(f"https://{urlparse(jobs[0][1]).netloc}/", require_ok=False)   # COG host
@@ -235,7 +287,7 @@ def extract_points(pts: pd.DataFrame, m: dict, kinds: tuple[str, ...] = ("npp", 
         log.warning("MODIS read FAILED: %s", err)
     all_kinds = (["npp"] if "npp" in kinds else []) + (list(m["lst"]["assets"]) if "lst" in kinds else [])
     out = aggregate(results, pts.site_key, all_kinds)
-    return out, {"n_jobs": len(jobs), "n_tiles": n_tiles, "failed_reads": failed}
+    return out, {**info, "failed_reads": failed}
 
 
 def modis_point_set(cfg: Config) -> pd.DataFrame:
@@ -255,17 +307,37 @@ def modis_point_set(cfg: Config) -> pd.DataFrame:
 
 
 def _extraction_code_sha256() -> str:
-    """Hash of the source of the functions that determine the extracted values."""
-    src = "".join(inspect.getsource(f) for f in (site_key, sinusoidal_tiles, scale_values, read_windows,
-                                                 item_datetime, plan_jobs, _read_job, aggregate))
-    return hashlib.sha256(src.encode()).hexdigest()
+    """SHA-256 of this module's source file: any function in it can change the extracted values."""
+    return hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+
+
+def _library_versions() -> dict:
+    import numpy
+    import pyproj
+    import rasterio
+    return {"numpy": numpy.__version__, "rasterio": rasterio.__version__, "gdal": rasterio.__gdal_version__,
+            "pyproj": pyproj.__version__, "proj": pyproj.proj_version_str}
+
+
+KEY_FIELDS = ("modis_config_sha256", "code_sha256", "libraries")     # the parts that do not depend on points
 
 
 def modis_cache_key(cfg: Config, keys) -> dict:
     return {"modis_config_sha256": canonical_sha256(cfg["sources"]["modis"]),
-            "code_sha256": _extraction_code_sha256(),
+            "code_sha256": _extraction_code_sha256(), "libraries": _library_versions(),
             "points_sha256": hashlib.sha256("\n".join(sorted(keys)).encode()).hexdigest(),
             "n_points": int(len(keys))}
+
+
+def write_modis_cache(cfg: Config, table: pd.DataFrame, key: dict, record: dict) -> Path:
+    """Write the cached table and its sidecar (key, run record, SHA-256 of the table's bytes)."""
+    out_path, meta_path = _paths(cfg)
+    meta_path.unlink(missing_ok=True)
+    table = table.copy()
+    table.attrs = {}
+    write_table(table, out_path)
+    write_json({"key": key, "record": record, "parquet_sha256": sha256_file(out_path)}, meta_path)
+    return out_path
 
 
 def _paths(cfg: Config):
@@ -273,19 +345,23 @@ def _paths(cfg: Config):
 
 
 def load_modis_points(cfg: Config, keys=None) -> pd.DataFrame:
-    """The cached MODIS table, only if it was produced by the current MODIS config and extraction code,
-    with no failed reads, and covers ``keys``; raises StaleModisError otherwise."""
+    """The cached MODIS table, only if it was produced by the current MODIS config, extraction code and
+    libraries, with no failed reads, its bytes are those recorded in the sidecar, and it covers ``keys``;
+    raises StaleModisError otherwise."""
     out_path, meta_path = _paths(cfg)
     if not (out_path.exists() and meta_path.exists()):
         raise FileNotFoundError(f"{out_path} (or its .meta.json) missing; run stage modis_points")
     meta = read_json(meta_path)
-    k = meta.get("key", {})
-    if (k.get("modis_config_sha256") != canonical_sha256(cfg["sources"]["modis"])
-            or k.get("code_sha256") != _extraction_code_sha256()):
-        raise StaleModisError(f"{out_path} was produced with a different MODIS config or extraction code; "
-                              "re-run stage modis_points")
+    k, cur = meta.get("key", {}), modis_cache_key(cfg, [])
+    bad = [f for f in KEY_FIELDS if k.get(f) != cur[f]]
+    if bad:
+        raise StaleModisError(f"{out_path} was produced with a different {', '.join(bad)} (MODIS config, "
+                              "extraction code or libraries); re-run stage modis_points")
     if meta.get("record", {}).get("n_failed_reads", 1) != 0:
         raise StaleModisError(f"{out_path} comes from a run with failed reads; re-run stage modis_points")
+    if meta.get("parquet_sha256") != sha256_file(out_path):
+        raise StaleModisError(f"{out_path} changed after the extraction (SHA-256 differs from its .meta.json); "
+                              "re-run stage modis_points")
     df = read_table(cfg, out_path)
     if keys is not None:
         miss = set(keys) - set(df.site_key)
@@ -294,33 +370,43 @@ def load_modis_points(cfg: Config, keys=None) -> pd.DataFrame:
     return df
 
 
+SITE_TABLES = ("sites_v3_qc.parquet", "sites_v3_repo.parquet")
+
+
 def modis_points(cfg: Config) -> dict:
     from ..netutil import check_reachable
     m = cfg["sources"]["modis"]
+    require_outputs(cfg, "build_sites.json", [cfg.path("derived", f) for f in SITE_TABLES])
     pts = modis_point_set(cfg)
     key = modis_cache_key(cfg, pts.site_key)
     out_path, meta_path = _paths(cfg)
     if out_path.exists() and meta_path.exists():
         meta = read_json(meta_path)
-        if meta.get("key") == key and meta.get("record", {}).get("n_failed_reads") == 0:
-            log.info("modis_points: cached extraction matches the MODIS config, code and %d points", len(pts))
-            write_result(cfg, meta["record"], "modis_points.json")     # same record as the original run
+        if (meta.get("key") == key and meta.get("record", {}).get("n_failed_reads") == 0
+                and meta.get("parquet_sha256") == sha256_file(out_path)):
+            log.info("modis_points: cached extraction matches the MODIS config, code, libraries and %d points",
+                     len(pts))
+            write_result(cfg, meta["record"], "modis_points.json", outputs=[out_path])   # same record
             return {**meta["record"], "cached": True}
     meta_path.unlink(missing_ok=True)
     check_reachable(m["stac_url"])
     check_reachable(m["sas_token_url"])
     vals, info = extract_points(pts, m)
-    failed = info["failed_reads"]
+    failed, gaps = info["failed_reads"], info["catalog_gaps"]
     rec = {"n_points": int(len(pts)), "n_tiles": info["n_tiles"], "n_raster_reads": info["n_jobs"],
            "n_failed_reads": len(failed), "failed_reads": failed[:100], "cache_key": key,
+           "n_catalog_gaps": len(gaps), "catalog_gaps": gaps[:100],
+           "accepted_catalog_gaps": info["accepted_catalog_gaps"],
+           "lst_same_date_ties": {"n": len(info["lst_same_date_ties"]), "list": info["lst_same_date_ties"][:200]},
+           "npp_duplicate_years": info["npp_duplicate_years"],
            "missing": {c: int(vals[c].isna().sum()) for c in ["npp", "lst_day", "lst_night"] if c in vals}}
-    if len(failed) > m["max_failed_reads"]:
+    if failed or gaps:
         out_path.unlink(missing_ok=True)
         write_result(cfg, {**rec, "status": "incomplete: no values written"}, "modis_points.json")
-        raise ModisIncompleteError(f"{len(failed)} of {info['n_jobs']} MODIS raster reads failed after retries "
-                                   f"(first: {failed[0]}); no values written, see results/modis_points.json")
-    vals.attrs = {}
-    write_table(vals, out_path)
-    write_json({"key": key, "record": rec}, meta_path)
-    write_result(cfg, rec, "modis_points.json")
+        why = (f"the STAC catalog lacks {len(gaps)} expected item(s) (first: {gaps[0]}); after review, list "
+               "genuine gaps in sources.modis.accepted_catalog_gaps (and log the decision)" if gaps else
+               f"{len(failed)} of {info['n_jobs']} MODIS raster reads failed after retries (first: {failed[0]})")
+        raise ModisIncompleteError(f"{why}; no values written, see results/modis_points.json")
+    write_modis_cache(cfg, vals, key, rec)
+    write_result(cfg, rec, "modis_points.json", outputs=[out_path])
     return rec

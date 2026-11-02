@@ -1,0 +1,6 @@
+run 1: {'n_points': 2, 'n_failed_reads': 0, 'n_raster_reads': 125} | extraction calls 1
+meta top-level keys: ['key', 'record'] | key fields: ['code_sha256', 'modis_config_sha256', 'n_points', 'points_sha256'] | record fields: ['cache_key', 'failed_reads', 'missing', 'n_failed_reads', 'n_points', 'n_raster_reads', 'n_tiles']
+meta mentions the parquet sha256: False
+after editing the parquet: load_modis_points accepts it, npp = [1240.0, 1240.0]
+modis_points again: {'cached': True} | extraction calls 1
+exit=0

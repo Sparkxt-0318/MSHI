@@ -67,9 +67,16 @@ def test_locked_test_rerun(cfg):
 
 
 @pytest.mark.data
-def test_locked_rerun_reported_against_locked_result(cfg):
-    ct = load_result(cfg, "clean_test_rerun_qc.json")
-    assert "vs_locked" in ct and ct["lock"]["locked_sha256"] == cfg["clean_test"]["locked_sha256"]
+@pytest.mark.parametrize("variant", ["qc", "repo"])
+def test_locked_rerun_reported_against_locked_result(cfg, variant):
+    """Both re-runs (primary and the plan-specified repo-filter sensitivity) carry a deviation block against
+    their hash-anchored locked result; the table reports PASS (identical) or DEVIATION, never silence."""
+    ct = load_result(cfg, f"clean_test_rerun_{variant}.json")
+    assert isinstance(ct["vs_locked"]["identical"], bool) and ct["lock"]["locked_sha256"] == cfg["clean_test"]["locked_sha256"]
+    rows = {r["quantity"]: r for r in load_result(cfg, "reproduction_check.json")["rows"]}
+    name = ("Locked test: re-run identical to the locked result" if variant == "qc" else
+            "Locked test (repo-filter sensitivity): re-run identical to the locked result")
+    assert rows[name]["status"] == ("PASS" if ct["vs_locked"]["identical"] else "DEVIATION")
 
 
 @pytest.mark.data
@@ -80,6 +87,16 @@ def test_npp_correlation(cfg):
     t = cfg["reproduction_targets"]["npp_corr_original_sites"]
     _check(rc["npp_check"]["pearson_r"], t, "NPP r")
     assert rc["npp_check"]["n_original_sites"] == t["n_sites"]
+
+
+@pytest.mark.data
+def test_europe_sites_in_the_original_asia_table(cfg):
+    """The numbers quoted in docs/DECISIONS.md F-H2 come from the pipeline (site_diagnostics item 5)."""
+    d = load_result(cfg, "site_diagnostics.json")
+    qc, repo = d["europe_in_original_asia_table_qc"], d["europe_in_original_asia_table_repo"]
+    assert (qc["n_europe_sites"], qc["n_within_km"], qc["n_with_identical_record"], qc["n_in_original_box"]) == (236, 30, 28, 30)
+    assert qc["by_country_within_km"] == {"Estonia": 13, "Finland": 8, "Latvia": 1, "Romania": 1, "Russia": 7}
+    assert (repo["n_europe_sites"], repo["n_within_km"], repo["n_with_identical_record"]) == (284, 38, 38)
 
 
 @pytest.mark.data
@@ -102,7 +119,10 @@ def test_fresh_rebuild_matches_committed_tables(cfg, tmp_path):
     S = build_sites(sand)
     committed = json.loads(cfg.path("results", "build_sites.json").read_text())
     committed.pop("_provenance", None)
+    recorded = committed.pop("_outputs")
     assert json.loads(json.dumps(S)) == committed
+    fresh = json.loads(sand.path("results", "build_sites.json").read_text())["_outputs"]
+    assert fresh == recorded                       # byte-identical tables (same SHA-256)
     for name in ["cosore_annual.csv", "sites_v3_qc.parquet", "sites_v3_repo.parquet", "records_v3.parquet"]:
         a, b = sand.path("derived", name), cfg.path("derived", name)
         rd = pd.read_csv if name.endswith(".csv") else pd.read_parquet
