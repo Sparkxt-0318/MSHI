@@ -494,7 +494,12 @@ Config changes (the config hash changes; the locked block and its hash do not): 
 `clean_test.py` changed (D-P1-9); the `LockedTest` pin did not. Record:
 `docs/review/2026-11-02/fix_verification_3.md` (scripts in `fixcheck3_scripts/`). Results regenerated from
 the clean commit `7f7263c` (V-P1-13): the same 17 PASS and 10 NOT RUN; 171 tests, 167 passed, 4 skipped
-(the locked-test re-runs and the NPP check, which need the blocked sources). Reviews stop here for
+(the locked-test re-runs and the NPP check, which need the blocked sources). Line endings, checked after
+the commit: a fresh clone of `d550318` made with `core.autocrlf=true` has no CR byte in the hashed files
+(code, plan, reproduction table, COSORE table), all 7 committed results are current, the lock verifies,
+and the test suite gives 165 passed and 6 skipped (the 4 above, and 2 that need `data/raw`, which a clone
+lacks); a fresh clone of `de236d0` made the same way has CRLF in those files, 0 of 7 results current, and
+the lock refuses. Reviews stop here for
 Checkpoint 1: the three rounds found 27, 20 and 18 problems, of falling severity (1 high, 7 medium and 19
 low; then 20 low; then 18 low), none of which changed a reproduced number; the code that cannot run here
 (rasters, MODIS, the locked-test re-run on real features) remains the main risk until the sources are
