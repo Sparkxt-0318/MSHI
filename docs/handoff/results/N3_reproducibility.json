@@ -1,0 +1,156 @@
+{
+ "qc": {
+  "sites_with_2plus_studies": 206,
+  "same_study": {
+   "n_pairs": 8422,
+   "semivar": 0.0728,
+   "ci": [
+    0.069,
+    0.0772
+   ],
+   "typical_pct_diff": 46.5
+  },
+  "diff_study": {
+   "n_pairs": 11056,
+   "semivar": 0.1357,
+   "ci": [
+    0.1307,
+    0.1406
+   ],
+   "typical_pct_diff": 68.4
+  },
+  "diff_study_same_year": {
+   "n_pairs": 846,
+   "semivar": 0.1423,
+   "ci": [
+    0.1207,
+    0.166
+   ],
+   "typical_pct_diff": 70.5
+  },
+  "diff_study_same_method": {
+   "n_pairs": 9121,
+   "semivar": 0.14,
+   "ci": [
+    0.1343,
+    0.1454
+   ],
+   "typical_pct_diff": 69.7
+  },
+  "diff_study_same_year_same_method_same_ecosystem": {
+   "n_pairs": 564,
+   "semivar": 0.0977,
+   "ci": [
+    0.0791,
+    0.1187
+   ],
+   "typical_pct_diff": 55.6
+  },
+  "same_study_diff_year": {
+   "n_pairs": 4845,
+   "semivar": 0.0648,
+   "ci": [
+    0.0607,
+    0.0686
+   ],
+   "typical_pct_diff": 43.3
+  },
+  "same_study_same_year": {
+   "n_pairs": 3577,
+   "semivar": 0.0837,
+   "ci": [
+    0.0762,
+    0.0917
+   ],
+   "typical_pct_diff": 50.6
+  },
+  "variance_components": {
+   "site": 0.2926,
+   "study_within_site": 0.0704,
+   "record": 0.0684,
+   "share_site": 0.678,
+   "share_study": 0.163,
+   "share_record": 0.159,
+   "ceiling_independent_study": 0.678,
+   "ceiling_same_study": 0.841
+  },
+  "total_var_logrs_sites": 0.3975
+ },
+ "repo": {
+  "sites_with_2plus_studies": 268,
+  "same_study": {
+   "n_pairs": 15061,
+   "semivar": 0.0674,
+   "ci": [
+    0.0645,
+    0.0706
+   ],
+   "typical_pct_diff": 44.4
+  },
+  "diff_study": {
+   "n_pairs": 18360,
+   "semivar": 0.1328,
+   "ci": [
+    0.129,
+    0.1373
+   ],
+   "typical_pct_diff": 67.4
+  },
+  "diff_study_same_year": {
+   "n_pairs": 1193,
+   "semivar": 0.1345,
+   "ci": [
+    0.1166,
+    0.1529
+   ],
+   "typical_pct_diff": 68.0
+  },
+  "diff_study_same_method": {
+   "n_pairs": 15197,
+   "semivar": 0.1304,
+   "ci": [
+    0.1255,
+    0.1353
+   ],
+   "typical_pct_diff": 66.7
+  },
+  "diff_study_same_year_same_method_same_ecosystem": {
+   "n_pairs": 778,
+   "semivar": 0.0893,
+   "ci": [
+    0.0747,
+    0.1058
+   ],
+   "typical_pct_diff": 52.6
+  },
+  "same_study_diff_year": {
+   "n_pairs": 9813,
+   "semivar": 0.0536,
+   "ci": [
+    0.051,
+    0.0564
+   ],
+   "typical_pct_diff": 38.7
+  },
+  "same_study_same_year": {
+   "n_pairs": 5248,
+   "semivar": 0.0934,
+   "ci": [
+    0.0866,
+    0.0999
+   ],
+   "typical_pct_diff": 54.1
+  },
+  "variance_components": {
+   "site": 0.3059,
+   "study_within_site": 0.1082,
+   "record": 0.0766,
+   "share_site": 0.623,
+   "share_study": 0.22,
+   "share_record": 0.156,
+   "ceiling_independent_study": 0.623,
+   "ceiling_same_study": 0.844
+  },
+  "total_var_logrs_sites": 0.4585
+ }
+}

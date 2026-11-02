@@ -1,0 +1,63 @@
+{
+ "n_sites": {
+  "Asia": 301,
+  "NA": 165
+ },
+ "Q1": {
+  "Asia": {
+   "median_rank": 0.53,
+   "median_rank_ci": [
+    0.486,
+    0.596
+   ],
+   "frac_above_peer_median": 0.538,
+   "site_npp_over_peer_median_ratio": 1.015,
+   "site_forest_frac": 0.352,
+   "peer_forest_frac": 0.285,
+   "median_peer_dist_sd": 0.342
+  },
+  "NA": {
+   "median_rank": 0.572,
+   "median_rank_ci": [
+    0.52,
+    0.646
+   ],
+   "frac_above_peer_median": 0.606,
+   "site_npp_over_peer_median_ratio": 1.017,
+   "site_forest_frac": 0.309,
+   "peer_forest_frac": 0.279,
+   "median_peer_dist_sd": 0.209
+  }
+ },
+ "Q2_lnNPP_slope": {
+  "coef": 0.246,
+  "ci": [
+   0.09,
+   0.402
+  ],
+  "p": 0.0019906917792532615,
+  "n": 466
+ },
+ "Q2_npp_rank_slope": {
+  "coef": 0.143,
+  "ci": [
+   -0.05,
+   0.337
+  ],
+  "p": 0.14570659029823044
+ },
+ "Q3_upscaled_totals_vegetated_footprint": {
+  "Asia": {
+   "cells": 19626,
+   "climate_only_PgC": 32.23,
+   "climate_plus_landscape_NPP_PgC": 31.29,
+   "inflation_pct": 3.0
+  },
+  "NA": {
+   "cells": 4186,
+   "climate_only_PgC": 7.56,
+   "climate_plus_landscape_NPP_PgC": 7.45,
+   "inflation_pct": 1.6
+  }
+ }
+}

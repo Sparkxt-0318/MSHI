@@ -1,0 +1,198 @@
+{
+ "srdb_rows": 14169,
+ "after_repo_filters": 4771,
+ "manipulation_values_kept": {
+  "NA": 4771
+ },
+ "n_srdb_sites": 858,
+ "index_matched_with_same_coords": 858,
+ "rs_value_matches": 858,
+ "Meas_method": {
+  "asia": {
+   "IRGA": 432,
+   "Gas chromatography": 93,
+   "Alkali absorption": 59,
+   "NA": 9,
+   "Soda lime": 5,
+   "Gradient": 3,
+   "Unknown": 2,
+   "Gas chromatograph": 1,
+   "Mass spectrometer": 1
+  },
+  "us": {
+   "IRGA": 182,
+   "Gas chromatography": 30,
+   "Alkali absorption": 27,
+   "NA": 4,
+   "Gradient": 4,
+   "Equation": 2,
+   "Unknown": 2,
+   "Isotope": 1,
+   "EC": 1
+  }
+ },
+ "Quality_flag": {
+  "asia": {
+   "NA": 491,
+   "Q01": 66,
+   "Q10": 12,
+   "Q03": 9,
+   "Q11": 7,
+   "Q1": 6,
+   "Q02": 4,
+   "Q16": 3,
+   "Q03,Q10": 2,
+   "Q03,Q10,Q16": 1,
+   "Q01,Q03": 1,
+   "Q11,Q12": 1
+  },
+  "us": {
+   "NA": 185,
+   "Q01": 46,
+   "Q02": 6,
+   "Q16": 5,
+   "Q10": 3,
+   "Q11": 3,
+   "Q03": 3,
+   "Q03,Q10": 1,
+   "Q01,Q10": 1
+  }
+ },
+ "Ecosystem_type": {
+  "asia": {
+   "Forest": 411,
+   "Grassland": 80,
+   "Agriculture": 64,
+   "Wetland": 29,
+   "Shrubland": 9,
+   "Desert": 6,
+   "Urban": 4,
+   "Savanna": 2
+  },
+  "us": {
+   "Forest": 161,
+   "Grassland": 42,
+   "Agriculture": 21,
+   "Wetland": 12,
+   "Desert": 12,
+   "Shrubland": 3,
+   "Savanna": 2
+  }
+ },
+ "Ecosystem_state": {
+  "asia": {
+   "Managed": 268,
+   "Natural": 230,
+   "Unmanaged": 101,
+   "NA": 6
+  },
+  "us": {
+   "Natural": 145,
+   "Managed": 74,
+   "Unmanaged": 34
+  }
+ },
+ "Biome": {
+  "asia": {
+   "Temperate": 276,
+   "Subtropical": 138,
+   "Tropical": 116,
+   "Boreal": 51,
+   "NA": 11,
+   "Mediterranean": 8,
+   "Alpine": 4,
+   "Arctic": 1
+  },
+  "us": {
+   "Temperate": 216,
+   "Mediterranean": 12,
+   "Subtropical": 11,
+   "Boreal": 8,
+   "Tropical": 3,
+   "NA": 3
+  }
+ },
+ "Duplicate_record": {
+  "asia": {
+   "NA": 605
+  },
+  "us": {
+   "NA": 253
+  }
+ },
+ "Country": {
+  "asia": {
+   "China": 320,
+   "Japan": 53,
+   "India": 40,
+   "South Korea": 26,
+   "Russia": 23,
+   "Malaysia": 22,
+   "Estonia": 21,
+   "Indonesia": 18,
+   "Finland": 12,
+   "Thailand": 10,
+   "Turkey": 10,
+   "Taiwan": 7
+  },
+  "us": {
+   "USA": 229,
+   "Canada": 17,
+   "United States": 5,
+   "Mexico": 1,
+   "Florida": 1
+  }
+ },
+ "Annual_coverage_lt_0.75": {
+  "asia": 93,
+  "us": 59
+ },
+ "Annual_coverage_missing": {
+  "asia": 54,
+  "us": 17
+ },
+ "Study_midyear": {
+  "asia": {
+   "min": 1964.0,
+   "25%": 2005.0,
+   "50%": 2010.5,
+   "75%": 2013.5,
+   "max": 2020.5
+  },
+  "us": {
+   "min": 1965.5,
+   "25%": 1996.0,
+   "50%": 2002.0,
+   "75%": 2009.5,
+   "max": 2021.0
+  }
+ },
+ "has_Duplicate_record_flag": {
+  "asia": 0,
+  "us": 0
+ },
+ "alkali_or_sodalime": {
+  "asia": 64,
+  "us": 27
+ },
+ "quality_flag_Q1x": {
+  "asia": 28,
+  "us": 13
+ },
+ "srdb_records_per_retained_cell": {
+  "asia": {
+   "50%": 2.0,
+   "75%": 4.0,
+   "max": 56.0
+  },
+  "us": {
+   "50%": 2.0,
+   "75%": 4.0,
+   "max": 131.0
+  }
+ },
+ "retained_cells_with_gt1_record": {
+  "asia": 368,
+  "us": 155
+ }
+}

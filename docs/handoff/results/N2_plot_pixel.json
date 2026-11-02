@@ -1,0 +1,150 @@
+{
+ "Q1_n": 624,
+ "Q1_crosstab_plot_x_pixel": {
+  "Agriculture": {
+   "Agriculture": 36,
+   "Desert": 1,
+   "Forest": 48,
+   "Grassland": 15,
+   "Savanna": 1,
+   "Shrubland": 2
+  },
+  "Forest": {
+   "Agriculture": 5,
+   "Desert": 0,
+   "Forest": 179,
+   "Grassland": 5,
+   "Savanna": 0,
+   "Shrubland": 1
+  },
+  "Grassland": {
+   "Agriculture": 7,
+   "Desert": 8,
+   "Forest": 17,
+   "Grassland": 49,
+   "Savanna": 3,
+   "Shrubland": 7
+  },
+  "Other": {
+   "Agriculture": 17,
+   "Desert": 1,
+   "Forest": 52,
+   "Grassland": 6,
+   "Savanna": 0,
+   "Shrubland": 3
+  },
+  "Savanna": {
+   "Agriculture": 10,
+   "Desert": 0,
+   "Forest": 136,
+   "Grassland": 7,
+   "Savanna": 2,
+   "Shrubland": 1
+  },
+  "Shrubland": {
+   "Agriculture": 0,
+   "Desert": 3,
+   "Forest": 1,
+   "Grassland": 1,
+   "Savanna": 0,
+   "Shrubland": 0
+  }
+ },
+ "Q1_forest_share": {
+  "plot": 0.694,
+  "pixel": 0.304
+ },
+ "Q1_agreement_forest_vs_not": 0.575,
+ "Q1_plot_forest_pixel_nonforest": 254,
+ "Q2_plot_type_effects_vs_forest_log": {},
+ "Q2_n": 967,
+ "Q2_pixel_type_effects_log": {
+  "Forest": {
+   "coef": 0.06,
+   "p": 0.4235
+  },
+  "Grassland": {
+   "coef": -0.131,
+   "p": 0.1854
+  },
+  "Other": {
+   "coef": 0.079,
+   "p": 0.355
+  },
+  "Savanna": {
+   "coef": 0.005,
+   "p": 0.9463
+  },
+  "Shrubland": {
+   "coef": -0.364,
+   "p": 0.1015
+  }
+ },
+ "Q4_r2": {
+  "climate|within Asia": 0.163,
+  "climate|within North America": 0.451,
+  "climate|Asia->North America": 0.334,
+  "climate|Asia->Europe": 0.076,
+  "climate+plot_type|within Asia": 0.211,
+  "climate+plot_type|within North America": 0.461,
+  "climate+plot_type|Asia->North America": 0.345,
+  "climate+plot_type|Asia->Europe": 0.117,
+  "climate+pixel_type|within Asia": 0.135,
+  "climate+pixel_type|within North America": 0.199,
+  "climate+pixel_type|Asia->North America": 0.078,
+  "climate+pixel_type|Asia->Europe": 0.104
+ },
+ "Q3_composition": {
+  "Asia": {
+   "plot_share": {
+    "Forest": 0.693,
+    "Agriculture": 0.135,
+    "Grassland": 0.128,
+    "Shrubland": 0.021,
+    "Desert": 0.021,
+    "Savanna": 0.003
+   },
+   "pixel_share_at_sites": {
+    "Forest": 0.299,
+    "Savanna": 0.232,
+    "Agriculture": 0.172,
+    "Grassland": 0.159,
+    "Other": 0.138
+   },
+   "landscape_share_in_site_climates": {
+    "Forest": 0.312,
+    "Savanna": 0.287,
+    "Agriculture": 0.22,
+    "Grassland": 0.146,
+    "Other": 0.023,
+    "Shrubland": 0.011
+   }
+  },
+  "NA": {
+   "plot_share": {
+    "Forest": 0.67,
+    "Grassland": 0.149,
+    "Agriculture": 0.103,
+    "Shrubland": 0.031,
+    "Desert": 0.026,
+    "Savanna": 0.021
+   },
+   "pixel_share_at_sites": {
+    "Forest": 0.304,
+    "Savanna": 0.299,
+    "Agriculture": 0.149,
+    "Grassland": 0.134,
+    "Other": 0.088,
+    "Shrubland": 0.026
+   },
+   "landscape_share_in_site_climates": {
+    "Savanna": 0.291,
+    "Forest": 0.268,
+    "Agriculture": 0.222,
+    "Grassland": 0.167,
+    "Shrubland": 0.045,
+    "Other": 0.007
+   }
+  }
+ }
+}

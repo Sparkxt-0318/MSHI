@@ -1,0 +1,21 @@
+{
+ "Asia box (train)": {
+  "Asia": 534,
+  "Europe": 65,
+  "Africa": 12,
+  "Oceania": 3,
+  "off-coast (>50 km from land)": 1
+ },
+ "US box (test)": {
+  "North America": 274
+ },
+ "countries_us_box": {
+  "United States of America": 252,
+  "Canada": 21,
+  "Mexico": 1
+ },
+ "fnpp_used": {
+  "Asia box (train)": 463,
+  "US box (test)": 223
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "qc": {
+  "all": {
+   "sites": 605,
+   "records": 3328,
+   "s2_between": 0.2837585946064813,
+   "s2_within": 0.0970876083498315,
+   "sd_within_log": 0.3115888450343361,
+   "icc_single_record": 0.7450739758039061
+  },
+  "Africa": {
+   "sites": 15,
+   "records": 51,
+   "s2_between": 0.663250521388698,
+   "s2_within": 0.08621280771225649,
+   "sd_within_log": 0.29362017592845435,
+   "icc_single_record": 0.8849672767636595
+  },
+  "Asia": {
+   "sites": 236,
+   "records": 1436,
+   "s2_between": 0.29001134681468643,
+   "s2_within": 0.10875839235991037,
+   "sd_within_log": 0.32978537317460027,
+   "icc_single_record": 0.7272651816935093
+  },
+  "Europe": {
+   "sites": 135,
+   "records": 737,
+   "s2_between": 0.18186944064149807,
+   "s2_within": 0.11023586047130152,
+   "sd_within_log": 0.3320178616750935,
+   "icc_single_record": 0.6226160221969653
+  },
+  "North America": {
+   "sites": 176,
+   "records": 937,
+   "s2_between": 0.2906750556104269,
+   "s2_within": 0.06385523487146978,
+   "sd_within_log": 0.2526959336267004,
+   "icc_single_record": 0.8198877879103805
+  },
+  "Oceania": {
+   "sites": 10,
+   "records": 43,
+   "s2_between": 0.04199464169067189,
+   "s2_within": 0.149900997335189,
+   "sd_within_log": 0.3871705016335684,
+   "icc_single_record": 0.21884104247419853
+  },
+  "South America": {
+   "sites": 33,
+   "records": 124,
+   "s2_between": 0.23984271493516301,
+   "s2_within": 0.11926671400092545,
+   "sd_within_log": 0.3453501324756159,
+   "icc_single_record": 0.6678819758248352
+  },
+  "ceiling_r2_site_mean_target": 0.8378597617461923,
+  "ceiling_r2_single_record_target": 0.7450739758039061,
+  "half_sq_diff_same_year": {
+   "n_pairs": 4423,
+   "mean": 0.09492882866237734
+  },
+  "half_sq_diff_diff_year": {
+   "n_pairs": 14979,
+   "mean": 0.11257824317123064
+  }
+ },
+ "repo": {
+  "all": {
+   "sites": 776,
+   "records": 4332,
+   "s2_between": 0.327320641422768,
+   "s2_within": 0.11774381514679796,
+   "sd_within_log": 0.34313818666362095,
+   "icc_single_record": 0.7354454766971625
+  },
+  "Africa": {
+   "sites": 17,
+   "records": 56,
+   "s2_between": 0.7752123105762659,
+   "s2_within": 0.08189355556946762,
+   "sd_within_log": 0.2861705008722381,
+   "icc_single_record": 0.904453395077402
+  },
+  "Asia": {
+   "sites": 308,
+   "records": 1801,
+   "s2_between": 0.3262890637660684,
+   "s2_within": 0.12788999257759134,
+   "sd_within_log": 0.35761710330686275,
+   "icc_single_record": 0.7184150374366406
+  },
+  "Europe": {
+   "sites": 168,
+   "records": 970,
+   "s2_between": 0.2700369472996441,
+   "s2_within": 0.1325878389063329,
+   "sd_within_log": 0.36412613049097825,
+   "icc_single_record": 0.6706913149691115
+  },
+  "North America": {
+   "sites": 222,
+   "records": 1285,
+   "s2_between": 0.3265890367789143,
+   "s2_within": 0.08949959977790246,
+   "sd_within_log": 0.29916483713481845,
+   "icc_single_record": 0.7849025618230713
+  },
+  "Oceania": {
+   "sites": 15,
+   "records": 56,
+   "s2_between": 0.07797646915690279,
+   "s2_within": 0.16895536935476382,
+   "sd_within_log": 0.4110418097405224,
+   "icc_single_record": 0.315781349326562
+  },
+  "South America": {
+   "sites": 46,
+   "records": 164,
+   "s2_between": 0.29130784138216254,
+   "s2_within": 0.1369720980180151,
+   "sd_within_log": 0.3700974169296715,
+   "icc_single_record": 0.6801809157583946
+  },
+  "ceiling_r2_site_mean_target": 0.8325744193046212,
+  "ceiling_r2_single_record_target": 0.7354454766971625,
+  "half_sq_diff_same_year": {
+   "n_pairs": 6441,
+   "mean": 0.10101711156916347
+  },
+  "half_sq_diff_diff_year": {
+   "n_pairs": 26890,
+   "mean": 0.10394946719139153
+  }
+ }
+}

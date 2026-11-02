@@ -1,0 +1,103 @@
+{
+ "plan_sha256": "9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac",
+ "train": "Asia",
+ "test": "Europe",
+ "selection_table": [
+  {
+   "set": "TP",
+   "learner": "OLS-TP",
+   "n_pred": 2,
+   "n_train": 384,
+   "cv_r2": 0.14335191031586358,
+   "cv_r2_sd": 0.07593261639078605
+  },
+  {
+   "set": "C8+MODIS",
+   "learner": "RF",
+   "n_pred": 12,
+   "n_train": 380,
+   "cv_r2": 0.13184270656785946,
+   "cv_r2_sd": 0.13820791772948215
+  },
+  {
+   "set": "ALL",
+   "learner": "RF",
+   "n_pred": 20,
+   "n_train": 379,
+   "cv_r2": 0.13116950039138014,
+   "cv_r2_sd": 0.13209456241036094
+  },
+  {
+   "set": "C8+NPP",
+   "learner": "RF",
+   "n_pred": 9,
+   "n_train": 380,
+   "cv_r2": 0.12191504014972004,
+   "cv_r2_sd": 0.1441021259991016
+  },
+  {
+   "set": "C8+SOIL",
+   "learner": "RF",
+   "n_pred": 16,
+   "n_train": 382,
+   "cv_r2": 0.11884902629322627,
+   "cv_r2_sd": 0.1034779923827719
+  },
+  {
+   "set": "C8",
+   "learner": "RF",
+   "n_pred": 8,
+   "n_train": 384,
+   "cv_r2": 0.10698250682482087,
+   "cv_r2_sd": 0.12586421659857822
+  },
+  {
+   "set": "C8+SOIL",
+   "learner": "XGB",
+   "n_pred": 16,
+   "n_train": 382,
+   "cv_r2": 0.045686644842476434,
+   "cv_r2_sd": 0.11825144703458637
+  },
+  {
+   "set": "ALL",
+   "learner": "XGB",
+   "n_pred": 20,
+   "n_train": 379,
+   "cv_r2": 0.031112302432218866,
+   "cv_r2_sd": 0.13956810194973493
+  },
+  {
+   "set": "C8+MODIS",
+   "learner": "XGB",
+   "n_pred": 12,
+   "n_train": 380,
+   "cv_r2": 0.02956005661065435,
+   "cv_r2_sd": 0.14789522032400237
+  },
+  {
+   "set": "C8",
+   "learner": "XGB",
+   "n_pred": 8,
+   "n_train": 384,
+   "cv_r2": 0.024129025677872614,
+   "cv_r2_sd": 0.1459899781202675
+  },
+  {
+   "set": "C8+NPP",
+   "learner": "XGB",
+   "n_pred": 9,
+   "n_train": 380,
+   "cv_r2": 0.018949356492418638,
+   "cv_r2_sd": 0.14148590639426573
+  }
+ ],
+ "selected": {
+  "set": "TP",
+  "learner": "OLS-TP",
+  "n_pred": 2,
+  "n_train": 384,
+  "cv_r2": 0.14335191031586358,
+  "cv_r2_sd": 0.07593261639078605
+ }
+}

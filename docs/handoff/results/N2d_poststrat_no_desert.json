@@ -1,0 +1,44 @@
+{
+ "n_sites": 565,
+ "plot_share": {
+  "Forest": 0.701,
+  "Grassland": 0.138,
+  "Agriculture": 0.127,
+  "Shrubland": 0.025,
+  "Savanna": 0.009
+ },
+ "X1_woody_savanna_as_forest": {
+  "landscape_share": {
+   "Forest": 0.319,
+   "Grassland": 0.295,
+   "Agriculture": 0.176,
+   "Shrubland": 0.1,
+   "Savanna": 0.11
+  },
+  "climate_only_PgC": 39.92,
+  "poststratified_PgC": 37.25,
+  "inflation": 0.072,
+  "inflation_ci": [
+   0.037,
+   0.104
+  ],
+  "n_boot": 298
+ },
+ "X2_woody_savanna_as_savanna": {
+  "landscape_share": {
+   "Forest": 0.199,
+   "Grassland": 0.295,
+   "Agriculture": 0.176,
+   "Shrubland": 0.1,
+   "Savanna": 0.23
+  },
+  "climate_only_PgC": 39.92,
+  "poststratified_PgC": 34.73,
+  "inflation": 0.15,
+  "inflation_ci": [
+   0.089,
+   0.22
+  ],
+  "n_boot": 297
+ }
+}

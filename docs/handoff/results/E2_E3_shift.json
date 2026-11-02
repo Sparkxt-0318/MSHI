@@ -1,0 +1,131 @@
+{
+ "E2_repo_C8": {
+  "n_train": 473,
+  "n_test": 326,
+  "r2": 0.314,
+  "ci": [
+   0.217,
+   0.389
+  ]
+ },
+ "E2_repo_C8+NPP": {
+  "n_train": 469,
+  "n_test": 325,
+  "r2": 0.346,
+  "ci": [
+   0.253,
+   0.421
+  ]
+ },
+ "E2_repo_C8+SOIL": {
+  "n_train": 468,
+  "n_test": 320,
+  "r2": 0.276,
+  "ci": [
+   0.188,
+   0.348
+  ]
+ },
+ "E2_qc_C8": {
+  "n_train": 384,
+  "n_test": 257,
+  "r2": 0.361,
+  "ci": [
+   0.254,
+   0.446
+  ]
+ },
+ "E2_qc_C8+NPP": {
+  "n_train": 380,
+  "n_test": 256,
+  "r2": 0.367,
+  "ci": [
+   0.254,
+   0.455
+  ]
+ },
+ "E2_qc_C8+SOIL": {
+  "n_train": 382,
+  "n_test": 255,
+  "r2": 0.329,
+  "ci": [
+   0.211,
+   0.42
+  ]
+ },
+ "E3_adversarial_auc_asia_vs_na": 0.98,
+ "E3_adversarial_top_features": {
+  "bio15": 0.23600000143051147,
+  "bio12": 0.17900000512599945,
+  "bio04": 0.10999999940395355,
+  "bio14": 0.10199999809265137
+ },
+ "E3_unweighted_r2": 0.367,
+ "E3_importance_weighted_r2": 0.297,
+ "E3_effective_sample_size_weighted": 27.6,
+ "E3_NA_within_spatialCV_r2": 0.375,
+ "E3_asia_trained_r2_same_sites": 0.367,
+ "E3_pooled_interactions": {
+  "bio01_z": {
+   "coef": 0.156,
+   "lo": 0.055,
+   "hi": 0.257,
+   "p": 0.002
+  },
+  "bio01_z:C(cont)[T.NA]": {
+   "coef": 0.044,
+   "lo": -0.091,
+   "hi": 0.179,
+   "p": 0.523
+  },
+  "lnP_z": {
+   "coef": 0.185,
+   "lo": 0.041,
+   "hi": 0.328,
+   "p": 0.012
+  },
+  "lnP_z:C(cont)[T.NA]": {
+   "coef": 0.019,
+   "lo": -0.168,
+   "hi": 0.206,
+   "p": 0.839
+  },
+  "bio15_z": {
+   "coef": 0.071,
+   "lo": -0.021,
+   "hi": 0.163,
+   "p": 0.129
+  },
+  "bio15_z:C(cont)[T.NA]": {
+   "coef": -0.06,
+   "lo": -0.185,
+   "hi": 0.066,
+   "p": 0.351
+  },
+  "clay_z": {
+   "coef": -0.035,
+   "lo": -0.136,
+   "hi": 0.067,
+   "p": 0.507
+  },
+  "clay_z:C(cont)[T.NA]": {
+   "coef": 0.03,
+   "lo": -0.088,
+   "hi": 0.147,
+   "p": 0.619
+  },
+  "lnNPP_z": {
+   "coef": 0.043,
+   "lo": -0.048,
+   "hi": 0.133,
+   "p": 0.354
+  },
+  "lnNPP_z:C(cont)[T.NA]": {
+   "coef": 0.157,
+   "lo": 0.022,
+   "hi": 0.292,
+   "p": 0.022
+  }
+ },
+ "E3_pooled_n": 635
+}

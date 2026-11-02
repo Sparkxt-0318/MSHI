@@ -1,0 +1,182 @@
+{
+ "pairwise": {
+  "Asia -> Europe": {
+   "n": 235,
+   "r2": 0.079,
+   "rmse": 0.535,
+   "skill": 0.059
+  },
+  "Asia -> North America": {
+   "n": 257,
+   "r2": 0.348,
+   "rmse": 0.546,
+   "skill": 0.196
+  },
+  "Asia -> South America": {
+   "n": 42,
+   "r2": 0.332,
+   "rmse": 0.527,
+   "skill": 0.255
+  },
+  "Asia -> Africa": {
+   "n": 26,
+   "r2": 0.148,
+   "rmse": 0.672,
+   "skill": 0.079
+  },
+  "Asia -> Oceania": {
+   "n": 23,
+   "r2": -0.18,
+   "rmse": 0.527,
+   "skill": -0.072
+  },
+  "Europe -> Asia": {
+   "n": 384,
+   "r2": 0.086,
+   "rmse": 0.614,
+   "skill": 0.058
+  },
+  "Europe -> North America": {
+   "n": 257,
+   "r2": 0.471,
+   "rmse": 0.492,
+   "skill": 0.296
+  },
+  "Europe -> South America": {
+   "n": 42,
+   "r2": 0.293,
+   "rmse": 0.542,
+   "skill": 0.287
+  },
+  "Europe -> Africa": {
+   "n": 26,
+   "r2": -0.005,
+   "rmse": 0.73,
+   "skill": 0.001
+  },
+  "Europe -> Oceania": {
+   "n": 23,
+   "r2": -0.859,
+   "rmse": 0.662,
+   "skill": -0.27
+  },
+  "North America -> Asia": {
+   "n": 384,
+   "r2": -0.015,
+   "rmse": 0.647,
+   "skill": -0.003
+  },
+  "North America -> Europe": {
+   "n": 235,
+   "r2": 0.088,
+   "rmse": 0.533,
+   "skill": 0.089
+  },
+  "North America -> South America": {
+   "n": 42,
+   "r2": 0.189,
+   "rmse": 0.58,
+   "skill": 0.151
+  },
+  "North America -> Africa": {
+   "n": 26,
+   "r2": -0.013,
+   "rmse": 0.733,
+   "skill": 0.005
+  },
+  "North America -> Oceania": {
+   "n": 23,
+   "r2": -1.306,
+   "rmse": 0.737,
+   "skill": -0.518
+  },
+  "South America -> Asia": {
+   "n": 384,
+   "r2": -0.013,
+   "rmse": 0.647,
+   "skill": 0.083
+  },
+  "South America -> Europe": {
+   "n": 235,
+   "r2": -0.308,
+   "rmse": 0.638,
+   "skill": 0.072
+  },
+  "South America -> North America": {
+   "n": 257,
+   "r2": 0.151,
+   "rmse": 0.624,
+   "skill": 0.126
+  },
+  "South America -> Africa": {
+   "n": 26,
+   "r2": 0.217,
+   "rmse": 0.645,
+   "skill": 0.198
+  },
+  "South America -> Oceania": {
+   "n": 23,
+   "r2": -0.709,
+   "rmse": 0.634,
+   "skill": -0.198
+  }
+ },
+ "loco": {
+  "Asia": {
+   "n": 384,
+   "r2": 0.125,
+   "rmse": 0.601,
+   "skill": 0.065
+  },
+  "Europe": {
+   "n": 235,
+   "r2": 0.088,
+   "rmse": 0.533,
+   "skill": 0.078
+  },
+  "North America": {
+   "n": 257,
+   "r2": 0.363,
+   "rmse": 0.54,
+   "skill": 0.208
+  },
+  "South America": {
+   "n": 42,
+   "r2": 0.373,
+   "rmse": 0.51,
+   "skill": 0.282
+  },
+  "Africa": {
+   "n": 26,
+   "r2": 0.126,
+   "rmse": 0.681,
+   "skill": 0.068
+  },
+  "Oceania": {
+   "n": 23,
+   "r2": -0.418,
+   "rmse": 0.578,
+   "skill": -0.176
+  }
+ },
+ "within_cv": {
+  "Asia": {
+   "n": 384,
+   "r2": 0.163,
+   "rmse": 0.588,
+   "skill": 0.092
+  },
+  "Europe": {
+   "n": 235,
+   "r2": 0.058,
+   "rmse": 0.541,
+   "skill": 0.034
+  },
+  "North America": {
+   "n": 257,
+   "r2": 0.451,
+   "rmse": 0.501,
+   "skill": 0.273
+  }
+ }
+}

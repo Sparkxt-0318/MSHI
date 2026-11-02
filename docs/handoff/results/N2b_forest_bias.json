@@ -1,0 +1,32 @@
+{
+ "n_sites": 578,
+ "plot_forest_share": 0.685,
+ "pixel_forest_share": 0.301,
+ "landscape_forest_share_area_weighted": 0.198,
+ "coef_plot_forest": 0.126,
+ "coef_plot_forest_ci": [
+  0.009,
+  0.244
+ ],
+ "coef_pixel_forest": 0.005,
+ "coef_pixel_forest_ci": [
+  -0.097,
+  0.106
+ ],
+ "totals_PgC": {
+  "A": 39.09,
+  "B": 39.1,
+  "C": 37.46
+ },
+ "inflation_A_climate_only": 0.043,
+ "inflation_A_ci": [
+  0.003,
+  0.088
+ ],
+ "inflation_B_pixel_landcover": 0.044,
+ "inflation_B_ci": [
+  0.003,
+  0.088
+ ],
+ "footprint_cells": 27655
+}

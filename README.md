@@ -1,72 +1,38 @@
-# MSHI-Atlas: Continental-Scale Soil Microbial Respiration for Asia
+# MSHI v3 — soil respiration: site data, transfer evaluation and upscaling bias
 
-Geospatial twin of the published electrochemical MSHI biosensor. Predicts
-soil respiration at 1 km resolution across Asia from environmental
-features, validated cross-continentally on a US held-out subset.
+> **Status (2026-11-02): rebuild in progress — end of Phase 1.** This README is interim; it is
+> rewritten for the paper in Phase 4. The previous (v1/v2) pipeline, its outputs and its claims are in
+> `legacy/` (see `legacy/README.md` for what each item was and why it was superseded).
 
-## Scientific framing
+v3 rebuilds the kilometre-tier soil respiration (Rs) data from pinned public sources: SRDB v5 and
+COSORE v0.8.0 records, Natural Earth countries, WorldClim 2.1, SoilGrids 2.0 and MODIS C6.1. The
+pre-registered Asia → Europe test (`docs/handoff/ANALYSIS_PLAN_LOCKED.md`) was scored once on
+2026-11-01, and its result (`docs/handoff/results/clean_test_europe.json`) is final.
 
-Soil microbial respiration is the biological flux your EAB biosensor
-measures (electron transfer ∝ metabolic activity ∝ substrate oxidation).
-This project predicts the same flux from satellite-derived and gridded
-environmental features at continental scale, then composes a
-**climate-corrected anomaly score** isolating soil-driven variation
-from climate-driven variation.
-
-The pitch: *the same biological signal at three scales — electrochemical
-(centimeter), chamber (meter), satellite-derived (kilometer).*
-
-## Pipeline
-
-```
-build_target → extract → train → validate → predict → composite → hero_map
-```
-
-One command: `bash run.sh all` (after data downloaded).
-
-## Quick start
+## Run
 
 ```bash
-# 1. Install
-python -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
-
-# 2. Smoke test (no internet, ~30 sec)
-bash run.sh demo
-
-# 3. Pull real data (~2-4 hours wall-clock, mostly waiting)
-bash run.sh download   # SoilGrids automated; instructions for everything else
-
-# 4. After data arrives:
-bash run.sh all
+python3.13 -m venv .venv && .venv/bin/pip install -r requirements-lock.txt   # or: conda env create -f environment.yml
+.venv/bin/python -m mshi.run --list            # stages and dependencies
+.venv/bin/python -m mshi.run --stage all       # or: make all
+make test                                      # regression, guard, unit and 50-site smoke tests
 ```
 
-## Outputs
+Every source version, path, threshold and seed is in `configs/v3.yaml`. Downloads go to `data/raw/`
+(gitignored), regenerable intermediates to `data/interim/` (gitignored), small derived tables to
+`data/derived/`, results (JSON) and the run log to `results/`. `results/reproduction_check.md` compares
+the outputs with the handoff numbers.
 
-```
-data/outputs/
-├── hero_mshi_geo_asia.png           ← Hero map (300 DPI, poster)
-├── hero_mshi_geo_asia.pdf           ← Vector for poster
-├── hero_mshi_geo_asia_screen.png    ← Slide deck (160 DPI)
-├── mshi_geo_xgb.json                ← Trained model
-├── training_metrics.json            ← Spatial CV results, SHAP rankings
-├── validation_report.json           ← Asia → US transfer numbers
-├── shap_summary.png                 ← Interpretability
-└── *.tif                            ← GeoTIFFs (open in QGIS)
-```
+## Where things are
 
-## Modules
-
-| File | Purpose |
+| Path | Contents |
 |---|---|
-| `download.py` | Stage all data sources (SoilGrids automated; others with instructions) |
-| `build_target.py` | Build training points from COSORE + SRDB |
-| `features.py` | Sample raster features at points and across grid |
-| `train.py` | XGBoost + spatial-block CV + SHAP |
-| `validate.py` | Asia → US external validation |
-| `predict.py` | Chunked inference at 5km or 1km |
-| `composite.py` | Climate-baseline + anomaly ratio |
-| `hero_map.py` | Bedrock-style hero visual (PNG + PDF) |
-| `demo_synthetic.py` | End-to-end smoke test |
-
-See `CLAUDE_CODE_PROMPT.md` for a ready-to-paste Claude Code instruction set.
+| `mshi/` | the pipeline package (`mshi/run.py` is the entry point) |
+| `configs/v3.yaml` | all versions, paths, thresholds, seeds; the hash-locked definition of the clean test |
+| `tests/` | reproduction-target regression tests, guards (demo table, locked plan), unit tests, smoke test |
+| `docs/DECISIONS.md` | dated log of decisions, deviations, versions and open questions |
+| `docs/handoff/` | the 2026-11-02 handoff bundle (audit log, locked plan, prototype scripts, pilot results) |
+| `data/derived/` | COSORE annual values, record and site tables (with licence and attribution notes) |
+| `results/` | stage outputs, `reproduction_check.md`, `run_log.jsonl` |
+| `legacy/` | superseded v1/v2 code, tables, figures and website artefacts |
+| `biosensor_samples/` | centimetre-tier biosensor data for a separate manuscript (not used by v3) |

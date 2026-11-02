@@ -1,0 +1,44 @@
+{
+ "Asia continent -> NA continent": {
+  "n": 326,
+  "r2": 0.314,
+  "rmse_log": 0.591,
+  "test_sd": 0.715,
+  "rmse_intercept": 0.714
+ },
+ "Asia continent -> US box": {
+  "n": 240,
+  "r2": 0.127,
+  "rmse_log": 0.562,
+  "test_sd": 0.603,
+  "rmse_intercept": 0.602
+ },
+ "Asia continent -> NA continent minus US box": {
+  "n": 86,
+  "r2": 0.506,
+  "rmse_log": 0.664,
+  "test_sd": 0.95,
+  "rmse_intercept": 0.96
+ },
+ "Asia box -> NA continent": {
+  "n": 326,
+  "r2": 0.283,
+  "rmse_log": 0.604,
+  "test_sd": 0.715,
+  "rmse_intercept": 0.714
+ },
+ "Asia box -> US box": {
+  "n": 240,
+  "r2": 0.059,
+  "rmse_log": 0.584,
+  "test_sd": 0.603,
+  "rmse_intercept": 0.603
+ },
+ "Asia box -> NA continent minus US box": {
+  "n": 86,
+  "r2": 0.515,
+  "rmse_log": 0.657,
+  "test_sd": 0.95,
+  "rmse_intercept": 0.957
+ }
+}

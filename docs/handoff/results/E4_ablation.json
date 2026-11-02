@@ -1,0 +1,72 @@
+{
+ "y_mean|continents": {
+  "n_train": 473,
+  "n_test": 326,
+  "r2": 0.325,
+  "ci": [
+   0.23,
+   0.405
+  ],
+  "r2_seed_mean": 0.318
+ },
+ "y_mean|boxes": {
+  "n_train": 525,
+  "n_test": 240,
+  "r2": 0.069,
+  "ci": [
+   -0.104,
+   0.203
+  ],
+  "r2_seed_mean": 0.072
+ },
+ "y_single|continents": {
+  "n_train": 473,
+  "n_test": 326,
+  "r2": 0.328,
+  "ci": [
+   0.248,
+   0.396
+  ],
+  "r2_seed_mean": 0.322
+ },
+ "y_single|boxes": {
+  "n_train": 525,
+  "n_test": 240,
+  "r2": 0.155,
+  "ci": [
+   0.01,
+   0.258
+  ],
+  "r2_seed_mean": 0.122
+ },
+ "original_sites|original_features": {
+  "n_train": 600,
+  "n_test": 272,
+  "r2": 0.131,
+  "ci": [
+   0.021,
+   0.228
+  ],
+  "r2_seed_mean": 0.135
+ },
+ "original_sites|v3_features": {
+  "n_train": 605,
+  "n_test": 274,
+  "r2": 0.113,
+  "ci": [
+   -0.029,
+   0.224
+  ],
+  "r2_seed_mean": 0.098
+ },
+ "original_sites|v3_features|site_mean_target": {
+  "n_train": 588,
+  "n_test": 266,
+  "r2": 0.047,
+  "ci": [
+   -0.105,
+   0.167
+  ],
+  "r2_seed_mean": 0.056
+ }
+}

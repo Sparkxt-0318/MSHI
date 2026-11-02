@@ -1,0 +1,66 @@
+{
+ "all_sites": {
+  "n_train": 967,
+  "threshold": 0.2823806280803837,
+  "importance_weights": {
+   "bio01": 0.113,
+   "bio04": 0.084,
+   "bio05": 0.1,
+   "bio06": 0.095,
+   "bio12": 0.418,
+   "bio14": 0.034,
+   "bio15": 0.081,
+   "bio17": 0.075
+  },
+  "global_rs_PgC": 87.3,
+  "land_area_frac_outside": 0.1,
+  "rs_flux_frac_outside": 0.058,
+  "frac_area_outside_by_lat_band": {
+   "S temperate": 0.039,
+   "Tropics": 0.171,
+   "N temperate": 0.045,
+   "N boreal": 0.029,
+   "Arctic": 0.242
+  }
+ },
+ "asia_only": {
+  "n_train": 384,
+  "threshold": 0.37671033604577586,
+  "importance_weights": {
+   "bio01": 0.14,
+   "bio04": 0.1,
+   "bio05": 0.106,
+   "bio06": 0.106,
+   "bio12": 0.313,
+   "bio14": 0.03,
+   "bio15": 0.131,
+   "bio17": 0.075
+  },
+  "global_rs_PgC": 92.8,
+  "land_area_frac_outside": 0.275,
+  "rs_flux_frac_outside": 0.202,
+  "NA_frac_inside": 0.914,
+  "NA_inside": {
+   "n": 235,
+   "r2": 0.307,
+   "rmse": 0.517
+  },
+  "NA_outside": {
+   "n": 22,
+   "r2": 0.461,
+   "rmse": 0.749
+  },
+  "NA_rmse_by_DI_tercile": [
+   0.536,
+   0.513,
+   0.573
+  ],
+  "frac_area_outside_by_lat_band": {
+   "S temperate": 0.581,
+   "Tropics": 0.219,
+   "N temperate": 0.263,
+   "N boreal": 0.162,
+   "Arctic": 0.601
+  }
+ }
+}
