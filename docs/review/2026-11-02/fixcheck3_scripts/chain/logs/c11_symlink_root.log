@@ -1,0 +1,7 @@
+WARNING:mshi.rasters:WorldClim zip hash is not pinned in configs/v3.yaml; recorded b189afaf952723af3af25740e8088e20a0fac9dbc2e4b268ca01045ba51f4587
+WARNING:mshi.rasters:WorldClim zip hash is not pinned in configs/v3.yaml; recorded 98a9b0b6f7421591cabc75317452f5f51a62769bb758e49744d6890f8a046b6a
+ERROR:mshi:fetch_worldclim failed
+ValueError: <chain>/work/c11/shared_store/worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])
+WARNING:mshi:stages not completed: {'fetch_worldclim': "error: ValueError: <chain>/work/c11/shared_store/worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])"}
+plain: exit 0 {'fetch_worldclim': 'ok'}
+symlinked: exit 1 {'fetch_worldclim': 'error: ValueError: <chain>/work/c11/shared_store/worldclim/2.1/2'}

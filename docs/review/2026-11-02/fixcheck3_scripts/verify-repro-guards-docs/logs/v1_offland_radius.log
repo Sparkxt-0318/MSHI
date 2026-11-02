@@ -1,0 +1,4 @@
+srdb_793 32.0 135.42 nearest planar-degree distances: [('Japan', 1.51), ('South Korea', 6.94), ('North Korea', 9.64)] -> within the 5-degree literal: True
+srdb_1528 53.05 3.47 nearest planar-degree distances: [('Netherlands', 1.22), ('Belgium', 1.68), ('United Kingdom', 1.79)] -> within the 5-degree literal: True
+srdb_11103 -42.15 -147.133 nearest planar-degree distances: [('French Polynesia', 22.95), ('Cook Islands', 24.41), ('Pitcairn Islands', 25.86)] -> within the 5-degree literal: False
+srdb_13828 1.315 193.911 nearest planar-degree distances: [('Tuvalu', 17.66), ('Kiribati', 19.3), ('Fiji', 21.73)] -> within the 5-degree literal: False

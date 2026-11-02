@@ -1,0 +1,29 @@
+WorldClim zip hash is not pinned in configs/v3.yaml; recorded 78b39390d256ee8933ea32e0ae0051f99e3c873c01171f83587082eb9fa2cb5c
+{
+ "pkg": "fixcheck3_scripts/verify-modis-rasters/pkg/head/mshi/__init__.py",
+ "code_sha12": "e3d4bf1e8ddf",
+ "1_fresh_unpinned": {
+  "status": "ok",
+  "http_requests": 1,
+  "download_calls": 1
+ },
+ "1_files": {
+  "n_layers": 19,
+  "zip": true,
+  "zip_sidecar": true,
+  "layer_sidecar": true,
+  "zip_sha12": "78b39390d256"
+ },
+ "2_wrong_pin_server_up": {
+  "status": "ChecksumMismatchError: http://127.0.0.1:43047/wc/wc2.1_2.5m_bio.zip: SHA-256 78b39390d256ee8933ea32e0ae0051f99e3c873c01171f83587082eb9fa2cb5c != pinned 0000000000000000000000000000000",
+  "http_requests": 1,
+  "download_calls": 1
+ },
+ "2_files_after": {
+  "n_layers": 0,
+  "zip": false,
+  "zip_sidecar": false,
+  "layer_sidecar": false,
+  "zip_sha12": null
+ }
+}

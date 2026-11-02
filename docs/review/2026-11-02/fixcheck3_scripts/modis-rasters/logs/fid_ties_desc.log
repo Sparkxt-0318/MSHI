@@ -1,0 +1,170 @@
+29 sites, 3 tiles, 375 raster reads
+2 month(s) have two Terra LST items on the earliest date; the smaller id is used (listed in results/modis_points.json)
+wrote fixcheck3_scripts/modis-rasters/work/fid/proto_ties_desc.parquet
+{
+ "scenario": "ties_desc",
+ "files_written_now": 0,
+ "n_points": 29,
+ "tiles": [
+  [
+   18,
+   4
+  ],
+  [
+   26,
+   5
+  ],
+  [
+   28,
+   5
+  ]
+ ],
+ "search_params_proto": [
+  [
+   "modis-11A2-061",
+   "2020-01-01/2024-12-31",
+   500
+  ],
+  [
+   "modis-17A3HGF-061",
+   "2020-01-01/2024-12-31",
+   500
+  ]
+ ],
+ "search_params_port": [
+  [
+   "modis-11A2-061",
+   "2020-01-01/2024-12-31",
+   500
+  ],
+  [
+   "modis-17A3HGF-061",
+   "2020-01-01/2024-12-31",
+   500
+  ]
+ ],
+ "n_jobs_proto": 375,
+ "n_jobs_port": 375,
+ "job_multisets_equal": false,
+ "info": {
+  "n_jobs": 375,
+  "n_tiles": 3,
+  "catalog_gaps": [],
+  "accepted_catalog_gaps": [],
+  "lst_same_date_ties": [
+   {
+    "tile": "h18v04",
+    "month": "2021-01",
+    "chosen": "MOD11A2.A2021001.h18v04.061.2021010000000",
+    "others": [
+     "MOD11A2.A2021001.h18v04.061.2099001000000"
+    ]
+   },
+   {
+    "tile": "h18v04",
+    "month": "2022-06",
+    "chosen": "MOD11A2.A2022153.h18v04.061.2000001000000",
+    "others": [
+     "MOD11A2.A2022153.h18v04.061.2022162000000"
+    ]
+   }
+  ],
+  "npp_duplicate_years": []
+ },
+ "n_failed_reads": 0,
+ "lst_first_composites_per_tile": {
+  "h18v04": [
+   "A2020001",
+   "A2020033"
+  ],
+  "h26v05": [
+   "A2020001",
+   "A2020033"
+  ],
+  "h28v05": [
+   "A2020001",
+   "A2020033"
+  ]
+ },
+ "lst_items_per_tile": {
+  "h18v04": 60,
+  "h26v05": 60,
+  "h28v05": 60
+ },
+ "npp_items_per_tile": {
+  "h18v04": 5,
+  "h26v05": 5,
+  "h28v05": 5
+ },
+ "value_multisets_equal": false,
+ "n_site_kind_lists": 87,
+ "row_order_equal": true,
+ "columns_proto": [
+  "site_key",
+  "npp",
+  "npp_n",
+  "lst_day",
+  "lst_day_n",
+  "lst_night",
+  "lst_night_n"
+ ],
+ "columns_port": [
+  "site_key",
+  "npp",
+  "npp_n",
+  "lst_day",
+  "lst_day_n",
+  "lst_night",
+  "lst_night_n"
+ ],
+ "dtypes_equal": {
+  "site_key": true,
+  "npp": true,
+  "npp_n": true,
+  "lst_day": true,
+  "lst_day_n": true,
+  "lst_night": true,
+  "lst_night_n": true
+ },
+ "columns": {
+  "npp": {
+   "nan_pattern_equal": true,
+   "n_nan": 1,
+   "finite": 28,
+   "bit_identical": 21,
+   "max_abs_diff": 1.1368683772161603e-13,
+   "max_rel_diff": 2.1990727970019364e-16,
+   "n_equal": true,
+   "n_range": [
+    0,
+    5
+   ]
+  },
+  "lst_day": {
+   "nan_pattern_equal": true,
+   "n_nan": 0,
+   "finite": 29,
+   "bit_identical": 7,
+   "max_abs_diff": 1.0447343189918925,
+   "max_rel_diff": 0.06495474005073103,
+   "n_equal": false,
+   "n_range": [
+    48,
+    54
+   ]
+  },
+  "lst_night": {
+   "nan_pattern_equal": true,
+   "n_nan": 0,
+   "finite": 29,
+   "bit_identical": 11,
+   "max_abs_diff": 1.5097659448394793,
+   "max_rel_diff": 0.07879284937960275,
+   "n_equal": true,
+   "n_range": [
+    48,
+    55
+   ]
+  }
+ }
+}

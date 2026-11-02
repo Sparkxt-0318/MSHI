@@ -1,0 +1,43 @@
+WARNING:mshi:stages not completed: {'features': 'stale: results/fetch_worldclim.json: missing; re-run the stage that writes it (or `make all`)'}
+Traceback (most recent call last):
+  File "fixcheck3_scripts/end-to-end/scripts/race.py", line 57, in <module>
+    f = pd.read_parquet(cfg.path("interim", "features_v3_qc.parquet"))
+  File "/home/user/MSHI/.venv/lib/python3.13/site-packages/pandas/io/parquet.py", line 760, in read_parquet
+    return impl.read(
+           ~~~~~~~~~^
+        path,
+        ^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/home/user/MSHI/.venv/lib/python3.13/site-packages/pandas/io/parquet.py", line 296, in read
+    pa_table = self.api.parquet.read_table(
+        path_or_handle,
+    ...<3 lines>...
+        **kwargs,
+    )
+  File "/home/user/MSHI/.venv/lib/python3.13/site-packages/pyarrow/parquet/core.py", line 1915, in read_table
+    dataset = ParquetDataset(
+        source,
+    ...<17 lines>...
+        arrow_extensions_enabled=arrow_extensions_enabled,
+    )
+  File "/home/user/MSHI/.venv/lib/python3.13/site-packages/pyarrow/parquet/core.py", line 1491, in __init__
+    self._dataset = ds.dataset(path_or_paths, filesystem=filesystem,
+                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                               schema=schema, format=parquet_format,
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                               partitioning=partitioning,
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+                               ignore_prefixes=ignore_prefixes)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/MSHI/.venv/lib/python3.13/site-packages/pyarrow/dataset.py", line 790, in dataset
+    return _filesystem_dataset(source, **kwargs)
+  File "/home/user/MSHI/.venv/lib/python3.13/site-packages/pyarrow/dataset.py", line 472, in _filesystem_dataset
+    fs, paths_or_selector = _ensure_single_source(source, filesystem)
+                            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/MSHI/.venv/lib/python3.13/site-packages/pyarrow/dataset.py", line 437, in _ensure_single_source
+    raise FileNotFoundError(path)
+FileNotFoundError: fixcheck3_scripts/end-to-end/sbR2/interim/features_v3_qc.parquet

@@ -1,0 +1,51 @@
+ERROR:mshi:repro_checks failed
+Traceback (most recent call last):
+  File "/home/user/MSHI/mshi/run.py", line 163, in run
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+  File "/home/user/MSHI/mshi/analysis/repro_checks.py", line 207, in repro_checks
+    raise ReproductionFailure(f"{summary['FAIL']} reproduction target(s) outside tolerance: {bad}; "
+                              "see results/reproduction_check.md. Stop and report (ground rule 2).")
+mshi.analysis.repro_checks.ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2).
+features exit: 0
+repro exit (author state): 0 {'DEVIATION': 0, 'FAIL': 0, 'INFO': 1, 'NOT RUN': 0, 'PASS': 26, 'STALE': 0} r 0.9825
+
+`make features`-like re-run: exit 0 {'fetch_soilgrids': 'ok', 'modis_points': 'ok', 'features': 'ok'}
+staleness: {
+ "build_sites.json": null,
+ "clean_test_rerun_qc.json": null,
+ "clean_test_rerun_repo.json": null,
+ "cosore_annual.json": null,
+ "features.json": null,
+ "fetch_soilgrids.json": null,
+ "fetch_worldclim.json": null,
+ "modis_points.json": null,
+ "reproduction_check.json": null
+}
+feature tables changed: {'qc': True, 'repo': True}
+clean_test_rerun_*.json unchanged on disk: {'qc': True, 'repo': True}
+stored table unchanged: True True
+gate: ok
+later stage alone: exit 0 {'later_stage': 'ok'} ran 1
+regression (stored table): {
+ "test_cosore_sites": "pass",
+ "test_record_and_site_counts": "pass",
+ "test_locked_test_rerun": "pass",
+ "test_npp_correlation": "pass",
+ "test_reproduction_table_has_no_fail": "pass",
+ "rerun_reported_qc": "pass",
+ "rerun_reported_repo": "pass"
+}
+stored npp r: 0.9825
+
+make repro: exit 1 {'repro_checks': "error: ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)'];"}
+summary: {'DEVIATION': 0, 'FAIL': 1, 'INFO': 1, 'NOT RUN': 0, 'PASS': 25, 'STALE': 0}
+    PASS | Locked test: selected model | OLS-TP (TP)
+    PASS | Locked test: Asia spatial-CV R² | 0.14335191031586358
+    PASS | Locked test: Europe n | 235
+    PASS | Locked test: Europe R² | 0.07899539157825719
+    PASS | Locked test: site-bootstrap CI low | 0.013354932456855498
+    PASS | Locked test: site-bootstrap CI high | 0.12538039748581667
+    PASS | Locked test: re-run identical to the locked result | identical
+    PASS | Locked test (repo-filter sensitivity): re-run identical to the locked  | identical
+    FAIL | NPP r vs committed NPP (original 889 sites) | 0.5464472757790975

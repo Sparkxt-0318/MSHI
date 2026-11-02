@@ -1,0 +1,65 @@
+catalog lacks 108 expected item(s), e.g. ['h10v04 lst 2020-01', 'h10v04 lst 2020-02', 'h10v04 lst 2020-03', 'h10v04 lst 2020-04', 'h10v04 lst 2020-05']; no raster read
+catalog lacks 8 expected item(s), e.g. ['h19v04 lst 2022-05', 'h19v04 lst 2022-06', 'h19v04 lst 2022-07', 'h19v04 lst 2022-08', 'h19v04 lst 2022-09']; no raster read
+{
+ "pkg": "fixcheck3_scripts/verify-modis-rasters/pkg/head/mshi/__init__.py",
+ "tiles": [
+  "h10v04",
+  "h18v04",
+  "h19v04"
+ ],
+ "n_sites": 9,
+ "run1": {
+  "status": "ModisIncompleteError: the STAC catalog lacks 108 expected item(s) (first: h10v04 lst 2020-01); after review, list genuine gaps in sources.modis.accepted_catalog_gaps (and log the decision); no values written, see results/modis_points.json",
+  "cached": false,
+  "actual_reads": 0,
+  "rec.status": "incomplete: no values written",
+  "rec.n_raster_reads": 159,
+  "rec.n_failed_reads": 0,
+  "rec.n_catalog_gaps": 108,
+  "rec.len(catalog_gaps)": 100,
+  "rec.catalog_gaps[:4]": [
+   "h10v04 lst 2020-01",
+   "h10v04 lst 2020-02",
+   "h10v04 lst 2020-03",
+   "h10v04 lst 2020-04"
+  ],
+  "rec.lst_same_date_ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet_sha12": null
+ },
+ "n_catalog_gaps": 108,
+ "n_listed": 100,
+ "run2_after_accepting_listed": {
+  "status": "ModisIncompleteError: the STAC catalog lacks 8 expected item(s) (first: h19v04 lst 2022-05); after review, list genuine gaps in sources.modis.accepted_catalog_gaps (and log the decision); no values written, see results/modis_points.json",
+  "cached": false,
+  "actual_reads": 0,
+  "rec.status": "incomplete: no values written",
+  "rec.n_raster_reads": 159,
+  "rec.n_failed_reads": 0,
+  "rec.n_catalog_gaps": 8,
+  "rec.len(catalog_gaps)": 8,
+  "rec.catalog_gaps[:4]": [
+   "h19v04 lst 2022-05",
+   "h19v04 lst 2022-06",
+   "h19v04 lst 2022-07",
+   "h19v04 lst 2022-08"
+  ],
+  "rec.lst_same_date_ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet_sha12": null
+ },
+ "run2_gaps": [
+  "h19v04 lst 2022-05",
+  "h19v04 lst 2022-06",
+  "h19v04 lst 2022-07",
+  "h19v04 lst 2022-08",
+  "h19v04 lst 2022-09",
+  "h19v04 lst 2022-10",
+  "h19v04 lst 2022-11",
+  "h19v04 lst 2022-12"
+ ]
+}

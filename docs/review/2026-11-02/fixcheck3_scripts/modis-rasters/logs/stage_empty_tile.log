@@ -1,0 +1,43 @@
+catalog lacks 65 expected item(s), e.g. ['h18v03 lst 2020-01', 'h18v03 lst 2020-02', 'h18v03 lst 2020-03', 'h18v03 lst 2020-04', 'h18v03 lst 2020-05']; no raster read
+{
+ "run": {
+  "status": "ModisIncompleteError: the STAC catalog lacks 65 expected item(s) (first: h18v03 lst 2020-01); after review, list genuine gaps in sources.modis.accepted_catalog_gaps (and log the decision); no values written, see results/modis_points.json",
+  "cached": false,
+  "reads": 0,
+  "rec_status": "incomplete: no values written",
+  "n_raster_reads": 375,
+  "n_failed_reads": 0,
+  "catalog_gaps": [
+   "h18v03 lst 2020-01",
+   "h18v03 lst 2020-02",
+   "h18v03 lst 2020-03",
+   "h18v03 lst 2020-04",
+   "h18v03 lst 2020-05",
+   "h18v03 lst 2020-06",
+   "h18v03 lst 2020-07",
+   "h18v03 lst 2020-08"
+  ],
+  "n_catalog_gaps": 65,
+  "ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet": null
+ },
+ "n_catalog_gaps": 65,
+ "run_with_65_accepted": {
+  "status": "ok",
+  "cached": false,
+  "reads": 375,
+  "rec_status": null,
+  "n_raster_reads": 375,
+  "n_failed_reads": 0,
+  "catalog_gaps": [],
+  "n_catalog_gaps": 0,
+  "ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet": "538eb7e20aa8"
+ }
+}

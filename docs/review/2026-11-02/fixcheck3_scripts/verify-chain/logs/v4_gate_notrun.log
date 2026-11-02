@@ -1,0 +1,25 @@
+[a] control (B build current): run([repro_checks, later]) exit 1 {'repro_checks': "error: ReproductionFailure: 8 reproduction target(s) outside tolerance: ['QC sites: Asia',", 'later_stage': 'skipped: reproduction gate closed (repro_checks: error: ReproductionFailure: 8 reproductio'} {'DEVIATION': 0, 'FAIL': 8, 'INFO': 1, 'NOT RUN': 8, 'PASS': 10, 'STALE': 0} later ran: 0
+[a] run([build_sites, repro_checks, later]) exit 1 {'build_sites': 'error: ChecksumMismatchError: /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a', 'repro_checks': 'ok', 'later_stage': 'ok'} {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 26, 'PASS': 1, 'STALE': 0} later ran: 1
+[a] build_sites.json staleness: None | stored B build QC sites: 783
+[a] later stage alone afterwards: exit 0 {'later_stage': 'ok'} later ran: 1 | gate: ok
+[b] control (B build current): run([repro_checks, later]) exit 1 {'repro_checks': "error: ReproductionFailure: 8 reproduction target(s) outside tolerance: ['QC sites: Asia',", 'later_stage': 'skipped: reproduction gate closed (repro_checks: error: ReproductionFailure: 8 reproductio'} {'DEVIATION': 0, 'FAIL': 8, 'INFO': 1, 'NOT RUN': 8, 'PASS': 10, 'STALE': 0} later ran: 0
+[b] make all (fetch_srdb unreachable): exit 2
+    statuses: {
+ "fetch_srdb": "unavailable: https://raw.githubusercontent.com/...: ConnectionError after 4 atte",
+ "fetch_cosore": "ok",
+ "fetch_naturalearth": "ok",
+ "cosore_annual": "ok",
+ "build_sites": "skipped: upstream fetch_srdb not available",
+ "site_diagnostics": "skipped: upstream build_sites not available",
+ "fetch_worldclim": "ok",
+ "fetch_soilgrids": "ok",
+ "modis_points": "skipped: upstream build_sites not available",
+ "features": "skipped: upstream build_sites, modis_points not available",
+ "clean_test": "skipped: upstream features not available",
+ "repro_checks": "ok",
+ "later_stage": "skipped: upstream features not available"
+}
+    summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 26, 'PASS': 1, 'STALE': 0} later ran: 0
+[b] later stage alone afterwards: exit 0 {'later_stage': 'ok'} later ran: 1 | gate: ok
+[b] features.json staleness: None | build_sites.json staleness: None
+[b] control: run([repro_checks]) alone now: exit 1 {'DEVIATION': 0, 'FAIL': 8, 'INFO': 1, 'NOT RUN': 8, 'PASS': 10, 'STALE': 0}

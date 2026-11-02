@@ -1,0 +1,61 @@
+catalog lacks 3 expected item(s), e.g. ['h18v04 lst truncated', 'h26v05 lst truncated', 'h28v05 lst truncated']; no raster read
+catalog lacks 3 expected item(s), e.g. ['h18v04 lst truncated', 'h26v05 lst truncated', 'h28v05 lst truncated']; no raster read
+{
+ "six_year_range": {
+  "status": "ModisIncompleteError: the STAC catalog lacks 3 expected item(s) (first: h18v04 lst truncated); after review, list genuine gaps in sources.modis.accepted_catalog_gaps (and log the decision); no values written, see results/modis_points.json",
+  "cached": false,
+  "reads": 0,
+  "rec_status": "incomplete: no values written",
+  "n_raster_reads": 450,
+  "n_failed_reads": 0,
+  "catalog_gaps": [
+   "h18v04 lst truncated",
+   "h26v05 lst truncated",
+   "h28v05 lst truncated"
+  ],
+  "n_catalog_gaps": 3,
+  "ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet": null
+ },
+ "max_items_460_clip": {
+  "status": "ModisIncompleteError: the STAC catalog lacks 3 expected item(s) (first: h18v04 lst truncated); after review, list genuine gaps in sources.modis.accepted_catalog_gaps (and log the decision); no values written, see results/modis_points.json",
+  "cached": false,
+  "reads": 0,
+  "rec_status": "incomplete: no values written",
+  "n_raster_reads": 375,
+  "n_failed_reads": 0,
+  "catalog_gaps": [
+   "h18v04 lst truncated",
+   "h26v05 lst truncated",
+   "h28v05 lst truncated"
+  ],
+  "n_catalog_gaps": 3,
+  "ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet": null
+ },
+ "max_items_500_overlap": {
+  "status": "ok",
+  "cached": false,
+  "reads": 381,
+  "rec_status": null,
+  "n_raster_reads": 381,
+  "n_failed_reads": 0,
+  "catalog_gaps": [],
+  "n_catalog_gaps": 0,
+  "ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet": "b65bf3ff63e1"
+ },
+ "n_items_lst_clip": 460,
+ "n_items_npp_clip": 10,
+ "n_items_lst_overlap": 462,
+ "n_items_npp_overlap": 10
+}

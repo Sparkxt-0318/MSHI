@@ -1,0 +1,57 @@
+WorldClim zip hash is not pinned in configs/v3.yaml; recorded 07e330c9c4fb1c788ca000988929b8adce2aee5d0f0524f43419df390687527b
+download http://127.0.0.1:44277/wc/wc2.1_2.5m_bio.zip failed (HTTP 503); retry 1/1 in 2s
+WorldClim zip hash is not pinned in configs/v3.yaml; recorded 07e330c9c4fb1c788ca000988929b8adce2aee5d0f0524f43419df390687527b
+WorldClim zip hash is not pinned in configs/v3.yaml; recorded 07e330c9c4fb1c788ca000988929b8adce2aee5d0f0524f43419df390687527b
+{
+ "1_fresh_worldclim": {
+  "status": "ok",
+  "downloads": 1,
+  "http_requests": 1
+ },
+ "1_fresh_soilgrids": {
+  "status": "ok",
+  "downloads": 8,
+  "http_requests": 8
+ },
+ "a_worldclim_vars_12_server_down": {
+  "status": "DownloadError: http://127.0.0.1:44277/wc/wc2.1_2.5m_bio.zip: failed after 2 attempts (HTTP 503)",
+  "downloads": 1,
+  "http_requests": 2
+ },
+ "a_files_after": {
+  "n_tifs": 7,
+  "zip": false,
+  "zip_sidecar": false,
+  "layer_sidecar": false
+ },
+ "a_worldclim_vars_12_server_up": {
+  "status": "ok",
+  "downloads": 1,
+  "http_requests": 1
+ },
+ "b_killed": "simulated kill before the sidecar",
+ "b_file_present_without_sidecar": true,
+ "b_rerun": {
+  "status": "ok",
+  "downloads": 1,
+  "http_requests": 1
+ },
+ "c_killed": "simulated kill during extraction",
+ "c_files_after_kill": {
+  "n_tifs": 2,
+  "zip": true,
+  "zip_sidecar": true,
+  "layer_sidecar": false
+ },
+ "c_rerun": {
+  "status": "ok",
+  "downloads": 0,
+  "http_requests": 0
+ },
+ "c_files_after_rerun": {
+  "n_tifs": 19,
+  "zip": true,
+  "zip_sidecar": true,
+  "layer_sidecar": true
+ }
+}

@@ -71,10 +71,13 @@ manuscript under review.
 Stages: fetch_srdb, fetch_cosore, fetch_naturalearth, cosore_annual, build_sites, site_diagnostics,
 fetch_worldclim, fetch_soilgrids, modis_points, features, clean_test, repro_checks (+ smoke_subset in
 `--smoke` runs). Every source version, path, analysis threshold, reproduction tolerance and seed is in
-`configs/v3.yaml` (*amended 2026-11-02, R-P1-20:* the re-run deviation tolerance was a code literal and is
-now `clean_test.deviation_atol`; the code keeps only numerical slack, 1e-12 in tolerance comparisons, and
-network retry/timeout defaults). A stage whose source cannot be reached is logged as `blocked` and its
-dependants are skipped (never mocked).
+`configs/v3.yaml` (*amended 2026-11-02, R-P1-20 and R-P1-21:* the re-run deviation tolerance
+(`clean_test.deviation_atol`), the minimum number of sites for the NPP r (`repro_checks.npp_min_sites`) and
+the off-land search radius and site-diameter bins of `site_diagnostics` were code literals and are now in
+the config; the code keeps only numerical slack, 1e-12 in tolerance comparisons, network retry/timeout
+defaults and how many examples a result lists). A stage whose source the egress proxy refuses is logged as
+`blocked`, one whose source cannot be reached as `unavailable` (*corrected 2026-11-02, R-P1-21:* this said
+`blocked` for both; D-P1-18); their dependants are skipped (never mocked).
 Output layout: `data/raw/` (downloads, gitignored), `data/interim/` (regenerable; gitignored),
 `data/derived/` (small committed tables), `results/` (committed JSON; `run_log.jsonl` holds the
 timestamps and run times, so result JSON files carry none). *Corrected 2026-11-02 (R-P1-14):* this entry
@@ -179,18 +182,21 @@ its hash are unchanged, no value changed, and no Europe data were used. Evidence
 new `LockedTest` run on two synthetic feature tables (real 971-site geometry, synthetic covariates and
 target; one selects OLS-TP, the other XGB/ALL, which exercises the seed spread and the permutation-importance
 AOA) give bit-identical selection tables, selected models, primary metrics, bootstrap CIs and AOA
-results; only random-forest entries differ, at the 1e-16 level (*corrected 2026-11-02, R-P1-20:* this
-said "the 19 entries, by ≤ 5e-16"; the size is data-dependent, see DEV-P1-15).
+results; only random-forest entries differ, at the 1e-16 to 1e-15 level (*corrected 2026-11-02, R-P1-20
+and R-P1-21:* this said "the 19 entries, by ≤ 5e-16", then "at the 1e-16 level"; the size is
+data-dependent, see DEV-P1-15).
 Re-runs write `results/clean_test_rerun_{qc,repo}.json` with `lock`, `_provenance` and a `vs_locked`
-block (`identical` = same model and every primary metric within `clean_test.deviation_atol` = 1e-9); the
+block (`identical` = same model and every primary metric within `clean_test.deviation_atol` = 1e-9, a value
+pinned by a test since R-P1-21); the
 locked result in `docs/handoff/results/` stays primary and is never overwritten. `LockedTest` itself
 verifies the lock (only tests on synthetic data may opt out). The stage also refuses feature tables that
 are not the recorded outputs of a current `results/features.json` (other code or config, or bytes changed
 since; D-P1-17). *Amended 2026-11-02 (R-P1-20):* the lock check also requires `clean_test.variants` to
 re-run every locked result (`qc` and the plan-specified `repo` sensitivity), and the reproduction table
 reports both re-runs. These edits to the stage wrapper changed the syntax-tree pin of `clean_test.py`
-(`66368bfa…` → `31e2f191…`); the `LockedTest` class (selection, scoring, metrics, AOA) is unchanged, and
-a second pin now fixes it alone (`9487b2b4…`, identical at `b74e590`, `9e17a36` and now). Tests: refusal for a modified plan (also with
+(`66368bfa…` → `31e2f191…`; *R-P1-21:* → `0feeaa0f…`, because the wrapper now records `features.json` as
+the re-runs' input); the `LockedTest` class (selection, scoring, metrics, AOA) is unchanged, and a second
+pin fixes it alone (`9487b2b4…`, identical at `b74e590`, `9e17a36`, `a6c00bc` and now). Tests: refusal for a modified plan (also with
 config and sidecar re-hashed), a whitespace change, a mismatched sidecar, 22 kinds of edit to the locked
 block each with and without a re-hashed config (the refusal message never prints a replacement hash), an
 alternative `--config` file, a modified locked result; every value the plan states is compared with the
@@ -204,7 +210,9 @@ it is now **exact**, because the Europe test set is closed and any change in it 
 selected model or any primary metric differs by more than 1e-9). *Amended 2026-11-02 (R-P1-20):* a
 second such row covers the repo-filter sensitivity re-run, and `tests/test_guards.py` holds a literal copy
 of the brief's target table (checked against `PROMPT_mshi_v3.md`), so loosening a target in the config
-fails the tests instead of only changing the table.
+fails the tests instead of only changing the table. *Amended 2026-11-02 (R-P1-21):* the 1e-9 that separates
+PASS from DEVIATION in the re-run rows moved into the config in R-P1-20 without such an anchor (a config
+edit could turn a deviation into PASS); `tests/test_guards.py` now pins it too.
 
 **D-P1-11 Additions that change no reproduced number.** Records table carries extra SRDB columns
 for later phases (`srdb_row` = original CSV row index, raw coordinate strings `lat_str`/`lon_str` for
@@ -260,29 +268,36 @@ All 27 are fixed in this commit; the main ones:
 scikit-learn then sums the per-tree predictions in thread-completion order, so identical fits give
 predictions differing by ~1e-16 between runs. v3 fits with `n_jobs=2` (identical forests) and predicts
 with one thread (`rf.predict_n_jobs: 1`, part of the locked block), which fixes the summation order.
-Effect (*corrected 2026-11-02, R-P1-20*; this said "≤ 5e-16, no other value changes"): RF entries of the
-selection table and of `all_candidates_on_test` change at the 1e-16 level. The size depends on the data:
-the second review measured up to 6.7e-16 absolute on synthetic tables at the locked settings (relative
-differences are larger where an R² is near 0). If RF were the selected model, its primary metrics, seed
+Effect (*corrected 2026-11-02, R-P1-20 and R-P1-21*; this said "≤ 5e-16, no other value changes", then
+"at the 1e-16 level"): RF entries of the selection table and of `all_candidates_on_test` change at the
+1e-16 to 1e-15 level. The size depends on the data: on synthetic tables at the locked settings the second
+review measured up to 6.7e-16 absolute, the third up to 1.3e-15 (relative differences are larger where an
+R² is near 0). If RF were the selected model, its primary metrics, seed
 spread and AOA results would change by similar amounts (up to 5.7e-14 absolute was measured). OLS-TP and
 XGB values are bit-identical, so the locked result's model (OLS-TP, CV R² 0.143 vs 0.132 for the best
 RF) and every reported number are unaffected. The previous code was not reproducible with itself on RF
 entries; the new code is.
 
 **DEV-P1-16 MODIS stage** (*rewritten 2026-11-02, R-P1-20*). Differences from the prototype
-`modis_points_lst.py`. When every raster read succeeds and the catalog is complete, (1)-(5) and (7) change
-no value; (6) can change an LST mean, and only if two Terra items share the earliest date of a month:
+`modis_points_lst.py`. When every raster read succeeds and the catalog is complete, (1)-(5), (7) and (8)
+change no value; (6) can change an LST mean, and only if two Terra items share the earliest date of a month:
 (1) a read still failing after its 4 attempts is retried once more in a second pass with a fresh token;
 if any read still fails the stage fails and writes no values (the prototype printed the failure and
 averaged the remaining rasters, silently changing those sites' means). The former `max_failed_reads`
 setting was removed: any value above 0 made the stage report ok with partial means that `features` then
 refused;
 (2) the STAC search is checked before any raster is read: every tile needs one NPP item per year of
-`datetime` and an LST composite in every month, and no search may return `max_items_per_tile` items
-(possible truncation). A gap fails the stage, with the gaps listed in `results/modis_points.json`, unless
-it is listed in `sources.modis.accepted_catalog_gaps` (empty; entries only after review, with a logged
-decision). The prototype averaged whatever the catalog returned, and the v3 cache would have kept such a
-partial mean after the catalog recovered;
+`datetime` and, in every month, an LST composite dated in the first `lst.composite_days` (8) days of the
+month, and no search may return `max_items_per_tile` items (possible truncation). A gap fails the stage,
+with every gap listed in `results/modis_points.json`, unless it is listed in
+`sources.modis.accepted_catalog_gaps` (empty; entries only after review, with a logged decision). The
+prototype averaged whatever the catalog returned, and the v3 cache would have kept such a partial mean
+after the catalog recovered. *Amended 2026-11-02 (R-P1-21):* the check was month-granular, so a month whose
+first 8-day composite was missing (a later one present) passed, and its mean used the later composite.
+MOD11A2 composites start every 8 days (day of year 1, 9, …, 361), so the first composite of every month
+starts on day 1–8; this follows the product's 8-day calendar and could not be checked against the live
+catalog (blocked). The failure record listed only 100 gaps and counted the planned reads as made; it now
+lists every gap and records 0 reads;
 (3) per-site means are taken over rasters in sorted (kind, date, href) order, so they do not depend on
 thread completion order;
 (4) the cache in `data/interim/` carries a key: SHA-256 of `sources.modis`, of the point set, of the whole
@@ -292,14 +307,22 @@ table. The cache is reused, and `load_modis_points` (used by `features` and the 
 table, only if the key and the table's bytes match and the cached run had no failed reads; a cache hit
 rewrites the original run's record;
 (5) the blob-storage host of the first COG is probed before extraction, so a policy block of that host
-is reported as `blocked` instead of yielding all-NaN values;
+is reported as `blocked` instead of yielding all-NaN values. *Amended 2026-11-02 (R-P1-21):* a stale cache
+is no longer deleted before a re-extraction; it stays until a new extraction replaces it, so after a
+blocked re-extraction `features` and the NPP check report why the old table is refused (status `stale`;
+the error is now a `StaleInputError`) instead of a missing file;
 (6) LST items are ordered by (date, item id) before taking the first composite of each month; the
 prototype ordered by date only, keeping the API's order for identical dates. If the catalog holds two
 Terra items on the earliest date of a month, the smaller id is used, and every such tie is listed in
 `results/modis_points.json` (`lst_same_date_ties`), so a difference from the handoff can be traced. Whether
 the real catalog has such ties is unknown here (blocked). LST enters only the C8+MODIS and ALL
 candidates; the locked results select OLS-TP, which uses no LST;
-(7) `lst.composite` is read and validated (only `first_of_month`, the handoff rule, is implemented).
+(7) `lst.composite` is read and validated (only `first_of_month`, the handoff rule, is implemented);
+(8) (*added 2026-11-02, R-P1-21*) the STAC search returns items whose time span overlaps `datetime`, so a
+composite dated outside the range (e.g. one starting in late December 2019 and ending in January 2020, if
+the catalog dates it so; not checkable here) can be returned. It is used, as in the prototype (the LST
+mean then covers one more month), and every such tile period is listed in `results/modis_points.json`
+(`periods_outside_datetime`).
 
 **D-P1-17 Provenance and stale results.** Every stage result JSON now carries `_provenance`: SHA-256 of
 the config and of the `mshi` package source. The reproduction table marks a row STALE if its result
@@ -307,9 +330,11 @@ came from another config or code, and NOT RUN, with the reason, if the producing
 in the current invocation, even when an older file exists. The regression tests fail on a stale result.
 *Amended 2026-11-02 (R-P1-20):* provenance was checked per result only, so a stage run on upstream
 outputs from another config was stamped current (e.g. `make features` after a config change, without
-re-running `build_sites`). Now (a) each result also records `_outputs`, the SHA-256 of every file the
-stage wrote, and a result is current only if its config and code hashes match and every recorded output
-still has its recorded bytes; (b) every stage that reads another stage's files first calls
+re-running `build_sites`). Now (a) each result also records `_outputs`, the SHA-256 of the files the
+stage wrote for later stages (*corrected 2026-11-02, R-P1-21:* this said "every file the stage wrote"; the
+fetch stages of pinned sources record none, because their readers check the pinned hashes or commit, and
+cache sidecars are checked by their own stage), and a result is current only if its config and code hashes
+match and every recorded output still has its recorded bytes; (b) every stage that reads another stage's files first calls
 `require_outputs` (the upstream result is current, records a complete run, and lists those files as its
 outputs): `build_sites` for the COSORE table, `site_diagnostics`, `modis_points` and `features` for the
 site tables, `features` for the MODIS table and every WorldClim/SoilGrids raster, `clean_test` for the
@@ -318,7 +343,23 @@ hashes taken when the run started, not when the result was written, so a result 
 was edited while the stage ran; (d) the raster fetches keep a `*.source.json` sidecar with the request
 that produced each file and re-fetch when the configured request (e.g. SoilGrids depth or statistic,
 WorldClim URL or pinned hash) or the file changes; the SoilGrids file name now includes depth and
-statistic.
+statistic. *Amended 2026-11-02 (R-P1-21):* (e) results also record `_inputs`, the SHA-256 of each upstream
+result the stage read, and a result is current only if each of those is unchanged and itself current
+(checked recursively). Before, a result stayed current when an upstream stage was re-run under the same
+config and code but wrote other bytes (an unpinned source fetched again: WorldClim, SoilGrids, a MODIS
+re-extraction), so `make features` followed by `make repro` reported locked-test rows from re-runs on
+feature tables that no longer existed, and the reproduction gate opened on them; (f) outputs under
+`provenance.local_only_roots` (`data/raw`, `data/interim`: gitignored) may be absent without making a
+result stale, and `require_outputs` refuses to hand an absent file to a stage. Before, a fresh clone of
+results committed from a networked run would have shown the NPP rows STALE and failed `make test`; a test
+checks that these roots are exactly the gitignored ones; (g) `Config.root_key` matches paths as written
+before resolving symlinks, so a symlinked sub-directory of a root (e.g. `data/raw/worldclim` on another
+disk) works again; (h) the raster fetches never delete verified data before a replacement download has
+succeeded; the WorldClim pin is verified, not part of the request (pinning the hash a download recorded
+needs no request), and the SoilGrids request hash covers the WCS parameters as built by the code, not only
+the configured fields; (i) `.gitattributes` turns off line-ending conversion for every hashed path, and
+JSON, CSV, Markdown and the run log are written with `\n` on every platform: on a CRLF checkout (Git for
+Windows' default `core.autocrlf`, `[UNVERIFIED]` here) every result read as stale and the lock refused.
 Each `run_log.jsonl` record carries the git commit (`+dirty` if code, config, tests, environment files
 or the handoff bundle have uncommitted or untracked changes), the config and code hashes, and the
 requested stages. `results/environment.json` is written only by full (`--stage all`) runs. The
@@ -338,12 +379,20 @@ result is not current, D-P1-17, or a reproduction row is STALE), counted in exit
 rows are all STALE used to exit 0; (b) "later stages will not run on non-reproducing inputs" was not
 enforced. Now `run()` skips every stage ordered after `repro_checks` unless `repro_checks` finished `ok`
 in the same invocation or, when it is not part of the invocation, the stored table is current and has
-no FAIL or STALE row; (c) a policy block is recognised by the tunnel status only (`Tunnel connection
+no FAIL or STALE row (*amended 2026-11-02, R-P1-21:* and no NOT RUN row, in both cases: a producer that
+failed in an invocation turned the current build's FAIL rows into NOT RUN, which opened the gate. Smoke
+runs do not apply the gate: their outputs are not results and they never run `repro_checks`, so the gate
+would have blocked every later-phase stage in `make smoke`); (c) a policy block is recognised by the tunnel status only (`Tunnel connection
 failed: 403/407` from requests, `CONNECT tunnel failed, response 403/407` from git, checked against this
 container's proxy). Before, any "403"/"407" in the message counted, so a dead proxy on a port such as
-1403 was reported as `blocked`; (d) the COSORE checkout check also refuses gitignored files (the pinned
-commit ignores `doc` and `Meta`, so a dataset directory with such a name was read but invisible to
-`git status`).
+1403 was reported as `blocked` (*amended 2026-11-02, R-P1-21:* `git fetch` failures are classified like
+downloads: HTTP 408/429/5xx are retried and then `error`, a proxy that cannot reach the host, CONNECT 5xx,
+is retried and then `unavailable`; a 5xx used to fail at once); (d) the COSORE checkout check also refuses
+gitignored files (the pinned commit ignores `doc` and `Meta`, so a dataset directory with such a name was
+read but invisible to `git status`). *Amended 2026-11-02 (R-P1-21):* the check now covers only the paths
+that are read (the datasets directory and the licence) and ignores operating-system metadata files
+(`.DS_Store`, `._*`, `Thumbs.db`, `desktop.ini`): refusing every ignored file made opening the checkout in
+Finder or RStudio stop `make all`. The checkout converts no line endings (`core.autocrlf false`).
 
 **F-P1-19 The NPP reproduction check is a reconstruction `[UNVERIFIED method]`.** No handoff script
 computes "NPP r = 0.982 vs committed" (prep_log D8): `validate_features.py` compares the committed GEE
@@ -387,6 +436,62 @@ changes; no reproduced number changes; the locked block and its hash do not chan
 `clean_test.deviation_atol: 1.0e-9`, `site_diagnostics.original_asia_table` and `original_asia_box`;
 SoilGrids `file_pattern` is now `{var}_{depth}_{statistic}_global_0p05.tif`. Record:
 `docs/review/2026-11-02/fix_verification.md` (with the reviewers' scripts in `fixcheck_scripts/`).
+*Corrected 2026-11-02 (R-P1-21):* two statements above were too broad. "Checks `source` under any
+projection" did not hold for projections combined with options that change the header line, or for a
+`source` stored as an index; and the transitive-provenance fix covered a change of config or code, not
+upstream content that changed under the same config. Both are fixed in R-P1-21.
+
+**R-P1-21 Third check: the second round of fixes verified (2026-11-02).** After `a6c00bc`, four reviewers
+re-ran the fixes of R-P1-20 by area (provenance chain and gate; MODIS and rasters; reproduction table,
+guards and docs) and ran `python -m mshi.run --stage all` end to end on stand-ins for the blocked sources
+(a synthetic WorldClim zip and SoilGrids GeoTIFFs, a fake STAC catalog and raster reads, a light locked
+test with the real lock verified and a synthetic target; nothing real was scored); an adversarial
+verifier re-ran every finding. Result: the end-to-end run works (every stage ran; a second run made no
+download, re-used the MODIS cache and wrote byte-identical results; a SoilGrids statistic change re-fetched
+exactly the 8 rasters; the 17 site-build rows equal the committed values). 16 of the 20 fixes hold, 4
+partly. **22 new findings, 18 distinct** (four found by two reviewers): 17 confirmed and 1 uncertain, all
+low after verification (one rated medium by its finder). None changes a reproduced number. Several came
+from the R-P1-20 fixes themselves (marked †). All are fixed in this commit, with tests; the new test
+cases fail on the previous commit (33 of 36 new or changed cases; the 3 others are old cases of a changed
+test):
+- results were not bound to the upstream results they read, so a re-fetched unpinned source left
+  downstream numbers, and the reproduction gate, "current" → D-P1-17 (e);
+- † gitignored outputs would have made committed results STALE on a fresh clone → D-P1-17 (f);
+- † `root_key` broke a symlinked sub-directory of a root → D-P1-17 (g);
+- † pinning the recorded WorldClim hash, or changing the layer count, deleted the verified layers and zip
+  before a re-download; a SoilGrids request changed in code reused old rasters → D-P1-17 (h);
+- a CRLF checkout made every result stale and the lock refuse; CSV and JSON used the platform line ending
+  → D-P1-17 (i);
+- † a producer that failed in an invocation turned FAIL rows into NOT RUN and opened the gate; † smoke runs
+  could never run a later-phase stage → D-P1-18 (b);
+- a refused MODIS table was `error` in `features` but STALE in the table → DEV-P1-16 (5);
+- `git fetch` did not retry HTTP 5xx → D-P1-18 (c); † the COSORE worktree check refused harmless OS and
+  editor files (.DS_Store, .Rproj.user) → D-P1-18 (d);
+- MODIS: a missing first composite of a month passed the catalog check (R-P1-20's fix was partial); the
+  failure record counted planned reads as made and cut the gap list at 100; periods outside `datetime`
+  were used without a record (the uncertain finding: whether the real catalog returns such items could
+  not be checked) → DEV-P1-16 (2), (8);
+- `read_table`: a `source` index, or a CSV projection with options that change the header line, escaped
+  the content check (R-P1-20's fix was partial) → `mshi/io.py` rule (4), whose docstring now states the
+  remaining limit (a renamed column is caught only by the hash rule);
+- † `deviation_atol` moved into the config without an anchor → pinned by a test (D-P1-10);
+- code literals still decided results (NPP minimum overlap, off-land search radius, site-diameter bins) →
+  config (D-P1-1);
+- documentation: "every file the stage wrote", "every stage refuses inputs that are not the outputs of a
+  current upstream result", "the code keeps only numerical slack and network defaults", the allow-list
+  descriptions, D-P1-1's "logged as `blocked`", and the RF effect "at the 1e-16 level" (the third check
+  measured 1.3e-15 in an RF table entry) → corrected in README, config comments, `legacy/README.md`,
+  D-P1-1, D-P1-9, D-P1-17, DEV-P1-15 and `docs/CHECKPOINT1.md`.
+Config changes (the config hash changes; the locked block and its hash do not): added
+`provenance.local_only_roots: [raw, interim]`, `sources.modis.lst.composite_days: 8`,
+`site_diagnostics.offland_search_deg: 5.0` and `diameter_bins_km: [5, 10, 20]`,
+`repro_checks.npp_min_sites: 3`; comments corrected. New `.gitattributes`. The syntax-tree pin of
+`clean_test.py` changed (D-P1-9); the `LockedTest` pin did not. Record:
+`docs/review/2026-11-02/fix_verification_3.md` (scripts in `fixcheck3_scripts/`). Reviews stop here for
+Checkpoint 1: the three rounds found 27, 20 and 18 problems, of falling severity (1 high, 7 medium and 19
+low; then 20 low; then 18 low), none of which changed a reproduced number; the code that cannot run here
+(rasters, MODIS, the locked-test re-run on real features) remains the main risk until the sources are
+reachable (Q-1).
 
 ## 2026-11-02 — Checkpoint 1: what in the handoff is wrong (F-H)
 

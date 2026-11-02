@@ -1,0 +1,29 @@
+catalog lacks 1 expected item(s), e.g. ['h18v04 lst 2022-05']; no raster read
+{
+ "pkg": "fixcheck3_scripts/verify-modis-rasters/pkg/head/mshi/__init__.py",
+ "tiles": [
+  "h10v04",
+  "h18v04",
+  "h19v04"
+ ],
+ "n_sites": 9,
+ "run": {
+  "status": "ModisIncompleteError: the STAC catalog lacks 1 expected item(s) (first: h18v04 lst 2022-05); after review, list genuine gaps in sources.modis.accepted_catalog_gaps (and log the decision); no values written, see results/modis_points.json",
+  "cached": false,
+  "actual_reads": 0,
+  "rec.status": "incomplete: no values written",
+  "rec.n_raster_reads": 373,
+  "rec.n_failed_reads": 0,
+  "rec.n_catalog_gaps": 1,
+  "rec.len(catalog_gaps)": 1,
+  "rec.catalog_gaps[:4]": [
+   "h18v04 lst 2022-05"
+  ],
+  "rec.lst_same_date_ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet_sha12": null
+ },
+ "parquet_exists": false
+}

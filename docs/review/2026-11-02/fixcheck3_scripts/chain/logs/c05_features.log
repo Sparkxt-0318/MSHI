@@ -1,0 +1,4 @@
+WARNING:mshi:stages not completed: {'features': 'stale: results/build_sites.json: produced with a different config; re-run the stage that writes it (or `make all`)'}
+WARNING:mshi:stages not completed: {'clean_test': 'stale: results/features.json: produced with a different config; re-run the stage that writes it (or `make all`)'}
+features under C: 2 {'features': 'stale: results/build_sites.json: produced with a different config; re-run the stage that writes it (or `make all`)'}
+clean_test under C: 2 {'clean_test': 'stale: results/features.json: produced with a different config; re-run the stage that writes it (or `make all`)'}

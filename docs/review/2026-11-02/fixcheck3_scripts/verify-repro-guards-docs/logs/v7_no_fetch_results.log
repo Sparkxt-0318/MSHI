@@ -1,0 +1,8 @@
+sandbox results before: ['cosore_annual.json']
+build_sites OK without fetch results: records_after_qc 3694 sites_qc 971 sites_repo 1225
+site_diagnostics OK without fetch_naturalearth.json; offland n 4
+sandbox results after: ['build_sites.json', 'cosore_annual.json', 'site_diagnostics.json']
+sandbox build_sites _outputs == committed _outputs: True
+committed fetch_srdb.json has _outputs: False | hash-like keys: ['commit', 'licence_sha256', 'sha256', 'sha256_pinned']
+committed fetch_cosore.json has _outputs: False | hash-like keys: ['commit', 'licence_sha256', 'tree']
+committed fetch_naturalearth.json has _outputs: False | hash-like keys: ['commit', 'files_sha256']

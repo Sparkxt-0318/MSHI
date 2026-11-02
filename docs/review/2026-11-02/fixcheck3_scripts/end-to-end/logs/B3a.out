@@ -1,0 +1,163 @@
+{
+ "label": "B3a_gap",
+ "exit_code": 1,
+ "seconds": 48.1,
+ "stages": [
+  [
+   "fetch_srdb",
+   "ok",
+   0.02,
+   null
+  ],
+  [
+   "fetch_cosore",
+   "ok",
+   0.45,
+   null
+  ],
+  [
+   "fetch_naturalearth",
+   "ok",
+   0.02,
+   null
+  ],
+  [
+   "cosore_annual",
+   "ok",
+   40.61,
+   null
+  ],
+  [
+   "build_sites",
+   "ok",
+   3.54,
+   null
+  ],
+  [
+   "site_diagnostics",
+   "ok",
+   1.85,
+   null
+  ],
+  [
+   "fetch_worldclim",
+   "ok",
+   0.06,
+   null
+  ],
+  [
+   "fetch_soilgrids",
+   "ok",
+   0.01,
+   null
+  ],
+  [
+   "modis_points",
+   "error: ModisIncompleteError: the STAC catalog lacks 1 expected item(s) (first: h18v04 lst 2024-12); after review, list genuine gaps in sources.modis.accepted_catalog_gaps (and log the decision); no values written, see results/modis_points.json",
+   0.84,
+   null
+  ],
+  [
+   "features",
+   "skipped: upstream modis_points not available",
+   0.0,
+   null
+  ],
+  [
+   "clean_test",
+   "skipped: upstream features not available",
+   0.0,
+   null
+  ],
+  [
+   "repro_checks",
+   "ok",
+   0.01,
+   null
+  ]
+ ],
+ "state": {
+  "raster_downloads": [],
+  "fetch_downloads": [
+   [
+    "srdb-data.csv",
+    false
+   ],
+   [
+    "LICENSE",
+    false
+   ],
+   [
+    "ne_50m_admin_0_countries.geojson",
+    false
+   ],
+   [
+    "ne_110m_land.geojson",
+    false
+   ],
+   [
+    "ne_50m_land.geojson",
+    false
+   ]
+  ],
+  "reachable": [
+   "https://planetarycomputer.microsoft.com/api/stac/v1",
+   "https://planetarycomputer.microsoft.com/api/sas/v1/token/modiseuwest/modis-061-cogs"
+  ],
+  "searches": 252,
+  "reads": 0,
+  "net_attempts": [],
+  "token_gets": 0,
+  "light_runs": 0
+ },
+ "staleness_after": {
+  "build_sites.json": null,
+  "clean_test_rerun_qc.json": null,
+  "clean_test_rerun_repo.json": null,
+  "cosore_annual.json": null,
+  "environment.json": "(no _provenance: environment.json)",
+  "features.json": null,
+  "fetch_cosore.json": null,
+  "fetch_naturalearth.json": null,
+  "fetch_soilgrids.json": null,
+  "fetch_srdb.json": null,
+  "fetch_worldclim.json": null,
+  "modis_points.json": null,
+  "reproduction_check.json": null,
+  "site_diagnostics.json": null
+ },
+ "results_changed": [
+  "modis_points.json",
+  "reproduction_check.json",
+  "reproduction_check.md",
+  "run_log.jsonl"
+ ]
+}
+SUMMARY {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 17, 'STALE': 0}
+ROW ('COSORE sites with an annual value', 'PASS', 66, '')
+ROW ('SRDB records after repo filters', 'PASS', 4771, '')
+ROW ('Records after coordinate check', 'PASS', 4781, '')
+ROW ('Records after QC', 'PASS', 3694, '')
+ROW ('QC removals: f_method', 'PASS', 450, '')
+ROW ('QC removals: f_quality', 'PASS', 260, '')
+ROW ('QC removals: f_coverage', 'PASS', 252, '')
+ROW ('QC removals: f_ecosys', 'PASS', 243, '')
+ROW ('QC removals: f_dup', 'PASS', 57, '')
+ROW ('QC sites: Asia', 'PASS', 387, '')
+ROW ('QC sites: North America', 'PASS', 257, '')
+ROW ('QC sites: Europe', 'PASS', 236, '')
+ROW ('QC sites: South America', 'PASS', 42, '')
+ROW ('QC sites: Africa', 'PASS', 26, '')
+ROW ('QC sites: Oceania', 'PASS', 23, '')
+ROW ('QC sites: total', 'PASS', 971, '')
+ROW ('Repo-filter sites: total', 'PASS', 1225, '')
+ROW ('Locked test: selected model', 'NOT RUN', None, 'modis_points: error (ModisIncompleteError)')
+ROW ('Locked test: Asia spatial-CV R²', 'NOT RUN', None, 'modis_points: error (ModisIncompleteError)')
+ROW ('Locked test: Europe n', 'NOT RUN', None, 'modis_points: error (ModisIncompleteError)')
+ROW ('Locked test: Europe R²', 'NOT RUN', None, 'modis_points: error (ModisIncompleteError)')
+ROW ('Locked test: site-bootstrap CI low', 'NOT RUN', None, 'modis_points: error (ModisIncompleteError)')
+ROW ('Locked test: site-bootstrap CI high', 'NOT RUN', None, 'modis_points: error (ModisIncompleteError)')
+ROW ('Locked test: re-run identical to the locked result', 'NOT RUN', None, 'modis_points: error (ModisIncompleteError)')
+ROW ('Locked test (repo-filter sensitivity): re-run identical to the locked result', 'NOT RUN', None, 'modis_points: error (ModisIncompleteError)')
+ROW ('NPP r vs committed NPP (original 889 sites)', 'NOT RUN', None, 'modis_points: error (ModisIncompleteError)')
+ROW ('Original sites with NPP missing in the committed tables but present in v3', 'NOT RUN', None, 'modis_points: error (ModisIncompleteError)')

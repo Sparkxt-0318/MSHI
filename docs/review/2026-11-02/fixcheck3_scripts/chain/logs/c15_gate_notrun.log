@@ -1,0 +1,5 @@
+build_sites under B: 0 {'build_sites': 'ok'}
+control repro_checks alone: 1 {'repro_checks': "error: ReproductionFailure: 8 reproduction target(s) outside tolerance: ['QC sites: Asia', 'QC sites", 'phase2_transfer': 'skipped: reproduction gate closed (repro_checks: error: ReproductionFailure: 8 reproduction target(s'} {'DEVIATION': 0, 'FAIL': 8, 'INFO': 0, 'NOT RUN': 10, 'PASS': 9, 'STALE': 0}
+build_sites error + repro + later stage: exit 1 {'build_sites': 'error: ChecksumMismatchError: /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scr', 'repro_checks': 'ok', 'phase2_transfer': 'ok'} {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 26, 'PASS': 1, 'STALE': 0} ran: ['phase2']
+later stage alone afterwards (stored table): exit 0 {'phase2_transfer': 'ok'} gate: ok ran: ['phase2']
+build_sites.json (config B build) staleness: None

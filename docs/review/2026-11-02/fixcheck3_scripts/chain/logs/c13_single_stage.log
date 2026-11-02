@@ -1,0 +1,8 @@
+['cosore_annual'] exit 0 {'cosore_annual': 'ok'}
+['build_sites'] exit 0 {'build_sites': 'ok'}
+['site_diagnostics'] exit 0 {'site_diagnostics': 'ok'}
+['repro_checks'] exit 0 {'repro_checks': 'ok'}
+staleness: {'build_sites.json': None, 'cosore_annual.json': None, 'reproduction_check.json': None, 'site_diagnostics.json': None}
+summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 17, 'STALE': 0}
+second run byte-identical results: True {}
+derived outputs equal the committed tables: True

@@ -273,7 +273,7 @@ def clean_test(cfg: Config) -> dict:
                      f"{lr[tag]['file']}; it is never overwritten.")
         R["vs_locked"] = compare_with_locked(R, read_json(cfg.repo_path(lr[tag]["file"])),
                                              cfg["clean_test"]["deviation_atol"])
-        write_result(cfg, R, f"clean_test_rerun_{tag}.json")
+        write_result(cfg, R, f"clean_test_rerun_{tag}.json", inputs=["features.json"])
         res[tag] = {"selected": R["selected"], "primary_r2": R["primary"]["r2"], "n": R["primary"]["n"],
                     "identical_to_locked": R["vs_locked"]["identical"]}
     return res

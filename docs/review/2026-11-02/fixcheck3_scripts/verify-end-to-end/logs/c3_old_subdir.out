@@ -1,0 +1,25 @@
+{
+ "pkg": "old",
+ "layout": "subdir",
+ "label": "old_subdir",
+ "exit": 0,
+ "downloads": [],
+ "stages": [
+  [
+   "fetch_worldclim",
+   "ok"
+  ],
+  [
+   "fetch_soilgrids",
+   "ok"
+  ]
+ ],
+ "fetch_worldclim.json": {
+  "_outputs_keys": [],
+  "n_outputs": 0
+ },
+ "fetch_soilgrids.json": {
+  "_outputs_keys": [],
+  "n_outputs": 0
+ }
+}

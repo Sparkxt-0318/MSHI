@@ -6,11 +6,13 @@ Failures are classified so that the run log says what actually happened:
   answered 403/407: ``Tunnel connection failed: 403`` from requests, ``CONNECT tunnel failed, response
   403`` from git). This is a network-policy block; the run log records the stage as ``blocked``. Only the
   tunnel status is matched, so a dead proxy is ``unreachable`` even if its port or the URL contains 403.
-- ``SourceUnavailableError(kind="unreachable")``: DNS or connection failures, or timeouts, still failing
-  after the retries. The run log records ``unavailable``.
+- ``SourceUnavailableError(kind="unreachable")``: DNS or connection failures, timeouts, or a proxy that
+  cannot reach the host (CONNECT answered 5xx), still failing after the retries. The run log records
+  ``unavailable``.
 - ``DownloadError``: the server answered with an error (HTTP 4xx other than 407/408/429 at once;
   408/429/5xx after the retries), a transfer was truncated on every attempt, or the body is not what
-  was expected. This is an ordinary error, not a policy block.
+  was expected. This is an ordinary error, not a policy block. ``git fetch`` (COSORE) is classified the
+  same way from git's messages.
 - ``ChecksumMismatchError``: the bytes do not match the pinned SHA-256. The file is not left at the
   destination.
 """
@@ -51,6 +53,14 @@ class ChecksumMismatchError(RuntimeError):
 
 _TUNNEL_DENIED = re.compile(r"Tunnel connection failed: 40[37]\b")              # http.client, via requests
 _GIT_TUNNEL_DENIED = re.compile(r"CONNECT tunnel failed, response 40[37]\b")      # curl, via git
+# git (curl) messages for a server answer to retry: "The requested URL returned error: 503",
+# "RPC failed; HTTP 502 curl 22 ..."; after the retries: DownloadError, as for HTTP in ``download``
+_GIT_HTTP_RETRY = re.compile(r"(returned error: |RPC failed; HTTP )(408|429|5\d\d)\b")
+# connection-level failures to retry; after the retries: unreachable
+_GIT_TRANSIENT = ("could not resolve", "failed to connect", "timed out", "connection", "early eof", "rpc failed",
+                  "unexpected disconnect", "connect tunnel failed")
+# operating-system metadata files that no stage reads (Finder, AppleDouble, Windows Explorer)
+_OS_METADATA = re.compile(r"(^|/)(\.DS_Store|\._[^/]+|Thumbs\.db|desktop\.ini)$")
 
 
 def _is_proxy_denial(e: Exception) -> bool:
@@ -59,6 +69,19 @@ def _is_proxy_denial(e: Exception) -> bool:
 
 def _git_proxy_denial(stderr: str) -> bool:
     return bool(_GIT_TUNNEL_DENIED.search(stderr))
+
+
+def _git_failure_kind(stderr: str) -> str:
+    """Class of a failed ``git fetch``: ``proxy_denied`` (CONNECT 403/407: a policy block), ``http`` (a server
+    answer to retry: 408/429/5xx), ``transient`` (connection-level: retry; includes a proxy that cannot reach
+    the host, CONNECT 5xx) or ``fatal`` (anything else, e.g. an unknown commit: no retry)."""
+    if _git_proxy_denial(stderr):
+        return "proxy_denied"
+    if _GIT_HTTP_RETRY.search(stderr):
+        return "http"
+    if any(k in stderr.lower() for k in _GIT_TRANSIENT):
+        return "transient"
+    return "fatal"
 
 
 def verify_sha256(path: Path, expected: str) -> None:
@@ -156,9 +179,12 @@ def _git(*args: str, cwd: Path | None = None) -> subprocess.CompletedProcess:
     return subprocess.run(cmd, capture_output=True, text=True, env=GIT_ENV)
 
 
-def verify_git_checkout(dest: Path, commit: str) -> dict:
-    """Raise unless ``dest`` is a checkout of ``commit`` with no modified, deleted, untracked or ignored
-    files (an ignored file, e.g. a dataset directory matching the repository's .gitignore, would be read)."""
+def verify_git_checkout(dest: Path, commit: str, pathspec: list[str] | None = None) -> dict:
+    """Raise unless ``dest`` is a checkout of ``commit`` whose files under ``pathspec`` (default: all) have
+    no modified, deleted, untracked or ignored files (an ignored file, e.g. a dataset directory matching the
+    repository's .gitignore, would be read). Callers pass the paths their stage reads, so files elsewhere
+    (e.g. an editor's project state at the top of the checkout) do not matter; operating-system metadata
+    files (.DS_Store, ._*, Thumbs.db, desktop.ini) are not read by any stage and are ignored everywhere."""
     dest = Path(dest)
     head = _git("rev-parse", "HEAD", cwd=dest) if (dest / ".git").exists() else None
     if head is None or head.returncode != 0:
@@ -167,42 +193,49 @@ def verify_git_checkout(dest: Path, commit: str) -> dict:
     if got != commit:
         raise ChecksumMismatchError(f"{dest}: HEAD {got} != pinned {commit}")
     st = _git("--no-optional-locks", "status", "--porcelain", "--untracked-files=all", "--ignored=matching",
-              cwd=dest)
-    if st.returncode != 0 or st.stdout.strip():
-        changed = st.stdout.strip().splitlines()[:10]
-        raise ChecksumMismatchError(f"{dest}: checkout of the pinned commit has local changes {changed}; "
+              "--", *(pathspec or ["."]), cwd=dest)
+    changed = [ln for ln in st.stdout.splitlines() if ln.strip() and not _OS_METADATA.search(ln[3:].rstrip("/"))]
+    if st.returncode != 0 or changed:
+        raise ChecksumMismatchError(f"{dest}: checkout of the pinned commit has local changes {changed[:10]} "
+                                    f"(or git status failed: {st.stderr.strip()[:200]}); remove those files, or "
                                     f"delete {dest} and re-fetch")
     tree = _git("rev-parse", "HEAD^{tree}", cwd=dest).stdout.strip()
     return {"commit": got, "tree": tree}
 
 
-def git_checkout_commit(repo_url: str, commit: str, dest: Path, retries: int = 4, sleep=time.sleep) -> dict:
-    """Shallow-fetch exactly ``commit`` into ``dest`` (idempotent); verify HEAD and a clean worktree."""
+def git_checkout_commit(repo_url: str, commit: str, dest: Path, retries: int = 4, sleep=time.sleep,
+                        pathspec: list[str] | None = None) -> dict:
+    """Shallow-fetch exactly ``commit`` into ``dest`` (idempotent); verify HEAD and a clean worktree under
+    ``pathspec`` (``verify_git_checkout``). The checkout converts no line endings (core.autocrlf false), so
+    its files have the committed bytes on every platform."""
     dest = Path(dest)
     if (dest / ".git").exists():
         h = _git("rev-parse", "HEAD", cwd=dest)
         if h.returncode == 0 and h.stdout.strip() == commit:
-            return {"path": str(dest), **verify_git_checkout(dest, commit), "downloaded": False}
+            return {"path": str(dest), **verify_git_checkout(dest, commit, pathspec), "downloaded": False}
     dest.mkdir(parents=True, exist_ok=True)
     if not (dest / ".git").exists():
         subprocess.run(["git", "init", "-q", str(dest)], check=True, env=GIT_ENV)
+        for k, v in (("core.autocrlf", "false"), ("core.eol", "lf")):
+            subprocess.run(["git", "-C", str(dest), "config", k, v], check=True, env=GIT_ENV)
         subprocess.run(["git", "-C", str(dest), "remote", "add", "origin", repo_url], check=True, env=GIT_ENV)
-    last = ""
+    last, kind = "", ""
     for attempt in range(retries):
         r = _git("fetch", "-q", "--depth", "1", "origin", commit, cwd=dest)
         if r.returncode == 0:
             break
         last = r.stderr.strip()
-        low = last.lower()
-        if _git_proxy_denial(last):
+        kind = _git_failure_kind(last)
+        if kind == "proxy_denied":
             raise SourceUnavailableError(f"{repo_url}@{commit}: blocked by proxy ({last})", kind="proxy_denied")
-        if not any(k in low for k in ("could not resolve", "failed to connect", "timed out", "connection",
-                                      "early eof", "rpc failed", "unexpected disconnect")):
+        if kind == "fatal":
             raise DownloadError(f"{repo_url}@{commit}: git fetch failed ({last})")
         if attempt < retries - 1:
             sleep(2 ** (attempt + 1))
     else:
+        if kind == "http":
+            raise DownloadError(f"{repo_url}@{commit}: git fetch failed after {retries} attempts ({last})")
         raise SourceUnavailableError(f"{repo_url}@{commit}: unreachable after {retries} attempts ({last})",
                                      kind="unreachable")
     subprocess.run(["git", "-C", str(dest), "checkout", "-q", "FETCH_HEAD"], check=True, env=GIT_ENV)
-    return {"path": str(dest), **verify_git_checkout(dest, commit), "downloaded": True}
+    return {"path": str(dest), **verify_git_checkout(dest, commit, pathspec), "downloaded": True}

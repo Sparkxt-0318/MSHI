@@ -7,6 +7,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -32,6 +33,9 @@ class Config:
         # set by mshi.run.run(): {"stages": [...], "status": {stage: status}, "provenance": {...}} for the
         # current invocation ("provenance" is the config/code snapshot taken when the run started)
         self.invocation: dict | None = None
+        # results read through mshi.io.require_current in this process: name -> SHA-256 of the bytes read.
+        # A stage records the ones it used as its ``_inputs`` (mshi.io.write_result).
+        self.reads: dict[str, str] = {}
 
     def __getitem__(self, key: str) -> Any:
         return self._d[key]
@@ -58,19 +62,25 @@ class Config:
 
     def root_key(self, p: str | Path) -> str:
         """``<root>:<relative path>`` for a file under one of the ``paths`` roots (the most specific one).
-        Portable across machines and sandboxes; used to record a stage's output files in its result."""
-        p = Path(p).resolve()
-        best: tuple[str, Path] | None = None
-        for root in self._d["paths"]:
-            try:
-                rel = p.relative_to(self.path(root).resolve())
-            except ValueError:
-                continue
-            if best is None or len(rel.parts) < len(best[1].parts):
-                best = (root, rel)
-        if best is None:
-            raise ValueError(f"{p} is not under any configured path root ({sorted(self._d['paths'])})")
-        return f"{best[0]}:{best[1].as_posix()}"
+        Portable across machines and sandboxes; used to record a stage's output files in its result.
+
+        The path is matched as written (made absolute, ``..`` removed, symlinks NOT resolved), so a file
+        under a symlinked sub-directory of a root (e.g. data/raw/worldclim on another disk) keeps its key;
+        only if that fails are both sides resolved (a path given through a symlink into a root)."""
+        for resolve in (False, True):
+            q = Path(p).resolve() if resolve else Path(os.path.abspath(p))
+            best: tuple[str, Path] | None = None
+            for root in self._d["paths"]:
+                base = self.path(root)
+                try:
+                    rel = q.relative_to(base.resolve() if resolve else Path(os.path.abspath(base)))
+                except ValueError:
+                    continue
+                if best is None or len(rel.parts) < len(best[1].parts):
+                    best = (root, rel)
+            if best is not None:
+                return f"{best[0]}:{best[1].as_posix()}"
+        raise ValueError(f"{p} is not under any configured path root ({sorted(self._d['paths'])})")
 
     def from_root_key(self, key: str) -> Path:
         root, _, rel = key.partition(":")

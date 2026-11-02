@@ -1,0 +1,24 @@
+{
+ "run": {
+  "status": "ok",
+  "cached": false,
+  "reads": 375,
+  "rec_status": null,
+  "n_raster_reads": 375,
+  "n_failed_reads": 0,
+  "catalog_gaps": [],
+  "n_catalog_gaps": 0,
+  "ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet": "a024dc24d98a"
+ },
+ "accepted_by_load_modis_points": true,
+ "lst_day_max_abs_change_vs_complete_catalog": 0.7499770390112399,
+ "sites_changed": 15,
+ "lst_day_n_change": [
+  0,
+  1
+ ]
+}

@@ -1,0 +1,76 @@
+...F..F.F.
+=================================== FAILURES ===================================
+____________________________ test_locked_test_rerun ____________________________
+
+cfg = <mshi.config.Config object at 0x7ffbcc46f230>
+
+    @pytest.mark.data
+    def test_locked_test_rerun(cfg):
+        T = cfg["reproduction_targets"]["locked_test"]
+        ct = load_result(cfg, "clean_test_rerun_qc.json")
+        assert ct["selected"]["learner"] == T["selected"]
+>       _check(ct["selected"]["cv_r2"], T["asia_cv_r2"], "Asia CV R2")
+
+/home/user/MSHI/tests/test_regression.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+value = 0.09199573544187599, t = {'value': 0.143, 'abs': 0.01}
+name = 'Asia CV R2'
+
+    def _check(value, t, name):
+>       assert _within(value, t), f"{name}: v3 {value} vs handoff {t['value']} (tolerance {t})"
+E       AssertionError: Asia CV R2: v3 0.09199573544187599 vs handoff 0.143 (tolerance {'value': 0.143, 'abs': 0.01})
+E       assert False
+E        +  where False = _within(0.09199573544187599, {'value': 0.143, 'abs': 0.01})
+
+/home/user/MSHI/tests/test_regression.py:24: AssertionError
+_____________________________ test_npp_correlation _____________________________
+
+cfg = <mshi.config.Config object at 0x7ffbcc46f230>
+
+    @pytest.mark.data
+    def test_npp_correlation(cfg):
+        rc = load_result(cfg, "reproduction_check.json")
+        if not rc.get("npp_check"):
+            pytest.skip("NPP check not run (modis_points output missing)")
+        t = cfg["reproduction_targets"]["npp_corr_original_sites"]
+>       _check(rc["npp_check"]["pearson_r"], t, "NPP r")
+
+/home/user/MSHI/tests/test_regression.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+value = -0.034361800755549614, t = {'value': 0.982, 'abs': 0.01, 'n_sites': 889}
+name = 'NPP r'
+
+    def _check(value, t, name):
+>       assert _within(value, t), f"{name}: v3 {value} vs handoff {t['value']} (tolerance {t})"
+E       AssertionError: NPP r: v3 -0.034361800755549614 vs handoff 0.982 (tolerance {'value': 0.982, 'abs': 0.01, 'n_sites': 889})
+E       assert False
+E        +  where False = _within(-0.034361800755549614, {'value': 0.982, 'abs': 0.01, 'n_sites': 889})
+
+/home/user/MSHI/tests/test_regression.py:24: AssertionError
+_____________________ test_reproduction_table_has_no_fail ______________________
+
+cfg = <mshi.config.Config object at 0x7ffbcc46f230>
+
+    @pytest.mark.data
+    def test_reproduction_table_has_no_fail(cfg):
+        rc = load_result(cfg, "reproduction_check.json")
+>       assert rc["summary"]["FAIL"] == 0, [r for r in rc["rows"] if r["status"] == "FAIL"]
+E       AssertionError: [{'diff': -0.051004, 'handoff': 0.143, 'note': '', 'quantity': 'Locked test: Asia spatial-CV R²', ...}, {'diff': 1.0, ... a value in both tables, joined on site_key; n = 672', 'quantity': 'NPP r vs committed NPP (original 889 sites)', ...}]
+E       assert 4 == 0
+
+/home/user/MSHI/tests/test_regression.py:105: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED ../../../../../../../home/user/MSHI/tests/test_regression.py::test_cosore_sites
+PASSED ../../../../../../../home/user/MSHI/tests/test_regression.py::test_record_and_site_counts
+PASSED ../../../../../../../home/user/MSHI/tests/test_regression.py::test_build_summary_identical_to_handoff
+PASSED ../../../../../../../home/user/MSHI/tests/test_regression.py::test_locked_rerun_reported_against_locked_result[qc]
+PASSED ../../../../../../../home/user/MSHI/tests/test_regression.py::test_locked_rerun_reported_against_locked_result[repo]
+PASSED ../../../../../../../home/user/MSHI/tests/test_regression.py::test_europe_sites_in_the_original_asia_table
+PASSED ../../../../../../../home/user/MSHI/tests/test_regression.py::test_fresh_rebuild_matches_committed_tables
+FAILED ../../../../../../../home/user/MSHI/tests/test_regression.py::test_locked_test_rerun
+FAILED ../../../../../../../home/user/MSHI/tests/test_regression.py::test_npp_correlation
+FAILED ../../../../../../../home/user/MSHI/tests/test_regression.py::test_reproduction_table_has_no_fail
+3 failed, 7 passed in 49.40s

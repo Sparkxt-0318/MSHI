@@ -1,0 +1,30 @@
+fetch_cosore failed
+Traceback (most recent call last):
+  File "/home/user/MSHI/mshi/run.py", line 163, in run
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+  File "/home/user/MSHI/mshi/data/fetch.py", line 45, in fetch_cosore
+    info = git_checkout_commit(c["repo_url"], c["commit"], cosore_repo_path(cfg))   # HEAD + clean worktree
+  File "/home/user/MSHI/mshi/netutil.py", line 185, in git_checkout_commit
+    return {"path": str(dest), **verify_git_checkout(dest, commit), "downloaded": False}
+                                 ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/user/MSHI/mshi/netutil.py", line 173, in verify_git_checkout
+    raise ChecksumMismatchError(f"{dest}: checkout of the pinned commit has local changes {changed}; "
+                                f"delete {dest} and re-fetch")
+mshi.netutil.ChecksumMismatchError: fixcheck3_scripts/verify-end-to-end/c2/raw/cosore/02f32e8e: checkout of the pinned commit has local changes ['!! inst/extdata/datasets/.DS_Store']; delete fixcheck3_scripts/verify-end-to-end/c2/raw/cosore/02f32e8e and re-fetch
+cosore_annual      skipped: upstream fetch_cosore not available
+build_sites        skipped: upstream cosore_annual not available
+stages not completed: {'fetch_cosore': "error: ChecksumMismatchError: fixcheck3_scripts/verify-end-to-end/c2/raw/cosore/02f32e8e: checkout of the pinned commit has local changes ['!! inst/extdata/datasets/.DS_Store']; delete fixcheck3_scripts/verify-end-to-end/c2/raw/cosore/02f32e8e and re-fetch", 'cosore_annual': 'skipped: upstream fetch_cosore not available', 'build_sites': 'skipped: upstream cosore_annual not available'}
+cosore_annual failed
+Traceback (most recent call last):
+  File "/home/user/MSHI/mshi/run.py", line 163, in run
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+  File "/home/user/MSHI/mshi/data/cosore.py", line 91, in cosore_annual
+    verify_git_checkout(cosore_repo_path(cfg), cfg["sources"]["cosore"]["commit"])   # pinned commit, unmodified
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/MSHI/mshi/netutil.py", line 173, in verify_git_checkout
+    raise ChecksumMismatchError(f"{dest}: checkout of the pinned commit has local changes {changed}; "
+                                f"delete {dest} and re-fetch")
+mshi.netutil.ChecksumMismatchError: fixcheck3_scripts/verify-end-to-end/c2/raw/cosore/02f32e8e: checkout of the pinned commit has local changes ['!! inst/extdata/datasets/.DS_Store']; delete fixcheck3_scripts/verify-end-to-end/c2/raw/cosore/02f32e8e and re-fetch
+stages not completed: {'cosore_annual': "error: ChecksumMismatchError: fixcheck3_scripts/verify-end-to-end/c2/raw/cosore/02f32e8e: checkout of the pinned commit has local changes ['!! inst/extdata/datasets/.DS_Store']; delete fixcheck3_scripts/verify-end-to-end/c2/raw/cosore/02f32e8e and re-fetch"}

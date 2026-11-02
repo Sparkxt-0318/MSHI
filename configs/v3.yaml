@@ -1,7 +1,8 @@
 # MSHI v3 pipeline configuration.
 # Every source version, path, analysis threshold, reproduction tolerance and seed used by `python -m mshi.run`
-# lives here. The code keeps only numerical slack (1e-12 in tolerance comparisons) and network retry/timeout
-# defaults. Changing a value here changes results: log every change in docs/DECISIONS.md.
+# lives here. The code keeps only numerical slack (1e-12 in tolerance comparisons), network retry/timeout
+# defaults, and how many examples a result lists. Changing a value here changes results: log every change in
+# docs/DECISIONS.md.
 
 version: 3
 
@@ -13,8 +14,16 @@ paths:                       # relative to the repository root
   figures: figures           # figures produced by mshi/figures (committed)
   handoff: docs/handoff      # 2026-11-02 handoff bundle (provenance, read-only)
 
+provenance:
+  # Path roots whose files are not committed (gitignored, so absent from a fresh clone). A result's recorded
+  # output there may be absent without the result being stale; a stage that needs the file refuses to run
+  # until it is regenerated (mshi/io.py; docs/DECISIONS.md R-P1-21). tests/test_guards.py checks that these
+  # are exactly the gitignored roots.
+  local_only_roots: [raw, interim]
+
 # Files under legacy/ are never read, except these (path: pinned SHA-256), used for the NPP reproduction
-# check and to add the 889 original sites to the MODIS point set.
+# check, to add the 889 original sites to the MODIS point set, and (training_features_v2 only) by
+# site_diagnostics item 5 (Europe test sites already in the original "Asia" training table).
 legacy_allowlist:
   legacy/data/processed/training_features_v2.parquet: 482892dfed5c0897a0743dab72e9c0b563da89f45f6410cdb86b8f080fb5338a
   legacy/data/processed/us_validation_features_v2.parquet: 1fa5d930dc2211cc9e5d19f4047105f6b6fa1f864ac335a3989afb2fec84c058
@@ -108,6 +117,9 @@ sources:
       scale: 0.02
       offset: -273.15        # -> deg C
       composite: first_of_month   # first 8-day composite of each month (the only rule implemented)
+      # MOD11A2 composites start every 8 days (day of year 1, 9, ..., 361), so the first composite of a month
+      # starts on day 1-8 of that month; a later first date means the catalog lacks it (a catalog gap)
+      composite_days: 8
 
 cosore_annual:
   min_obs_days: 150          # unique observation days per port
@@ -176,6 +188,8 @@ site_diagnostics:                      # exploratory checks only; no table is ch
   # (prep_log section 3: 25-180 E, -10-80 N); Europe test sites already in it are listed (F-H2)
   original_asia_table: legacy/data/processed/training_features_v2.parquet
   original_asia_box: [25.0, 180.0, -10.0, 80.0]
+  offland_search_deg: 5.0              # item 2: countries within this many degrees are searched for the nearest
+  diameter_bins_km: [5, 10, 20]        # item 3: sites whose records span more than each distance are counted
 
 features:
   worldclim_vars: 19
@@ -263,6 +277,9 @@ reproduction_targets:                  # handoff values and tolerances (PROMPT s
   # prep_log D8 also says the new extraction "recovers 189 sites lost to masked pixels"; no tolerance is
   # given in the brief, so this row is reported for information only
   npp_recovered_sites: {value: 189, info_only: true}
+
+repro_checks:
+  npp_min_sites: 3                     # NPP r is computed only with at least this many sites (else the row FAILs)
 
 smoke:
   n_sites: 50

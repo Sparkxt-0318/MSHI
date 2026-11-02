@@ -68,6 +68,23 @@ def test_source_column_checked_even_when_the_read_projects_other_columns(cfg, tm
     assert read_table(cfg, tmp_path / "real.parquet", columns=["longitude"]).shape == (3000, 1)
 
 
+def test_source_checked_as_an_index_and_under_header_changing_options(cfg, tmp_path):
+    """Third review: 'source' restored as a (multi-)index, and CSV projections combined with options that
+    change which line is the header, escaped the content check."""
+    d = pd.read_parquet(cfg.repo_path(DEMO))          # direct read, test only
+    d.set_index("source").to_parquet(tmp_path / "source_index.parquet")
+    d.set_index(["source", "longitude"]).to_parquet(tmp_path / "multiindex.parquet")
+    d.to_csv(tmp_path / "export.csv", index=False)
+    (tmp_path / "preamble.csv").write_text("# exported from v1\n" + (tmp_path / "export.csv").read_text())
+    for f, kw in [("source_index.parquet", {}), ("multiindex.parquet", {}),
+                  ("source_index.parquet", {"columns": ["longitude"]}),
+                  ("export.csv", {"index_col": "source"}),
+                  ("preamble.csv", {"skiprows": 1, "usecols": ["longitude", "latitude"]}),
+                  ("preamble.csv", {"comment": "#", "usecols": ["longitude"]})]:
+        with pytest.raises(ForbiddenInputError, match="synthetic"):
+            read_table(cfg, tmp_path / f, **kw)
+
+
 def test_reencoded_demo_table_refused_by_content(cfg, tmp_path):
     d = pd.read_parquet(cfg.repo_path(DEMO))          # direct read, test only
     d.to_parquet(tmp_path / "resaved.parquet", index=False, compression="gzip")
@@ -372,9 +389,10 @@ def test_locked_constants_match_prototype(cfg):
 # analysis code changed: if the change alters nothing the plan defines, record why in docs/DECISIONS.md and
 # update the pin; otherwise it is a deviation from the locked plan (ground rule 4).
 # - the whole of clean_test.py (anchors, lock checks, the stage wrapper) and spatial.py: updated in R-P1-20
-#   (stage wrapper: require_outputs, deviation_atol from the config, every locked variant required);
+#   (stage wrapper: require_outputs, deviation_atol from the config, every locked variant required) and in
+#   R-P1-21 (stage wrapper: the re-run records features.json as its input);
 # - the LockedTest class alone (selection, scoring, metrics, AOA): unchanged since D-P1-9.
-LOCKED_CODE_AST_SHA256 = "31e2f1916e1c19a551e66d37f239beae397ad8ab0e3c2c2a13f9c927baf78685"
+LOCKED_CODE_AST_SHA256 = "0feeaa0fc7298d54a402ea0901b7b4d85250e5871f8b5d4f627c74473c5a586f"
 LOCKED_TEST_CLASS_AST_SHA256 = "9487b2b4a22e06f1326f58fbf008ee5de0067fc25f0263e80f7ca18952b11a66"
 
 
@@ -410,3 +428,48 @@ def test_locked_code_unchanged():
 @pytest.mark.skipif(sys.version_info[:2] != (3, 13), reason="AST dumps are pinned for Python 3.13 (environment.yml)")
 def test_locked_computation_unchanged():
     assert _class_digest(PKG / "analysis" / "clean_test.py", "LockedTest") == LOCKED_TEST_CLASS_AST_SHA256
+
+
+def test_deviation_tolerance_is_the_documented_one(cfg):
+    """The tolerance that decides PASS ('identical') vs DEVIATION for the locked-test re-runs is anchored
+    here, as the reproduction targets are (docs/DECISIONS.md D-P1-10): moving it into the config must not
+    let a config edit turn a deviation from the locked result into a PASS (ground rule 4)."""
+    assert cfg["clean_test"]["deviation_atol"] == 1e-9
+
+
+# ---------------------------------------------------------------- bytes on every platform
+
+HASHED = ["mshi/io.py", "configs/v3.yaml", "docs/handoff/ANALYSIS_PLAN_LOCKED.md",
+          "docs/handoff/results/clean_test_europe.json", "docs/handoff/results/clean_test_europe_repo_sensitivity.json",
+          "results/reproduction_check.md", "data/derived/cosore_annual.csv",
+          "legacy/data/processed/training_features_v2.parquet"]
+
+
+def test_hashed_files_are_checked_out_without_line_ending_conversion(cfg):
+    """Code, plan, locked results, recorded outputs and allow-listed tables are hashed byte for byte, so a
+    CRLF checkout (Git for Windows' default core.autocrlf) must not change them (.gitattributes)."""
+    import subprocess
+    out = subprocess.run(["git", "-C", str(cfg.repo_root), "check-attr", "text", "--", *HASHED],
+                         capture_output=True, text=True, check=True).stdout.splitlines()
+    assert [ln.rsplit(": ", 1)[-1] for ln in out] == ["unset"] * len(HASHED), out
+
+
+def test_local_only_roots_are_exactly_the_gitignored_roots(cfg):
+    """A recorded output may be absent only under a root that is not committed (mshi.io.local_only_roots)."""
+    import subprocess
+    from mshi.io import local_only_roots
+    ignored = set()
+    for root, rel in cfg["paths"].items():
+        r = subprocess.run(["git", "-C", str(cfg.repo_root), "check-ignore", "-q", "--no-index", f"{rel}/x.parquet"])
+        if r.returncode == 0:
+            ignored.add(root)
+    assert local_only_roots(cfg) == ignored == {"raw", "interim"}
+
+
+def test_written_files_use_lf_line_endings(cfg, tmp_path, monkeypatch):
+    import os
+    from mshi.io import write_json, write_table, write_text
+    monkeypatch.setattr(os, "linesep", "\r\n")                         # pandas' default line terminator
+    paths = [write_table(pd.DataFrame({"a": [1, 2]}), tmp_path / "t.csv"), write_json({"a": [1, 2]}, tmp_path / "t.json"),
+             write_text("a\nb\n", tmp_path / "t.md")]
+    assert all(b"\r" not in p.read_bytes() for p in paths)

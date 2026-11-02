@@ -1,0 +1,300 @@
+######## head ck1 run
+{
+ "pkg": "head",
+ "code_hash": "4df2aa4b265c",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "load_before": "no cache",
+ "run": {
+  "status": "ok cached=False",
+  "reads": 375,
+  "parquet": "9adb29eecf4f",
+  "meta": "21563f673f18",
+  "npp0": NaN
+ },
+ "load_after": "ACCEPTED npp[0]=np.float64(nan)",
+ "meta_keys": [
+  "key",
+  "parquet_sha256",
+  "record"
+ ],
+ "key_fields": [
+  "code_sha256",
+  "libraries",
+  "modis_config_sha256",
+  "n_points",
+  "points_sha256"
+ ]
+}
+######## head ck1 run
+{
+ "pkg": "head",
+ "code_hash": "4df2aa4b265c",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "load_before": "ACCEPTED npp[0]=np.float64(nan)",
+ "run": {
+  "status": "ok cached=True",
+  "reads": 0,
+  "parquet": "9adb29eecf4f",
+  "meta": "21563f673f18",
+  "npp0": NaN
+ },
+ "load_after": "ACCEPTED npp[0]=np.float64(nan)",
+ "meta_keys": [
+  "key",
+  "parquet_sha256",
+  "record"
+ ],
+ "key_fields": [
+  "code_sha256",
+  "libraries",
+  "modis_config_sha256",
+  "n_points",
+  "points_sha256"
+ ]
+}
+######## edit ck1 load
+{
+ "pkg": "edit",
+ "code_hash": "c0a7b36d061f",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "load": "REFUSED StaleModisError: fixcheck3_scripts/modis-rasters/work/fid/sb/ck1/out/data/interim/modis_points.parquet was "
+}
+######## edit ck1 run
+{
+ "pkg": "edit",
+ "code_hash": "c0a7b36d061f",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "load_before": "REFUSED StaleModisError: fixcheck3_scripts/modis-rasters/work/fid/sb/ck1/out/data/interim/modis_points.parquet was ",
+ "run": {
+  "status": "ok cached=False",
+  "reads": 375,
+  "parquet": "92fdd144f7ed",
+  "meta": "c2623825a2f9",
+  "npp0": NaN
+ },
+ "load_after": "ACCEPTED npp[0]=np.float64(nan)",
+ "meta_keys": [
+  "key",
+  "parquet_sha256",
+  "record"
+ ],
+ "key_fields": [
+  "code_sha256",
+  "libraries",
+  "modis_config_sha256",
+  "n_points",
+  "points_sha256"
+ ]
+}
+######## head ck1 load
+{
+ "pkg": "head",
+ "code_hash": "4df2aa4b265c",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "load": "REFUSED StaleModisError: fixcheck3_scripts/modis-rasters/work/fid/sb/ck1/out/data/interim/modis_points.parquet was "
+}
+######## head ck1 run
+{
+ "pkg": "head",
+ "code_hash": "4df2aa4b265c",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "load_before": "REFUSED StaleModisError: fixcheck3_scripts/modis-rasters/work/fid/sb/ck1/out/data/interim/modis_points.parquet was ",
+ "run": {
+  "status": "ok cached=False",
+  "reads": 375,
+  "parquet": "9adb29eecf4f",
+  "meta": "21563f673f18",
+  "npp0": NaN
+ },
+ "load_after": "ACCEPTED npp[0]=np.float64(nan)",
+ "meta_keys": [
+  "key",
+  "parquet_sha256",
+  "record"
+ ],
+ "key_fields": [
+  "code_sha256",
+  "libraries",
+  "modis_config_sha256",
+  "n_points",
+  "points_sha256"
+ ]
+}
+######## head ck1 replace_same_values
+{
+ "pkg": "head",
+ "code_hash": "4df2aa4b265c",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "parquet_before_after": [
+  "9adb29eecf4f",
+  "3c9b6785a0c9"
+ ],
+ "values_equal": true,
+ "load": "REFUSED StaleModisError: fixcheck3_scripts/modis-rasters/work/fid/sb/ck1/out/data/interim/modis_points.parquet chan",
+ "require_outputs": "REFUSED StaleInputError: results/modis_points.json: its output fixcheck3_scripts/modis-rasters/work/fid/sb/ck1/out/",
+ "run": {
+  "status": "ok cached=False",
+  "reads": 375,
+  "parquet": "9adb29eecf4f",
+  "meta": "21563f673f18",
+  "npp0": NaN
+ }
+}
+######## head ck1 crash_before_meta
+{
+ "pkg": "head",
+ "code_hash": "4df2aa4b265c",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "crash": "simulated crash after the table was written",
+ "after_crash": {
+  "parquet": "9adb29eecf4f",
+  "meta": null,
+  "load": "REFUSED FileNotFoundError: fixcheck3_scripts/modis-rasters/work/fid/sb/ck1/out/data/interim/modis_points.parquet (or "
+ },
+ "rerun": {
+  "status": "ok cached=False",
+  "reads": 375,
+  "parquet": "9adb29eecf4f",
+  "meta": "21563f673f18",
+  "npp0": NaN
+ }
+}
+######## head ck1 libs
+{
+ "pkg": "head",
+ "code_hash": "4df2aa4b265c",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "load_other_proj": "REFUSED StaleModisError: fixcheck3_scripts/modis-rasters/work/fid/sb/ck1/out/data/interim/modis_points.parquet was ",
+ "run_other_proj": {
+  "status": "ok cached=False",
+  "reads": 375,
+  "parquet": "9adb29eecf4f",
+  "meta": "474d81c158b0",
+  "npp0": NaN
+ }
+}
+######## prev ck2 run
+Traceback (most recent call last):
+  File "fixcheck3_scripts/modis-rasters/scripts/cache.py", line 49, in <module>
+    write_result(c, {"fake": True}, "build_sites.json", outputs=outs)     # current for THIS package's code hash
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: write_result() got an unexpected keyword argument 'outputs'
+######## head ck2 load
+{
+ "pkg": "head",
+ "code_hash": "4df2aa4b265c",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "load": "REFUSED FileNotFoundError: fixcheck3_scripts/modis-rasters/work/fid/sb/ck2/out/data/interim/modis_points.parquet (or "
+}
+######## head ck2 run
+{
+ "pkg": "head",
+ "code_hash": "4df2aa4b265c",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "load_before": "no cache",
+ "run": {
+  "status": "ok cached=False",
+  "reads": 375,
+  "parquet": "9adb29eecf4f",
+  "meta": "21563f673f18",
+  "npp0": NaN
+ },
+ "load_after": "ACCEPTED npp[0]=np.float64(nan)",
+ "meta_keys": [
+  "key",
+  "parquet_sha256",
+  "record"
+ ],
+ "key_fields": [
+  "code_sha256",
+  "libraries",
+  "modis_config_sha256",
+  "n_points",
+  "points_sha256"
+ ]
+}
+######## prev ck2 run
+Traceback (most recent call last):
+  File "fixcheck3_scripts/modis-rasters/scripts/cache.py", line 49, in <module>
+    write_result(c, {"fake": True}, "build_sites.json", outputs=outs)     # current for THIS package's code hash
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: write_result() got an unexpected keyword argument 'outputs'
+######## head ck2 load
+{
+ "pkg": "head",
+ "code_hash": "4df2aa4b265c",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "load": "ACCEPTED npp[0]=np.float64(nan)"
+}

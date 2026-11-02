@@ -1,0 +1,34 @@
+{
+ "run_short_catalog": {
+  "status": "ok",
+  "cached": false,
+  "reads": 375,
+  "rec_status": null,
+  "n_raster_reads": 375,
+  "n_failed_reads": 0,
+  "catalog_gaps": [],
+  "n_catalog_gaps": 0,
+  "ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet": "a024dc24d98a"
+ },
+ "run_catalog_recovered": {
+  "status": "ok",
+  "cached": true,
+  "reads": 0,
+  "rec_status": null,
+  "n_raster_reads": 375,
+  "n_failed_reads": 0,
+  "catalog_gaps": [],
+  "n_catalog_gaps": 0,
+  "ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet": "a024dc24d98a"
+ },
+ "lst_day_still_differs_from_complete_catalog_at_sites": 15,
+ "max_abs_diff": 0.7499770390112399
+}

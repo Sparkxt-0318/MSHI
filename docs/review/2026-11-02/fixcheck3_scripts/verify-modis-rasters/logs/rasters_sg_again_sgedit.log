@@ -1,0 +1,20 @@
+{
+ "pkg": "fixcheck3_scripts/verify-modis-rasters/pkg/sgedit/mshi/__init__.py",
+ "code_sha12": "8cc804c846f9",
+ "again": {
+  "status": "ok",
+  "http_requests": 0,
+  "download_calls": 0
+ },
+ "outputcrs_sent": [],
+ "sidecar_params_OUTPUTCRS": "http://www.opengis.net/def/crs/EPSG/0/4326",
+ "code_params_OUTPUTCRS_in_this_pkg": [
+  "\"OUTPUTCRS\": \"http://www.opengis.net/def/crs/EPSG/0/3857\","
+ ],
+ "fetch_soilgrids.json code_sha12": "8cc804c846f9",
+ "require_outputs": "accepted",
+ "soc_sha12_before_after": [
+  "d51eac8936e5",
+  "d51eac8936e5"
+ ]
+}

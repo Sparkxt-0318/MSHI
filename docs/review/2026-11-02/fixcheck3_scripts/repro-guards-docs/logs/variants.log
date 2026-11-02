@@ -1,0 +1,7 @@
+variants=['qc', 'repo']: accepted
+variants=['repo', 'qc']: accepted
+variants=['qc']: refused: clean_test.variants must re-run every locked variant ['qc', 
+variants=['repo']: refused: clean_test.variants must re-run every locked variant ['qc', 
+variants=['qc', 'repo', 'repo']: refused: clean_test.variants must re-run every locked variant ['qc', 
+variants=[]: refused: clean_test.variants must re-run every locked variant ['qc', 
+variants=None: refused: clean_test.variants must re-run every locked variant ['qc', 

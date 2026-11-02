@@ -1,0 +1,7 @@
+run([fetch_srdb, fetch_naturalearth]) exit 0 {'fetch_srdb': 'ok', 'fetch_naturalearth': 'ok'}
+   fetch_srdb.json: keys ['_provenance', 'commit', 'licence_sha256', 'repo', 'sha256', 'sha256_pinned', 'source', 'url'] | _outputs: None
+   fetch_naturalearth.json: keys ['_provenance', 'commit', 'files_sha256', 'source', 'version'] | _outputs: None
+committed results without _outputs: ['environment.json', 'fetch_cosore.json', 'fetch_naturalearth.json', 'fetch_srdb.json', 'site_diagnostics.json']
+fetch results absent: run([build_sites]) exit 0 {'build_sites': 'ok'}
+fetch_srdb.json now: produced with a different config
+stale fetch_srdb.json: run([build_sites]) exit 0 {'build_sites': 'ok'}

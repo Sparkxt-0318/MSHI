@@ -4,7 +4,7 @@ Everything in this folder was moved here on 2026-11-02 at the start of the v3 re
 (see `docs/DECISIONS.md`, entry D-P0-2). Nothing was deleted; paths inside the folder
 mirror where each file used to live. **Nothing in `mshi/` reads from `legacy/`**, except
 the two original v2 feature tables listed under "Still read by v3", which are read
-only for reproduction checks against the original pipeline.
+only for reproduction checks against the original pipeline and for one exploratory diagnostic.
 
 Why the whole pipeline was superseded (from the 2026-11-01 audit, `docs/handoff/prep_log.md`):
 
@@ -44,7 +44,7 @@ v3 rebuilds the data from pinned public sources (SRDB, COSORE, Natural Earth, Wo
 | `data/processed/training_features.parquet` | **Real** v1 Asia-box training table, 615 sites (605 SRDB + 10 COSORE), restored from commit `c6450a7` (2026-05-07) | At HEAD `a809a97` this path held the synthetic demo table: the merge `5c1e5a7` silently reverted `c6450a7`'s real table. Restored here so the v1 record is complete. Same 615 `site_id`s as `training_features_v2.parquet`, identical values on all shared columns. |
 | `data/processed/training_features_SYNTHETIC_DEMO.parquet` | **Synthetic** 3,000-row demo table (`source == "synthetic"`), SHA-256 `2ffe0fe5…e016` | This is what `data/processed/training_features.parquet` contained at HEAD. Kept (not deleted) under an unmistakable name. `mshi.io.read_table` refuses this file by hash and refuses everything under `legacy/` that is not explicitly allow-listed. |
 | `data/processed/us_validation_features.parquet` | Real v1 US-box table, 274 sites | v1 table (bounding boxes, US-test reuse). |
-| `data/processed/training_features_v2.parquet`, `us_validation_features_v2.parquet` | v1 tables + MODIS NPP/LST from the GEE export (615 / 274 sites) | Superseded, but **still read by v3** for two reproduction checks: the NPP correlation (r = 0.982 target) and the E4 ablation on the original 889 sites. |
+| `data/processed/training_features_v2.parquet`, `us_validation_features_v2.parquet` | v1 tables + MODIS NPP/LST from the GEE export (615 / 274 sites) | Superseded, but **still read by v3**: the NPP correlation (r = 0.982 target), the E4 ablation on the original 889 sites (Phase 2), and (training table only) the exploratory list of Europe test sites already in the original "Asia" training table (`site_diagnostics`). |
 | `data/processed/asia_predictions_F_NPP.parquet`, `hero_*_anomaly.parquet`, `asia_grid_demo_anomaly.parquet` | 5-km Asia prediction grids and anomaly composites for the hero maps | Outputs of the superseded models (the demo anomaly file is a 2-byte placeholder). |
 | `data/raw/ACQUISITION_MANIFEST.json` | Manifest of the v1 raw downloads (WorldClim 10′ etc.) | The rasters it lists were never committed; v3 fetches pinned sources itself. |
 | `figures/validation_scatter_fnpp_n223.png` | F+NPP Asia → US scatter (n = 223) | Superseded result. |

@@ -1,0 +1,270 @@
+
+=== S0 committed regen: returned {'PASS': 17, 'FAIL': 0, 'DEVIATION': 0, 'STALE': 0, 'NOT RUN': 10, 'INFO': 0}
+summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 17, 'STALE': 0}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  NOT RUN   | Locked test: selected model                                                 | v3=None | tol=same model | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)'
+  NOT RUN   | Locked test: Asia spatial-CV R²                                             | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)'
+  NOT RUN   | Locked test: Europe n                                                       | v3=None | tol=exact | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)'
+  NOT RUN   | Locked test: Europe R²                                                      | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)'
+  NOT RUN   | Locked test: site-bootstrap CI low                                          | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)'
+  NOT RUN   | Locked test: site-bootstrap CI high                                         | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)'
+  NOT RUN   | Locked test: re-run identical to the locked result                          | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)'
+  NOT RUN   | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)'
+  NOT RUN   | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com)'
+  NOT RUN   | Original sites with NPP missing in the committed tables but present in v3   | v3=None | tol=none given | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com)'
+  reproduction_check.md byte-identical to committed: True
+  reproduction_check.json byte-identical to committed: True
+
+=== S1 repro only, committed state: returned {'PASS': 17, 'FAIL': 0, 'DEVIATION': 0, 'STALE': 0, 'NOT RUN': 10, 'INFO': 0}
+summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 17, 'STALE': 0}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  NOT RUN   | Locked test: selected model                                                 | v3=None | tol=same model | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Asia spatial-CV R²                                             | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Europe n                                                       | v3=None | tol=exact | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Europe R²                                                      | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: site-bootstrap CI low                                          | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: site-bootstrap CI high                                         | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: re-run identical to the locked result                          | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+  NOT RUN   | Original sites with NPP missing in the committed tables but present in v3   | v3=None | tol=none given | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+
+=== S2 both re-runs identical: returned {'PASS': 25, 'FAIL': 0, 'DEVIATION': 0, 'STALE': 0, 'NOT RUN': 2, 'INFO': 0}
+summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 2, 'PASS': 25, 'STALE': 0}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  PASS      | Locked test: selected model                                                 | v3='OLS-TP (TP)' | tol=same model | note=''
+  PASS      | Locked test: Asia spatial-CV R²                                             | v3=0.14335191031586358 | tol=±0.01 | note=''
+  PASS      | Locked test: Europe n                                                       | v3=235 | tol=exact | note=''
+  PASS      | Locked test: Europe R²                                                      | v3=0.07899539157825719 | tol=±0.01 | note=''
+  PASS      | Locked test: site-bootstrap CI low                                          | v3=0.013354932456855498 | tol=±0.01 | note=''
+  PASS      | Locked test: site-bootstrap CI high                                         | v3=0.12538039748581667 | tol=±0.01 | note=''
+  PASS      | Locked test: re-run identical to the locked result                          | v3='identical' | tol=1e-09 | note=''
+  PASS      | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3='identical' | tol=1e-09 | note=''
+  NOT RUN   | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+  NOT RUN   | Original sites with NPP missing in the committed tables but present in v3   | v3=None | tol=none given | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+
+=== S3 repo deviates: returned {'PASS': 24, 'FAIL': 0, 'DEVIATION': 1, 'STALE': 0, 'NOT RUN': 2, 'INFO': 0}
+summary {'DEVIATION': 1, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 2, 'PASS': 24, 'STALE': 0}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  PASS      | Locked test: selected model                                                 | v3='OLS-TP (TP)' | tol=same model | note=''
+  PASS      | Locked test: Asia spatial-CV R²                                             | v3=0.14335191031586358 | tol=±0.01 | note=''
+  PASS      | Locked test: Europe n                                                       | v3=235 | tol=exact | note=''
+  PASS      | Locked test: Europe R²                                                      | v3=0.07899539157825719 | tol=±0.01 | note=''
+  PASS      | Locked test: site-bootstrap CI low                                          | v3=0.013354932456855498 | tol=±0.01 | note=''
+  PASS      | Locked test: site-bootstrap CI high                                         | v3=0.12538039748581667 | tol=±0.01 | note=''
+  PASS      | Locked test: re-run identical to the locked result                          | v3='identical' | tol=1e-09 | note=''
+  DEVIATION | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3='max |diff| 0.4; another model selected' | tol=1e-09 | note='deviation: report it; the locked result stays primary'
+  NOT RUN   | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+  NOT RUN   | Original sites with NPP missing in the committed tables but present in v3   | v3=None | tol=none given | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+
+=== S4 repo without vs_locked: RAISED ReproductionFailure: 1 reproduction target(s) outside tolerance: ['Locked test (repo-filter sensitivity): re-run identical to the locked result']; see results/reproduction_check.md.
+summary {'DEVIATION': 0, 'FAIL': 1, 'INFO': 0, 'NOT RUN': 2, 'PASS': 24, 'STALE': 0}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  PASS      | Locked test: selected model                                                 | v3='OLS-TP (TP)' | tol=same model | note=''
+  PASS      | Locked test: Asia spatial-CV R²                                             | v3=0.14335191031586358 | tol=±0.01 | note=''
+  PASS      | Locked test: Europe n                                                       | v3=235 | tol=exact | note=''
+  PASS      | Locked test: Europe R²                                                      | v3=0.07899539157825719 | tol=±0.01 | note=''
+  PASS      | Locked test: site-bootstrap CI low                                          | v3=0.013354932456855498 | tol=±0.01 | note=''
+  PASS      | Locked test: site-bootstrap CI high                                         | v3=0.12538039748581667 | tol=±0.01 | note=''
+  PASS      | Locked test: re-run identical to the locked result                          | v3='identical' | tol=1e-09 | note=''
+  FAIL      | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3=None | tol=1e-09 | note='re-run result has no valid vs_locked block (compare_with_locked not applied)'
+  NOT RUN   | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+  NOT RUN   | Original sites with NPP missing in the committed tables but present in v3   | v3=None | tol=none given | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+
+=== S5 repo vs_locked.identical='yes': RAISED ReproductionFailure: 1 reproduction target(s) outside tolerance: ['Locked test (repo-filter sensitivity): re-run identical to the locked result']; see results/reproduction_check.md.
+summary {'DEVIATION': 0, 'FAIL': 1, 'INFO': 0, 'NOT RUN': 2, 'PASS': 24, 'STALE': 0}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  PASS      | Locked test: selected model                                                 | v3='OLS-TP (TP)' | tol=same model | note=''
+  PASS      | Locked test: Asia spatial-CV R²                                             | v3=0.14335191031586358 | tol=±0.01 | note=''
+  PASS      | Locked test: Europe n                                                       | v3=235 | tol=exact | note=''
+  PASS      | Locked test: Europe R²                                                      | v3=0.07899539157825719 | tol=±0.01 | note=''
+  PASS      | Locked test: site-bootstrap CI low                                          | v3=0.013354932456855498 | tol=±0.01 | note=''
+  PASS      | Locked test: site-bootstrap CI high                                         | v3=0.12538039748581667 | tol=±0.01 | note=''
+  PASS      | Locked test: re-run identical to the locked result                          | v3='identical' | tol=1e-09 | note=''
+  FAIL      | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3=None | tol=1e-09 | note='re-run result has no valid vs_locked block (compare_with_locked not applied)'
+  NOT RUN   | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+  NOT RUN   | Original sites with NPP missing in the committed tables but present in v3   | v3=None | tol=none given | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+
+=== S6 repo identical False, diff None: returned {'PASS': 24, 'FAIL': 0, 'DEVIATION': 1, 'STALE': 0, 'NOT RUN': 2, 'INFO': 0}
+summary {'DEVIATION': 1, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 2, 'PASS': 24, 'STALE': 0}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  PASS      | Locked test: selected model                                                 | v3='OLS-TP (TP)' | tol=same model | note=''
+  PASS      | Locked test: Asia spatial-CV R²                                             | v3=0.14335191031586358 | tol=±0.01 | note=''
+  PASS      | Locked test: Europe n                                                       | v3=235 | tol=exact | note=''
+  PASS      | Locked test: Europe R²                                                      | v3=0.07899539157825719 | tol=±0.01 | note=''
+  PASS      | Locked test: site-bootstrap CI low                                          | v3=0.013354932456855498 | tol=±0.01 | note=''
+  PASS      | Locked test: site-bootstrap CI high                                         | v3=0.12538039748581667 | tol=±0.01 | note=''
+  PASS      | Locked test: re-run identical to the locked result                          | v3='identical' | tol=1e-09 | note=''
+  DEVIATION | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3='differs (no primary metrics to compare)' | tol=1e-09 | note='deviation: report it; the locked result stays primary'
+  NOT RUN   | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+  NOT RUN   | Original sites with NPP missing in the committed tables but present in v3   | v3=None | tol=none given | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+
+=== S7 repo stale: RAISED StaleInputError: 1 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`
+summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 2, 'PASS': 24, 'STALE': 1}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  PASS      | Locked test: selected model                                                 | v3='OLS-TP (TP)' | tol=same model | note=''
+  PASS      | Locked test: Asia spatial-CV R²                                             | v3=0.14335191031586358 | tol=±0.01 | note=''
+  PASS      | Locked test: Europe n                                                       | v3=235 | tol=exact | note=''
+  PASS      | Locked test: Europe R²                                                      | v3=0.07899539157825719 | tol=±0.01 | note=''
+  PASS      | Locked test: site-bootstrap CI low                                          | v3=0.013354932456855498 | tol=±0.01 | note=''
+  PASS      | Locked test: site-bootstrap CI high                                         | v3=0.12538039748581667 | tol=±0.01 | note=''
+  PASS      | Locked test: re-run identical to the locked result                          | v3='identical' | tol=1e-09 | note=''
+  STALE     | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3='identical' | tol=1e-09 | note='clean_test_rerun_repo.json produced with a different config; re-run `make all`'
+  NOT RUN   | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+  NOT RUN   | Original sites with NPP missing in the committed tables but present in v3   | v3=None | tol=none given | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+
+=== S8 repo stale, no vs_locked: RAISED StaleInputError: 1 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`
+summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 2, 'PASS': 24, 'STALE': 1}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  PASS      | Locked test: selected model                                                 | v3='OLS-TP (TP)' | tol=same model | note=''
+  PASS      | Locked test: Asia spatial-CV R²                                             | v3=0.14335191031586358 | tol=±0.01 | note=''
+  PASS      | Locked test: Europe n                                                       | v3=235 | tol=exact | note=''
+  PASS      | Locked test: Europe R²                                                      | v3=0.07899539157825719 | tol=±0.01 | note=''
+  PASS      | Locked test: site-bootstrap CI low                                          | v3=0.013354932456855498 | tol=±0.01 | note=''
+  PASS      | Locked test: site-bootstrap CI high                                         | v3=0.12538039748581667 | tol=±0.01 | note=''
+  PASS      | Locked test: re-run identical to the locked result                          | v3='identical' | tol=1e-09 | note=''
+  STALE     | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3=None | tol=1e-09 | note='clean_test_rerun_repo.json produced with a different config; re-run `make all`'
+  NOT RUN   | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+  NOT RUN   | Original sites with NPP missing in the committed tables but present in v3   | v3=None | tol=none given | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+
+=== S9 FAIL + STALE: RAISED ReproductionFailure: 1 reproduction target(s) outside tolerance: ['Locked test: selected model']; see results/reproduction_check.md. Stop and report (ground rule 2).
+summary {'DEVIATION': 1, 'FAIL': 1, 'INFO': 0, 'NOT RUN': 2, 'PASS': 22, 'STALE': 1}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  FAIL      | Locked test: selected model                                                 | v3='XGB (ALL)' | tol=same model | note=''
+  PASS      | Locked test: Asia spatial-CV R²                                             | v3=0.14335191031586358 | tol=±0.01 | note=''
+  PASS      | Locked test: Europe n                                                       | v3=235 | tol=exact | note=''
+  PASS      | Locked test: Europe R²                                                      | v3=0.07899539157825719 | tol=±0.01 | note=''
+  PASS      | Locked test: site-bootstrap CI low                                          | v3=0.013354932456855498 | tol=±0.01 | note=''
+  PASS      | Locked test: site-bootstrap CI high                                         | v3=0.12538039748581667 | tol=±0.01 | note=''
+  DEVIATION | Locked test: re-run identical to the locked result                          | v3='max |diff| 0; another model selected' | tol=1e-09 | note='deviation: report it; the locked result stays primary'
+  STALE     | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3='identical' | tol=1e-09 | note='clean_test_rerun_repo.json produced with a different config; re-run `make all`'
+  NOT RUN   | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+  NOT RUN   | Original sites with NPP missing in the committed tables but present in v3   | v3=None | tol=none given | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+
+=== S10 qc stale, repo missing: RAISED StaleInputError: 7 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`
+summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 3, 'PASS': 17, 'STALE': 7}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  STALE     | Locked test: selected model                                                 | v3='OLS-TP (TP)' | tol=same model | note='clean_test_rerun_qc.json produced with a different config; re-run `make all`'
+  STALE     | Locked test: Asia spatial-CV R²                                             | v3=0.14335191031586358 | tol=±0.01 | note='clean_test_rerun_qc.json produced with a different config; re-run `make all`'
+  STALE     | Locked test: Europe n                                                       | v3=235 | tol=exact | note='clean_test_rerun_qc.json produced with a different config; re-run `make all`'
+  STALE     | Locked test: Europe R²                                                      | v3=0.07899539157825719 | tol=±0.01 | note='clean_test_rerun_qc.json produced with a different config; re-run `make all`'
+  STALE     | Locked test: site-bootstrap CI low                                          | v3=0.013354932456855498 | tol=±0.01 | note='clean_test_rerun_qc.json produced with a different config; re-run `make all`'
+  STALE     | Locked test: site-bootstrap CI high                                         | v3=0.12538039748581667 | tol=±0.01 | note='clean_test_rerun_qc.json produced with a different config; re-run `make all`'
+  STALE     | Locked test: re-run identical to the locked result                          | v3='identical' | tol=1e-09 | note='clean_test_rerun_qc.json produced with a different config; re-run `make all`'
+  NOT RUN   | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+  NOT RUN   | Original sites with NPP missing in the committed tables but present in v3   | v3=None | tol=none given | note='modis_points: blocked by network policy (planetarycomputer.microsoft.com) (run log, 2026-11-02)'
+
+=== N1 modis current r=1: RAISED ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2).
+summary {'DEVIATION': 0, 'FAIL': 1, 'INFO': 1, 'NOT RUN': 8, 'PASS': 17, 'STALE': 0}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  NOT RUN   | Locked test: selected model                                                 | v3=None | tol=same model | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Asia spatial-CV R²                                             | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Europe n                                                       | v3=None | tol=exact | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Europe R²                                                      | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: site-bootstrap CI low                                          | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: site-bootstrap CI high                                         | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: re-run identical to the locked result                          | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  FAIL      | NPP r vs committed NPP (original 889 sites)                                 | v3=1.0 | tol=±0.01 | note='method reconstructed [UNVERIFIED]: no handoff script computes this r; Pearson r on raw NPP at the original sites with a '
+  INFO      | Original sites with NPP missing in the committed tables but present in v3   | v3=0 | tol=none given | note='prep_log D8; no tolerance in the brief, reported for information'
+
+=== N1b modis current noisy: returned {'PASS': 18, 'FAIL': 0, 'DEVIATION': 0, 'STALE': 0, 'NOT RUN': 8, 'INFO': 1}
+summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 1, 'NOT RUN': 8, 'PASS': 18, 'STALE': 0}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  NOT RUN   | Locked test: selected model                                                 | v3=None | tol=same model | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Asia spatial-CV R²                                             | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Europe n                                                       | v3=None | tol=exact | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Europe R²                                                      | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: site-bootstrap CI low                                          | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: site-bootstrap CI high                                         | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: re-run identical to the locked result                          | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  PASS      | NPP r vs committed NPP (original 889 sites)                                 | v3=0.9823475390426653 | tol=±0.01 | note='method reconstructed [UNVERIFIED]: no handoff script computes this r; Pearson r on raw NPP at the original sites with a '
+  INFO      | Original sites with NPP missing in the committed tables but present in v3   | v3=0 | tol=none given | note='prep_log D8; no tolerance in the brief, reported for information'
+
+=== N2 modis current all-NaN: RAISED ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2).
+summary {'DEVIATION': 0, 'FAIL': 1, 'INFO': 1, 'NOT RUN': 8, 'PASS': 17, 'STALE': 0}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  NOT RUN   | Locked test: selected model                                                 | v3=None | tol=same model | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Asia spatial-CV R²                                             | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Europe n                                                       | v3=None | tol=exact | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Europe R²                                                      | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: site-bootstrap CI low                                          | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: site-bootstrap CI high                                         | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: re-run identical to the locked result                          | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  FAIL      | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='r not computable: 0 original sites have NPP in both tables'
+  INFO      | Original sites with NPP missing in the committed tables but present in v3   | v3=0 | tol=none given | note='prep_log D8; no tolerance in the brief, reported for information'
+
+=== N3 modis_points.json stale: RAISED StaleInputError: 2 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`
+summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 8, 'PASS': 17, 'STALE': 2}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  NOT RUN   | Locked test: selected model                                                 | v3=None | tol=same model | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Asia spatial-CV R²                                             | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Europe n                                                       | v3=None | tol=exact | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Europe R²                                                      | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: site-bootstrap CI low                                          | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: site-bootstrap CI high                                         | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: re-run identical to the locked result                          | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  STALE     | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='modis_points.json produced with a different config; re-run `make all`'
+  STALE     | Original sites with NPP missing in the committed tables but present in v3   | v3=None | tol=none given | note='modis_points.json produced with a different config; re-run `make all`'
+
+=== N4 sidecar n_failed_reads 1: RAISED StaleInputError: 2 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`
+summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 8, 'PASS': 17, 'STALE': 2}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  NOT RUN   | Locked test: selected model                                                 | v3=None | tol=same model | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Asia spatial-CV R²                                             | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Europe n                                                       | v3=None | tol=exact | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Europe R²                                                      | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: site-bootstrap CI low                                          | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: site-bootstrap CI high                                         | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: re-run identical to the locked result                          | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  STALE     | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='modis_points output unusable: fixcheck3_scripts/re'
+  STALE     | Original sites with NPP missing in the committed tables but present in v3   | v3=None | tol=none given | note='modis_points output unusable: fixcheck3_scripts/re'
+
+=== N5 parquet changed: RAISED StaleInputError: 2 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`
+summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 8, 'PASS': 17, 'STALE': 2}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  NOT RUN   | Locked test: selected model                                                 | v3=None | tol=same model | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Asia spatial-CV R²                                             | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Europe n                                                       | v3=None | tol=exact | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Europe R²                                                      | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: site-bootstrap CI low                                          | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: site-bootstrap CI high                                         | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: re-run identical to the locked result                          | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  STALE     | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='modis_points.json its output fixcheck3_scripts/rep'
+  STALE     | Original sites with NPP missing in the committed tables but present in v3   | v3=None | tol=none given | note='modis_points.json its output fixcheck3_scripts/rep'
+
+=== N6 incomplete + run-log error: returned {'PASS': 17, 'FAIL': 0, 'DEVIATION': 0, 'STALE': 0, 'NOT RUN': 10, 'INFO': 0}
+summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 17, 'STALE': 0}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  NOT RUN   | Locked test: selected model                                                 | v3=None | tol=same model | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Asia spatial-CV R²                                             | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Europe n                                                       | v3=None | tol=exact | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: Europe R²                                                      | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: site-bootstrap CI low                                          | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: site-bootstrap CI high                                         | v3=None | tol=±0.01 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test: re-run identical to the locked result                          | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3=None | tol=1e-09 | note='fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) (run log, 2026-11-02)'
+  NOT RUN   | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='modis_points: error (ModisIncompleteError) (run log, 2026-11-03)'
+  NOT RUN   | Original sites with NPP missing in the committed tables but present in v3   | v3=None | tol=none given | note='modis_points: error (ModisIncompleteError) (run log, 2026-11-03)'
+
+=== N7 incomplete, empty run log: returned {'PASS': 17, 'FAIL': 0, 'DEVIATION': 0, 'STALE': 0, 'NOT RUN': 10, 'INFO': 0}
+summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 17, 'STALE': 0}
+  PASS      | COSORE sites with an annual value                                           | v3=66 | tol=exact | note=''
+  NOT RUN   | Locked test: selected model                                                 | v3=None | tol=same model | note='no result (stage not run)'
+  NOT RUN   | Locked test: Asia spatial-CV R²                                             | v3=None | tol=±0.01 | note='no result (stage not run)'
+  NOT RUN   | Locked test: Europe n                                                       | v3=None | tol=exact | note='no result (stage not run)'
+  NOT RUN   | Locked test: Europe R²                                                      | v3=None | tol=±0.01 | note='no result (stage not run)'
+  NOT RUN   | Locked test: site-bootstrap CI low                                          | v3=None | tol=±0.01 | note='no result (stage not run)'
+  NOT RUN   | Locked test: site-bootstrap CI high                                         | v3=None | tol=±0.01 | note='no result (stage not run)'
+  NOT RUN   | Locked test: re-run identical to the locked result                          | v3=None | tol=1e-09 | note='no result (stage not run)'
+  NOT RUN   | Locked test (repo-filter sensitivity): re-run identical to the locked resul | v3=None | tol=1e-09 | note='no result (stage not run)'
+  NOT RUN   | NPP r vs committed NPP (original 889 sites)                                 | v3=None | tol=±0.01 | note='no result (stage not run)'
+  NOT RUN   | Original sites with NPP missing in the committed tables but present in v3   | v3=None | tol=none given | note='no result (stage not run)'
+
+legend: PASS/FAIL: within/outside the tolerance in configs/v3.yaml (FAIL also when a current result does not yield the value). NOT RUN: no result (reason in the note). STALE: the result is not current (another config or code, or an output file changed after the run). DEVIATION: a locked-test re-run differs from its locked result, which stays primary. INFO: no tolerance given in the brief.

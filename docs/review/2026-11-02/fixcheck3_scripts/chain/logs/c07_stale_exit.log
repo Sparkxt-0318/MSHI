@@ -1,0 +1,7 @@
+mshi.analysis.repro_checks.ReproductionFailure: 1 reproduction target(s) outside tolerance: ['SRDB records after repo filters']; see results/reproduction_check.md. Stop and report (ground rule 2).
+control: exit 0 {'repro_checks': 'ok'} {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 17, 'STALE': 0}
+after unrelated config edit: exit 2 {'repro_checks': 'stale: 17 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`'} {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 0, 'STALE': 17}
+console: ['repro_checks       start', 'repro_checks       STALE (0.0s)']
+md written: True
+CLI exit 2 {'repro_checks': 'stale: 17 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`'}
+FAIL + STALE: exit 1 {'repro_checks': "error: ReproductionFailure: 1 reproduction target(s) outside tolerance: ['SRDB records after repo filters']; see results/reproduction_check.md. Stop a"} {'DEVIATION': 0, 'FAIL': 1, 'INFO': 0, 'NOT RUN': 10, 'PASS': 15, 'STALE': 1}

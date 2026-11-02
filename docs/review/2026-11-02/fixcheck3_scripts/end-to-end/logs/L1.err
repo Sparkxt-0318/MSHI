@@ -1,0 +1,61 @@
+16:46:15 INFO mshi: fetch_srdb         start
+16:46:15 INFO mshi: fetch_srdb         OK (0.0s)
+16:46:15 INFO mshi: fetch_cosore       start
+16:46:15 INFO mshi: fetch_cosore       OK (0.4s)
+16:46:15 INFO mshi: fetch_naturalearth start
+16:46:15 INFO mshi: fetch_naturalearth OK (0.0s)
+16:46:15 INFO mshi: cosore_annual      start
+16:46:52 INFO mshi.cosore: COSORE: 66 sites, 24 datasets unreadable/no data
+16:46:52 INFO mshi: cosore_annual      OK (36.5s)
+16:46:52 INFO mshi: build_sites        start
+16:46:55 INFO mshi.sites: sites: qc 971, repo 1225
+16:46:55 INFO mshi: build_sites        OK (3.6s)
+16:46:55 INFO mshi: site_diagnostics   start
+16:46:57 INFO mshi: site_diagnostics   OK (1.7s)
+16:46:57 INFO mshi: fetch_worldclim    start
+16:46:57 WARNING mshi.rasters: WorldClim zip hash is not pinned in configs/v3.yaml; recorded e5902633c3276e67b97dcfdbd268ee9976b6a7702d285fe2b9f383cba14b9c2b
+16:46:57 ERROR mshi: fetch_worldclim failed
+Traceback (most recent call last):
+  File "/home/user/MSHI/mshi/run.py", line 163, in run
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+  File "/home/user/MSHI/mshi/data/rasters.py", line 96, in fetch_worldclim
+    write_result(cfg, res, "fetch_worldclim.json", outputs=tifs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/MSHI/mshi/io.py", line 185, in write_result
+    rec["_outputs"] = {cfg.root_key(p): sha256_file(p) for p in outputs}
+                       ~~~~~~~~~~~~^^^
+  File "/home/user/MSHI/mshi/config.py", line 72, in root_key
+    raise ValueError(f"{p} is not under any configured path root ({sorted(self._d['paths'])})")
+ValueError: fixcheck3_scripts/end-to-end/bigdisk/worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])
+16:46:57 INFO mshi: fetch_soilgrids    start
+16:46:57 ERROR mshi: fetch_soilgrids failed
+Traceback (most recent call last):
+  File "/home/user/MSHI/mshi/run.py", line 163, in run
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+  File "/home/user/MSHI/mshi/data/rasters.py", line 129, in fetch_soilgrids
+    write_result(cfg, res, "fetch_soilgrids.json", outputs=paths)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/MSHI/mshi/io.py", line 185, in write_result
+    rec["_outputs"] = {cfg.root_key(p): sha256_file(p) for p in outputs}
+                       ~~~~~~~~~~~~^^^
+  File "/home/user/MSHI/mshi/config.py", line 72, in root_key
+    raise ValueError(f"{p} is not under any configured path root ({sorted(self._d['paths'])})")
+ValueError: fixcheck3_scripts/end-to-end/bigdisk/soilgrids/2.0/0p05/soc_5-15cm_mean_global_0p05.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])
+16:46:57 INFO mshi: modis_points       start
+16:46:58 INFO mshi.modis: 1530 points, 126 tiles, 15750 raster reads
+16:47:01 INFO mshi: modis_points       OK (4.4s)
+16:47:01 WARNING mshi: features           skipped: upstream fetch_worldclim, fetch_soilgrids not available
+16:47:01 WARNING mshi: clean_test         skipped: upstream features not available
+16:47:01 INFO mshi: repro_checks       start
+16:47:02 ERROR mshi: repro_checks failed
+Traceback (most recent call last):
+  File "/home/user/MSHI/mshi/run.py", line 163, in run
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+  File "/home/user/MSHI/mshi/analysis/repro_checks.py", line 207, in repro_checks
+    raise ReproductionFailure(f"{summary['FAIL']} reproduction target(s) outside tolerance: {bad}; "
+                              "see results/reproduction_check.md. Stop and report (ground rule 2).")
+mshi.analysis.repro_checks.ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2).
+16:47:02 WARNING mshi: stages not completed: {'fetch_worldclim': "error: ValueError: fixcheck3_scripts/end-to-end/bigdisk/worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])", 'fetch_soilgrids': "error: ValueError: fixcheck3_scripts/end-to-end/bigdisk/soilgrids/2.0/0p05/soc_5-15cm_mean_global_0p05.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])", 'features': 'skipped: upstream fetch_worldclim, fetch_soilgrids not available', 'clean_test': 'skipped: upstream features not available', 'repro_checks': "error: ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2)."}

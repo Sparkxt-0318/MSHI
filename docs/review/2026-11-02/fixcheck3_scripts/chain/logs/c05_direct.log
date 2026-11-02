@@ -1,0 +1,9 @@
+WARNING:mshi:stages not completed: {'build_sites': 'stale: results/cosore_annual.json: produced with a different config; re-run the stage that writes it (or `make all`)', 'repro_checks': 'stale: 1 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`'}
+run log: {
+"build_sites": "stale: results/cosore_annual.json: produced with a different config; re-run the stage that writes it (or `make all`)",
+"repro_checks": "stale: 1 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`"
+}
+--- config B, build_sites+repro_checks on A's cosore_annual: exit=2 summary={'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 26, 'PASS': 0, 'STALE': 1}
+    staleness build_sites.json: produced with a different config
+    staleness cosore_annual.json: produced with a different config
+rows (first 3): [('COSORE sites with an annual value', 'STALE', 'cosore_annual.json produced with a different config; re-run `make all`'), ('SRDB records after repo filters', 'NOT RUN', 'build_sites: stale input (results/cosore_annual.json: produced with a different config)'), ('Records after coordinate check', 'NOT RUN', 'build_sites: stale input (results/cosore_annual.json: produced with a different config)')]

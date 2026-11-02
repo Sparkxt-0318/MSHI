@@ -85,5 +85,6 @@ def features(cfg: Config) -> dict:
         outputs.append(write_table(d, cfg.path("interim", f"features_v3_{tag}.parquet")))
         res[tag] = {"shape": list(d.shape),
                     "missing": d[["bio01", "bio12", "clay", "npp", "lst_day"]].isna().sum().to_dict()}
-    write_result(cfg, res, "features.json", outputs=outputs)
+    write_result(cfg, res, "features.json", outputs=outputs,
+                 inputs=["build_sites.json", "modis_points.json", "fetch_worldclim.json", "fetch_soilgrids.json"])
     return res

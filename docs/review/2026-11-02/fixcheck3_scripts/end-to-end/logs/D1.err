@@ -1,0 +1,33 @@
+16:41:26 INFO mshi: fetch_srdb         start
+16:41:26 INFO mshi: fetch_srdb         OK (0.0s)
+16:41:26 INFO mshi: fetch_cosore       start
+16:41:27 ERROR mshi: fetch_cosore failed
+Traceback (most recent call last):
+  File "/home/user/MSHI/mshi/run.py", line 163, in run
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+  File "/home/user/MSHI/mshi/data/fetch.py", line 45, in fetch_cosore
+    info = git_checkout_commit(c["repo_url"], c["commit"], cosore_repo_path(cfg))   # HEAD + clean worktree
+  File "/home/user/MSHI/mshi/netutil.py", line 185, in git_checkout_commit
+    return {"path": str(dest), **verify_git_checkout(dest, commit), "downloaded": False}
+                                 ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/user/MSHI/mshi/netutil.py", line 173, in verify_git_checkout
+    raise ChecksumMismatchError(f"{dest}: checkout of the pinned commit has local changes {changed}; "
+                                f"delete {dest} and re-fetch")
+mshi.netutil.ChecksumMismatchError: fixcheck3_scripts/end-to-end/sbD/raw/cosore/02f32e8e: checkout of the pinned commit has local changes ['!! inst/extdata/datasets/.DS_Store']; delete fixcheck3_scripts/end-to-end/sbD/raw/cosore/02f32e8e and re-fetch
+16:41:27 INFO mshi: fetch_naturalearth start
+16:41:27 INFO mshi: fetch_naturalearth OK (0.0s)
+16:41:27 WARNING mshi: cosore_annual      skipped: upstream fetch_cosore not available
+16:41:27 WARNING mshi: build_sites        skipped: upstream cosore_annual not available
+16:41:27 WARNING mshi: site_diagnostics   skipped: upstream build_sites not available
+16:41:27 INFO mshi: fetch_worldclim    start
+16:41:27 WARNING mshi.rasters: WorldClim zip hash is not pinned in configs/v3.yaml; recorded e5902633c3276e67b97dcfdbd268ee9976b6a7702d285fe2b9f383cba14b9c2b
+16:41:27 INFO mshi: fetch_worldclim    OK (0.2s)
+16:41:27 INFO mshi: fetch_soilgrids    start
+16:41:27 INFO mshi: fetch_soilgrids    OK (0.1s)
+16:41:27 WARNING mshi: modis_points       skipped: upstream build_sites not available
+16:41:27 WARNING mshi: features           skipped: upstream build_sites, modis_points not available
+16:41:27 WARNING mshi: clean_test         skipped: upstream features not available
+16:41:27 INFO mshi: repro_checks       start
+16:41:27 INFO mshi: repro_checks       OK (0.0s)
+16:41:27 WARNING mshi: stages not completed: {'fetch_cosore': "error: ChecksumMismatchError: fixcheck3_scripts/end-to-end/sbD/raw/cosore/02f32e8e: checkout of the pinned commit has local changes ['!! inst/extdata/datasets/.DS_Store']; delete fixcheck3_scripts/end-to-end/sbD/raw/cosore/02f32e8e and re-fetch", 'cosore_annual': 'skipped: upstream fetch_cosore not available', 'build_sites': 'skipped: upstream cosore_annual not available', 'site_diagnostics': 'skipped: upstream build_sites not available', 'modis_points': 'skipped: upstream build_sites not available', 'features': 'skipped: upstream build_sites, modis_points not available', 'clean_test': 'skipped: upstream features not available'}

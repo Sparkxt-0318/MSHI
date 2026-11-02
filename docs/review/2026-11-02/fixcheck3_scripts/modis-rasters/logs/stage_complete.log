@@ -1,0 +1,86 @@
+{
+ "run1": {
+  "status": "ok",
+  "cached": false,
+  "reads": 375,
+  "rec_status": null,
+  "n_raster_reads": 375,
+  "n_failed_reads": 0,
+  "catalog_gaps": [],
+  "n_catalog_gaps": 0,
+  "ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet": "9adb29eecf4f"
+ },
+ "run2_cache": {
+  "status": "ok",
+  "cached": true,
+  "reads": 0,
+  "rec_status": null,
+  "n_raster_reads": 375,
+  "n_failed_reads": 0,
+  "catalog_gaps": [],
+  "n_catalog_gaps": 0,
+  "ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet": "9adb29eecf4f"
+ },
+ "json_identical_on_cache_hit": true,
+ "stage_table_equals_extract_points_table": true,
+ "stage_vs_proto_max_rel": {
+  "npp": 3.0898068627310393e-16,
+  "lst_day": 4.3558065516435823e-16,
+  "lst_night": 2.13363831729717e-16
+ },
+ "load_ok": true,
+ "searches": [
+  [
+   "modis-11A2-061",
+   "2020-01-01/2024-12-31",
+   500
+  ],
+  [
+   "modis-17A3HGF-061",
+   "2020-01-01/2024-12-31",
+   500
+  ]
+ ],
+ "probes": [
+  "https://planetarycomputer.microsoft.com/api/sas/v1/token/modiseuwest/modis-061-cogs",
+  "https://planetarycomputer.microsoft.com/api/stac/v1"
+ ],
+ "run_desc": {
+  "status": "ok",
+  "cached": false,
+  "reads": 375,
+  "rec_status": null,
+  "n_raster_reads": 375,
+  "n_failed_reads": 0,
+  "catalog_gaps": [],
+  "n_catalog_gaps": 0,
+  "ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet": "9adb29eecf4f"
+ },
+ "run_asc": {
+  "status": "ok",
+  "cached": false,
+  "reads": 375,
+  "rec_status": null,
+  "n_raster_reads": 375,
+  "n_failed_reads": 0,
+  "catalog_gaps": [],
+  "n_catalog_gaps": 0,
+  "ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet": "9adb29eecf4f"
+ }
+}

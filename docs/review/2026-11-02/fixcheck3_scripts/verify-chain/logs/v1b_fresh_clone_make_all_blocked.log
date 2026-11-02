@@ -1,0 +1,36 @@
+make all (blocked container) exit: 2
+statuses: {
+ "fetch_srdb": "ok",
+ "fetch_cosore": "ok",
+ "fetch_naturalearth": "ok",
+ "cosore_annual": "ok",
+ "build_sites": "ok",
+ "site_diagnostics": "ok",
+ "fetch_worldclim": "blocked: https://geodata.ucdavis.edu/: blocked by proxy (Tunnel connection failed: 403)",
+ "fetch_soilgrids": "blocked: https://maps.isric.org/: blocked by proxy (Tunnel connection failed: 403)",
+ "modis_points": "blocked: https://planetarycomputer.microsoft.com/: blocked by proxy (Tunnel connection failed: 403)",
+ "features": "skipped: upstream fetch_worldclim, fetch_soilgrids, modis_points not available",
+ "clean_test": "skipped: upstream features not available",
+ "repro_checks": "ok"
+}
+summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 17, 'STALE': 0}
+    NOT RUN | Locked test: selected model | fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)
+    NOT RUN | Locked test: Asia spatial-CV R² | fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)
+    NOT RUN | Locked test: Europe n | fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)
+    NOT RUN | Locked test: Europe R² | fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)
+    NOT RUN | Locked test: site-bootstrap CI low | fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)
+    NOT RUN | Locked test: site-bootstrap CI high | fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)
+    NOT RUN | Locked test: re-run identical to the locked result | fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)
+    NOT RUN | Locked test (repo-filter sensitivity): re-run identical to t | fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)
+    NOT RUN | NPP r vs committed NPP (original 889 sites) | modis_points: blocked by network policy (planetarycomputer.microsoft.com)
+    NOT RUN | Original sites with NPP missing in the committed tables but  | modis_points: blocked by network policy (planetarycomputer.microsoft.com)
+regression: {
+ "test_cosore_sites": "pass",
+ "test_record_and_site_counts": "pass",
+ "test_locked_test_rerun": "pass",
+ "test_npp_correlation": "Skipped: NPP check not run (modis_points output missing)",
+ "test_reproduction_table_has_no_fail": "pass",
+ "rerun_reported_qc": "AssertionError: ",
+ "rerun_reported_repo": "AssertionError: "
+}
+gate: ok

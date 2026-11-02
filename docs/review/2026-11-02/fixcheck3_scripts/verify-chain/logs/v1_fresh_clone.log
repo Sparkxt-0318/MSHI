@@ -1,0 +1,76 @@
+WARNING:mshi:stages not completed: {'repro_checks': 'stale: 2 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`'}
+WARNING:mshi:stages not completed: {'repro_checks': 'stale: 2 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`'}
+features exit: 0
+repro exit (author state): 0
+author summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 1, 'NOT RUN': 0, 'PASS': 26, 'STALE': 0} npp r: 0.9825
+author staleness: {
+ "build_sites.json": null,
+ "clean_test_rerun_qc.json": null,
+ "clean_test_rerun_repo.json": null,
+ "cosore_annual.json": null,
+ "features.json": null,
+ "fetch_soilgrids.json": null,
+ "fetch_worldclim.json": null,
+ "modis_points.json": null,
+ "reproduction_check.json": null
+}
+author regression: {
+ "test_cosore_sites": "pass",
+ "test_record_and_site_counts": "pass",
+ "test_locked_test_rerun": "pass",
+ "test_npp_correlation": "pass",
+ "test_reproduction_table_has_no_fail": "pass",
+ "rerun_reported_qc": "pass",
+ "rerun_reported_repo": "pass"
+}
+author gate: ok
+recorded output root keys: {'modis_points.json': ['interim:modis_points.parquet'], 'features.json': ['interim:features_v3_qc.parquet', 'interim:features_v3_repo.parquet'], 'fetch_worldclim.json': ['raw:worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif', 'raw:worldclim/2.1/2.5m/wc2.1_2.5m_bio_10.tif'], 'fetch_soilgrids.json': ['raw:soilgrids/2.0/0p05/bdod_5-15cm_mean_global_0p05.tif', 'raw:soilgrids/2.0/0p05/cec_5-15cm_mean_global_0p05.tif']}
+
+fresh-clone staleness: {
+ "build_sites.json": null,
+ "clean_test_rerun_qc.json": null,
+ "clean_test_rerun_repo.json": null,
+ "cosore_annual.json": null,
+ "features.json": "missing its output /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scra",
+ "fetch_soilgrids.json": "missing its output /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scra",
+ "fetch_worldclim.json": "missing its output /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scra",
+ "modis_points.json": "missing its output /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scra",
+ "reproduction_check.json": null
+}
+fresh-clone regression (committed table): {
+ "test_cosore_sites": "pass",
+ "test_record_and_site_counts": "pass",
+ "test_locked_test_rerun": "pass",
+ "test_npp_correlation": "pass",
+ "test_reproduction_table_has_no_fail": "pass",
+ "rerun_reported_qc": "pass",
+ "rerun_reported_repo": "pass"
+}
+fresh-clone gate (committed table): ok
+
+make repro: exit 2 {'repro_checks': 'stale: 2 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`'}
+summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 0, 'PASS': 25, 'STALE': 2} npp_check: None
+    STALE | NPP r vs committed NPP (original 889 sites) | modis_points.json missing its output <v1>/s/interim/modis_points.parquet; re-run `make all`
+    STALE | Original sites with NPP missing in the committed tables but  | modis_points.json missing its output <v1>/s/interim/modis_points.parquet; re-run `make all`
+after make repro regression: {
+ "test_cosore_sites": "pass",
+ "test_record_and_site_counts": "pass",
+ "test_locked_test_rerun": "pass",
+ "test_npp_correlation": "Skipped: NPP check not run (modis_points output missing)",
+ "test_reproduction_table_has_no_fail": "AssertionError: ",
+ "rerun_reported_qc": "pass",
+ "rerun_reported_repo": "pass"
+}
+after make repro gate: results/reproduction_check.json has {'STALE': 2}
+
+make data (emulated, without fetch_cosore/cosore_annual): exit 2 {'fetch_srdb': 'ok', 'fetch_naturalearth': 'ok', 'build_sites': 'ok', 'repro_checks': 'stale: 2 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`'}
+summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 0, 'PASS': 25, 'STALE': 2}
+regression: {
+ "test_cosore_sites": "pass",
+ "test_record_and_site_counts": "pass",
+ "test_locked_test_rerun": "pass",
+ "test_npp_correlation": "Skipped: NPP check not run (modis_points output missing)",
+ "test_reproduction_table_has_no_fail": "AssertionError: ",
+ "rerun_reported_qc": "pass",
+ "rerun_reported_repo": "pass"
+}

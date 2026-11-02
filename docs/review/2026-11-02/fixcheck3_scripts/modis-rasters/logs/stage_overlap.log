@@ -1,0 +1,21 @@
+{
+ "run": {
+  "status": "ok",
+  "cached": false,
+  "reads": 381,
+  "rec_status": null,
+  "n_raster_reads": 381,
+  "n_failed_reads": 0,
+  "catalog_gaps": [],
+  "n_catalog_gaps": 0,
+  "ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet": "b65bf3ff63e1"
+ },
+ "lst_day_n_range": [
+  49,
+  56
+ ]
+}

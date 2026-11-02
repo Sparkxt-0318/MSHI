@@ -1,0 +1,111 @@
+WorldClim zip hash is not pinned in configs/v3.yaml; recorded 41f28d76c19f4f0a9f3cae83adf41bb80e2153d8265936b2dc962deb6b4f7816
+WorldClim zip hash is not pinned in configs/v3.yaml; recorded 41f28d76c19f4f0a9f3cae83adf41bb80e2153d8265936b2dc962deb6b4f7816
+WorldClim zip hash is not pinned in configs/v3.yaml; recorded 41f28d76c19f4f0a9f3cae83adf41bb80e2153d8265936b2dc962deb6b4f7816
+download http://127.0.0.1:44607/wc/wc2.1_2.5m_bio.zip failed (HTTP 503); retry 1/1 in 2s
+download http://127.0.0.1:44607/wc/wc2.1_2.5m_bio.zip failed (HTTP 503); retry 1/1 in 2s
+WorldClim zip hash is not pinned in configs/v3.yaml; recorded 41f28d76c19f4f0a9f3cae83adf41bb80e2153d8265936b2dc962deb6b4f7816
+{
+ "1_fresh_worldclim": {
+  "status": "ok",
+  "downloads": 1,
+  "http_requests": 1
+ },
+ "1_fresh_soilgrids": {
+  "status": "ok",
+  "downloads": 8,
+  "http_requests": 8
+ },
+ "1_files": {
+  "n_tifs": 19,
+  "zip": true,
+  "zip_sidecar": true,
+  "layer_sidecar": true
+ },
+ "1_features": {
+  "status": "ok",
+  "downloads": 0,
+  "http_requests": 0
+ },
+ "2_rerun_worldclim": {
+  "status": "ok",
+  "downloads": 0,
+  "http_requests": 0
+ },
+ "2_rerun_soilgrids": {
+  "status": "ok",
+  "downloads": 0,
+  "http_requests": 0
+ },
+ "3_verify_after_wc_layer_replaced": "REFUSED StaleInputError: results/fetch_worldclim.json: its output fixcheck3_scripts/modis-rasters/work/rast/rsb/raw/worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif",
+ "3_refetch_worldclim": {
+  "status": "ok",
+  "downloads": 0,
+  "http_requests": 0
+ },
+ "3_verify_after_sg_replaced": "REFUSED StaleInputError: results/fetch_soilgrids.json: its output fixcheck3_scripts/modis-rasters/work/rast/rsb/raw/soilgrids/2.0/0p05/soc_5-15cm_mean_glob",
+ "3_refetch_soilgrids": {
+  "status": "ok",
+  "downloads": 1,
+  "http_requests": 1
+ },
+ "3_verify_after_refetch": "accepted",
+ "4_statistic_Q0.5": {
+  "status": "ok",
+  "downloads": 8,
+  "http_requests": 8
+ },
+ "4_statistic_files": [
+  "soc_5-15cm_Q0.5_global_0p05.tif",
+  "soc_5-15cm_mean_global_0p05.tif"
+ ],
+ "4_lat_change": {
+  "status": "ok",
+  "downloads": 8,
+  "http_requests": 8
+ },
+ "4_verify_lat_config_without_features_rerun": "REFUSED StaleInputError: results/build_sites.json: produced with a different config; re-run the stage that writes it (or `make all`)",
+ "4_back_to_A_soilgrids": {
+  "status": "ok",
+  "downloads": 8,
+  "http_requests": 8
+ },
+ "5_pin_recorded_hash_server_down": {
+  "status": "DownloadError: http://127.0.0.1:44607/wc/wc2.1_2.5m_bio.zip: failed after 2 attempts (HTTP 503)",
+  "downloads": 1,
+  "http_requests": 2
+ },
+ "5_files_after": {
+  "n_tifs": 0,
+  "zip": false,
+  "zip_sidecar": false,
+  "layer_sidecar": false
+ },
+ "5_pin_recorded_hash_server_up": {
+  "status": "ok",
+  "downloads": 1,
+  "http_requests": 1
+ },
+ "5_files_after_up": {
+  "n_tifs": 19,
+  "zip": true,
+  "zip_sidecar": true,
+  "layer_sidecar": true
+ },
+ "5_zip_hash_equals_pin": true,
+ "6_zip_without_sidecar_server_down": {
+  "status": "DownloadError: http://127.0.0.1:44607/wc/wc2.1_2.5m_bio.zip: failed after 2 attempts (HTTP 503)",
+  "downloads": 1,
+  "http_requests": 2
+ },
+ "6_files_after": {
+  "n_tifs": 0,
+  "zip": false,
+  "zip_sidecar": false,
+  "layer_sidecar": false
+ },
+ "6_refetch_server_up": {
+  "status": "ok",
+  "downloads": 1,
+  "http_requests": 1
+ }
+}

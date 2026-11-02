@@ -1,0 +1,4 @@
+target {'value': 0.982, 'abs': 0.01, 'n_sites': 889}
+n=2: r without the literal = 0.9999999999999999; row status with r: FAIL; row status with r=None (literal): FAIL
+n=2: r without the literal = -0.9999999999999999; row status with r: FAIL; row status with r=None (literal): FAIL
+n=1: r without the literal = nan; row status with r: FAIL; row status with r=None (literal): FAIL

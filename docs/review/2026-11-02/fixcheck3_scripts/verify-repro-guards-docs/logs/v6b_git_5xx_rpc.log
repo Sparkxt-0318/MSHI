@@ -1,0 +1,5 @@
+POST answers normally: ok downloaded=True
+   sleeps []; requests [('GET', '/repo.git/info/refs'), ('POST', '/repo.git/git-upload-pack'), ('POST', '/repo.git/git-upload-pack')]
+POST answers 502: SourceUnavailableError(kind=unreachable): 32f1: unreachable after 4 attempts (error: RPC failed; HTTP 502 curl 22 The requested URL returned error: 502
+fatal: expected flush after ref listing)
+   sleeps [2, 4, 8]; requests [('GET', '/repo.git/info/refs'), ('POST', '/repo.git/git-upload-pack'), ('GET', '/repo.git/info/refs'), ('POST', '/repo.git/git-upload-pack'), ('GET', '/repo.git/info/refs'), ('POST', '/repo.git/git-upload-pack'), ('GET', '/repo.git/info/refs'), ('POST', '/repo.git/git-upload-pack')]

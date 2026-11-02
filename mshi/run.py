@@ -17,9 +17,12 @@ some stage was blocked, unavailable, stale or skipped.
 Results are stamped with the config and code hashes taken when the run started (``Config.invocation``),
 so a result never claims code that was edited while the stage ran.
 
-Reproduction gate: a stage ordered after ``repro_checks`` (later phases) runs only if ``repro_checks``
-finished ``ok`` in this invocation or, when it is not part of the invocation, if the stored
-results/reproduction_check.json is current and has no FAIL or STALE row.
+Reproduction gate ("reproduce before you extend"): a stage ordered after ``repro_checks`` (later phases)
+runs only if results/reproduction_check.json is current (its inputs included, mshi.io.result_staleness) and
+every target row was compared and is within tolerance: no FAIL, STALE or NOT RUN row (a DEVIATION, i.e. a
+locked-test re-run that differs from the locked result, is reported but does not close the gate). If
+``repro_checks`` is part of the invocation it must also have finished ``ok``. Smoke runs do not apply the
+gate: their outputs (data/interim/smoke/) are not results, and they never run ``repro_checks``.
 """
 from __future__ import annotations
 
@@ -90,6 +93,7 @@ def smoke_subset(cfg: Config) -> dict:
         return {"skipped": "not a smoke run"}
     tables = [cfg.path("derived", f) for f in SITE_TABLES]
     b = require_outputs(cfg, "build_sites.json", tables)
+    ins = dict(b.get("_inputs") or {})          # the re-recorded build keeps the inputs of the full build
     n, seed = cfg["smoke"]["n_sites"], cfg["smoke"]["seed"]
     out = {}
     for tag in cfg["site_build"]["variants"]:
@@ -99,20 +103,24 @@ def smoke_subset(cfg: Config) -> dict:
         sub = st.iloc[idx].reset_index(drop=True)
         write_table(sub, p)
         out[tag] = {"n": int(len(sub)), "by_continent": sub.continent.value_counts().to_dict()}
-    write_result(cfg, {**b, "smoke_subset": out}, "build_sites.json", outputs=tables)
-    write_result(cfg, out, "smoke_subset.json", outputs=tables[1:])
+    write_result(cfg, {**b, "smoke_subset": out}, "build_sites.json", outputs=tables, inputs=ins)
+    require_current(cfg, "build_sites.json")    # registers the re-recorded result as read
+    write_result(cfg, out, "smoke_subset.json", outputs=tables[1:], inputs=["build_sites.json"])
     return out
 
 
 def _gate_status(cfg: Config, status: dict[str, str], names: list[str]) -> str:
     """'ok' if the reproduction gate is open (module docstring), else the reason it is closed."""
-    if GATE in names:
+    if GATE in names and status.get(GATE) != "ok":
         return status.get(GATE, "not run")
     try:
         rc = require_current(cfg, "reproduction_check.json")
     except StaleInputError as e:
         return f"stale: {e}"
-    bad = {k: rc["summary"].get(k, 0) for k in ("FAIL", "STALE") if rc["summary"].get(k, 0)}
+    summary = rc.get("summary") or {}
+    bad = {k: summary.get(k, 0) for k in ("FAIL", "STALE", "NOT RUN") if summary.get(k, 0)}
+    if not summary.get("PASS"):
+        bad["PASS"] = summary.get("PASS", 0)
     return f"results/reproduction_check.json has {bad}" if bad else "ok"
 
 
@@ -148,8 +156,11 @@ def run(stage_names: list[str], cfg: Config, full: bool = False) -> int:
             up = [d for d in st.deps if d in status and status[d] != "ok"]
             msg = f"skipped: upstream {', '.join(up)} not available" if up else None
             if msg is None and GATE in order and order.index(name) > order.index(GATE):
-                gate = _gate_status(cfg, status, names)
-                msg = None if gate == "ok" else f"skipped: reproduction gate closed ({GATE}: {gate})"
+                if smoke:
+                    log.info("%-18s smoke run: reproduction gate not applied (smoke outputs are not results)", name)
+                else:
+                    gate = _gate_status(cfg, status, names)
+                    msg = None if gate == "ok" else f"skipped: reproduction gate closed ({GATE}: {gate})"
             if msg:
                 with stage_timer(log_path, name, prov) as rec:
                     rec["status_override"] = msg

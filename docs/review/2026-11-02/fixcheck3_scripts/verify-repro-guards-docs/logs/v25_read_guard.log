@@ -1,0 +1,29 @@
+demo: (3000, 30) source values: ['synthetic'] has source column: True
+
+-- (5a) parquet with 'source' stored as the pandas index
+   schema names end: ['aridity_demartonne', 'lst_diurnal_range', 'source'] | pandas index_columns: ['source']
+READ     source_as_index.parquet, no kwargs: shape (3000, 29), index names ['source'], 'source' present: True
+ERROR    source_as_index.parquet, columns=['longitude']: KeyError: 'source'
+READ     multiindex.parquet (source, longitude), no kwargs: shape (3000, 28), index names ['source', 'longitude'], 'source' present: True
+REFUSED  control resaved.parquet (source column), no kwargs: refusing to use fixcheck3_scripts/verify
+REFUSED  control resaved.parquet, columns=['longitude','latitude']: refusing to use fixcheck3_scripts/verify
+
+-- (5a') CSV read with index_col='source' (no projection kwarg)
+READ     export.csv, index_col='source': shape (3000, 29), index names ['source'], 'source' present: True
+REFUSED  control export.csv, no kwargs: refusing to use fixcheck3_scripts/verify
+REFUSED  fixed part: export.csv usecols list: refusing to use fixcheck3_scripts/verify
+REFUSED  fixed part: export.csv usecols callable: refusing to use fixcheck3_scripts/verify
+REFUSED  fixed part: export.csv usecols positions: refusing to use fixcheck3_scripts/verify
+REFUSED  fixed part: semi.csv sep=';' usecols: refusing to use fixcheck3_scripts/verify
+
+-- (2)/(5b) CSV projections combined with header-changing kwargs
+REFUSED  preamble.csv skiprows=1 (control, no projection): refusing to use fixcheck3_scripts/verify
+READ     preamble.csv skiprows=1 + usecols: shape (3000, 2), index names [None], 'source' present: False
+REFUSED  preamble.csv comment='#' (control): refusing to use fixcheck3_scripts/verify
+READ     preamble.csv comment='#' + usecols: shape (3000, 1), index names [None], 'source' present: False
+REFUSED  headerless.csv header=None names=... (control): refusing to use fixcheck3_scripts/verify
+READ     headerless.csv header=None names=... + usecols: shape (3000, 2), index names [None], 'source' present: False
+REFUSED  export.csv header=0 names=renamed + usecols (rename 'source'->'origin'): refusing to use fixcheck3_scripts/verify
+
+-- pipeline projected reads (grep of read_table calls with kwargs):
+   mshi/data/sites.py 43 raw_coords = read_table(cfg, path, usecols=["Latitude", "Longitude"], dtype=str, keep_default_na=False)

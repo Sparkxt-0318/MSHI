@@ -1,0 +1,2 @@
+edited fixcheck3_scripts/end-to-end/pkgcopy/mshi/data/modis.py while the run was in progress
+exit 2 [('fetch_srdb', 'ok', None), ('fetch_cosore', 'ok', None), ('fetch_naturalearth', 'ok', None), ('cosore_annual', 'ok', None), ('build_sites', 'stale: results/cosore_annual.json: produced with a different code; re-run the st', None), ('modis_points', 'skipped: upstream build_sites not available', None), ('features', 'skipped: upstream build_sites, modis_points not available', None)]

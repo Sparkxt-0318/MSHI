@@ -1,0 +1,3 @@
+atol_plugin: DEFAULT_CONFIG -> fixcheck3_scripts/verify-repro-guards-docs/work/atol_cfg/v3_atol005.yaml
+atol_plugin: deviation_atol values seen by tests: {0.05}
+72 passed in 2.77s

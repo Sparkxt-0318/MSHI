@@ -1,0 +1,30 @@
+{
+ "pkg": "new",
+ "layout": "subdir",
+ "label": "new_subdir",
+ "exit": 1,
+ "downloads": [
+  "wc2.1_2.5m_bio.zip",
+  "soc_5-15cm_mean_global_0p05.tif",
+  "nitrogen_5-15cm_mean_global_0p05.tif",
+  "phh2o_5-15cm_mean_global_0p05.tif",
+  "clay_5-15cm_mean_global_0p05.tif",
+  "sand_5-15cm_mean_global_0p05.tif",
+  "silt_5-15cm_mean_global_0p05.tif",
+  "bdod_5-15cm_mean_global_0p05.tif",
+  "cec_5-15cm_mean_global_0p05.tif"
+ ],
+ "stages": [
+  [
+   "fetch_worldclim",
+   "error: ValueError: fixcheck3_scripts/verify-end-to-end/c3/new_subdir/bigdisk/worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])"
+  ],
+  [
+   "fetch_soilgrids",
+   "error: ValueError: fixcheck3_scripts/verify-end-to-end/c3/new_subdir/bigdisk/soilgrids/2.0/0p05/soc_5-15cm_mean_global_0p05.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])"
+  ]
+ ],
+ "fetch_worldclim.json": "not written",
+ "fetch_soilgrids.json": "not written",
+ "root_key_tif1": "ValueError: fixcheck3_scripts/verify-end-to-end/c3/new_subdir/bigdisk/worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])"
+}

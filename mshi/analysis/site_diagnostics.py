@@ -103,12 +103,14 @@ def site_diagnostics(cfg: Config) -> dict:
     out["coord_check"]["reported_country_not_in_naturalearth"] = (
         unknown.groupby(["Country", "geo_country"]).size().rename("n").reset_index().to_dict(orient="records"))
 
-    # 2. continent fallback for points off the 1:50m coastline
+    # 2. continent fallback for points off the 1:50m coastline (nearest country among those within
+    #    ``offland_search_deg`` degrees; None if there is none)
     off = r[r.f_offland]
-    out["offland"] = {"n": int(len(off)), "records": []}
+    deg = cfg["site_diagnostics"]["offland_search_deg"]
+    out["offland"] = {"n": int(len(off)), "search_deg": deg, "records": []}
     for row in off.itertuples():
         d = sorted((_true_km_to_polygon(row.lon, row.lat, g, cty.crs), a) for a, g in zip(cty.ADMIN, cty.geometry)
-                   if g.distance(gpd.points_from_xy([row.lon], [row.lat])[0]) < 5)[:1]
+                   if g.distance(gpd.points_from_xy([row.lon], [row.lat])[0]) < deg)[:1]
         out["offland"]["records"].append({"rec_id": row.rec_id, "lat": row.lat, "lon": row.lon,
                                           "nearest_country": d[0][1] if d else None,
                                           "true_km": round(d[0][0], 1) if d else None})
@@ -126,8 +128,9 @@ def site_diagnostics(cfg: Config) -> dict:
             diam[sid] = float(_haversine_km(la[i], lo[i], la[j], lo[j]).max())
         dv = pd.Series(diam, dtype=float)
         out[f"site_diameter_{tag}"] = {"n_multi_record_sites": int(len(dv)),
-                                       "n_gt_5km": int((dv > 5).sum()), "n_gt_10km": int((dv > 10).sum()),
-                                       "n_gt_20km": int((dv > 20).sum()), "max_km": float(dv.max()) if len(dv) else None,
+                                       **{f"n_gt_{k:g}km": int((dv > k).sum())
+                                          for k in cfg["site_diagnostics"]["diameter_bins_km"]},
+                                       "max_km": float(dv.max()) if len(dv) else None,
                                        "largest": dv.sort_values(ascending=False).head(5).round(1).to_dict()}
     # 4. continent labels outside broad geographic boxes (exploratory; the locked rule is not changed)
     boxes = cfg["site_diagnostics"]["continent_boxes"]
@@ -148,6 +151,6 @@ def site_diagnostics(cfg: Config) -> dict:
     for tag in cfg["site_build"]["variants"]:
         st = read_table(cfg, cfg.path("derived", f"sites_v3_{tag}.parquet"))
         out[f"europe_in_original_asia_table_{tag}"] = in_original_asia_table(cfg, r, st, tag)
-    write_result(cfg, out, "site_diagnostics.json")
+    write_result(cfg, out, "site_diagnostics.json", inputs=["build_sites.json"])
     return {k: (v if not isinstance(v, dict) else {kk: vv for kk, vv in v.items() if not isinstance(vv, list)})
             for k, v in out.items()}

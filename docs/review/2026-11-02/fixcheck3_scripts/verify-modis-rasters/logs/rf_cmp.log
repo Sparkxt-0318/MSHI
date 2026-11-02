@@ -1,0 +1,53 @@
+old_V2a.json vs head_V2.json: selected C8/RF vs C8/RF
+  all_candidates_on_test:RF          leaves   30 differ  14 (>1e-15:  0) max abs 8.88e-16 at ('all_candidates_on_test[7].ci_site[0]', -0.36204603662460666, -0.36204603662460577)
+  all_candidates_on_test:nonRF       leaves   36 differ   0 (>1e-15:  0) max abs 0 at None
+  other                              leaves    2 differ   0 (>1e-15:  0) max abs 0 at None
+  selected-model(RF)                 leaves   51 differ  29 (>1e-15:  3) max abs 2.84e-14 at ('aoa.outside.mae_rs', 134.1933078787107, 134.19330787871067)
+  selection_table:RF                 leaves   30 differ   9 (>1e-15:  0) max abs 1.11e-16 at ('selection_table[0].cv_r2', 0.27192599806739365, 0.27192599806739354)
+  selection_table:nonRF              leaves   36 differ   0 (>1e-15:  0) max abs 0 at None
+old_V2b.json vs head_V2.json: selected C8/RF vs C8/RF
+  all_candidates_on_test:RF          leaves   30 differ  10 (>1e-15:  1) max abs 1.11e-15 at ('all_candidates_on_test[7].ci_site[0]', -0.3620460366246069, -0.36204603662460577)
+  all_candidates_on_test:nonRF       leaves   36 differ   0 (>1e-15:  0) max abs 0 at None
+  other                              leaves    2 differ   0 (>1e-15:  0) max abs 0 at None
+  selected-model(RF)                 leaves   51 differ  19 (>1e-15:  1) max abs 2.84e-14 at ('primary.mae_rs', 128.93301744913293, 128.9330174491329)
+  selection_table:RF                 leaves   30 differ  10 (>1e-15:  0) max abs 1.67e-16 at ('selection_table[7].cv_r2', 0.19952226404635734, 0.1995222640463575)
+  selection_table:nonRF              leaves   36 differ   0 (>1e-15:  0) max abs 0 at None
+old_V2c.json vs head_V2.json: selected C8/RF vs C8/RF
+  all_candidates_on_test:RF          leaves   30 differ  14 (>1e-15:  0) max abs 6.59e-16 at ('all_candidates_on_test[3].ci_site[1]', -0.021138603016046153, -0.021138603016045494)
+  all_candidates_on_test:nonRF       leaves   36 differ   0 (>1e-15:  0) max abs 0 at None
+  other                              leaves    2 differ   0 (>1e-15:  0) max abs 0 at None
+  selected-model(RF)                 leaves   51 differ  29 (>1e-15: 10) max abs 5.68e-14 at ('aoa.outside.rmse_rs', 188.2721784230819, 188.27217842308184)
+  selection_table:RF                 leaves   30 differ  10 (>1e-15:  0) max abs 2.57e-16 at ('selection_table[1].cv_r2_sd', 0.041276984401825284, 0.04127698440182503)
+  selection_table:nonRF              leaves   36 differ   0 (>1e-15:  0) max abs 0 at None
+--- my head_V2 vs reviewer head_V2 / head_V2b:
+4f3eaaca543c5830
+4f3eaaca543c5830
+4f3eaaca543c5830
+head_V2.json vs head_V2.json: selected C8/RF vs C8/RF
+  all_candidates_on_test:RF          leaves   30 differ   0 (>1e-15:  0) max abs 0 at None
+  all_candidates_on_test:nonRF       leaves   36 differ   0 (>1e-15:  0) max abs 0 at None
+  other                              leaves    2 differ   0 (>1e-15:  0) max abs 0 at None
+  selected-model(RF)                 leaves   51 differ   0 (>1e-15:  0) max abs 0 at None
+  selection_table:RF                 leaves   30 differ   0 (>1e-15:  0) max abs 0 at None
+  selection_table:nonRF              leaves   36 differ   0 (>1e-15:  0) max abs 0 at None
+--- reviewer old_V2 vs my head_V2 (recomputed by my cmp):
+old_V2.json vs head_V2.json: selected C8/RF vs C8/RF
+  all_candidates_on_test:RF          leaves   30 differ  11 (>1e-15:  1) max abs 1.33e-15 at ('all_candidates_on_test[9].ci_site[0]', -0.3344398564153544, -0.33443985641535573)
+  all_candidates_on_test:nonRF       leaves   36 differ   0 (>1e-15:  0) max abs 0 at None
+  other                              leaves    2 differ   0 (>1e-15:  0) max abs 0 at None
+  selected-model(RF)                 leaves   51 differ  26 (>1e-15:  4) max abs 2.84e-14 at ('aoa.inside.rmse_rs', 179.94004427960294, 179.94004427960297)
+  selection_table:RF                 leaves   30 differ   9 (>1e-15:  0) max abs 2.64e-16 at ('selection_table[5].cv_r2_sd', 0.06129380374270038, 0.06129380374270012)
+  selection_table:nonRF              leaves   36 differ   0 (>1e-15:  0) max abs 0 at None
+old_V2a.json: RF-table numeric leaves 40, differ 23, median 2.22e-16, max 8.88e-16, n>5e-16 5, n>1e-15 0, max ulps 189
+old_V2b.json: RF-table numeric leaves 40, differ 20, median 1.46e-16, max 1.11e-15, n>5e-16 4, n>1e-15 1, max ulps 161
+old_V2c.json: RF-table numeric leaves 40, differ 24, median 1.77e-16, max 6.59e-16, n>5e-16 1, n>1e-15 0, max ulps 190
+old_V2.json: RF-table numeric leaves 40, differ 20, median 2.22e-16, max 1.33e-15, n>5e-16 3, n>1e-15 1, max ulps 128
+old_V2b.json: RF-table numeric leaves 40, differ 22, median 1.68e-16, max 4.44e-16, n>5e-16 0, n>1e-15 0, max ulps 125
+old_W3.json vs head_W3.json: selected C8/RF vs C8/RF
+  all_candidates_on_test:RF          leaves   30 differ  14 (>1e-15:  0) max abs 8.6e-16 at ('all_candidates_on_test[5].ci_site[0]', 0.07308362119847926, 0.0730836211984784)
+  all_candidates_on_test:nonRF       leaves   36 differ   0 (>1e-15:  0) max abs 0 at None
+  other                              leaves    2 differ   0 (>1e-15:  0) max abs 0 at None
+  selected-model(RF)                 leaves   51 differ  33 (>1e-15:  8) max abs 1.14e-13 at ('aoa.outside.rmse_rs', 237.1523351436816, 237.15233514368148)
+  selection_table:RF                 leaves   30 differ  10 (>1e-15:  0) max abs 4.16e-16 at ('selection_table[5].cv_r2', 0.055207509931752934, 0.05520750993175252)
+  selection_table:nonRF              leaves   36 differ   0 (>1e-15:  0) max abs 0 at None
+old_W3.json: RF-table numeric leaves 40, differ 24, median 1.46e-16, max 8.60e-16, n>5e-16 2, n>1e-15 0, max ulps 256

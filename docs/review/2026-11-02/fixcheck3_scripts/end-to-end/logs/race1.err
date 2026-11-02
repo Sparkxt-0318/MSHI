@@ -1,0 +1,17 @@
+WARNING:mshi:modis_points       skipped: upstream build_sites not available
+WARNING:mshi:features           skipped: upstream build_sites, modis_points not available
+WARNING:mshi:stages not completed: {'build_sites': 'stale: results/cosore_annual.json: produced with a different code; re-run the stage that writes it (or `make all`)', 'modis_points': 'skipped: upstream build_sites not available', 'features': 'skipped: upstream build_sites, modis_points not available'}
+Traceback (most recent call last):
+  File "fixcheck3_scripts/end-to-end/scripts/race.py", line 48, in <module>
+    meta = json.loads(cfg.path("interim", "modis_points.meta.json").read_text())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/pathlib/_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/pathlib/_abc.py", line 632, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/pathlib/_local.py", line 537, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'fixcheck3_scripts/end-to-end/sbR/interim/modis_points.meta.json'

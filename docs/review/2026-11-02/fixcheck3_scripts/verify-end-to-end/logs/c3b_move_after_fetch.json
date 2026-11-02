@@ -1,0 +1,4 @@
+{
+ "staleness_fetch_worldclim": null,
+ "require_outputs": "ValueError: fixcheck3_scripts/verify-end-to-end/c3/new_plain/bigdisk2/worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])"
+}

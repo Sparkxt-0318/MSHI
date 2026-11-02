@@ -1,0 +1,7 @@
+smoke derived:sites_v3_qc.parquet True
+smoke results:reproduction_check.md True
+smoke raw:worldclim/x.tif True
+nested derived:t.parquet <chain>/work/c14/data/derived/t.parquet
+relative arg from another cwd: ValueError <scratchpad>/fi
+symlinked root, real path: interim:m.parquet <chain>/work/c14/link_root/m.parquet
+outside every root: ValueError /etc/hostname is not under any configured path root (['deriv

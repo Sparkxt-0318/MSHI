@@ -1,0 +1,91 @@
+{
+ "pkg": "fixcheck3_scripts/verify-modis-rasters/pkg/head/mshi/__init__.py",
+ "tiles": [
+  "h10v04",
+  "h18v04",
+  "h19v04"
+ ],
+ "n_sites": 9,
+ "run": {
+  "status": "ok",
+  "cached": false,
+  "actual_reads": 381,
+  "rec.status": null,
+  "rec.n_raster_reads": 381,
+  "rec.n_failed_reads": 0,
+  "rec.n_catalog_gaps": 0,
+  "rec.len(catalog_gaps)": 0,
+  "rec.catalog_gaps[:4]": [],
+  "rec.lst_same_date_ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet_sha12": "2870122e68b7"
+ },
+ "vs_complete_clip": {
+  "npp": {
+   "sites_changed": 0,
+   "max_abs": 0.0
+  },
+  "npp_n": [
+   5
+  ],
+  "lst_day": {
+   "sites_changed": 9,
+   "max_abs": 0.2001085306618151
+  },
+  "lst_day_n": [
+   61
+  ],
+  "lst_night": {
+   "sites_changed": 9,
+   "max_abs": 0.16313677761218948
+  },
+  "lst_night_n": [
+   61
+  ],
+  "lst_day_changed_site_tiles": [
+   "h10v04",
+   "h18v04",
+   "h19v04"
+  ]
+ },
+ "record_mentions_2019": false,
+ "jobs_dated_2019": [
+  [
+   "lst_day",
+   "2019-12-27",
+   "MOD11A2.A2019361.h10v04."
+  ],
+  [
+   "lst_day",
+   "2019-12-27",
+   "MOD11A2.A2019361.h18v04."
+  ],
+  [
+   "lst_day",
+   "2019-12-27",
+   "MOD11A2.A2019361.h19v04."
+  ],
+  [
+   "lst_night",
+   "2019-12-27",
+   "MOD11A2.A2019361.h10v04."
+  ],
+  [
+   "lst_night",
+   "2019-12-27",
+   "MOD11A2.A2019361.h18v04."
+  ],
+  [
+   "lst_night",
+   "2019-12-27",
+   "MOD11A2.A2019361.h19v04."
+  ]
+ ],
+ "n_lst_day_jobs_per_tile": {
+  "h10v04": 61,
+  "h18v04": 61,
+  "h19v04": 61
+ }
+}

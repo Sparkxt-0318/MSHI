@@ -1,0 +1,30 @@
+WorldClim zip hash is not pinned in configs/v3.yaml; recorded d88455533be8d80433e849a9f062ff2a8d2fac64154a5914a1c80a5758a62178
+fetch_worldclim failed
+Traceback (most recent call last):
+  File "/home/user/MSHI/mshi/run.py", line 163, in run
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+  File "/home/user/MSHI/mshi/data/rasters.py", line 96, in fetch_worldclim
+    write_result(cfg, res, "fetch_worldclim.json", outputs=tifs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/MSHI/mshi/io.py", line 185, in write_result
+    rec["_outputs"] = {cfg.root_key(p): sha256_file(p) for p in outputs}
+                       ~~~~~~~~~~~~^^^
+  File "/home/user/MSHI/mshi/config.py", line 72, in root_key
+    raise ValueError(f"{p} is not under any configured path root ({sorted(self._d['paths'])})")
+ValueError: fixcheck3_scripts/verify-end-to-end/c3/new_subdir/bigdisk/worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])
+fetch_soilgrids failed
+Traceback (most recent call last):
+  File "/home/user/MSHI/mshi/run.py", line 163, in run
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+  File "/home/user/MSHI/mshi/data/rasters.py", line 129, in fetch_soilgrids
+    write_result(cfg, res, "fetch_soilgrids.json", outputs=paths)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/MSHI/mshi/io.py", line 185, in write_result
+    rec["_outputs"] = {cfg.root_key(p): sha256_file(p) for p in outputs}
+                       ~~~~~~~~~~~~^^^
+  File "/home/user/MSHI/mshi/config.py", line 72, in root_key
+    raise ValueError(f"{p} is not under any configured path root ({sorted(self._d['paths'])})")
+ValueError: fixcheck3_scripts/verify-end-to-end/c3/new_subdir/bigdisk/soilgrids/2.0/0p05/soc_5-15cm_mean_global_0p05.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])
+stages not completed: {'fetch_worldclim': "error: ValueError: fixcheck3_scripts/verify-end-to-end/c3/new_subdir/bigdisk/worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])", 'fetch_soilgrids': "error: ValueError: fixcheck3_scripts/verify-end-to-end/c3/new_subdir/bigdisk/soilgrids/2.0/0p05/soc_5-15cm_mean_global_0p05.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])"}

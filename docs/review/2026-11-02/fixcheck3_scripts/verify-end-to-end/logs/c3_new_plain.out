@@ -1,0 +1,46 @@
+{
+ "pkg": "new",
+ "layout": "plain",
+ "label": "new_plain",
+ "exit": 0,
+ "downloads": [
+  "wc2.1_2.5m_bio.zip",
+  "soc_5-15cm_mean_global_0p05.tif",
+  "nitrogen_5-15cm_mean_global_0p05.tif",
+  "phh2o_5-15cm_mean_global_0p05.tif",
+  "clay_5-15cm_mean_global_0p05.tif",
+  "sand_5-15cm_mean_global_0p05.tif",
+  "silt_5-15cm_mean_global_0p05.tif",
+  "bdod_5-15cm_mean_global_0p05.tif",
+  "cec_5-15cm_mean_global_0p05.tif"
+ ],
+ "stages": [
+  [
+   "fetch_worldclim",
+   "ok"
+  ],
+  [
+   "fetch_soilgrids",
+   "ok"
+  ]
+ ],
+ "fetch_worldclim.json": {
+  "_outputs_keys": [
+   "raw:worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif",
+   "raw:worldclim/2.1/2.5m/wc2.1_2.5m_bio_10.tif",
+   "raw:worldclim/2.1/2.5m/wc2.1_2.5m_bio_11.tif"
+  ],
+  "n_outputs": 19,
+  "staleness": null
+ },
+ "fetch_soilgrids.json": {
+  "_outputs_keys": [
+   "raw:soilgrids/2.0/0p05/bdod_5-15cm_mean_global_0p05.tif",
+   "raw:soilgrids/2.0/0p05/cec_5-15cm_mean_global_0p05.tif",
+   "raw:soilgrids/2.0/0p05/clay_5-15cm_mean_global_0p05.tif"
+  ],
+  "n_outputs": 8,
+  "staleness": null
+ },
+ "root_key_tif1": "raw:worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif"
+}

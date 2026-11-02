@@ -1,0 +1,9 @@
+........................................................................ [ 51%]
+...ssss..s...........................................s..............     [100%]
+=========================== short test summary info ============================
+SKIPPED [2] tests/conftest.py:25: results/clean_test_rerun_qc.json not present (stage not run)
+SKIPPED [1] tests/conftest.py:25: results/clean_test_rerun_repo.json not present (stage not run)
+SKIPPED [1] tests/test_regression.py:86: NPP check not run (modis_points output missing)
+SKIPPED [1] tests/test_regression.py:114: raw SRDB/COSORE/Natural Earth not present; run `make data` first
+SKIPPED [1] tests/test_smoke.py:29: pinned raw inputs / cosore_annual.csv not present; run `make data` first
+134 passed, 6 skipped in 18.10s

@@ -1,0 +1,15 @@
+# The pipeline hashes these files' bytes (code hash, locked plan and results, recorded outputs, allow-listed
+# tables), so they must have the committed bytes on every platform: no line-ending conversion on checkout,
+# whatever core.autocrlf says (docs/DECISIONS.md R-P1-21). Other paths are left to git's defaults.
+/mshi/** -text
+/configs/** -text
+/tests/** -text
+/results/** -text
+/data/derived/** -text
+/docs/handoff/** -text
+/legacy/data/processed/** -text
+/Makefile -text
+/pyproject.toml -text
+/environment.yml -text
+/requirements-lock.txt -text
+/.gitattributes -text

@@ -1,0 +1,32 @@
+demo: (3000, 30) source values ['synthetic'] columns ['site_id', 'source', 'longitude', 'latitude', 'soc', 'nitrogen'] ...
+== directories and symlinks
+  directory dataset                                                    refused (refusing to read /tmp/claude-0/-home-use...: directory)
+  symlink to a directory                                               refused (refusing to read /tmp/claude-0/-home-use...: directory)
+  symlink to legacy v1 table (not allow-listed)                        refused (refusing to read /home/user/MSHI/legacy/...: legacy)
+  symlink to the demo table                                            refused (refusing to read /home/user/MSHI/legacy/...: legacy)
+  symlink to the allow-listed v2 table                                 READ (615, 32)
+  byte copy of the demo table                                          refused (refusing to read /tmp/claude-0/-home-use...: forbidden hash)
+== re-encoded demo table, projections
+  re-saved parquet, no projection                                      refused (refusing to use /tmp/claude-0/-home-user...: synthetic)
+  re-saved parquet, columns=[longitude, latitude]                      refused (refusing to use /tmp/claude-0/-home-user...: synthetic)
+  re-saved parquet, columns=[]                                         refused (refusing to use /tmp/claude-0/-home-user...: synthetic)
+  CSV, usecols list                                                    refused (refusing to use /tmp/claude-0/-home-user...: synthetic)
+  CSV, usecols callable                                                refused (refusing to use /tmp/claude-0/-home-user...: synthetic)
+  CSV, usecols by position                                             refused (refusing to use /tmp/claude-0/-home-user...: synthetic)
+  CSV sep=';', usecols                                                 refused (refusing to use /tmp/claude-0/-home-user...: synthetic)
+  CSV utf-16, usecols                                                  refused (refusing to use /tmp/claude-0/-home-user...: synthetic)
+  TXT tab, delimiter kw, usecols                                       refused (refusing to use /tmp/claude-0/-home-user...: synthetic)
+== 'source' column not in df.columns without a projection kwarg
+  schema of source_as_index.parquet: ['aridity_demartonne', 'lst_diurnal_range', 'source']
+  parquet whose 'source' column is the stored pandas index (no kwargs) READ (3000, 29) index=source
+  same, columns=[longitude]                                            KeyError: 'source'
+  CSV with index_col='source'                                          READ (3000, 29) index=source
+  CSV with index_col='source', usecols                                 refused (refusing to use /tmp/claude-0/-home-user...: synthetic)
+  parquet, MultiIndex (source, longitude)                              READ (3000, 28)
+== header-changing CSV kwargs with a projection
+  CSV with a preamble line, skiprows=1, usecols                        READ (3000, 2)
+  same, skiprows=1, no usecols (control)                               refused (refusing to use /tmp/claude-0/-home-user...: synthetic)
+  CSV with a comment line, comment='#', usecols                        READ (3000, 1)
+  headerless CSV, header=None, names=..., usecols                      READ (3000, 2)
+  same, no usecols (control)                                           refused (refusing to use /tmp/claude-0/-home-user...: synthetic)
+  CSV header=0 names renaming source->src, usecols                     refused (refusing to use /tmp/claude-0/-home-user...: synthetic)

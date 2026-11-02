@@ -1,0 +1,5 @@
+exit 0 start hash e3d4bf1e8ddf | run_log e3d4bf1e8ddf | result e3d4bf1e8ddf | on disk now 1a0245614aa1
+result_staleness after the edit: produced with a different code
+invocation provenance cleared: True
+edit between stages: exit 2 {'up': 'ok', 'edit': 'ok', 'down': 'stale: results/up.json: produced with a different code; re-run the stage that writes it (or `make all`)'}
+outside run(): True

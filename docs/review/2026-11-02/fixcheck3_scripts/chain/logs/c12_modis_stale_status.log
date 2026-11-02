@@ -1,0 +1,5 @@
+features (baseline): 0 {'features': 'ok'}
+modis_points.json staleness: None
+features after a library change: exit 1 {'features': 'error: StaleModisError: <chain>/wo'}
+repro_checks, same state: exit 2 {'repro_checks': 'stale: 2 reproduction row(s) come from results that are not current; see results'} [('STALE', 'modis_points output unusable: /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a')]
+features, sidecar missing: exit 1 {'features': 'error: FileNotFoundError: <chain>/'}

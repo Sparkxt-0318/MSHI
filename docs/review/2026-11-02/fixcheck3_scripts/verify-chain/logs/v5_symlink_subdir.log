@@ -1,0 +1,8 @@
+[plain] fetch_worldclim exit 0: ok
+    layer 1 on disk: True (resolved under <v5>/plain/s/raw/worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif)
+[subdir_symlink] fetch_worldclim exit 1: error: ValueError: <v5>/subdir_symlink/shared_store/worl
+    layer 1 on disk: True (resolved under <v5>/subdir_symlink/shared_store/worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif)
+[root_symlink] fetch_worldclim exit 0: ok
+    layer 1 on disk: True (resolved under <v5>/root_symlink/shared_raw/worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif)
+[subdir_symlink] second run (files present): exit 1 error: ValueError: /tmp/claude-0/-home-user-MSHI/efd5d835-bc | downloads so far: 3
+root_key ValueError: <v5>/subdir_symlink/shared_store/worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])

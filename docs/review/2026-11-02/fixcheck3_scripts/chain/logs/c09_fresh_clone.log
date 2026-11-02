@@ -1,0 +1,36 @@
+WARNING:mshi:stages not completed: {'repro_checks': 'stale: 2 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`'}
+author state: features exit 0 repro exit 0 summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 1, 'NOT RUN': 0, 'PASS': 26, 'STALE': 0}
+author NPP row: [('NPP r vs committed NPP (origin', 0.9821248638212481, 'PASS'), ('Original sites with NPP missin', 200, 'INFO')]
+author gate for a later-phase stage: ok
+fresh clone staleness:
+   build_sites.json             None
+   clean_test_rerun_qc.json     None
+   clean_test_rerun_repo.json   None
+   cosore_annual.json           None
+   features.json                missing its output <chain>/work/c09/s/interim/features_v3_qc.parquet
+   fetch_soilgrids.json         missing its output <chain>/work/c09/s/raw/soilgrids/2.0/0p05/bdod_5-15cm_mean_global_0p05.tif
+   fetch_worldclim.json         missing its output <chain>/work/c09/s/raw/worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif
+   modis_points.json            missing its output <chain>/work/c09/s/interim/modis_points.parquet
+   reproduction_check.json      None
+regression tests (fresh clone, committed table): {
+ "test_cosore_sites": "pass",
+ "test_record_and_site_counts": "pass",
+ "test_locked_test_rerun": "pass",
+ "test_npp_correlation": "pass",
+ "test_reproduction_table_has_no_fail": "pass",
+ "rerun_qc": "pass",
+ "rerun_repo": "pass"
+}
+make repro exit: 2 {'repro_checks': 'stale: 2 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`'}
+summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 0, 'PASS': 25, 'STALE': 2}
+NPP rows: [('NPP r vs committed NPP (original 889 sit', 'STALE', 'modis_points.json missing its output <scratchpad>/fixch'), ('Original sites with NPP missing in the c', 'STALE', 'modis_points.json missing its output <scratchpad>/fixch')]
+regression tests (after make repro): {
+ "test_cosore_sites": "pass",
+ "test_record_and_site_counts": "pass",
+ "test_locked_test_rerun": "pass",
+ "test_npp_correlation": "Skipped: NPP check not run (modis_points output missing)",
+ "test_reproduction_table_has_no_fail": "AssertionError: ",
+ "rerun_qc": "pass",
+ "rerun_repo": "pass"
+}
+gate for a later-phase stage: results/reproduction_check.json has {'STALE': 2}

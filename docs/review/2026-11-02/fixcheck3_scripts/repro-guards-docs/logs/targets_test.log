@@ -1,0 +1,15 @@
+unmodified             test PASSES
+europe_n rel 0.02      test FAILS
+npp abs 0.05           test FAILS
+srdb abs 1             test FAILS
+selected XGB           test FAILS
+int->float 4771.0      test PASSES
+BRIEF_ROWS found in PROMPT: True n rows 7
+rows in PROMPT section 4 table: 7 all in BRIEF_ROWS: True
+   True | SRDB records after repo filters | 4,771 | exact |
+   True | Records after coordinate check / after QC | 4,781 / 3,694 | ±1% |
+   True | QC removals: method / quality / coverage / ecosystem / duplicate | 450 / 260 / 252 / 243 / 57 | ±2% |
+   True | QC sites by continent: Asia / N America / Europe / S America / Africa / Oceania | 387 / 257 / 236 / 42 / 26 
+   True | Repo-filter sites total | 1,225 | ±2% |
+   True | Locked test: selected model; Asia spatial-CV R²; Europe n; Europe R² and site-bootstrap CI | OLS-TP; 0.143; 
+   True | NPP correlation with the repo's committed NPP at the original 889 sites | r = 0.982 | ±0.01 |

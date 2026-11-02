@@ -1,6 +1,7 @@
 """Compare pipeline outputs with the handoff's reproduction targets (PROMPT section 4).
 
-Writes results/reproduction_check.json and results/reproduction_check.md, then raises
+Writes results/reproduction_check.json (recording, as its inputs, the results its rows were read from)
+and results/reproduction_check.md, then raises
 ``ReproductionFailure`` (the run exits 1) if any row is FAIL: Phase 1 stops when something does not
 reproduce; otherwise ``StaleInputError`` (status ``stale``, exit 2) if any row is STALE. Row statuses:
 
@@ -9,9 +10,11 @@ reproduce; otherwise ``StaleInputError`` (status ``stale``, exit 2) if any row i
   without its ``vs_locked`` block) is FAIL, with the reason in the note;
 - NOT RUN: no result. The note gives the reason: the producing stage did not complete in this
   invocation (blocked by the network policy, unreachable, skipped, error), or, if it was not run in
-  this invocation, its last status in results/run_log.jsonl. Nothing is estimated or filled in;
-- STALE: a result exists but is not current: produced by a different config or code, or an output file
-  it records changed after the run (``mshi.io.result_staleness``); re-run;
+  this invocation, its last status in results/run_log.jsonl; for the NPP rows also when the MODIS table
+  is not on this machine (data/interim is not committed). Nothing is estimated or filled in;
+- STALE: a result exists but is not current: produced by a different config or code, an output file
+  it records changed after the run, or an upstream result it read has changed or is not current
+  (``mshi.io.result_staleness``); re-run;
 - DEVIATION: a locked-test re-run (primary or repo-filter sensitivity) differs from its locked result
   (ground rule 4: report it; the locked result stays primary);
 - INFO: a handoff number for which the brief gives no tolerance.
@@ -27,7 +30,7 @@ import pandas as pd
 
 from ..config import Config
 from ..data.modis import StaleModisError, load_modis_points, site_key
-from ..io import StaleInputError, read_table, result_staleness, write_result
+from ..io import StaleInputError, _read_result, read_table, result_staleness, write_result, write_text
 
 log = logging.getLogger("mshi.repro")
 
@@ -100,8 +103,9 @@ def _last_records(res_dir) -> dict:
     return last
 
 
-def source(cfg: Config, fname: str) -> tuple[dict | None, str, str]:
-    """(result, state, note) for a result file; state is OK, STALE or NOT RUN."""
+def source(cfg: Config, fname: str, memo: dict | None = None) -> tuple[dict | None, str, str]:
+    """(result, state, note) for a result file; state is OK, STALE or NOT RUN. A result returned OK is
+    registered as read (``cfg.reads``), so the table can record it as an input."""
     res_dir = cfg.path("results")
     stages = PRODUCERS[fname]
     status = (cfg.invocation or {}).get("status", {})
@@ -109,8 +113,7 @@ def source(cfg: Config, fname: str) -> tuple[dict | None, str, str]:
         st = status.get(s)
         if st is not None and st != "ok":
             return None, "NOT RUN", f"{s}: {_describe(st)}"
-    p = res_dir / fname
-    obj = json.loads(p.read_text()) if p.exists() else None
+    obj, digest = _read_result(cfg, fname)
     if obj is None or obj.get("status", "").startswith("incomplete"):
         last = _last_records(res_dir)
         for s in stages:
@@ -118,9 +121,10 @@ def source(cfg: Config, fname: str) -> tuple[dict | None, str, str]:
             if rec and rec.get("status") != "ok":
                 return None, "NOT RUN", f"{s}: {_describe(rec['status'])} (run log, {rec.get('end_utc', '')[:10]})"
         return None, "NOT RUN", "no result (stage not run)"
-    stale = result_staleness(cfg, obj)
+    stale = result_staleness(cfg, obj, memo)
     if stale:
         return obj, "STALE", f"{fname} {stale}; re-run `make all`"
+    cfg.reads[fname] = digest
     return obj, "OK", ""
 
 
@@ -131,7 +135,8 @@ def npp_correlation(cfg: Config) -> dict:
     o["site_key"] = site_key(o.latitude, o.longitude, cfg["features"]["site_key_round"]).values
     m = o.merge(v3, on="site_key", how="left", suffixes=("_committed", "_v3"))
     both = m.npp_committed.notna() & m.npp_v3.notna()
-    r = float(np.corrcoef(m.npp_committed[both], m.npp_v3[both])[0, 1]) if both.sum() > 2 else None
+    enough = both.sum() >= cfg["repro_checks"]["npp_min_sites"]
+    r = float(np.corrcoef(m.npp_committed[both], m.npp_v3[both])[0, 1]) if enough else None
     return {"method": NPP_METHOD, "n_original_sites": int(len(o)), "n_both_valid": int(both.sum()),
             "pearson_r": r,
             "committed_missing_v3_present": int((m.npp_committed.isna() & m.npp_v3.notna()).sum()),
@@ -142,11 +147,19 @@ def npp_correlation(cfg: Config) -> dict:
 def repro_checks(cfg: Config) -> dict:
     T = cfg["reproduction_targets"]
     rows = []
+    memo: dict = {}                      # one staleness verdict per upstream result in this check
+    used: list[str] = []                 # results whose values the rows use: the table's inputs
 
-    cs, st, note = source(cfg, "cosore_annual.json")
+    def src(fname: str):
+        obj, state, why = source(cfg, fname, memo)
+        if state == "OK":
+            used.append(fname)
+        return obj, state, why
+
+    cs, st, note = src("cosore_annual.json")
     rows.append(_row("COSORE sites with an annual value", T["cosore_sites"], cs and cs["n_sites"], st, note))
 
-    b, st, note = source(cfg, "build_sites.json")
+    b, st, note = src("build_sites.json")
     g = (lambda f: f(b)) if b else (lambda f: None)
     rows.append(_row("SRDB records after repo filters", T["srdb_repo_filter_records"], g(lambda x: x["srdb_repo_filter_records"]), st, note))
     rows.append(_row("Records after coordinate check", T["records_after_coord_check"], g(lambda x: x["records_after_coord_check"]), st, note))
@@ -160,7 +173,7 @@ def repro_checks(cfg: Config) -> dict:
 
     lt = T["locked_test"]
     atol = cfg["clean_test"]["deviation_atol"]
-    ct, st, note = source(cfg, "clean_test_rerun_qc.json")
+    ct, st, note = src("clean_test_rerun_qc.json")
     sel = f"{ct['selected']['learner']} ({ct['selected']['set']})" if ct else None
     rows.append({"quantity": "Locked test: selected model", "handoff": lt["selected"], "v3": sel,
                  "tolerance": "same model", "note": note,
@@ -173,17 +186,22 @@ def repro_checks(cfg: Config) -> dict:
     rows.append(_row("Locked test: site-bootstrap CI low", lt["europe_ci_lo"], c(lambda x: x["primary"]["ci_site"][0]), st, note))
     rows.append(_row("Locked test: site-bootstrap CI high", lt["europe_ci_hi"], c(lambda x: x["primary"]["ci_site"][1]), st, note))
     rows.append(_rerun_row("Locked test: re-run identical to the locked result", ct, st, note, atol))
-    ctr, st_r, note_r = source(cfg, "clean_test_rerun_repo.json")
+    ctr, st_r, note_r = src("clean_test_rerun_repo.json")
     rows.append(_rerun_row("Locked test (repo-filter sensitivity): re-run identical to the locked result",
                            ctr, st_r, note_r, atol))
 
-    mp, st, note = source(cfg, "modis_points.json")
+    mp, st, note = src("modis_points.json")
     npp = None
     if st == "OK":
-        try:
-            npp = npp_correlation(cfg)
-        except (FileNotFoundError, StaleModisError) as e:   # the result is current but its table is not
-            st, note = "STALE", f"modis_points output unusable: {e}"
+        table, sidecar = (cfg.path("interim", f) for f in ("modis_points.parquet", "modis_points.meta.json"))
+        if not (table.is_file() and sidecar.is_file()):     # current result, table not regenerated here
+            st, note = "NOT RUN", ("modis_points table is not on this machine (data/interim is not committed); "
+                                   "run `make all`")
+        else:
+            try:
+                npp = npp_correlation(cfg)
+            except StaleModisError as e:    # the result is current but its table is not usable
+                st, note = "STALE", f"modis_points output unusable: {e}"
     t = T["npp_corr_original_sites"]
     r_npp = npp["pearson_r"] if npp else None
     if npp and r_npp is None:
@@ -198,10 +216,8 @@ def repro_checks(cfg: Config) -> dict:
 
     summary = {s: sum(r["status"] == s for r in rows) for s in ["PASS", "FAIL", "DEVIATION", "STALE", "NOT RUN", "INFO"]}
     out = {"rows": rows, "npp_check": npp, "summary": summary}
-    md = cfg.path("results", "reproduction_check.md")
-    md.parent.mkdir(parents=True, exist_ok=True)
-    md.write_text(to_markdown(rows))
-    write_result(cfg, out, "reproduction_check.json", outputs=[md])
+    md = write_text(to_markdown(rows), cfg.path("results", "reproduction_check.md"))
+    write_result(cfg, out, "reproduction_check.json", outputs=[md], inputs=used)
     if summary["FAIL"]:
         bad = [r["quantity"] for r in rows if r["status"] == "FAIL"]
         raise ReproductionFailure(f"{summary['FAIL']} reproduction target(s) outside tolerance: {bad}; "

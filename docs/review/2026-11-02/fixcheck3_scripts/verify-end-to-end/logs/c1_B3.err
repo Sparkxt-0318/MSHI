@@ -1,0 +1,23 @@
+17:14:57 INFO mshi: fetch_worldclim    start
+17:14:58 WARNING mshi.rasters: WorldClim zip hash is not pinned in configs/v3.yaml; recorded 2b520bb1d50db3b908123b631feae20d63237e049f16d2ba19ae04e0c3b0c00b
+17:14:58 INFO mshi: fetch_worldclim    OK (0.5s)
+17:14:58 INFO mshi: fetch_soilgrids    start
+17:14:58 INFO mshi: fetch_soilgrids    OK (0.0s)
+17:14:58 INFO mshi: modis_points       uses existing outputs of build_sites (not requested; checked for currency)
+17:14:58 INFO mshi: modis_points       start
+17:14:58 INFO mshi.modis: modis_points: cached extraction matches the MODIS config, code, libraries and 1530 points
+17:14:58 INFO mshi: modis_points       OK (0.1s)
+17:14:58 INFO mshi: features           uses existing outputs of build_sites (not requested; checked for currency)
+17:14:58 INFO mshi: features           start
+17:15:01 INFO mshi: features           OK (2.9s)
+17:15:01 INFO mshi: repro_checks       start
+17:15:01 ERROR mshi: repro_checks failed
+Traceback (most recent call last):
+  File "/home/user/MSHI/mshi/run.py", line 163, in run
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+  File "/home/user/MSHI/mshi/analysis/repro_checks.py", line 207, in repro_checks
+    raise ReproductionFailure(f"{summary['FAIL']} reproduction target(s) outside tolerance: {bad}; "
+                              "see results/reproduction_check.md. Stop and report (ground rule 2).")
+mshi.analysis.repro_checks.ReproductionFailure: 6 reproduction target(s) outside tolerance: ['Locked test: Asia spatial-CV R²', 'Locked test: Europe n', 'Locked test: Europe R²', 'Locked test: site-bootstrap CI low', 'Locked test: site-bootstrap CI high', 'NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2).
+17:15:01 WARNING mshi: stages not completed: {'repro_checks': "error: ReproductionFailure: 6 reproduction target(s) outside tolerance: ['Locked test: Asia spatial-CV R²', 'Locked test: Europe n', 'Locked test: Europe R²', 'Locked test: site-bootstrap CI low', 'Locked test: site-bootstrap CI high', 'NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2)."}

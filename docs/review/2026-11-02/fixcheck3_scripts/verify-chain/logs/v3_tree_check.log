@@ -1,0 +1,30 @@
+tree: lf | mshi from: lf/mshi
+code_sha256: e3d4bf1e8ddf | config_sha256: dfde8e429a9b
+   build_sites.json             None
+   cosore_annual.json           None
+   fetch_cosore.json            None
+   fetch_naturalearth.json      None
+   fetch_srdb.json              None
+   reproduction_check.json      None
+   site_diagnostics.json        None
+plan sha == anchor: True
+locked result qc sha == anchor: True
+locked result repo sha == anchor: True
+verify_lock: ok
+exit=0
+
+tree: crlf | mshi from: crlf/mshi
+code_sha256: 75dee7142d64 | config_sha256: dfde8e429a9b
+   build_sites.json             produced with a different code
+   cosore_annual.json           produced with a different code
+   fetch_cosore.json            produced with a different code
+   fetch_naturalearth.json      produced with a different code
+   fetch_srdb.json              produced with a different code
+   reproduction_check.json      produced with a different code
+   site_diagnostics.json        produced with a different code
+plan sha == anchor: False
+locked result qc sha == anchor: False
+locked result repo sha == anchor: False
+verify_lock: LockedPlanError: <tree>/docs/handoff/ANALYSIS_PLAN_LOCKED.md: content 
+exit=0
+

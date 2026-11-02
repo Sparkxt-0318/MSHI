@@ -1,0 +1,20 @@
+author state: features exit 0 repro exit 0 summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 1, 'NOT RUN': 0, 'PASS': 26, 'STALE': 0}
+make features (re-extraction): 0 {'modis_points': 'ok', 'features': 'ok'}
+   build_sites.json             None
+   clean_test_rerun_qc.json     None
+   clean_test_rerun_repo.json   None
+   cosore_annual.json           None
+   features.json                None
+   fetch_soilgrids.json         None
+   fetch_worldclim.json         None
+   modis_points.json            None
+   reproduction_check.json      None
+features_v3_qc.parquet changed: True | clean_test_rerun_qc.json staleness: None
+stored table unchanged: True
+gate: ok
+later-phase stage alone: 0 {'phase2_transfer': 'ok'} ran: ['phase2']
+regression tests: {'test_npp_correlation': 'pass', 'test_reproduction_table_has_no_fail': 'pass', 'test_locked_test_rerun': 'pass'}
+stored npp_check r: 0.9821248638212481
+control, repro_checks now: 1 {'repro_checks': "error: ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)']; see results/reproduction_chec", 'phase2_transfer': "skipped: reproduction gate closed (repro_checks: error: ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (ori"}
+NPP row now: [(0.5464472757790975, 'FAIL')]
+locked-test rows now: [('Locked test: selected model', 'PASS'), ('Locked test: Asia spatial-CV R²', 'PASS'), ('Locked test: Europe n', 'PASS')]

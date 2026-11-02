@@ -182,6 +182,6 @@ def build_sites(cfg: Config) -> dict:
         S[f"sites_{name}"] = {"n": int(len(st)), "by_continent": st.continent.value_counts().to_dict(),
                               "sites_with_2plus_records": int((st.n_rec >= 2).sum())}
     outputs.append(write_table(r, cfg.path("derived", "records_v3.parquet")))
-    write_result(cfg, S, "build_sites.json", outputs=outputs)
+    write_result(cfg, S, "build_sites.json", outputs=outputs, inputs=["cosore_annual.json"])
     log.info("sites: qc %d, repo %d", S["sites_qc"]["n"], S["sites_repo"]["n"])
     return S

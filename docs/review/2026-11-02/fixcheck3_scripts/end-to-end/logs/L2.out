@@ -1,0 +1,152 @@
+{
+ "label": "L2",
+ "exit_code": 1,
+ "seconds": 48.8,
+ "stages": [
+  [
+   "fetch_srdb",
+   "ok",
+   0.02,
+   null
+  ],
+  [
+   "fetch_cosore",
+   "ok",
+   0.38,
+   null
+  ],
+  [
+   "fetch_naturalearth",
+   "ok",
+   0.02,
+   null
+  ],
+  [
+   "cosore_annual",
+   "ok",
+   40.97,
+   null
+  ],
+  [
+   "build_sites",
+   "ok",
+   4.29,
+   null
+  ],
+  [
+   "site_diagnostics",
+   "ok",
+   2.28,
+   null
+  ],
+  [
+   "fetch_worldclim",
+   "error: ValueError: fixcheck3_scripts/end-to-end/bigdisk/worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])",
+   0.04,
+   null
+  ],
+  [
+   "fetch_soilgrids",
+   "error: ValueError: fixcheck3_scripts/end-to-end/bigdisk/soilgrids/2.0/0p05/soc_5-15cm_mean_global_0p05.tif is not under any configured path root (['derived', 'figures', 'handoff', 'interim', 'raw', 'results'])",
+   0.01,
+   null
+  ],
+  [
+   "modis_points",
+   "ok",
+   0.06,
+   true
+  ],
+  [
+   "features",
+   "skipped: upstream fetch_worldclim, fetch_soilgrids not available",
+   0.0,
+   null
+  ],
+  [
+   "clean_test",
+   "skipped: upstream features not available",
+   0.0,
+   null
+  ],
+  [
+   "repro_checks",
+   "error: ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2).",
+   0.05,
+   null
+  ]
+ ],
+ "state": {
+  "raster_downloads": [],
+  "fetch_downloads": [
+   [
+    "srdb-data.csv",
+    false
+   ],
+   [
+    "LICENSE",
+    false
+   ],
+   [
+    "ne_50m_admin_0_countries.geojson",
+    false
+   ],
+   [
+    "ne_110m_land.geojson",
+    false
+   ],
+   [
+    "ne_50m_land.geojson",
+    false
+   ]
+  ],
+  "reachable": [],
+  "searches": 0,
+  "reads": 0,
+  "net_attempts": [],
+  "token_gets": 0,
+  "light_runs": 0
+ },
+ "staleness_after": {
+  "build_sites.json": null,
+  "cosore_annual.json": null,
+  "environment.json": "(no _provenance: environment.json)",
+  "fetch_cosore.json": null,
+  "fetch_naturalearth.json": null,
+  "fetch_srdb.json": null,
+  "modis_points.json": null,
+  "reproduction_check.json": null,
+  "site_diagnostics.json": null
+ },
+ "results_changed": [
+  "run_log.jsonl"
+ ]
+}
+SUMMARY {'DEVIATION': 0, 'FAIL': 1, 'INFO': 1, 'NOT RUN': 8, 'PASS': 17, 'STALE': 0}
+ROW ('COSORE sites with an annual value', 'PASS', 66, '')
+ROW ('SRDB records after repo filters', 'PASS', 4771, '')
+ROW ('Records after coordinate check', 'PASS', 4781, '')
+ROW ('Records after QC', 'PASS', 3694, '')
+ROW ('QC removals: f_method', 'PASS', 450, '')
+ROW ('QC removals: f_quality', 'PASS', 260, '')
+ROW ('QC removals: f_coverage', 'PASS', 252, '')
+ROW ('QC removals: f_ecosys', 'PASS', 243, '')
+ROW ('QC removals: f_dup', 'PASS', 57, '')
+ROW ('QC sites: Asia', 'PASS', 387, '')
+ROW ('QC sites: North America', 'PASS', 257, '')
+ROW ('QC sites: Europe', 'PASS', 236, '')
+ROW ('QC sites: South America', 'PASS', 42, '')
+ROW ('QC sites: Africa', 'PASS', 26, '')
+ROW ('QC sites: Oceania', 'PASS', 23, '')
+ROW ('QC sites: total', 'PASS', 971, '')
+ROW ('Repo-filter sites: total', 'PASS', 1225, '')
+ROW ('Locked test: selected model', 'NOT RUN', None, 'fetch_worldclim: error (ValueError)')
+ROW ('Locked test: Asia spatial-CV R²', 'NOT RUN', None, 'fetch_worldclim: error (ValueError)')
+ROW ('Locked test: Europe n', 'NOT RUN', None, 'fetch_worldclim: error (ValueError)')
+ROW ('Locked test: Europe R²', 'NOT RUN', None, 'fetch_worldclim: error (ValueError)')
+ROW ('Locked test: site-bootstrap CI low', 'NOT RUN', None, 'fetch_worldclim: error (ValueError)')
+ROW ('Locked test: site-bootstrap CI high', 'NOT RUN', None, 'fetch_worldclim: error (ValueError)')
+ROW ('Locked test: re-run identical to the locked result', 'NOT RUN', None, 'fetch_worldclim: error (ValueError)')
+ROW ('Locked test (repo-filter sensitivity): re-run identical to the locked result', 'NOT RUN', None, 'fetch_worldclim: error (ValueError)')
+ROW ('NPP r vs committed NPP (original 889 sites)', 'FAIL', -0.034361800755549614, 'method reconstructed [UNVERIFIED]: no handoff script computes this r; Pearson r on raw NPP at the original sites with a value in both tables, joined on site_key')
+ROW ('Original sites with NPP missing in the committed tables but present in v3', 'INFO', 200, 'prep_log D8; no tolerance in the brief, reported for information')

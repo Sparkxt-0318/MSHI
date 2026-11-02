@@ -230,6 +230,69 @@ def test_git_checkout_detects_ignored_files(tmp_path):
         verify_git_checkout(dest, commit)
 
 
+def test_git_checkout_ignores_os_metadata_and_paths_that_are_not_read(tmp_path):
+    """Third review: --ignored=matching refused a Finder .DS_Store or RStudio project files that no stage
+    reads. The check now covers the paths that are read (datasets, licence), minus OS metadata files."""
+    src = tmp_path / "origin"
+    src.mkdir()
+    _git("init", "-q", cwd=src)
+    _git("config", "user.email", "t@example.invalid", cwd=src)
+    _git("config", "user.name", "t", cwd=src)
+    _git("config", "uploadpack.allowAnySHA1InWant", "true", cwd=src)
+    (src / ".gitignore").write_text(".DS_Store\n.Rproj.user/\n.Rhistory\ndoc\n")
+    (src / "datasets" / "dA").mkdir(parents=True)
+    (src / "datasets" / "dA" / "DESCRIPTION.txt").write_text("CSR_LATITUDE: 1\n")
+    (src / "LICENSE").write_text("CC-BY-4.0\n")
+    _git("add", ".", cwd=src)
+    _git("commit", "-qm", "c1", cwd=src)
+    commit = _git("rev-parse", "HEAD", cwd=src)
+    dest = tmp_path / "co"
+    read = ["datasets", "LICENSE"]
+    git_checkout_commit(f"file://{src}", commit, dest, pathspec=read)
+    for junk in ["datasets/.DS_Store", "datasets/dA/.DS_Store", "datasets/dA/._DESCRIPTION.txt", ".Rhistory",
+                 ".Rproj.user/x", "notes.txt"]:
+        (dest / junk).parent.mkdir(parents=True, exist_ok=True)
+        (dest / junk).write_text("x")
+    verify_git_checkout(dest, commit, pathspec=read)                    # none of these is read
+    assert git_checkout_commit(f"file://{src}", commit, dest, pathspec=read)["downloaded"] is False
+    (dest / "datasets" / "doc").mkdir()                                # an ignored dataset directory: read
+    (dest / "datasets" / "doc" / "DESCRIPTION.txt").write_text("CSR_LATITUDE: 2\n")
+    with pytest.raises(ChecksumMismatchError, match="datasets/doc"):
+        verify_git_checkout(dest, commit, pathspec=read)
+    (dest / "datasets" / "doc" / "DESCRIPTION.txt").unlink()
+    (dest / "datasets" / "doc").rmdir()
+    (dest / "LICENSE").write_text("MIT\n")                             # a file that is read, modified
+    with pytest.raises(ChecksumMismatchError, match="LICENSE"):
+        verify_git_checkout(dest, commit, pathspec=read)
+    assert _git("config", "core.autocrlf", cwd=dest) == "false"         # no line-ending conversion
+
+
+@pytest.mark.parametrize("stderr,kind", [
+    ("fatal: unable to access 'https://github.com/bpbond/cosore/': CONNECT tunnel failed, response 403", "proxy_denied"),
+    ("fatal: unable to access 'https://github.com/bpbond/cosore/': CONNECT tunnel failed, response 407", "proxy_denied"),
+    ("fatal: unable to access 'https://github.com/bpbond/cosore/': CONNECT tunnel failed, response 502", "transient"),
+    ("fatal: unable to access 'https://github.com/x/': The requested URL returned error: 503", "http"),
+    ("error: RPC failed; HTTP 502 curl 22 The requested URL returned error: 502", "http"),
+    ("fatal: unable to access 'https://github.com/x/': The requested URL returned error: 429", "http"),
+    ("error: RPC failed; curl 56 GnuTLS recv error (-9): A TLS packet with unexpected length was received.", "transient"),
+    ("fatal: unable to access 'https://github.com/x/': Could not resolve host: github.com", "transient"),
+    ("fatal: unable to access 'https://github.com/x/': The requested URL returned error: 404", "fatal"),
+    ("fatal: remote error: upload-pack: not our ref 02f32e8e7f9a0f1c26c9dad61c574aef863f1df1", "fatal"),
+])
+def test_git_fetch_failures_are_classified_like_downloads(stderr, kind):
+    from mshi.netutil import _git_failure_kind
+    assert _git_failure_kind(stderr) == kind
+
+
+def test_git_fetch_retries_a_5xx_then_reports_a_download_error(server, tmp_path):
+    """Third review: a GitHub 5xx failed at once; it is now retried (2, 4, 8 s), then DownloadError, as for
+    HTTP in ``download``. 127.0.0.1 is in no_proxy, so git talks to the local server directly."""
+    sleeps = []
+    with pytest.raises(DownloadError, match="after 4 attempts.*502"):
+        git_checkout_commit(f"{server}/502/repo.git", "0" * 40, tmp_path / "co", sleep=sleeps.append)
+    assert sleeps == [2, 4, 8] and _Handler.hits["/502/repo.git/info/refs?service=git-upload-pack"] == 4
+
+
 # ---------------------------------------------------------------- MODIS
 
 M = {"window_deg": 0.05, "retries": 1, "threads": 4, "second_pass_threads": 2, "accepted_catalog_gaps": [],
@@ -239,7 +302,8 @@ M = {"window_deg": 0.05, "retries": 1, "threads": 4, "second_pass_threads": 2, "
      "npp": {"collection": "npp-col", "item_prefix": "MOD17A3HGF", "asset": "Npp_500m", "valid_range": [0, 32700],
              "scale": 0.1, "offset": 0.0},
      "lst": {"collection": "lst-col", "item_prefix": "MOD11A2", "assets": {"lst_day": "D", "lst_night": "N"},
-             "valid_min_exclusive": 0, "scale": 0.02, "offset": -273.15, "composite": "first_of_month"}}
+             "valid_min_exclusive": 0, "scale": 0.02, "offset": -273.15, "composite": "first_of_month",
+             "composite_days": 8}}
 
 
 def _item(iid, when, assets, dt_none=False):
@@ -340,9 +404,10 @@ def test_modis_points_fails_on_failed_reads_and_caches_only_complete_runs(cfg, t
         state["calls"] += 1
         out = pd.DataFrame({"site_key": p.site_key, "npp": 500.0, "npp_n": 5, "lst_day": 20.0, "lst_day_n": 60,
                             "lst_night": 5.0, "lst_night_n": 60})
-        return out, {"n_jobs": 125, "n_tiles": 1, "failed_reads": ["mem://x: OSError"] if state["fail"] else [],
+        return out, {"n_jobs": 125, "n_reads": 125, "n_tiles": 1,
+                     "failed_reads": ["mem://x: OSError"] if state["fail"] else [],
                      "catalog_gaps": [], "accepted_catalog_gaps": [], "lst_same_date_ties": [],
-                     "npp_duplicate_years": []}
+                     "npp_duplicate_years": [], "periods_outside_datetime": []}
 
     monkeypatch.setattr(modis, "extract_points", fake_extract)
     with pytest.raises(modis.ModisIncompleteError):
@@ -350,7 +415,7 @@ def test_modis_points_fails_on_failed_reads_and_caches_only_complete_runs(cfg, t
     rec = json.loads(sand.path("results", "modis_points.json").read_text())
     assert rec["n_failed_reads"] == 1 and rec["status"].startswith("incomplete")
     assert not sand.path("interim", "modis_points.parquet").exists()
-    with pytest.raises(FileNotFoundError):
+    with pytest.raises(modis.StaleModisError, match="missing"):        # a StaleInputError: readers are 'stale'
         modis.load_modis_points(sand)
 
     state["fail"] = False
@@ -441,20 +506,55 @@ def test_catalog_gap_fails_before_any_raster_is_read(monkeypatch):
     assert info["catalog_gaps"] == [f"{tile} npp truncated"]
 
 
+def test_missing_first_composite_of_a_month_is_a_catalog_gap(monkeypatch):
+    """Third review: the check was month-granular, so a month whose first 8-day composite is missing (but a
+    later one present) passed, and its mean silently used the later composite."""
+    from mshi.data import modis
+    seen = []
+    _reads(monkeypatch, seen)
+    tile = "h{:02d}v{:02d}".format(*map(int, (_pts().h.iat[0], _pts().v.iat[0])))
+    cat = FakeCatalog()
+    cat.lst = [i for i in cat.lst if i.id != "MOD11A2.20210101"]      # Jan 2021: day 9 and 17 remain
+    out, info = modis.extract_points(_pts(), M, catalog=cat, tokens=_Tokens())
+    assert info["catalog_gaps"] == [f"{tile} lst 2021-01 first composite"] and seen == [] and out.empty
+    m = copy.deepcopy(M)
+    m["accepted_catalog_gaps"] = [f"{tile} lst 2021-01 first composite"]
+    out, info = modis.extract_points(_pts(), m, catalog=cat, tokens=_Tokens())
+    assert (out.lst_day_n == 60).all() and info["accepted_catalog_gaps"] == m["accepted_catalog_gaps"]
+
+
+def test_periods_outside_the_datetime_range_are_used_and_recorded(monkeypatch):
+    """A composite dated before the range but returned by the search (e.g. late December 2019) is used, as
+    in the prototype, and listed."""
+    from mshi.data import modis
+    seen = []
+    _reads(monkeypatch, seen)
+    tile = "h{:02d}v{:02d}".format(*map(int, (_pts().h.iat[0], _pts().v.iat[0])))
+    cat = FakeCatalog()
+    cat.lst.append(_item("MOD11A2.20191227", (2019, 12, 27), ["D", "N"]))
+    out, info = modis.extract_points(_pts(), M, catalog=cat, tokens=_Tokens())
+    assert info["catalog_gaps"] == [] and info["periods_outside_datetime"] == [f"{tile} lst 2019-12"]
+    assert (out.lst_day_n == 61).all() and info["n_reads"] == info["n_jobs"] == len(seen)
+
+
 def test_modis_points_writes_nothing_on_a_catalog_gap(cfg, tmp_path, monkeypatch):
     from mshi.data import modis
     sand = sandbox(cfg, tmp_path)
     fake_build(sand)
     monkeypatch.setattr(modis, "modis_point_set", lambda c: _pts()[["lat", "lon", "site_key"]])
     monkeypatch.setattr("mshi.netutil.check_reachable", lambda *a, **k: None)
-    def gap_extract(p, m):              # what extract_points returns when the catalog lacks an item
-        return pd.DataFrame(), {"n_jobs": 0, "n_tiles": 1, "failed_reads": [], "catalog_gaps": ["h18v04 npp 2023"],
-                                "accepted_catalog_gaps": [], "lst_same_date_ties": [], "npp_duplicate_years": []}
+    gaps = [f"h18v04 lst 2021-{i:02d}" for i in range(1, 13)] * 10 + ["h18v04 npp 2023"]      # 121 gaps
+
+    def gap_extract(p, m):              # what extract_points returns when the catalog lacks items
+        return pd.DataFrame(), {"n_jobs": 373, "n_reads": 0, "n_tiles": 1, "failed_reads": [], "catalog_gaps": gaps,
+                                "accepted_catalog_gaps": [], "lst_same_date_ties": [], "npp_duplicate_years": [],
+                                "periods_outside_datetime": []}
     monkeypatch.setattr(modis, "extract_points", gap_extract)
-    with pytest.raises(modis.ModisIncompleteError, match="lacks 1 expected item"):
+    with pytest.raises(modis.ModisIncompleteError, match="lacks 121 expected item"):
         modis.modis_points(sand)
     rec = json.loads(sand.path("results", "modis_points.json").read_text())
-    assert rec["status"].startswith("incomplete") and rec["catalog_gaps"] == ["h18v04 npp 2023"]
+    assert rec["status"].startswith("incomplete") and rec["catalog_gaps"] == gaps    # complete list, to copy
+    assert rec["n_raster_reads"] == 0 and rec["n_planned_reads"] == 373               # nothing was read
     assert not sand.path("interim", "modis_points.parquet").exists()
 
 
@@ -523,6 +623,10 @@ def _gate_stages(beh):
                 raise ReproductionFailure("1 reproduction target(s) outside tolerance")
             if b == "stale":
                 raise StaleInputError("2 reproduction row(s) come from results that are not current")
+            if name == "repro_checks":     # as the real stage: the table, then ok (NOT RUN rows are not errors)
+                notrun = 10 if b == "notrun" else 0
+                write_result(cfg, {"summary": {"PASS": 17, "FAIL": 0, "STALE": 0, "NOT RUN": notrun}},
+                             "reproduction_check.json")
             return {"ok": name}
         return f
     return [Stage("build", mk("build")), Stage("repro_checks", mk("repro_checks")),
@@ -530,7 +634,8 @@ def _gate_stages(beh):
 
 
 @pytest.mark.parametrize("repro,code,phase2", [("ok", 0, "ok"), ("fail", 1, "skipped: reproduction gate closed"),
-                                               ("stale", 2, "skipped: reproduction gate closed")])
+                                               ("stale", 2, "skipped: reproduction gate closed"),
+                                               ("notrun", 2, "skipped: reproduction gate closed")])
 def test_stages_after_repro_checks_need_a_passing_table(cfg, tmp_path, monkeypatch, repro, code, phase2):
     import mshi.run as R
     monkeypatch.setattr(R, "_stages", lambda: _gate_stages({"repro_checks": repro}))
@@ -548,6 +653,8 @@ def test_gate_uses_the_stored_table_when_repro_checks_is_not_run(cfg, tmp_path, 
     assert R.run(["phase2"], sand) == 2 and "reproduction_check.json: missing" in last()
     write_result(sand, {"summary": {"FAIL": 1, "STALE": 0}}, "reproduction_check.json")
     assert R.run(["phase2"], sand) == 2 and "'FAIL': 1" in last()
+    write_result(sand, {"summary": {"FAIL": 0, "STALE": 0, "PASS": 7, "NOT RUN": 10}}, "reproduction_check.json")
+    assert R.run(["phase2"], sand) == 2 and "'NOT RUN': 10" in last()      # not reproduced is not passed
     write_result(sand, {"summary": {"FAIL": 0, "STALE": 0, "PASS": 17}}, "reproduction_check.json")
     assert R.run(["phase2"], sand) == 0 and last() == "ok"
     other = full_sandbox(cfg, tmp_path, edit=lambda d: d["smoke"].__setitem__("seed", 1))  # table: other config
@@ -739,39 +846,78 @@ def test_clean_test_refuses_stale_features(cfg, tmp_path):
 
 # ---------------------------------------------------------------- WorldClim zip handling
 
+class _BytesSession:
+    """requests.Session stand-in for ``netutil.download``: serves fixed bytes, or a proxy denial when offline."""
+
+    def __init__(self, data: bytes):
+        self.data, self.offline, self.calls = data, False, 0
+
+    def get(self, url, params=None, stream=True, timeout=None):
+        if self.offline:
+            raise requests.exceptions.ProxyError("Tunnel connection failed: 403 Forbidden")
+        self.calls += 1
+        data = self.data
+
+        class _R:
+            status_code, reason = 200, "OK"
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *a):
+                return False
+
+            def iter_content(self, n):
+                yield data
+        return _R()
+
+
 def test_fetch_worldclim_extracts_19_layers_and_reuses_zip(cfg, tmp_path, monkeypatch):
+    import hashlib
     from mshi.data import rasters
     sand = sandbox(cfg, tmp_path)
     src = tmp_path / "wc.zip"
     with zipfile.ZipFile(src, "w") as z:
         for i in range(1, 20):
             z.writestr(cfg["sources"]["worldclim"]["file_pattern"].format(i=i), f"layer {i}")
-    calls = []
-
-    def fake_download(url, dest, sha256=None, reuse_existing=False, **k):
-        calls.append(url)
-        Path(dest).parent.mkdir(parents=True, exist_ok=True)
-        Path(dest).write_bytes(src.read_bytes())
-        return {"path": str(dest), "sha256": None, "downloaded": True}
-
-    monkeypatch.setattr(rasters, "download", fake_download)
+    web = _BytesSession(src.read_bytes())
+    monkeypatch.setattr(rasters, "download", lambda url, dest, sha256=None, **k:
+                        download(url, dest, sha256=sha256, session=web, sleep=lambda s: None))   # the real one
     r = rasters.fetch_worldclim(sand)
-    assert len(r["tif_sha256"]) == 19 and r["zip_sha256"] and len(calls) == 1
+    assert len(r["tif_sha256"]) == 19 and r["zip_sha256"] == hashlib.sha256(web.data).hexdigest() and web.calls == 1
     out = json.loads(sand.path("results", "fetch_worldclim.json").read_text())
     assert len(out["_outputs"]) == 19 and all(k.startswith("raw:worldclim/") for k in out["_outputs"])
     rasters.fetch_worldclim(sand)
-    assert len(calls) == 1                         # layers present and recorded: nothing downloaded
+    assert web.calls == 1                          # layers present and recorded: nothing downloaded
     rasters.worldclim_path(sand, 1).write_bytes(b"replaced")
     r2 = rasters.fetch_worldclim(sand)             # a replaced layer is re-extracted from the recorded zip
-    assert len(calls) == 1 and r2["tif_sha256"] == r["tif_sha256"]
-    pinned = sandbox(cfg, tmp_path, edit=lambda d: d["sources"]["worldclim"].__setitem__("sha256", "0" * 64))
-    with pytest.raises(DownloadError, match="not the pinned"):
-        rasters.fetch_worldclim(pinned)            # a pin is part of the request and is always compared
-    assert len(calls) == 2
+    assert web.calls == 1 and r2["tif_sha256"] == r["tif_sha256"]
+
+    web.offline = True                             # e.g. geodata.ucdavis.edu blocked, as in this container
+    good = sandbox(cfg, tmp_path, edit=lambda d: d["sources"]["worldclim"].__setitem__("sha256", r["zip_sha256"]))
+    assert rasters.fetch_worldclim(good)["tif_sha256"] == r["tif_sha256"]      # pinning the recorded hash:
+    assert web.calls == 1                                                      # no request, nothing deleted
+    fewer = sandbox(cfg, tmp_path, edit=lambda d: d["features"].__setitem__("worldclim_vars", 12))
+    assert len(rasters.fetch_worldclim(fewer)["tif_sha256"]) == 12 and web.calls == 1   # re-extracted, offline
+    wrong = sandbox(cfg, tmp_path, edit=lambda d: d["sources"]["worldclim"].__setitem__("sha256", "0" * 64))
+    zpath = rasters.worldclim_dir(sand).parent / cfg["sources"]["worldclim"]["url"].rsplit("/", 1)[-1]
+    with pytest.raises(SourceUnavailableError):
+        rasters.fetch_worldclim(wrong)             # another pin needs a download: blocked ...
+    assert hashlib.sha256(zpath.read_bytes()).hexdigest() == r["zip_sha256"]       # ... and nothing was deleted
+    assert all(rasters.worldclim_path(sand, i).exists() for i in range(1, 20))
+    web.offline = False
+    with pytest.raises(ChecksumMismatchError):
+        rasters.fetch_worldclim(wrong)             # online: the bytes are not the pinned ones; zip kept
+    assert hashlib.sha256(zpath.read_bytes()).hexdigest() == r["zip_sha256"] and web.calls == 2
+    zpath.with_name(zpath.name + ".source.json").unlink()                     # a zip without its sidecar
+    web.offline = True
+    assert rasters.fetch_worldclim(good)["zip_sha256"] == r["zip_sha256"] and web.calls == 2   # pin: no request
 
 
-def _tiff_download(calls):
+def _tiff_download(calls, state=None):
     def fake(url, dest, params=None, session=None, **k):
+        if state and state.get("offline"):
+            raise SourceUnavailableError(f"{url}: blocked by proxy", kind="proxy_denied")
         calls.append(params["COVERAGEID"])
         Path(dest).parent.mkdir(parents=True, exist_ok=True)
         Path(dest).write_bytes(b"II*\x00" + params["COVERAGEID"].encode() + b"\0" * 20000)
@@ -799,6 +945,27 @@ def test_fetch_soilgrids_refetches_when_the_request_or_file_changes(cfg, tmp_pat
     p.write_bytes(p.read_bytes() + b"x")
     rasters.fetch_soilgrids(lat)
     assert len(calls) == 3 * n + 1                                    # a changed file is fetched again
+    orig = rasters.soilgrids_params
+    monkeypatch.setattr(rasters, "soilgrids_params",                  # a code change to the WCS request
+                        lambda sg, v: {**orig(sg, v), "OUTPUTCRS": "http://www.opengis.net/def/crs/EPSG/0/3857"})
+    rasters.fetch_soilgrids(lat)
+    assert len(calls) == 4 * n + 1                                    # fetched again, not reused
+
+
+def test_fetch_soilgrids_keeps_its_files_when_a_refetch_fails(cfg, tmp_path, monkeypatch):
+    from mshi.data import rasters
+    from mshi.io import sha256_file
+    calls, state = [], {}
+    monkeypatch.setattr(rasters, "download", _tiff_download(calls, state))
+    sand = sandbox(cfg, tmp_path)
+    rasters.fetch_soilgrids(sand)
+    p = rasters.soilgrids_path(sand, "soc")
+    before = sha256_file(p)
+    state["offline"] = True
+    lat = sandbox(cfg, tmp_path, edit=lambda d: d["sources"]["soilgrids"].__setitem__("lat", [-60, 84]))
+    with pytest.raises(SourceUnavailableError):
+        rasters.fetch_soilgrids(lat)                                  # new request, source blocked
+    assert sha256_file(p) == before and not p.with_name(p.name + ".new").exists()
 
 
 

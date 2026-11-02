@@ -1,0 +1,17 @@
+git  server 502: DownloadError: it fetch failed (fatal: unable to access 'http://127.0.0.1:57045/bpbond/cosore/': The requested URL returned error: 502)
+     sleeps [], server saw 1 request(s) [('GET', '/bpbond/cosore/info/refs?service=git-upload-pack')]
+git  server 503: DownloadError: it fetch failed (fatal: unable to access 'http://127.0.0.1:53125/bpbond/cosore/': The requested URL returned error: 503)
+     sleeps [], server saw 1 request(s) [('GET', '/bpbond/cosore/info/refs?service=git-upload-pack')]
+git  server 404 (control): DownloadError: 7f9a0f1c26c9dad61c574aef863f1df1: git fetch failed (fatal: repository 'http://127.0.0.1:54701/bpbond/cosore/' not found)
+     sleeps [], server saw 1 request(s) [('GET', '/bpbond/cosore/info/refs?service=git-upload-pack')]
+git  proxy CONNECT 502: DownloadError: fetch failed (fatal: unable to access 'https://git.example.invalid/bpbond/cosore/': CONNECT tunnel failed, response 502)
+     sleeps [], server saw 1 request(s) [('CONNECT', 'git.example.invalid:443')]
+git  proxy CONNECT 403 (control): SourceUnavailableError(kind=proxy_denied): ked by proxy (fatal: unable to access 'https://git.example.invalid/bpbond/cosore/': CONNECT tunnel failed, response 403)
+     sleeps [], server saw 1 request(s) [('CONNECT', 'git.example.invalid:443')]
+download https://git.example.invalid/srdb-data.csv failed (proxy connection failed (HTTPSConnectionPool(host='git.example.invalid', port=443): Max retries exceeded with url: /srdb-data.csv (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 502 Bad Gateway'))))); retry 1/3 in 2s
+download https://git.example.invalid/srdb-data.csv failed (proxy connection failed (HTTPSConnectionPool(host='git.example.invalid', port=443): Max retries exceeded with url: /srdb-data.csv (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 502 Bad Gateway'))))); retry 2/3 in 4s
+download https://git.example.invalid/srdb-data.csv failed (proxy connection failed (HTTPSConnectionPool(host='git.example.invalid', port=443): Max retries exceeded with url: /srdb-data.csv (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 502 Bad Gateway'))))); retry 3/3 in 8s
+requests proxy CONNECT 502: SourceUnavailableError(kind=unreachable): by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 502 Bad Gateway')))))
+     sleeps [2, 4, 8], proxy saw 4 request(s)
+requests proxy CONNECT 403: SourceUnavailableError(kind=proxy_denied): ed by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden'))))
+     sleeps [], proxy saw 1 request(s)

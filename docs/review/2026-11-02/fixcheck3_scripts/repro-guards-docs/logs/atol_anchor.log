@@ -1,0 +1,6 @@
+deviation_atol=1e-09: row DEVIATION v3='max |diff| 0.004'; summary {'PASS': 24, 'FAIL': 0, 'DEVIATION': 1, 'STALE': 0, 'NOT RUN': 2, 'INFO': 0}
+   tests: {'test_reproduction_targets_are_the_briefs': 'pass', 'test_lock_ok_on_repo': 'pass', 'test_config_hashes_equal_code_anchors': 'pass', 'test_locked_rerun_reported_against_locked_result': 'pass', 'test_locked_test_rerun': 'pass', 'test_reproduction_table_has_no_fail': 'pass'}
+deviation_atol=0.05: row PASS v3='identical'; summary {'PASS': 25, 'FAIL': 0, 'DEVIATION': 0, 'STALE': 0, 'NOT RUN': 2, 'INFO': 0}
+   tests: {'test_reproduction_targets_are_the_briefs': 'pass', 'test_lock_ok_on_repo': 'pass', 'test_config_hashes_equal_code_anchors': 'pass', 'test_locked_rerun_reported_against_locked_result': 'pass', 'test_locked_test_rerun': 'pass', 'test_reproduction_table_has_no_fail': 'pass'}
+9e17a36 66368bfad3395580
+edited atol 0.05 9c3be9705641044c

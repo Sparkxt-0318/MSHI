@@ -1,0 +1,13 @@
+baseline: features exit 0 {'features': 'ok'}
+
+libraries changed: modis_points.json staleness: None
+StaleModisError is a StaleInputError subclass: False
+run([features]) exit 1 {'features': 'error: StaleModisError: fixcheck3_scripts/verify-chain/work/v7/s/interim/modis_p'}
+run([repro_checks]) exit 2 {'repro_checks': 'stale: 2 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-'}
+   NPP row: [('STALE', 'modis_points output unusable: fixcheck3_scripts/ve')]
+`make features`-like run([modis_points, features]) exit 2 {'modis_points': 'blocked: https://planetarycomputer.microsoft.com/api/stac/v1: blocked by proxy (Tunnel con', 'features': 'skipped: upstream modis_points not available'}
+
+after the blocked modis_points run: sidecar exists: False | parquet exists: True
+sidecar missing (libraries back to the original): modis_points.json staleness: None
+run([features]) exit 1 {'features': 'error: FileNotFoundError: fixcheck3_scripts/verify-chain/work/v7/s/interim/modis'}
+run([repro_checks]) exit 2 {'repro_checks': 'stale: 2 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-'}

@@ -1,0 +1,5 @@
+E0 committed state (NOT RUN rows only): exit 0; run_log repro_checks status 'ok'; summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 17, 'STALE': 0}
+E1 both identical: exit 0; run_log repro_checks status 'ok'; summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 2, 'PASS': 25, 'STALE': 0}
+E2 repo DEVIATION: exit 0; run_log repro_checks status 'ok'; summary {'DEVIATION': 1, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 2, 'PASS': 24, 'STALE': 0}
+E3 repo STALE: exit 2; run_log repro_checks status 'stale: 1 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-'; summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 2, 'PASS': 24, 'STALE': 1}
+E4 FAIL (Europe n 236) + STALE: exit 1; run_log repro_checks status "error: ReproductionFailure: 1 reproduction target(s) outside tolerance: ['Locked test: Europe n']; see results"; summary {'DEVIATION': 1, 'FAIL': 1, 'INFO': 0, 'NOT RUN': 2, 'PASS': 22, 'STALE': 1}

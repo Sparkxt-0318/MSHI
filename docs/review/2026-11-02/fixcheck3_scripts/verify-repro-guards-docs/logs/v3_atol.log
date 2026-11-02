@@ -1,0 +1,35 @@
+== 1. old pin at 9e17a36 ==
+pin in 9e17a36 tests/test_guards.py: LOCKED_CODE_AST_SHA256 = "66368bfad339558031a911988b60ba714b16fd3caeef08fbf9537e3d2c0eac35"
+digest of 9e17a36 clean_test.py+spatial.py: 66368bfad339558031a911988b60ba714b16fd3caeef08fbf9537e3d2c0eac35
+digest with the default edited to 0.05: 9c3be9705641044cf32b29d60125c3bed4c02b6e1e1a392a06f34e78b54ae1d8
+HEAD digest (pin LOCKED_CODE_AST_SHA256 = 31e2f1916e1c19a551e66d37f239beae397ad8ab0e3c2c2a13f9c927baf78685): 31e2f1916e1c19a551e66d37f239beae397ad8ab0e3c2c2a13f9c927baf78685
+
+== 2. HEAD: config edit deviation_atol 1e-9 -> 0.05 ==
+
+-- deviation_atol = 1e-09; config sha dfde8e429a9b (repo config dfde8e429a9b)
+verify_lock: ok
+test_reproduction_targets_are_the_briefs PASSED
+test_lock_ok_on_repo PASSED
+test_config_hashes_equal_code_anchors PASSED
+vs_locked: {'identical': False, 'selected_same': True, 'max_abs_primary_diff': 0.0040000000000000036}
+repro summary: {'PASS': 6, 'FAIL': 0, 'DEVIATION': 1, 'STALE': 0, 'NOT RUN': 20, 'INFO': 0}
+re-run row: {'v3': 'max |diff| 0.004', 'tolerance': '1e-09', 'status': 'DEVIATION', 'note': 'deviation: report it; the locked result stays primary'}
+Europe R2 row: {'handoff': 0.079, 'v3': 0.0829953915782572, 'tolerance': '±0.01', 'status': 'PASS'}
+md line: | Locked test: re-run identical to the locked result | identical | max |diff| 0.004 | 1e-09 | DEVIATION | deviation: report it; the locked result stays primary |
+test_locked_test_rerun PASSED
+test_locked_rerun_reported_against_locked_result PASSED
+test_reproduction_table_has_no_fail PASSED
+
+-- deviation_atol = 0.05; config sha ecd23147bc8e (repo config dfde8e429a9b)
+verify_lock: ok
+test_reproduction_targets_are_the_briefs PASSED
+test_lock_ok_on_repo PASSED
+test_config_hashes_equal_code_anchors PASSED
+vs_locked: {'identical': True, 'selected_same': True, 'max_abs_primary_diff': 0.0040000000000000036}
+repro summary: {'PASS': 7, 'FAIL': 0, 'DEVIATION': 0, 'STALE': 0, 'NOT RUN': 20, 'INFO': 0}
+re-run row: {'v3': 'identical', 'tolerance': '0.05', 'status': 'PASS', 'note': ''}
+Europe R2 row: {'handoff': 0.079, 'v3': 0.0829953915782572, 'tolerance': '±0.01', 'status': 'PASS'}
+md line: | Locked test: re-run identical to the locked result | identical | identical | 0.05 | PASS |  |
+test_locked_test_rerun PASSED
+test_locked_rerun_reported_against_locked_result PASSED
+test_reproduction_table_has_no_fail PASSED

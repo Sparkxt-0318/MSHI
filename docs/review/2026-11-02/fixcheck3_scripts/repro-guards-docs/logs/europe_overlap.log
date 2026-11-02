@@ -1,0 +1,16 @@
+[qc] Europe sites 236; identical record 28 (max |dcoord| 0.0, max |dRs| 0.0); within 5 km geodesic 30, haversine 30; in box 30
+   same <= near: True;  near == inbox: True;  near - same: ['v3qc_00430', 'v3qc_00741']
+   by country (near): {'Estonia': 13, 'Finland': 8, 'Latvia': 1, 'Romania': 1, 'Russia': 7}
+   Russia sites in near: max lon 37.603
+   sites with min distance in (4, 6) km: {}
+   committed: n_europe 236, within_km 30, identical 28, in_box 30, by_country {'Estonia': 13, 'Finland': 8, 'Latvia': 1, 'Romania': 1, 'Russia': 7}
+   committed site list equals recomputed near|same: True
+[repo] Europe sites 284; identical record 38 (max |dcoord| 0.0, max |dRs| 0.0); within 5 km geodesic 38, haversine 38; in box 38
+   same <= near: True;  near == inbox: True;  near - same: []
+   by country (near): {'Estonia': 14, 'Finland': 9, 'Latvia': 1, 'Romania': 3, 'Russia': 11}
+   Russia sites in near: max lon 37.603
+   sites with min distance in (4, 6) km: {}
+   committed: n_europe 284, within_km 38, identical 38, in_box 38, by_country {'Estonia': 14, 'Finland': 9, 'Latvia': 1, 'Romania': 3, 'Russia': 11}
+   committed site list equals recomputed near|same: True
+qc matched records by src: {'srdb': 30} distinct sites: 28
+repo matched records by src: {'srdb': 49} distinct sites: 38

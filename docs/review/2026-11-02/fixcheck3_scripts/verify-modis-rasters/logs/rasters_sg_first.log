@@ -1,0 +1,12 @@
+{
+ "pkg": "fixcheck3_scripts/verify-modis-rasters/pkg/head/mshi/__init__.py",
+ "code_sha12": "e3d4bf1e8ddf",
+ "fresh": {
+  "status": "ok",
+  "http_requests": 8,
+  "download_calls": 8
+ },
+ "outputcrs_sent": [
+  "http://www.opengis.net/def/crs/EPSG/0/4326"
+ ]
+}

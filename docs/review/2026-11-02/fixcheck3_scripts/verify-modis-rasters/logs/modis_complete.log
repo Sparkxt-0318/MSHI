@@ -1,0 +1,31 @@
+{
+ "pkg": "fixcheck3_scripts/verify-modis-rasters/pkg/head/mshi/__init__.py",
+ "tiles": [
+  "h10v04",
+  "h18v04",
+  "h19v04"
+ ],
+ "n_sites": 9,
+ "run": {
+  "status": "ok",
+  "cached": false,
+  "actual_reads": 375,
+  "rec.status": null,
+  "rec.n_raster_reads": 375,
+  "rec.n_failed_reads": 0,
+  "rec.n_catalog_gaps": 0,
+  "rec.len(catalog_gaps)": 0,
+  "rec.catalog_gaps[:4]": [],
+  "rec.lst_same_date_ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet_sha12": "f8e16f69211e"
+ },
+ "lst_day_n": [
+  60
+ ],
+ "npp_n": [
+  5
+ ]
+}

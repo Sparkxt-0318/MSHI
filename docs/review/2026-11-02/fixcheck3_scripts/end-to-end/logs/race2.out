@@ -1,0 +1,4 @@
+exit 2 [('fetch_srdb', 'ok', None), ('fetch_cosore', 'ok', None), ('fetch_naturalearth', 'ok', None), ('cosore_annual', 'ok', None), ('build_sites', 'ok', None), ('modis_points', 'ok', None), ('features', 'stale: results/fetch_worldclim.json: missing; re-run the stage that writes it (o', None)]
+aggregate() in memory doubles: True
+cache key code_sha256 8c489dbea286 | sha256 of modis.py on disk now 8c489dbea286
+cached npp [['-0.03135_18.3102', 1315.0815], ['-0.217_109.433', 1332.2218], ['-0.312_35.406', 540.788]]

@@ -1,0 +1,9 @@
+fetch_cosore failed
+cosore_annual      skipped: upstream fetch_cosore not available
+stages not completed: {'fetch_cosore': "error: ChecksumMismatchError: fixcheck3_scripts/verify-repro-guards-docs/work/git_run/raw/cosore/4362ca4c: checkout of the pinned commit has local changes ['!! .DS_Store']; delete fixcheck3_scripts/verify-repro-guards-docs/work/git_run/raw/cosore/4362ca4c and re-fetch", 'cosore_annual': 'skipped: upstream fetch_cosore not available'}
+cosore_annual failed
+stages not completed: {'cosore_annual': "error: ChecksumMismatchError: fixcheck3_scripts/verify-repro-guards-docs/work/git_run/raw/cosore/4362ca4c: checkout of the pinned commit has local changes ['!! .DS_Store']; delete fixcheck3_scripts/verify-repro-guards-docs/work/git_run/raw/cosore/4362ca4c and re-fetch"}
+sandbox out_root: None | raw: fixcheck3_scripts/verify-repro-guards-docs/work/git_run/raw
+control (clean checkout): exit 0 [('fetch_cosore', 'ok'), ('cosore_annual', 'ok')]
+with .DS_Store:           exit 1 [('fetch_cosore', 'error: ChecksumMismatchError: <scratchpad>/fi'), ('cosore_annual', 'skipped: upstream fetch_cosore not available')]
+cosore_annual alone:      exit 1 [('cosore_annual', 'error: ChecksumMismatchError: <scratchpad>/fi')]

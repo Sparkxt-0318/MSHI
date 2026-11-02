@@ -1,0 +1,25 @@
+old_V1.json vs head_V1.json: selected TP/OLS-TP vs TP/OLS-TP
+  RF table                     leaves   60  differ  18  max abs 2.22e-16 at ('all_candidates_on_test[1].ci_site[1]', 0.0657791160323285)  max rel 3.96e-14 at ('all_candidates_on_test[1].r2', -0.00560651698843917)
+  other                        leaves    2  differ   0  max abs 0 at None  max rel 0 at None
+  other table                  leaves   72  differ   0  max abs 0 at None  max rel 0 at None
+  selected-model (OLS-TP)      leaves   50  differ   0  max abs 0 at None  max rel 0 at None
+old_V2.json vs head_V2.json: selected C8/RF vs C8/RF
+  RF table                     leaves   60  differ  20  max abs 1.33e-15 at ('all_candidates_on_test[9].ci_site[0]', -0.3344398564153544)  max rel 1.87e-14 at ('all_candidates_on_test[9].ci_site[1]', -0.04756327691714114)
+  other                        leaves    2  differ   0  max abs 0 at None  max rel 0 at None
+  other table                  leaves   72  differ   0  max abs 0 at None  max rel 0 at None
+  selected-model (RF)          leaves   51  differ  26  max abs 2.84e-14 at ('aoa.inside.rmse_rs', 179.94004427960294)  max rel 1.85e-12 at ('aoa.r2_diff_inside_minus_outside.ci[0]', -0.00036545210807841443)
+old_V2.json vs old_V2b.json: selected C8/RF vs C8/RF
+  RF table                     leaves   60  differ  21  max abs 8.88e-16 at ('all_candidates_on_test[9].ci_site[0]', -0.3344398564153544)  max rel 2.05e-14 at ('all_candidates_on_test[5].ci_site[1]', 0.016085751575179618)
+  other                        leaves    2  differ   0  max abs 0 at None  max rel 0 at None
+  other table                  leaves   72  differ   0  max abs 0 at None  max rel 0 at None
+  selected-model (RF)          leaves   51  differ  32  max abs 8.53e-14 at ('aoa.outside.rmse_rs', 188.2721784230818)  max rel 1.85e-12 at ('aoa.r2_diff_inside_minus_outside.ci[0]', -0.00036545210807841443)
+head_V2.json vs head_V2b.json: selected C8/RF vs C8/RF
+  RF table                     leaves   60  differ   0  max abs 0 at None  max rel 0 at None
+  other                        leaves    2  differ   0  max abs 0 at None  max rel 0 at None
+  other table                  leaves   72  differ   0  max abs 0 at None  max rel 0 at None
+  selected-model (RF)          leaves   51  differ   0  max abs 0 at None  max rel 0 at None
+old_V2b.json vs head_V2b.json: selected C8/RF vs C8/RF
+  RF table                     leaves   60  differ  22  max abs 4.44e-16 at ('all_candidates_on_test[1].ci_site[0]', -0.28474268241908934)  max rel 2.25e-14 at ('all_candidates_on_test[1].ci_site[1]', -0.019260333774100125)
+  other                        leaves    2  differ   0  max abs 0 at None  max rel 0 at None
+  other table                  leaves   72  differ   0  max abs 0 at None  max rel 0 at None
+  selected-model (RF)          leaves   51  differ  24  max abs 5.68e-14 at ('aoa.outside.rmse_rs', 188.2721784230819)  max rel 1.12e-14 at ('primary.ci_site[1]', -0.019260333774099907)

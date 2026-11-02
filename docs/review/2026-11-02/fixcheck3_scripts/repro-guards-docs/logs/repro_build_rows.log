@@ -1,0 +1,5 @@
+RAISED ReproductionFailure 1 reproduction target(s) outside tolerance: ['SRDB records after repo filters']; see results/reprodu
+  STALE | COSORE sites with an annual value | 66 | 0.0 | cosore_annual.json produced with a different config; re-run `make all`
+  FAIL | SRDB records after repo filters | 4770 | -1.0 | 
+  PASS | Records after coordinate check | 4781 | 0.0 | 
+ summary {'DEVIATION': 0, 'FAIL': 1, 'INFO': 0, 'NOT RUN': 10, 'PASS': 15, 'STALE': 1}

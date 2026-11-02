@@ -1,0 +1,37 @@
+1 month(s) have two Terra LST items on the earliest date; the smaller id is used (listed in results/modis_points.json)
+2 of 375 raster reads failed after 4 attempts; second pass with a fresh token
+MODIS read FAILED: fixcheck3_scripts/modis-rasters/work/fid/tiles/MOD11A2.A2023001.h18v04.061.2000000000000.LST_Day_1km.tif: RasterioIOError: fixcheck3_scripts/modis-rasters/work/fid/tiles/MOD11A2.A2023001.h18v04.061.2000000000000.LST_Day_1km.tif?tok: No such file or dire
+MODIS read FAILED: fixcheck3_scripts/modis-rasters/work/fid/tiles/MOD11A2.A2023001.h18v04.061.2000000000000.LST_Night_1km.tif: RasterioIOError: fixcheck3_scripts/modis-rasters/work/fid/tiles/MOD11A2.A2023001.h18v04.061.2000000000000.LST_Night_1km.tif?tok: No such file or di
+{
+ "run": {
+  "status": "ModisIncompleteError: 2 of 375 MODIS raster reads failed after retries (first: fixcheck3_scripts/modis-rasters/work/fid/tiles/MOD11A2.A2023001.h18v04.061.2000000000000.LST_Day_1km.tif: RasterioIOError: /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-a",
+  "cached": false,
+  "reads": 389,
+  "rec_status": "incomplete: no values written",
+  "n_raster_reads": 375,
+  "n_failed_reads": 2,
+  "catalog_gaps": [],
+  "n_catalog_gaps": 0,
+  "ties": {
+   "list": [
+    {
+     "chosen": "MOD11A2.A2023001.h18v04.061.2000000000000",
+     "month": "2023-01",
+     "others": [
+      "MOD11A2.A2023001.h18v04.061.2023010000000"
+     ],
+     "tile": "h18v04"
+    }
+   ],
+   "n": 1
+  },
+  "parquet": null
+ },
+ "parquet_exists": false,
+ "meta_exists": false,
+ "load": "FileNotFoundError: fixcheck3_scripts/modis-rasters/work/fid/sb/failed_read/out/data/interim/modis_points.parquet (or its .meta.json) missing; run sta",
+ "failed_reads": [
+  "MOD11A2.A2023001.h18v04.061.2000000000000.LST_Day_1km.tif?tok: No such file or dire",
+  "MOD11A2.A2023001.h18v04.061.2000000000000.LST_Night_1km.tif?tok: No such file or di"
+ ]
+}

@@ -1,0 +1,152 @@
+29 sites, 3 tiles, 375 raster reads
+wrote fixcheck3_scripts/modis-rasters/work/fid/proto_clip_shuffle.parquet
+{
+ "scenario": "clip_shuffle",
+ "files_written_now": 0,
+ "n_points": 29,
+ "tiles": [
+  [
+   18,
+   4
+  ],
+  [
+   26,
+   5
+  ],
+  [
+   28,
+   5
+  ]
+ ],
+ "search_params_proto": [
+  [
+   "modis-11A2-061",
+   "2020-01-01/2024-12-31",
+   500
+  ],
+  [
+   "modis-17A3HGF-061",
+   "2020-01-01/2024-12-31",
+   500
+  ]
+ ],
+ "search_params_port": [
+  [
+   "modis-11A2-061",
+   "2020-01-01/2024-12-31",
+   500
+  ],
+  [
+   "modis-17A3HGF-061",
+   "2020-01-01/2024-12-31",
+   500
+  ]
+ ],
+ "n_jobs_proto": 375,
+ "n_jobs_port": 375,
+ "job_multisets_equal": true,
+ "info": {
+  "n_jobs": 375,
+  "n_tiles": 3,
+  "catalog_gaps": [],
+  "accepted_catalog_gaps": [],
+  "lst_same_date_ties": [],
+  "npp_duplicate_years": []
+ },
+ "n_failed_reads": 0,
+ "lst_first_composites_per_tile": {
+  "h18v04": [
+   "A2020001",
+   "A2020033"
+  ],
+  "h26v05": [
+   "A2020001",
+   "A2020033"
+  ],
+  "h28v05": [
+   "A2020001",
+   "A2020033"
+  ]
+ },
+ "lst_items_per_tile": {
+  "h18v04": 60,
+  "h26v05": 60,
+  "h28v05": 60
+ },
+ "npp_items_per_tile": {
+  "h18v04": 5,
+  "h26v05": 5,
+  "h28v05": 5
+ },
+ "value_multisets_equal": true,
+ "n_site_kind_lists": 87,
+ "row_order_equal": true,
+ "columns_proto": [
+  "site_key",
+  "npp",
+  "npp_n",
+  "lst_day",
+  "lst_day_n",
+  "lst_night",
+  "lst_night_n"
+ ],
+ "columns_port": [
+  "site_key",
+  "npp",
+  "npp_n",
+  "lst_day",
+  "lst_day_n",
+  "lst_night",
+  "lst_night_n"
+ ],
+ "dtypes_equal": {
+  "site_key": true,
+  "npp": true,
+  "npp_n": true,
+  "lst_day": true,
+  "lst_day_n": true,
+  "lst_night": true,
+  "lst_night_n": true
+ },
+ "columns": {
+  "npp": {
+   "nan_pattern_equal": true,
+   "n_nan": 1,
+   "finite": 28,
+   "bit_identical": 17,
+   "max_abs_diff": 2.2737367544323206e-13,
+   "max_rel_diff": 3.0898068627310393e-16,
+   "n_equal": true,
+   "n_range": [
+    0,
+    5
+   ]
+  },
+  "lst_day": {
+   "nan_pattern_equal": true,
+   "n_nan": 0,
+   "finite": 29,
+   "bit_identical": 18,
+   "max_abs_diff": 7.105427357601002e-15,
+   "max_rel_diff": 4.3558065516435823e-16,
+   "n_equal": true,
+   "n_range": [
+    48,
+    55
+   ]
+  },
+  "lst_night": {
+   "nan_pattern_equal": true,
+   "n_nan": 0,
+   "finite": 29,
+   "bit_identical": 16,
+   "max_abs_diff": 3.552713678800501e-15,
+   "max_rel_diff": 2.13363831729717e-16,
+   "n_equal": true,
+   "n_range": [
+    48,
+    55
+   ]
+  }
+ }
+}

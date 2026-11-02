@@ -1,0 +1,94 @@
+{
+ "clean": {
+  "label": "clean copy",
+  "a6c00bc": "accepted (tree 69553d3966df)",
+  "9e17a36": "accepted (tree 69553d3966df)",
+  "check_ignore": [
+   ".gitignore:45:.DS_Store\tinst/extdata/datasets/.DS_Store",
+   ".gitignore:42:.Rproj.user\t.Rproj.user/x",
+   ".gitignore:7:.Rhistory\t.Rhistory"
+  ],
+  "n_dataset_dirs_cosore_annual_sees": 94
+ },
+ "ds_store_datasets": {
+  "label": "inst/extdata/datasets/.DS_Store",
+  "a6c00bc": "ChecksumMismatchError: cal changes ['!! inst/extdata/datasets/.DS_Store']; delete fixcheck3_scripts/verify-end-to-end/c2/raw/cosore/02f32e8e and re-fetch",
+  "9e17a36": "accepted (tree 69553d3966df)",
+  "check_ignore": [
+   ".gitignore:45:.DS_Store\tinst/extdata/datasets/.DS_Store",
+   ".gitignore:42:.Rproj.user\t.Rproj.user/x",
+   ".gitignore:7:.Rhistory\t.Rhistory"
+  ],
+  "n_dataset_dirs_cosore_annual_sees": 94
+ },
+ "ds_store_in_dataset": {
+  "label": "TEST_custom/.DS_Store",
+  "a6c00bc": "ChecksumMismatchError: ['!! inst/extdata/datasets/TEST_custom/.DS_Store']; delete fixcheck3_scripts/verify-end-to-end/c2/raw/cosore/02f32e8e and re-fetch",
+  "9e17a36": "accepted (tree 69553d3966df)",
+  "check_ignore": [
+   ".gitignore:45:.DS_Store\tinst/extdata/datasets/.DS_Store",
+   ".gitignore:42:.Rproj.user\t.Rproj.user/x",
+   ".gitignore:7:.Rhistory\t.Rhistory"
+  ],
+  "n_dataset_dirs_cosore_annual_sees": 94
+ },
+ "rstudio": {
+  "label": ".Rproj.user/ + .Rhistory",
+  "a6c00bc": "ChecksumMismatchError:  local changes ['!! .Rhistory', '!! .Rproj.user/']; delete fixcheck3_scripts/verify-end-to-end/c2/raw/cosore/02f32e8e and re-fetch",
+  "9e17a36": "accepted (tree 69553d3966df)",
+  "check_ignore": [
+   ".gitignore:45:.DS_Store\tinst/extdata/datasets/.DS_Store",
+   ".gitignore:42:.Rproj.user\t.Rproj.user/x",
+   ".gitignore:7:.Rhistory\t.Rhistory"
+  ],
+  "n_dataset_dirs_cosore_annual_sees": 94
+ },
+ "untracked_control": {
+  "label": "untracked notes.txt (control)",
+  "a6c00bc": "ChecksumMismatchError: cal changes ['?? inst/extdata/datasets/notes.txt']; delete fixcheck3_scripts/verify-end-to-end/c2/raw/cosore/02f32e8e and re-fetch",
+  "9e17a36": "ChecksumMismatchError: cal changes ['?? inst/extdata/datasets/notes.txt']; delete fixcheck3_scripts/verify-end-to-end/c2/raw/cosore/02f32e8e and re-fetch",
+  "check_ignore": [
+   ".gitignore:45:.DS_Store\tinst/extdata/datasets/.DS_Store",
+   ".gitignore:42:.Rproj.user\t.Rproj.user/x",
+   ".gitignore:7:.Rhistory\t.Rhistory"
+  ],
+  "n_dataset_dirs_cosore_annual_sees": 94
+ },
+ "clean_again": {
+  "label": "clean again",
+  "a6c00bc": "accepted (tree 69553d3966df)",
+  "9e17a36": "accepted (tree 69553d3966df)",
+  "check_ignore": [
+   ".gitignore:45:.DS_Store\tinst/extdata/datasets/.DS_Store",
+   ".gitignore:42:.Rproj.user\t.Rproj.user/x",
+   ".gitignore:7:.Rhistory\t.Rhistory"
+  ],
+  "n_dataset_dirs_cosore_annual_sees": 94
+ },
+ "pipeline": {
+  "exit": 1,
+  "stages": [
+   [
+    "fetch_cosore",
+    "error: ChecksumMismatchError: fixcheck3_scripts/verify-end-to-end/c2/raw/cosore/02f32e8e: checkout of the pinned commit has local changes ['!! inst/extdata/datasets/.DS_Store']; delete /tmp/"
+   ],
+   [
+    "cosore_annual",
+    "skipped: upstream fetch_cosore not available"
+   ],
+   [
+    "build_sites",
+    "skipped: upstream cosore_annual not available"
+   ]
+  ]
+ },
+ "pipeline_cosore_annual_alone": {
+  "exit": 1,
+  "stages": [
+   [
+    "cosore_annual",
+    "error: ChecksumMismatchError: fixcheck3_scripts/verify-end-to-end/c2/raw/cosore/02f32e8e: checkout of the pinned commit has local changes ['!! inst/extdata/datasets/.DS_Store']; delete /tmp/"
+   ]
+  ]
+ }
+}

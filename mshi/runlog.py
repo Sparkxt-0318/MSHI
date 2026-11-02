@@ -91,5 +91,5 @@ def stage_timer(log_path: Path, stage: str, extra: dict | None = None):
         rec["status"] = rec.get("status_override", status)
         rec.pop("status_override", None)
         log_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(log_path, "a", encoding="utf-8") as fh:
+        with open(log_path, "a", encoding="utf-8", newline="\n") as fh:
             fh.write(json.dumps(rec, default=str) + "\n")

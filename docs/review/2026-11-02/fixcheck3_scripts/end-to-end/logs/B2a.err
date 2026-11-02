@@ -1,0 +1,12 @@
+16:33:15 INFO mshi: fetch_worldclim    start
+16:33:15 WARNING mshi.rasters: WorldClim zip hash is not pinned in configs/v3.yaml; recorded 5b92405fe3c64934dcf79af55356bc0f3b06413cac384f5f6d865a5ef74aa64f
+16:33:16 INFO mshi: fetch_worldclim    OK (0.7s)
+16:33:16 INFO mshi: fetch_soilgrids    start
+16:33:16 INFO mshi: fetch_soilgrids    OK (0.0s)
+16:33:16 INFO mshi: modis_points       uses existing outputs of build_sites (not requested; checked for currency)
+16:33:16 INFO mshi: modis_points       start
+16:33:16 INFO mshi.modis: modis_points: cached extraction matches the MODIS config, code, libraries and 1530 points
+16:33:16 INFO mshi: modis_points       OK (0.2s)
+16:33:16 INFO mshi: features           uses existing outputs of build_sites (not requested; checked for currency)
+16:33:16 INFO mshi: features           start
+16:33:19 INFO mshi: features           OK (3.4s)

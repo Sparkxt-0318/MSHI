@@ -1,0 +1,4 @@
+statuses: {'fetch_srdb': 'ok', 'fetch_cosore': 'ok', 'fetch_naturalearth': 'ok', 'cosore_annual': 'ok', 'build_sites': 'ok', 'site_diagnostics': 'ok', 'fetch_worldclim': 'blocked: https://geodata.ucdavis.edu/cli', 'fetch_soilgrids': 'blocked: https://maps.isric.org/mapserv:', 'modis_points': 'blocked: https://planetarycomputer.micro', 'features': 'skipped: upstream fetch_worldclim, fetch', 'clean_test': 'skipped: upstream features not available'}
+summary: {'PASS': 17, 'FAIL': 0, 'DEVIATION': 0, 'STALE': 0, 'NOT RUN': 10, 'INFO': 0}
+reproduction_check.json identical 540fa3dc4eec 540fa3dc4eec
+reproduction_check.md identical 86ebf908240e 86ebf908240e

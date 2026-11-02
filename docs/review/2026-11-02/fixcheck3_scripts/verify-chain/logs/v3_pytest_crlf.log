@@ -1,0 +1,1167 @@
+.............F....FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.FF...... [ 51%]
+FFFsssFFFs.....................................FF....s..............     [100%]
+=================================== FAILURES ===================================
+_____________________________ test_lock_ok_on_repo _____________________________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+
+    def test_lock_ok_on_repo(cfg):
+>       info = verify_lock(cfg)
+               ^^^^^^^^^^^^^^^^
+
+tests/test_guards.py:197: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+
+    def verify_lock(cfg: Config) -> dict:
+        """Refuse (LockedPlanError) unless plan, definition and locked results match the anchored hashes.
+        Messages name the expected hash only (never a replacement value)."""
+        ct = cfg["clean_test"]
+        if ct.get("plan_sha256") != PLAN_SHA256:
+            raise LockedPlanError("clean_test.plan_sha256 in the config differs from the plan hash anchored in "
+                                  f"mshi/analysis/clean_test.py ({PLAN_SHA256}). Refusing to run.")
+        plan = cfg.repo_path(ct["plan"])
+        if not plan.exists():
+            raise LockedPlanError(f"locked plan not found: {plan}")
+        if sha256_file(plan) != PLAN_SHA256:
+>           raise LockedPlanError(f"{plan}: content does not match the locked SHA-256 {PLAN_SHA256}; the plan has "
+                                  "been modified. Refusing to run.")
+E           mshi.analysis.clean_test.LockedPlanError: fixcheck3_scripts/verify-chain/work/v3/crlf/docs/handoff/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.
+
+mshi/analysis/clean_test.py:68: LockedPlanError
+_____________________ test_lock_refuses_mismatched_sidecar _____________________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_mismatched_s0')
+
+    def test_lock_refuses_mismatched_sidecar(cfg, tmp_path):
+        bad = _tampered_cfg(cfg, tmp_path, sha_text="0" * 64 + "  ANALYSIS_PLAN_LOCKED.md\n")
+>       with pytest.raises(LockedPlanError, match="does not record the locked hash"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'does not record the locked hash'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_mismatched_s0/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:232: AssertionError
+_________ test_lock_refuses_edited_test_definition[C8 extra var-as-is] _________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_0')
+name = 'C8 extra var', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_0/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+_______ test_lock_refuses_edited_test_definition[C8 extra var-rehashed] ________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_1')
+name = 'C8 extra var', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_1/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+______ test_lock_refuses_edited_test_definition[C8+NPP without npp-as-is] ______
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_2')
+name = 'C8+NPP without npp', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_2/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+____ test_lock_refuses_edited_test_definition[C8+NPP without npp-rehashed] _____
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_3')
+name = 'C8+NPP without npp', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_3/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+_________ test_lock_refuses_edited_test_definition[aoa whisker-as-is] __________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_4')
+name = 'aoa whisker', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_4/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+________ test_lock_refuses_edited_test_definition[aoa whisker-rehashed] ________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_5')
+name = 'aoa whisker', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_5/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+_____ test_lock_refuses_edited_test_definition[block_bootstrap_deg-as-is] ______
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_6')
+name = 'block_bootstrap_deg', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_6/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+____ test_lock_refuses_edited_test_definition[block_bootstrap_deg-rehashed] ____
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_7')
+name = 'block_bootstrap_deg', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_7/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+_________ test_lock_refuses_edited_test_definition[bootstrap_n-as-is] __________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_8')
+name = 'bootstrap_n', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_8/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+________ test_lock_refuses_edited_test_definition[bootstrap_n-rehashed] ________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_9')
+name = 'bootstrap_n', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_9/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+________ test_lock_refuses_edited_test_definition[bootstrap_seed-as-is] ________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_10')
+name = 'bootstrap_seed', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_10/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+______ test_lock_refuses_edited_test_definition[bootstrap_seed-rehashed] _______
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_11')
+name = 'bootstrap_seed', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_11/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+______________ test_lock_refuses_edited_test_definition[ci-as-is] ______________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_12')
+name = 'ci', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_12/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+____________ test_lock_refuses_edited_test_definition[ci-rehashed] _____________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_13')
+name = 'ci', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_13/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+_________ test_lock_refuses_edited_test_definition[cv_block_deg-as-is] _________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_14')
+name = 'cv_block_deg', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_14/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+_______ test_lock_refuses_edited_test_definition[cv_block_deg-rehashed] ________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_15')
+name = 'cv_block_deg', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_15/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+___________ test_lock_refuses_edited_test_definition[cv_folds-as-is] ___________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_16')
+name = 'cv_folds', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_16/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+_________ test_lock_refuses_edited_test_definition[cv_folds-rehashed] __________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_17')
+name = 'cv_folds', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_17/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+___________ test_lock_refuses_edited_test_definition[cv_seed-as-is] ____________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_18')
+name = 'cv_seed', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_18/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+__________ test_lock_refuses_edited_test_definition[cv_seed-rehashed] __________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_19')
+name = 'cv_seed', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_19/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+__________ test_lock_refuses_edited_test_definition[di groups-as-is] ___________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_20')
+name = 'di groups', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_20/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+_________ test_lock_refuses_edited_test_definition[di groups-rehashed] _________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_21')
+name = 'di groups', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_21/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+_________ test_lock_refuses_edited_test_definition[drop C8+SOIL-as-is] _________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_22')
+name = 'drop C8+SOIL', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_22/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+_______ test_lock_refuses_edited_test_definition[drop C8+SOIL-rehashed] ________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_23')
+name = 'drop C8+SOIL', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_23/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+___________ test_lock_refuses_edited_test_definition[learners-as-is] ___________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_24')
+name = 'learners', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_24/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+_________ test_lock_refuses_edited_test_definition[learners-rehashed] __________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_25')
+name = 'learners', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_25/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+__________ test_lock_refuses_edited_test_definition[model_seed-as-is] __________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_26')
+name = 'model_seed', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_26/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+________ test_lock_refuses_edited_test_definition[model_seed-rehashed] _________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_27')
+name = 'model_seed', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_27/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+____________ test_lock_refuses_edited_test_definition[ols_tp-as-is] ____________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_28')
+name = 'ols_tp', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_28/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+__________ test_lock_refuses_edited_test_definition[ols_tp-rehashed] ___________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_29')
+name = 'ols_tp', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_29/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+__________ test_lock_refuses_edited_test_definition[ols_tp_log-as-is] __________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_30')
+name = 'ols_tp_log', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_30/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+________ test_lock_refuses_edited_test_definition[ols_tp_log-rehashed] _________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_31')
+name = 'ols_tp_log', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_31/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+______ test_lock_refuses_edited_test_definition[rf predict threads-as-is] ______
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_32')
+name = 'rf predict threads', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_32/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+____ test_lock_refuses_edited_test_definition[rf predict threads-rehashed] _____
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_33')
+name = 'rf predict threads', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_33/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+_________ test_lock_refuses_edited_test_definition[seed_spread-as-is] __________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_34')
+name = 'seed_spread', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_34/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+________ test_lock_refuses_edited_test_definition[seed_spread-rehashed] ________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_35')
+name = 'seed_spread', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_35/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+___________ test_lock_refuses_edited_test_definition[test NA-as-is] ____________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_36')
+name = 'test NA', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_36/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+__________ test_lock_refuses_edited_test_definition[test NA-rehashed] __________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_37')
+name = 'test NA', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_37/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+__________ test_lock_refuses_edited_test_definition[tie_margin-as-is] __________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_38')
+name = 'tie_margin', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_38/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+________ test_lock_refuses_edited_test_definition[tie_margin-rehashed] _________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_39')
+name = 'tie_margin', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_39/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+_________ test_lock_refuses_edited_test_definition[train Europe-as-is] _________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_40')
+name = 'train Europe', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_40/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+_______ test_lock_refuses_edited_test_definition[train Europe-rehashed] ________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_41')
+name = 'train Europe', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_41/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+__________ test_lock_refuses_edited_test_definition[xgb depth-as-is] ___________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_42')
+name = 'xgb depth', rehash = False
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_42/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+_________ test_lock_refuses_edited_test_definition[xgb depth-rehashed] _________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_43')
+name = 'xgb depth', rehash = True
+
+    @pytest.mark.parametrize("rehash", [False, True], ids=["as-is", "rehashed"])
+    @pytest.mark.parametrize("name", sorted(EDITS))
+    def test_lock_refuses_edited_test_definition(cfg, tmp_path, name, rehash):
+        bad = _tampered_cfg(cfg, tmp_path, locked_edit=EDITS[name], rehash=rehash)
+>       with pytest.raises(LockedPlanError, match="must not change") as e:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'must not change'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_edited_test_43/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:266: AssertionError
+_________________ test_lock_refuses_dropping_a_locked_variant __________________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_dropping_a_l0')
+
+    def test_lock_refuses_dropping_a_locked_variant(cfg, tmp_path):
+        data = copy.deepcopy(cfg.data)
+        data["clean_test"]["variants"] = ["qc"]          # the plan-specified repo-filter sensitivity dropped
+>       with pytest.raises(LockedPlanError, match="every locked variant"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'every locked variant'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/crlf/docs/handoff/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:285: AssertionError
+___________________ test_lock_refuses_modified_locked_result ___________________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_lock_refuses_modified_loc0')
+
+    def test_lock_refuses_modified_locked_result(cfg, tmp_path):
+        data = copy.deepcopy(cfg.data)
+        src = cfg.repo_path(data["clean_test"]["locked_results"]["qc"]["file"])
+        alt = tmp_path / "clean_test_europe.json"
+        alt.write_text(src.read_text().replace('"r2": 0.0', '"r2": 0.5', 1) + " ")
+        data["clean_test"]["locked_results"]["qc"]["file"] = str(alt)
+>       with pytest.raises(LockedPlanError, match="locked result"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'locked result'
+E         Actual message: 'fixcheck3_scripts/verify-chain/work/v3/crlf/docs/handoff/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.'
+
+tests/test_guards.py:295: AssertionError
+______________________________ test_cosore_sites _______________________________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+
+    @pytest.mark.data
+    def test_cosore_sites(cfg):
+>       c = load_result(cfg, "cosore_annual.json")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regression.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>, name = 'cosore_annual.json'
+
+    def load_result(cfg, name):
+        """A committed result; skipped if absent (stage not run), FAILS if it was produced by other code or
+        config than the current checkout (re-run `make all`), so a stale file can never pass a regression test."""
+        from mshi.io import result_staleness
+        p = cfg.path("results", name)
+        if not p.exists():
+            pytest.skip(f"{p.relative_to(REPO_ROOT)} not present (stage not run)")
+        obj = json.loads(p.read_text())
+        stale = result_staleness(cfg, obj)
+        if stale:
+>           pytest.fail(f"{p.relative_to(REPO_ROOT)} is stale ({stale}); run `make all`")
+E           Failed: results/cosore_annual.json is stale (produced with a different code); run `make all`
+
+tests/conftest.py:29: Failed
+_________________________ test_record_and_site_counts __________________________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+
+    @pytest.mark.data
+    def test_record_and_site_counts(cfg):
+        T = cfg["reproduction_targets"]
+>       b = load_result(cfg, "build_sites.json")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regression.py:36: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>, name = 'build_sites.json'
+
+    def load_result(cfg, name):
+        """A committed result; skipped if absent (stage not run), FAILS if it was produced by other code or
+        config than the current checkout (re-run `make all`), so a stale file can never pass a regression test."""
+        from mshi.io import result_staleness
+        p = cfg.path("results", name)
+        if not p.exists():
+            pytest.skip(f"{p.relative_to(REPO_ROOT)} not present (stage not run)")
+        obj = json.loads(p.read_text())
+        stale = result_staleness(cfg, obj)
+        if stale:
+>           pytest.fail(f"{p.relative_to(REPO_ROOT)} is stale ({stale}); run `make all`")
+E           Failed: results/build_sites.json is stale (produced with a different code); run `make all`
+
+tests/conftest.py:29: Failed
+___________________ test_build_summary_identical_to_handoff ____________________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+
+    @pytest.mark.data
+    def test_build_summary_identical_to_handoff(cfg):
+        """Stronger than the tolerance table: the v3 build summary equals the handoff's on every shared key."""
+>       b = load_result(cfg, "build_sites.json")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regression.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>, name = 'build_sites.json'
+
+    def load_result(cfg, name):
+        """A committed result; skipped if absent (stage not run), FAILS if it was produced by other code or
+        config than the current checkout (re-run `make all`), so a stale file can never pass a regression test."""
+        from mshi.io import result_staleness
+        p = cfg.path("results", name)
+        if not p.exists():
+            pytest.skip(f"{p.relative_to(REPO_ROOT)} not present (stage not run)")
+        obj = json.loads(p.read_text())
+        stale = result_staleness(cfg, obj)
+        if stale:
+>           pytest.fail(f"{p.relative_to(REPO_ROOT)} is stale ({stale}); run `make all`")
+E           Failed: results/build_sites.json is stale (produced with a different code); run `make all`
+
+tests/conftest.py:29: Failed
+_____________________________ test_npp_correlation _____________________________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+
+    @pytest.mark.data
+    def test_npp_correlation(cfg):
+>       rc = load_result(cfg, "reproduction_check.json")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regression.py:84: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+name = 'reproduction_check.json'
+
+    def load_result(cfg, name):
+        """A committed result; skipped if absent (stage not run), FAILS if it was produced by other code or
+        config than the current checkout (re-run `make all`), so a stale file can never pass a regression test."""
+        from mshi.io import result_staleness
+        p = cfg.path("results", name)
+        if not p.exists():
+            pytest.skip(f"{p.relative_to(REPO_ROOT)} not present (stage not run)")
+        obj = json.loads(p.read_text())
+        stale = result_staleness(cfg, obj)
+        if stale:
+>           pytest.fail(f"{p.relative_to(REPO_ROOT)} is stale ({stale}); run `make all`")
+E           Failed: results/reproduction_check.json is stale (produced with a different code); run `make all`
+
+tests/conftest.py:29: Failed
+_________________ test_europe_sites_in_the_original_asia_table _________________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+
+    @pytest.mark.data
+    def test_europe_sites_in_the_original_asia_table(cfg):
+        """The numbers quoted in docs/DECISIONS.md F-H2 come from the pipeline (site_diagnostics item 5)."""
+>       d = load_result(cfg, "site_diagnostics.json")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regression.py:95: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+name = 'site_diagnostics.json'
+
+    def load_result(cfg, name):
+        """A committed result; skipped if absent (stage not run), FAILS if it was produced by other code or
+        config than the current checkout (re-run `make all`), so a stale file can never pass a regression test."""
+        from mshi.io import result_staleness
+        p = cfg.path("results", name)
+        if not p.exists():
+            pytest.skip(f"{p.relative_to(REPO_ROOT)} not present (stage not run)")
+        obj = json.loads(p.read_text())
+        stale = result_staleness(cfg, obj)
+        if stale:
+>           pytest.fail(f"{p.relative_to(REPO_ROOT)} is stale ({stale}); run `make all`")
+E           Failed: results/site_diagnostics.json is stale (produced with a different code); run `make all`
+
+tests/conftest.py:29: Failed
+_____________________ test_reproduction_table_has_no_fail ______________________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+
+    @pytest.mark.data
+    def test_reproduction_table_has_no_fail(cfg):
+>       rc = load_result(cfg, "reproduction_check.json")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regression.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+name = 'reproduction_check.json'
+
+    def load_result(cfg, name):
+        """A committed result; skipped if absent (stage not run), FAILS if it was produced by other code or
+        config than the current checkout (re-run `make all`), so a stale file can never pass a regression test."""
+        from mshi.io import result_staleness
+        p = cfg.path("results", name)
+        if not p.exists():
+            pytest.skip(f"{p.relative_to(REPO_ROOT)} not present (stage not run)")
+        obj = json.loads(p.read_text())
+        stale = result_staleness(cfg, obj)
+        if stale:
+>           pytest.fail(f"{p.relative_to(REPO_ROOT)} is stale ({stale}); run `make all`")
+E           Failed: results/reproduction_check.json is stale (produced with a different code); run `make all`
+
+tests/conftest.py:29: Failed
+_____________ test_clean_test_stage_success_path_on_synthetic_data _____________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_clean_test_stage_success_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fa1d047bed0>
+
+    @pytest.mark.data
+    @pytest.mark.slow
+    def test_clean_test_stage_success_path_on_synthetic_data(cfg, tmp_path, monkeypatch):
+        from mshi.analysis import clean_test as CT
+        sand = sandbox(cfg, tmp_path)
+        rng = np.random.default_rng(0)
+        sites = pd.read_parquet(cfg.path("derived", "sites_v3_qc.parquet"))
+        d = sites[["site_id", "lat", "lon", "continent"]].copy()
+        cols = set().union(*map(set, cfg["clean_test"]["locked"]["sets"].values()))
+        for c in sorted(cols):
+            d[c] = rng.gamma(3.0, 10.0, len(d))
+        d["log_rs"] = 5.5 + 0.02 * d.bio01 + 0.1 * np.log(d.bio12) + rng.normal(0, 0.3, len(d))   # synthetic target
+        sand.path("interim").mkdir(parents=True)
+        outs = [write_table(d, sand.path("interim", f"features_v3_{tag}.parquet")) for tag in cfg["clean_test"]["variants"]]
+        write_result(sand, {"synthetic": True}, "features.json", outputs=outs)
+    
+        class Light(CT.LockedTest):
+            def __init__(self, c, **kw):
+                super().__init__(c, **kw)            # verifies the real lock
+                self.L = copy.deepcopy(self.L)
+                self.L["rf"]["n_estimators"] = self.L["xgb"]["n_estimators"] = 15
+                self.L["bootstrap_n"], self.L["seed_spread"] = 30, [0, 1]
+    
+        monkeypatch.setattr(CT, "LockedTest", Light)
+>       res = CT.clean_test(sand)
+              ^^^^^^^^^^^^^^^^^^^
+
+tests/test_robustness.py:720: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+mshi/analysis/clean_test.py:260: in clean_test
+    lt = LockedTest(cfg)            # verifies the lock first; nothing is read or written if it is refused
+         ^^^^^^^^^^^^^^^
+tests/test_robustness.py:714: in __init__
+    super().__init__(c, **kw)            # verifies the real lock
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+mshi/analysis/clean_test.py:96: in __init__
+    self.lock = verify_lock(cfg) if require_lock else None
+                ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cfg = <mshi.config.Config object at 0x7fa1d046c280>
+
+    def verify_lock(cfg: Config) -> dict:
+        """Refuse (LockedPlanError) unless plan, definition and locked results match the anchored hashes.
+        Messages name the expected hash only (never a replacement value)."""
+        ct = cfg["clean_test"]
+        if ct.get("plan_sha256") != PLAN_SHA256:
+            raise LockedPlanError("clean_test.plan_sha256 in the config differs from the plan hash anchored in "
+                                  f"mshi/analysis/clean_test.py ({PLAN_SHA256}). Refusing to run.")
+        plan = cfg.repo_path(ct["plan"])
+        if not plan.exists():
+            raise LockedPlanError(f"locked plan not found: {plan}")
+        if sha256_file(plan) != PLAN_SHA256:
+>           raise LockedPlanError(f"{plan}: content does not match the locked SHA-256 {PLAN_SHA256}; the plan has "
+                                  "been modified. Refusing to run.")
+E           mshi.analysis.clean_test.LockedPlanError: fixcheck3_scripts/verify-chain/work/v3/crlf/docs/handoff/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.
+
+mshi/analysis/clean_test.py:68: LockedPlanError
+____________________ test_clean_test_refuses_stale_features ____________________
+
+cfg = <mshi.config.Config object at 0x7fa2212e3230>
+tmp_path = PosixPath('fixcheck3_scripts/verify-chain/work/v3/bt_crlf/test_clean_test_refuses_stale_0')
+
+    def test_clean_test_refuses_stale_features(cfg, tmp_path):
+        from mshi.analysis.clean_test import clean_test
+        sand = sandbox(cfg, tmp_path)
+        write_json({"_provenance": {"config_sha256": "x", "code_sha256": "y"}}, sand.path("results", "features.json"))
+        with pytest.raises(StaleInputError, match="features.json: produced with a different config and code"):
+>           clean_test(sand)
+
+tests/test_robustness.py:736: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+mshi/analysis/clean_test.py:260: in clean_test
+    lt = LockedTest(cfg)            # verifies the lock first; nothing is read or written if it is refused
+         ^^^^^^^^^^^^^^^
+mshi/analysis/clean_test.py:96: in __init__
+    self.lock = verify_lock(cfg) if require_lock else None
+                ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cfg = <mshi.config.Config object at 0x7fa1d046def0>
+
+    def verify_lock(cfg: Config) -> dict:
+        """Refuse (LockedPlanError) unless plan, definition and locked results match the anchored hashes.
+        Messages name the expected hash only (never a replacement value)."""
+        ct = cfg["clean_test"]
+        if ct.get("plan_sha256") != PLAN_SHA256:
+            raise LockedPlanError("clean_test.plan_sha256 in the config differs from the plan hash anchored in "
+                                  f"mshi/analysis/clean_test.py ({PLAN_SHA256}). Refusing to run.")
+        plan = cfg.repo_path(ct["plan"])
+        if not plan.exists():
+            raise LockedPlanError(f"locked plan not found: {plan}")
+        if sha256_file(plan) != PLAN_SHA256:
+>           raise LockedPlanError(f"{plan}: content does not match the locked SHA-256 {PLAN_SHA256}; the plan has "
+                                  "been modified. Refusing to run.")
+E           mshi.analysis.clean_test.LockedPlanError: fixcheck3_scripts/verify-chain/work/v3/crlf/docs/handoff/ANALYSIS_PLAN_LOCKED.md: content does not match the locked SHA-256 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac; the plan has been modified. Refusing to run.
+
+mshi/analysis/clean_test.py:68: LockedPlanError
+=========================== short test summary info ============================
+FAILED tests/test_guards.py::test_lock_ok_on_repo - mshi.analysis.clean_test....
+FAILED tests/test_guards.py::test_lock_refuses_mismatched_sidecar - Assertion...
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[C8 extra var-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[C8 extra var-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[C8+NPP without npp-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[C8+NPP without npp-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[aoa whisker-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[aoa whisker-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[block_bootstrap_deg-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[block_bootstrap_deg-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[bootstrap_n-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[bootstrap_n-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[bootstrap_seed-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[bootstrap_seed-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[ci-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[ci-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[cv_block_deg-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[cv_block_deg-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[cv_folds-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[cv_folds-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[cv_seed-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[cv_seed-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[di groups-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[di groups-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[drop C8+SOIL-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[drop C8+SOIL-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[learners-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[learners-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[model_seed-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[model_seed-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[ols_tp-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[ols_tp-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[ols_tp_log-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[ols_tp_log-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[rf predict threads-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[rf predict threads-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[seed_spread-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[seed_spread-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[test NA-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[test NA-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[tie_margin-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[tie_margin-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[train Europe-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[train Europe-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[xgb depth-as-is]
+FAILED tests/test_guards.py::test_lock_refuses_edited_test_definition[xgb depth-rehashed]
+FAILED tests/test_guards.py::test_lock_refuses_dropping_a_locked_variant - As...
+FAILED tests/test_guards.py::test_lock_refuses_modified_locked_result - Asser...
+FAILED tests/test_regression.py::test_cosore_sites - Failed: results/cosore_a...
+FAILED tests/test_regression.py::test_record_and_site_counts - Failed: result...
+FAILED tests/test_regression.py::test_build_summary_identical_to_handoff - Fa...
+FAILED tests/test_regression.py::test_npp_correlation - Failed: results/repro...
+FAILED tests/test_regression.py::test_europe_sites_in_the_original_asia_table
+FAILED tests/test_regression.py::test_reproduction_table_has_no_fail - Failed...
+FAILED tests/test_robustness.py::test_clean_test_stage_success_path_on_synthetic_data
+FAILED tests/test_robustness.py::test_clean_test_refuses_stale_features - msh...
+SKIPPED [2] tests/conftest.py:25: results/clean_test_rerun_qc.json not present (stage not run)
+SKIPPED [1] tests/conftest.py:25: results/clean_test_rerun_repo.json not present (stage not run)
+SKIPPED [1] tests/test_regression.py:114: raw SRDB/COSORE/Natural Earth not present; run `make data` first
+SKIPPED [1] tests/test_smoke.py:29: pinned raw inputs / cosore_annual.csv not present; run `make data` first
+56 failed, 79 passed, 5 skipped in 7.38s

@@ -1,0 +1,8 @@
+lf | make repro exit 0 | status ok
+summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 17, 'STALE': 0}
+first STALE note: None
+exit=0
+crlf | make repro exit 2 | status stale: 17 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re
+summary {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 0, 'STALE': 17}
+first STALE note: cosore_annual.json produced with a different code; re-run `make all`
+exit=0

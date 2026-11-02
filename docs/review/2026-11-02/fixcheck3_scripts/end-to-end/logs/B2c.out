@@ -1,0 +1,80 @@
+{
+ "label": "B2c_make_clean_test",
+ "exit_code": 1,
+ "seconds": 10.7,
+ "stages": [
+  [
+   "clean_test",
+   "ok",
+   10.3,
+   null
+  ],
+  [
+   "repro_checks",
+   "error: ReproductionFailure: 5 reproduction target(s) outside tolerance: ['Locked test: Asia spatial-CV R\u00b2', 'Locked test: Europe n', 'Locked test: site-bootstrap CI low', 'Locked test: site-bootstrap CI high', 'NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop an",
+   0.17,
+   null
+  ]
+ ],
+ "state": {
+  "raster_downloads": [],
+  "fetch_downloads": [],
+  "reachable": [],
+  "searches": 0,
+  "reads": 0,
+  "net_attempts": [],
+  "token_gets": 0,
+  "light_runs": 2
+ },
+ "staleness_after": {
+  "build_sites.json": null,
+  "clean_test_rerun_qc.json": null,
+  "clean_test_rerun_repo.json": null,
+  "cosore_annual.json": null,
+  "environment.json": "(no _provenance: environment.json)",
+  "features.json": null,
+  "fetch_cosore.json": null,
+  "fetch_naturalearth.json": null,
+  "fetch_soilgrids.json": null,
+  "fetch_srdb.json": null,
+  "fetch_worldclim.json": null,
+  "modis_points.json": null,
+  "reproduction_check.json": null,
+  "site_diagnostics.json": null
+ },
+ "results_changed": [
+  "clean_test_rerun_qc.json",
+  "clean_test_rerun_repo.json",
+  "reproduction_check.json",
+  "reproduction_check.md",
+  "run_log.jsonl"
+ ]
+}
+SUMMARY {'DEVIATION': 2, 'FAIL': 5, 'INFO': 1, 'NOT RUN': 0, 'PASS': 19, 'STALE': 0}
+ROW ('COSORE sites with an annual value', 'PASS', 66, '')
+ROW ('SRDB records after repo filters', 'PASS', 4771, '')
+ROW ('Records after coordinate check', 'PASS', 4781, '')
+ROW ('Records after QC', 'PASS', 3694, '')
+ROW ('QC removals: f_method', 'PASS', 450, '')
+ROW ('QC removals: f_quality', 'PASS', 260, '')
+ROW ('QC removals: f_coverage', 'PASS', 252, '')
+ROW ('QC removals: f_ecosys', 'PASS', 243, '')
+ROW ('QC removals: f_dup', 'PASS', 57, '')
+ROW ('QC sites: Asia', 'PASS', 387, '')
+ROW ('QC sites: North America', 'PASS', 257, '')
+ROW ('QC sites: Europe', 'PASS', 236, '')
+ROW ('QC sites: South America', 'PASS', 42, '')
+ROW ('QC sites: Africa', 'PASS', 26, '')
+ROW ('QC sites: Oceania', 'PASS', 23, '')
+ROW ('QC sites: total', 'PASS', 971, '')
+ROW ('Repo-filter sites: total', 'PASS', 1225, '')
+ROW ('Locked test: selected model', 'PASS', 'OLS-TP (TP)', '')
+ROW ('Locked test: Asia spatial-CV R²', 'FAIL', 0.09086270845723685, '')
+ROW ('Locked test: Europe n', 'FAIL', 236, '')
+ROW ('Locked test: Europe R²', 'PASS', 0.082427971511712, '')
+ROW ('Locked test: site-bootstrap CI low', 'FAIL', 0.0027592383217029262, '')
+ROW ('Locked test: site-bootstrap CI high', 'FAIL', 0.14151617317178297, '')
+ROW ('Locked test: re-run identical to the locked result', 'DEVIATION', 'max |diff| 222', 'deviation: report it; the locked result stays primary')
+ROW ('Locked test (repo-filter sensitivity): re-run identical to the locked result', 'DEVIATION', 'max |diff| 240', 'deviation: report it; the locked result stays primary')
+ROW ('NPP r vs committed NPP (original 889 sites)', 'FAIL', -0.034361800755549614, 'method reconstructed [UNVERIFIED]: no handoff script computes this r; Pearson r on raw NPP at the original sites with a value in both tables, joined on site_key')
+ROW ('Original sites with NPP missing in the committed tables but present in v3', 'INFO', 200, 'prep_log D8; no tolerance in the brief, reported for information')

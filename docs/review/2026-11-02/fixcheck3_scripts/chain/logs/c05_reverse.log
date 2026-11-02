@@ -1,0 +1,15 @@
+WARNING:mshi:stages not completed: {'build_sites': 'stale: results/cosore_annual.json: produced with a different config; re-run the stage that writes it (or `make all`)', 'repro_checks': 'stale: 1 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`'}
+WARNING:mshi:stages not completed: {'repro_checks': 'stale: 16 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-run `make all`'}
+step1 statuses: {'build_sites': 'stale: results/cosore_annual.json: produced with a different config; re-run the stage that writes it (or `make', 'repro_checks': 'stale: 1 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re-'}
+--- step 1 (C: build_sites, repro_checks): exit=2 summary={'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 26, 'PASS': 0, 'STALE': 1}
+    staleness build_sites.json: produced with a different config
+    staleness cosore_annual.json: produced with a different config
+step2 statuses: {'cosore_annual': 'ok', 'repro_checks': 'stale: 16 reproduction row(s) come from results that are not current; see results/reproduction_check.md and re'}
+--- step 2 (C: cosore_annual, repro_checks): exit=2 summary={'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 1, 'STALE': 16}
+    staleness build_sites.json: produced with a different config
+    staleness cosore_annual.json: None
+rows STALE notes: ['build_sites.json produced with a different config; re-run `make all`']
+step3 statuses: {'build_sites': 'ok', 'repro_checks': 'ok'}
+--- step 3 (C: build_sites, repro_checks): exit=0 summary={'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 17, 'STALE': 0}
+    staleness build_sites.json: None
+    staleness cosore_annual.json: None

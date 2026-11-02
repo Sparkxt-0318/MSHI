@@ -22,7 +22,7 @@ import pandas as pd
 
 from ..config import Config
 from ..io import write_result, write_table
-from .fetch import cosore_repo_path
+from .fetch import cosore_read_paths, cosore_repo_path
 
 log = logging.getLogger("mshi.cosore")
 
@@ -88,7 +88,8 @@ def cosore_annual(cfg: Config) -> dict:
     p = cfg["cosore_annual"]
     factor = p["molar_mass_c"] * p["seconds_per_year"] / 1e6
     from ..netutil import verify_git_checkout
-    verify_git_checkout(cosore_repo_path(cfg), cfg["sources"]["cosore"]["commit"])   # pinned commit, unmodified
+    verify_git_checkout(cosore_repo_path(cfg), cfg["sources"]["cosore"]["commit"],   # pinned commit, unmodified
+                        pathspec=cosore_read_paths(cfg))
     root = cosore_repo_path(cfg) / cfg["sources"]["cosore"]["datasets_dir"]
     datasets = sorted(d for d in root.iterdir() if d.is_dir())
     rows, unreadable, bad_meta, no_port, out_of_range, test_skipped = [], [], [], [], [], []

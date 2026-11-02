@@ -1,0 +1,20 @@
+catalog lacks 1 expected item(s), e.g. ['h18v04 npp 2023']; no raster read
+{
+ "run": {
+  "status": "ModisIncompleteError: the STAC catalog lacks 1 expected item(s) (first: h18v04 npp 2023); after review, list genuine gaps in sources.modis.accepted_catalog_gaps (and log the decision); no values written, see results/modis_points.json",
+  "cached": false,
+  "reads": 0,
+  "rec_status": "incomplete: no values written",
+  "n_raster_reads": 374,
+  "n_failed_reads": 0,
+  "catalog_gaps": [
+   "h18v04 npp 2023"
+  ],
+  "n_catalog_gaps": 1,
+  "ties": {
+   "list": [],
+   "n": 0
+  },
+  "parquet": null
+ }
+}

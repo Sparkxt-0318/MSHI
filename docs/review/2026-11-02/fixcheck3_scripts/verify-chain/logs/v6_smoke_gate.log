@@ -1,0 +1,5 @@
+[smoke] run(all) exit 2; called ['build_sites']; statuses {"build_sites": "ok", "later_stage": "skipped: reproduction gate closed (repro_checks: not run)"}
+[smoke] run([later_stage]) alone exit 2; called []; statuses {"later_stage": "skipped: reproduction gate closed (repro_checks: stale: results/reproduction_check.json: missing; re-run the stage that writes it (or `make all`))"}
+[non-smoke] run(all) exit 0; called ['build_sites', 'repro_checks', 'later_stage']; statuses {"build_sites": "ok", "repro_checks": "ok", "later_stage": "ok"}
+[non-smoke] run([later_stage]) alone exit 2; called []; statuses {"later_stage": "skipped: reproduction gate closed (repro_checks: stale: results/reproduction_check.json: missing; re-run the stage that writes it (or `make all`))"}
+real stages: ['fetch_srdb', 'fetch_cosore', 'fetch_naturalearth', 'cosore_annual', 'build_sites', 'site_diagnostics', 'smoke_subset', 'fetch_worldclim', 'fetch_soilgrids', 'modis_points', 'features', 'clean_test', 'repro_checks'] | stages after repro_checks: []

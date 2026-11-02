@@ -1,0 +1,208 @@
+######## head ck3 run
+{
+ "pkg": "head",
+ "code_hash": "4df2aa4b265c",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "load_before": "no cache",
+ "run": {
+  "status": "ok cached=False",
+  "reads": 375,
+  "parquet": "9adb29eecf4f",
+  "meta": "21563f673f18",
+  "npp_max": 771.1529034263615
+ },
+ "load_after": "ACCEPTED npp_max=771.1529034263615",
+ "meta_keys": [
+  "key",
+  "parquet_sha256",
+  "record"
+ ],
+ "key_fields": [
+  "code_sha256",
+  "libraries",
+  "modis_config_sha256",
+  "n_points",
+  "points_sha256"
+ ]
+}
+######## edit ck3 run
+{
+ "pkg": "edit",
+ "code_hash": "c0a7b36d061f",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "load_before": "REFUSED StaleModisError: fixcheck3_scripts/modis-rasters/work/fid/sb/ck3/out/data/interim/modis_points.parquet was ",
+ "run": {
+  "status": "ok cached=False",
+  "reads": 375,
+  "parquet": "92fdd144f7ed",
+  "meta": "c2623825a2f9",
+  "npp_max": 848.2681937689977
+ },
+ "load_after": "ACCEPTED npp_max=848.2681937689977",
+ "meta_keys": [
+  "key",
+  "parquet_sha256",
+  "record"
+ ],
+ "key_fields": [
+  "code_sha256",
+  "libraries",
+  "modis_config_sha256",
+  "n_points",
+  "points_sha256"
+ ]
+}
+######## head ck3 run
+{
+ "pkg": "head",
+ "code_hash": "4df2aa4b265c",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "load_before": "REFUSED StaleModisError: fixcheck3_scripts/modis-rasters/work/fid/sb/ck3/out/data/interim/modis_points.parquet was ",
+ "run": {
+  "status": "ok cached=False",
+  "reads": 375,
+  "parquet": "9adb29eecf4f",
+  "meta": "21563f673f18",
+  "npp_max": 771.1529034263615
+ },
+ "load_after": "ACCEPTED npp_max=771.1529034263615",
+ "meta_keys": [
+  "key",
+  "parquet_sha256",
+  "record"
+ ],
+ "key_fields": [
+  "code_sha256",
+  "libraries",
+  "modis_config_sha256",
+  "n_points",
+  "points_sha256"
+ ]
+}
+######## prev ck2 run
+{
+ "pkg": "prev",
+ "code_hash": "2e3bcc83d928",
+ "libraries": null,
+ "load_before": "no cache",
+ "run": {
+  "status": "ok cached=False",
+  "reads": 375,
+  "parquet": "9adb29eecf4f",
+  "meta": "983eb902be19",
+  "npp_max": 771.1529034263615
+ },
+ "load_after": "ACCEPTED npp_max=771.1529034263615",
+ "meta_keys": [
+  "key",
+  "record"
+ ],
+ "key_fields": [
+  "code_sha256",
+  "modis_config_sha256",
+  "n_points",
+  "points_sha256"
+ ]
+}
+######## head ck2 load
+{
+ "pkg": "head",
+ "code_hash": "4df2aa4b265c",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "load": "REFUSED StaleModisError: fixcheck3_scripts/modis-rasters/work/fid/sb/ck2/out/data/interim/modis_points.parquet was "
+}
+######## head ck2 run
+{
+ "pkg": "head",
+ "code_hash": "4df2aa4b265c",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "load_before": "REFUSED StaleModisError: fixcheck3_scripts/modis-rasters/work/fid/sb/ck2/out/data/interim/modis_points.parquet was ",
+ "run": {
+  "status": "ok cached=False",
+  "reads": 375,
+  "parquet": "9adb29eecf4f",
+  "meta": "21563f673f18",
+  "npp_max": 771.1529034263615
+ },
+ "load_after": "ACCEPTED npp_max=771.1529034263615",
+ "meta_keys": [
+  "key",
+  "parquet_sha256",
+  "record"
+ ],
+ "key_fields": [
+  "code_sha256",
+  "libraries",
+  "modis_config_sha256",
+  "n_points",
+  "points_sha256"
+ ]
+}
+######## prev ck2 run
+{
+ "pkg": "prev",
+ "code_hash": "2e3bcc83d928",
+ "libraries": null,
+ "load_before": "REFUSED StaleModisError: fixcheck3_scripts/modis-rasters/work/fid/sb/ck2/out/data/interim/modis_points.parquet was ",
+ "run": {
+  "status": "ok cached=False",
+  "reads": 375,
+  "parquet": "9adb29eecf4f",
+  "meta": "983eb902be19",
+  "npp_max": 771.1529034263615
+ },
+ "load_after": "ACCEPTED npp_max=771.1529034263615",
+ "meta_keys": [
+  "key",
+  "record"
+ ],
+ "key_fields": [
+  "code_sha256",
+  "modis_config_sha256",
+  "n_points",
+  "points_sha256"
+ ]
+}
+######## head ck2 load
+{
+ "pkg": "head",
+ "code_hash": "4df2aa4b265c",
+ "libraries": {
+  "numpy": "2.5.4",
+  "rasterio": "1.5.2",
+  "gdal": "3.12.2",
+  "pyproj": "3.8.0",
+  "proj": "9.8.1"
+ },
+ "load": "REFUSED StaleModisError: fixcheck3_scripts/modis-rasters/work/fid/sb/ck2/out/data/interim/modis_points.parquet was "
+}

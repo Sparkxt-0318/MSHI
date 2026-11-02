@@ -1,0 +1,166 @@
+{
+ "label": "D1_dsstore",
+ "exit_code": 1,
+ "seconds": 1.4,
+ "stages": [
+  [
+   "fetch_srdb",
+   "ok",
+   0.02,
+   null
+  ],
+  [
+   "fetch_cosore",
+   "error: ChecksumMismatchError: fixcheck3_scripts/end-to-end/sbD/raw/cosore/02f32e8e: checkout of the pinned commit has local changes ['!! inst/extdata/datasets/.DS_Store']; delete /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa",
+   0.46,
+   null
+  ],
+  [
+   "fetch_naturalearth",
+   "ok",
+   0.02,
+   null
+  ],
+  [
+   "cosore_annual",
+   "skipped: upstream fetch_cosore not available",
+   0.0,
+   null
+  ],
+  [
+   "build_sites",
+   "skipped: upstream cosore_annual not available",
+   0.0,
+   null
+  ],
+  [
+   "site_diagnostics",
+   "skipped: upstream build_sites not available",
+   0.0,
+   null
+  ],
+  [
+   "fetch_worldclim",
+   "ok",
+   0.2,
+   null
+  ],
+  [
+   "fetch_soilgrids",
+   "ok",
+   0.08,
+   null
+  ],
+  [
+   "modis_points",
+   "skipped: upstream build_sites not available",
+   0.0,
+   null
+  ],
+  [
+   "features",
+   "skipped: upstream build_sites, modis_points not available",
+   0.0,
+   null
+  ],
+  [
+   "clean_test",
+   "skipped: upstream features not available",
+   0.0,
+   null
+  ],
+  [
+   "repro_checks",
+   "ok",
+   0.0,
+   null
+  ]
+ ],
+ "state": {
+  "raster_downloads": [
+   "https://geodata.ucdavis.edu/climate/worldclim/2_1/base/wc2.1_2.5m_bio.zip",
+   "soc_5-15cm_mean",
+   "nitrogen_5-15cm_mean",
+   "phh2o_5-15cm_mean",
+   "clay_5-15cm_mean",
+   "sand_5-15cm_mean",
+   "silt_5-15cm_mean",
+   "bdod_5-15cm_mean",
+   "cec_5-15cm_mean"
+  ],
+  "fetch_downloads": [
+   [
+    "srdb-data.csv",
+    false
+   ],
+   [
+    "LICENSE",
+    false
+   ],
+   [
+    "ne_50m_admin_0_countries.geojson",
+    false
+   ],
+   [
+    "ne_110m_land.geojson",
+    false
+   ],
+   [
+    "ne_50m_land.geojson",
+    false
+   ]
+  ],
+  "reachable": [],
+  "searches": 0,
+  "reads": 0,
+  "net_attempts": [],
+  "token_gets": 0,
+  "light_runs": 0
+ },
+ "staleness_after": {
+  "environment.json": "(no _provenance: environment.json)",
+  "fetch_naturalearth.json": null,
+  "fetch_soilgrids.json": null,
+  "fetch_srdb.json": null,
+  "fetch_worldclim.json": null,
+  "reproduction_check.json": null
+ },
+ "results_changed": [
+  "environment.json",
+  "fetch_naturalearth.json",
+  "fetch_soilgrids.json",
+  "fetch_srdb.json",
+  "fetch_worldclim.json",
+  "reproduction_check.json",
+  "reproduction_check.md",
+  "run_log.jsonl"
+ ]
+}
+SUMMARY {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 27, 'PASS': 0, 'STALE': 0}
+ROW ('COSORE sites with an annual value', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('SRDB records after repo filters', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('Records after coordinate check', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('Records after QC', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('QC removals: f_method', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('QC removals: f_quality', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('QC removals: f_coverage', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('QC removals: f_ecosys', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('QC removals: f_dup', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('QC sites: Asia', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('QC sites: North America', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('QC sites: Europe', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('QC sites: South America', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('QC sites: Africa', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('QC sites: Oceania', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('QC sites: total', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('Repo-filter sites: total', 'NOT RUN', None, 'fetch_cosore: error (ChecksumMismatchError)')
+ROW ('Locked test: selected model', 'NOT RUN', None, 'build_sites: skipped: upstream cosore_annual not available')
+ROW ('Locked test: Asia spatial-CV R²', 'NOT RUN', None, 'build_sites: skipped: upstream cosore_annual not available')
+ROW ('Locked test: Europe n', 'NOT RUN', None, 'build_sites: skipped: upstream cosore_annual not available')
+ROW ('Locked test: Europe R²', 'NOT RUN', None, 'build_sites: skipped: upstream cosore_annual not available')
+ROW ('Locked test: site-bootstrap CI low', 'NOT RUN', None, 'build_sites: skipped: upstream cosore_annual not available')
+ROW ('Locked test: site-bootstrap CI high', 'NOT RUN', None, 'build_sites: skipped: upstream cosore_annual not available')
+ROW ('Locked test: re-run identical to the locked result', 'NOT RUN', None, 'build_sites: skipped: upstream cosore_annual not available')
+ROW ('Locked test (repo-filter sensitivity): re-run identical to the locked result', 'NOT RUN', None, 'build_sites: skipped: upstream cosore_annual not available')
+ROW ('NPP r vs committed NPP (original 889 sites)', 'NOT RUN', None, 'build_sites: skipped: upstream cosore_annual not available')
+ROW ('Original sites with NPP missing in the committed tables but present in v3', 'NOT RUN', None, 'build_sites: skipped: upstream cosore_annual not available')

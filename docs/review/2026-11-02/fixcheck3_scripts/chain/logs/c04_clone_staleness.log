@@ -1,0 +1,24 @@
+clone <chain>/work/clone_lf config dfde8e429a9b code e3d4bf1e8ddf
+   build_sites.json           None
+   cosore_annual.json         None
+   fetch_cosore.json          None
+   fetch_naturalearth.json    None
+   fetch_srdb.json            None
+   reproduction_check.json    None
+   site_diagnostics.json      None
+plan sha256 == PLAN_SHA256: True
+locked result qc sha256 == anchor: True
+locked result repo sha256 == anchor: True
+verify_lock: ok
+clone <chain>/work/clone_crlf config dfde8e429a9b code 75dee7142d64
+   build_sites.json           produced with a different code
+   cosore_annual.json         produced with a different code
+   fetch_cosore.json          produced with a different code
+   fetch_naturalearth.json    produced with a different code
+   fetch_srdb.json            produced with a different code
+   reproduction_check.json    produced with a different code
+   site_diagnostics.json      produced with a different code
+plan sha256 == PLAN_SHA256: False
+locked result qc sha256 == anchor: False
+locked result repo sha256 == anchor: False
+verify_lock: LockedPlanError <chain>/work/clone_crlf/docs/handoff/ANALYSIS_PLAN_LOCKED.md: content does

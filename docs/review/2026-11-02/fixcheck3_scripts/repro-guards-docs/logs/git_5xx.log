@@ -1,0 +1,2 @@
+HTTP 502: DownloadError:  to access 'http://127.0.0.1:44779/bpbond/cosore/': The requested URL returned error: 502); sleeps []; requests 1
+HTTP 503: DownloadError:  to access 'http://127.0.0.1:44431/bpbond/cosore/': The requested URL returned error: 503); sleeps []; requests 1

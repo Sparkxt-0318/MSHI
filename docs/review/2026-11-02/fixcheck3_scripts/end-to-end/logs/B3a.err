@@ -1,0 +1,34 @@
+16:34:11 INFO mshi: fetch_srdb         start
+16:34:11 INFO mshi: fetch_srdb         OK (0.0s)
+16:34:11 INFO mshi: fetch_cosore       start
+16:34:12 INFO mshi: fetch_cosore       OK (0.5s)
+16:34:12 INFO mshi: fetch_naturalearth start
+16:34:12 INFO mshi: fetch_naturalearth OK (0.0s)
+16:34:12 INFO mshi: cosore_annual      start
+16:34:53 INFO mshi.cosore: COSORE: 66 sites, 24 datasets unreadable/no data
+16:34:53 INFO mshi: cosore_annual      OK (40.6s)
+16:34:53 INFO mshi: build_sites        start
+16:34:56 INFO mshi.sites: sites: qc 971, repo 1225
+16:34:56 INFO mshi: build_sites        OK (3.5s)
+16:34:56 INFO mshi: site_diagnostics   start
+16:34:58 INFO mshi: site_diagnostics   OK (1.9s)
+16:34:58 INFO mshi: fetch_worldclim    start
+16:34:58 WARNING mshi.rasters: WorldClim zip hash is not pinned in configs/v3.yaml; recorded 5b92405fe3c64934dcf79af55356bc0f3b06413cac384f5f6d865a5ef74aa64f
+16:34:58 INFO mshi: fetch_worldclim    OK (0.1s)
+16:34:58 INFO mshi: fetch_soilgrids    start
+16:34:58 INFO mshi: fetch_soilgrids    OK (0.0s)
+16:34:58 INFO mshi: modis_points       start
+16:34:59 WARNING mshi.modis: catalog lacks 1 expected item(s), e.g. ['h18v04 lst 2024-12']; no raster read
+16:34:59 ERROR mshi: modis_points failed
+Traceback (most recent call last):
+  File "/home/user/MSHI/mshi/run.py", line 163, in run
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+  File "/home/user/MSHI/mshi/data/modis.py", line 409, in modis_points
+    raise ModisIncompleteError(f"{why}; no values written, see results/modis_points.json")
+mshi.data.modis.ModisIncompleteError: the STAC catalog lacks 1 expected item(s) (first: h18v04 lst 2024-12); after review, list genuine gaps in sources.modis.accepted_catalog_gaps (and log the decision); no values written, see results/modis_points.json
+16:34:59 WARNING mshi: features           skipped: upstream modis_points not available
+16:34:59 WARNING mshi: clean_test         skipped: upstream features not available
+16:34:59 INFO mshi: repro_checks       start
+16:34:59 INFO mshi: repro_checks       OK (0.0s)
+16:34:59 WARNING mshi: stages not completed: {'modis_points': 'error: ModisIncompleteError: the STAC catalog lacks 1 expected item(s) (first: h18v04 lst 2024-12); after review, list genuine gaps in sources.modis.accepted_catalog_gaps (and log the decision); no values written, see results/modis_points.json', 'features': 'skipped: upstream modis_points not available', 'clean_test': 'skipped: upstream features not available'}

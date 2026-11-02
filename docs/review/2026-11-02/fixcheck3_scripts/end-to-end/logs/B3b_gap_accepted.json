@@ -1,0 +1,396 @@
+{
+ "label": "B3b_gap_accepted",
+ "config": "fixcheck3_scripts/end-to-end/sbB/configs/gap_accepted.yaml",
+ "exit_code": 1,
+ "seconds": 67.7,
+ "stages": [
+  [
+   "fetch_srdb",
+   "ok",
+   0.02,
+   null
+  ],
+  [
+   "fetch_cosore",
+   "ok",
+   0.42,
+   null
+  ],
+  [
+   "fetch_naturalearth",
+   "ok",
+   0.02,
+   null
+  ],
+  [
+   "cosore_annual",
+   "ok",
+   42.06,
+   null
+  ],
+  [
+   "build_sites",
+   "ok",
+   4.05,
+   null
+  ],
+  [
+   "site_diagnostics",
+   "ok",
+   2.26,
+   null
+  ],
+  [
+   "fetch_worldclim",
+   "ok",
+   0.08,
+   null
+  ],
+  [
+   "fetch_soilgrids",
+   "ok",
+   0.02,
+   null
+  ],
+  [
+   "modis_points",
+   "ok",
+   4.32,
+   null
+  ],
+  [
+   "features",
+   "ok",
+   3.14,
+   null
+  ],
+  [
+   "clean_test",
+   "ok",
+   10.66,
+   null
+  ],
+  [
+   "repro_checks",
+   "error: ReproductionFailure: 5 reproduction target(s) outside tolerance: ['Locked test: Asia spatial-CV R\u00b2', 'Locked test: Europe n', 'Locked test: site-bootstrap CI low', 'Locked test: site-bootstrap CI high', 'NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop an",
+   0.09,
+   null
+  ]
+ ],
+ "state": {
+  "raster_downloads": [],
+  "fetch_downloads": [
+   [
+    "srdb-data.csv",
+    false
+   ],
+   [
+    "LICENSE",
+    false
+   ],
+   [
+    "ne_50m_admin_0_countries.geojson",
+    false
+   ],
+   [
+    "ne_110m_land.geojson",
+    false
+   ],
+   [
+    "ne_50m_land.geojson",
+    false
+   ]
+  ],
+  "reachable": [
+   "https://planetarycomputer.microsoft.com/api/stac/v1",
+   "https://planetarycomputer.microsoft.com/api/sas/v1/token/modiseuwest/modis-061-cogs",
+   "https://modiseuwest.blob.core.windows.net/"
+  ],
+  "searches": 252,
+  "reads": 15748,
+  "net_attempts": [],
+  "token_gets": 15748,
+  "light_runs": 2
+ },
+ "staleness_after": {
+  "build_sites.json": null,
+  "clean_test_rerun_qc.json": null,
+  "clean_test_rerun_repo.json": null,
+  "cosore_annual.json": null,
+  "environment.json": "(no _provenance: environment.json)",
+  "features.json": null,
+  "fetch_cosore.json": null,
+  "fetch_naturalearth.json": null,
+  "fetch_soilgrids.json": null,
+  "fetch_srdb.json": null,
+  "fetch_worldclim.json": null,
+  "modis_points.json": null,
+  "reproduction_check.json": null,
+  "site_diagnostics.json": null
+ },
+ "results_changed": [
+  "build_sites.json",
+  "clean_test_rerun_qc.json",
+  "clean_test_rerun_repo.json",
+  "cosore_annual.json",
+  "environment.json",
+  "features.json",
+  "fetch_cosore.json",
+  "fetch_naturalearth.json",
+  "fetch_soilgrids.json",
+  "fetch_srdb.json",
+  "fetch_worldclim.json",
+  "modis_points.json",
+  "reproduction_check.json",
+  "reproduction_check.md",
+  "run_log.jsonl",
+  "site_diagnostics.json"
+ ],
+ "results_hashes": {
+  "build_sites.json": "ec95763932c5bae1fc6a4e4dc38291323859ed98191d1d2dedfb4d97c8491da6",
+  "clean_test_rerun_qc.json": "77e283dbf695a810e57f3d31aab1e3b8be8fdbee19cf4c0ec18ce55db71e3a04",
+  "clean_test_rerun_repo.json": "6bb7f49569a240bcbe133723a2c8ff07ed089118535dce70ec5dd05cb61444f1",
+  "cosore_annual.json": "d719a498f5edb38410e2d4bdc01b61092a18dac6d3e392f01f10af34edd9b71f",
+  "environment.json": "0ffdac90843983f86d9c036b7e2ee8210e902a99ed460b8a62b0621bdf4bdf45",
+  "features.json": "5a9b9b1f2368cb9eac5eda20d944c720e86436082f4f9f416008b5de0ab52850",
+  "fetch_cosore.json": "69ecb09fc42b7aa880f01138898c503aeede5255247cd262db90d601db7a271b",
+  "fetch_naturalearth.json": "545ff1c1afe5872587a042c1681bfc14ea0e88b1167129333990c501e49e6fe3",
+  "fetch_soilgrids.json": "d39479641e0cb973171c9b631c86704207ff1f280c852e5c145f1527d54f0b1a",
+  "fetch_srdb.json": "8a16fa1b23e454701aa1f90efa00c58c32a347d4bb61ff03599af3b332ddd39f",
+  "fetch_worldclim.json": "8761e02ebc2d41587a99778acca18b5ced6b1bc429217f5cc080f576c2cf0524",
+  "modis_points.json": "47a43ef223085b75844ac391134dff7e5b296541da95affa027dab4664152368",
+  "reproduction_check.json": "7760c730a85c9420a8cbcfa16a2a2f8925c96cfe9b00eaf9b6955048259ad71b",
+  "reproduction_check.md": "fbcce4a0006c40f8a711bb2f51b810db6b772b3506fb2ef553f552cb32c78f86",
+  "run_log.jsonl": "81d8b4b1bf486f07ada9198599e2676265804642b934e6d9f9c92c523e68241a",
+  "site_diagnostics.json": "67a091c14b7fccc206729182eb32ef5999e0a2ef3710b1a23cc734560afa0f93"
+ },
+ "derived_hashes": {
+  "cosore_annual.csv": "af3ab2d1691e9a5ce2aa375cae24d2e5656aeb923847b98d6b77c9581753134e",
+  "records_v3.parquet": "d51a8577885327c6664c19f3b91dab1a34b7c36777aec22079d3ff210a362df3",
+  "sites_v3_qc.parquet": "8aef5b32b20e67a1357a1f8c30b1bf93bda00875025d30ccf6732e16c411a007",
+  "sites_v3_repo.parquet": "1ca93390b7f1f01f1bfb556d6c7331412047bb4cecec0fa228df03974b8e303a"
+ },
+ "interim_hashes": {
+  "features_v3_qc.parquet": "daa6b8e8753b4a5e2887265ebe6d367f87ac9607c7647089a2175d79db0130db",
+  "features_v3_repo.parquet": "dd408008cf509facdaa5d088131af83f3959e208dea5c3b1ede936d928c3b0ad",
+  "modis_points.meta.json": "2f037385cf287fd552728e9be6bd33d846db503602a87b25937dcddebbb4833c",
+  "modis_points.parquet": "c190d630547ca5f12082514816c3e5c8ef2826834550bfc51c55cd4e46b81b6b"
+ },
+ "raw_hashes": {
+  "naturalearth/v5.1.2/ne_110m_land.geojson": "9e0729ee253ca7d7a5c4ae9395fb1902264c5377c52e224d13dd85010e2835d9",
+  "naturalearth/v5.1.2/ne_50m_admin_0_countries.geojson": "3e458fc036ad0a66411f2c1e6cac49c5d7bfb81cb1123bc513b22511a2b7fdeb",
+  "naturalearth/v5.1.2/ne_50m_land.geojson": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+  "soilgrids/2.0/0p05/bdod_5-15cm_mean_global_0p05.tif": "014ea42debc629dd7c615471e80ecb9eb18274eadef32d280e3a8ee5b864492e",
+  "soilgrids/2.0/0p05/bdod_5-15cm_mean_global_0p05.tif.source.json": "2e4217de1ad7084c6093e29494b2132055b0b8a0f0ab9a99936bdc439df55acd",
+  "soilgrids/2.0/0p05/cec_5-15cm_mean_global_0p05.tif": "18e42a813fb2a1cf75c22d05c346420a9cf92096dbc5d5f773f03944ffb3da46",
+  "soilgrids/2.0/0p05/cec_5-15cm_mean_global_0p05.tif.source.json": "fe3eb1ed70cf0767dc5054614158ea46f6e645605691b9dc54ff564825459ea3",
+  "soilgrids/2.0/0p05/clay_5-15cm_mean_global_0p05.tif": "0a447d8397d8170f9e5b49aa241419e702ba10f281baebd6407ffbf33cfd94e9",
+  "soilgrids/2.0/0p05/clay_5-15cm_mean_global_0p05.tif.source.json": "d9a44c2d22b4727b6c02e3145a7287701db51cd32d63ab09a0f64d305ff13dc6",
+  "soilgrids/2.0/0p05/nitrogen_5-15cm_mean_global_0p05.tif": "b1551ab61a0c168de84f918a617fab8bb3050f2da75ace18403afd015afc41f0",
+  "soilgrids/2.0/0p05/nitrogen_5-15cm_mean_global_0p05.tif.source.json": "c4b3ed7073d25ba90935ecabc49c037c891376d5c2147757c071f218fd64f58b",
+  "soilgrids/2.0/0p05/phh2o_5-15cm_mean_global_0p05.tif": "1db3d614e24d877368aa839a712d651a9f9cee7a744925d04cc3d20bc805c05c",
+  "soilgrids/2.0/0p05/phh2o_5-15cm_mean_global_0p05.tif.source.json": "b224b9443cb23c7c2641e297d12a12da9f3b5e0779058a290594790d695a78ab",
+  "soilgrids/2.0/0p05/sand_5-15cm_mean_global_0p05.tif": "026539e7be2a08e830bbf241dba0e02713425da12c1e078c38430aaecccb5708",
+  "soilgrids/2.0/0p05/sand_5-15cm_mean_global_0p05.tif.source.json": "82930677c17bb1079b1d5bafbddc1d52dea1e9132703d2a44b8b355ab0e1ad69",
+  "soilgrids/2.0/0p05/silt_5-15cm_mean_global_0p05.tif": "eaad6d81c95791cc05269816e3d661b3ceadedd23d0b603ca8c0f4f9b2b1ee7e",
+  "soilgrids/2.0/0p05/silt_5-15cm_mean_global_0p05.tif.source.json": "5836709b75e5786293a005ecc8cae61f59e08e8caadd3a755d86daac2a204ced",
+  "soilgrids/2.0/0p05/soc_5-15cm_mean_global_0p05.tif": "7bf766ed258c05c20943dcf111730114fbe8902e70424095eb0a74ce5b9f4814",
+  "soilgrids/2.0/0p05/soc_5-15cm_mean_global_0p05.tif.source.json": "d1a2f67f4dd465fe388872a5d3be3a6600761d0cb088bbff8febbb6353a24708",
+  "srdb/02163a72/LICENSE": "64bd84a5d7afb8f6e9caf1e9c18960e2e8eef1214f1d7a012fc50b8c5456d971",
+  "srdb/02163a72/srdb-data.csv": "c4d7714a0954a0c9b8d4d41ae758defa8c46cb208aa50ef148e762655f892911",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_1.tif": "6cd516fd42c226ed2776f7f6354eedd7e568a947ff8e9e41f00821a9c2aae50c",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_10.tif": "7ebc8e5135b86d29ef068d8ff20c5ad0ee23ddafc77f4ce014a26b356efbe769",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_11.tif": "4c6ddb8333e63d1bbb1a8fdb2c0c32f1ea5cd86b9bb9ac43487820dba8e51f6b",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_12.tif": "4369ff8e60927cfe10474d69973d31a96977c98179162cf20484f617928fda57",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_13.tif": "a08971629573df4dec8537b2ef652f9de61174d399e2e11894ceac11c060d554",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_14.tif": "9e903d54db0ce39291d86b367435633505b94b722bd30da41aeae8fb4b6a010c",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_15.tif": "acdf1d376b95077740f69773b0d04fcc337f708f569e52cf9e7cc83d1dc2616e",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_16.tif": "bb5673f38046333ab8e5acff68e530b25ed566c4a9d75c883ce3f4f60738cd1c",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_17.tif": "f94d3e5db9f19ec999f92b89c0ecc8db941ff3c8a4e64c981f6802d49a766e33",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_18.tif": "16de35463df8df2f7ed5ad6ef5ca254f4bc96e04735daeea61b4256ef8dd57ff",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_19.tif": "e035ebeb86b9139094a6fd9ad6ddcd7e056a9a3c0c59d4293947e8c183c3f6d1",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_2.tif": "7d9bae747d1f3dbcf2768f648f9a9b964dc76166536f7eff842560b374687733",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_3.tif": "2046685664e1731c7f98de996393733dc81cff96707d4f4bb6265653f6b050e3",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_4.tif": "cc1ae322e1d7da5b398ed8d6be88943e690abc9c89552c4109e28092592db74e",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_5.tif": "dd751f267965a4cb465a25b39db57d33beac8d365f9102fe4a7c784b3b3d3b6c",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_6.tif": "1f52a0527318d57d2278fcb8ffd633258988d28c8b41a3c8a971631405c5ca74",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_7.tif": "3a9950bb6120a1d02306e2ee9b0e21977be6cfc5616a5ea5b297c8bc06cf4a32",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_8.tif": "5db8c2fbd29c329c9efb3bc66940a50dd4ad263ffd09fb82c58be17be032c4da",
+  "worldclim/2.1/2.5m/wc2.1_2.5m_bio_9.tif": "159d6a31a3d4e52d85130f0468909126ec103b6e0cf2fe74409058c7d6e7c1a5",
+  "worldclim/2.1/2.5m/worldclim.source.json": "956b50bdcfd96d33d4216f63006e1f96a4bffa4818802cb10d19df11d6dbbf56",
+  "worldclim/2.1/wc2.1_2.5m_bio.zip": "5b92405fe3c64934dcf79af55356bc0f3b06413cac384f5f6d865a5ef74aa64f",
+  "worldclim/2.1/wc2.1_2.5m_bio.zip.source.json": "5cdd4349b8f71a22179a0c014a242a7ddc021a3ce4c5330e112ee055972edc66"
+ },
+ "repro_summary": {
+  "DEVIATION": 2,
+  "FAIL": 5,
+  "INFO": 1,
+  "NOT RUN": 0,
+  "PASS": 19,
+  "STALE": 0
+ },
+ "repro_rows": [
+  [
+   "COSORE sites with an annual value",
+   "PASS",
+   66,
+   ""
+  ],
+  [
+   "SRDB records after repo filters",
+   "PASS",
+   4771,
+   ""
+  ],
+  [
+   "Records after coordinate check",
+   "PASS",
+   4781,
+   ""
+  ],
+  [
+   "Records after QC",
+   "PASS",
+   3694,
+   ""
+  ],
+  [
+   "QC removals: f_method",
+   "PASS",
+   450,
+   ""
+  ],
+  [
+   "QC removals: f_quality",
+   "PASS",
+   260,
+   ""
+  ],
+  [
+   "QC removals: f_coverage",
+   "PASS",
+   252,
+   ""
+  ],
+  [
+   "QC removals: f_ecosys",
+   "PASS",
+   243,
+   ""
+  ],
+  [
+   "QC removals: f_dup",
+   "PASS",
+   57,
+   ""
+  ],
+  [
+   "QC sites: Asia",
+   "PASS",
+   387,
+   ""
+  ],
+  [
+   "QC sites: North America",
+   "PASS",
+   257,
+   ""
+  ],
+  [
+   "QC sites: Europe",
+   "PASS",
+   236,
+   ""
+  ],
+  [
+   "QC sites: South America",
+   "PASS",
+   42,
+   ""
+  ],
+  [
+   "QC sites: Africa",
+   "PASS",
+   26,
+   ""
+  ],
+  [
+   "QC sites: Oceania",
+   "PASS",
+   23,
+   ""
+  ],
+  [
+   "QC sites: total",
+   "PASS",
+   971,
+   ""
+  ],
+  [
+   "Repo-filter sites: total",
+   "PASS",
+   1225,
+   ""
+  ],
+  [
+   "Locked test: selected model",
+   "PASS",
+   "OLS-TP (TP)",
+   ""
+  ],
+  [
+   "Locked test: Asia spatial-CV R\u00b2",
+   "FAIL",
+   0.09086270845723685,
+   ""
+  ],
+  [
+   "Locked test: Europe n",
+   "FAIL",
+   236,
+   ""
+  ],
+  [
+   "Locked test: Europe R\u00b2",
+   "PASS",
+   0.082427971511712,
+   ""
+  ],
+  [
+   "Locked test: site-bootstrap CI low",
+   "FAIL",
+   0.0027592383217029262,
+   ""
+  ],
+  [
+   "Locked test: site-bootstrap CI high",
+   "FAIL",
+   0.14151617317178297,
+   ""
+  ],
+  [
+   "Locked test: re-run identical to the locked result",
+   "DEVIATION",
+   "max |diff| 222",
+   "deviation: report it; the locked result stays primary"
+  ],
+  [
+   "Locked test (repo-filter sensitivity): re-run identical to the locked result",
+   "DEVIATION",
+   "max |diff| 240",
+   "deviation: report it; the locked result stays primary"
+  ],
+  [
+   "NPP r vs committed NPP (original 889 sites)",
+   "FAIL",
+   -0.034361800755549614,
+   "method reconstructed [UNVERIFIED]: no handoff script computes this r; Pearson r on raw NPP at the original sites with a value in both tables, joined on site_key"
+  ],
+  [
+   "Original sites with NPP missing in the committed tables but present in v3",
+   "INFO",
+   200,
+   "prep_log D8; no tolerance in the brief, reported for information"
+  ]
+ ]
+}

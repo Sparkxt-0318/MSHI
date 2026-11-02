@@ -22,18 +22,27 @@ With conda instead: `conda env create -f environment.yml`, activate it, then the
 shows the stages. Exit codes: 0 all stages ok; 1 a stage failed or a reproduction target is outside
 its tolerance; 2 no failure, but a source was blocked or unreachable, an input was stale (re-run the
 upstream stages, e.g. `make all`), or a stage was skipped because of one of these. Stages of later
-phases run only after a passing reproduction table (no FAIL or STALE row).
+phases run only after a complete, passing reproduction table: current, and no FAIL, STALE or NOT RUN
+row (smoke runs do not apply this gate).
 
-Every source version, path, analysis threshold, reproduction tolerance and seed is in `configs/v3.yaml`.
+Every source version, path, analysis threshold, reproduction tolerance and seed is in `configs/v3.yaml`;
+the code keeps only numerical slack, network retry/timeout defaults and how many examples a result lists.
 Downloads go to `data/raw/` (gitignored), regenerable intermediates to `data/interim/` (gitignored), small
 derived tables to `data/derived/`, results (JSON) and the run log to `results/`.
 `results/reproduction_check.md` compares the outputs with the handoff numbers. Each result JSON carries
-`_provenance` (hashes of the config and of the `mshi` code of the run) and `_outputs` (SHA-256 of every
-file the stage wrote). A result is current only if both hashes match and its output files are unchanged;
-a stage refuses inputs that are not the outputs of a current upstream result, the reproduction table
-reports such results as STALE, and the regression tests fail on them. `results/run_log.jsonl` is the append-only log of every stage run (times,
-statuses, commit) on the machines that produced the committed results; its `blocked` entries describe
-that machine's network policy, not a property of the pipeline.
+`_provenance` (hashes of the config and of the `mshi` code of the run), `_outputs` (SHA-256 of the files
+the stage wrote for later stages: tables, rasters, the reproduction table) and `_inputs` (SHA-256 of the
+upstream results it read). A result is current only if both hashes match, its output files are
+unchanged, and every upstream result it read is unchanged and itself current. Outputs under `data/raw/`
+and `data/interim/` are not committed, so on a fresh clone they may be absent without making a result
+stale; a stage that needs one refuses to run until it is regenerated. Stages read other stages' files
+only if they are recorded outputs of a current result; downloads of pinned sources (SRDB, COSORE,
+Natural Earth) are checked against the pinned hashes or commit instead. The reproduction table reports
+results that are not current as STALE, and the regression tests fail on them. `.gitattributes` turns
+off line-ending conversion for the hashed files, so a checkout on Windows has the same bytes.
+`results/run_log.jsonl` is the append-only log of every stage run (times, statuses, commit) on the
+machines that produced the committed results; its `blocked` entries describe that machine's network
+policy, not a property of the pipeline.
 
 ## Where things are
 

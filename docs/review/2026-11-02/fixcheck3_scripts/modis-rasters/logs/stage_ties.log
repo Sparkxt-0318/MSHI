@@ -1,0 +1,106 @@
+2 month(s) have two Terra LST items on the earliest date; the smaller id is used (listed in results/modis_points.json)
+2 month(s) have two Terra LST items on the earliest date; the smaller id is used (listed in results/modis_points.json)
+2 month(s) have two Terra LST items on the earliest date; the smaller id is used (listed in results/modis_points.json)
+{
+ "tie_rasters_written": 4,
+ "runs": {
+  "shuffle": {
+   "status": "ok",
+   "cached": false,
+   "reads": 375,
+   "rec_status": null,
+   "n_raster_reads": 375,
+   "n_failed_reads": 0,
+   "catalog_gaps": [],
+   "n_catalog_gaps": 0,
+   "ties": {
+    "list": [
+     {
+      "chosen": "MOD11A2.A2021001.h18v04.061.2021010000000",
+      "month": "2021-01",
+      "others": [
+       "MOD11A2.A2021001.h18v04.061.2099001000000"
+      ],
+      "tile": "h18v04"
+     },
+     {
+      "chosen": "MOD11A2.A2022153.h18v04.061.2000001000000",
+      "month": "2022-06",
+      "others": [
+       "MOD11A2.A2022153.h18v04.061.2022162000000"
+      ],
+      "tile": "h18v04"
+     }
+    ],
+    "n": 2
+   },
+   "parquet": "ae1337c7c425"
+  },
+  "desc": {
+   "status": "ok",
+   "cached": false,
+   "reads": 375,
+   "rec_status": null,
+   "n_raster_reads": 375,
+   "n_failed_reads": 0,
+   "catalog_gaps": [],
+   "n_catalog_gaps": 0,
+   "ties": {
+    "list": [
+     {
+      "chosen": "MOD11A2.A2021001.h18v04.061.2021010000000",
+      "month": "2021-01",
+      "others": [
+       "MOD11A2.A2021001.h18v04.061.2099001000000"
+      ],
+      "tile": "h18v04"
+     },
+     {
+      "chosen": "MOD11A2.A2022153.h18v04.061.2000001000000",
+      "month": "2022-06",
+      "others": [
+       "MOD11A2.A2022153.h18v04.061.2022162000000"
+      ],
+      "tile": "h18v04"
+     }
+    ],
+    "n": 2
+   },
+   "parquet": "ae1337c7c425"
+  },
+  "asc": {
+   "status": "ok",
+   "cached": false,
+   "reads": 375,
+   "rec_status": null,
+   "n_raster_reads": 375,
+   "n_failed_reads": 0,
+   "catalog_gaps": [],
+   "n_catalog_gaps": 0,
+   "ties": {
+    "list": [
+     {
+      "chosen": "MOD11A2.A2021001.h18v04.061.2021010000000",
+      "month": "2021-01",
+      "others": [
+       "MOD11A2.A2021001.h18v04.061.2099001000000"
+      ],
+      "tile": "h18v04"
+     },
+     {
+      "chosen": "MOD11A2.A2022153.h18v04.061.2000001000000",
+      "month": "2022-06",
+      "others": [
+       "MOD11A2.A2022153.h18v04.061.2022162000000"
+      ],
+      "tile": "h18v04"
+     }
+    ],
+    "n": 2
+   },
+   "parquet": "ae1337c7c425"
+  }
+ },
+ "same_parquet_all_orders": true,
+ "sites_lst_changed_vs_no_ties": 15
+}

@@ -1,0 +1,6 @@
+...........................................................................ssss.............................................................
+=========================== short test summary info ============================
+SKIPPED [2] ../../../../../../../home/user/MSHI/tests/conftest.py:25: results/clean_test_rerun_qc.json not present (stage not run)
+SKIPPED [1] ../../../../../../../home/user/MSHI/tests/conftest.py:25: results/clean_test_rerun_repo.json not present (stage not run)
+SKIPPED [1] ../../../../../../../home/user/MSHI/tests/test_regression.py:86: NPP check not run (modis_points output missing)
+136 passed, 4 skipped in 67.52s (0:01:07)
