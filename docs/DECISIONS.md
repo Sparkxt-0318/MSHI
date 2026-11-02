@@ -456,9 +456,10 @@ download, re-used the MODIS cache and wrote byte-identical results; a SoilGrids 
 exactly the 8 rasters; the 17 site-build rows equal the committed values). 16 of the 20 fixes hold, 4
 partly. **22 new findings, 18 distinct** (four found by two reviewers): 17 confirmed and 1 uncertain, all
 low after verification (one rated medium by its finder). None changes a reproduced number. Several came
-from the R-P1-20 fixes themselves (marked †). All are fixed in this commit, with tests; the new test
-cases fail on the previous commit (33 of 36 new or changed cases; the 3 others are old cases of a changed
-test):
+from the R-P1-20 fixes themselves (marked †). All are fixed in this commit, with tests. Run against the
+previous commit, 33 of 36 new or changed test cases fail there (the 3 that pass are old cases of a changed
+test); not in that run: the `deviation_atol` anchor, which passes on both commits by design, and the
+`.gitattributes` test, checked with CRLF clones instead (below):
 - results were not bound to the upstream results they read, so a re-fetched unpinned source left
   downstream numbers, and the reproduction gate, "current" → D-P1-17 (e);
 - † gitignored outputs would have made committed results STALE on a fresh clone → D-P1-17 (f);

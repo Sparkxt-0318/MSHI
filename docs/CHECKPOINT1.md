@@ -144,7 +144,8 @@ F-P1-7, D-P1-8). The ones that matter most:
   (gitignored outputs absent); a failed upstream stage could turn FAIL rows into NOT RUN and open the
   gate; pinning the WorldClim hash deleted the downloaded data; a Finder `.DS_Store` in the COSORE
   checkout stopped `make all`; a Windows (CRLF) checkout made every result stale. All 18 are fixed in
-  `7f7263c`, with tests that fail on the previous commit. Results now also record the upstream results
+  `7f7263c`, with tests (33 of the 36 new or changed test cases fail on the previous commit; the rest
+are older cases or an anchor). Results now also record the upstream results
   they read and are current only if those are unchanged and current; the gate also requires no NOT RUN
   row. Tests: 171 tests, 167 passed, 4 skipped (the checks that need the blocked sources).
 - **Stopping here.** The three rounds found 27, 20 and 18 problems, of falling severity (1 high, 7
