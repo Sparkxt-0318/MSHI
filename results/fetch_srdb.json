@@ -1,4 +1,8 @@
 {
+ "_provenance": {
+  "code_sha256": "682cad1246354513940ea2481024ff14476136a66c723e1b2610a291e45d2f80",
+  "config_sha256": "d74c6282748cda672aab391021ef5c32408b309d82af5946b731a0a2f8371d78"
+ },
  "commit": "02163a720bc0b84bd535ad0962c85735816448e8",
  "licence_sha256": "64bd84a5d7afb8f6e9caf1e9c18960e2e8eef1214f1d7a012fc50b8c5456d971",
  "repo": "bpbond/srdb",

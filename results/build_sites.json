@@ -1,4 +1,8 @@
 {
+ "_provenance": {
+  "code_sha256": "682cad1246354513940ea2481024ff14476136a66c723e1b2610a291e45d2f80",
+  "config_sha256": "d74c6282748cda672aab391021ef5c32408b309d82af5946b731a0a2f8371d78"
+ },
  "coord_mismatch_examples": [
   [
    "Canada",

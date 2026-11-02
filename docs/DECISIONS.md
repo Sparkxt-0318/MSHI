@@ -204,10 +204,14 @@ WorldClim's licence terms could not be read (worldclim.org blocked) `[UNVERIFIED
 to `data/interim/` (gitignored) until checked. MODIS and ESA CCI terms likewise `[UNVERIFIED]`. No
 derived raster is committed.
 
-**V-P1-13 Run times (2026-11-02, 4 vCPU).** fetch_srdb 1.7 s; fetch_cosore 11 s (374 MB shallow
-clone); fetch_naturalearth < 1 s; cosore_annual 34–41 s; build_sites 3–4 s; site_diagnostics 2 s;
-test suite 53 s. Not measurable here: WorldClim download, SoilGrids WCS (8 × global 0.05° GeoTIFF),
-MODIS points (handoff: LST ≈ 45 min for 1,530 points at 32 threads).
+**V-P1-13 Run times (2026-11-02, 4 vCPU).** First fetches: fetch_srdb 1.7 s; fetch_cosore 11 s (374 MB
+shallow clone); fetch_naturalearth < 1 s. Full run `make all` from the clean commit `b74e590` (raw
+inputs cached): 43 s in total: cosore_annual 33.6 s, build_sites 2.9 s, site_diagnostics 1.9 s, the
+cached fetches ≤ 0.4 s each (hash and worktree checks only), each blocked stage 0.3 s; exit code 2
+(three sources blocked). The committed `results/` and `data/derived/` come from that run (the derived
+tables were byte-identical to the previous ones). Test suite: 110 tests, 107 passed, 3 skipped (the
+locked-test re-run and the NPP check, not run), 60 s. Not measurable here: WorldClim download, SoilGrids
+WCS (8 × global 0.05° GeoTIFF), MODIS points (handoff: LST ≈ 45 min for 1,530 points at 32 threads).
 
 **R-P1-14 Package review (2026-11-02).** The Phase-1 package was reviewed by three independent
 reviewers (fidelity to the handoff scripts, guards and robustness, conformance to the brief), and every

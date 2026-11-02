@@ -1,6 +1,7 @@
 {
- "config_sha256": "49a0fa9a23e4e7e17470515645ce3e3dacaaf25ce79a50920a466c10d9a00586",
- "git_commit": "a809a979ec383e89fb49f28a96a7da9a01499b0e+dirty",
+ "code_sha256": "682cad1246354513940ea2481024ff14476136a66c723e1b2610a291e45d2f80",
+ "config_sha256": "d74c6282748cda672aab391021ef5c32408b309d82af5946b731a0a2f8371d78",
+ "git_commit": "b74e59016dcd2ebe0780e63637e5bafa61742f06",
  "versions": {
   "gdal": "3.12.2",
   "geopandas": "1.2.0",

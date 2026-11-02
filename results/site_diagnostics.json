@@ -1,4 +1,153 @@
 {
+ "_provenance": {
+  "code_sha256": "682cad1246354513940ea2481024ff14476136a66c723e1b2610a291e45d2f80",
+  "config_sha256": "d74c6282748cda672aab391021ef5c32408b309d82af5946b731a0a2f8371d78"
+ },
+ "continent_outside_box_qc": {
+  "boxes_lon0_lon1_lat0_lat1": {
+   "Europe": [
+    -32.0,
+    70.0,
+    34.0,
+    82.0
+   ]
+  },
+  "n": 4,
+  "sites": [
+   {
+    "continent": "Europe",
+    "countries": [
+     "France",
+     "French Guiana"
+    ],
+    "lat": 5.03,
+    "lon": -53.0,
+    "n_rec": 1,
+    "site_id": "v3qc_00091",
+    "site_names": [
+     "Paracou"
+    ]
+   },
+   {
+    "continent": "Europe",
+    "countries": [
+     "France"
+    ],
+    "lat": 5.282,
+    "lon": -52.912,
+    "n_rec": 1,
+    "site_id": "v3qc_00185",
+    "site_names": [
+     "Paracou"
+    ]
+   },
+   {
+    "continent": "Europe",
+    "countries": [
+     "Spain"
+    ],
+    "lat": 28.292,
+    "lon": -16.629,
+    "n_rec": 1,
+    "site_id": "v3qc_00270",
+    "site_names": [
+     "La Victoria"
+    ]
+   },
+   {
+    "continent": "Europe",
+    "countries": [
+     "Spain"
+    ],
+    "lat": 28.306,
+    "lon": -16.5683,
+    "n_rec": 2,
+    "site_id": "v3qc_00423",
+    "site_names": []
+   }
+  ]
+ },
+ "continent_outside_box_repo": {
+  "boxes_lon0_lon1_lat0_lat1": {
+   "Europe": [
+    -32.0,
+    70.0,
+    34.0,
+    82.0
+   ]
+  },
+  "n": 5,
+  "sites": [
+   {
+    "continent": "Europe",
+    "countries": [
+     "France",
+     "French Guiana"
+    ],
+    "lat": 5.03,
+    "lon": -53.0,
+    "n_rec": 1,
+    "site_id": "v3repo_00151",
+    "site_names": [
+     "Paracou"
+    ]
+   },
+   {
+    "continent": "Europe",
+    "countries": [
+     "France",
+     "French Guiana"
+    ],
+    "lat": 5.2564,
+    "lon": -52.9178,
+    "n_rec": 5,
+    "site_id": "v3repo_00276",
+    "site_names": [
+     "Paracou",
+     "Paracou research station"
+    ]
+   },
+   {
+    "continent": "Europe",
+    "countries": [
+     "Spain"
+    ],
+    "lat": 28.292,
+    "lon": -16.629,
+    "n_rec": 1,
+    "site_id": "v3repo_00419",
+    "site_names": [
+     "La Victoria"
+    ]
+   },
+   {
+    "continent": "Europe",
+    "countries": [
+     "Spain"
+    ],
+    "lat": 28.1,
+    "lon": -15.4,
+    "n_rec": 20,
+    "site_id": "v3repo_00540",
+    "site_names": [
+     "H1",
+     "H2",
+     "H3"
+    ]
+   },
+   {
+    "continent": "Europe",
+    "countries": [
+     "Spain"
+    ],
+    "lat": 28.306,
+    "lon": -16.5683,
+    "n_rec": 2,
+    "site_id": "v3repo_00600",
+    "site_names": []
+   }
+  ]
+ },
  "coord_check": {
   "changed_records": [
    {
