@@ -23,8 +23,9 @@
 | Locked test: Europe R² | 0.079 | — | ±0.01 | NOT RUN | fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) |
 | Locked test: site-bootstrap CI low | 0.013 | — | ±0.01 | NOT RUN | fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) |
 | Locked test: site-bootstrap CI high | 0.125 | — | ±0.01 | NOT RUN | fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) |
-| Locked test: re-run identical to the locked result | identical | — | 1e-9 | NOT RUN | fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) |
+| Locked test: re-run identical to the locked result | identical | — | 1e-09 | NOT RUN | fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) |
+| Locked test (repo-filter sensitivity): re-run identical to the locked result | identical | — | 1e-09 | NOT RUN | fetch_worldclim: blocked by network policy (geodata.ucdavis.edu) |
 | NPP r vs committed NPP (original 889 sites) | 0.982 | — | ±0.01 | NOT RUN | modis_points: blocked by network policy (planetarycomputer.microsoft.com) |
 | Original sites with NPP missing in the committed tables but present in v3 | 189 | — | none given | NOT RUN | modis_points: blocked by network policy (planetarycomputer.microsoft.com) |
 
-PASS/FAIL: within/outside the tolerance in configs/v3.yaml. NOT RUN: no current result (reason in the note). STALE: produced by a different config or code. DEVIATION: the locked-test re-run differs from the locked result, which stays primary. INFO: no tolerance given in the brief.
+PASS/FAIL: within/outside the tolerance in configs/v3.yaml (FAIL also when a current result does not yield the value). NOT RUN: no result (reason in the note). STALE: the result is not current (another config or code, or an output file changed after the run). DEVIATION: a locked-test re-run differs from its locked result, which stays primary. INFO: no tolerance given in the brief.

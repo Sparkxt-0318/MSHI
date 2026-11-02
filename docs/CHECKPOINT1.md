@@ -1,13 +1,13 @@
 # Checkpoint 1 — end of Phase 1 (2026-11-02)
 
 Phase 0 (housekeeping) and Phase 1 (the v3 pipeline as a package) are done as far as this environment
-allows. Work is on branch `claude/mshi-pipeline-v3-rebuild-cg0r7o` (commits `b98b2ce`, `ee07832`,
-`b74e590`, `1ab8032`, …). Details: `docs/DECISIONS.md`; reproduction table:
-`results/reproduction_check.md`; reviews: `docs/review/2026-11-02/`. **Phase 2 has not been started.**
+allows. Work is on branch `claude/mshi-pipeline-v3-rebuild-cg0r7o`. Details: `docs/DECISIONS.md`;
+reproduction table: `results/reproduction_check.md`; reviews: `docs/review/2026-11-02/`.
+**Phase 2 has not been started.**
 
 ## 1. Reproduction table
 
-From `make all` at the clean commit `b74e590` (`results/reproduction_check.md`):
+From `make all` at the clean commit `a6c00bc` (`results/reproduction_check.md`):
 
 | Quantity | Handoff | v3 | Tolerance | Status |
 |---|---|---|---|---|
@@ -17,13 +17,14 @@ From `make all` at the clean commit `b74e590` (`results/reproduction_check.md`):
 | QC removals: method / quality / coverage / ecosystem / duplicate | 450 / 260 / 252 / 243 / 57 | 450 / 260 / 252 / 243 / 57 | ±2% | PASS (exact) |
 | QC sites: Asia / N America / Europe / S America / Africa / Oceania (total) | 387 / 257 / 236 / 42 / 26 / 23 (971) | 387 / 257 / 236 / 42 / 26 / 23 (971) | ±2% | PASS (exact) |
 | Repo-filter sites total | 1,225 | 1,225 | ±2% | PASS (exact) |
-| Locked test: model; Asia CV R²; Europe n; Europe R² [site-bootstrap CI]; re-run identical | OLS-TP; 0.143; 235; 0.079 [0.013, 0.125] | — | same model; ±0.01; exact | **NOT RUN** (WorldClim, SoilGrids, MODIS blocked) |
+| Locked test: model; Asia CV R²; Europe n; Europe R² [site-bootstrap CI] | OLS-TP; 0.143; 235; 0.079 [0.013, 0.125] | — | same model; ±0.01; exact; ±0.01 | **NOT RUN** (WorldClim, SoilGrids, MODIS blocked) |
+| Locked-test re-runs identical to the locked results (primary; repo-filter sensitivity) | identical | — | 1e-9 | **NOT RUN** (same) |
 | NPP r vs committed NPP (889 original sites) | 0.982 | — | ±0.01 | **NOT RUN** (Planetary Computer blocked) |
 
 All 17 site-build targets reproduce **exactly**, not just within tolerance. The v3 build summary equals
 the handoff's `build_summary.json` on every key, and the prototype script and the v3 port produce
-byte-identical site tables from the same inputs. The locked-test re-run and the NPP check could not run.
-Their code is complete and tested offline, but it has never been run against the real servers.
+byte-identical site tables from the same inputs. The locked-test re-runs and the NPP check could not
+run. Their code is complete and tested offline, but it has never been run against the real servers.
 
 ## 2. What blocked the rest
 
@@ -52,40 +53,43 @@ None of these changes a reproduced number.
 - **Locked test, config representation.** Constants that were literals in the prototype (learner list,
   ln(bio12), AOA whisker, CI quantiles, DI terciles) now sit in the hashed config block. Its hash changed
   (`822f2ce1…` → `ef029090…`); the plan and its hash did not. On synthetic data the old and new code give
-  bit-identical results, except random-forest entries ≤ 5e-16 (D-P1-9).
-- **Random-forest predictions single-threaded.** The handoff summed trees in thread order (DEV-P1-15).
-- **MODIS stage.** A raster read that still fails after retries now fails the stage. The prototype
-  averaged whatever succeeded. Means are taken in a fixed order, and the cache is keyed on the config and
-  the extraction code (DEV-P1-16).
+  bit-identical results except random-forest entries, which differ at the 1e-16 level (D-P1-9).
+- **Random-forest predictions single-threaded.** The handoff summed trees in thread order, so its RF
+  values were not reproducible run to run. The effect is ~1e-16 and data-dependent; OLS-TP (the locked
+  model) and XGB values are bit-identical (DEV-P1-15).
+- **MODIS stage** (DEV-P1-16). A raster read that still fails after retries now fails the stage, and so
+  does a catalog that lacks an expected year or month (the prototype averaged whatever it got). Means are
+  taken in a fixed order. The cache is keyed on the MODIS config, the point set, the module source and
+  library versions, and bound to the cached table's bytes. LST items with the same date are ordered by
+  id, which can change an LST mean only if the catalog has such ties; each tie is listed in
+  `results/modis_points.json`.
 - **Europe n is checked exactly.** The brief gives no tolerance, and the test set is closed (D-P1-10).
 - **NPP r method `[UNVERIFIED]`.** No handoff script computes 0.982, so the v3 check is a reconstruction
   (F-P1-19).
 
 ## 4. Run times (4 vCPU)
 
-`make all` with cached raw inputs: 43 s (cosore_annual 34 s, build_sites 3 s, site_diagnostics 2 s,
-each blocked stage 0.3 s). First fetches: SRDB 1.7 s, COSORE 11 s (374 MB). Tests: 110 tests, 107
-passed and 3 skipped (the two not-run checks), 60 s. Not measurable here: WorldClim, SoilGrids and
-MODIS (the handoff reports ≈ 45 min for the LST points).
+`make all` with cached raw inputs, from the clean commit `a6c00bc`: 48 s (cosore_annual 38 s, build_sites 4 s, site_diagnostics 2 s, each cached fetch ≤ 0.4 s, each blocked stage 0.3–0.4 s); exit code 2 (three sources blocked). First fetches: SRDB 1.7 s, COSORE 11 s (374 MB). Tests (`make test`): 140 tests, 136 passed and 4 skipped (the two locked-test re-runs, the locked-test targets and the NPP check, all not run), 68 s. Not measurable here: WorldClim, SoilGrids and MODIS (the handoff reports ≈ 45 min for the LST points).
 
 ## 5. What in the handoff is wrong
 
-Two independent reviews, with every finding re-run by an adversarial verifier: the handoff critique
-(42 findings, 41 confirmed) and the package review (27 findings in the first v3 package, all confirmed
-and fixed). The full list is in `docs/DECISIONS.md` (F-H1–F-H43, F-P1-6, F-P1-7, D-P1-8). The ones that
-matter most:
+Two reviews, with every finding re-run by an adversarial verifier: the handoff critique (42 findings,
+41 confirmed) and the package review (§6). The full list is in `docs/DECISIONS.md` (F-H1–F-H43, F-P1-6,
+F-P1-7, D-P1-8). The ones that matter most:
 
 1. **The locked "Europe" test set contains non-European sites (F-H1, high).** The plan's continent rule
    uses the Natural Earth country polygon, so French Guiana and the Canary Islands count as France and
    Spain. 4 of the 236 QC "Europe" sites are outside Europe: 2 at Paracou, French Guiana, and 2 on
    Tenerife. The v3 pipeline itself reports them (`results/site_diagnostics.json`). The two Paracou
    sites are among the highest-Rs sites in the set. *Reviewers' estimate with proxy climate (not a
-   pipeline number):* without them the Europe R² would be about 0.06 rather than 0.079. The
-   site-bootstrap lower bound would drop by about 0.02, to roughly −0.01, so H1 would probably not hold. The code follows the plan exactly, so this is a flaw in the plan. The
-   locked result stays primary. I propose a declared sensitivity analysis on geographic Europe, decided
-   on geography, not on the score (Q-5).
-2. **"Europe has never been used to score any model" is false (F-H2).** About 30 of the 235 test sites
-   (13%) were in the original 25–180° E "Asia" tables (Estonia, Finland, Romania, western Russia).
+   pipeline number):* without them the Europe R² would be about 0.06 rather than 0.079, and the
+   site-bootstrap lower bound would drop by about 0.02, to roughly −0.01, so H1 would probably not hold.
+   The code follows the plan exactly, so this is a flaw in the plan. The locked result stays primary. I
+   propose a declared sensitivity analysis on geographic Europe, decided on geography, not on the score
+   (Q-5).
+2. **"Europe has never been used to score any model" is false (F-H2).** 30 of the 236 QC Europe sites
+   (12.7%) were in the original 25–180° E "Asia" training table: Estonia 13, Finland 8, Russia 7, Latvia
+   1, Romania 1. 28 of them hold the identical SRDB record (pipeline numbers: `site_diagnostics`, item 5).
    They were scored as held-out sites in the earlier cross-validation. No number changes; the word
    "untouched" must.
 3. **The coordinate check breaks the plan's own rule for Malta (F-H3).** Malta's records lie 95–98 km
@@ -116,10 +120,19 @@ matter most:
 
 ## 6. Package review and verification of the fixes
 
-The first v3 package had 27 confirmed problems, none of which changed a reproduced number. The most
-serious: MODIS values computed after failed reads would have been cached silently; the lock could be
-bypassed by re-hashing the config; and a stale result could show PASS. All are fixed in `b74e590`, with
-tests (R-P1-14). A second, independent check of the fixes: *pending*.
+- **First review** (`package_review.md`, R-P1-14): 27 confirmed problems in the first v3 package
+  (1 high, 7 medium, 19 low). None changed a reproduced number. The most serious: MODIS values computed
+  after failed reads would have been cached silently; the lock could be bypassed by re-hashing the
+  config; a stale result could show PASS. All fixed in `b74e590`.
+- **Second review** (`fix_verification.md`, R-P1-20): all 27 fixes re-run and hold. It found 20 new
+  problems, all confirmed and all low. None changed a reproduced number. The main ones: a stage run on
+  upstream outputs from another config looked current (provenance was per stage, not transitive); the
+  MODIS cache key missed part of the extraction code and did not bind the cached table's bytes; a short
+  STAC catalog was accepted as complete; rasters were not verified when read. All 20 are fixed. Results
+  now record the hash of every file they wrote, every stage refuses inputs that are not the outputs of a
+  current upstream result, and stages after the reproduction table run only if it has no FAIL or STALE
+  row. Tests: 140 tests, 136 passed, 4 skipped (the checks that need the blocked sources).
+- **Third check** (on the second round of fixes): *pending* (a review of the second round of fixes is running; outcome to be recorded here and in `docs/DECISIONS.md`).
 
 ## 7. Decisions needed
 

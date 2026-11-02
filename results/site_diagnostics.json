@@ -1,7 +1,7 @@
 {
  "_provenance": {
-  "code_sha256": "682cad1246354513940ea2481024ff14476136a66c723e1b2610a291e45d2f80",
-  "config_sha256": "d74c6282748cda672aab391021ef5c32408b309d82af5946b731a0a2f8371d78"
+  "code_sha256": "e3d4bf1e8ddf276e0a0662606620304df9b70c1a58577d56ab5e6e8314cddeb4",
+  "config_sha256": "dfde8e429a9bb547adc214e5a03203ae0def14f4378cd84b9f04616d88dc5f28"
  },
  "continent_outside_box_qc": {
   "boxes_lon0_lon1_lat0_lat1": {
@@ -317,6 +317,598 @@
     "Country": "Republic of Congo",
     "geo_country": "Republic of the Congo",
     "n": 2
+   }
+  ]
+ },
+ "europe_in_original_asia_table_qc": {
+  "by_country_within_km": {
+   "Estonia": 13,
+   "Finland": 8,
+   "Latvia": 1,
+   "Romania": 1,
+   "Russia": 7
+  },
+  "km": 5.0,
+  "n_europe_sites": 236,
+  "n_in_original_box": 30,
+  "n_original_sites": 615,
+  "n_with_identical_record": 28,
+  "n_within_km": 30,
+  "original_box_lon0_lon1_lat0_lat1": [
+   25.0,
+   180.0,
+   -10.0,
+   80.0
+  ],
+  "original_table": "legacy/data/processed/training_features_v2.parquet",
+  "sites": [
+   {
+    "country": "Russia",
+    "identical_record": true,
+    "lat": 54.83,
+    "lon": 37.58,
+    "site_id": "v3qc_00033",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 63.05,
+    "lon": 29.08,
+    "site_id": "v3qc_00043",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 62.5,
+    "lon": 30.5,
+    "site_id": "v3qc_00144",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 62.78,
+    "lon": 30.97,
+    "site_id": "v3qc_00156",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 67.72,
+    "lon": 29.6,
+    "site_id": "v3qc_00190",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 62.87,
+    "lon": 30.82,
+    "site_id": "v3qc_00194",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 66.37,
+    "lon": 28.67,
+    "site_id": "v3qc_00213",
+    "within_km": true
+   },
+   {
+    "country": "Russia",
+    "identical_record": true,
+    "lat": 54.13,
+    "lon": 37.1,
+    "site_id": "v3qc_00243",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 64.4963,
+    "lon": 26.3569,
+    "site_id": "v3qc_00399",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 63.05,
+    "lon": 29.8667,
+    "site_id": "v3qc_00401",
+    "within_km": true
+   },
+   {
+    "country": "Russia",
+    "identical_record": false,
+    "lat": 56.0,
+    "lon": 32.0,
+    "site_id": "v3qc_00430",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.05,
+    "lon": 27.02,
+    "site_id": "v3qc_00506",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.62,
+    "lon": 27.03,
+    "site_id": "v3qc_00507",
+    "within_km": true
+   },
+   {
+    "country": "Latvia",
+    "identical_record": true,
+    "lat": 57.13,
+    "lon": 26.93,
+    "site_id": "v3qc_00508",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.0,
+    "lon": 27.0,
+    "site_id": "v3qc_00683",
+    "within_km": true
+   },
+   {
+    "country": "Russia",
+    "identical_record": false,
+    "lat": 55.708,
+    "lon": 37.526,
+    "site_id": "v3qc_00741",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.375,
+    "lon": 26.725,
+    "site_id": "v3qc_00746",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.65,
+    "lon": 26.75,
+    "site_id": "v3qc_00763",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 59.57,
+    "lon": 26.12,
+    "site_id": "v3qc_00764",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 59.55,
+    "lon": 26.03,
+    "site_id": "v3qc_00766",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.27,
+    "lon": 26.45,
+    "site_id": "v3qc_00767",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.7,
+    "lon": 25.05,
+    "site_id": "v3qc_00768",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.98,
+    "lon": 26.75,
+    "site_id": "v3qc_00769",
+    "within_km": true
+   },
+   {
+    "country": "Russia",
+    "identical_record": true,
+    "lat": 56.5,
+    "lon": 32.9,
+    "site_id": "v3qc_00791",
+    "within_km": true
+   },
+   {
+    "country": "Russia",
+    "identical_record": true,
+    "lat": 54.917,
+    "lon": 37.567,
+    "site_id": "v3qc_00797",
+    "within_km": true
+   },
+   {
+    "country": "Russia",
+    "identical_record": true,
+    "lat": 55.7262,
+    "lon": 37.603,
+    "site_id": "v3qc_00807",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.29,
+    "lon": 27.27,
+    "site_id": "v3qc_00855",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.1,
+    "lon": 26.3,
+    "site_id": "v3qc_00905",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.284,
+    "lon": 27.162,
+    "site_id": "v3qc_00928",
+    "within_km": true
+   },
+   {
+    "country": "Romania",
+    "identical_record": true,
+    "lat": 45.087,
+    "lon": 25.066,
+    "site_id": "v3qc_00941",
+    "within_km": true
+   }
+  ]
+ },
+ "europe_in_original_asia_table_repo": {
+  "by_country_within_km": {
+   "Estonia": 14,
+   "Finland": 9,
+   "Latvia": 1,
+   "Romania": 3,
+   "Russia": 11
+  },
+  "km": 5.0,
+  "n_europe_sites": 284,
+  "n_in_original_box": 38,
+  "n_original_sites": 615,
+  "n_with_identical_record": 38,
+  "n_within_km": 38,
+  "original_box_lon0_lon1_lat0_lat1": [
+   25.0,
+   180.0,
+   -10.0,
+   80.0
+  ],
+  "original_table": "legacy/data/processed/training_features_v2.parquet",
+  "sites": [
+   {
+    "country": "Russia",
+    "identical_record": true,
+    "lat": 54.83,
+    "lon": 37.58,
+    "site_id": "v3repo_00050",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 62.7713,
+    "lon": 30.97,
+    "site_id": "v3repo_00063",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 62.23,
+    "lon": 29.83,
+    "site_id": "v3repo_00065",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 63.05,
+    "lon": 29.08,
+    "site_id": "v3repo_00067",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 62.5,
+    "lon": 30.5,
+    "site_id": "v3repo_00223",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 67.72,
+    "lon": 29.6,
+    "site_id": "v3repo_00281",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 62.8614,
+    "lon": 30.8457,
+    "site_id": "v3repo_00286",
+    "within_km": true
+   },
+   {
+    "country": "Russia",
+    "identical_record": true,
+    "lat": 67.5,
+    "lon": 33.0,
+    "site_id": "v3repo_00303",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 66.37,
+    "lon": 28.67,
+    "site_id": "v3repo_00321",
+    "within_km": true
+   },
+   {
+    "country": "Russia",
+    "identical_record": true,
+    "lat": 54.13,
+    "lon": 37.1,
+    "site_id": "v3repo_00363",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.8667,
+    "lon": 26.2333,
+    "site_id": "v3repo_00548",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 64.4968,
+    "lon": 26.3628,
+    "site_id": "v3repo_00570",
+    "within_km": true
+   },
+   {
+    "country": "Finland",
+    "identical_record": true,
+    "lat": 63.05,
+    "lon": 29.8667,
+    "site_id": "v3repo_00572",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 59.1,
+    "lon": 27.5,
+    "site_id": "v3repo_00582",
+    "within_km": true
+   },
+   {
+    "country": "Russia",
+    "identical_record": true,
+    "lat": 56.0,
+    "lon": 32.0,
+    "site_id": "v3repo_00608",
+    "within_km": true
+   },
+   {
+    "country": "Russia",
+    "identical_record": true,
+    "lat": 58.2738,
+    "lon": 33.2318,
+    "site_id": "v3repo_00650",
+    "within_km": true
+   },
+   {
+    "country": "Russia",
+    "identical_record": true,
+    "lat": 58.0884,
+    "lon": 33.3444,
+    "site_id": "v3repo_00651",
+    "within_km": true
+   },
+   {
+    "country": "Russia",
+    "identical_record": true,
+    "lat": 57.9876,
+    "lon": 33.3956,
+    "site_id": "v3repo_00652",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.05,
+    "lon": 27.02,
+    "site_id": "v3repo_00694",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.62,
+    "lon": 27.03,
+    "site_id": "v3repo_00695",
+    "within_km": true
+   },
+   {
+    "country": "Latvia",
+    "identical_record": true,
+    "lat": 57.13,
+    "lon": 26.93,
+    "site_id": "v3repo_00696",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.282,
+    "lon": 27.2603,
+    "site_id": "v3repo_00897",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.0,
+    "lon": 27.0,
+    "site_id": "v3repo_00900",
+    "within_km": true
+   },
+   {
+    "country": "Russia",
+    "identical_record": true,
+    "lat": 55.708,
+    "lon": 37.526,
+    "site_id": "v3repo_00966",
+    "within_km": true
+   },
+   {
+    "country": "Romania",
+    "identical_record": true,
+    "lat": 45.92,
+    "lon": 26.9,
+    "site_id": "v3repo_00975",
+    "within_km": true
+   },
+   {
+    "country": "Romania",
+    "identical_record": true,
+    "lat": 45.7,
+    "lon": 27.3,
+    "site_id": "v3repo_00976",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.375,
+    "lon": 26.725,
+    "site_id": "v3repo_00977",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.65,
+    "lon": 26.75,
+    "site_id": "v3repo_00993",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 59.57,
+    "lon": 26.12,
+    "site_id": "v3repo_00994",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 59.55,
+    "lon": 26.03,
+    "site_id": "v3repo_00996",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.27,
+    "lon": 26.45,
+    "site_id": "v3repo_00997",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.7,
+    "lon": 25.05,
+    "site_id": "v3repo_00998",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.98,
+    "lon": 26.75,
+    "site_id": "v3repo_00999",
+    "within_km": true
+   },
+   {
+    "country": "Russia",
+    "identical_record": true,
+    "lat": 56.5,
+    "lon": 32.9,
+    "site_id": "v3repo_01023",
+    "within_km": true
+   },
+   {
+    "country": "Russia",
+    "identical_record": true,
+    "lat": 54.917,
+    "lon": 37.567,
+    "site_id": "v3repo_01030",
+    "within_km": true
+   },
+   {
+    "country": "Russia",
+    "identical_record": true,
+    "lat": 55.7262,
+    "lon": 37.603,
+    "site_id": "v3repo_01040",
+    "within_km": true
+   },
+   {
+    "country": "Estonia",
+    "identical_record": true,
+    "lat": 58.1,
+    "lon": 26.3,
+    "site_id": "v3repo_01155",
+    "within_km": true
+   },
+   {
+    "country": "Romania",
+    "identical_record": true,
+    "lat": 45.087,
+    "lon": 25.066,
+    "site_id": "v3repo_01192",
+    "within_km": true
    }
   ]
  },

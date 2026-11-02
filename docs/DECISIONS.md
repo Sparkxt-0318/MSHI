@@ -224,6 +224,10 @@ cached fetches ≤ 0.4 s each (hash and worktree checks only), each blocked stag
 tables were byte-identical to the previous ones). Test suite: 110 tests, 107 passed, 3 skipped (the
 locked-test re-run and the NPP check, not run), 60 s. Not measurable here: WorldClim download, SoilGrids
 WCS (8 × global 0.05° GeoTIFF), MODIS points (handoff: LST ≈ 45 min for 1,530 points at 32 threads).
+*Updated 2026-11-02 (R-P1-20):* `make all` from the clean commit `a6c00bc`: 48 s (cosore_annual 37.7 s,
+build_sites 3.9 s, site_diagnostics 1.8 s, cached fetches ≤ 0.4 s, blocked stages 0.3–0.4 s), exit code 2;
+`data/derived/` byte-identical to before. `make test`: 140 tests, 136 passed, 4 skipped (the two
+locked-test re-runs, the locked-test targets and the NPP check), 68 s.
 
 **R-P1-14 Package review (2026-11-02).** The Phase-1 package was reviewed by three independent
 reviewers (fidelity to the handoff scripts, guards and robustness, conformance to the brief), and every

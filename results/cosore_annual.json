@@ -1,7 +1,10 @@
 {
+ "_outputs": {
+  "derived:cosore_annual.csv": "af3ab2d1691e9a5ce2aa375cae24d2e5656aeb923847b98d6b77c9581753134e"
+ },
  "_provenance": {
-  "code_sha256": "682cad1246354513940ea2481024ff14476136a66c723e1b2610a291e45d2f80",
-  "config_sha256": "d74c6282748cda672aab391021ef5c32408b309d82af5946b731a0a2f8371d78"
+  "code_sha256": "e3d4bf1e8ddf276e0a0662606620304df9b70c1a58577d56ab5e6e8314cddeb4",
+  "config_sha256": "dfde8e429a9bb547adc214e5a03203ae0def14f4378cd84b9f04616d88dc5f28"
  },
  "bad_metadata": [],
  "igbp_counts": {

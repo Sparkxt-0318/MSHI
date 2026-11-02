@@ -1,7 +1,10 @@
 {
+ "_outputs": {
+  "results:reproduction_check.md": "86ebf908240e50ad79c9d1343455f75575df155ceb1c06308905c971225cc18b"
+ },
  "_provenance": {
-  "code_sha256": "682cad1246354513940ea2481024ff14476136a66c723e1b2610a291e45d2f80",
-  "config_sha256": "d74c6282748cda672aab391021ef5c32408b309d82af5946b731a0a2f8371d78"
+  "code_sha256": "e3d4bf1e8ddf276e0a0662606620304df9b70c1a58577d56ab5e6e8314cddeb4",
+  "config_sha256": "dfde8e429a9bb547adc214e5a03203ae0def14f4378cd84b9f04616d88dc5f28"
  },
  "npp_check": null,
  "rows": [
@@ -228,7 +231,15 @@
    "note": "fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)",
    "quantity": "Locked test: re-run identical to the locked result",
    "status": "NOT RUN",
-   "tolerance": "1e-9",
+   "tolerance": "1e-09",
+   "v3": null
+  },
+  {
+   "handoff": "identical",
+   "note": "fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)",
+   "quantity": "Locked test (repo-filter sensitivity): re-run identical to the locked result",
+   "status": "NOT RUN",
+   "tolerance": "1e-09",
    "v3": null
   },
   {
@@ -252,7 +263,7 @@
   "DEVIATION": 0,
   "FAIL": 0,
   "INFO": 0,
-  "NOT RUN": 9,
+  "NOT RUN": 10,
   "PASS": 17,
   "STALE": 0
  }

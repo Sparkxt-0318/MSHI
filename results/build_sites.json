@@ -1,7 +1,12 @@
 {
+ "_outputs": {
+  "derived:records_v3.parquet": "d51a8577885327c6664c19f3b91dab1a34b7c36777aec22079d3ff210a362df3",
+  "derived:sites_v3_qc.parquet": "8aef5b32b20e67a1357a1f8c30b1bf93bda00875025d30ccf6732e16c411a007",
+  "derived:sites_v3_repo.parquet": "1ca93390b7f1f01f1bfb556d6c7331412047bb4cecec0fa228df03974b8e303a"
+ },
  "_provenance": {
-  "code_sha256": "682cad1246354513940ea2481024ff14476136a66c723e1b2610a291e45d2f80",
-  "config_sha256": "d74c6282748cda672aab391021ef5c32408b309d82af5946b731a0a2f8371d78"
+  "code_sha256": "e3d4bf1e8ddf276e0a0662606620304df9b70c1a58577d56ab5e6e8314cddeb4",
+  "config_sha256": "dfde8e429a9bb547adc214e5a03203ae0def14f4378cd84b9f04616d88dc5f28"
  },
  "coord_mismatch_examples": [
   [
