@@ -29,6 +29,8 @@ class Config:
         self.source = source
         self.repo_root = REPO_ROOT
         self.out_root = Path(out_root) if out_root else None
+        # set by mshi.run.run(): {"stages": [...], "status": {stage: status}} for the current invocation
+        self.invocation: dict | None = None
 
     def __getitem__(self, key: str) -> Any:
         return self._d[key]

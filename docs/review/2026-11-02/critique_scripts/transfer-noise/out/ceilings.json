@@ -1,0 +1,142 @@
+{
+ "qc": {
+  "ALL": {
+   "sites_all": 971,
+   "sites_multi": 605,
+   "anova_icc_single": 0.745,
+   "e1_style_site_mean_ceiling": 0.838,
+   "reml1_icc": 0.778,
+   "reml3": {
+    "site": 0.2927,
+    "study": 0.0704,
+    "record": 0.0684,
+    "conv": true
+   },
+   "ceil_independent_study_single": 0.678,
+   "ceil_same_study_single": 0.841,
+   "site_mean_ceiling_3level": 0.744,
+   "var_observed_site_means": 0.4072
+  },
+  "Asia": {
+   "sites_all": 387,
+   "sites_multi": 236,
+   "anova_icc_single": 0.727,
+   "e1_style_site_mean_ceiling": 0.825,
+   "reml1_icc": 0.756,
+   "reml3": {
+    "site": 0.2706,
+    "study": 0.0903,
+    "record": 0.0702,
+    "conv": true
+   },
+   "ceil_independent_study_single": 0.628,
+   "ceil_same_study_single": 0.837,
+   "site_mean_ceiling_3level": 0.697,
+   "var_observed_site_means": 0.4136
+  },
+  "Europe": {
+   "sites_all": 236,
+   "sites_multi": 135,
+   "anova_icc_single": 0.623,
+   "e1_style_site_mean_ceiling": 0.732,
+   "reml1_icc": 0.683,
+   "reml3": {
+    "site": 0.1976,
+    "study": 0.0582,
+    "record": 0.0837,
+    "conv": true
+   },
+   "ceil_independent_study_single": 0.582,
+   "ceil_same_study_single": 0.753,
+   "site_mean_ceiling_3level": 0.658,
+   "var_observed_site_means": 0.3114
+  },
+  "North America": {
+   "sites_all": 257,
+   "sites_multi": 176,
+   "anova_icc_single": 0.82,
+   "e1_style_site_mean_ceiling": 0.896,
+   "reml1_icc": 0.857,
+   "reml3": {
+    "site": 0.3522,
+    "study": 0.0433,
+    "record": 0.0472,
+    "conv": true
+   },
+   "ceil_independent_study_single": 0.795,
+   "ceil_same_study_single": 0.893,
+   "site_mean_ceiling_3level": 0.848,
+   "var_observed_site_means": 0.4599
+  }
+ },
+ "repo": {
+  "ALL": {
+   "sites_all": 1225,
+   "sites_multi": 776,
+   "anova_icc_single": 0.735,
+   "e1_style_site_mean_ceiling": 0.833,
+   "reml1_icc": 0.768,
+   "reml3": {
+    "site": 0.309,
+    "study": 0.106,
+    "record": 0.0766,
+    "conv": true
+   },
+   "ceil_independent_study_single": 0.629,
+   "ceil_same_study_single": 0.844,
+   "site_mean_ceiling_3level": 0.694,
+   "var_observed_site_means": 0.464
+  },
+  "Asia": {
+   "sites_all": 482,
+   "sites_multi": 308,
+   "anova_icc_single": 0.718,
+   "e1_style_site_mean_ceiling": 0.823,
+   "reml1_icc": 0.742,
+   "reml3": {
+    "site": 0.283,
+    "study": 0.1103,
+    "record": 0.0806,
+    "conv": true
+   },
+   "ceil_independent_study_single": 0.597,
+   "ceil_same_study_single": 0.83,
+   "site_mean_ceiling_3level": 0.67,
+   "var_observed_site_means": 0.4505
+  },
+  "Europe": {
+   "sites_all": 284,
+   "sites_multi": 168,
+   "anova_icc_single": 0.671,
+   "e1_style_site_mean_ceiling": 0.776,
+   "reml1_icc": 0.713,
+   "reml3": {
+    "site": 0.2399,
+    "study": 0.1028,
+    "record": 0.0948,
+    "conv": true
+   },
+   "ceil_independent_study_single": 0.548,
+   "ceil_same_study_single": 0.783,
+   "site_mean_ceiling_3level": 0.617,
+   "var_observed_site_means": 0.3888
+  },
+  "North America": {
+   "sites_all": 328,
+   "sites_multi": 222,
+   "anova_icc_single": 0.785,
+   "e1_style_site_mean_ceiling": 0.874,
+   "reml1_icc": 0.822,
+   "reml3": {
+    "site": 0.3518,
+    "study": 0.0929,
+    "record": 0.0538,
+    "conv": true
+   },
+   "ceil_independent_study_single": 0.706,
+   "ceil_same_study_single": 0.892,
+   "site_mean_ceiling_3level": 0.764,
+   "var_observed_site_means": 0.5079
+  }
+ }
+}

@@ -16,8 +16,8 @@ import numpy as np
 import pandas as pd
 
 from ..config import Config
-from ..io import read_table, write_json, write_table
-from .modis import site_key
+from ..io import read_json, read_table, write_result, write_table
+from .modis import load_modis_points, site_key
 from .rasters import soilgrids_path, worldclim_path
 
 log = logging.getLogger("mshi.features")
@@ -54,16 +54,18 @@ def attach_features(cfg: Config, d: pd.DataFrame, modis: pd.DataFrame | None) ->
 
 
 def features(cfg: Config) -> dict:
-    mp = cfg.path("interim", "modis_points.parquet")
-    modis = pd.read_parquet(mp) if mp.exists() else None
-    if modis is None:
-        raise FileNotFoundError(f"{mp} missing; run stage modis_points first")
-    res = {}
-    for tag in cfg["site_build"]["variants"]:
-        d = read_table(cfg, cfg.path("derived", f"sites_v3_{tag}.parquet"))
+    nd = cfg["features"]["site_key_round"]
+    sites = {tag: read_table(cfg, cfg.path("derived", f"sites_v3_{tag}.parquet"))
+             for tag in cfg["site_build"]["variants"]}
+    keys = set().union(*(site_key(d.lat, d.lon, nd) for d in sites.values()))
+    # refuses MODIS values from another MODIS config/extraction code, from a run with failed reads,
+    # or not covering every site
+    modis = load_modis_points(cfg, keys)
+    res = {"modis_cache_key": read_json(cfg.path("interim", "modis_points.meta.json"))["key"]}
+    for tag, d in sites.items():
         d = attach_features(cfg, d, modis)
         write_table(d, cfg.path("interim", f"features_v3_{tag}.parquet"))
         res[tag] = {"shape": list(d.shape),
                     "missing": d[["bio01", "bio12", "clay", "npp", "lst_day"]].isna().sum().to_dict()}
-    write_json(res, cfg.path("results", "features.json"))
+    write_result(cfg, res, "features.json")
     return res

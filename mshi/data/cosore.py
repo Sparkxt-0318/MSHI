@@ -8,7 +8,9 @@ Python ``rdata`` parser, and integrate each port's mean flux to an annual value 
 Annual conversion: a flux of 1 umol CO2 m-2 s-1 sustained for a year is
 12.011 * 31,536,000 / 1e6 = 378.79 g C m-2 yr-1.
 
-Datasets that ``rdata`` cannot parse are recorded (name + error) in ``results/cosore_annual.json``.
+Every dataset that yields no annual value is recorded in ``results/cosore_annual.json`` with the
+reason: ``no_rds`` (no data file), ``parse_error`` (``rdata`` failed), ``no_qualifying_port`` (no port
+meets the coverage rule) or ``unusable_content`` (no complete flux/port/timestamp rows).
 """
 from __future__ import annotations
 
@@ -20,7 +22,7 @@ import numpy as np
 import pandas as pd
 
 from ..config import Config
-from ..io import write_json, write_table
+from ..io import write_result, write_table
 from .fetch import cosore_repo_path
 
 log = logging.getLogger("mshi.cosore")
@@ -86,9 +88,9 @@ def integrate_ports(df: pd.DataFrame, min_days: int, min_span: int, clip: tuple[
 def cosore_annual(cfg: Config) -> dict:
     p = cfg["cosore_annual"]
     factor = p["molar_mass_c"] * p["seconds_per_year"] / 1e6
+    from ..netutil import verify_git_checkout
+    verify_git_checkout(cosore_repo_path(cfg), cfg["sources"]["cosore"]["commit"])   # pinned commit, unmodified
     root = cosore_repo_path(cfg) / cfg["sources"]["cosore"]["datasets_dir"]
-    if not root.exists():
-        raise FileNotFoundError(f"COSORE datasets not found at {root}; run stage fetch_cosore first")
     datasets = sorted(d for d in root.iterdir() if d.is_dir())
     rows, unreadable, bad_meta, no_port, out_of_range, test_skipped = [], [], [], [], [], []
     for ds in datasets:
@@ -146,6 +148,6 @@ def cosore_annual(cfg: Config) -> dict:
            "rs_annual_summary": out["rs_annual"].describe().round(2).to_dict() if len(out) else {},
            "rule": {"min_obs_days": p["min_obs_days"], "min_span_days": p["min_span_days"],
                     "flux_clip_umol": p["flux_clip_umol"], "factor_gC_per_umol": factor}}
-    write_json(res, cfg.path("results", "cosore_annual.json"))
+    write_result(cfg, res, "cosore_annual.json")
     log.info("COSORE: %d sites, %d datasets unreadable/no data", len(out), len(unreadable))
     return res

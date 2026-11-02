@@ -1,0 +1,3 @@
+Se=0.415 FPR=0.055; landscape f: raw 0.199 -> RG 0.270
+f inflation A/C-1 = 0.0436
+f_rg inflation A/C-1 = 0.0322

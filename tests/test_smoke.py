@@ -29,7 +29,8 @@ def test_smoke_50_sites(cfg, tmp_path, monkeypatch):
         pytest.skip("pinned raw inputs / cosore_annual.csv not present; run `make data` first")
     from mshi.analysis.clean_test import LockedTest
     from mshi.data import features as F
-    from mshi.data.modis import modis_point_set, site_key
+    from mshi.data.modis import modis_cache_key, modis_point_set, site_key
+    from mshi.io import write_json
     from mshi.run import run
 
     data = copy.deepcopy(cfg.data)
@@ -62,8 +63,10 @@ def test_smoke_50_sites(cfg, tmp_path, monkeypatch):
                         "lst_day": 20 - 0.3 * pts.lat.abs().values, "lst_night": 5 - 0.3 * pts.lat.abs().values})
     sand.path("interim").mkdir(parents=True, exist_ok=True)
     mod.to_parquet(sand.path("interim", "modis_points.parquet"), index=False)
+    write_json({"key": modis_cache_key(sand, mod.site_key), "record": {"n_failed_reads": 0}},
+               sand.path("interim", "modis_points.meta.json"))
     res = F.features(sand)
-    assert set(res) == {"qc", "repo"}
+    assert {"qc", "repo"} <= set(res)
     d = pd.read_parquet(sand.path("interim", "features_v3_qc.parquet"))
     assert d[["bio01", "bio12", "clay", "npp", "lst_diurnal_range"]].notna().all().all()
 
@@ -74,7 +77,7 @@ def test_smoke_50_sites(cfg, tmp_path, monkeypatch):
     data["clean_test"]["locked"]["xgb"]["n_estimators"] = 30
     data["clean_test"]["locked"]["bootstrap_n"] = 50
     data["clean_test"]["locked"]["seed_spread"] = [0, 1]
-    R = LockedTest(Config(data, source=cfg.source, out_root=tmp_path)).run(d)
+    R = LockedTest(Config(data, source=cfg.source, out_root=tmp_path), require_lock=False).run(d)
     assert len(R["selection_table"]) == 11
     assert {"primary", "aoa", "all_candidates_on_test"} <= set(R)
     assert R["primary"]["n"] > 0 and len(R["all_candidates_on_test"]) == 11

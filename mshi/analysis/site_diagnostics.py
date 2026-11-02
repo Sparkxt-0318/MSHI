@@ -1,10 +1,13 @@
 """Diagnostics of the site build (exploratory; changes no table).
 
-Quantifies the impact of choices kept from the handoff for reproduction (docs/DECISIONS.md D-P1-5):
+Quantifies the impact of choices kept from the handoff for reproduction (docs/DECISIONS.md D-P1-8):
 1. the coordinate check measures "100 km from the reported country" in Web Mercator (EPSG:3857),
    where distances are inflated by 1/cos(latitude); compare with true (geodesic) distances;
 2. the nearest-polygon continent fallback ("within 50 km") is also measured in EPSG:3857;
-3. 5-km connected components can chain records that are more than 5 km apart.
+3. 5-km connected components can chain records that are more than 5 km apart;
+4. the continent comes from the Natural Earth CONTINENT of the country polygon containing the site, so
+   overseas parts of European countries (French Guiana, the Canary Islands) are labelled "Europe";
+   sites outside a broad geographic box per continent are listed (``site_diagnostics.continent_boxes``).
 Writes results/site_diagnostics.json.
 """
 from __future__ import annotations
@@ -16,7 +19,8 @@ from pyproj import CRS
 
 from ..config import Config
 from ..data.fetch import naturalearth_path
-from ..io import read_table, write_json
+from ..io import read_table, write_result
+from ..netutil import verify_sha256
 
 
 def _true_km_to_polygon(lon: float, lat: float, geom, geom_crs) -> float:
@@ -36,7 +40,9 @@ def _haversine_km(lat1, lon1, lat2, lon2, R=6371.0):
 def site_diagnostics(cfg: Config) -> dict:
     cc = cfg["site_build"]["coord_check"]
     r = read_table(cfg, cfg.path("derived", "records_v3.parquet"))
-    cty = gpd.read_file(naturalearth_path(cfg, "ne_50m_admin_0_countries.geojson"))[["ADMIN", "CONTINENT", "geometry"]]
+    ne_file = "ne_50m_admin_0_countries.geojson"
+    verify_sha256(naturalearth_path(cfg, ne_file), cfg["sources"]["naturalearth"]["files"][ne_file])
+    cty = gpd.read_file(naturalearth_path(cfg, ne_file))[["ADMIN", "CONTINENT", "geometry"]]
     by_name = cty.set_index("ADMIN").geometry
     out: dict = {}
 
@@ -92,6 +98,21 @@ def site_diagnostics(cfg: Config) -> dict:
                                        "n_gt_5km": int((dv > 5).sum()), "n_gt_10km": int((dv > 10).sum()),
                                        "n_gt_20km": int((dv > 20).sum()), "max_km": float(dv.max()) if len(dv) else None,
                                        "largest": dv.sort_values(ascending=False).head(5).round(1).to_dict()}
-    write_json(out, cfg.path("results", "site_diagnostics.json"))
+    # 4. continent labels outside broad geographic boxes (exploratory; the locked rule is not changed)
+    boxes = cfg["site_diagnostics"]["continent_boxes"]
+    for tag in cfg["site_build"]["variants"]:
+        st = read_table(cfg, cfg.path("derived", f"sites_v3_{tag}.parquet"))
+        rows = []
+        for cont, (lon0, lon1, lat0, lat1) in boxes.items():
+            sub = st[st.continent == cont]
+            bad = sub[(sub.lon < lon0) | (sub.lon > lon1) | (sub.lat < lat0) | (sub.lat > lat1)]
+            for b in bad.itertuples():
+                rec = r[r[f"site_id_{tag}"] == b.site_id]
+                rows.append({"site_id": b.site_id, "continent": cont, "lat": round(float(b.lat), 4),
+                             "lon": round(float(b.lon), 4), "n_rec": int(len(rec)),
+                             "countries": sorted(set(rec.geo_country.dropna()) | set(rec.Country.dropna())),
+                             "site_names": sorted(set(rec.Site_name.dropna().astype(str)))[:3]})
+        out[f"continent_outside_box_{tag}"] = {"boxes_lon0_lon1_lat0_lat1": boxes, "n": len(rows), "sites": rows}
+    write_result(cfg, out, "site_diagnostics.json")
     return {k: (v if not isinstance(v, dict) else {kk: vv for kk, vv in v.items() if not isinstance(vv, list)})
             for k, v in out.items()}

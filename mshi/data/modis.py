@@ -13,22 +13,45 @@ Planetary Computer pitfalls handled here (see PROMPT section 4):
 
 Known quirk kept for fidelity (see docs/DECISIONS.md): reads are ``boundless`` with fill 0, and 0 is a
 valid NPP value, so window cells beyond the edge of a MODIS tile count as NPP = 0.
+
+Differences from the prototype (none changes a value when every read succeeds; docs/DECISIONS.md):
+- a read that still fails after its retries is retried once more in a second pass with a fresh token;
+  if any read still fails, the stage FAILS and writes no values (the prototype printed the failure and
+  averaged the remaining rasters, which silently changes a site's mean);
+- per-site means are taken over rasters in a fixed (kind, date, href) order, so the result does not
+  depend on thread completion order (bit-reproducible);
+- the output is cached in data/interim/ together with a key (SHA-256 of ``sources.modis``, of the point
+  set and of the extraction code); the cache is reused only if the key matches exactly and the cached
+  run had no failed reads, and ``load_modis_points`` refuses a table whose key does not match;
+- before extracting, the blob-storage host of the first asset is probed, so a policy block of the
+  COG host is reported as ``blocked`` instead of producing all-NaN values.
 """
 from __future__ import annotations
 
+import hashlib
+import inspect
 import logging
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from urllib.parse import urlparse
 
 import numpy as np
 import pandas as pd
 import requests
 
-from ..config import Config
-from ..io import read_table, write_json, write_table
+from ..config import Config, canonical_sha256
+from ..io import read_json, read_table, write_json, write_result, write_table
 
 log = logging.getLogger("mshi.modis")
+
+
+class ModisIncompleteError(RuntimeError):
+    """Some raster reads failed after all retries; no values were written."""
+
+
+class StaleModisError(RuntimeError):
+    """The cached MODIS table was not produced by the current MODIS config/code, or misses points."""
 
 
 def site_key(lat, lon, nd: int = 5) -> pd.Series:
@@ -105,6 +128,16 @@ def item_datetime(it):
 
 
 def plan_jobs(pts: pd.DataFrame, m: dict, catalog, kinds: tuple[str, ...] = ("npp", "lst")) -> list[tuple]:
+    """One job per (tile, raster): (kind, href, points in the tile, item datetime).
+
+    NPP: every annual item in ``datetime``; LST: the first 8-day composite of each month (the only
+    ``lst.composite`` rule implemented, as in the handoff). Items whose ``datetime`` is None use
+    ``start_datetime``; only items whose id starts with the configured prefix (Terra) are used.
+    """
+    if "lst" in kinds and m["lst"].get("composite") != "first_of_month":
+        raise ValueError(f"sources.modis.lst.composite = {m['lst'].get('composite')!r} is not implemented; "
+                         "only 'first_of_month' (the handoff rule) is")
+
     def items_for(col, prefix, h, v):
         q = {"modis:horizontal-tile": {"eq": int(h)}, "modis:vertical-tile": {"eq": int(v)}}
         its = catalog.search(collections=[col], datetime=m["datetime"], query=q,
@@ -115,61 +148,94 @@ def plan_jobs(pts: pd.DataFrame, m: dict, catalog, kinds: tuple[str, ...] = ("np
     for (h, v), sub in pts.groupby(["h", "v"]):
         if "npp" in kinds:
             for it in items_for(m["npp"]["collection"], m["npp"]["item_prefix"], h, v):
-                jobs.append(("npp", it.assets[m["npp"]["asset"]].href, sub, item_datetime(it).year))
+                jobs.append(("npp", it.assets[m["npp"]["asset"]].href, sub, item_datetime(it)))
         if "lst" in kinds:
             firsts = {}
-            for it in sorted(items_for(m["lst"]["collection"], m["lst"]["item_prefix"], h, v), key=item_datetime):
+            for it in sorted(items_for(m["lst"]["collection"], m["lst"]["item_prefix"], h, v),
+                             key=lambda i: (item_datetime(i), i.id)):
                 firsts.setdefault((item_datetime(it).year, item_datetime(it).month), it)
             for it in firsts.values():
                 for kind, asset in m["lst"]["assets"].items():
-                    jobs.append((kind, it.assets[asset].href, sub, item_datetime(it).year))
+                    jobs.append((kind, it.assets[asset].href, sub, item_datetime(it)))
     return jobs
 
 
-def extract_points(pts: pd.DataFrame, m: dict, kinds: tuple[str, ...] = ("npp", "lst")) -> pd.DataFrame:
-    import pystac_client
-    pts = pts.copy()
-    pts["h"], pts["v"] = sinusoidal_tiles(pts.lon.values, pts.lat.values, m)
-    catalog = pystac_client.Client.open(m["stac_url"])
-    tokens = TokenCache(m["sas_token_url"], m["token_refresh_s"])
-    jobs = plan_jobs(pts, m, catalog, kinds)
-    log.info("%d points, %d tiles, %d raster reads", len(pts), pts.groupby(["h", "v"]).ngroups, len(jobs))
+def _read_job(job: tuple, tokens: TokenCache, m: dict, sleep=time.sleep) -> tuple[dict, str | None]:
+    kind, href, sub, _when = job
+    err: Exception | None = None
+    for attempt in range(m["retries"]):
+        try:
+            return read_windows(href + "?" + tokens.get(), sub, kind, m), None
+        except Exception as e:  # noqa: BLE001 - retried, then reported
+            err = e
+            if "403" in str(e):
+                tokens.get(force=True)
+            if attempt < m["retries"] - 1:
+                sleep(3 * (attempt + 1))
+    return {}, f"{href.split('?')[0]}: {type(err).__name__}: {str(err)[:200]}"
+
+
+def aggregate(results: list[tuple], site_keys, kinds: list[str]) -> pd.DataFrame:
+    """Per-site mean over rasters. ``results``: (kind, when, href, {site_key: window mean}) per raster.
+    Values are accumulated in sorted (kind, when, href) order, so the means do not depend on the order
+    in which reads completed."""
     acc: dict = {}
-    failed = []
-
-    def run(job):
-        kind, href, sub, _yr = job
-        err = None
-        for attempt in range(m["retries"]):
-            try:
-                return kind, read_windows(href + "?" + tokens.get(), sub, kind, m), None
-            except Exception as e:  # noqa: BLE001 - retried, then recorded
-                err = e
-                time.sleep(3 * (attempt + 1))
-                if "403" in str(e):
-                    tokens.get(force=True)
-        return kind, {}, f"{href}: {err}"
-
-    with ThreadPoolExecutor(m["threads"]) as ex:
-        for f in as_completed([ex.submit(run, j) for j in jobs]):
-            kind, vals, err = f.result()
-            if err:
-                failed.append(err)
-            for k, val in vals.items():
-                acc.setdefault((k, kind), []).append(val)
+    for kind, _when, _href, vals in sorted(results, key=lambda r: (r[0], str(r[1]), r[2])):
+        for k, val in vals.items():
+            acc.setdefault((k, kind), []).append(val)
     rows = []
-    all_kinds = (["npp"] if "npp" in kinds else []) + (list(m["lst"]["assets"]) if "lst" in kinds else [])
-    for k in pts.site_key:
+    for k in site_keys:
         row = {"site_key": k}
-        for kind in all_kinds:
+        for kind in kinds:
             v = np.array(acc.get((k, kind), []), float)
             row[kind] = float(np.nanmean(v)) if np.isfinite(v).any() else np.nan
             row[kind + "_n"] = int(np.isfinite(v).sum())
         rows.append(row)
-    out = pd.DataFrame(rows)
-    out.attrs["failed_reads"] = failed
-    out.attrs["n_jobs"] = len(jobs)
-    return out
+    return pd.DataFrame(rows)
+
+
+def extract_points(pts: pd.DataFrame, m: dict, kinds: tuple[str, ...] = ("npp", "lst"),
+                   catalog=None, tokens: TokenCache | None = None) -> tuple[pd.DataFrame, dict]:
+    """Window means for every point; returns (table, info) with info = n_jobs, n_tiles, failed_reads."""
+    from ..netutil import check_reachable
+    pts = pts.copy()
+    pts["h"], pts["v"] = sinusoidal_tiles(pts.lon.values, pts.lat.values, m)
+    if catalog is None:
+        import pystac_client
+        catalog = pystac_client.Client.open(m["stac_url"])
+    tokens = tokens or TokenCache(m["sas_token_url"], m["token_refresh_s"])
+    jobs = plan_jobs(pts, m, catalog, kinds)
+    n_tiles = int(pts.groupby(["h", "v"]).ngroups)
+    log.info("%d points, %d tiles, %d raster reads", len(pts), n_tiles, len(jobs))
+    if jobs and urlparse(jobs[0][1]).scheme in ("http", "https"):
+        check_reachable(f"https://{urlparse(jobs[0][1]).netloc}/", require_ok=False)   # COG host
+    results: list[tuple] = []
+
+    def run_all(js: list[tuple], threads: int) -> list[tuple[tuple, str]]:
+        bad = []
+        with ThreadPoolExecutor(threads) as ex:
+            futs = {ex.submit(_read_job, j, tokens, m): j for j in js}
+            for f in as_completed(futs):
+                j = futs[f]
+                vals, err = f.result()
+                if err:
+                    bad.append((j, err))
+                else:
+                    results.append((j[0], j[3], j[1], vals))
+        return bad
+
+    bad = run_all(jobs, m["threads"])
+    if bad:
+        log.warning("%d of %d raster reads failed after %d attempts; second pass with a fresh token",
+                    len(bad), len(jobs), m["retries"])
+        tokens.get(force=True)
+        bad = run_all([j for j, _ in bad], m["second_pass_threads"])
+    failed = sorted(err for _, err in bad)
+    for err in failed[:20]:
+        log.warning("MODIS read FAILED: %s", err)
+    all_kinds = (["npp"] if "npp" in kinds else []) + (list(m["lst"]["assets"]) if "lst" in kinds else [])
+    out = aggregate(results, pts.site_key, all_kinds)
+    return out, {"n_jobs": len(jobs), "n_tiles": n_tiles, "failed_reads": failed}
 
 
 def modis_point_set(cfg: Config) -> pd.DataFrame:
@@ -188,25 +254,73 @@ def modis_point_set(cfg: Config) -> pd.DataFrame:
     return pts.drop_duplicates("site_key").reset_index(drop=True)
 
 
+def _extraction_code_sha256() -> str:
+    """Hash of the source of the functions that determine the extracted values."""
+    src = "".join(inspect.getsource(f) for f in (site_key, sinusoidal_tiles, scale_values, read_windows,
+                                                 item_datetime, plan_jobs, _read_job, aggregate))
+    return hashlib.sha256(src.encode()).hexdigest()
+
+
+def modis_cache_key(cfg: Config, keys) -> dict:
+    return {"modis_config_sha256": canonical_sha256(cfg["sources"]["modis"]),
+            "code_sha256": _extraction_code_sha256(),
+            "points_sha256": hashlib.sha256("\n".join(sorted(keys)).encode()).hexdigest(),
+            "n_points": int(len(keys))}
+
+
+def _paths(cfg: Config):
+    return cfg.path("interim", "modis_points.parquet"), cfg.path("interim", "modis_points.meta.json")
+
+
+def load_modis_points(cfg: Config, keys=None) -> pd.DataFrame:
+    """The cached MODIS table, only if it was produced by the current MODIS config and extraction code,
+    with no failed reads, and covers ``keys``; raises StaleModisError otherwise."""
+    out_path, meta_path = _paths(cfg)
+    if not (out_path.exists() and meta_path.exists()):
+        raise FileNotFoundError(f"{out_path} (or its .meta.json) missing; run stage modis_points")
+    meta = read_json(meta_path)
+    k = meta.get("key", {})
+    if (k.get("modis_config_sha256") != canonical_sha256(cfg["sources"]["modis"])
+            or k.get("code_sha256") != _extraction_code_sha256()):
+        raise StaleModisError(f"{out_path} was produced with a different MODIS config or extraction code; "
+                              "re-run stage modis_points")
+    if meta.get("record", {}).get("n_failed_reads", 1) != 0:
+        raise StaleModisError(f"{out_path} comes from a run with failed reads; re-run stage modis_points")
+    df = read_table(cfg, out_path)
+    if keys is not None:
+        miss = set(keys) - set(df.site_key)
+        if miss:
+            raise StaleModisError(f"{out_path} lacks {len(miss)} of the requested points; re-run modis_points")
+    return df
+
+
 def modis_points(cfg: Config) -> dict:
     from ..netutil import check_reachable
     m = cfg["sources"]["modis"]
     pts = modis_point_set(cfg)
-    out_path = cfg.path("interim", "modis_points.parquet")
-    if out_path.exists():
-        prev = pd.read_parquet(out_path)
-        if set(pts.site_key) <= set(prev.site_key):
-            log.info("modis_points: cached values cover all %d points", len(pts))
-            res = {"n_points": int(len(pts)), "cached": True}
-            write_json(res, cfg.path("results", "modis_points.json"))
-            return res
+    key = modis_cache_key(cfg, pts.site_key)
+    out_path, meta_path = _paths(cfg)
+    if out_path.exists() and meta_path.exists():
+        meta = read_json(meta_path)
+        if meta.get("key") == key and meta.get("record", {}).get("n_failed_reads") == 0:
+            log.info("modis_points: cached extraction matches the MODIS config, code and %d points", len(pts))
+            write_result(cfg, meta["record"], "modis_points.json")     # same record as the original run
+            return {**meta["record"], "cached": True}
+    meta_path.unlink(missing_ok=True)
     check_reachable(m["stac_url"])
     check_reachable(m["sas_token_url"])
-    vals = extract_points(pts, m)
-    write_table(vals, out_path)
-    res = {"n_points": int(len(pts)), "cached": False, "n_raster_reads": vals.attrs.get("n_jobs"),
-           "n_failed_reads": len(vals.attrs.get("failed_reads", [])),
-           "failed_reads_head": vals.attrs.get("failed_reads", [])[:20],
+    vals, info = extract_points(pts, m)
+    failed = info["failed_reads"]
+    rec = {"n_points": int(len(pts)), "n_tiles": info["n_tiles"], "n_raster_reads": info["n_jobs"],
+           "n_failed_reads": len(failed), "failed_reads": failed[:100], "cache_key": key,
            "missing": {c: int(vals[c].isna().sum()) for c in ["npp", "lst_day", "lst_night"] if c in vals}}
-    write_json(res, cfg.path("results", "modis_points.json"))
-    return res
+    if len(failed) > m["max_failed_reads"]:
+        out_path.unlink(missing_ok=True)
+        write_result(cfg, {**rec, "status": "incomplete: no values written"}, "modis_points.json")
+        raise ModisIncompleteError(f"{len(failed)} of {info['n_jobs']} MODIS raster reads failed after retries "
+                                   f"(first: {failed[0]}); no values written, see results/modis_points.json")
+    vals.attrs = {}
+    write_table(vals, out_path)
+    write_json({"key": key, "record": rec}, meta_path)
+    write_result(cfg, rec, "modis_points.json")
+    return rec

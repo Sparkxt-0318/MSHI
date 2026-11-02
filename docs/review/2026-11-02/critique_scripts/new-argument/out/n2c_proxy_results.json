@@ -1,0 +1,232 @@
+{
+ "N2c_X1": {
+  "n_sites": 577,
+  "landscape_share": {
+   "Forest": 0.32,
+   "Grassland": 0.289,
+   "Agriculture": 0.17,
+   "Shrubland": 0.096,
+   "Savanna": 0.112,
+   "Desert": 0.013
+  },
+  "A": 35.44,
+  "C": 33.84,
+  "inflation": 0.047,
+  "iid1000_ci": [
+   0.006,
+   0.088
+  ],
+  "skipped": 3,
+  "class_coefs_vs_forest": {
+   "Grassland": -0.0,
+   "Agriculture": -0.152,
+   "Shrubland": -0.47,
+   "Savanna": -0.662,
+   "Desert": -0.852
+  },
+  "plot_counts": {
+   "Forest": 395,
+   "Grassland": 78,
+   "Agriculture": 72,
+   "Shrubland": 14,
+   "Desert": 13,
+   "Savanna": 5
+  },
+  "leave_one_savanna_out(inflation,coef)": [
+   [
+    0.054,
+    -0.756
+   ],
+   [
+    0.037,
+    -0.502
+   ],
+   [
+    0.054,
+    -0.752
+   ],
+   [
+    0.048,
+    -0.669
+   ],
+   [
+    0.046,
+    -0.626
+   ]
+  ],
+  "pooled[savanna->forest]": -0.01,
+  "pooled[savanna->grassland]": -0.001,
+  "pooled[savanna+shrub->grassland]": 0.0
+ },
+ "N2c_X2": {
+  "n_sites": 577,
+  "landscape_share": {
+   "Forest": 0.2,
+   "Grassland": 0.289,
+   "Agriculture": 0.17,
+   "Shrubland": 0.096,
+   "Savanna": 0.232,
+   "Desert": 0.013
+  },
+  "A": 35.44,
+  "C": 31.57,
+  "inflation": 0.123,
+  "iid1000_ci": [
+   0.044,
+   0.193
+  ],
+  "skipped": 3,
+  "class_coefs_vs_forest": {
+   "Grassland": -0.0,
+   "Agriculture": -0.152,
+   "Shrubland": -0.47,
+   "Savanna": -0.662,
+   "Desert": -0.852
+  },
+  "plot_counts": {
+   "Forest": 395,
+   "Grassland": 78,
+   "Agriculture": 72,
+   "Shrubland": 14,
+   "Desert": 13,
+   "Savanna": 5
+  },
+  "leave_one_savanna_out(inflation,coef)": [
+   [
+    0.138,
+    -0.756
+   ],
+   [
+    0.096,
+    -0.502
+   ],
+   [
+    0.137,
+    -0.752
+   ],
+   [
+    0.124,
+    -0.669
+   ],
+   [
+    0.118,
+    -0.626
+   ]
+  ],
+  "pooled[savanna->forest]": -0.01,
+  "pooled[savanna->grassland]": 0.005,
+  "pooled[savanna+shrub->grassland]": 0.013
+ },
+ "N2d_X1": {
+  "n_sites": 564,
+  "landscape_share": {
+   "Forest": 0.324,
+   "Grassland": 0.292,
+   "Agriculture": 0.173,
+   "Shrubland": 0.097,
+   "Savanna": 0.113
+  },
+  "A": 36.11,
+  "C": 33.67,
+  "inflation": 0.072,
+  "iid1000_ci": [
+   0.037,
+   0.106
+  ],
+  "skipped": 11,
+  "class_coefs_vs_forest": {
+   "Grassland": -0.009,
+   "Agriculture": -0.162,
+   "Shrubland": -0.485,
+   "Savanna": -0.674
+  },
+  "plot_counts": {
+   "Forest": 395,
+   "Grassland": 78,
+   "Agriculture": 72,
+   "Shrubland": 14,
+   "Savanna": 5
+  },
+  "leave_one_savanna_out(inflation,coef)": [
+   [
+    0.079,
+    -0.767
+   ],
+   [
+    0.063,
+    -0.513
+   ],
+   [
+    0.079,
+    -0.764
+   ],
+   [
+    0.073,
+    -0.684
+   ],
+   [
+    0.071,
+    -0.64
+   ]
+  ],
+  "pooled[savanna->forest]": 0.012,
+  "pooled[savanna->grassland]": 0.023,
+  "pooled[savanna+shrub->grassland]": 0.024
+ },
+ "N2d_X2": {
+  "n_sites": 564,
+  "landscape_share": {
+   "Forest": 0.203,
+   "Grassland": 0.292,
+   "Agriculture": 0.173,
+   "Shrubland": 0.097,
+   "Savanna": 0.235
+  },
+  "A": 36.11,
+  "C": 31.38,
+  "inflation": 0.151,
+  "iid1000_ci": [
+   0.078,
+   0.217
+  ],
+  "skipped": 11,
+  "class_coefs_vs_forest": {
+   "Grassland": -0.009,
+   "Agriculture": -0.162,
+   "Shrubland": -0.485,
+   "Savanna": -0.674
+  },
+  "plot_counts": {
+   "Forest": 395,
+   "Grassland": 78,
+   "Agriculture": 72,
+   "Shrubland": 14,
+   "Savanna": 5
+  },
+  "leave_one_savanna_out(inflation,coef)": [
+   [
+    0.167,
+    -0.767
+   ],
+   [
+    0.125,
+    -0.513
+   ],
+   [
+    0.166,
+    -0.764
+   ],
+   [
+    0.153,
+    -0.684
+   ],
+   [
+    0.146,
+    -0.64
+   ]
+  ],
+  "pooled[savanna->forest]": 0.012,
+  "pooled[savanna->grassland]": 0.031,
+  "pooled[savanna+shrub->grassland]": 0.039
+ }
+}

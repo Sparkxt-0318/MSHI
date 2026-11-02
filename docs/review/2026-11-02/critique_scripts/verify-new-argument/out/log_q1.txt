@@ -1,0 +1,14 @@
+Q1_n MATCH
+Q1_crosstab_plot_x_pixel MATCH
+Q1_forest_share MATCH
+Q1_agreement_forest_vs_not MATCH
+Q1_plot_forest_pixel_nonforest MATCH
+outer keys: ['Agriculture', 'Forest', 'Grassland', 'Other', 'Savanna', 'Shrubland']  inner keys: ['Agriculture', 'Desert', 'Forest', 'Grassland', 'Savanna', 'Shrubland']
+plot classes in s: {'Forest': 433, 'Grassland': 83, 'Agriculture': 75, 'Shrubland': 14, 'Desert': 13, 'Savanna': 6}
+pixel classes in s: {'Forest': 190, 'Savanna': 156, 'Agriculture': 103, 'Grassland': 91, 'Other': 79, 'Shrubland': 5}
+Q1 continent counts: {'Asia': 387, 'North America': 194, 'Europe': 30, 'Africa': 10, 'Oceania': 3}
+forest plots in Q1: 433  IGBP codes: {8: 100, 4: 65, 2: 56, 5: 49, 9: 36, 12: 31, 13: 28, 17: 19, 14: 17, 10: 17, 1: 9, 11: 3, 16: 2, 6: 1}
+Q1 sample: pixel-forest share at plots [1-5] = 0.304; forest plots in such pixels = 0.413
+Q1 sample: pixel-forest share at plots [1-5+8] = 0.481; forest plots in such pixels = 0.644
+Q1 sample: pixel-forest share at plots [1-5+8+9] = 0.554; forest plots in such pixels = 0.727
+Desert plots in Q1: 13 {10: 8, 7: 3, 16: 1, 12: 1} {'Asia': 8, 'North America': 5}

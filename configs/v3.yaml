@@ -12,10 +12,11 @@ paths:                       # relative to the repository root
   figures: figures           # figures produced by mshi/figures (committed)
   handoff: docs/handoff      # 2026-11-02 handoff bundle (provenance, read-only)
 
-# Files under legacy/ are never read, except these (reproduction checks against the v1/v2 pipeline).
+# Files under legacy/ are never read, except these (path: pinned SHA-256), used for the NPP reproduction
+# check and to add the 889 original sites to the MODIS point set.
 legacy_allowlist:
-  - legacy/data/processed/training_features_v2.parquet
-  - legacy/data/processed/us_validation_features_v2.parquet
+  legacy/data/processed/training_features_v2.parquet: 482892dfed5c0897a0743dab72e9c0b563da89f45f6410cdb86b8f080fb5338a
+  legacy/data/processed/us_validation_features_v2.parquet: 1fa5d930dc2211cc9e5d19f4047105f6b6fa1f864ac335a3989afb2fec84c058
 
 # Tables the pipeline must refuse to read under any name (SHA-256 of file contents).
 forbidden_sha256:
@@ -30,6 +31,7 @@ sources:
     url: https://raw.githubusercontent.com/bpbond/srdb/{commit}/{file}
     sha256: c4d7714a0954a0c9b8d4d41ae758defa8c46cb208aa50ef148e762655f892911
     licence_url: https://raw.githubusercontent.com/bpbond/srdb/{commit}/LICENSE
+    licence_sha256: 64bd84a5d7afb8f6e9caf1e9c18960e2e8eef1214f1d7a012fc50b8c5456d971
   cosore:
     description: COSORE continuous soil respiration database v0.8.0 (Bond-Lamberty et al. 2020, GCB 26:7268), CC-BY-4.0 (LICENSE at the pinned commit; NOT MIT)
     repo_url: https://github.com/bpbond/cosore
@@ -83,7 +85,9 @@ sources:
     tile_size_m: 1111950.5197
     x_origin_m: -20015109.354
     y_origin_m: 10007554.677
-    retries: 4
+    retries: 4               # attempts per raster read
+    second_pass_threads: 4   # reads still failing are retried once more, with a fresh token
+    max_failed_reads: 0      # any read still failing after that fails the stage (no partial means)
     npp:
       collection: modis-17A3HGF-061
       item_prefix: MOD17A3HGF
@@ -98,7 +102,7 @@ sources:
       valid_min_exclusive: 0
       scale: 0.02
       offset: -273.15        # -> deg C
-      composite: first_of_month
+      composite: first_of_month   # first 8-day composite of each month (the only rule implemented)
 
 cosore_annual:
   min_obs_days: 150          # unique observation days per port
@@ -118,7 +122,7 @@ site_build:
     quality_regex: "Q1[0-4]"           # on Quality_flag
     min_annual_coverage: 0.5           # Annual_coverage < 0.5 dropped (missing kept)
     ecosystem_exclude: [Wetland, Urban]
-    cosore_ecosystem_exclude_upper: [WET, WETLAND, URB]   # as in handoff build_sites_v3.py (see DECISIONS.md D-P1-...)
+    cosore_ecosystem_exclude_upper: [WET, WETLAND, URB]   # COSORE IGBP codes, upper-cased (as in handoff build_sites_v3.py)
   coord_check:
     max_km: 100.0
     distance_crs: EPSG:3857            # as in the handoff (Web Mercator distances; see DECISIONS.md)
@@ -159,17 +163,27 @@ site_build:
   earth_radius_km: 6371.0
   variants: [qc, repo]                 # qc = primary; repo = repo filters only (sensitivity)
 
+site_diagnostics:                      # exploratory checks only; no table is changed
+  # broad geographic boxes [lon0, lon1, lat0, lat1]; sites whose continent label falls outside are listed
+  continent_boxes:
+    Europe: [-32.0, 70.0, 34.0, 82.0]
+
 features:
   worldclim_vars: 19
   site_key_round: 5                    # site_key = round(lat,5)_round(lon,5), as in the handoff
 
 clean_test:
-  # The locked Asia -> Europe test. The stage refuses to run unless BOTH hashes match.
+  # The locked Asia -> Europe test. The stage refuses to run unless the plan file, the `locked` block below
+  # and the two locked result files match these hashes AND the same hashes anchored in
+  # mshi/analysis/clean_test.py (so neither an edited config nor another --config can change the test).
   plan: docs/handoff/ANALYSIS_PLAN_LOCKED.md
   plan_sha256: 9d50e120c42fa8b4ffdac7b98be1cfa461d4c22b7eac7f9a4aaf01e0befe3dac
   plan_locked_utc: "2026-11-01T07:28:35Z"
-  # SHA-256 of the canonical JSON of `locked` below; editing the candidate set or rule makes the stage refuse.
-  locked_sha256: 822f2ce128ff431f0dc991acea978a725247998d9ed67cdf2625edd54817cafa
+  locked_results:                      # scored once on 2026-11-01; final, never overwritten
+    qc: {file: docs/handoff/results/clean_test_europe.json, sha256: b091795f9127d1de873ce42290b391d3d006775c9404ff36f0cb79671256d1e6}
+    repo: {file: docs/handoff/results/clean_test_europe_repo_sensitivity.json, sha256: 48aa5bebf01c855d70a66623396b496fa875e8775402075486fa514c3539f9db}
+  # SHA-256 of the canonical JSON of `locked` below (docs/DECISIONS.md D-P1-9 says what it covers).
+  locked_sha256: ef029090d17d2a428cff48a710753cee75b63cf2f00748a73f1114798a4dae7f
   locked:
     train_continent: Asia
     test_continent: Europe
@@ -180,10 +194,13 @@ clean_test:
       C8+MODIS: [bio01, bio04, bio05, bio06, bio12, bio14, bio15, bio17, npp, lst_day, lst_night, lst_diurnal_range]
       C8+SOIL: [bio01, bio04, bio05, bio06, bio12, bio14, bio15, bio17, soc, nitrogen, phh2o, clay, sand, silt, bdod, cec]
       ALL: [bio01, bio04, bio05, bio06, bio12, bio14, bio15, bio17, soc, nitrogen, phh2o, clay, sand, silt, bdod, cec, npp, lst_day, lst_night, lst_diurnal_range]
+    ml_learners: [XGB, RF]             # crossed with every set; OLS-TP is added as the 11th candidate
     ols_tp: [bio01, bio12]             # log Rs ~ bio01 + ln(bio12)
+    ols_tp_log: [bio12]                # predictors entered as natural logs
     xgb: {n_estimators: 250, max_depth: 3, learning_rate: 0.05, subsample: 0.85, colsample_bytree: 0.85,
           min_child_weight: 4, reg_alpha: 0.5, reg_lambda: 2.0, n_jobs: 2, verbosity: 0}
-    rf: {n_estimators: 500, min_samples_leaf: 5, max_features: 0.5, n_jobs: 2}
+    # fit with n_jobs 2 as in the handoff; predict with 1 thread (fixed tree-sum order; DEV-P1-15)
+    rf: {n_estimators: 500, min_samples_leaf: 5, max_features: 0.5, n_jobs: 2, predict_n_jobs: 1}
     model_seed: 0
     cv_block_deg: 5.0
     cv_folds: 5
@@ -192,12 +209,15 @@ clean_test:
     bootstrap_n: 2000
     bootstrap_seed: 42
     block_bootstrap_deg: 2.0
+    ci_quantiles: [0.025, 0.975]       # 95% percentile intervals (bootstraps and AOA difference)
     seed_spread: [0, 19]
     aoa_cv_seed: 42
     aoa_perm_repeats: 10
     aoa_perm_seed: 0
+    aoa_whisker: {quantiles: [0.25, 0.75], iqr_multiplier: 1.5}   # threshold = Q3 + 1.5 IQR of training DI
     aoa_diff_seed: 7
     aoa_min_group: 10
+    di_groups: 3                       # squared error by DI tercile
   variants: [qc, repo]                 # qc = primary; repo = plan-specified sensitivity
 
 reproduction_targets:                  # handoff values and tolerances (PROMPT section 4); checked by repro_checks and tests/
@@ -223,11 +243,14 @@ reproduction_targets:                  # handoff values and tolerances (PROMPT s
   locked_test:
     selected: OLS-TP
     asia_cv_r2: {value: 0.143, abs: 0.01}
-    europe_n: {value: 235, rel: 0.02}
+    europe_n: {value: 235, abs: 0}     # no tolerance given; the closed test set must not change (rule 4)
     europe_r2: {value: 0.079, abs: 0.01}
     europe_ci_lo: {value: 0.013, abs: 0.01}
     europe_ci_hi: {value: 0.125, abs: 0.01}
   npp_corr_original_sites: {value: 0.982, abs: 0.01, n_sites: 889}
+  # prep_log D8 also says the new extraction "recovers 189 sites lost to masked pixels"; no tolerance is
+  # given in the brief, so this row is reported for information only
+  npp_recovered_sites: {value: 189, info_only: true}
 
 smoke:
   n_sites: 50

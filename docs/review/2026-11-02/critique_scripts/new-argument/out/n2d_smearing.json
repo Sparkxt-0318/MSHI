@@ -1,0 +1,98 @@
+{
+ "X1|as_handoff|pooled_smearing": {
+  "inflation": 0.072,
+  "iid_ci": [
+   0.037,
+   0.106
+  ],
+  "n_boot": 989
+ },
+ "X1|as_handoff|class_smearing": {
+  "inflation": 0.05,
+  "iid_ci": [
+   0.02,
+   0.087
+  ],
+  "n_boot": 989
+ },
+ "X1|savanna->grassland|pooled_smearing": {
+  "inflation": 0.023,
+  "iid_ci": [
+   -0.011,
+   0.057
+  ],
+  "n_boot": 1000
+ },
+ "X1|savanna->grassland|class_smearing": {
+  "inflation": -0.009,
+  "iid_ci": [
+   -0.042,
+   0.029
+  ],
+  "n_boot": 1000
+ },
+ "X1|savanna->forest|pooled_smearing": {
+  "inflation": 0.012,
+  "iid_ci": [
+   -0.006,
+   0.031
+  ],
+  "n_boot": 1000
+ },
+ "X1|savanna->forest|class_smearing": {
+  "inflation": -0.007,
+  "iid_ci": [
+   -0.027,
+   0.014
+  ],
+  "n_boot": 1000
+ },
+ "X2|as_handoff|pooled_smearing": {
+  "inflation": 0.151,
+  "iid_ci": [
+   0.078,
+   0.217
+  ],
+  "n_boot": 989
+ },
+ "X2|as_handoff|class_smearing": {
+  "inflation": 0.126,
+  "iid_ci": [
+   0.07,
+   0.19
+  ],
+  "n_boot": 989
+ },
+ "X2|savanna->grassland|pooled_smearing": {
+  "inflation": 0.031,
+  "iid_ci": [
+   -0.023,
+   0.087
+  ],
+  "n_boot": 1000
+ },
+ "X2|savanna->grassland|class_smearing": {
+  "inflation": -0.017,
+  "iid_ci": [
+   -0.066,
+   0.042
+  ],
+  "n_boot": 1000
+ },
+ "X2|savanna->forest|pooled_smearing": {
+  "inflation": 0.012,
+  "iid_ci": [
+   -0.006,
+   0.031
+  ],
+  "n_boot": 1000
+ },
+ "X2|savanna->forest|class_smearing": {
+  "inflation": -0.007,
+  "iid_ci": [
+   -0.027,
+   0.014
+  ],
+  "n_boot": 1000
+ }
+}

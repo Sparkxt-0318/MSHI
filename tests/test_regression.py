@@ -67,6 +67,12 @@ def test_locked_test_rerun(cfg):
 
 
 @pytest.mark.data
+def test_locked_rerun_reported_against_locked_result(cfg):
+    ct = load_result(cfg, "clean_test_rerun_qc.json")
+    assert "vs_locked" in ct and ct["lock"]["locked_sha256"] == cfg["clean_test"]["locked_sha256"]
+
+
+@pytest.mark.data
 def test_npp_correlation(cfg):
     rc = load_result(cfg, "reproduction_check.json")
     if not rc.get("npp_check"):
@@ -74,6 +80,13 @@ def test_npp_correlation(cfg):
     t = cfg["reproduction_targets"]["npp_corr_original_sites"]
     _check(rc["npp_check"]["pearson_r"], t, "NPP r")
     assert rc["npp_check"]["n_original_sites"] == t["n_sites"]
+
+
+@pytest.mark.data
+def test_reproduction_table_has_no_fail(cfg):
+    rc = load_result(cfg, "reproduction_check.json")
+    assert rc["summary"]["FAIL"] == 0, [r for r in rc["rows"] if r["status"] == "FAIL"]
+    assert rc["summary"]["STALE"] == 0
 
 
 @pytest.mark.data
@@ -88,7 +101,8 @@ def test_fresh_rebuild_matches_committed_tables(cfg, tmp_path):
     cosore_annual(sand)
     S = build_sites(sand)
     committed = json.loads(cfg.path("results", "build_sites.json").read_text())
-    assert S == committed
+    committed.pop("_provenance", None)
+    assert json.loads(json.dumps(S)) == committed
     for name in ["cosore_annual.csv", "sites_v3_qc.parquet", "sites_v3_repo.parquet", "records_v3.parquet"]:
         a, b = sand.path("derived", name), cfg.path("derived", name)
         rd = pd.read_csv if name.endswith(".csv") else pd.read_parquet

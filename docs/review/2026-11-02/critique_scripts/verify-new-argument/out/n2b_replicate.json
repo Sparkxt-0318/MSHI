@@ -1,0 +1,98 @@
+{
+ "sites577_cells_atlas_only": {
+  "n_sites": 577,
+  "plot_forest_share": 0.685,
+  "pixel_forest_share": 0.302,
+  "landscape_forest_share_area_weighted": 0.201,
+  "coef_plot_forest": 0.125,
+  "coef_plot_forest_ci": [
+   0.007,
+   0.246
+  ],
+  "coef_pixel_forest": 0.003,
+  "coef_pixel_forest_ci": [
+   -0.099,
+   0.099
+  ],
+  "totals_PgC": {
+   "A": 35.33,
+   "B": 35.33,
+   "C": 33.86
+  },
+  "inflation_A_climate_only": 0.043,
+  "inflation_A_ci": [
+   0.003,
+   0.091
+  ],
+  "inflation_B_pixel_landcover": 0.043,
+  "inflation_B_ci": [
+   0.003,
+   0.091
+  ],
+  "footprint_cells": 24182
+ },
+ "sites577_cells_filled": {
+  "n_sites": 577,
+  "plot_forest_share": 0.685,
+  "pixel_forest_share": 0.302,
+  "landscape_forest_share_area_weighted": 0.199,
+  "coef_plot_forest": 0.125,
+  "coef_plot_forest_ci": [
+   0.007,
+   0.246
+  ],
+  "coef_pixel_forest": 0.003,
+  "coef_pixel_forest_ci": [
+   -0.099,
+   0.099
+  ],
+  "totals_PgC": {
+   "A": 39.47,
+   "B": 39.47,
+   "C": 37.82
+  },
+  "inflation_A_climate_only": 0.044,
+  "inflation_A_ci": [
+   0.003,
+   0.091
+  ],
+  "inflation_B_pixel_landcover": 0.044,
+  "inflation_B_ci": [
+   0.003,
+   0.092
+  ],
+  "footprint_cells": 28145
+ },
+ "sites581_cells_filled": {
+  "n_sites": 581,
+  "plot_forest_share": 0.685,
+  "pixel_forest_share": 0.299,
+  "landscape_forest_share_area_weighted": 0.199,
+  "coef_plot_forest": 0.133,
+  "coef_plot_forest_ci": [
+   0.022,
+   0.258
+  ],
+  "coef_pixel_forest": 0.004,
+  "coef_pixel_forest_ci": [
+   -0.091,
+   0.089
+  ],
+  "totals_PgC": {
+   "A": 39.43,
+   "B": 39.43,
+   "C": 37.68
+  },
+  "inflation_A_climate_only": 0.046,
+  "inflation_A_ci": [
+   0.007,
+   0.094
+  ],
+  "inflation_B_pixel_landcover": 0.046,
+  "inflation_B_ci": [
+   0.007,
+   0.094
+  ],
+  "footprint_cells": 28145
+ }
+}

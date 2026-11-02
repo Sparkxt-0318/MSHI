@@ -1,0 +1,236 @@
+{
+ "n_sites": 577,
+ "cells": 28145,
+ "n_blocks_2deg": 262,
+ "crosswalk_1_5": {
+  "infl_A": 0.0436,
+  "infl_A_iid": [
+   0.005,
+   0.08
+  ],
+  "infl_A_block2": [
+   -0.005,
+   0.101
+  ],
+  "infl_B": 0.0436,
+  "infl_B_iid": [
+   0.006,
+   0.079
+  ],
+  "infl_B_block2": [
+   -0.005,
+   0.1
+  ],
+  "infl_A_classsmear": -0.0019,
+  "infl_A_classsmear_iid": [
+   -0.048,
+   0.03
+  ],
+  "infl_A_classsmear_block2": [
+   -0.045,
+   0.053
+  ],
+  "b_pix": 0.0029,
+  "b_pix_iid": [
+   -0.114,
+   0.074
+  ],
+  "b_pix_block2": [
+   -0.127,
+   0.122
+  ],
+  "b_plot": 0.1247,
+  "b_plot_iid": [
+   0.014,
+   0.218
+  ],
+  "b_plot_block2": [
+   -0.014,
+   0.278
+  ],
+  "diff_plot_minus_pix": 0.1219,
+  "diff_plot_minus_pix_iid": [
+   0.038,
+   0.282
+  ],
+  "diff_plot_minus_pix_block2": [
+   -0.025,
+   0.305
+  ],
+  "lam": 0.168,
+  "lam_iid": [
+   0.104,
+   0.224
+  ],
+  "lam_block2": [
+   0.099,
+   0.233
+  ],
+  "expected_attenuated": 0.021,
+  "expected_attenuated_iid": [
+   0.002,
+   0.045
+  ],
+  "expected_attenuated_block2": [
+   -0.002,
+   0.044
+  ],
+  "b_pix_given_plot": -0.0187,
+  "b_pix_given_plot_iid": [
+   -0.129,
+   0.056
+  ],
+  "b_pix_given_plot_block2": [
+   -0.139,
+   0.085
+  ],
+  "arith_forest_effect": 0.0185,
+  "arith_forest_effect_iid": [
+   -0.103,
+   0.114
+  ],
+  "arith_forest_effect_block2": [
+   -0.1,
+   0.156
+  ],
+  "smA": 1.1522,
+  "smC": 1.1525,
+  "smCf": 1.1131,
+  "smCn": 1.2379,
+  "sd_res_f": 0.4813,
+  "sd_res_n": 0.6697,
+  "A_PgC": 39.472,
+  "C_PgC": 37.8244,
+  "Ccs_PgC": 39.5453,
+  "landscape_share": 0.1989,
+  "pixel_share_at_plots": 0.3016
+ },
+ "crosswalk_1_5_8": {
+  "infl_A": 0.0267,
+  "infl_A_iid": [
+   0.003,
+   0.05
+  ],
+  "infl_A_block2": [
+   -0.003,
+   0.066
+  ],
+  "infl_B": 0.0267,
+  "infl_B_iid": [
+   0.003,
+   0.047
+  ],
+  "infl_B_block2": [
+   -0.003,
+   0.066
+  ],
+  "infl_A_classsmear": -0.0042,
+  "infl_A_classsmear_iid": [
+   -0.035,
+   0.016
+  ],
+  "infl_A_classsmear_block2": [
+   -0.033,
+   0.031
+  ],
+  "b_pix": 0.0508,
+  "b_pix_iid": [
+   -0.043,
+   0.133
+  ],
+  "b_pix_block2": [
+   -0.069,
+   0.157
+  ],
+  "b_plot": 0.1247,
+  "b_plot_iid": [
+   0.014,
+   0.218
+  ],
+  "b_plot_block2": [
+   -0.014,
+   0.278
+  ],
+  "diff_plot_minus_pix": 0.0739,
+  "diff_plot_minus_pix_iid": [
+   -0.058,
+   0.208
+  ],
+  "diff_plot_minus_pix_block2": [
+   -0.046,
+   0.239
+  ],
+  "lam": 0.2846,
+  "lam_iid": [
+   0.228,
+   0.338
+  ],
+  "lam_block2": [
+   0.211,
+   0.355
+  ],
+  "expected_attenuated": 0.0355,
+  "expected_attenuated_iid": [
+   0.004,
+   0.068
+  ],
+  "expected_attenuated_block2": [
+   -0.003,
+   0.076
+  ],
+  "b_pix_given_plot": 0.017,
+  "b_pix_given_plot_iid": [
+   -0.087,
+   0.106
+  ],
+  "b_pix_given_plot_block2": [
+   -0.111,
+   0.12
+  ],
+  "arith_forest_effect": 0.0185,
+  "arith_forest_effect_iid": [
+   -0.103,
+   0.114
+  ],
+  "arith_forest_effect_block2": [
+   -0.1,
+   0.156
+  ],
+  "smA": 1.1522,
+  "smC": 1.1525,
+  "smCf": 1.1131,
+  "smCn": 1.2379,
+  "sd_res_f": 0.4813,
+  "sd_res_n": 0.6697,
+  "A_PgC": 39.472,
+  "C_PgC": 38.4441,
+  "Ccs_PgC": 39.6386,
+  "landscape_share": 0.3183,
+  "pixel_share_at_plots": 0.4801
+ },
+ "quasipoisson_log": {
+  "infl": 0.0171,
+  "infl_iid": [
+   -0.036,
+   0.073
+  ],
+  "b_forest": 0.0483,
+  "b_forest_ci_hc3": [
+   -0.074,
+   0.17
+  ]
+ },
+ "gamma_log": {
+  "infl": 0.0173,
+  "infl_iid": [
+   -0.032,
+   0.07
+  ],
+  "b_forest": 0.0488,
+  "b_forest_ci_hc3": [
+   -0.069,
+   0.167
+  ]
+ },
+ "brown_forsythe_p": 5.580283369001711e-08
+}

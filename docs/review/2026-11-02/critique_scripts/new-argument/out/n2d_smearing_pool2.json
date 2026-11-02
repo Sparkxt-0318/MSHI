@@ -1,0 +1,66 @@
+{
+ "X1|savanna+shrub->grassland|pooled_smearing": {
+  "inflation": 0.024,
+  "iid_ci": [
+   -0.006,
+   0.059
+  ],
+  "n_boot": 500
+ },
+ "X1|savanna+shrub->grassland|class_smearing": {
+  "inflation": -0.01,
+  "iid_ci": [
+   -0.04,
+   0.026
+  ],
+  "n_boot": 500
+ },
+ "X1|savanna->forest,shrub->grassland|pooled_smearing": {
+  "inflation": 0.008,
+  "iid_ci": [
+   -0.008,
+   0.026
+  ],
+  "n_boot": 500
+ },
+ "X1|savanna->forest,shrub->grassland|class_smearing": {
+  "inflation": -0.014,
+  "iid_ci": [
+   -0.03,
+   0.006
+  ],
+  "n_boot": 500
+ },
+ "X2|savanna+shrub->grassland|pooled_smearing": {
+  "inflation": 0.039,
+  "iid_ci": [
+   -0.01,
+   0.096
+  ],
+  "n_boot": 500
+ },
+ "X2|savanna+shrub->grassland|class_smearing": {
+  "inflation": -0.011,
+  "iid_ci": [
+   -0.056,
+   0.045
+  ],
+  "n_boot": 500
+ },
+ "X2|savanna->forest,shrub->grassland|pooled_smearing": {
+  "inflation": 0.008,
+  "iid_ci": [
+   -0.008,
+   0.026
+  ],
+  "n_boot": 500
+ },
+ "X2|savanna->forest,shrub->grassland|class_smearing": {
+  "inflation": -0.014,
+  "iid_ci": [
+   -0.03,
+   0.006
+  ],
+  "n_boot": 500
+ }
+}

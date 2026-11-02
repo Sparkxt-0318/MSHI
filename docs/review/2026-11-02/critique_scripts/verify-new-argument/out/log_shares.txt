@@ -1,0 +1,13 @@
+/tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/critique/verify-new-argument/scripts/v_shares.py:27: Pandas4Warning: Starting with pandas version 4.0 all arguments of sum will be keyword-only.
+  print("cells before any climate drop:", len(g), " forest share 1-5:", round(float((g[[f'n{k}' for k in [1,2,3,4,5]]].sum(1) / g.n * w).sum() / w.sum()), 4),
+/tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/critique/verify-new-argument/scripts/v_shares.py:28: Pandas4Warning: Starting with pandas version 4.0 all arguments of sum will be keyword-only.
+  " 1-5+8:", round(float((g[[f'n{k}' for k in [1,2,3,4,5,8]]].sum(1) / g.n * w).sum() / w.sum()), 4))
+N2b sample before WorldClim drop: n = 581  plot forest share 0.685  count 398
+  [1-5] pixel-forest share at plots = 0.2995 (174); forest plots in such pixels = 0.4121
+  [1-5+8] pixel-forest share at plots = 0.4768 (277); forest plots in such pixels = 0.6482
+  [1-5+8+9] pixel-forest share at plots = 0.5525 (321); forest plots in such pixels = 0.7362
+forest plots in non-1-5 pixels: 234 {8: 94, 9: 35, 13: 26, 12: 26, 10: 16, 17: 16, 14: 15, 11: 3, 16: 2, 6: 1}
+  share in IGBP 8/9: 0.551  share in water/urban (17/13): 0.179
+cells (fill=True): n=28145; area-weighted landscape forest share 1-5 = 0.1989; 1-5+8 = 0.3183; 1-5+8+9 = 0.4280
+cells (fill=False): n=24182; area-weighted landscape forest share 1-5 = 0.2014; 1-5+8 = 0.3226; 1-5+8+9 = 0.4352
+cells before any climate drop: 28299  forest share 1-5: 0.1992  1-5+8: 0.3186

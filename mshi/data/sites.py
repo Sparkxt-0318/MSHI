@@ -20,7 +20,8 @@ import numpy as np
 import pandas as pd
 
 from ..config import Config
-from ..io import read_table, write_json, write_table
+from ..io import read_table, write_result, write_table
+from ..netutil import verify_sha256
 from ..spatial import cluster_within_km
 from .fetch import naturalearth_path, srdb_csv_path
 
@@ -37,6 +38,7 @@ EXTRA_SRDB = ["Study_number", "Author", "Site_ID", "Site_name", "Biome", "Leaf_h
 def load_srdb_records(cfg: Config) -> tuple[pd.DataFrame, dict]:
     sb = cfg["site_build"]
     path = srdb_csv_path(cfg)
+    verify_sha256(path, cfg["sources"]["srdb"]["sha256"])       # pinned bytes only
     s = read_table(cfg, path, low_memory=False)
     raw_coords = read_table(cfg, path, usecols=["Latitude", "Longitude"], dtype=str, keep_default_na=False)
     n_rows = len(s)
@@ -79,7 +81,9 @@ def load_cosore_records(cfg: Config) -> pd.DataFrame:
 
 def assign_countries(cfg: Config, r: pd.DataFrame) -> tuple[pd.DataFrame, gpd.GeoDataFrame]:
     sb = cfg["site_build"]
-    cty = gpd.read_file(naturalearth_path(cfg, "ne_50m_admin_0_countries.geojson"))[["ADMIN", "NAME", "CONTINENT", "geometry"]]
+    ne_file = "ne_50m_admin_0_countries.geojson"
+    verify_sha256(naturalearth_path(cfg, ne_file), cfg["sources"]["naturalearth"]["files"][ne_file])
+    cty = gpd.read_file(naturalearth_path(cfg, ne_file))[["ADMIN", "NAME", "CONTINENT", "geometry"]]
     g = gpd.GeoDataFrame(r, geometry=gpd.points_from_xy(r.lon, r.lat), crs=4326)
     j = gpd.sjoin(g, cty, how="left", predicate="within")
     j = j[~j.index.duplicated()].reindex(r.index)
@@ -175,6 +179,6 @@ def build_sites(cfg: Config) -> dict:
         S[f"sites_{name}"] = {"n": int(len(st)), "by_continent": st.continent.value_counts().to_dict(),
                               "sites_with_2plus_records": int((st.n_rec >= 2).sum())}
     write_table(r, cfg.path("derived", "records_v3.parquet"))
-    write_json(S, cfg.path("results", "build_sites.json"))
+    write_result(cfg, S, "build_sites.json")
     log.info("sites: qc %d, repo %d", S["sites_qc"]["n"], S["sites_repo"]["n"])
     return S

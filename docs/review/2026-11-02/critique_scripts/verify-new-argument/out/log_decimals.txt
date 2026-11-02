@@ -1,0 +1,13 @@
+QC records with >=4 decimals in both coords: 533 | DMS-like (minute-level both): 168 | minute-or-second in both: 314
+ALL SRDB rows with >=4 decimals in both coords: 1471 | minute-level both: 589 | second-level (not minute) in both or mixed: 413
+Q1 (all continents in boxes) | forest plots with all4: n=39, in IGBP1-5 pixels 13 = 0.333 [Wilson 0.206, 0.490]
+Q1 (all continents in boxes) | forest plots with any4: n=73, in IGBP1-5 pixels 31 = 0.425 [Wilson 0.318, 0.539]
+Q1 (all continents in boxes) | forest plots with all4_nodms: n=15, in IGBP1-5 pixels 5 = 0.333 [Wilson 0.152, 0.583]
+Q1 (all continents in boxes) | all forest plots: 179/433 = 0.413
+N2b (Asia+NA, pre-WorldClim drop) | forest plots with all4: n=36, in IGBP1-5 pixels 12 = 0.333 [Wilson 0.202, 0.497]
+N2b (Asia+NA, pre-WorldClim drop) | forest plots with any4: n=70, in IGBP1-5 pixels 30 = 0.429 [Wilson 0.319, 0.545]
+N2b (Asia+NA, pre-WorldClim drop) | forest plots with all4_nodms: n=14, in IGBP1-5 pixels 4 = 0.286 [Wilson 0.117, 0.546]
+N2b (Asia+NA, pre-WorldClim drop) | all forest plots: 164/398 = 0.412
+Q1 sites whose site-MEAN floats have >=4 decimals: 130 ; of which contain a record with <4 decimals: 73
+Q1 | forest plots, every record >=4 dec and not minute-level DMS: n=30, in IGBP1-5 11 = 0.367 [0.219, 0.545]
+N2b | forest plots, every record >=4 dec and not minute-level DMS: n=27, in IGBP1-5 10 = 0.370 [0.215, 0.558]

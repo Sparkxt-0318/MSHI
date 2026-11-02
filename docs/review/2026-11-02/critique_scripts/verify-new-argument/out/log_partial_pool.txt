@@ -1,0 +1,5 @@
+tau2 0.0729 raw {'Forest': 0.0, 'Grassland': np.float64(-0.009), 'Agriculture': np.float64(-0.162), 'Shrubland': np.float64(-0.485), 'Savanna': np.float64(-0.674)} shrunk {'Forest': 0.0, 'Grassland': np.float64(-0.032), 'Agriculture': np.float64(-0.171), 'Shrubland': np.float64(-0.425), 'Savanna': np.float64(-0.515)}
+  unpooled                 X1 inflation 0.0724
+  unpooled                 X2 inflation 0.1506
+  partially pooled (EB)    X1 inflation 0.0635
+  partially pooled (EB)    X2 inflation 0.1260

@@ -1,6 +1,8 @@
 # Full transitive lock of the v3 reference environment (Python 3.13.18, linux x86_64).
 # Generated with: uv pip freeze --python .venv/bin/python   (2026-11-02)
 # Install: pip install -r requirements-lock.txt   (or use environment.yml)
+# nvidia-nccl-cu12 carries the same environment marker as xgboost 2.1.4's own dependency on it (Linux
+# x86_64 only), so the lock also installs on macOS and Windows (versions otherwise as resolved on Linux).
 affine==3.0.1
 attrs==26.1.0
 certifi==2026.10.23
@@ -20,7 +22,7 @@ kiwisolver==1.5.1
 matplotlib==3.11.2
 narwhals==2.28.0
 numpy==2.5.4
-nvidia-nccl-cu12==2.32.3
+nvidia-nccl-cu12==2.32.3 ; platform_system == "Linux" and platform_machine != "aarch64"
 packaging==26.3
 pandas==3.1.0
 patsy==1.0.3

@@ -54,8 +54,10 @@ def cluster_within_km(lat, lon, radius_km: float, earth_radius_km: float = 6371.
 
 
 def bootstrap_ci(y, p, n: int = 2000, seed: int = 42, lon=None, lat=None, deg: float | None = None,
-                 stat: Callable[[np.ndarray, np.ndarray], float] = r2_score, alpha: float = 0.05) -> list[float]:
-    """Percentile CI of ``stat(y, p)`` under a site bootstrap (deg=None) or a spatial-block bootstrap."""
+                 stat: Callable[[np.ndarray, np.ndarray], float] = r2_score,
+                 q: tuple[float, float] | list[float] = (0.025, 0.975)) -> list[float]:
+    """Percentile CI (quantiles ``q``) of ``stat(y, p)`` under a site bootstrap (deg=None) or a
+    spatial-block bootstrap of ``deg``-degree blocks."""
     y = np.asarray(y)
     p = np.asarray(p)
     rng = np.random.default_rng(seed)
@@ -69,4 +71,4 @@ def bootstrap_ci(y, p, n: int = 2000, seed: int = 42, lon=None, lat=None, deg: f
         for _ in range(n):
             i = np.concatenate([idx[k] for k in rng.choice(u, len(u))])
             bs.append(stat(y[i], p[i]))
-    return [float(np.quantile(bs, alpha / 2)), float(np.quantile(bs, 1 - alpha / 2))]
+    return [float(np.quantile(bs, q[0])), float(np.quantile(bs, q[1]))]

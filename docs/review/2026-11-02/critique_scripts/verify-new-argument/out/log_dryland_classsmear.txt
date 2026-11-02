@@ -1,0 +1,19 @@
+==== N2d (no desert) n = 564 {'Forest': 395, 'Grassland': 78, 'Agriculture': 72, 'Shrubland': 14, 'Savanna': 5}
+  X1 unpooled (handoff)                     infl 0.0500 iid [0.023, 0.087] (n_boot 296) coef {'Forest': 0.0, 'Grassland': -0.009, 'Agriculture': -0.162, 'Shrubland': -0.485, 'Savanna': -0.674}
+  X1 Sav->Shrub (19 plots, still <20)       infl 0.0389 iid [0.008, 0.076] (n_boot 300) coef {'Forest': 0.0, 'Grassland': -0.011, 'Agriculture': -0.163, 'Shrubland': -0.535}
+  X1 Sav+Shrub->Agri                        infl 0.0044 iid [-0.023, 0.034] (n_boot 300) coef {'Forest': 0.0, 'Grassland': -0.003, 'Agriculture': -0.233}
+  X2 unpooled (handoff)                     infl 0.1260 iid [0.07, 0.198] (n_boot 296) coef {'Forest': 0.0, 'Grassland': -0.009, 'Agriculture': -0.162, 'Shrubland': -0.485, 'Savanna': -0.674}
+  X2 Sav->Shrub (19 plots, still <20)       infl 0.0958 iid [0.037, 0.157] (n_boot 300) coef {'Forest': 0.0, 'Grassland': -0.011, 'Agriculture': -0.163, 'Shrubland': -0.535}
+  X2 Sav+Shrub->Agri                        infl 0.0232 iid [-0.018, 0.072] (n_boot 300) coef {'Forest': 0.0, 'Grassland': -0.003, 'Agriculture': -0.233}
+N2c cells: 32008 filled from atlas: 7809 median fill distance deg: 0.5
+==== N2c (with desert) n = 577 {'Forest': 395, 'Grassland': 78, 'Agriculture': 72, 'Shrubland': 14, 'Desert': 13, 'Savanna': 5}
+  X1 unpooled (handoff)                     infl 0.0656 iid [0.027, 0.112] (n_boot 299) coef {'Forest': 0.0, 'Grassland': -0.0, 'Agriculture': -0.152, 'Shrubland': -0.47, 'Savanna': -0.662, 'Desert': -0.852}
+  X1 Sav->Shrub (19 plots, still <20)       infl 0.0549 iid [0.016, 0.108] (n_boot 300) coef {'Forest': 0.0, 'Grassland': -0.002, 'Agriculture': -0.153, 'Shrubland': -0.521, 'Desert': -0.854}
+  X1 Sav+Shrub->Agri                        infl 0.0225 iid [-0.009, 0.06] (n_boot 300) coef {'Forest': 0.0, 'Grassland': 0.006, 'Agriculture': -0.222, 'Desert': -0.833}
+  X1 dryland: Sav+Des->Shrub (32 plots)     infl 0.0553 iid [0.022, 0.1] (n_boot 300) coef {'Forest': 0.0, 'Grassland': 0.01, 'Agriculture': -0.142, 'Shrubland': -0.635}
+  X1 Sav+Shrub+Des->Grass                   infl -0.0152 iid [-0.045, 0.024] (n_boot 300) coef {'Forest': 0.0, 'Grassland': -0.14, 'Agriculture': -0.106}
+  X2 unpooled (handoff)                     infl 0.1354 iid [0.075, 0.203] (n_boot 299) coef {'Forest': 0.0, 'Grassland': -0.0, 'Agriculture': -0.152, 'Shrubland': -0.47, 'Savanna': -0.662, 'Desert': -0.852}
+  X2 Sav->Shrub (19 plots, still <20)       infl 0.1069 iid [0.048, 0.179] (n_boot 300) coef {'Forest': 0.0, 'Grassland': -0.002, 'Agriculture': -0.153, 'Shrubland': -0.521, 'Desert': -0.854}
+  X2 Sav+Shrub->Agri                        infl 0.0390 iid [-0.005, 0.086] (n_boot 300) coef {'Forest': 0.0, 'Grassland': 0.006, 'Agriculture': -0.222, 'Desert': -0.833}
+  X2 dryland: Sav+Des->Shrub (32 plots)     infl 0.1136 iid [0.058, 0.184] (n_boot 300) coef {'Forest': 0.0, 'Grassland': 0.01, 'Agriculture': -0.142, 'Shrubland': -0.635}
+  X2 Sav+Shrub+Des->Grass                   infl -0.0135 iid [-0.06, 0.044] (n_boot 300) coef {'Forest': 0.0, 'Grassland': -0.14, 'Agriculture': -0.106}

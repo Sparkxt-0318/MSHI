@@ -1,0 +1,5 @@
+pt counts in N2b proxy sample: {'Forest': 395, 'Grassland': 78, 'Agriculture': 72, 'Shrubland': 14, 'Desert': 13, 'Savanna': 5}
+all (N2b spec)                   n=577 plot_forest 0.125 [0.003, 0.246]
+drop Shrub/Savanna/Desert        n=545 plot_forest 0.094 [-0.029, 0.217]
+non-forest = Grassland only      n=473 plot_forest 0.004 [-0.159, 0.166]
+non-forest = Agriculture only    n=467 plot_forest 0.225 [0.068, 0.382]

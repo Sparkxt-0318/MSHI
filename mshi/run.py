@@ -1,12 +1,16 @@
 """Single entry point for the v3 pipeline.
 
     python -m mshi.run --stage all                 # every stage, in order
-    python -m mshi.run --stage build_sites         # one stage (inputs must exist)
+    python -m mshi.run --stage build_sites         # one stage (uses existing outputs of its inputs)
     python -m mshi.run --list                      # stages and dependencies
     python -m mshi.run --stage all --smoke         # 50-site smoke run in data/interim/smoke/
 
-A stage whose pinned source cannot be reached is recorded as ``blocked`` in results/run_log.jsonl;
-with ``--stage all`` the stages that depend on it are skipped (never mocked) and the run exits 2.
+Requested stages always run in pipeline order, whatever the order on the command line. Statuses in
+results/run_log.jsonl: ``ok``; ``blocked`` (the egress proxy refused a pinned source: a network-policy
+block); ``unavailable`` (a source could not be reached); ``skipped`` (an upstream stage in this
+invocation did not complete; dependants are never mocked); ``error``.
+Exit code: 0 all ok; 1 any error (including a reproduction target outside tolerance); 2 no error, but
+some stage was blocked, unavailable or skipped.
 """
 from __future__ import annotations
 
@@ -19,9 +23,9 @@ from dataclasses import dataclass, field
 import numpy as np
 
 from .config import Config, load_config
-from .io import read_table, write_json, write_table
+from .io import read_table, write_json, write_result, write_table
 from .netutil import SourceUnavailableError
-from .runlog import git_commit, package_versions, stage_timer
+from .runlog import git_commit, package_versions, provenance, stage_timer
 
 log = logging.getLogger("mshi")
 
@@ -77,47 +81,61 @@ def smoke_subset(cfg: Config) -> dict:
         sub = st.iloc[idx].reset_index(drop=True)
         write_table(sub, p)
         out[tag] = {"n": int(len(sub)), "by_continent": sub.continent.value_counts().to_dict()}
-    write_json(out, cfg.path("results", "smoke_subset.json"))
+    write_result(cfg, out, "smoke_subset.json")
     return out
 
 
-def run(stage_names: list[str], cfg: Config) -> int:
-    stages = {s.name: s for s in _stages()}
+def run(stage_names: list[str], cfg: Config, full: bool = False) -> int:
+    """Run ``stage_names`` in pipeline order; see the module docstring for statuses and exit codes."""
+    all_stages = _stages()
+    order = [s.name for s in all_stages]
+    stages = {s.name: s for s in all_stages}
+    names = sorted(dict.fromkeys(stage_names), key=order.index)
+    smoke = cfg.out_root is not None
     log_path = cfg.path("results", "run_log.jsonl")
-    env = {"git_commit": git_commit(cfg.repo_root), "config_sha256": cfg.sha256(), "versions": package_versions()}
-    write_json(env, cfg.path("results", "environment.json"))
-    failed: dict[str, str] = {}
-    for name in stage_names:
+    commit = git_commit(cfg.repo_root)
+    prov = {"git_commit": commit, **provenance(cfg), "invocation": ["all"] if full else names, "smoke": smoke}
+    if full:   # the environment record describes the last full run (stage results carry their own provenance)
+        write_json({"git_commit": commit, **provenance(cfg), "versions": package_versions()},
+                   cfg.path("results", "environment.json"))
+    status: dict[str, str] = {}
+    cfg.invocation = {"stages": names, "status": status}
+    errors = False
+    for name in names:
         st = stages[name]
-        if name == "smoke_subset" and cfg.out_root is None:
+        if name == "smoke_subset" and not smoke:
             continue
-        if cfg.out_root is not None and name in ("clean_test", "repro_checks", "site_diagnostics"):
+        if smoke and name in ("clean_test", "repro_checks", "site_diagnostics"):
             log.info("%-18s not part of smoke runs (locked test and targets need the full site set)", name)
             continue
-        up = [d for d in st.deps if d in failed]
+        absent = [d for d in st.deps if d not in names]
+        if absent and not full:
+            log.info("%-18s uses existing outputs of %s (not requested)", name, ", ".join(absent))
+        up = [d for d in st.deps if d in status and status[d] != "ok"]
         if up:
             msg = f"skipped: upstream {', '.join(up)} not available"
-            with stage_timer(log_path, name, {"smoke": cfg.out_root is not None}) as rec:
+            with stage_timer(log_path, name, prov) as rec:
                 rec["status_override"] = msg
-            failed[name] = msg
+            status[name] = msg
             log.warning("%-18s %s", name, msg)
             continue
         log.info("%-18s start", name)
         try:
-            with stage_timer(log_path, name, {"smoke": cfg.out_root is not None}) as rec:
+            with stage_timer(log_path, name, prov) as rec:
                 try:
                     rec["result"] = st.func(cfg)
                 except SourceUnavailableError as e:
-                    rec["status_override"] = f"blocked: {e}"
-                    failed[name] = f"blocked: {e}"
-            log.info("%-18s %s (%.1fs)", name, "BLOCKED" if name in failed else "done", rec["seconds"])
+                    rec["status_override"] = f"{'blocked' if e.kind == 'proxy_denied' else 'unavailable'}: {e}"
+            status[name] = rec["status"]
+            log.info("%-18s %s (%.1fs)", name, status[name].split(":")[0].upper(), rec["seconds"])
         except Exception as e:  # noqa: BLE001 - record and continue with independent stages
-            failed[name] = f"error: {type(e).__name__}: {e}"
+            status[name] = f"error: {type(e).__name__}: {e}"
+            errors = True
             log.exception("%s failed", name)
-    if failed:
-        log.warning("stages not completed: %s", failed)
-        return 2
-    return 0
+    not_ok = {k: v for k, v in status.items() if v != "ok"}
+    if not_ok:
+        log.warning("stages not completed: %s", not_ok)
+    return 1 if errors else (2 if not_ok else 0)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -135,14 +153,15 @@ def main(argv: list[str] | None = None) -> int:
         for s in _stages():
             print(f"{s.name:20s} deps={','.join(s.deps) or '-':45s} {s.doc}")
         return 0
-    want = names if "all" in a.stage else a.stage
+    full = "all" in a.stage
+    want = names if full else a.stage
     bad = [s for s in want if s not in names]
     if bad:
         ap.error(f"unknown stage(s): {bad}; choose from {names}")
     cfg = load_config(a.config)
     if a.smoke:
         cfg = load_config(a.config, out_root=cfg.path("interim", "smoke"))
-    return run(want, cfg)
+    return run(want, cfg, full=full)
 
 
 if __name__ == "__main__":

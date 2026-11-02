@@ -1,0 +1,22 @@
+Asia | handoff samples (pixel: in-box s; others: all d) | climate: 0.164 (383/383); climate+plot_type: 0.212 (281/383); climate+pixel_type: 0.135 (383/383)
+Asia | common in-box s | climate: 0.164 (383/383); climate+plot_type: 0.212 (281/383); climate+pixel_type: 0.135 (383/383)
+North America | handoff samples (pixel: in-box s; others: all d) | climate: 0.256 (194/194); climate+plot_type: 0.217 (194/194); climate+pixel_type: 0.203 (194/194)
+North America | common in-box s | climate: 0.256 (194/194); climate+plot_type: 0.217 (194/194); climate+pixel_type: 0.203 (194/194)
+all QC sites ptype by continent:
+ ptype          Agriculture  Desert  Forest  ...  Other  Savanna  Shrubland
+continent                                   ...                           
+Africa                   3       0      14  ...      0        4          1
+Asia                    53       8     268  ...      0        1          8
+Europe                  34       0     157  ...      2        1         13
+North America           21       5     186  ...      2        4          7
+Oceania                  1       1      16  ...      0        1          2
+South America            8       0      29  ...      0        1          1
+
+[6 rows x 7 columns]
+Asia | all-continent d (climate & plot-type models) | n=387 | fold 1: 105 val sites; unseen ptype {'Savanna'}; unseen pixel set()
+Asia | in-box s (pixel model) | n=387 | fold 1: 105 val sites; unseen ptype {'Savanna'}; unseen pixel set()
+North America | all-continent d (climate & plot-type models) | n=257 | fold 1: 55 val sites; unseen ptype {'Other'}; unseen pixel set()
+PROXY within Asia climate: scored 383/383  R2=0.164
+  swallowed: climate+plot_type PatsyError predict requires that you use a DataFrame when predicting from a model that was created using the fo
+PROXY within Asia climate+plot_type: scored 281/383  R2=0.212
+PROXY within Asia climate-only on the same 281 sites: R2=0.176

@@ -17,10 +17,17 @@ def results_dir(cfg):
 
 
 def load_result(cfg, name):
+    """A committed result; skipped if absent (stage not run), FAILS if it was produced by other code or
+    config than the current checkout (re-run `make all`), so a stale file can never pass a regression test."""
+    from mshi.io import result_staleness
     p = cfg.path("results", name)
     if not p.exists():
         pytest.skip(f"{p.relative_to(REPO_ROOT)} not present (stage not run)")
-    return json.loads(p.read_text())
+    obj = json.loads(p.read_text())
+    stale = result_staleness(cfg, obj)
+    if stale:
+        pytest.fail(f"{p.relative_to(REPO_ROOT)} is stale ({stale}); run `make all`")
+    return obj
 
 
 def raw_available(cfg) -> bool:

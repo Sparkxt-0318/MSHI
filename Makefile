@@ -1,5 +1,7 @@
 # MSHI v3 — every target calls the single entry point `python -m mshi.run`.
-PY ?= .venv/bin/python
+# The reference virtualenv if present (`make env`), otherwise the active interpreter (e.g. the conda
+# environment from environment.yml). Override with `make PY=/path/to/python ...`.
+PY ?= $(shell test -x .venv/bin/python && echo .venv/bin/python || echo python)
 
 .PHONY: all data features clean-test repro smoke test list env lock
 
@@ -22,8 +24,8 @@ repro:
 smoke:          ## 50-site smoke run into data/interim/smoke/
 	$(PY) -m mshi.run --stage all --smoke
 
-test:
-	$(PY) -m pytest -q
+test:           ## regression tests fail if committed results are stale (run `make all` first after code changes)
+	GIT_OPTIONAL_LOCKS=0 $(PY) -m pytest -q
 
 list:
 	$(PY) -m mshi.run --list

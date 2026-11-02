@@ -1,0 +1,64 @@
+{
+ "n": 577,
+ "cells": 24182,
+ "landscape_f": 0.201,
+ "landscape_f8": 0.323,
+ "handoff_crosswalk_1_5": {
+  "infl_A": 0.043,
+  "infl_A_iid": [
+   0.0,
+   0.088
+  ],
+  "infl_A_block2": [
+   -0.003,
+   0.099
+  ],
+  "infl_B": 0.043,
+  "b_pix": 0.003,
+  "b_pix_iid": [
+   -0.101,
+   0.101
+  ],
+  "b_plot": 0.125,
+  "b_plot_iid": [
+   0.001,
+   0.242
+  ],
+  "b_plot_block2": [
+   -0.007,
+   0.263
+  ],
+  "A_PgC": 35.33,
+  "C_PgC": 33.86,
+  "reduction_1_minus_C_over_A": 0.041
+ },
+ "alt_crosswalk_1_5_8": {
+  "infl_A": 0.026,
+  "infl_A_iid": [
+   0.0,
+   0.055
+  ],
+  "infl_A_block2": [
+   -0.002,
+   0.062
+  ],
+  "infl_B": 0.026,
+  "b_pix": 0.051,
+  "b_pix_iid": [
+   -0.057,
+   0.156
+  ],
+  "b_plot": 0.125,
+  "b_plot_iid": [
+   0.001,
+   0.242
+  ],
+  "b_plot_block2": [
+   -0.007,
+   0.263
+  ],
+  "A_PgC": 35.33,
+  "C_PgC": 34.42,
+  "reduction_1_minus_C_over_A": 0.026
+ }
+}

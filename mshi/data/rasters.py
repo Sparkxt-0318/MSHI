@@ -12,8 +12,8 @@ import zipfile
 import requests
 
 from ..config import Config
-from ..io import sha256_file, write_json
-from ..netutil import SourceUnavailableError, download
+from ..io import sha256_file, write_result
+from ..netutil import DownloadError, download
 
 log = logging.getLogger("mshi.rasters")
 
@@ -39,7 +39,9 @@ def fetch_worldclim(cfg: Config) -> dict:
     tifs = [worldclim_path(cfg, i) for i in range(1, n + 1)]
     zpath = out_dir.parent / w["url"].rsplit("/", 1)[-1]
     if not all(t.exists() for t in tifs):
-        info = download(w["url"], zpath, sha256=w.get("sha256"))
+        # unpinned (WorldClim publishes no checksum): an existing complete zip is reused (downloads are
+        # written to .part and renamed only when complete), and its hash is recorded below
+        download(w["url"], zpath, sha256=w.get("sha256"), reuse_existing=True)
         with zipfile.ZipFile(zpath) as z:
             for t in tifs:
                 z.extract(t.name, out_dir)
@@ -49,7 +51,7 @@ def fetch_worldclim(cfg: Config) -> dict:
     res = {"source": "worldclim", "version": w["version"], "resolution": w["resolution"], "url": w["url"],
            "zip_sha256": zip_sha, "zip_sha256_pinned": w.get("sha256"),
            "tif_sha256": {t.name: sha256_file(t) for t in tifs}}
-    write_json(res, cfg.path("results", "fetch_worldclim.json"))
+    write_result(cfg, res, "fetch_worldclim.json")
     return res
 
 
@@ -68,12 +70,13 @@ def fetch_soilgrids(cfg: Config) -> dict:
                       "SCALESIZE": f"long({sg['size'][0]}),lat({sg['size'][1]})"}
             download(sg["wcs_url"], p, params=params, session=s)
             with open(p, "rb") as fh:
-                magic = fh.read(4)
-            if magic not in (b"II*\x00", b"MM\x00*", b"II+\x00", b"MM\x00+"):
+                head = fh.read(200)
+            if head[:4] not in (b"II*\x00", b"MM\x00*", b"II+\x00", b"MM\x00+"):
                 p.unlink()
-                raise SourceUnavailableError(f"SoilGrids WCS returned a non-TIFF response for {v}")
+                raise DownloadError(f"SoilGrids WCS returned a non-TIFF response for {v}: "
+                                    f"{head.decode('utf-8', 'replace')!r}")
         files[p.name] = sha256_file(p)
     res = {"source": "soilgrids", "version": sg["version"], "wcs_url": sg["wcs_url"], "depth": sg["depth"],
            "statistic": sg["statistic"], "size": sg["size"], "files_sha256": files}
-    write_json(res, cfg.path("results", "fetch_soilgrids.json"))
+    write_result(cfg, res, "fetch_soilgrids.json")
     return res

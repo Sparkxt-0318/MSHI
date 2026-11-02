@@ -1,0 +1,5 @@
+N2b {13,15,16,17} {'Asia': 0.627, 'North America': 0.165, 'Africa': 0.1, 'Europe': 0.091, 'off-polygon': 0.01, 'Oceania': 0.007}
+N2c {11,13,15,17} {'Asia': 0.651, 'North America': 0.141, 'Africa': 0.119, 'Europe': 0.076, 'off-polygon': 0.008, 'Oceania': 0.006}
+   barren (16) area by continent: {'Asia': 0.77, 'Africa': 0.206, 'North America': 0.019, 'off-polygon': 0.004, 'Europe': 0.002}
+   Asia box only: {'Asia': 0.758, 'Africa': 0.138, 'Europe': 0.088, 'off-polygon': 0.009, 'Oceania': 0.007}
+N2d {11,13,15,16,17} {'Asia': 0.626, 'North America': 0.166, 'Africa': 0.1, 'Europe': 0.091, 'off-polygon': 0.009, 'Oceania': 0.007}

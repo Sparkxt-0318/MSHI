@@ -1,0 +1,89 @@
+{
+ "resid_sd_forest_nonforest": [
+  0.481,
+  0.67
+ ],
+ "brown_forsythe_p": 5.580283369001711e-08,
+ "resid_sd_by_class": {
+  "Forest": [
+   395,
+   0.481
+  ],
+  "Grassland": [
+   78,
+   0.669
+  ],
+  "Agriculture": [
+   72,
+   0.621
+  ],
+  "Shrubland": [
+   14,
+   0.57
+  ],
+  "Savanna": [
+   5,
+   0.426
+  ],
+  "Desert": [
+   13,
+   0.694
+  ]
+ },
+ "binary_inflation_pooled_smearing": {
+  "est": 0.0433,
+  "iid": [
+   0.0,
+   0.088
+  ],
+  "block2": [
+   -0.003,
+   0.099
+  ]
+ },
+ "binary_inflation_class_smearing": {
+  "est": -0.0019,
+  "iid": [
+   -0.045,
+   0.048
+  ],
+  "block2": [
+   -0.044,
+   0.053
+  ]
+ },
+ "forest_effect_log_geomean": {
+  "est": 0.125,
+  "iid": [
+   0.001,
+   0.242
+  ]
+ },
+ "forest_effect_arith_mean_scale(log ratio)": {
+  "est": 0.018,
+  "iid": [
+   -0.104,
+   0.149
+  ],
+  "block2": [
+   -0.105,
+   0.157
+  ]
+ },
+ "glm_quasi_poisson_forest_coef": {
+  "est": 0.048,
+  "ci": [
+   -0.074,
+   0.17
+  ]
+ },
+ "glm_quasi_poisson_inflation": 0.0171,
+ "glm_gamma_log_forest_coef": {
+  "est": 0.049,
+  "ci": [
+   -0.069,
+   0.167
+  ]
+ },
+ "glm_gamma_log_inflation": 0.0172
+}
