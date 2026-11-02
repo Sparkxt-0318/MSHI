@@ -37,8 +37,10 @@ that machine's network policy, not a property of the pipeline.
 |---|---|
 | `mshi/` | the pipeline package (`mshi/run.py` is the entry point) |
 | `configs/v3.yaml` | all versions, paths, thresholds, seeds; the hash-locked definition of the clean test |
-| `tests/` | reproduction-target regression tests, guards (demo table, locked plan), unit tests, smoke test |
+| `tests/` | reproduction-target regression tests, guards (demo table, locked plan), unit and robustness tests, smoke test |
 | `docs/DECISIONS.md` | dated log of decisions, deviations, versions and open questions |
+| `docs/CHECKPOINT1.md` | Checkpoint 1 report: reproduction table, deviations, run times, what in the handoff is wrong, decisions needed |
+| `docs/review/2026-11-02/` | the package review and the handoff critique (findings, verifier notes, review scripts; exploratory) |
 | `docs/handoff/` | the 2026-11-02 handoff bundle (audit log, locked plan, prototype scripts, pilot results) |
 | `data/derived/` | COSORE annual values, record and site tables (with licence and attribution notes) |
 | `results/` | stage outputs, `reproduction_check.md`, `run_log.jsonl` |
