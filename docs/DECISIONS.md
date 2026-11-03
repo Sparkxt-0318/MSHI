@@ -809,3 +809,20 @@ nothing that depends on the unreproduced rows can run.
 **D-P2-6 One MODIS extraction for both builds.** The MODIS point set now also holds the analysis sites. Window
 means are computed per point, so extra points change no value at the locked sites or at the 889 original
 sites; this avoids a second ~1-hour extraction for Phase 2. Smoke runs subset both builds.
+
+**D-P2-7 kNNDM, implemented from the authors' reference code (brief Phase 2 item 2).** No maintained Python
+implementation exists (PyPI has no `knndm`/`pyknndm`; `spatial-kfold` 0.0.4 and `spacv` 0.0.22 do not
+implement kNNDM). The paper (Linnenbrink et al. 2024, doi:10.5194/gmd-17-5897-2024) could not be read: its
+publisher and CRAN are blocked here. `mshi/analysis/knndm.py` ports `knndm_geo` of the authors' R package CAST
+1.2.0 (`R/knndm.R`, GitHub HannaMeyer/CAST, branch master, read 2026-11-03, SHA-256 `14fded58…`; the commit
+could not be resolved), with R's `ks.test`/`psmirnov` and `twosamples::wass_stat` read from their sources. Not
+run against R (R is not available here); each piece is tested against brute force or SciPy, and toy cases
+check the behaviour (47 tests). Settings (config `phase2.within.knndm`): k = 5, maxp 0.5, Ward (`ward.D2`)
+clustering of great-circle distances, 100 cluster counts, CAST's random-CV fallback at KS p ≥ 0.05. Distances
+are great-circle on the 6,371-km sphere, as CAST's default and as the 5-km site merging: a true surface distance
+in the sense of D-C1-2 (WGS84 geodesics differ by under 0.6%, and gave the same splits in nine toy
+configurations). The prediction domain is the continent's 0.5° land cells, drawn with probability proportional
+to cell area (an unweighted lon/lat grid over-represents high latitudes); this choice changes the folds and is
+fixed here, before any continent is scored. Known limit, kept for fidelity: CAST's fallback KS test treats
+leave-one-out distances as independent and rejects too often (14% at a nominal 5% in toy draws); kNNDM then
+returns a near-random split, so the effect on the benchmark is small.
