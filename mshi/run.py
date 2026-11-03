@@ -60,8 +60,10 @@ class Stage:
 
 
 def _stages() -> list[Stage]:
+    from .analysis.aoa import aoa_sensitivity
     from .analysis.clean_test import clean_test
     from .analysis.europe_geo import europe_geo_sensitivity
+    from .analysis.noise_ceiling import noise_ceiling
     from .analysis.repro_checks import repro_checks
     from .analysis.transfer import transfer_matrix, within_continent
     from .analysis.site_diagnostics import site_diagnostics
@@ -98,6 +100,9 @@ def _stages() -> list[Stage]:
         Stage("clean_test", clean_test, ["features"], "locked Asia -> Europe test (hash-verified re-run)"),
         Stage("repro_checks", repro_checks, [], "compare outputs with the handoff reproduction targets"),
         # ---- after the reproduction gate (module docstring): later phases, all exploratory
+        Stage("noise_ceiling", noise_ceiling, ["build_sites_analysis"],
+              "3-level REML noise ceilings by geographic continent (Phase 2 item 3)", needs=("site_build",),
+              exploratory=True),
         Stage("europe_geo_sensitivity", europe_geo_sensitivity, ["features"],
               "declared post-hoc sensitivity of the locked test on geographic Europe (Q-5)", exploratory=True),
         Stage("features_analysis", features_analysis,
@@ -107,6 +112,9 @@ def _stages() -> list[Stage]:
               "continent transfer matrix and leave-one-continent-out (Phase 2 item 1)", exploratory=True),
         Stage("within_continent", within_continent, ["transfer_matrix", "fetch_worldclim"],
               "within-continent benchmark: spatial blocks and kNNDM, transfer penalties (item 2)", exploratory=True),
+        Stage("aoa_sensitivity", aoa_sensitivity, ["features_analysis", "fetch_worldclim"],
+              "area-of-applicability sensitivity: DI thresholds x importance weights, global DI map (item 4)",
+              exploratory=True),
     ]
 
 

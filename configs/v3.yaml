@@ -370,6 +370,8 @@ phase2:
     min_records_per_site: 2
     n_boot: 200                        # site-cluster bootstrap of the variance shares
     seed: 7
+    optimizer: lbfgs                   # statsmodels MixedLM.fit method (as N3); boundary models also fitted (D-P2-9)
+    n_jobs: 4                          # bootstrap processes; no effect on any result (checked: byte-identical)
   aoa:                                 # item 4: area-of-applicability sensitivity (Meyer & Pebesma 2021)
     learner: XGB                       # on c8, as the handoff's E5
     train: [all, Asia]
@@ -379,6 +381,14 @@ phase2:
     perm_repeats: 10
     perm_seed: 0
     cv: {block_deg: 5.0, folds: 5, seed: 42}
+    threshold_rules:                   # outlier-removed maximum (as the locked test and E5) vs the 0.95 quantile
+      whisker_max: {rule: whisker, quantiles: [0.25, 0.75], iqr_multiplier: 1.5}
+      q95: {rule: quantile, q: 0.95}
+    lat_bands:                         # E5's bands, extended to the poles; intervals (lower, upper]
+      edges: [-90.0, -60.0, -23.5, 23.5, 50.0, 66.5, 90.0]
+      labels: [Antarctic, S temperate, Tropics, N temperate, N boreal, Arctic]
+    ice_sheets: {continent_geo: [Antarctica], south_of_lat: -60.0, subunits: [Greenland]}   # excluded domain (F-H25)
+    transfer_check: {train: Asia, test: North America}   # inside vs outside the Asia model's AOA (exploratory)
   us_r2:                               # item 5: why the original US R2 was low (E4/E4b, clean)
     asia_box: [25.0, 180.0, -10.0, 80.0]     # the original (v1/v2) "Asia" box [lon0, lon1, lat0, lat1]
     us_box: [-125.0, -66.0, 24.0, 50.0]      # the original "US" box (CONUS)

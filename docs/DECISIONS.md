@@ -847,3 +847,35 @@ penalty = within-continent R² minus transfer R², against LOCO and against ever
 (F-H18), with paired bootstrap CIs (same resampled blocks). `within_continent` reuses `transfer_matrix`'s
 per-site predictions (`data/interim/transfer_predictions_qc.parquet`). xgboost 2.1.4 is pinned and library
 versions are recorded in each result (F-H21). Not run yet: the gridded features are unreachable.
+
+**D-P2-9 Noise ceiling (brief Phase 2 item 3; exploratory).** Stage `noise_ceiling`
+(`mshi/analysis/noise_ceiling.py`) on the analysis QC records, by geographic continent and pooled. Nested REML
+model log Rs = site + study-within-site + record (statsmodels `MixedLM`, built from arrays; it equals N3's formula
+model to rel 1e-6), study = SRDB `Study_number` within the 5-km site, each COSORE record its own study; sites
+with at least 2 records enter the fit. The kept estimate is the REML maximum over the closed parameter space:
+besides the interior fit, the two boundary models (study variance 0; site variance 0) are fitted, because lbfgs
+reported convergence short of the boundary (South America: 0.34 log-likelihood below the study-variance-0
+model). Ceilings: a record from an independent study, s²_site / total; a record from the same study, (s²_site +
+s²_study) / total; the actual Phase-2 target, the record-weighted site mean, s²_site / (s²_site + mean_i v_i)
+with v_i = s²_study Σ_j (m_ij/n_i)² + s²_record/n_i (exact for how site means are built; the brief's
+equal-study-weight formula, s²_study/J_i + s²_record/n_i, is reported alongside and differs by at most about
+0.003 on the QC data). CIs: site-cluster bootstrap within each continent (200 replicates, duplicated sites
+relabelled; replicates that cannot separate site and study variance are excluded and counted; the pooled
+replicate is the union of the continent replicates). N3's same- vs different-study pair semivariances are
+redone with the same site-cluster bootstrap (F-H20). Limits: nested model only (the crossed site x study model
+of F-H26 is not fitted); Africa and Oceania have 2-3 multi-study sites, so their split is barely identified
+(supplementary). Runs now: it needs only the site-build reproduction rows (D-P2-5).
+
+**D-P2-10 Area-of-applicability sensitivity (brief Phase 2 item 4; exploratory).** Stage `aoa_sensitivity`
+(`mshi/analysis/aoa.py`): XGBoost on the 8 bioclim variables (the original fixed parameters), trained on all
+sites of the six continents and on Asia only; dissimilarity index as in the locked test (Meyer & Pebesma 2021,
+doi:10.1111/2041-210X.13650; the paper could not be read here, so the DI, the CV training DI and the rule were
+checked against the source of CAST 1.2.0, `R/trainDI.R`, `R/aoa.R`, `R/aoa-helpers.R`, read 2026-11-03).
+Variants: threshold = outlier-removed maximum of the CV training DI (5° blocks; as the locked test and E5) or its
+0.95 quantile; importance weights = permutation importance or none. Reported per training set and variant: the
+land-area share outside the AOA on a 0.5° grid, by geographic continent and latitude band, with and without the
+ice sheets (Antarctica and Greenland; F-H25), the share of predicted Rs flux outside (the smearing factor
+cancels in a share; no global total is reported), and for the Asia model, North American sites inside vs outside
+its AOA with block-bootstrap CIs. Global DI map of the primary variant (all sites, outlier-removed maximum,
+permutation weights). CAST 1.2.0's own threshold, min(Q3 + 1.5 IQR, max), is implemented but not configured; it
+differs from the outlier-removed maximum only when training DI exceed the fence.
