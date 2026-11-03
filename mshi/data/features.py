@@ -88,3 +88,36 @@ def features(cfg: Config) -> dict:
     write_result(cfg, res, "features.json", outputs=outputs,
                  inputs=["build_sites.json", "modis_points.json", "fetch_worldclim.json", "fetch_soilgrids.json"])
     return res
+
+
+ANALYSIS_TABLES = ("sites_analysis_qc.parquet", "sites_analysis_repo.parquet")
+
+
+def features_analysis(cfg: Config) -> dict:
+    """Phase 2 input: the same features (WorldClim, SoilGrids, MODIS window means), attached the same way, to
+    the analysis site tables (``build_sites_analysis``: geodesic distances, geographic continent, restricted
+    COSORE). Writes data/interim/features_analysis_{qc,repo}.parquet (gitignored, as the locked tables)."""
+    nd = cfg["features"]["site_key_round"]
+    tags = cfg["site_build"]["variants"]
+    tables = [cfg.path("derived", f"sites_analysis_{t}.parquet") for t in tags]
+    require_outputs(cfg, "build_sites_analysis.json", tables)
+    require_outputs(cfg, "modis_points.json", [cfg.path("interim", "modis_points.parquet")])
+    require_outputs(cfg, "fetch_worldclim.json",
+                    [worldclim_path(cfg, i) for i in range(1, cfg["features"]["worldclim_vars"] + 1)])
+    require_outputs(cfg, "fetch_soilgrids.json",
+                    [soilgrids_path(cfg, v) for v in cfg["sources"]["soilgrids"]["variables"]])
+    sites = {t: read_table(cfg, p) for t, p in zip(tags, tables)}
+    keys = set().union(*(site_key(d.lat, d.lon, nd) for d in sites.values()))
+    modis = load_modis_points(cfg, keys)
+    res = {"exploratory": True, "modis_cache_key": read_json(cfg.path("interim", "modis_points.meta.json"))["key"]}
+    outputs = []
+    for tag, d in sites.items():
+        d = attach_features(cfg, d, modis)
+        outputs.append(write_table(d, cfg.path("interim", f"features_analysis_{tag}.parquet")))
+        res[tag] = {"shape": list(d.shape),
+                    "missing": d[["bio01", "bio12", "clay", "npp", "lst_day"]].isna().sum().to_dict(),
+                    "by_continent_geo": d.continent_geo.value_counts().to_dict()}
+    write_result(cfg, res, "features_analysis.json", outputs=outputs,
+                 inputs=["build_sites_analysis.json", "modis_points.json", "fetch_worldclim.json", "fetch_soilgrids.json"])
+    return res
+

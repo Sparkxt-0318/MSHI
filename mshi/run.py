@@ -59,10 +59,11 @@ class Stage:
 
 def _stages() -> list[Stage]:
     from .analysis.clean_test import clean_test
+    from .analysis.europe_geo import europe_geo_sensitivity
     from .analysis.repro_checks import repro_checks
     from .analysis.site_diagnostics import site_diagnostics
     from .data.cosore import cosore_annual, cosore_annual_analysis
-    from .data.features import features
+    from .data.features import features, features_analysis
     from .data.sites_analysis import build_sites_analysis
     from .data.fetch import fetch_cosore, fetch_naturalearth, fetch_srdb
     from .data.modis import modis_points
@@ -92,6 +93,12 @@ def _stages() -> list[Stage]:
               "attach WorldClim, SoilGrids, MODIS to sites"),
         Stage("clean_test", clean_test, ["features"], "locked Asia -> Europe test (hash-verified re-run)"),
         Stage("repro_checks", repro_checks, [], "compare outputs with the handoff reproduction targets"),
+        # ---- after the reproduction gate (module docstring): later phases, all exploratory
+        Stage("europe_geo_sensitivity", europe_geo_sensitivity, ["features"],
+              "declared post-hoc sensitivity of the locked test on geographic Europe (Q-5)"),
+        Stage("features_analysis", features_analysis,
+              ["build_sites_analysis", "fetch_worldclim", "fetch_soilgrids", "modis_points"],
+              "Phase 2 input: features attached to the analysis site tables"),
     ]
 
 
@@ -228,7 +235,7 @@ def main(argv: list[str] | None = None) -> int:
     names = [s.name for s in _stages()]
     if a.list or not a.stage:
         for s in _stages():
-            print(f"{s.name:20s} deps={','.join(s.deps) or '-':45s} {s.doc}")
+            print(f"{s.name:24s} deps={','.join(s.deps) or '-':45s} {s.doc}")
         return 0
     full = "all" in a.stage
     want = names if full else a.stage

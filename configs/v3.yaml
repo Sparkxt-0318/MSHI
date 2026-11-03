@@ -307,6 +307,15 @@ reproduction_targets:                  # handoff values and tolerances (PROMPT s
 repro_checks:
   npp_min_sites: 3                     # NPP r is computed only with at least this many sites (else the row FAILs)
 
+# Declared post-hoc sensitivity analysis of the locked test on geographic Europe (the author's decision Q-5 of
+# 2026-11-03; D-C1-5, D-P2-4). The locked result stays primary; the result is labelled exploratory.
+europe_geo_sensitivity:
+  approved: "the author, 2026-11-03 (Q-5)"
+  test_continent_geo: Europe
+  # the author's check outside the pipeline (2026-11-03), reported to 4 (R2) and 3 (CI) decimals
+  author_reference: {n: 231, r2: 0.0598, ci_site: [-0.001, 0.098]}
+  reference_tolerance: {r2: 0.00005, ci: 0.0005}   # half a unit of the reported precision
+
 # Phase 2 (brief section 5): exploratory, supporting analyses. They use the analysis tables (sites_analysis_*,
 # features_analysis_*) and the geographic continent (continent_geo); every result is labelled exploratory.
 # North America is used for exploratory analyses only (ground rule 5). docs/DECISIONS.md D-P2-5 onwards.

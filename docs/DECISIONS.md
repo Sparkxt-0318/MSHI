@@ -738,3 +738,74 @@ the handoff bundle in `docs/handoff/` is provenance and is not edited, and the d
 is left as written. Changed now: README (the locked test's description) and the heading of the Phase-3
 part of the handoff critique.
 
+
+## 2026-11-03 — Phase 2 (exploratory; started while the gridded sources are unreachable)
+
+The author asked to finish Phase 1 and then start Phase 2. Phase 1's remaining rows (locked-test re-run,
+NPP check) still wait for the network (D-C1-1). Phase-2 work that does not depend on them was done; the rest
+is implemented and tested on synthetic data and runs when the sources are reachable. Everything in this
+section is exploratory (ground rule 3) unless stated otherwise.
+
+**D-P2-1 COSORE for v3 analyses (implements DEV-C1-6).** Stage `cosore_annual_analysis`,
+`data/derived/cosore_annual_analysis.csv`. A port is kept if its PORTS.txt row (or the row of port 0, "all
+ports") has `CSR_MSMT_VAR == "Rs"` and `CSR_TREATMENT == "None"`, it has the handoff's 150 observation days
+spanning 180 days, and *full-year coverage*: at least 5 observation days in every calendar month, pooled over
+years (`cosore_analysis.min_days_per_month`; chosen on coverage counts alone, before any Rs value was computed:
+1 day gives 42 datasets, 3–5 days 39, 7 days 36, 10 days 34). A port's annual value is the mean of its 12
+monthly means of daily means (fluxes clipped as in the handoff), so every month weighs the same; the
+handoff-style mean of all observations of the same ports is kept next to it. PORTS.txt is parsed with tabs
+turned into spaces first (otherwise quoted fields with commas split; 5 files did not parse). Result: 39 sites
+(the handoff rule: 66); 124 of 629 ports kept. Exclusions (a port can have several): 470 not full-year, 311
+short record, 50 Rh, 18 NEE, 7 Reco, 212 under a treatment, 1 without a PORTS.txt row; 45 datasets keep no
+port, 6 have no data file, 1 has unusable content. The mean-of-observations value is 0.85–1.22 times the
+month-balanced one (median 1.035), the size of the seasonal-sampling effect F-H12 described. *Operational
+choices that are mine, not the author's:* the 5-day threshold and the month-balanced annual value (requiring
+full-year coverage while weighting densely sampled months more would keep part of the bias F-H12 is about).
+
+**D-P2-2 Analysis site build (implements D-C1-2).** Stage `build_sites_analysis`; tables
+`data/derived/records_analysis.parquet`, `sites_analysis_{qc,repo}.parquet` (site ids `v3aqc_*`,
+`v3arepo_*`). The locked build's records, filters, thresholds and 5-km merging, except: COSORE from D-P2-1;
+geodesic distances (`mshi/geo.py`: the distance in an azimuthal-equidistant projection centred on the
+record, after clipping the polygon to a window around it, so a far polygon cannot look near) for the
+coordinate check and for the nearest country of a record off the 1:50m coastline (limit 50 km, as before);
+and a geographic continent per record and site (D-P2-3). Result: the coordinate check flags 42 records instead
+of 52; the 10 that change are 3 Malta records reported as Italy (98 km geodesic, 122 km in Web Mercator), 6
+records in Pakistan reported as India (96 vs 114 km) and 1 in Vietnam reported as China (96 vs 104 km). With 27
+COSORE sites fewer, records after the coordinate check: 4,764 (locked 4,781); after QC: 3,672 (3,694). Sites:
+QC 965 (971), repo 1,221 (1,225). The part of Q-2 about records with correct coordinates and a wrong Country
+label was not decided; the 100-km rule is unchanged.
+
+**D-P2-3 Geographic continent (implements D-C1-5).** `continent_geo` = the continent of the Natural Earth 1:50m
+admin-0 *map subunit* containing the point (file pinned by SHA-256 `b1df8433…`; same Natural Earth commit as
+the countries). Natural Earth gives overseas subunits the continent where they lie: French Guiana South
+America, the Canary Islands and Madeira Africa, Hawaii and Easter Island Oceania, Guadeloupe and Martinique
+North America, Svalbard Europe. Subunits labelled "Seven seas (open ocean)" take their UN region (Azores:
+Europe; Réunion: Africa; Americas split by UN sub-region). Russia keeps the locked 60°E split, because Natural
+Earth splits Russia along another line and only overseas territories were to change. Points off the coastline:
+nearest subunit within 50 km, geodesic. Checked against the locked QC table: 9 of 971 sites change continent,
+2 in French Guiana (Europe → South America), 2 in the Canary Islands (Europe → Africa) and 5 in Hawaii (North
+America → Oceania); geographic Europe in the locked QC set has 232 sites. Analysis QC sites by geographic
+continent: Asia 386, North America 246, Europe 233, South America 44, Africa 28, Oceania 28.
+
+**D-P2-4 The geographic-Europe sensitivity analysis, defined before it is computed (implements D-C1-5).**
+Stage `europe_geo_sensitivity` (`mshi/analysis/europe_geo.py`), fixed in code and config before any of its
+results exists (the gridded features are not available yet). The locked model (the one the locked result
+selected), refit on the same Asia training sites by the locked code, which verifies the lock first, is scored
+on the locked Europe test sites whose `continent_geo` is Europe, with the locked metrics and the same site
+bootstrap; the training set, model and selection rule do not change (ground rule 4). Control: the same
+computation on the full locked Europe set must reproduce the locked primary metrics (to
+`clean_test.deviation_atol`), otherwise the stage fails and reports nothing. The author's reference (n = 231,
+R² 0.0598 [−0.001, 0.098], computed outside the pipeline) is compared with tolerances of half a unit of its
+reported precision; a difference is reported, not tuned away. The result is labelled exploratory (declared
+post hoc). Expected n: 232 geographic-Europe sites, minus the one locked test site without WorldClim values,
+if it is not one of the four removed.
+
+**D-P2-5 Reproduction gate per row group.** The gate (D-P1-18 (b), R-P1-21) now checks only the reproduction
+rows a later-phase stage builds on: `site_build` (COSORE and site-build counts), `locked_test`, `npp`. A stage
+that uses gridded features needs all three; one that uses only the site records (the noise ceiling) needs
+`site_build`, which reproduces exactly. This is "reproduce before you extend" applied to each stage's inputs;
+nothing that depends on the unreproduced rows can run.
+
+**D-P2-6 One MODIS extraction for both builds.** The MODIS point set now also holds the analysis sites. Window
+means are computed per point, so extra points change no value at the locked sites or at the 889 original
+sites; this avoids a second ~1-hour extraction for Phase 2. Smoke runs subset both builds.
