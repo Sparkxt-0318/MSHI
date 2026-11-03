@@ -1010,7 +1010,13 @@ both, every bootstrap replicate of South America (200), Europe (200), Oceania (1
 reaches the independent REML maximum of the review to 1.2e-9 in log-likelihood, and none fails (the polish changed
 2 South America and 3 Africa replicates; check scripts in the review record). Tests: the stage's draw 2 for South
 America keeps the s²_study = 0 model at the maximum (0.0860, 0, 0.1174); its draw 58 is polished to s²_study 0.005
-(gain 0.033); on simulated data the kept fit is the best point of a fine grid. (C-2) The equal-study-weight site-mean formula was attributed to the brief, which gives
+(gain 0.033); on simulated data the kept fit is the best point of a fine grid. *Regenerated from the clean commit
+1577f19:* no point estimate of any group changed; South America's CIs are now independent-study and same-study
+ceiling [0.445, 0.835] (was [0.471, 0.835] and [0.475, 0.835]), site-mean ceiling [0.610, 0.917] (was
+[0.640, 0.917]), study share [0, 0] (was [0, 0.002]); its replicates on the boundary 197 (was 191), failed 0 (was
+1); no CI of any other group moved by 5e-5 or more. Over all groups, the polish applied in 9 Asia, 3 North America,
+3 Africa, 2 South America and 34 pooled replicates (gains above LLF_TIE that move no CI), and fallback methods
+produced 80 interior, 26 no-site and 7 no-study candidate fits in South America and 63 no-study fits in Oceania. (C-2) The equal-study-weight site-mean formula was attributed to the brief, which gives
 none; corrected in the code, the result and D-P2-9. (C-3) The same-study ceiling, (s²_site + s²_study)/total, is the
 R² of a perfect predictor of the study mean. A predictor constant within a site (gridded climate and soil) reaches it
 only at single-study sites; with the real design the reviewer's simulation gives 0.81 instead of 0.84 for Asia

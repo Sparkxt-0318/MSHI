@@ -732,7 +732,7 @@ def figure(cfg: Config, res: dict, s: Settings) -> list[Path]:
     axes[0].set_xlabel("Share of log Rs variance (REML)")
     axes[0].set_title("a  Variance shares", loc="left")
     series_b = [("independent_study", "New record, independent study", PALETTE["blue"], "o", 0.2),
-                ("same_study", "New record, same study (a predictor of the study)", PALETTE["orange"], "s", 0.0),
+                ("same_study", "New record, same study\n(a predictor of the study)", PALETTE["orange"], "s", 0.0),
                 ("site_mean", "Site mean (the Phase-2 target)", PALETTE["black"], "D", -0.2)]
     _dots(axes[1], rows, [[G[k]["ceilings"][key] for k in names] for key, *_ in series_b], series_b)
     axes[1].set_xlim(0, 1)
