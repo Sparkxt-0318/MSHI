@@ -879,3 +879,21 @@ cancels in a share; no global total is reported), and for the Asia model, North 
 its AOA with block-bootstrap CIs. Global DI map of the primary variant (all sites, outlier-removed maximum,
 permutation weights). CAST 1.2.0's own threshold, min(Q3 + 1.5 IQR, max), is implemented but not configured; it
 differs from the outlier-removed maximum only when training DI exceed the fence.
+
+**D-P2-11 Why the original US R² was low: E4/E4b re-run cleanly (brief Phase 2 item 5; exploratory; North
+America is used for exploratory analysis only).** Stage `us_r2` (`mshi/analysis/us_r2.py`). Both analysis
+variants, each named (qc: coordinate check and QC filters, primary; repo: repository filters and coordinate check
+only, as E4b). Training regions: Asia (geographic continent) and the original v1/v2 "Asia" box; test regions: the
+original "US" box, called here the *US bounding box* because it also holds Canadian and Mexican sites (analysis QC:
+USA 175, Canada 15, Mexico 1), North America (geographic continent; Hawaii is now Oceania) and North America
+outside the box. Learners: XGBoost with the original fixed parameters (seed 0 for the main rows; the range over
+seeds 0-19 reported next to each row, since a single seed was a high draw in E4, F-H22) and OLS-TP. Targets: the
+site mean, and one record per site chosen by the original rule (COSORE first, then the lowest SRDB row; ties
+between COSORE records at one site, 3 sites per variant, go to the lowest record id), on the same site features;
+the target effect (site mean minus single record) gets a paired block-bootstrap CI, so "no change" (F-H22) is
+tested as a difference. Metrics as D-P2-8, with 2° block-bootstrap CIs; region differences have no paired CI
+(different site sets). In the current tables no site is in both a training and a test region. Not the original
+configuration (F-H29): v3 sites, WorldClim 2.5' and the restricted COSORE replace the original 0.05° cells,
+WorldClim 10' and 66 COSORE sites; E4's rows on the original 889 sites are not re-run (they would use the legacy
+tables outside their allow-listed purpose). The Asia box includes 30 geographic-Europe QC sites, some of them in the
+locked Europe test set (F-H2); this is exploratory and does not touch the locked test.

@@ -391,8 +391,11 @@ phase2:
     transfer_check: {train: Asia, test: North America}   # inside vs outside the Asia model's AOA (exploratory)
   us_r2:                               # item 5: why the original US R2 was low (E4/E4b, clean)
     asia_box: [25.0, 180.0, -10.0, 80.0]     # the original (v1/v2) "Asia" box [lon0, lon1, lat0, lat1]
-    us_box: [-125.0, -66.0, 24.0, 50.0]      # the original "US" box (CONUS)
+    us_box: [-125.0, -66.0, 24.0, 50.0]      # the original "US" box (it also holds Canadian and Mexican sites)
     learners: [XGB, OLS-TP]
+    train_continent: Asia                    # geographic continents of the comparison (North America: exploratory only)
+    test_continent: North America
+    xgb_seed_spread: [0, 19]                 # XGB refitted with each seed; min/mean/max reported next to each row
 
 smoke:
   n_sites: 50

@@ -26,7 +26,8 @@ repro:
 
 phase2:         ## exploratory Phase-2 stages (they run only if the reproduction rows they build on passed)
 	$(PY) -m mshi.run --stage repro_checks --stage noise_ceiling --stage europe_geo_sensitivity \
-	    --stage features_analysis --stage transfer_matrix --stage within_continent --stage aoa_sensitivity
+	    --stage features_analysis --stage transfer_matrix --stage within_continent --stage aoa_sensitivity \
+	    --stage us_r2
 
 smoke:          ## 50-site smoke run into data/interim/smoke/
 	$(PY) -m mshi.run --stage all --smoke

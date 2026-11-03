@@ -66,6 +66,7 @@ def _stages() -> list[Stage]:
     from .analysis.noise_ceiling import noise_ceiling
     from .analysis.repro_checks import repro_checks
     from .analysis.transfer import transfer_matrix, within_continent
+    from .analysis.us_r2 import us_r2
     from .analysis.site_diagnostics import site_diagnostics
     from .data.cosore import cosore_annual, cosore_annual_analysis
     from .data.features import features, features_analysis
@@ -114,6 +115,9 @@ def _stages() -> list[Stage]:
               "within-continent benchmark: spatial blocks and kNNDM, transfer penalties (item 2)", exploratory=True),
         Stage("aoa_sensitivity", aoa_sensitivity, ["features_analysis", "fetch_worldclim"],
               "area-of-applicability sensitivity: DI thresholds x importance weights, global DI map (item 4)",
+              exploratory=True),
+        Stage("us_r2", us_r2, ["features_analysis", "build_sites_analysis"],
+              "why the original US R2 was low: E4/E4b re-run cleanly, US box vs North America (item 5)",
               exploratory=True),
     ]
 
