@@ -3,8 +3,8 @@
   "derived:cosore_annual_analysis.csv": "cff7d1bb2fbaa120c531fb4b2f738f4b59a57533c1e86fafb12c8c1d3aad76d4"
  },
  "_provenance": {
-  "code_sha256": "8d2cd64c0b2b12b1e615a8c95d3eda3459c3f7eee7eb342c91a751b988968159",
-  "config_sha256": "85533e78e57dc0fdc360b83fccabc3de53f7b6fa87a7a5e2c92d54c25d79ad25"
+  "code_sha256": "07184285e291096465387d276ab132c993d7d1976e9e57054557a76f7c4c7ed0",
+  "config_sha256": "40efafbce531322fe6e89ab4655b8661ebb414995fd55c03b1cb779e84ecf8fe"
  },
  "annual": "mean of the 12 monthly means of daily means (clipped fluxes)",
  "dropped": [
