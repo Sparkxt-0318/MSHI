@@ -63,6 +63,7 @@ def _stages() -> list[Stage]:
     from .analysis.clean_test import clean_test
     from .analysis.europe_geo import europe_geo_sensitivity
     from .analysis.repro_checks import repro_checks
+    from .analysis.transfer import transfer_matrix, within_continent
     from .analysis.site_diagnostics import site_diagnostics
     from .data.cosore import cosore_annual, cosore_annual_analysis
     from .data.features import features, features_analysis
@@ -102,6 +103,10 @@ def _stages() -> list[Stage]:
         Stage("features_analysis", features_analysis,
               ["build_sites_analysis", "fetch_worldclim", "fetch_soilgrids", "modis_points"],
               "Phase 2 input: features attached to the analysis site tables", exploratory=True),
+        Stage("transfer_matrix", transfer_matrix, ["features_analysis"],
+              "continent transfer matrix and leave-one-continent-out (Phase 2 item 1)", exploratory=True),
+        Stage("within_continent", within_continent, ["transfer_matrix", "fetch_worldclim"],
+              "within-continent benchmark: spatial blocks and kNNDM, transfer penalties (item 2)", exploratory=True),
     ]
 
 

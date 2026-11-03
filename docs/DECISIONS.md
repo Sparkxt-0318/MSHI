@@ -826,3 +826,24 @@ to cell area (an unweighted lon/lat grid over-represents high latitudes); this c
 fixed here, before any continent is scored. Known limit, kept for fidelity: CAST's fallback KS test treats
 leave-one-out distances as independent and rejects too often (14% at a nominal 5% in toy draws); kNNDM then
 returns a near-random split, so the effect on the benchmark is small.
+
+**D-P2-8 Continent transfer matrix and within-continent benchmark (brief Phase 2 items 1-2; exploratory).**
+Stages `transfer_matrix` and `within_continent` (`mshi/analysis/transfer.py`), on `features_analysis_qc`, by
+geographic continent. Learners: OLS-TP (log Rs ~ MAT + ln MAP, the locked form); a GAM with cubic B-spline
+smooths of MAT and ln MAP (statsmodels `GLMGam`, df 6; penalty weight by AIC on the training data, searched by
+Nelder-Mead from 1, which is deterministic where statsmodels' default restarts randomly; beyond the training
+range each smooth continues linearly, since statsmodels refuses to extrapolate B-splines); a random forest on
+the 8 bioclim variables, tuned by spatial-block CV inside the training data only (grid min_samples_leaf {1, 5,
+20} x max_features {0.33, 1.0}, reduced from 5 x 4 on measured run time alone, about 78 → 25 min, before any
+real result; fitted with 4 threads, which changes no tree or prediction); and XGBoost with the original fixed
+parameters (`clean_test.locked.xgb`). Pairwise (train on one continent, test on another) and leave-one-
+continent-out; rows with fewer than 30 test sites go to a supplementary table. Metrics: R² against the test-set
+mean; skill against the training-mean prediction (MSE scale) reported with the null's own offset
+(`null_bias_log`), since that skill rewards fixing the between-continent offset (F-H24); mean bias; RMSE in log
+units and in g C m⁻² yr⁻¹ (plain exp() back-transform, i.e. medians; F-H7). Every metric has a 2° spatial-block
+bootstrap CI (test sites resampled; conditional on the fitted model, F-H6). Within-continent CV (continents with
+at least 60 sites): 5° spatial blocks (3 seeds) and kNNDM (D-P2-7), out-of-fold predictions pooled; transfer
+penalty = within-continent R² minus transfer R², against LOCO and against every pairwise training continent
+(F-H18), with paired bootstrap CIs (same resampled blocks). `within_continent` reuses `transfer_matrix`'s
+per-site predictions (`data/interim/transfer_predictions_qc.parquet`). xgboost 2.1.4 is pinned and library
+versions are recorded in each result (F-H21). Not run yet: the gridded features are unreachable.

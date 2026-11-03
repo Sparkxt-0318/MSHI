@@ -329,15 +329,24 @@ phase2:
   transfer:                            # item 1: continent matrix and leave-one-continent-out
     learners: [OLS-TP, GAM, RF, XGB]
     ols_tp: {features: [bio01, bio12], log: [bio12]}           # log Rs ~ MAT + ln MAP (the locked form)
-    gam: {features: [bio01, bio12], log: [bio12], df: 6, degree: 3}   # cubic B-spline smooths of MAT and ln MAP; penalty by AIC
+    gam:                               # cubic B-spline smooths of MAT and ln MAP (statsmodels GLMGam; D-P2-8)
+      features: [bio01, bio12]
+      log: [bio12]
+      df: 6
+      degree: 3
+      penalty_criterion: aic           # penalty weight chosen on the training data only
+      penalty_optimizer: nm            # Nelder-Mead from alpha = 1 (deterministic; statsmodels' default restarts randomly)
+      extrapolation: linear            # beyond the training range each smooth continues linearly (statsmodels refuses)
     rf:                                # features c8; tuned by nested spatial CV inside the training data only
       n_estimators: 500
-      grid: {min_samples_leaf: [1, 3, 5, 10, 20], max_features: [0.33, 0.5, 0.8, 1.0]}
+      # reduced from 5 x 4 on measured run time alone (about 78 -> 25 min for within_continent), before any real
+      # result; keeps the ends and middle of the former grid (D-P2-8)
+      grid: {min_samples_leaf: [1, 5, 20], max_features: [0.33, 1.0]}
       inner_block_deg: 5.0
       inner_folds: 5
       inner_seed: 42
       seed: 0
-      n_jobs: 2
+      n_jobs: 4                        # fit threads; trees and predictions do not depend on it (checked for 1, 2, 4)
       predict_n_jobs: 1                # fixed tree-sum order at prediction time (bit-reproducible, DEV-P1-15)
     xgb_from: clean_test.locked.xgb    # "XGBoost with the original fixed parameters" (features c8, random_state seed)
     xgb_seed: 0
