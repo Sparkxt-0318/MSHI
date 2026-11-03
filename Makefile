@@ -3,7 +3,7 @@
 # environment from environment.yml). Override with `make PY=/path/to/python ...`.
 PY ?= $(shell test -x .venv/bin/python && echo .venv/bin/python || echo python)
 
-.PHONY: all data features clean-test repro smoke test list env lock
+.PHONY: all data analysis features clean-test repro phase2 smoke test list env lock
 
 all:            ## every stage, in order (fetch -> sites -> features -> locked test re-run -> reproduction checks)
 	$(PY) -m mshi.run --stage all
@@ -11,6 +11,9 @@ all:            ## every stage, in order (fetch -> sites -> features -> locked t
 data:           ## pinned sources + COSORE annual + site build (no gridded features)
 	$(PY) -m mshi.run --stage fetch_srdb --stage fetch_cosore --stage fetch_naturalearth \
 	    --stage cosore_annual --stage build_sites --stage repro_checks
+
+analysis:       ## site tables for v3 analyses: restricted COSORE, geodesic distances, geographic continent
+	$(PY) -m mshi.run --stage cosore_annual_analysis --stage build_sites_analysis
 
 features:       ## WorldClim, SoilGrids, MODIS points, feature tables
 	$(PY) -m mshi.run --stage fetch_worldclim --stage fetch_soilgrids --stage modis_points --stage features
@@ -20,6 +23,9 @@ clean-test:     ## hash-verified re-run of the locked Asia -> Europe test (never
 
 repro:
 	$(PY) -m mshi.run --stage repro_checks
+
+phase2:         ## exploratory Phase-2 stages (they run only if the reproduction rows they build on passed)
+	$(PY) -m mshi.run --stage repro_checks --stage europe_geo_sensitivity --stage features_analysis
 
 smoke:          ## 50-site smoke run into data/interim/smoke/
 	$(PY) -m mshi.run --stage all --smoke

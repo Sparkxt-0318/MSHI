@@ -45,6 +45,21 @@ off line-ending conversion for the hashed files, so a checkout on Windows has th
 machines that produced the committed results; its `blocked` entries describe that machine's network
 policy, not a property of the pipeline.
 
+## Two site builds
+
+- **Locked build** (`build_sites`: `data/derived/records_v3.parquet`, `sites_v3_{qc,repo}.parquet`): the
+  handoff's rules, kept only to reproduce the locked test (distances in Web Mercator, continents by country,
+  the handoff's COSORE rule).
+- **Analysis build** (`build_sites_analysis`: `records_analysis.parquet`, `sites_analysis_{qc,repo}.parquet`),
+  used for all new work (the author's decisions of 2026-11-03): geodesic distances (`mshi/geo.py`), a
+  geographic continent `continent_geo` (Natural Earth map subunits: overseas territories by location), and
+  COSORE restricted to untreated soil-respiration ports with full-year coverage
+  (`cosore_annual_analysis.csv`). See `docs/DECISIONS.md` D-P2-1 to D-P2-3.
+
+Stages after `repro_checks` (later phases; all exploratory) run only if the reproduction rows they build on
+passed: a stage that uses the gridded features needs the whole table, the noise ceiling only the site-build
+rows (D-P2-5).
+
 ## Where things are
 
 | Path | Contents |
@@ -56,7 +71,7 @@ policy, not a property of the pipeline.
 | `docs/CHECKPOINT1.md` | Checkpoint 1 report: reproduction table, deviations, run times, what in the handoff is wrong, decisions needed |
 | `docs/review/2026-11-02/` | the package review and the handoff critique (findings, verifier notes, review scripts; exploratory) |
 | `docs/handoff/` | the 2026-11-02 handoff bundle (audit log, locked plan, prototype scripts, pilot results) |
-| `data/derived/` | COSORE annual values, record and site tables (with licence and attribution notes) |
+| `data/derived/` | COSORE annual values, record and site tables of both builds (with licence and attribution notes) |
 | `results/` | stage outputs, `reproduction_check.md`, `run_log.jsonl` |
 | `legacy/` | superseded v1/v2 code, tables, figures and website artefacts |
 | `biosensor_samples/` | centimetre-tier biosensor data for a separate manuscript (not used by v3) |
