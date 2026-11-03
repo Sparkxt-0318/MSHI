@@ -55,6 +55,8 @@ class Stage:
     deps: list[str] = field(default_factory=list)
     doc: str = ""
     needs: tuple[str, ...] = ROW_GROUPS      # reproduction-row groups a stage after the gate builds on
+    exploratory: bool = False                # not part of the reproduction or a plan committed before analysis
+                                             # (ground rule 3); recorded in every run-log record
 
 
 def _stages() -> list[Stage]:
@@ -75,14 +77,15 @@ def _stages() -> list[Stage]:
         Stage("fetch_naturalearth", fetch_naturalearth, [], "Natural Earth v5.1.2 GeoJSON (SHA-256 verified)"),
         Stage("cosore_annual", cosore_annual, ["fetch_cosore"], "COSORE -> annual Rs per site"),
         Stage("cosore_annual_analysis", cosore_annual_analysis, ["fetch_cosore"],
-              "COSORE for v3 analyses: untreated Rs ports, full-year coverage (Q-6)"),
+              "COSORE for v3 analyses: untreated Rs ports, full-year coverage (Q-6)", exploratory=True),
         Stage("build_sites", build_sites, ["fetch_srdb", "cosore_annual", "fetch_naturalearth"],
               "records, QC flags, coordinate check, 5-km sites, continents"),
         Stage("site_diagnostics", site_diagnostics, ["build_sites"],
-              "exploratory: Mercator vs true distance in the coordinate check, 5-km chaining"),
+              "exploratory: Mercator vs true distance in the coordinate check, 5-km chaining", exploratory=True),
         Stage("build_sites_analysis", build_sites_analysis,
               ["fetch_srdb", "cosore_annual_analysis", "fetch_naturalearth", "build_sites"],
-              "site tables for v3 analyses: geodesic distances, geographic continent (Q-2, Q-5, Q-6)"),
+              "site tables for v3 analyses: geodesic distances, geographic continent (Q-2, Q-5, Q-6)",
+              exploratory=True),
         Stage("smoke_subset", smoke_subset, ["build_sites", "build_sites_analysis"],
               "(smoke runs only) keep a 50-site subset"),
         Stage("fetch_worldclim", fetch_worldclim, [], "WorldClim 2.1 bioclim 2.5'"),
@@ -95,10 +98,10 @@ def _stages() -> list[Stage]:
         Stage("repro_checks", repro_checks, [], "compare outputs with the handoff reproduction targets"),
         # ---- after the reproduction gate (module docstring): later phases, all exploratory
         Stage("europe_geo_sensitivity", europe_geo_sensitivity, ["features"],
-              "declared post-hoc sensitivity of the locked test on geographic Europe (Q-5)"),
+              "declared post-hoc sensitivity of the locked test on geographic Europe (Q-5)", exploratory=True),
         Stage("features_analysis", features_analysis,
               ["build_sites_analysis", "fetch_worldclim", "fetch_soilgrids", "modis_points"],
-              "Phase 2 input: features attached to the analysis site tables"),
+              "Phase 2 input: features attached to the analysis site tables", exploratory=True),
     ]
 
 
@@ -194,14 +197,14 @@ def run(stage_names: list[str], cfg: Config, full: bool = False) -> int:
                     gate = _gate_status(cfg, status, names, st.needs)
                     msg = None if gate == "ok" else f"skipped: reproduction gate closed ({GATE}: {gate})"
             if msg:
-                with stage_timer(log_path, name, prov) as rec:
+                with stage_timer(log_path, name, {**prov, "exploratory": st.exploratory}) as rec:
                     rec["status_override"] = msg
                 status[name] = msg
                 log.warning("%-18s %s", name, msg)
                 continue
             log.info("%-18s start", name)
             try:
-                with stage_timer(log_path, name, prov) as rec:
+                with stage_timer(log_path, name, {**prov, "exploratory": st.exploratory}) as rec:
                     try:
                         rec["result"] = st.func(cfg)
                     except SourceUnavailableError as e:

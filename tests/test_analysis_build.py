@@ -288,3 +288,25 @@ def test_features_analysis_attaches_the_same_features(cfg, tmp_path, monkeypatch
     write_table(st.assign(log_rs=7.0), tabs[1])                        # an analysis table replaced
     with pytest.raises(StaleInputError, match="sites_analysis_qc.parquet changed after the run"):
         F.features_analysis(sand)
+
+
+@pytest.mark.data
+def test_analysis_build_differs_from_the_locked_build_only_as_intended(cfg):
+    """D-P2-2: same records, countries, continents (locked rule) and QC flags; the only differences are the
+    COSORE rule and records the geodesic coordinate check no longer flags."""
+    from conftest import load_result
+    load_result(cfg, "build_sites.json")
+    a = load_result(cfg, "build_sites_analysis.json")
+    L = pd.read_parquet(cfg.path("derived", "records_v3.parquet"))
+    A = pd.read_parquet(cfg.path("derived", "records_analysis.parquet"))
+    only_locked, only_analysis = set(L.rec_id) - set(A.rec_id), set(A.rec_id) - set(L.rec_id)
+    assert only_analysis == set() and all(x.startswith("cosore_") for x in only_locked)
+    assert sorted(only_locked) == a["vs_locked_build"]["cosore_sites"]["dropped"]
+    m = L.merge(A, on="rec_id", suffixes=("_l", "_a"))
+    for c in ["continent", "geo_country", "f_offland", "f_method", "f_quality", "f_coverage", "f_ecosys", "f_dup"]:
+        assert (m[f"{c}_l"].fillna("-") == m[f"{c}_a"].fillna("-")).all(), c
+    ch = m[m.f_coord_l != m.f_coord_a]
+    assert len(ch) == len(a["vs_locked_build"]["coord_flag"]["flag_changed"])
+    assert (ch.f_coord_l & ~ch.f_coord_a).all()                              # only un-flagged, never newly flagged
+    assert (ch.dist_to_reported_country_km_a <= cfg["site_build"]["coord_check"]["max_km"]).all()
+    assert (ch.dist_to_reported_country_km_l > cfg["site_build"]["coord_check"]["max_km"]).all()
