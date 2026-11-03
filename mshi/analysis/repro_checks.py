@@ -214,6 +214,8 @@ def repro_checks(cfg: Config) -> dict:
                  "tolerance": "none given", "status": "INFO" if npp else st,
                  "note": (note if not npp else "prep_log D8; no tolerance in the brief, reported for information")})
 
+    for r in rows:              # row groups for the reproduction gate of later-phase stages (mshi.run)
+        r["group"] = row_group(r["quantity"])
     summary = {s: sum(r["status"] == s for r in rows) for s in ["PASS", "FAIL", "DEVIATION", "STALE", "NOT RUN", "INFO"]}
     out = {"rows": rows, "npp_check": npp, "summary": summary}
     md = write_text(to_markdown(rows), cfg.path("results", "reproduction_check.md"))
@@ -226,6 +228,16 @@ def repro_checks(cfg: Config) -> dict:
         raise StaleInputError(f"{summary['STALE']} reproduction row(s) come from results that are not current; "
                               "see results/reproduction_check.md and re-run `make all`")
     return summary
+
+
+def row_group(quantity: str) -> str:
+    """``locked_test`` (the locked test and its re-runs), ``npp`` (the NPP check) or ``site_build`` (COSORE and
+    site-build counts)."""
+    if quantity.startswith("Locked test"):
+        return "locked_test"
+    if quantity.startswith(("NPP", "Original sites with NPP")):
+        return "npp"
+    return "site_build"
 
 
 def _rerun_row(name: str, ct: dict | None, st: str, note: str, atol: float) -> dict:

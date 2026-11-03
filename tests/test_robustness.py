@@ -49,6 +49,10 @@ def fake_build(sand, lat=(45.0, 45.01), lon=(10.0, 10.02)):
     outs = [write_table(st, sand.path("derived", f"sites_v3_{t}.parquet")) for t in ("qc", "repo")]
     outs.append(write_table(st.assign(rec_id=st.site_id), sand.path("derived", "records_v3.parquet")))
     write_result(sand, {"fake": True}, "build_sites.json", outputs=outs)
+    sa = st.assign(continent_geo="Europe")          # the analysis build (D-P2-2), same tiny tables
+    aouts = [write_table(sa, sand.path("derived", f"sites_analysis_{t}.parquet")) for t in ("qc", "repo")]
+    aouts.append(write_table(sa.assign(rec_id=sa.site_id), sand.path("derived", "records_analysis.parquet")))
+    write_result(sand, {"fake": True}, "build_sites_analysis.json", outputs=aouts)
     return st
 
 
@@ -829,7 +833,7 @@ def test_clean_test_stage_success_path_on_synthetic_data(cfg, tmp_path, monkeypa
     R = json.loads(sand.path("results", "clean_test_rerun_qc.json").read_text())
     assert R["lock"]["locked_sha256"] == CT.LOCKED_SHA256 and R["_provenance"]["config_sha256"] == sand.sha256()
     assert R["vs_locked"]["identical"] is False and "max_abs_primary_diff" in R["vs_locked"]
-    assert not any(Path(cfg.path("handoff", "results")).glob("*rerun*"))       # locked results untouched
+    assert not any(Path(cfg.path("handoff", "results")).glob("*rerun*"))       # locked results not modified
     write_table(d.assign(log_rs=d.log_rs + 1), outs[0])                       # features table replaced
     with pytest.raises(StaleInputError, match="features_v3_qc.parquet changed after the run"):
         CT.clean_test(sand)

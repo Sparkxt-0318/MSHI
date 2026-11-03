@@ -25,8 +25,9 @@ def _wgs_raster(path, values, dtype="float32"):
 
 @pytest.mark.data
 def test_smoke_50_sites(cfg, tmp_path, monkeypatch):
-    if not raw_available(cfg) or not cfg.path("derived", "cosore_annual.csv").exists():
-        pytest.skip("pinned raw inputs / cosore_annual.csv not present; run `make data` first")
+    if not raw_available(cfg) or not all(cfg.path("derived", f).exists()
+                                         for f in ("cosore_annual.csv", "cosore_annual_analysis.csv")):
+        pytest.skip("pinned raw inputs / COSORE tables not present; run `make data` first")
     from mshi.analysis.clean_test import LockedTest
     from mshi.data import features as F
     from mshi.data.modis import modis_cache_key, modis_point_set, site_key, write_modis_cache
@@ -36,16 +37,21 @@ def test_smoke_50_sites(cfg, tmp_path, monkeypatch):
     data = copy.deepcopy(cfg.data)
     sand = Config(data, source=cfg.source, out_root=tmp_path)
     sand.path("derived").mkdir(parents=True)
-    # stands in for cosore_annual: the committed table, recorded as the output of a current result
-    csv = sand.path("derived", "cosore_annual.csv")
-    shutil.copy(cfg.path("derived", "cosore_annual.csv"), csv)
-    write_result(sand, {"seeded_from": "data/derived/cosore_annual.csv"}, "cosore_annual.json", outputs=[csv])
-    assert run(["build_sites", "smoke_subset"], sand) == 0
-    for tag in ("qc", "repo"):
-        st = pd.read_parquet(sand.path("derived", f"sites_v3_{tag}.parquet"))
-        assert len(st) == cfg["smoke"]["n_sites"]
-    # smoke_subset re-recorded the subset tables as build_sites' outputs, so later stages accept them
+    # stand in for cosore_annual and cosore_annual_analysis: the committed tables, recorded as the outputs of
+    # current results
+    for name in ("cosore_annual", "cosore_annual_analysis"):
+        csv = sand.path("derived", f"{name}.csv")
+        shutil.copy(cfg.path("derived", f"{name}.csv"), csv)
+        write_result(sand, {"seeded_from": f"data/derived/{name}.csv"}, f"{name}.json", outputs=[csv])
+    assert run(["build_sites", "build_sites_analysis", "smoke_subset"], sand) == 0
+    for prefix in ("sites_v3", "sites_analysis"):
+        for tag in ("qc", "repo"):
+            st = pd.read_parquet(sand.path("derived", f"{prefix}_{tag}.parquet"))
+            assert len(st) == cfg["smoke"]["n_sites"]
+    # smoke_subset re-recorded the subset tables as the builds' outputs, so later stages accept them
     require_outputs(sand, "build_sites.json", [sand.path("derived", f"sites_v3_{t}.parquet") for t in ("qc", "repo")])
+    require_outputs(sand, "build_sites_analysis.json",
+                    [sand.path("derived", f"sites_analysis_{t}.parquet") for t in ("qc", "repo")])
 
     # synthetic global rasters (1 deg): smooth fields so every site gets a finite value
     rng = np.random.default_rng(0)
@@ -68,7 +74,7 @@ def test_smoke_50_sites(cfg, tmp_path, monkeypatch):
     write_result(sand, {"synthetic": True}, "fetch_soilgrids.json",
                  outputs=[paths[("sg", k)] for k in cfg["sources"]["soilgrids"]["variables"]])
     pts = modis_point_set(sand)
-    assert len(pts) <= 2 * cfg["smoke"]["n_sites"]           # smoke runs exclude the 889 legacy points
+    assert len(pts) <= 4 * cfg["smoke"]["n_sites"]           # 4 subset tables; smoke runs exclude the 889 legacy points
     mod = pd.DataFrame({"site_key": site_key(pts.lat, pts.lon).values,
                         "npp": 300 + 3 * pts.lat.abs().values, "npp_n": 5,
                         "lst_day": 20 - 0.3 * pts.lat.abs().values, "lst_night": 5 - 0.3 * pts.lat.abs().values})

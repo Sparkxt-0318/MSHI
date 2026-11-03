@@ -61,10 +61,12 @@ def load_srdb_records(cfg: Config) -> tuple[pd.DataFrame, dict]:
     return s, {"srdb_rows": n_rows, "srdb_repo_filter_records": int(len(s))}
 
 
-def load_cosore_records(cfg: Config) -> pd.DataFrame:
+def load_cosore_records(cfg: Config, table: str = "cosore_annual.csv", result: str = "cosore_annual.json") -> pd.DataFrame:
+    """COSORE annual values as records (the locked build reads ``cosore_annual``; the analysis build passes
+    the ``cosore_annual_analysis`` table)."""
     sb = cfg["site_build"]
-    path = cfg.path("derived", "cosore_annual.csv")
-    require_outputs(cfg, "cosore_annual.json", [path])       # current config/code, bytes as written
+    path = cfg.path("derived", table)
+    require_outputs(cfg, result, [path])                     # current config/code, bytes as written
     c = read_table(cfg, path)
     c = c.rename(columns={"latitude": "lat", "longitude": "lon", "rs_annual": "rs"})
     lo, hi = sb["rs_range"]

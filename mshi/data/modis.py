@@ -312,12 +312,15 @@ def extract_points(pts: pd.DataFrame, m: dict, kinds: tuple[str, ...] = ("npp", 
 
 
 def modis_point_set(cfg: Config) -> pd.DataFrame:
-    """Unique points: every v3 site (both variants) plus the original 889 v1/v2 sites (NPP check)."""
+    """Unique points: every v3 site (both variants of the locked build and of the analysis build) plus the
+    original 889 v1/v2 sites (NPP check). Window means are computed per point, so the analysis sites, added
+    so that one extraction serves the reproduction and Phase 2, change no value at the other points."""
     nd = cfg["features"]["site_key_round"]
     frames = []
-    for tag in cfg["site_build"]["variants"]:
-        st = read_table(cfg, cfg.path("derived", f"sites_v3_{tag}.parquet"))
-        frames.append(pd.DataFrame({"lat": st.lat.values, "lon": st.lon.values}))
+    for prefix in ("sites_v3", "sites_analysis"):
+        for tag in cfg["site_build"]["variants"]:
+            st = read_table(cfg, cfg.path("derived", f"{prefix}_{tag}.parquet"))
+            frames.append(pd.DataFrame({"lat": st.lat.values, "lon": st.lon.values}))
     if cfg.out_root is None:          # not in smoke runs
         for rel in cfg["legacy_allowlist"]:
             o = read_table(cfg, cfg.repo_path(rel))
@@ -392,13 +395,15 @@ def load_modis_points(cfg: Config, keys=None) -> pd.DataFrame:
 
 
 SITE_TABLES = ("sites_v3_qc.parquet", "sites_v3_repo.parquet")
+ANALYSIS_SITE_TABLES = ("sites_analysis_qc.parquet", "sites_analysis_repo.parquet")
 
 
 def modis_points(cfg: Config) -> dict:
     from ..netutil import check_reachable
     m = cfg["sources"]["modis"]
     require_outputs(cfg, "build_sites.json", [cfg.path("derived", f) for f in SITE_TABLES])
-    ins = ["build_sites.json"]
+    require_outputs(cfg, "build_sites_analysis.json", [cfg.path("derived", f) for f in ANALYSIS_SITE_TABLES])
+    ins = ["build_sites.json", "build_sites_analysis.json"]
     pts = modis_point_set(cfg)
     key = modis_cache_key(cfg, pts.site_key)
     out_path, meta_path = _paths(cfg)

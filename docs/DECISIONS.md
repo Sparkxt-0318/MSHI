@@ -20,7 +20,7 @@ that name on request. Base: `main` @ `a809a97`.
 `legacy/`, mirroring the old paths: `src/`, `scripts/`, `run.sh`, `requirements.txt`,
 `configs/mshi_geo.yaml`, `data/outputs/`, `data/processed/`, `data/raw/ACQUISITION_MANIFEST.json`,
 `figures/`, `deck/`, `tiles/`, the old README and the atlas-branch notes. `legacy/README.md` says what
-each item was and why it was superseded. Not moved: `biosensor_samples/` (untouched, see D-P0-6) and
+each item was and why it was superseded. Not moved: `biosensor_samples/` (not touched, see D-P0-6) and
 the committed GEE MODIS exports `data/raw/modis/*.tif` (inputs, not outputs; needed in Phase 3).
 
 **D-P0-3 v1 tables / demo table.** `data/processed/training_features.parquet` at HEAD was the 3,000-row
@@ -636,7 +636,7 @@ variance share); two Asia CV R² definitions (F-H9); E2's soil-vs-NPP contrasts 
 E4/E4b do not reproduce the original configuration and do not name their filter set; the prep_log §12
 clay correlations have no script.
 
-### Bearing on Phase 3 (plot vs landscape; to be handled in the pre-registration)
+### Bearing on Phase 3 (plot vs landscape; to be handled in the Phase-3 analysis plan)
 
 **F-H31 (high)** "68.5% of plots are forest vs 30.1% of the landscape" counts IGBP 8 (woody savanna,
 30–60% tree cover) as non-forest. With IGBP 8 as forest the landscape share at plots is 47.7%: the gap
@@ -664,6 +664,9 @@ excluded).
 
 ## Open questions for the author
 
+*Answered by the author on 2026-11-03: see the next section.*
+
+
 **Q-1 Network access.** To finish Phase 1 (locked-test reproduction, NPP check) the environment needs
 these hosts allowed: `geodata.ucdavis.edu`, `maps.isric.org`, `planetarycomputer.microsoft.com` and
 the Planetary Computer blob storage (`modiseuwest.blob.core.windows.net`; Phase 3 also needs the
@@ -683,3 +686,55 @@ instead of clipping)? Each would change the COSORE site count from 66 and would 
 **Q-7 Order of analyses (F-H5).** Did E1–E5 (prep_log §12) run before the Europe scoring on 2026-11-01?
 **Q-8 Wording (F-H2, F-H4, F-H6, F-H7).** The paper should not say "untouched" or "pre-registered"
 without qualification; agreed?
+
+## 2026-11-03 — The author's decisions on Checkpoint 1 (Q-1–Q-8)
+
+**D-C1-1 (Q-1) Network access.** The author enabled the six hosts listed in Q-1. In this session the egress
+proxy still refused all six on 2026-11-03 (CONNECT answered 403 at 03:23–03:24 UTC, while GitHub answered
+200), so the change had not reached this container. Finishing Phase 1 (locked-test re-run, NPP check) waits
+for it; nothing is substituted. *Storage hosts for Phase 3* `[from Microsoft's ingest configuration, not
+yet confirmed against the live STAC API, which is blocked here]`: `esa-worldcover` assets are in the
+storage account `ai4edataeuwest` (`ai4edataeuwest.blob.core.windows.net`), `esa-cci-lc` in `landcoverdata`
+(`landcoverdata.blob.core.windows.net`), every MODIS collection (including `modis-17A2HGF-061` GPP and the
+NDVI products) in `modiseuwest` (already allowed). Source: `datasets/esa-worldcover/dataset.yaml` and
+`datasets/esa-cci-lc/dataset.yaml` (`asset_storage: blob://<account>/...`) and the collection templates
+(`msft:storage_account`) of `microsoft/planetary-computer-tasks`, branch `main`, read on 2026-11-03
+(SHA-256 of the two dataset files: `d4e90642…`, `cd8b5866…`). The SAS tokens come from
+`planetarycomputer.microsoft.com`. The account for `io-lulc-annual-v02` was not found there `[UNVERIFIED]`.
+
+**D-C1-2 (Q-2) Coordinate check.** The locked check (distance to the reported country measured in Web
+Mercator) is kept only for reproducing the locked test (`build_sites`, `sites_v3_*`). Everything new uses
+geodesic distances (D-P2-2). The other part of Q-2, keeping records whose coordinates are right but whose
+`Country` label is wrong, was not decided; the 100-km rule itself is unchanged.
+
+**D-C1-3 (Q-3) Branch.** The session branch `claude/mshi-pipeline-v3-rebuild-cg0r7o` is kept (closes D-P0-1).
+
+**D-C1-4 (Q-4) Biosensor.** The author decides separately. `biosensor_samples/` stays as it is: not read,
+not moved, not archived.
+
+**D-C1-5 (Q-5) Geographic Europe: a declared post-hoc sensitivity analysis.** Approved as a declared
+post-hoc sensitivity analysis of the locked test; the locked result stays primary. Reference from the
+author's check outside the pipeline: geographic Europe n = 231, R² 0.0598 [−0.001, 0.098]; the pipeline
+must reproduce it (D-P2-4). A geographic continent column, with overseas territories assigned by location
+rather than by country, is added and used for all new work (D-P2-3).
+
+**DEV-C1-6 (Q-6) COSORE for v3 analyses.** Restricted to soil-respiration-only, untreated ports with
+full-year coverage (D-P2-1). A deviation from the handoff's COSORE rule, used for v3 analyses only; the
+reproduction keeps the handoff rule.
+
+**F-C1-7 (Q-7) Order of analyses on 2026-11-01** (*the author's statement, from file timestamps, UTC+8*):
+the plan was locked at 15:28; E1–E5 ran 15:29–15:32; Europe was scored at 16:21. E1 used European outcomes
+descriptively (ICC by continent), and E5's all-sites model was trained on European outcomes; neither could
+alter the locked rule. Consistent with the bundle: `ANALYSIS_PLAN_LOCKED.sha256` and prep_log D9 give
+07:28:35 UTC (= 15:28:35 UTC+8), and prep_log §13 says Europe was scored "~08:25 UTC". The bundle has no
+times for E1–E5 (the zip's file times are all 2026-11-02 19:02, when it was packed), so those rest on the
+author's check. This answers F-H5's open part: E1 and E5 used European outcomes after the lock and before
+the scoring, descriptively and outside the locked rule.
+
+**D-C1-8 (Q-8) Wording.** Write "plan written and hashed before scoring", never "pre-registered" or
+"untouched", for the locked test. The same applies to v3's own Phase-3 plan: "analysis plan written,
+committed and hashed before the analysis". This governs every text we write (README, docs, the paper);
+the handoff bundle in `docs/handoff/` is provenance and is not edited, and the dated Checkpoint-1 report
+is left as written. Changed now: README (the locked test's description) and the heading of the Phase-3
+part of the handoff critique.
+

@@ -6,8 +6,9 @@
 
 v3 rebuilds the kilometre-tier soil respiration (Rs) data from pinned public sources: SRDB v5 and
 COSORE v0.8.0 records, Natural Earth countries, WorldClim 2.1, SoilGrids 2.0 and MODIS C6.1. The
-pre-registered Asia → Europe test (`docs/handoff/ANALYSIS_PLAN_LOCKED.md`) was scored once on
-2026-11-01, and its result (`docs/handoff/results/clean_test_europe.json`) is final.
+Asia → Europe test, whose plan was written and hashed before scoring
+(`docs/handoff/ANALYSIS_PLAN_LOCKED.md`), was scored once on 2026-11-01, and its result
+(`docs/handoff/results/clean_test_europe.json`) is final.
 
 ## Run
 

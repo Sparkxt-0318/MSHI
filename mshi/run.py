@@ -19,10 +19,13 @@ so a result never claims code that was edited while the stage ran.
 
 Reproduction gate ("reproduce before you extend"): a stage ordered after ``repro_checks`` (later phases)
 runs only if results/reproduction_check.json is current (its inputs included, mshi.io.result_staleness) and
-every target row was compared and is within tolerance: no FAIL, STALE or NOT RUN row (a DEVIATION, i.e. a
-locked-test re-run that differs from the locked result, is reported but does not close the gate). If
-``repro_checks`` is part of the invocation it must also have finished ``ok``. Smoke runs do not apply the
-gate: their outputs (data/interim/smoke/) are not results, and they never run ``repro_checks``.
+every target row the stage builds on was compared and is within tolerance: no FAIL, STALE or NOT RUN row in
+the row groups the stage ``needs`` (``site_build``: COSORE and site-build counts; ``locked_test``: the locked
+test and its re-runs; ``npp``: the NPP check). A stage that uses gridded features needs all three; one that
+uses only the site records needs ``site_build``. A DEVIATION (a locked-test re-run that differs from the
+locked result) is reported but does not close the gate. If ``repro_checks`` is part of the invocation it must
+also have finished ``ok``. Smoke runs do not apply the gate: their outputs (data/interim/smoke/) are not
+results, and they never run ``repro_checks``.
 """
 from __future__ import annotations
 
@@ -42,6 +45,7 @@ from .runlog import git_commit, package_versions, provenance, stage_timer
 log = logging.getLogger("mshi")
 
 GATE = "repro_checks"      # stages ordered after it need a passing reproduction table (module docstring)
+ROW_GROUPS = ("site_build", "locked_test", "npp")      # reproduction-row groups (mshi.analysis.repro_checks)
 
 
 @dataclass
@@ -50,14 +54,16 @@ class Stage:
     func: Callable[[Config], dict]
     deps: list[str] = field(default_factory=list)
     doc: str = ""
+    needs: tuple[str, ...] = ROW_GROUPS      # reproduction-row groups a stage after the gate builds on
 
 
 def _stages() -> list[Stage]:
     from .analysis.clean_test import clean_test
     from .analysis.repro_checks import repro_checks
     from .analysis.site_diagnostics import site_diagnostics
-    from .data.cosore import cosore_annual
+    from .data.cosore import cosore_annual, cosore_annual_analysis
     from .data.features import features
+    from .data.sites_analysis import build_sites_analysis
     from .data.fetch import fetch_cosore, fetch_naturalearth, fetch_srdb
     from .data.modis import modis_points
     from .data.rasters import fetch_soilgrids, fetch_worldclim
@@ -67,14 +73,21 @@ def _stages() -> list[Stage]:
         Stage("fetch_cosore", fetch_cosore, [], "COSORE v0.8.0 shallow checkout at the pinned commit"),
         Stage("fetch_naturalearth", fetch_naturalearth, [], "Natural Earth v5.1.2 GeoJSON (SHA-256 verified)"),
         Stage("cosore_annual", cosore_annual, ["fetch_cosore"], "COSORE -> annual Rs per site"),
+        Stage("cosore_annual_analysis", cosore_annual_analysis, ["fetch_cosore"],
+              "COSORE for v3 analyses: untreated Rs ports, full-year coverage (Q-6)"),
         Stage("build_sites", build_sites, ["fetch_srdb", "cosore_annual", "fetch_naturalearth"],
               "records, QC flags, coordinate check, 5-km sites, continents"),
         Stage("site_diagnostics", site_diagnostics, ["build_sites"],
               "exploratory: Mercator vs true distance in the coordinate check, 5-km chaining"),
-        Stage("smoke_subset", smoke_subset, ["build_sites"], "(smoke runs only) keep a 50-site subset"),
+        Stage("build_sites_analysis", build_sites_analysis,
+              ["fetch_srdb", "cosore_annual_analysis", "fetch_naturalearth", "build_sites"],
+              "site tables for v3 analyses: geodesic distances, geographic continent (Q-2, Q-5, Q-6)"),
+        Stage("smoke_subset", smoke_subset, ["build_sites", "build_sites_analysis"],
+              "(smoke runs only) keep a 50-site subset"),
         Stage("fetch_worldclim", fetch_worldclim, [], "WorldClim 2.1 bioclim 2.5'"),
         Stage("fetch_soilgrids", fetch_soilgrids, [], "SoilGrids 2.0 5-15 cm mean, 0.05 deg WCS"),
-        Stage("modis_points", modis_points, ["build_sites"], "MODIS NPP/LST window means (Planetary Computer)"),
+        Stage("modis_points", modis_points, ["build_sites", "build_sites_analysis"],
+              "MODIS NPP/LST window means (Planetary Computer)"),
         Stage("features", features, ["build_sites", "fetch_worldclim", "fetch_soilgrids", "modis_points"],
               "attach WorldClim, SoilGrids, MODIS to sites"),
         Stage("clean_test", clean_test, ["features"], "locked Asia -> Europe test (hash-verified re-run)"),
@@ -83,45 +96,57 @@ def _stages() -> list[Stage]:
 
 
 SITE_TABLES = ("records_v3.parquet", "sites_v3_qc.parquet", "sites_v3_repo.parquet")
+ANALYSIS_TABLES = ("records_analysis.parquet", "sites_analysis_qc.parquet", "sites_analysis_repo.parquet")
 
 
 def smoke_subset(cfg: Config) -> dict:
-    """Smoke runs only: reduce both site tables to a seeded subset of ``smoke.n_sites`` sites. The sandbox's
-    results/build_sites.json is re-recorded with the subset tables as its outputs, so later stages accept
-    them as current inputs."""
+    """Smoke runs only: reduce the site tables (locked and analysis builds) to a seeded subset of
+    ``smoke.n_sites`` sites each. The sandbox's build results are re-recorded with the subset tables as their
+    outputs, so later stages accept them as current inputs."""
     if cfg.out_root is None:
         return {"skipped": "not a smoke run"}
-    tables = [cfg.path("derived", f) for f in SITE_TABLES]
-    b = require_outputs(cfg, "build_sites.json", tables)
-    ins = dict(b.get("_inputs") or {})          # the re-recorded build keeps the inputs of the full build
     n, seed = cfg["smoke"]["n_sites"], cfg["smoke"]["seed"]
-    out = {}
-    for tag in cfg["site_build"]["variants"]:
-        p = cfg.path("derived", f"sites_v3_{tag}.parquet")
-        st = read_table(cfg, p)
-        idx = np.sort(np.random.default_rng(seed).choice(len(st), size=min(n, len(st)), replace=False))
-        sub = st.iloc[idx].reset_index(drop=True)
-        write_table(sub, p)
-        out[tag] = {"n": int(len(sub)), "by_continent": sub.continent.value_counts().to_dict()}
-    write_result(cfg, {**b, "smoke_subset": out}, "build_sites.json", outputs=tables, inputs=ins)
-    require_current(cfg, "build_sites.json")    # registers the re-recorded result as read
-    write_result(cfg, out, "smoke_subset.json", outputs=tables[1:], inputs=["build_sites.json"])
+    out, names = {}, []
+    for result, files, prefix in [("build_sites.json", SITE_TABLES, "sites_v3"),
+                                  ("build_sites_analysis.json", ANALYSIS_TABLES, "sites_analysis")]:
+        tables = [cfg.path("derived", f) for f in files]
+        b = require_outputs(cfg, result, tables)
+        ins = dict(b.get("_inputs") or {})      # the re-recorded build keeps the inputs of the full build
+        sub_out = {}
+        for tag in cfg["site_build"]["variants"]:
+            p = cfg.path("derived", f"{prefix}_{tag}.parquet")
+            st = read_table(cfg, p)
+            idx = np.sort(np.random.default_rng(seed).choice(len(st), size=min(n, len(st)), replace=False))
+            sub = st.iloc[idx].reset_index(drop=True)
+            write_table(sub, p)
+            sub_out[tag] = {"n": int(len(sub)), "by_continent": sub.continent.value_counts().to_dict()}
+        write_result(cfg, {**b, "smoke_subset": sub_out}, result, outputs=tables, inputs=ins)
+        require_current(cfg, result)            # registers the re-recorded result as read
+        out[prefix], names = sub_out, names + [result]
+    subset_tables = [cfg.path("derived", f) for f in SITE_TABLES[1:] + ANALYSIS_TABLES[1:]]
+    write_result(cfg, out, "smoke_subset.json", outputs=subset_tables, inputs=names)
     return out
 
 
-def _gate_status(cfg: Config, status: dict[str, str], names: list[str]) -> str:
-    """'ok' if the reproduction gate is open (module docstring), else the reason it is closed."""
+def _gate_status(cfg: Config, status: dict[str, str], names: list[str], needs: tuple[str, ...] = ROW_GROUPS) -> str:
+    """'ok' if the reproduction gate is open for a stage that ``needs`` these row groups (module docstring),
+    else the reason it is closed."""
     if GATE in names and status.get(GATE) != "ok":
         return status.get(GATE, "not run")
     try:
         rc = require_current(cfg, "reproduction_check.json")
     except StaleInputError as e:
         return f"stale: {e}"
-    summary = rc.get("summary") or {}
+    if set(needs) >= set(ROW_GROUPS):
+        summary = rc.get("summary") or {}
+    else:                  # only the rows the stage builds on; a row without a group counts for every stage
+        rows = [r for r in rc.get("rows") or [] if "group" not in r or r["group"] in needs]
+        summary = {k: sum(r.get("status") == k for r in rows) for k in ("PASS", "FAIL", "STALE", "NOT RUN")}
     bad = {k: summary.get(k, 0) for k in ("FAIL", "STALE", "NOT RUN") if summary.get(k, 0)}
     if not summary.get("PASS"):
         bad["PASS"] = summary.get("PASS", 0)
-    return f"results/reproduction_check.json has {bad}" if bad else "ok"
+    where = "" if set(needs) >= set(ROW_GROUPS) else f" in the {'/'.join(needs)} rows"
+    return f"results/reproduction_check.json has {bad}{where}" if bad else "ok"
 
 
 def run(stage_names: list[str], cfg: Config, full: bool = False) -> int:
@@ -159,7 +184,7 @@ def run(stage_names: list[str], cfg: Config, full: bool = False) -> int:
                 if smoke:
                     log.info("%-18s smoke run: reproduction gate not applied (smoke outputs are not results)", name)
                 else:
-                    gate = _gate_status(cfg, status, names)
+                    gate = _gate_status(cfg, status, names, st.needs)
                     msg = None if gate == "ok" else f"skipped: reproduction gate closed ({GATE}: {gate})"
             if msg:
                 with stage_timer(log_path, name, prov) as rec:
