@@ -1,19 +1,20 @@
 {
  "_inputs": {
-  "build_sites.json": "89a2ea3e7478bca494672d6bf8de9a960c6dc10d18c1759b0c69088476524895",
-  "cosore_annual.json": "42d4f282e99f72e27fa16891ee8c4e0de1929a518474c55a60384cd022ae83c8"
+  "build_sites.json": "15875b9c85b1cbe51b1e089a952fc18008dff8eb726fbdd7610fc0ade2283f27",
+  "cosore_annual.json": "4fe92124dac359473e21d1aa5085b74f54dec7d84360bfa4d229ef16e5d9028a"
  },
  "_outputs": {
   "results:reproduction_check.md": "86ebf908240e50ad79c9d1343455f75575df155ceb1c06308905c971225cc18b"
  },
  "_provenance": {
-  "code_sha256": "53b20a6b3ec3923b7eb05d5a3658d9174545149223d9caa173e35b2bf1ded304",
-  "config_sha256": "9db84120bbafd84172efc668e64efca7f3e0f320eb912f6f5dae0517248752a9"
+  "code_sha256": "8d2cd64c0b2b12b1e615a8c95d3eda3459c3f7eee7eb342c91a751b988968159",
+  "config_sha256": "85533e78e57dc0fdc360b83fccabc3de53f7b6fa87a7a5e2c92d54c25d79ad25"
  },
  "npp_check": null,
  "rows": [
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 66,
    "note": "",
    "quantity": "COSORE sites with an annual value",
@@ -24,6 +25,7 @@
   },
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 4771,
    "note": "",
    "quantity": "SRDB records after repo filters",
@@ -34,6 +36,7 @@
   },
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 4781,
    "note": "",
    "quantity": "Records after coordinate check",
@@ -44,6 +47,7 @@
   },
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 3694,
    "note": "",
    "quantity": "Records after QC",
@@ -54,6 +58,7 @@
   },
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 450,
    "note": "",
    "quantity": "QC removals: f_method",
@@ -64,6 +69,7 @@
   },
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 260,
    "note": "",
    "quantity": "QC removals: f_quality",
@@ -74,6 +80,7 @@
   },
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 252,
    "note": "",
    "quantity": "QC removals: f_coverage",
@@ -84,6 +91,7 @@
   },
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 243,
    "note": "",
    "quantity": "QC removals: f_ecosys",
@@ -94,6 +102,7 @@
   },
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 57,
    "note": "",
    "quantity": "QC removals: f_dup",
@@ -104,6 +113,7 @@
   },
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 387,
    "note": "",
    "quantity": "QC sites: Asia",
@@ -114,6 +124,7 @@
   },
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 257,
    "note": "",
    "quantity": "QC sites: North America",
@@ -124,6 +135,7 @@
   },
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 236,
    "note": "",
    "quantity": "QC sites: Europe",
@@ -134,6 +146,7 @@
   },
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 42,
    "note": "",
    "quantity": "QC sites: South America",
@@ -144,6 +157,7 @@
   },
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 26,
    "note": "",
    "quantity": "QC sites: Africa",
@@ -154,6 +168,7 @@
   },
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 23,
    "note": "",
    "quantity": "QC sites: Oceania",
@@ -164,6 +179,7 @@
   },
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 971,
    "note": "",
    "quantity": "QC sites: total",
@@ -174,6 +190,7 @@
   },
   {
    "diff": 0.0,
+   "group": "site_build",
    "handoff": 1225,
    "note": "",
    "quantity": "Repo-filter sites: total",
@@ -183,6 +200,7 @@
    "v3": 1225
   },
   {
+   "group": "locked_test",
    "handoff": "OLS-TP",
    "note": "fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)",
    "quantity": "Locked test: selected model",
@@ -191,6 +209,7 @@
    "v3": null
   },
   {
+   "group": "locked_test",
    "handoff": 0.143,
    "note": "fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)",
    "quantity": "Locked test: Asia spatial-CV R²",
@@ -199,6 +218,7 @@
    "v3": null
   },
   {
+   "group": "locked_test",
    "handoff": 235,
    "note": "fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)",
    "quantity": "Locked test: Europe n",
@@ -207,6 +227,7 @@
    "v3": null
   },
   {
+   "group": "locked_test",
    "handoff": 0.079,
    "note": "fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)",
    "quantity": "Locked test: Europe R²",
@@ -215,6 +236,7 @@
    "v3": null
   },
   {
+   "group": "locked_test",
    "handoff": 0.013,
    "note": "fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)",
    "quantity": "Locked test: site-bootstrap CI low",
@@ -223,6 +245,7 @@
    "v3": null
   },
   {
+   "group": "locked_test",
    "handoff": 0.125,
    "note": "fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)",
    "quantity": "Locked test: site-bootstrap CI high",
@@ -231,6 +254,7 @@
    "v3": null
   },
   {
+   "group": "locked_test",
    "handoff": "identical",
    "note": "fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)",
    "quantity": "Locked test: re-run identical to the locked result",
@@ -239,6 +263,7 @@
    "v3": null
   },
   {
+   "group": "locked_test",
    "handoff": "identical",
    "note": "fetch_worldclim: blocked by network policy (geodata.ucdavis.edu)",
    "quantity": "Locked test (repo-filter sensitivity): re-run identical to the locked result",
@@ -247,6 +272,7 @@
    "v3": null
   },
   {
+   "group": "npp",
    "handoff": 0.982,
    "note": "modis_points: blocked by network policy (planetarycomputer.microsoft.com)",
    "quantity": "NPP r vs committed NPP (original 889 sites)",
@@ -255,6 +281,7 @@
    "v3": null
   },
   {
+   "group": "npp",
    "handoff": 189,
    "note": "modis_points: blocked by network policy (planetarycomputer.microsoft.com)",
    "quantity": "Original sites with NPP missing in the committed tables but present in v3",

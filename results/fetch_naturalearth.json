@@ -1,12 +1,13 @@
 {
  "_provenance": {
-  "code_sha256": "53b20a6b3ec3923b7eb05d5a3658d9174545149223d9caa173e35b2bf1ded304",
-  "config_sha256": "9db84120bbafd84172efc668e64efca7f3e0f320eb912f6f5dae0517248752a9"
+  "code_sha256": "8d2cd64c0b2b12b1e615a8c95d3eda3459c3f7eee7eb342c91a751b988968159",
+  "config_sha256": "85533e78e57dc0fdc360b83fccabc3de53f7b6fa87a7a5e2c92d54c25d79ad25"
  },
  "commit": "f1890d9f152c896d250a77557a5751a93d494776",
  "files_sha256": {
   "ne_110m_land.geojson": "9e0729ee253ca7d7a5c4ae9395fb1902264c5377c52e224d13dd85010e2835d9",
   "ne_50m_admin_0_countries.geojson": "3e458fc036ad0a66411f2c1e6cac49c5d7bfb81cb1123bc513b22511a2b7fdeb",
+  "ne_50m_admin_0_map_subunits.geojson": "b1df8433477614c89e6b724990a7ab3733ec647559863321b6255c3fa3fce3ec",
   "ne_50m_land.geojson": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b"
  },
  "source": "naturalearth",

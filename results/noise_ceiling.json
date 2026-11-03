@@ -1,0 +1,1659 @@
+{
+ "_inputs": {
+  "build_sites_analysis.json": "13fb74d2e822f680448fbfb696a5eada5cdcf953bc99ebcea77483a64a8bc85e"
+ },
+ "_outputs": {
+  "figures:phase2/noise_ceiling.pdf": "f55e1fe9565db7dbe74a608bf79cb87641986b846974adabbe1c79413bab6cdf",
+  "figures:phase2/noise_ceiling.png": "be5e532325e2631d12c5c684eea5b8c2810ed2f01d4340a5d7eb951fac7e706e"
+ },
+ "_provenance": {
+  "code_sha256": "8d2cd64c0b2b12b1e615a8c95d3eda3459c3f7eee7eb342c91a751b988968159",
+  "config_sha256": "85533e78e57dc0fdc360b83fccabc3de53f7b6fa87a7a5e2c92d54c25d79ad25"
+ },
+ "data": {
+  "cosore_records": 37,
+  "records": 3672,
+  "records_of_sites_not_in_site_table": 0,
+  "sites": 965,
+  "sites_outside_continents": {
+   "continent_geo": {},
+   "examples": [],
+   "n": 0
+  }
+ },
+ "exploratory": true,
+ "fits": {
+  "bootstrap": 4113,
+  "point": 21
+ },
+ "formulas": {
+  "ceiling_independent_study": "s2_site / (s2_site + s2_study + s2_record)",
+  "ceiling_same_study": "(s2_site + s2_study) / (s2_site + s2_study + s2_record)",
+  "ceiling_site_mean": "s2_site / (s2_site + mean_i v_i), v_i = s2_study * sum_j (m_ij / n_i)^2 + s2_record / n_i, mean over all sites (singletons included); m_ij records of study j at site i, n_i = sum_j m_ij",
+  "ceiling_site_mean_equal_study_weights": "s2_site / (s2_site + mean_i (s2_study / J_i + s2_record / n_i)), J_i studies at site i (the brief's formula; exact for equal m_ij)",
+  "check_singleton_var_diff": "var(singleton site values) - (s2_site + s2_study + s2_record)",
+  "check_site_mean_var_diff": "var(site means over all sites) - (s2_site + mean_i v_i)",
+  "pairs": "mean over record pairs within a site of (log_rs_a - log_rs_b)^2 / 2, pairs pooled over sites"
+ },
+ "groups": {
+  "Africa": {
+   "bootstrap": {
+    "boundary": 79,
+    "dropped_candidate": {
+     "interior": 0,
+     "no_site": 0,
+     "no_study": 1
+    },
+    "failed": 0,
+    "kept_candidate": {
+     "interior": 139,
+     "no_site": 37,
+     "no_study": 0
+    },
+    "n": 200,
+    "ok": 176,
+    "too_few_sites": 0,
+    "unidentified": 24
+   },
+   "ceilings": {
+    "independent_study": {
+     "ci": [
+      0.0,
+      0.5658679078676856
+     ],
+     "estimate": 0.089422917616102,
+     "n_boot_used": 176
+    },
+    "same_study": {
+     "ci": [
+      0.8643180588874654,
+      0.9658650760138864
+     ],
+     "estimate": 0.94061312705444,
+     "n_boot_used": 176
+    },
+    "site_mean": {
+     "ci": [
+      0.0,
+      0.5830272106584078
+     ],
+     "estimate": 0.09397562103112092,
+     "n_boot_used": 176
+    },
+    "site_mean_equal_study_weights": {
+     "ci": [
+      0.0,
+      0.5851071533339582
+     ],
+     "estimate": 0.09435240981546512,
+     "n_boot_used": 176
+    }
+   },
+   "checks": {
+    "observed_var_singletons": 0.1345683061079348,
+    "observed_var_site_mean": 0.5328855272819765,
+    "singleton_var_diff": {
+     "ci": [
+      -0.9746251481136564,
+      -0.17558007828501312
+     ],
+     "estimate": -0.5934128013969976,
+     "n_boot_used": 176
+    },
+    "site_mean_var_diff": {
+     "ci": [
+      -0.3498084216702038,
+      0.017262089635316037
+     ],
+     "estimate": -0.15982811364128358,
+     "n_boot_used": 176
+    }
+   },
+   "components": {
+    "s2_record": {
+     "ci": [
+      0.030240318059328863,
+      0.0729800270509158
+     ],
+     "estimate": 0.04323252153816343,
+     "n_boot_used": 176
+    },
+    "s2_site": {
+     "ci": [
+      0.0,
+      0.6021100042170887
+     ],
+     "estimate": 0.06509819460249226,
+     "n_boot_used": 176
+    },
+    "s2_study": {
+     "ci": [
+      0.27317761940518837,
+      0.7912425938918894
+     ],
+     "estimate": 0.6196503913642767,
+     "n_boot_used": 176
+    },
+    "total": {
+     "ci": [
+      0.3164714577712188,
+      1.0901800922502582
+     ],
+     "estimate": 0.7279811075049324,
+     "n_boot_used": 176
+    }
+   },
+   "fit": {
+    "boundary": false,
+    "candidates": {
+     "interior": {
+      "converged": true,
+      "error": null,
+      "llf": -25.99389492428017,
+      "s2_record": 0.04323252153816343,
+      "s2_site": 0.06509819460249226,
+      "s2_study": 0.6196503913642767,
+      "usable": true,
+      "warnings": []
+     },
+     "no_site": {
+      "converged": true,
+      "error": null,
+      "llf": -25.995806472295683,
+      "s2_record": 0.043231798328253516,
+      "s2_site": 0.0,
+      "s2_study": 0.6834630218979308,
+      "usable": true,
+      "warnings": []
+     },
+     "no_study": {
+      "converged": true,
+      "error": null,
+      "llf": -35.422100330990105,
+      "s2_record": 0.0838406422442512,
+      "s2_site": 0.6601046451173722,
+      "s2_study": 0.0,
+      "usable": true,
+      "warnings": []
+     }
+    },
+    "kept": "interior",
+    "status": "ok"
+   },
+   "mean_noise_site_mean": {
+    "ci": [
+     0.2859595182718559,
+     0.7765644642139083
+    ],
+    "estimate": 0.6276154463207678,
+    "n_boot_used": 176
+   },
+   "n": {
+    "records": 65,
+    "records_fit": 53,
+    "singleton_sites": 12,
+    "sites": 28,
+    "sites_fit": 16,
+    "sites_fit_2plus_studies": 2,
+    "srdb_studies_at_2plus_sites": 3,
+    "studies_fit": 18,
+    "studies_fit_2plus_records": 17
+   },
+   "pairs": {
+    "diff_minus_same": {
+     "ci": [
+      0.42622039976791676,
+      0.47775663179034494
+     ],
+     "estimate": 0.4576682111403805,
+     "n_boot_used": 176
+    },
+    "diff_study": {
+     "max_site_share": 0.5714285714285714,
+     "n_pairs": 7,
+     "n_sites": 2,
+     "semivariance": {
+      "ci": [
+       0.4829973962477894,
+       0.5020119844460545
+      ],
+      "estimate": 0.49114650547561733,
+      "n_boot_used": 176
+     }
+    },
+    "same_study": {
+     "max_site_share": 0.21428571428571427,
+     "n_pairs": 70,
+     "n_sites": 16,
+     "semivariance": {
+      "ci": [
+       0.022591671188485346,
+       0.061219186338227254
+      ],
+      "estimate": 0.03347829433523686,
+      "n_boot_used": 200
+     }
+    }
+   },
+   "shares": {
+    "record": {
+     "ci": [
+      0.03413492398611361,
+      0.13568194111253462
+     ],
+     "estimate": 0.05938687294555994,
+     "n_boot_used": 176
+    },
+    "site": {
+     "ci": [
+      0.0,
+      0.5658679078676856
+     ],
+     "estimate": 0.089422917616102,
+     "n_boot_used": 176
+    },
+    "study": {
+     "ci": [
+      0.38735222134372604,
+      0.9573380089237907
+     ],
+     "estimate": 0.851190209438338,
+     "n_boot_used": 176
+    }
+   },
+   "supplementary": true
+  },
+  "Asia": {
+   "bootstrap": {
+    "boundary": 0,
+    "dropped_candidate": {
+     "interior": 0,
+     "no_site": 0,
+     "no_study": 0
+    },
+    "failed": 0,
+    "kept_candidate": {
+     "interior": 200,
+     "no_site": 0,
+     "no_study": 0
+    },
+    "n": 200,
+    "ok": 200,
+    "too_few_sites": 0,
+    "unidentified": 0
+   },
+   "ceilings": {
+    "independent_study": {
+     "ci": [
+      0.5126108459108554,
+      0.7011691653613553
+     ],
+     "estimate": 0.6265320642358062,
+     "n_boot_used": 200
+    },
+    "same_study": {
+     "ci": [
+      0.7675992544435056,
+      0.886376360832223
+     ],
+     "estimate": 0.8373078119318031,
+     "n_boot_used": 200
+    },
+    "site_mean": {
+     "ci": [
+      0.5876324560567732,
+      0.766027717866065
+     ],
+     "estimate": 0.6956143581682078,
+     "n_boot_used": 200
+    },
+    "site_mean_equal_study_weights": {
+     "ci": [
+      0.5904520407309117,
+      0.7681649370310634
+     ],
+     "estimate": 0.6985706314337236,
+     "n_boot_used": 200
+    }
+   },
+   "checks": {
+    "observed_var_singletons": 0.4658292297230238,
+    "observed_var_site_mean": 0.40970050601610974,
+    "singleton_var_diff": {
+     "ci": [
+      -0.13022584477313573,
+      0.206042124768765
+     ],
+     "estimate": 0.03422979926226172,
+     "n_boot_used": 200
+    },
+    "site_mean_var_diff": {
+     "ci": [
+      -0.03831288264663694,
+      0.08971203111381405
+     ],
+     "estimate": 0.020963731229481475,
+     "n_boot_used": 200
+    }
+   },
+   "components": {
+    "s2_record": {
+     "ci": [
+      0.048176480163058255,
+      0.09841397713915426
+     ],
+     "estimate": 0.07021785571064895,
+     "n_boot_used": 200
+    },
+    "s2_site": {
+     "ci": [
+      0.17882386501268446,
+      0.3453449848459903
+     ],
+     "estimate": 0.2704108820895796,
+     "n_boot_used": 200
+    },
+    "s2_study": {
+     "ci": [
+      0.0631127646241725,
+      0.11999276111715519
+     ],
+     "estimate": 0.09097069266053352,
+     "n_boot_used": 200
+    },
+    "total": {
+     "ci": [
+      0.3355466978252312,
+      0.5234241273660266
+     ],
+     "estimate": 0.4315994304607621,
+     "n_boot_used": 200
+    }
+   },
+   "fit": {
+    "boundary": false,
+    "candidates": {
+     "interior": {
+      "converged": true,
+      "error": null,
+      "llf": -645.6843771011581,
+      "s2_record": 0.07021785571064895,
+      "s2_site": 0.2704108820895796,
+      "s2_study": 0.09097069266053352,
+      "usable": true,
+      "warnings": []
+     },
+     "no_site": {
+      "converged": true,
+      "error": null,
+      "llf": -706.1259846703288,
+      "s2_record": 0.06984977717829324,
+      "s2_site": 0.0,
+      "s2_study": 0.31754805092477867,
+      "usable": true,
+      "warnings": []
+     },
+     "no_study": {
+      "converged": true,
+      "error": null,
+      "llf": -761.3018071621127,
+      "s2_record": 0.10894021795154063,
+      "s2_site": 0.33728204593011396,
+      "s2_study": 0.0,
+      "usable": true,
+      "warnings": []
+     }
+    },
+    "kept": "interior",
+    "status": "ok"
+   },
+   "mean_noise_site_mean": {
+    "ci": [
+     0.0963726912889956,
+     0.14592446484282148
+    ],
+    "estimate": 0.11832589269704871,
+    "n_boot_used": 200
+   },
+   "n": {
+    "records": 1583,
+    "records_fit": 1433,
+    "singleton_sites": 150,
+    "sites": 386,
+    "sites_fit": 236,
+    "sites_fit_2plus_studies": 98,
+    "srdb_studies_at_2plus_sites": 31,
+    "studies_fit": 467,
+    "studies_fit_2plus_records": 340
+   },
+   "pairs": {
+    "diff_minus_same": {
+     "ci": [
+      0.014643019922384407,
+      0.10147280778106972
+     ],
+     "estimate": 0.055828144981210415,
+     "n_boot_used": 200
+    },
+    "diff_study": {
+     "max_site_share": 0.24370139968895801,
+     "n_pairs": 6430,
+     "n_sites": 98,
+     "semivariance": {
+      "ci": [
+       0.09144388610241372,
+       0.1855820066056115
+      ],
+      "estimate": 0.12934474008525834,
+      "n_boot_used": 200
+     }
+    },
+    "same_study": {
+     "max_site_share": 0.20838899278653486,
+     "n_pairs": 3743,
+     "n_sites": 222,
+     "semivariance": {
+      "ci": [
+       0.05186181022527657,
+       0.10796892804021849
+      ],
+      "estimate": 0.07351659510404793,
+      "n_boot_used": 200
+     }
+    }
+   },
+   "shares": {
+    "record": {
+     "ci": [
+      0.11362363916777687,
+      0.23240074555649445
+     ],
+     "estimate": 0.16269218806819685,
+     "n_boot_used": 200
+    },
+    "site": {
+     "ci": [
+      0.5126108459108554,
+      0.7011691653613553
+     ],
+     "estimate": 0.6265320642358062,
+     "n_boot_used": 200
+    },
+    "study": {
+     "ci": [
+      0.14395859323605212,
+      0.2944659025342819
+     ],
+     "estimate": 0.21077574769599683,
+     "n_boot_used": 200
+    }
+   },
+   "supplementary": false
+  },
+  "Europe": {
+   "bootstrap": {
+    "boundary": 1,
+    "dropped_candidate": {
+     "interior": 1,
+     "no_site": 0,
+     "no_study": 1
+    },
+    "failed": 0,
+    "kept_candidate": {
+     "interior": 199,
+     "no_site": 0,
+     "no_study": 1
+    },
+    "n": 200,
+    "ok": 200,
+    "too_few_sites": 0,
+    "unidentified": 0
+   },
+   "ceilings": {
+    "independent_study": {
+     "ci": [
+      0.3987099338128521,
+      0.7150247087691081
+     ],
+     "estimate": 0.5738733568913875,
+     "n_boot_used": 200
+    },
+    "same_study": {
+     "ci": [
+      0.6522199581878395,
+      0.8178614454016304
+     ],
+     "estimate": 0.7459803795512631,
+     "n_boot_used": 200
+    },
+    "site_mean": {
+     "ci": [
+      0.469433544634201,
+      0.7913105023166512
+     ],
+     "estimate": 0.651779842764912,
+     "n_boot_used": 200
+    },
+    "site_mean_equal_study_weights": {
+     "ci": [
+      0.4722792956210656,
+      0.792280286836478
+     ],
+     "estimate": 0.6539295705448622,
+     "n_boot_used": 200
+    }
+   },
+   "checks": {
+    "observed_var_singletons": 0.3434217154579953,
+    "observed_var_site_mean": 0.30720404081550073,
+    "singleton_var_diff": {
+     "ci": [
+      -0.1501746966091629,
+      0.16647596491798944
+     ],
+     "estimate": 0.005631848309856136,
+     "n_boot_used": 200
+    },
+    "site_mean_var_diff": {
+     "ci": [
+      -0.05582938487745296,
+      0.085889831237436
+     ],
+     "estimate": 0.009789803268855757,
+     "n_boot_used": 200
+    }
+   },
+   "components": {
+    "s2_record": {
+     "ci": [
+      0.06432918716218011,
+      0.11115609983559509
+     ],
+     "estimate": 0.08580525384439959,
+     "n_boot_used": 200
+    },
+    "s2_site": {
+     "ci": [
+      0.10823571881523301,
+      0.2702439952828216
+     ],
+     "estimate": 0.19384860498419845,
+     "n_boot_used": 200
+    },
+    "s2_study": {
+     "ci": [
+      0.012126832295324423,
+      0.10381632356195632
+     ],
+     "estimate": 0.05813600831954114,
+     "n_boot_used": 200
+    },
+    "total": {
+     "ci": [
+      0.2591564521616401,
+      0.4202339198802117
+     ],
+     "estimate": 0.3377898671481392,
+     "n_boot_used": 200
+    }
+   },
+   "fit": {
+    "boundary": false,
+    "candidates": {
+     "interior": {
+      "converged": true,
+      "error": null,
+      "llf": -351.07041808541726,
+      "s2_record": 0.08580525384439959,
+      "s2_site": 0.19384860498419845,
+      "s2_study": 0.05813600831954114,
+      "usable": true,
+      "warnings": []
+     },
+     "no_site": {
+      "converged": true,
+      "error": null,
+      "llf": -371.6042054052423,
+      "s2_record": 0.08709609449193718,
+      "s2_site": 0.0,
+      "s2_study": 0.22340135507840675,
+      "usable": true,
+      "warnings": []
+     },
+     "no_study": {
+      "converged": true,
+      "error": null,
+      "llf": -394.62264677488565,
+      "s2_record": 0.11251000200723114,
+      "s2_site": 0.234919779938839,
+      "s2_study": 0.0,
+      "usable": true,
+      "warnings": []
+     }
+    },
+    "kept": "interior",
+    "status": "ok"
+   },
+   "mean_noise_site_mean": {
+    "ci": [
+     0.06664581820683017,
+     0.1469453259192604
+    ],
+    "estimate": 0.10356563256244651,
+    "n_boot_used": 200
+   },
+   "n": {
+    "records": 835,
+    "records_fit": 737,
+    "singleton_sites": 98,
+    "sites": 233,
+    "sites_fit": 135,
+    "sites_fit_2plus_studies": 46,
+    "srdb_studies_at_2plus_sites": 32,
+    "studies_fit": 219,
+    "studies_fit_2plus_records": 161
+   },
+   "pairs": {
+    "diff_minus_same": {
+     "ci": [
+      -0.0016069800555584767,
+      0.19175155786170478
+     ],
+     "estimate": 0.10042110564638695,
+     "n_boot_used": 200
+    },
+    "diff_study": {
+     "max_site_share": 0.36467991169977926,
+     "n_pairs": 2265,
+     "n_sites": 46,
+     "semivariance": {
+      "ci": [
+       0.09916236069411276,
+       0.28644810305253393
+      ],
+      "estimate": 0.20377179560905523,
+      "n_boot_used": 200
+     }
+    },
+    "same_study": {
+     "max_site_share": 0.20770432066631964,
+     "n_pairs": 1921,
+     "n_sites": 127,
+     "semivariance": {
+      "ci": [
+       0.07579099762724817,
+       0.13063884215712057
+      ],
+      "estimate": 0.10335068996266827,
+      "n_boot_used": 200
+     }
+    }
+   },
+   "shares": {
+    "record": {
+     "ci": [
+      0.18213855459836958,
+      0.3477800418121605
+     ],
+     "estimate": 0.25401962044873694,
+     "n_boot_used": 200
+    },
+    "site": {
+     "ci": [
+      0.3987099338128521,
+      0.7150247087691081
+     ],
+     "estimate": 0.5738733568913875,
+     "n_boot_used": 200
+    },
+    "study": {
+     "ci": [
+      0.046022024853274945,
+      0.32776762828532574
+     ],
+     "estimate": 0.17210702265987554,
+     "n_boot_used": 200
+    }
+   },
+   "supplementary": false
+  },
+  "North America": {
+   "bootstrap": {
+    "boundary": 0,
+    "dropped_candidate": {
+     "interior": 0,
+     "no_site": 0,
+     "no_study": 0
+    },
+    "failed": 0,
+    "kept_candidate": {
+     "interior": 200,
+     "no_site": 0,
+     "no_study": 0
+    },
+    "n": 200,
+    "ok": 200,
+    "too_few_sites": 0,
+    "unidentified": 0
+   },
+   "ceilings": {
+    "independent_study": {
+     "ci": [
+      0.7456454992367819,
+      0.8655487901067894
+     ],
+     "estimate": 0.813237984727344,
+     "n_boot_used": 200
+    },
+    "same_study": {
+     "ci": [
+      0.8478273768943803,
+      0.9195314488954114
+     ],
+     "estimate": 0.8904821591649471,
+     "n_boot_used": 200
+    },
+    "site_mean": {
+     "ci": [
+      0.8139328615506429,
+      0.9083530840033718
+     ],
+     "estimate": 0.8655967379718018,
+     "n_boot_used": 200
+    },
+    "site_mean_equal_study_weights": {
+     "ci": [
+      0.8156499632513615,
+      0.910015680605881
+     ],
+     "estimate": 0.8672514011111128,
+     "n_boot_used": 200
+    }
+   },
+   "checks": {
+    "observed_var_singletons": 0.520461835072847,
+    "observed_var_site_mean": 0.4397526066955895,
+    "singleton_var_diff": {
+     "ci": [
+      -0.1030510837014091,
+      0.2516530027781845
+     ],
+     "estimate": 0.08501067804339196,
+     "n_boot_used": 200
+    },
+    "site_mean_var_diff": {
+     "ci": [
+      -0.025076400371780945,
+      0.08610770888877246
+     ],
+     "estimate": 0.030641289779604952,
+     "n_boot_used": 200
+    }
+   },
+   "components": {
+    "s2_record": {
+     "ci": [
+      0.03747592643915782,
+      0.059646855746408434
+     ],
+     "estimate": 0.04768967050699148,
+     "n_boot_used": 200
+    },
+    "s2_site": {
+     "ci": [
+      0.2460391278811894,
+      0.4804705920881343
+     ],
+     "estimate": 0.3541254213898243,
+     "n_boot_used": 200
+    },
+    "s2_study": {
+     "ci": [
+      0.020803109527355982,
+      0.04785347062163713
+     ],
+     "estimate": 0.03363606513263932,
+     "n_boot_used": 200
+    },
+    "total": {
+     "ci": [
+      0.32684869407943823,
+      0.5542105960340304
+     ],
+     "estimate": 0.4354511570294551,
+     "n_boot_used": 200
+    }
+   },
+   "fit": {
+    "boundary": false,
+    "candidates": {
+     "interior": {
+      "converged": true,
+      "error": null,
+      "llf": -252.2962174579734,
+      "s2_record": 0.04768967050699148,
+      "s2_site": 0.3541254213898243,
+      "s2_study": 0.03363606513263932,
+      "usable": true,
+      "warnings": []
+     },
+     "no_site": {
+      "converged": true,
+      "error": null,
+      "llf": -322.2176113667733,
+      "s2_record": 0.0481669173118925,
+      "s2_site": 0.0,
+      "s2_study": 0.3351664669948695,
+      "usable": true,
+      "warnings": []
+     },
+     "no_study": {
+      "converged": true,
+      "error": null,
+      "llf": -294.6786818695573,
+      "s2_record": 0.06146853061015519,
+      "s2_site": 0.3783432562295067,
+      "s2_study": 0.0,
+      "usable": true,
+      "warnings": []
+     }
+    },
+    "kept": "interior",
+    "status": "ok"
+   },
+   "mean_noise_site_mean": {
+    "ci": [
+     0.043587665995622964,
+     0.06656360049879576
+    ],
+    "estimate": 0.05498589552616028,
+    "n_boot_used": 200
+   },
+   "n": {
+    "records": 971,
+    "records_fit": 893,
+    "singleton_sites": 78,
+    "sites": 246,
+    "sites_fit": 168,
+    "sites_fit_2plus_studies": 56,
+    "srdb_studies_at_2plus_sites": 42,
+    "studies_fit": 287,
+    "studies_fit_2plus_records": 193
+   },
+   "pairs": {
+    "diff_minus_same": {
+     "ci": [
+      0.01625237083718649,
+      0.061306352443924884
+     ],
+     "estimate": 0.040055824911954925,
+     "n_boot_used": 200
+    },
+    "diff_study": {
+     "max_site_share": 0.2670549084858569,
+     "n_pairs": 2404,
+     "n_sites": 56,
+     "semivariance": {
+      "ci": [
+       0.053880220422756,
+       0.11112317641763995
+      ],
+      "estimate": 0.08607919860855154,
+      "n_boot_used": 200
+     }
+    },
+    "same_study": {
+     "max_site_share": 0.1442429354702657,
+     "n_pairs": 2371,
+     "n_sites": 158,
+     "semivariance": {
+      "ci": [
+       0.0332776258678579,
+       0.05976188605449825
+      ],
+      "estimate": 0.04602337369659661,
+      "n_boot_used": 200
+     }
+    }
+   },
+   "shares": {
+    "record": {
+     "ci": [
+      0.08046855110458868,
+      0.1521726231056197
+     ],
+     "estimate": 0.10951784083505288,
+     "n_boot_used": 200
+    },
+    "site": {
+     "ci": [
+      0.7456454992367819,
+      0.8655487901067894
+     ],
+     "estimate": 0.813237984727344,
+     "n_boot_used": 200
+    },
+    "study": {
+     "ci": [
+      0.044530912440067516,
+      0.1215894821335505
+     ],
+     "estimate": 0.07724417443760309,
+     "n_boot_used": 200
+    }
+   },
+   "supplementary": false
+  },
+  "Oceania": {
+   "bootstrap": {
+    "boundary": 73,
+    "dropped_candidate": {
+     "interior": 0,
+     "no_site": 0,
+     "no_study": 63
+    },
+    "failed": 0,
+    "kept_candidate": {
+     "interior": 174,
+     "no_site": 21,
+     "no_study": 0
+    },
+    "n": 200,
+    "ok": 195,
+    "too_few_sites": 0,
+    "unidentified": 5
+   },
+   "ceilings": {
+    "independent_study": {
+     "ci": [
+      0.0,
+      0.828158098766684
+     ],
+     "estimate": 0.11052544319209372,
+     "n_boot_used": 195
+    },
+    "same_study": {
+     "ci": [
+      0.7303058136052234,
+      0.9430640277081578
+     ],
+     "estimate": 0.8915079352391901,
+     "n_boot_used": 195
+    },
+    "site_mean": {
+     "ci": [
+      0.0,
+      0.862944403516999
+     ],
+     "estimate": 0.1206670826813894,
+     "n_boot_used": 195
+    },
+    "site_mean_equal_study_weights": {
+     "ci": [
+      0.0,
+      0.8629635947297633
+     ],
+     "estimate": 0.12110775438145906,
+     "n_boot_used": 195
+    }
+   },
+   "checks": {
+    "observed_var_singletons": 0.42261673531107974,
+    "observed_var_site_mean": 0.27823336451653274,
+    "singleton_var_diff": {
+     "ci": [
+      -0.12462790499827493,
+      0.3795839120858274
+     ],
+     "estimate": 0.1359086861147623,
+     "n_boot_used": 195
+    },
+    "site_mean_var_diff": {
+     "ci": [
+      -0.11704799634686243,
+      0.1802315797798279
+     ],
+     "estimate": 0.015622107991550505,
+     "n_boot_used": 195
+    }
+   },
+   "components": {
+    "s2_record": {
+     "ci": [
+      0.016676122424020917,
+      0.061041196553200595
+     ],
+     "estimate": 0.03110554824085235,
+     "n_boot_used": 195
+    },
+    "s2_site": {
+     "ci": [
+      0.0,
+      0.15671849739228436
+     ],
+     "estimate": 0.03168853420416359,
+     "n_boot_used": 195
+    },
+    "s2_study": {
+     "ci": [
+      0.008345599394929785,
+      0.33292609376938553
+     ],
+     "estimate": 0.22391396675130149,
+     "n_boot_used": 195
+    },
+    "total": {
+     "ci": [
+      0.12248782371120316,
+      0.3960837906106593
+     ],
+     "estimate": 0.2867080491963174,
+     "n_boot_used": 195
+    }
+   },
+   "fit": {
+    "boundary": false,
+    "candidates": {
+     "interior": {
+      "converged": true,
+      "error": null,
+      "llf": -9.404039127739097,
+      "s2_record": 0.03110554824085235,
+      "s2_site": 0.03168853420416359,
+      "s2_study": 0.22391396675130149,
+      "usable": true,
+      "warnings": []
+     },
+     "no_site": {
+      "converged": true,
+      "error": null,
+      "llf": -9.509473352246118,
+      "s2_record": 0.0310889659118903,
+      "s2_site": 0.0,
+      "s2_study": 0.2565532551012696,
+      "usable": true,
+      "warnings": []
+     },
+     "no_study": {
+      "converged": true,
+      "error": null,
+      "llf": -31.75028847451125,
+      "s2_record": 0.09857326410577144,
+      "s2_site": 0.12861365790512866,
+      "s2_study": 0.0,
+      "usable": true,
+      "warnings": []
+     }
+    },
+    "kept": "interior",
+    "status": "ok"
+   },
+   "mean_noise_site_mean": {
+    "ci": [
+     0.022988728270977848,
+     0.3319500354856583
+    ],
+    "estimate": 0.23092272232081865,
+    "n_boot_used": 195
+   },
+   "n": {
+    "records": 83,
+    "records_fit": 69,
+    "singleton_sites": 14,
+    "sites": 28,
+    "sites_fit": 14,
+    "sites_fit_2plus_studies": 3,
+    "srdb_studies_at_2plus_sites": 3,
+    "studies_fit": 19,
+    "studies_fit_2plus_records": 16
+   },
+   "pairs": {
+    "diff_minus_same": {
+     "ci": [
+      0.0031188178685144026,
+      0.6953094273962682
+     ],
+     "estimate": 0.15699830094293488,
+     "n_boot_used": 195
+    },
+    "diff_study": {
+     "max_site_share": 0.7682926829268293,
+     "n_pairs": 82,
+     "n_sites": 3,
+     "semivariance": {
+      "ci": [
+       0.02463684376617616,
+       0.7160564165864645
+      ],
+      "estimate": 0.1764131133482366,
+      "n_boot_used": 195
+     }
+    },
+    "same_study": {
+     "max_site_share": 0.36538461538461536,
+     "n_pairs": 156,
+     "n_sites": 14,
+     "semivariance": {
+      "ci": [
+       0.010694599477466453,
+       0.055676103590324676
+      ],
+      "estimate": 0.019414812405301726,
+      "n_boot_used": 200
+     }
+    }
+   },
+   "shares": {
+    "record": {
+     "ci": [
+      0.056935972291842336,
+      0.2696941863947767
+     ],
+     "estimate": 0.10849206476080993,
+     "n_boot_used": 195
+    },
+    "site": {
+     "ci": [
+      0.0,
+      0.828158098766684
+     ],
+     "estimate": 0.11052544319209372,
+     "n_boot_used": 195
+    },
+    "study": {
+     "ci": [
+      0.05252511920361669,
+      0.9008849385128521
+     ],
+     "estimate": 0.7809824920470964,
+     "n_boot_used": 195
+    }
+   },
+   "supplementary": true
+  },
+  "South America": {
+   "bootstrap": {
+    "boundary": 191,
+    "dropped_candidate": {
+     "interior": 80,
+     "no_site": 26,
+     "no_study": 7
+    },
+    "failed": 1,
+    "kept_candidate": {
+     "interior": 18,
+     "no_site": 0,
+     "no_study": 181
+    },
+    "n": 200,
+    "ok": 199,
+    "too_few_sites": 0,
+    "unidentified": 0
+   },
+   "ceilings": {
+    "independent_study": {
+     "ci": [
+      0.4712324097920853,
+      0.8353122143760014
+     ],
+     "estimate": 0.6755682266924258,
+     "n_boot_used": 199
+    },
+    "same_study": {
+     "ci": [
+      0.47455021821436927,
+      0.8353122144200336
+     ],
+     "estimate": 0.6755682266924258,
+     "n_boot_used": 199
+    },
+    "site_mean": {
+     "ci": [
+      0.6401460442551994,
+      0.9167989319925196
+     ],
+     "estimate": 0.8077885015235363,
+     "n_boot_used": 199
+    },
+    "site_mean_equal_study_weights": {
+     "ci": [
+      0.6401460442551994,
+      0.916798932021693
+     ],
+     "estimate": 0.8077885015235363,
+     "n_boot_used": 199
+    }
+   },
+   "checks": {
+    "observed_var_singletons": 0.8263322461147593,
+    "observed_var_site_mean": 0.4167258341737303,
+    "singleton_var_diff": {
+     "ci": [
+      -0.2194982594751233,
+      1.2706132647616575
+     ],
+     "estimate": 0.459182773348934,
+     "n_boot_used": 199
+    },
+    "site_mean_var_diff": {
+     "ci": [
+      -0.04511468410975655,
+      0.37007967263301894
+     ],
+     "estimate": 0.10967204747131987,
+     "n_boot_used": 199
+    }
+   },
+   "components": {
+    "s2_record": {
+     "ci": [
+      0.04823179534662515,
+      0.20382010052373553
+     ],
+     "estimate": 0.11911495451835764,
+     "n_boot_used": 199
+    },
+    "s2_site": {
+     "ci": [
+      0.11646608156611411,
+      0.369820385137812
+     ],
+     "estimate": 0.2480345182474677,
+     "n_boot_used": 199
+    },
+    "s2_study": {
+     "ci": [
+      0.0,
+      0.0006253375382145902
+     ],
+     "estimate": 0.0,
+     "n_boot_used": 199
+    },
+    "total": {
+     "ci": [
+      0.21574678163110092,
+      0.535367449419691
+     ],
+     "estimate": 0.3671494727658253,
+     "n_boot_used": 199
+    }
+   },
+   "fit": {
+    "boundary": true,
+    "candidates": {
+     "interior": {
+      "converged": true,
+      "error": null,
+      "llf": -79.8394825349389,
+      "s2_record": 0.12346333482818991,
+      "s2_site": 0.2162546631677436,
+      "s2_study": 0.0036644452112433953,
+      "usable": true,
+      "warnings": [
+       "ConvergenceWarning: The Hessian matrix at the estimated parameter values is not positive definite.",
+       "ConvergenceWarning: The MLE may be on the boundary of the parameter space."
+      ]
+     },
+     "no_site": {
+      "converged": true,
+      "error": null,
+      "llf": -86.83433635026489,
+      "s2_record": 0.13109506994857154,
+      "s2_site": 0.0,
+      "s2_study": 0.20353591631650308,
+      "usable": true,
+      "warnings": []
+     },
+     "no_study": {
+      "converged": true,
+      "error": null,
+      "llf": -79.49662376130794,
+      "s2_record": 0.11911495451835764,
+      "s2_site": 0.2480345182474677,
+      "s2_study": 0.0,
+      "usable": true,
+      "warnings": []
+     }
+    },
+    "kept": "no_study",
+    "status": "ok"
+   },
+   "mean_noise_site_mean": {
+    "ci": [
+     0.024165859419388848,
+     0.10686004422395376
+    ],
+    "estimate": 0.059019268454942736,
+    "n_boot_used": 199
+   },
+   "n": {
+    "records": 135,
+    "records_fit": 124,
+    "singleton_sites": 11,
+    "sites": 44,
+    "sites_fit": 33,
+    "sites_fit_2plus_studies": 10,
+    "srdb_studies_at_2plus_sites": 4,
+    "studies_fit": 47,
+    "studies_fit_2plus_records": 34
+   },
+   "pairs": {
+    "diff_minus_same": {
+     "ci": [
+      -0.25979091622019085,
+      -0.0011983837345297345
+     ],
+     "estimate": -0.13532679173179868,
+     "n_boot_used": 200
+    },
+    "diff_study": {
+     "max_site_share": 0.5970149253731343,
+     "n_pairs": 67,
+     "n_sites": 10,
+     "semivariance": {
+      "ci": [
+       0.017247926595457656,
+       0.08334572563545288
+      ],
+      "estimate": 0.027781817373439887,
+      "n_boot_used": 200
+     }
+    },
+    "same_study": {
+     "max_site_share": 0.17073170731707318,
+     "n_pairs": 164,
+     "n_sites": 30,
+     "semivariance": {
+      "ci": [
+       0.04450195337113853,
+       0.2892582626452138
+      ],
+      "estimate": 0.16310860910523856,
+      "n_boot_used": 200
+     }
+    }
+   },
+   "shares": {
+    "record": {
+     "ci": [
+      0.16468778557996633,
+      0.5254497817856301
+     ],
+     "estimate": 0.3244317733075742,
+     "n_boot_used": 199
+    },
+    "site": {
+     "ci": [
+      0.4712324097920853,
+      0.8353122143760014
+     ],
+     "estimate": 0.6755682266924258,
+     "n_boot_used": 199
+    },
+    "study": {
+     "ci": [
+      0.0,
+      0.002065013118788588
+     ],
+     "estimate": 0.0,
+     "n_boot_used": 199
+    }
+   },
+   "supplementary": false
+  },
+  "pooled": {
+   "bootstrap": {
+    "boundary": 0,
+    "dropped_candidate": {
+     "interior": 0,
+     "no_site": 0,
+     "no_study": 0
+    },
+    "failed": 0,
+    "kept_candidate": {
+     "interior": 200,
+     "no_site": 0,
+     "no_study": 0
+    },
+    "n": 200,
+    "ok": 200,
+    "too_few_sites": 0,
+    "unidentified": 0
+   },
+   "ceilings": {
+    "independent_study": {
+     "ci": [
+      0.6188340504860215,
+      0.7299320164741165
+     ],
+     "estimate": 0.679489055156485,
+     "n_boot_used": 200
+    },
+    "same_study": {
+     "ci": [
+      0.8065678738726322,
+      0.8704776194746191
+     ],
+     "estimate": 0.8396569410961007,
+     "n_boot_used": 200
+    },
+    "site_mean": {
+     "ci": [
+      0.6868975121547108,
+      0.7922985370448966
+     ],
+     "estimate": 0.7452444755382629,
+     "n_boot_used": 200
+    },
+    "site_mean_equal_study_weights": {
+     "ci": [
+      0.6900394759046307,
+      0.7942566568442924
+     ],
+     "estimate": 0.7475990731794917,
+     "n_boot_used": 200
+    }
+   },
+   "checks": {
+    "observed_var_singletons": 0.4420218839771082,
+    "observed_var_site_mean": 0.40048544124666197,
+    "singleton_var_diff": {
+     "ci": [
+      -0.10061703087697185,
+      0.10394552581161752
+     ],
+     "estimate": 0.013051011442794302,
+     "n_boot_used": 200
+    },
+    "site_mean_var_diff": {
+     "ci": [
+      -0.035104160212298764,
+      0.044659461970435944
+     ],
+     "estimate": 0.009364107998981352,
+     "n_boot_used": 200
+    }
+   },
+   "components": {
+    "s2_record": {
+     "ci": [
+      0.05625956991266281,
+      0.0838205545265376
+     ],
+     "estimate": 0.06878250188282657,
+     "n_boot_used": 200
+    },
+    "s2_site": {
+     "ci": [
+      0.2385739161272639,
+      0.35291015555171384
+     ],
+     "estimate": 0.2914810128679939,
+     "n_boot_used": 200
+    },
+    "s2_study": {
+     "ci": [
+      0.052491458961179654,
+      0.08742315184030482
+     ],
+     "estimate": 0.06870735778349342,
+     "n_boot_used": 200
+    },
+    "total": {
+     "ci": [
+      0.378745084011202,
+      0.490186917083172
+     ],
+     "estimate": 0.4289708725343139,
+     "n_boot_used": 200
+    }
+   },
+   "fit": {
+    "boundary": false,
+    "candidates": {
+     "interior": {
+      "converged": true,
+      "error": null,
+      "llf": -1440.5509692834876,
+      "s2_record": 0.06878250188282657,
+      "s2_site": 0.2914810128679939,
+      "s2_study": 0.06870735778349342,
+      "usable": true,
+      "warnings": []
+     },
+     "no_site": {
+      "converged": true,
+      "error": null,
+      "llf": -1601.8188235566777,
+      "s2_record": 0.0689798209172952,
+      "s2_site": 0.0,
+      "s2_study": 0.3238216863012821,
+      "usable": true,
+      "warnings": []
+     },
+     "no_study": {
+      "converged": true,
+      "error": null,
+      "llf": -1654.5399420810954,
+      "s2_record": 0.09680739282283943,
+      "s2_site": 0.3400239822537155,
+      "s2_study": 0.0,
+      "usable": true,
+      "warnings": []
+     }
+    },
+    "kept": "interior",
+    "status": "ok"
+   },
+   "mean_noise_site_mean": {
+    "ci": [
+     0.0858129418355626,
+     0.11710754815553379
+    ],
+    "estimate": 0.0996403203796867,
+    "n_boot_used": 200
+   },
+   "n": {
+    "records": 3672,
+    "records_fit": 3309,
+    "singleton_sites": 363,
+    "sites": 965,
+    "sites_fit": 602,
+    "sites_fit_2plus_studies": 215,
+    "srdb_studies_at_2plus_sites": 116,
+    "studies_fit": 1057,
+    "studies_fit_2plus_records": 761
+   },
+   "pairs": {
+    "diff_minus_same": {
+     "ci": [
+      0.028035400858593195,
+      0.10317292582312827
+     ],
+     "estimate": 0.06205340206216792,
+     "n_boot_used": 200
+    },
+    "diff_study": {
+     "max_site_share": 0.13922701021768102,
+     "n_pairs": 11255,
+     "n_sites": 215,
+     "semivariance": {
+      "ci": [
+       0.0978673394269871,
+       0.1789269088198329
+      ],
+      "estimate": 0.13504482202173118,
+      "n_boot_used": 200
+     }
+    },
+    "same_study": {
+     "max_site_share": 0.09258160237388724,
+     "n_pairs": 8425,
+     "n_sites": 567,
+     "semivariance": {
+      "ci": [
+       0.05933050036813562,
+       0.09005706356923146
+      ],
+      "estimate": 0.07299141995956326,
+      "n_boot_used": 200
+     }
+    }
+   },
+   "shares": {
+    "record": {
+     "ci": [
+      0.12952238052538093,
+      0.19343212612736785
+     ],
+     "estimate": 0.1603430589038993,
+     "n_boot_used": 200
+    },
+    "site": {
+     "ci": [
+      0.6188340504860215,
+      0.7299320164741165
+     ],
+     "estimate": 0.679489055156485,
+     "n_boot_used": 200
+    },
+    "study": {
+     "ci": [
+      0.11781202887259896,
+      0.2053851318241994
+     ],
+     "estimate": 0.16016788593961573,
+     "n_boot_used": 200
+    }
+   },
+   "supplementary": false
+  }
+ },
+ "method": "3-level REML (statsmodels MixedLM: random site intercept, variance component for study within site) of log Rs per geographic continent and pooled, on sites with at least min_records_per_site records; REML maximum over the closed parameter space (interior fit and the two boundary models, highest REML log-likelihood kept). Ceilings: independent study s2_site/total; same study (s2_site+s2_study)/total; site mean s2_site/(s2_site + mean over all sites of s2_study*sum_j (m_ij/n_i)^2 + s2_record/n_i). Pair statistic: mean half squared difference of log Rs, same-study vs different-study record pairs within sites. CIs: site-cluster bootstrap within continents (duplicated sites relabelled), percentile intervals.",
+ "settings": {
+  "continent_column": "continent_geo",
+  "continents": [
+   "Asia",
+   "Europe",
+   "North America",
+   "South America",
+   "Africa",
+   "Oceania"
+  ],
+  "llf_tie": 1e-06,
+  "min_records_per_site": 2,
+  "n_boot": 200,
+  "optimizer": "lbfgs",
+  "quantiles": [
+   0.025,
+   0.975
+  ],
+  "seed": 7,
+  "zero_share": 1e-06
+ },
+ "variant": "qc",
+ "versions": {
+  "numpy": "2.5.4",
+  "statsmodels": "0.15.0"
+ }
+}

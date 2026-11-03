@@ -1,0 +1,427 @@
+{
+ "_inputs": {
+  "build_sites.json": "15875b9c85b1cbe51b1e089a952fc18008dff8eb726fbdd7610fc0ade2283f27",
+  "cosore_annual_analysis.json": "3be6a755c16aa857a77e11a33f02f46f31fc5b4f35403615ba08ce8d52aabc04"
+ },
+ "_outputs": {
+  "derived:records_analysis.parquet": "589e284833d5d6915870ed402b06c1f5ae2b0502d379e5ec9c7a8cd483d6b2c2",
+  "derived:sites_analysis_qc.parquet": "d3d8cea8fa87949c7bd6f92fd0f198412a18ab440f72dad104b15c23ad95e589",
+  "derived:sites_analysis_repo.parquet": "0b1e5d39dbc1d9bb0e8bcf3dbb4ec2960c343d2f42ddbdd819f7433e2a612f3d"
+ },
+ "_provenance": {
+  "code_sha256": "8d2cd64c0b2b12b1e615a8c95d3eda3459c3f7eee7eb342c91a751b988968159",
+  "config_sha256": "85533e78e57dc0fdc360b83fccabc3de53f7b6fa87a7a5e2c92d54c25d79ad25"
+ },
+ "coord_mismatch_records": 42,
+ "coord_reported_country_not_in_naturalearth": [
+  "Czechoslovakia",
+  "French Guiana",
+  "Micronesia",
+  "Republic of Congo"
+ ],
+ "cosore_records": 39,
+ "exploratory": true,
+ "offland_records": 4,
+ "qc_removed_by": {
+  "f_coverage": 252,
+  "f_dup": 57,
+  "f_ecosys": 242,
+  "f_method": 456,
+  "f_quality": 260
+ },
+ "records_after_coord_check": 4764,
+ "records_after_qc": 3672,
+ "sites_qc": {
+  "by_continent_geo": {
+   "Africa": 28,
+   "Asia": 386,
+   "Europe": 233,
+   "North America": 246,
+   "Oceania": 28,
+   "South America": 44
+  },
+  "by_continent_locked_rule": {
+   "Africa": 26,
+   "Asia": 386,
+   "Europe": 237,
+   "North America": 251,
+   "Oceania": 23,
+   "South America": 42
+  },
+  "continent_geo_differs": [
+   {
+    "continent": "Europe",
+    "continent_geo": "South America",
+    "country": "France",
+    "geo_subunit": "French Guiana",
+    "lat": 5.03,
+    "lon": -53.0,
+    "site_id": "v3aqc_00091"
+   },
+   {
+    "continent": "North America",
+    "continent_geo": "Oceania",
+    "country": "United States of America",
+    "geo_subunit": "Hawaii",
+    "lat": 19.77,
+    "lon": -155.94,
+    "site_id": "v3aqc_00165"
+   },
+   {
+    "continent": "North America",
+    "continent_geo": "Oceania",
+    "country": "United States of America",
+    "geo_subunit": "Hawaii",
+    "lat": 19.84,
+    "lon": -155.12,
+    "site_id": "v3aqc_00175"
+   },
+   {
+    "continent": "Europe",
+    "continent_geo": "South America",
+    "country": "France",
+    "geo_subunit": "French Guiana",
+    "lat": 5.282,
+    "lon": -52.912,
+    "site_id": "v3aqc_00185"
+   },
+   {
+    "continent": "Europe",
+    "continent_geo": "Africa",
+    "country": "Spain",
+    "geo_subunit": "Canary Islands",
+    "lat": 28.292,
+    "lon": -16.629,
+    "site_id": "v3aqc_00270"
+   },
+   {
+    "continent": "North America",
+    "continent_geo": "Oceania",
+    "country": "United States of America",
+    "geo_subunit": "Hawaii",
+    "lat": 19.9449,
+    "lon": -155.2621,
+    "site_id": "v3aqc_00368"
+   },
+   {
+    "continent": "North America",
+    "continent_geo": "Oceania",
+    "country": "United States of America",
+    "geo_subunit": "Hawaii",
+    "lat": 19.842,
+    "lon": -155.2931,
+    "site_id": "v3aqc_00369"
+   },
+   {
+    "continent": "Europe",
+    "continent_geo": "Africa",
+    "country": "Spain",
+    "geo_subunit": "Canary Islands",
+    "lat": 28.306,
+    "lon": -16.5683,
+    "site_id": "v3aqc_00423"
+   },
+   {
+    "continent": "North America",
+    "continent_geo": "Oceania",
+    "country": "United States of America",
+    "geo_subunit": "Hawaii",
+    "lat": 20.89,
+    "lon": -156.41,
+    "site_id": "v3aqc_00708"
+   }
+  ],
+  "n": 965
+ },
+ "sites_repo": {
+  "by_continent_geo": {
+   "Africa": 33,
+   "Asia": 483,
+   "Europe": 280,
+   "North America": 313,
+   "Oceania": 49,
+   "South America": 63
+  },
+  "by_continent_locked_rule": {
+   "Africa": 30,
+   "Asia": 483,
+   "Europe": 285,
+   "North America": 322,
+   "Oceania": 40,
+   "South America": 61
+  },
+  "continent_geo_differs": [
+   {
+    "continent": "North America",
+    "continent_geo": "Oceania",
+    "country": "United States of America",
+    "geo_subunit": "Hawaii",
+    "lat": 19.75,
+    "lon": -155.25,
+    "site_id": "v3arepo_00077"
+   },
+   {
+    "continent": "North America",
+    "continent_geo": "Oceania",
+    "country": "United States of America",
+    "geo_subunit": "Hawaii",
+    "lat": 19.84,
+    "lon": -155.12,
+    "site_id": "v3arepo_00103"
+   },
+   {
+    "continent": "North America",
+    "continent_geo": "Oceania",
+    "country": "United States of America",
+    "geo_subunit": "Hawaii",
+    "lat": 19.75,
+    "lon": -155.5,
+    "site_id": "v3arepo_00141"
+   },
+   {
+    "continent": "Europe",
+    "continent_geo": "South America",
+    "country": "France",
+    "geo_subunit": "French Guiana",
+    "lat": 5.03,
+    "lon": -53.0,
+    "site_id": "v3arepo_00151"
+   },
+   {
+    "continent": "North America",
+    "continent_geo": "Oceania",
+    "country": "United States of America",
+    "geo_subunit": "Hawaii",
+    "lat": 22.15,
+    "lon": -159.62,
+    "site_id": "v3arepo_00179"
+   },
+   {
+    "continent": "North America",
+    "continent_geo": "Oceania",
+    "country": "United States of America",
+    "geo_subunit": "Hawaii",
+    "lat": 20.73,
+    "lon": -156.13,
+    "site_id": "v3arepo_00180"
+   },
+   {
+    "continent": "North America",
+    "continent_geo": "Oceania",
+    "country": "United States of America",
+    "geo_subunit": "Hawaii",
+    "lat": 19.77,
+    "lon": -155.94,
+    "site_id": "v3arepo_00258"
+   },
+   {
+    "continent": "Europe",
+    "continent_geo": "South America",
+    "country": "France",
+    "geo_subunit": "French Guiana",
+    "lat": 5.2564,
+    "lon": -52.9178,
+    "site_id": "v3arepo_00276"
+   },
+   {
+    "continent": "Europe",
+    "continent_geo": "Africa",
+    "country": "Spain",
+    "geo_subunit": "Canary Islands",
+    "lat": 28.292,
+    "lon": -16.629,
+    "site_id": "v3arepo_00420"
+   },
+   {
+    "continent": "North America",
+    "continent_geo": "Oceania",
+    "country": "United States of America",
+    "geo_subunit": "Hawaii",
+    "lat": 19.9449,
+    "lon": -155.2621,
+    "site_id": "v3arepo_00534"
+   },
+   {
+    "continent": "North America",
+    "continent_geo": "Oceania",
+    "country": "United States of America",
+    "geo_subunit": "Hawaii",
+    "lat": 19.842,
+    "lon": -155.2931,
+    "site_id": "v3arepo_00535"
+   },
+   {
+    "continent": "Europe",
+    "continent_geo": "Africa",
+    "country": "Spain",
+    "geo_subunit": "Canary Islands",
+    "lat": 28.1,
+    "lon": -15.4,
+    "site_id": "v3arepo_00541"
+   },
+   {
+    "continent": "Europe",
+    "continent_geo": "Africa",
+    "country": "Spain",
+    "geo_subunit": "Canary Islands",
+    "lat": 28.306,
+    "lon": -16.5683,
+    "site_id": "v3arepo_00601"
+   },
+   {
+    "continent": "North America",
+    "continent_geo": "Oceania",
+    "country": "United States of America",
+    "geo_subunit": "Hawaii",
+    "lat": 20.89,
+    "lon": -156.41,
+    "site_id": "v3arepo_00927"
+   }
+  ],
+  "n": 1221
+ },
+ "srdb_repo_filter_records": 4771,
+ "srdb_rows": 14169,
+ "vs_locked_build": {
+  "coord_flag": {
+   "flag_changed": [
+    {
+     "Country": "Italy",
+     "dist_to_reported_country_km_geodesic": 98.06,
+     "dist_to_reported_country_km_locked": 122.01,
+     "f_coord_geodesic": false,
+     "f_coord_locked": true,
+     "geo_country": "Malta",
+     "rec_id": "srdb_11712"
+    },
+    {
+     "Country": "Italy",
+     "dist_to_reported_country_km_geodesic": 97.99,
+     "dist_to_reported_country_km_locked": 121.93,
+     "f_coord_geodesic": false,
+     "f_coord_locked": true,
+     "geo_country": "Malta",
+     "rec_id": "srdb_11713"
+    },
+    {
+     "Country": "Italy",
+     "dist_to_reported_country_km_geodesic": 98.16,
+     "dist_to_reported_country_km_locked": 122.13,
+     "f_coord_geodesic": false,
+     "f_coord_locked": true,
+     "geo_country": "Malta",
+     "rec_id": "srdb_11714"
+    },
+    {
+     "Country": "India",
+     "dist_to_reported_country_km_geodesic": 95.59,
+     "dist_to_reported_country_km_locked": 114.04,
+     "f_coord_geodesic": false,
+     "f_coord_locked": true,
+     "geo_country": "Pakistan",
+     "rec_id": "srdb_3051"
+    },
+    {
+     "Country": "India",
+     "dist_to_reported_country_km_geodesic": 95.59,
+     "dist_to_reported_country_km_locked": 114.04,
+     "f_coord_geodesic": false,
+     "f_coord_locked": true,
+     "geo_country": "Pakistan",
+     "rec_id": "srdb_3052"
+    },
+    {
+     "Country": "India",
+     "dist_to_reported_country_km_geodesic": 95.59,
+     "dist_to_reported_country_km_locked": 114.04,
+     "f_coord_geodesic": false,
+     "f_coord_locked": true,
+     "geo_country": "Pakistan",
+     "rec_id": "srdb_3053"
+    },
+    {
+     "Country": "India",
+     "dist_to_reported_country_km_geodesic": 95.59,
+     "dist_to_reported_country_km_locked": 114.04,
+     "f_coord_geodesic": false,
+     "f_coord_locked": true,
+     "geo_country": "Pakistan",
+     "rec_id": "srdb_3054"
+    },
+    {
+     "Country": "India",
+     "dist_to_reported_country_km_geodesic": 95.59,
+     "dist_to_reported_country_km_locked": 114.04,
+     "f_coord_geodesic": false,
+     "f_coord_locked": true,
+     "geo_country": "Pakistan",
+     "rec_id": "srdb_3055"
+    },
+    {
+     "Country": "India",
+     "dist_to_reported_country_km_geodesic": 95.59,
+     "dist_to_reported_country_km_locked": 114.04,
+     "f_coord_geodesic": false,
+     "f_coord_locked": true,
+     "geo_country": "Pakistan",
+     "rec_id": "srdb_3056"
+    },
+    {
+     "Country": "China",
+     "dist_to_reported_country_km_geodesic": 96.04,
+     "dist_to_reported_country_km_locked": 104.16,
+     "f_coord_geodesic": false,
+     "f_coord_locked": true,
+     "geo_country": "Vietnam",
+     "rec_id": "srdb_7329"
+    }
+   ],
+   "geodesic": 42,
+   "locked_mercator": 52
+  },
+  "cosore_sites": {
+   "added": [],
+   "analysis": 39,
+   "dropped": [
+    "cosore_d20190409_ZOU",
+    "cosore_d20190415_VARNER",
+    "cosore_d20190424_ZHANG_oak",
+    "cosore_d20190504_SAVAGE_hf006-05",
+    "cosore_d20190517_MAURITZ",
+    "cosore_d20190526_MINIONS_HCB",
+    "cosore_d20190526_MINIONS_HCU",
+    "cosore_d20190526_MINIONS_IMNH",
+    "cosore_d20190526_MINIONS_IMNL",
+    "cosore_d20190526_MINIONS_NCU_OLD",
+    "cosore_d20190610_SIHI_H1",
+    "cosore_d20190610_SIHI_H2",
+    "cosore_d20190610_SIHI_H2wetland",
+    "cosore_d20190617_SCOTT_WHS",
+    "cosore_d20190831_SIHI",
+    "cosore_d20191214_PANG",
+    "cosore_d20200109_HIRANO_PDB",
+    "cosore_d20200114_CARBONE_SC_SAUCE",
+    "cosore_d20200120_CHANG",
+    "cosore_d20200214_SZUTU_TONZI",
+    "cosore_d20200214_SZUTU_TWITCHELL",
+    "cosore_d20200224_MATHES",
+    "cosore_d20200328_UEYAMA_FAIRBANKS",
+    "cosore_d20200328_UEYAMA_HOKUROKU",
+    "cosore_d20200328_UEYAMA_TESHIO",
+    "cosore_d20200417_ARAIN_TP74",
+    "cosore_d20200417_ARAIN_TPD"
+   ],
+   "locked": 66
+  },
+  "records_only_in_analysis": 0,
+  "records_only_in_locked": 27,
+  "sites_qc": {
+   "analysis": 965,
+   "locked": 971
+  },
+  "sites_repo": {
+   "analysis": 1221,
+   "locked": 1225
+  }
+ }
+}
