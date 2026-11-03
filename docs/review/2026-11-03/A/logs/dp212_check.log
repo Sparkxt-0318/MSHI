@@ -1,0 +1,16 @@
+0.5-deg cell centres inside Russian subunits at lon < 0: 93
+cell centres in South Georgia / South Sandwich: {'South Georgia': 2}
+qc Turkey sites west of 29.1E (East Thrace): []
+qc Kazakhstan sites west of 52E: []
+qc Egypt sites east of 32.3E (Sinai): []
+qc Indonesia sites east of 130.5E (western New Guinea and Moluccas): []
+qc Georgia sites: []
+qc Azerbaijan sites: []
+qc Armenia sites: []
+repo Turkey sites west of 29.1E (East Thrace): [['v3arepo_00484', 40.58333333, 26.51666667, 1, 'Asia'], ['v3arepo_00599', 41.19166667, 28.95, 5, 'Asia']]
+repo Kazakhstan sites west of 52E: []
+repo Egypt sites east of 32.3E (Sinai): []
+repo Indonesia sites east of 130.5E (western New Guinea and Moluccas): []
+repo Georgia sites: []
+repo Azerbaijan sites: []
+repo Armenia sites: []

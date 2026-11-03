@@ -1,0 +1,8 @@
+table summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 17, 'STALE': 0}
+noise_ceiling            needs=('site_build',) exploratory=True gate: ok
+europe_geo_sensitivity   needs=('site_build', 'locked_test', 'npp') exploratory=True gate: results/reproduction_check.json has {'NOT RUN': 10}
+features_analysis        needs=('site_build', 'locked_test', 'npp') exploratory=True gate: results/reproduction_check.json has {'NOT RUN': 10}
+transfer_matrix          needs=('site_build', 'locked_test', 'npp') exploratory=True gate: results/reproduction_check.json has {'NOT RUN': 10}
+within_continent         needs=('site_build', 'locked_test', 'npp') exploratory=True gate: results/reproduction_check.json has {'NOT RUN': 10}
+aoa_sensitivity          needs=('site_build', 'locked_test', 'npp') exploratory=True gate: results/reproduction_check.json has {'NOT RUN': 10}
+us_r2                    needs=('site_build', 'locked_test', 'npp') exploratory=True gate: results/reproduction_check.json has {'NOT RUN': 10}

@@ -1,0 +1,29 @@
+settings: ('XGB', 'OLS-TP') Asia North America (25.0, 180.0, -10.0, 80.0) (-125.0, -66.0, 24.0, 50.0) (0, 19) 30
+records: (4810, 44) {'srdb': 4771, 'cosore': 39}
+cosore rec_ids (first 5): ['cosore_d20190409_ANJILELI', 'cosore_d20190424_ZHANG_maple', 'cosore_d20190430_DESAI', 'cosore_d20190526_MINIONS_EML', 'cosore_d20190526_PENNINGTON']
+[qc] single_record OK: {'records_of_sites_not_used': 0, 'n_sites': 965, 'n_chosen_cosore': 28, 'n_sites_with_several_records': 602, 'n_sites_with_several_cosore_records': 3, 'mean_abs_diff_from_site_mean_log': 0.18672247358750346, 'max_abs_diff_from_site_mean_log': 1.4407184671863469}
+[qc] max |site log_rs - mean(records)| = 0; n_rec mismatches = 0
+[qc] sites with >1 COSORE record: 3: ['v3aqc_00130', 'v3aqc_00150', 'v3aqc_00962']
+[qc] region 'Asia': n=386 by_continent_geo={'Asia': 386}
+[qc] region 'Asia box': n=429 by_continent_geo={'Asia': 386, 'Europe': 30, 'Africa': 10, 'Oceania': 3}
+[qc] region 'US bounding box': n=191 by_continent_geo={'North America': 191} by_country={'United States of America': 175, 'Canada': 15, 'Mexico': 1}
+[qc] region 'North America': n=246 by_continent_geo={'North America': 246} by_country={'United States of America': 185, 'Canada': 34, 'Panama': 13, 'Mexico': 6, 'Costa Rica': 4, 'Puerto Rico': 3, 'Greenland': 1}
+[qc] region 'North America outside the US bounding box': n=55 by_continent_geo={'North America': 55} by_country={'Canada': 19, 'Panama': 13, 'United States of America': 10, 'Mexico': 5, 'Costa Rica': 4, 'Puerto Rico': 3, 'Greenland': 1} rel={'south': 25, 'north': 26, 'west_or_east': 4}
+[qc] overlaps: []
+[qc] Asia box by continent_geo: {'Asia': 386, 'Europe': 30, 'Africa': 10, 'Oceania': 3}
+[qc] continent_geo missing: 0
+[qc] NA sites with lon > 0: []
+[qc] Asia sites outside the Asia box: 0 []
+[repo] single_record OK: {'records_of_sites_not_used': 0, 'n_sites': 1221, 'n_chosen_cosore': 30, 'n_sites_with_several_records': 773, 'n_sites_with_several_cosore_records': 3, 'mean_abs_diff_from_site_mean_log': 0.20567942048995466, 'max_abs_diff_from_site_mean_log': 1.5559069133505945}
+[repo] max |site log_rs - mean(records)| = 0; n_rec mismatches = 0
+[repo] sites with >1 COSORE record: 3: ['v3arepo_00201', 'v3arepo_00228', 'v3arepo_01218']
+[repo] region 'Asia': n=483 by_continent_geo={'Asia': 483}
+[repo] region 'Asia box': n=535 by_continent_geo={'Asia': 483, 'Europe': 38, 'Africa': 11, 'Oceania': 3}
+[repo] region 'US bounding box': n=237 by_continent_geo={'North America': 237} by_country={'United States of America': 218, 'Canada': 18, 'Mexico': 1}
+[repo] region 'North America': n=313 by_continent_geo={'North America': 313} by_country={'United States of America': 235, 'Canada': 41, 'Panama': 14, 'Mexico': 8, 'Costa Rica': 5, 'Puerto Rico': 4, 'Greenland': 4, 'Belize': 2}
+[repo] region 'North America outside the US bounding box': n=76 by_continent_geo={'North America': 76} by_country={'Canada': 23, 'United States of America': 17, 'Panama': 14, 'Mexico': 7, 'Costa Rica': 5, 'Puerto Rico': 4, 'Greenland': 4, 'Belize': 2} rel={'south': 32, 'north': 40, 'west_or_east': 4}
+[repo] overlaps: []
+[repo] Asia box by continent_geo: {'Asia': 483, 'Europe': 38, 'Africa': 11, 'Oceania': 3}
+[repo] continent_geo missing: 0
+[repo] NA sites with lon > 0: []
+[repo] Asia sites outside the Asia box: 0 []

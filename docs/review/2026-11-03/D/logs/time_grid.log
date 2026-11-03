@@ -1,0 +1,3 @@
+sampling 19 layers at 259200 centres: 285.5s; land cells 90242
+sjoin: 0.3s; cells outside every subunit: 4544
+nearest_within_km: 5.6 ms per off-coast cell -> about 25s for all 4544

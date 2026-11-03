@@ -1,0 +1,3 @@
+n=10 nk_len=1: port q=5 sizes=[2, 2, 2, 2, 2] | R-semantics q=5 same partition=True
+n=10 nk_len=100: port q=7 sizes=[2, 2, 2, 2, 2] | R-semantics q=7 same partition=True
+n=15 nk_len=100: port q=7 sizes=[3, 3, 3, 4, 2] | R-semantics q=7 same partition=True

@@ -1,0 +1,33 @@
+2026-11-03 06:29:24,205 INFO mshi: cosore_annual      uses existing outputs of fetch_cosore (not requested; checked for currency)
+2026-11-03 06:29:24,205 INFO mshi: cosore_annual      start
+2026-11-03 06:30:01,495 INFO mshi.cosore: COSORE: 66 sites, 24 datasets unreadable/no data
+2026-11-03 06:30:01,496 INFO mshi: cosore_annual      OK (37.3s)
+2026-11-03 06:30:01,496 INFO mshi: cosore_annual_analysis uses existing outputs of fetch_cosore (not requested; checked for currency)
+2026-11-03 06:30:01,496 INFO mshi: cosore_annual_analysis start
+2026-11-03 06:30:38,403 INFO mshi.cosore: COSORE (analysis rule): 39 sites, 124 of 629 ports kept
+2026-11-03 06:30:38,404 INFO mshi: cosore_annual_analysis OK (36.9s)
+2026-11-03 06:30:38,404 INFO mshi: build_sites        uses existing outputs of fetch_srdb, fetch_naturalearth (not requested; checked for currency)
+2026-11-03 06:30:38,404 INFO mshi: build_sites        start
+2026-11-03 06:30:41,935 INFO mshi.sites: sites: qc 971, repo 1225
+2026-11-03 06:30:41,940 INFO mshi: build_sites        OK (3.5s)
+2026-11-03 06:30:41,940 INFO mshi: build_sites_analysis uses existing outputs of fetch_srdb, fetch_naturalearth (not requested; checked for currency)
+2026-11-03 06:30:41,940 INFO mshi: build_sites_analysis start
+2026-11-03 06:30:49,571 INFO mshi.sites_analysis: analysis sites: qc 965, repo 1221
+2026-11-03 06:30:49,575 INFO mshi: build_sites_analysis OK (7.6s)
+2026-11-03 06:30:49,576 INFO mshi: repro_checks       start
+2026-11-03 06:30:49,583 INFO mshi: repro_checks       OK (0.0s)
+exit code 0 seconds 86.5
+cosore_annual.json content identical to committed: True
+cosore_annual_analysis.json content identical to committed: True
+build_sites.json content identical to committed: True
+build_sites_analysis.json content identical to committed: True
+reproduction_check.json content identical to committed: False
+   differs: rows [{'diff': 0.0, 'group': 'site_build', 'handoff': 66, 'note': '', 'quantity': 'COSORE sites with an annual value', 'rel_diff': 0.0, 'status': 'PASS', 'tolerance': 'exact', 'v3': 66}, {'diff': 0.0, 'group': 'site_build', 'handoff': 4771, 'note': '', 'quantity': 'SRDB records after repo filters', 'rel_ -> [{'diff': 0.0, 'group': 'site_build', 'handoff': 66, 'note': '', 'quantity': 'COSORE sites with an annual value', 'rel_diff': 0.0, 'status': 'PASS', 'tolerance': 'exact', 'v3': 66}, {'diff': 0.0, 'group': 'site_build', 'handoff': 4771, 'note': '', 'quantity': 'SRDB records after repo filters', 'rel_
+cosore_annual.csv bytes identical to committed
+cosore_annual_analysis.csv bytes identical to committed
+records_v3.parquet bytes identical to committed
+sites_v3_qc.parquet bytes identical to committed
+sites_v3_repo.parquet bytes identical to committed
+records_analysis.parquet bytes identical to committed
+sites_analysis_qc.parquet bytes identical to committed
+sites_analysis_repo.parquet bytes identical to committed

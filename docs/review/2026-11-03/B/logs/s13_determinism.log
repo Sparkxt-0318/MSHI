@@ -1,0 +1,10 @@
+out/results/transfer_matrix.json                        identical=False
+out/results/within_continent.json                       identical=False
+out/data/interim/transfer_predictions_qc.parquet        identical=True
+out/data/interim/within_predictions_qc.parquet          identical=True
+out/figures/phase2/transfer_matrix.png                  identical=True
+out/figures/phase2/transfer_matrix.pdf                  identical=True
+out/figures/phase2/within_continent.png                 identical=True
+out/figures/phase2/within_continent.pdf                 identical=True
+transfer_matrix.json exploratory: True _inputs: ['features_analysis.json'] _outputs: ['figures:phase2/transfer_matrix.pdf', 'figures:phase2/transfer_matrix.png', 'interim:transfer_predictions_qc.parquet']
+within_continent.json exploratory: True _inputs: ['features_analysis.json', 'fetch_worldclim.json', 'transfer_matrix.json'] _outputs: ['figures:phase2/within_continent.pdf', 'figures:phase2/within_continent.png', 'interim:within_predictions_qc.parquet']

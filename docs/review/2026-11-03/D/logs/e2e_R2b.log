@@ -1,0 +1,4 @@
+08:10:51 INFO mshi: us_r2              uses existing outputs of features_analysis, build_sites_analysis (not requested; checked for currency)
+08:10:51 INFO mshi: us_r2              start
+08:10:51 INFO mshi: us_r2              STALE (0.0s)
+08:10:51 WARNING mshi: stages not completed: {'us_r2': 'stale: results/features_analysis.json: its output /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/D/e2e/sb/interim/features_analysis_repo.parquet changed after the run; re-run the stage that writes it (or `make all`)'}

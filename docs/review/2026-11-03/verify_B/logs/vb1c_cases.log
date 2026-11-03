@@ -1,0 +1,16 @@
+SA synthetic: fit_gam alpha [3.77781225e+28 3.36823237e-03], edf 3.475; exact edf 6.145
+  second reference (linear column) vs my reference: max diff 1.24e-14; fit_gam vs second reference: 0.214
+  fitted slopes on MAT (OLS of fitted values on [1, MAT, ln MAP]): fit_gam 0.0201, exact 0.0188
+  exact AIC search alpha [1.03828414e+16 4.39068172e-04] (AIC 52.966); capped search alpha [1.00000000e+08 4.39067388e-04] (statsmodels AIC 52.966, exact AIC at that alpha 52.966)
+  SA -> Asia           n= 313 r2 fit_gam    0.220 | exact AIC-opt    0.247 | capped    0.247 | max|pred diff| 2.634
+  SA -> Europe         n= 180 r2 fit_gam   -0.712 | exact AIC-opt   -0.783 | capped   -0.783 | max|pred diff| 0.291
+  SA -> North America  n= 176 r2 fit_gam   -0.015 | exact AIC-opt   -0.059 | capped   -0.059 | max|pred diff| 2.731
+  SA -> Africa         n=  22 r2 fit_gam    0.295 | exact AIC-opt    0.369 | capped    0.369 | max|pred diff| 0.278
+  SA -> Oceania        n=  21 r2 fit_gam    0.128 | exact AIC-opt   -0.272 | capped   -0.272 | max|pred diff| 0.399
+
+real LOCO (Europe held out) n=566: fit_gam alpha [5.52674902e+17 9.10404151e-22] statsmodels AIC 903.363 (exact AIC at that alpha 903.399); exact search alpha [1.54522080e+15 9.66347208e-19] AIC 903.399; capped alpha [1.00000000e+08 1.17458441e-02] statsmodels AIC 903.289, exact AIC 903.289; capped vs exact at capped alpha 1.8e-12
+  predictions at the 180 European sites: max|fit_gam - exact AIC-opt| 0.009, mean +0.0011; max|capped - exact AIC-opt| 0.015
+
+real	0m6.543s
+user	0m6.602s
+sys	0m0.459s

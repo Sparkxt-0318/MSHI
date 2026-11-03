@@ -1,0 +1,5 @@
+climate_grid: 90242 cells in 333s; NaN in bio: 0; continent_geo None: 0
+area (million km2) by continent_geo: {'Africa': 30.68, 'Antarctica': 12.94, 'Asia': 46.51, 'Europe': 10.68, 'North America': 25.94, 'Oceania': 9.41, 'South America': 18.37}
+Asia prediction points: (4000, 2) unique cells drawn: 3633
+Europe prediction points: (4000, 2) unique cells drawn: 2914
+North America prediction points: (4000, 2) unique cells drawn: 3474

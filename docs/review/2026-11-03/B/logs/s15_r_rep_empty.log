@@ -1,0 +1,12 @@
+do_rep starts at line 634; zero-length early return at lines 698-706; first 'times' validation error at line 737
+early return precedes the times check: True
+  698:     if(lx == 0) {
+  699: 	if(len > 0 && x == R_NilValue)
+  700: 	    warningcall(call, "'x' is NULL so the result will be NULL");
+  701: 	SEXP a;
+  702: 	PROTECT(a = duplicate(x));
+  703: 	if(len != NA_INTEGER && len > 0 && x != R_NilValue)
+  704: 	    a = xlengthgets(a, len);
+  705: 	UNPROTECT(3);
+  706: 	return a;
+1d169bc794d68c8b2ccc1a1130474073cbbc98ab465316859b3b59b0681f92fb  /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/B/rseq_dl/seq.c

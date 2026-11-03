@@ -1,0 +1,5 @@
+OLS-TP: fold predictions and nulls unchanged when the fold's own outcomes shift: True
+GAM: fold predictions and nulls unchanged when the fold's own outcomes shift: True
+RF: fold predictions and nulls unchanged when the fold's own outcomes shift: True
+XGB: fold predictions and nulls unchanged when the fold's own outcomes shift: True
+SingularMatrixWarning count: 746

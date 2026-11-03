@@ -1,0 +1,9 @@
+case 7: n=37 m=800 test=asymptotic ties=True port p=4.892e-01 R-literal p=4.892e-01
+case 10: n=21 m=120 test=exact ties=True port p=1.801e-25 R-literal p=0.000e+00
+case 17: n=53 m=800 test=asymptotic ties=True port p=1.731e-01 R-literal p=1.731e-01
+case 30: n=57 m=50 test=exact ties=True port p=1.005e-31 R-literal p=0.000e+00
+case 37: n=51 m=800 test=asymptotic ties=True port p=5.589e-01 R-literal p=5.589e-01
+case 47: n=159 m=800 test=asymptotic ties=True port p=4.022e-01 R-literal p=4.022e-01
+case 50: n=50 m=50 test=exact ties=True port p=9.912e-30 R-literal p=0.000e+00
+case 52: n=152 m=800 test=asymptotic ties=True port p=5.871e-01 R-literal p=5.871e-01
+case 55: n=155 m=50 test=exact ties=True port p=5.358e-49 R-literal p=0.000e+00

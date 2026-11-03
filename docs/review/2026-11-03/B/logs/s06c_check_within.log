@@ -1,0 +1,37 @@
+continents: ['Asia', 'Europe', 'North America'] skipped: [('South America', 44), ('Africa', 28), ('Oceania', 28)]
+
+== Asia n=386 var=0.254 oracle within r2=0.754
+   splits: {'blocks_42': (5, [84, 105, 63, 60, 74], 368.2), 'blocks_43': (5, [94, 124, 61, 78, 29], 394.6), 'blocks_44': (5, [69, 56, 84, 82, 95], 362.9), 'knndm_42': (5, [58, 59, 64, 82, 123], 102.9)}
+   knndm: {'q': 10, 'random_cv': False, 'W': 102.91534078260352, 'W_random': 567.8858997209786, 'fold_sizes': [58, 59, 64, 82, 123]}
+   GAM    blocks r2=0.751 [0.695, 0.802] knndm r2=0.750 skill_blocks=0.756
+   OLS-TP blocks r2=0.752 [0.696, 0.803] knndm r2=0.750 skill_blocks=0.757
+      penalty vs Europe         blocks=0.488 CI=[0.394, 0.608] knndm=0.486  expected~0.482
+      penalty vs LOCO           blocks=0.041 CI=[0.021, 0.059] knndm=0.039
+      penalty vs North America  blocks=0.335 CI=[0.265, 0.419] knndm=0.333  expected~0.246
+      penalty vs South America  blocks=0.030 CI=[0.012, 0.05] knndm=0.028  expected~0.089
+   RF     blocks r2=0.703 [0.642, 0.76] knndm r2=0.656 skill_blocks=0.710
+   XGB    blocks r2=0.670 [0.607, 0.73] knndm r2=0.628 skill_blocks=0.678
+
+== Europe n=233 var=0.198 oracle within r2=0.684
+   splits: {'blocks_42': (5, [30, 41, 51, 47, 64], 221.1), 'blocks_43': (5, [46, 31, 73, 43, 40], 215.0), 'blocks_44': (5, [69, 27, 46, 44, 47], 222.6), 'knndm_42': (5, [54, 67, 46, 42, 24], 103.3)}
+   knndm: {'q': 8, 'random_cv': False, 'W': 103.34708793186715, 'W_random': 345.68322397440784, 'fold_sizes': [54, 67, 46, 42, 24]}
+   GAM    blocks r2=0.648 [0.549, 0.717] knndm r2=0.651 skill_blocks=0.656
+   OLS-TP blocks r2=0.653 [0.556, 0.722] knndm r2=0.654 skill_blocks=0.661
+      penalty vs Asia           blocks=0.583 CI=[0.452, 0.728] knndm=0.585  expected~0.619
+      penalty vs LOCO           blocks=1.125 CI=[0.918, 1.41] knndm=1.126
+      penalty vs North America  blocks=1.723 CI=[1.426, 2.131] knndm=1.724  expected~1.820
+      penalty vs South America  blocks=0.265 CI=[0.201, 0.335] knndm=0.267  expected~0.202
+   RF     blocks r2=0.582 [0.48, 0.65] knndm r2=0.574 skill_blocks=0.592
+   XGB    blocks r2=0.561 [0.45, 0.64] knndm r2=0.556 skill_blocks=0.571
+
+== North America n=246 var=0.243 oracle within r2=0.743
+   splits: {'blocks_42': (5, [60, 42, 45, 42, 57], 217.6), 'blocks_43': (5, [59, 43, 52, 31, 61], 202.4), 'blocks_44': (5, [46, 48, 55, 37, 60], 205.1), 'knndm_42': (5, [46, 69, 61, 29, 41], 142.9)}
+   knndm: {'q': 25, 'random_cv': False, 'W': 142.89940366256502, 'W_random': 388.559979568139, 'fold_sizes': [46, 69, 61, 29, 41]}
+   GAM    blocks r2=0.734 [0.652, 0.783] knndm r2=0.664 skill_blocks=0.741
+   OLS-TP blocks r2=0.743 [0.662, 0.791] knndm r2=0.738 skill_blocks=0.749
+      penalty vs Asia           blocks=0.300 CI=[0.231, 0.399] knndm=0.295  expected~0.257
+      penalty vs Europe         blocks=1.567 CI=[1.293, 1.994] knndm=1.563  expected~1.481
+      penalty vs LOCO           blocks=0.665 CI=[0.51, 0.905] knndm=0.661
+      penalty vs South America  blocks=0.526 CI=[0.426, 0.699] knndm=0.522  expected~0.658
+   RF     blocks r2=0.671 [0.574, 0.735] knndm r2=0.650 skill_blocks=0.678
+   XGB    blocks r2=0.659 [0.56, 0.713] knndm r2=0.585 skill_blocks=0.667

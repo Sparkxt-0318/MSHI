@@ -1,0 +1,7 @@
+Asia                         n=386 q=10 random=False W=102.9 W_random=567.9 W_blocks=[368.2, 394.6, 362.9] Gij_med=543 Gj_med=31.9 Gjstar_med=537 sizes=[58, 59, 64, 82, 123] (0.2s)
+Europe                       n=233 q=8 random=False W=103.3 W_random=345.7 W_blocks=[221.1, 215.0, 222.6] Gij_med=265 Gj_med=36.7 Gjstar_med=386 sizes=[54, 67, 46, 42, 24] (0.1s)
+North America                n=246 q=25 random=False W=142.9 W_random=388.6 W_blocks=[217.6, 202.4, 205.1] Gij_med=294 Gj_med=36.0 Gjstar_med=391 sizes=[46, 69, 61, 29, 41] (0.2s)
+North America w/o Greenland  n=246 q=29 random=False W=144.9 W_random=347.6 W_blocks=[182.6, 172.1, 176.2] Gij_med=259 Gj_med=36.0 Gjstar_med=362 sizes=[60, 51, 46, 54, 35] (0.1s)
+North America: same kNNDM partition with and without Greenland in the domain: False
+Gij with Greenland: quantiles 50/75/90/95% = [294.0, 690.0, 1159.0, 1458.0] km
+Gij without Greenland: quantiles 50/75/90/95% = [259.0, 581.0, 1074.0, 1429.0] km

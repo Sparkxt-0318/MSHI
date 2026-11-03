@@ -1,0 +1,16 @@
+stages run by --stage all, in order: ['fetch_srdb', 'fetch_cosore', 'fetch_naturalearth', 'cosore_annual', 'cosore_annual_analysis', 'build_sites', 'site_diagnostics', 'build_sites_analysis', 'smoke_subset', 'fetch_worldclim', 'fetch_soilgrids', 'modis_points', 'features', 'clean_test', 'repro_checks', 'noise_ceiling', 'europe_geo_sensitivity', 'features_analysis', 'transfer_matrix', 'within_continent', 'aoa_sensitivity', 'us_r2']
+stages after repro_checks: ['noise_ceiling', 'europe_geo_sensitivity', 'features_analysis', 'transfer_matrix', 'within_continent', 'aoa_sensitivity', 'us_r2']
+Makefile `all` help: all:            ## every stage, in order (fetch -> sites -> features -> locked test re-run -> reproduction checks)
+Makefile `data` target: data:           ## pinned sources + COSORE annual + site build (no gridded features)
+	$(PY) -m mshi.run --stage fetch_srdb --stage fetch_cosore --stage fetch_naturalearth \
+	    --stage cosore_annual --stage build_sites --stage repro_checks
+README line 3: > **Status (2026-11-02): rebuild in progress — end of Phase 1.** This README is interim; it is
+data/derived/cosore_annual.csv: documented in data/derived/README.md: True
+data/derived/cosore_annual_analysis.csv: documented in data/derived/README.md: False
+data/derived/records_analysis.parquet: documented in data/derived/README.md: False
+data/derived/records_v3.parquet: documented in data/derived/README.md: True
+data/derived/sites_analysis_qc.parquet: documented in data/derived/README.md: False
+data/derived/sites_analysis_repo.parquet: documented in data/derived/README.md: False
+data/derived/sites_v3_qc.parquet: documented in data/derived/README.md: True
+data/derived/sites_v3_repo.parquet: documented in data/derived/README.md: True
+data/derived/README.md 'Produced by' line: ['Produced by `python -m mshi.run` (stages `cosore_annual`, `build_sites`). Regenerate with `make data`.']

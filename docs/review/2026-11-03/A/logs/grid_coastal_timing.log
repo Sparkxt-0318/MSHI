@@ -1,0 +1,6 @@
+/tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/A/scripts/grid_coastal_timing.py:17: UserWarning: Geometry is in a geographic CRS. Results from 'distance' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  near = out[out.distance(land) < 0.1]          # within ~0.1 deg (lon/lat units) of land
+cells inside subunits: 85699 ; outside but within 0.1 deg of land: 2993
+nearest-subunit search: 300 cells in 3.0 s (0.010 s per cell); matched within 50 km: 300
+estimated time for all 2993 such cells: 30 s

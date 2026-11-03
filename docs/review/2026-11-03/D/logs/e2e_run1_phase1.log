@@ -1,0 +1,25 @@
+07:28:01 INFO mshi: fetch_srdb         start
+07:28:01 INFO mshi: fetch_srdb         OK (0.0s)
+07:28:01 INFO mshi: fetch_cosore       start
+07:28:01 INFO mshi: fetch_cosore       OK (0.4s)
+07:28:01 INFO mshi: fetch_naturalearth start
+07:28:01 INFO mshi: fetch_naturalearth OK (0.0s)
+07:28:01 INFO mshi: cosore_annual      start
+07:28:42 INFO mshi.cosore: COSORE: 66 sites, 24 datasets unreadable/no data
+07:28:42 INFO mshi: cosore_annual      OK (40.2s)
+07:28:42 INFO mshi: cosore_annual_analysis start
+07:29:26 INFO mshi.cosore: COSORE (analysis rule): 39 sites, 124 of 629 ports kept
+07:29:26 INFO mshi: cosore_annual_analysis OK (44.3s)
+07:29:26 INFO mshi: build_sites        start
+07:29:30 INFO mshi.sites: sites: qc 971, repo 1225
+07:29:30 INFO mshi: build_sites        OK (4.0s)
+07:29:30 INFO mshi: site_diagnostics   start
+07:29:32 INFO mshi: site_diagnostics   OK (2.2s)
+07:29:32 INFO mshi: build_sites_analysis start
+07:29:41 INFO mshi.sites_analysis: analysis sites: qc 965, repo 1221
+07:29:41 INFO mshi: build_sites_analysis OK (8.4s)
+07:29:41 INFO mshi: fetch_worldclim    start
+07:29:41 WARNING mshi.rasters: WorldClim zip hash is not pinned in configs/v3.yaml; recorded 889b56070ffa36e30b529d2a97c1df17b7823edcab9d4d778dd4e58c075c74bb
+07:29:41 INFO mshi: fetch_worldclim    OK (0.3s)
+07:29:41 INFO mshi: fetch_soilgrids    start
+07:29:41 INFO mshi: fetch_soilgrids    OK (0.0s)

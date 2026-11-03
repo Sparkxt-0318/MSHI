@@ -1,0 +1,4 @@
+spherical/WGS84 - 1 over 200,000 random pairs 1-3000 km: min -0.447%  max 0.561%
+Asia: q sphere 10 vs WGS84 10; same split True; W 102.9 vs 103.0
+Europe: q sphere 8 vs WGS84 8; same split True; W 103.3 vs 103.5
+North America: q sphere 25 vs WGS84 25; same split True; W 142.9 vs 142.8

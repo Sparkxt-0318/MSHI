@@ -1,0 +1,14 @@
+FAIL      in site_build : noise_ceiling -> results/reproduction_check.json has {'FAIL': 1} in the site_ | gridded -> results/reproduction_check.json has {'FAIL': 1}
+STALE     in site_build : noise_ceiling -> results/reproduction_check.json has {'STALE': 1} in the site | gridded -> results/reproduction_check.json has {'STALE': 1}
+NOT RUN   in site_build : noise_ceiling -> results/reproduction_check.json has {'NOT RUN': 1} in the si | gridded -> results/reproduction_check.json has {'NOT RUN': 1}
+DEVIATION in site_build : noise_ceiling -> ok                                                           | gridded -> ok
+FAIL      in locked_test: noise_ceiling -> ok                                                           | gridded -> results/reproduction_check.json has {'FAIL': 1}
+STALE     in locked_test: noise_ceiling -> ok                                                           | gridded -> results/reproduction_check.json has {'STALE': 1}
+NOT RUN   in locked_test: noise_ceiling -> ok                                                           | gridded -> results/reproduction_check.json has {'NOT RUN': 1}
+DEVIATION in locked_test: noise_ceiling -> ok                                                           | gridded -> ok
+FAIL      in npp        : noise_ceiling -> ok                                                           | gridded -> results/reproduction_check.json has {'FAIL': 1}
+STALE     in npp        : noise_ceiling -> ok                                                           | gridded -> results/reproduction_check.json has {'STALE': 1}
+NOT RUN   in npp        : noise_ceiling -> ok                                                           | gridded -> results/reproduction_check.json has {'NOT RUN': 1}
+DEVIATION in npp        : noise_ceiling -> ok                                                           | gridded -> ok
+rows without group keys, NOT RUN npp: noise -> results/reproduction_check.json has {'NOT RUN': 1} in the site_build r
+table from another config: noise -> stale: results/reproduction_check.json: produced with a different config; re-run the stage

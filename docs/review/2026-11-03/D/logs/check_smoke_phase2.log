@@ -1,0 +1,7 @@
+qc smoke subset by continent_geo: {'Asia': 17, 'Europe': 15, 'North America': 9, 'Oceania': 5, 'South America': 2, 'Africa': 2}
+repo smoke subset by continent_geo: {'Asia': 20, 'North America': 15, 'Europe': 11, 'Oceania': 2, 'South America': 2}
+noise_ceiling: ok {'exploratory': True, 'variant': 'qc', 'groups': {'Asia': {'status': 'ok', 'independent_study': 0.17921723207986962, 'same_study': 0.7641372501071024, 'site_mean': 0.22201151790820675}, 'Europe': {'st
+transfer_matrix: ok {'n_main': 0, 'n_supplementary': 24, 'n_skipped': 6}
+within_continent: ok {'continents': [], 'n_skipped': 6}
+aoa_sensitivity: ok {'primary': {'train': 'all', 'threshold': 'whisker_max', 'weights': 'permutation', 'area_frac_outside': 0.35079304185038296, 'area_frac_outside_excluding_ice_sheets': 0.28290480336894025}, 'n_variants
+us_r2: ok {'n_rows': 0, 'n_target_effects': 0, 'n_skipped': 8}

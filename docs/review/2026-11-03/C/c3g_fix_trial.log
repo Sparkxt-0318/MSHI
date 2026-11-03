@@ -1,0 +1,8 @@
+fix A: retry status counts {'ok': 200}
+   share_site           CI [0.4454, 0.8352] (n 200)
+   ceiling_same_study   CI [0.4454, 0.8352] (n 200)
+   ceiling_site_mean    CI [0.6099, 0.9167] (n 200)
+fix A+B: retry + bounded polish status counts {'ok': 200}
+   share_site           CI [0.4454, 0.8352] (n 200)
+   ceiling_same_study   CI [0.4454, 0.8352] (n 200)
+   ceiling_site_mean    CI [0.6099, 0.9167] (n 200)

@@ -1,0 +1,52 @@
+random boxes: 400 cases; max |diff| 0.101 km; 99th pct 0.056 km; median 0.0000 km
+   |diff| 0.101 km  geo 123.195  ref 123.094  pt (-77.235, -51.397) kind 3  box (-77.598, -53.28, -76.638, -52.503)
+   |diff| 0.080 km  geo 131.695  ref 131.775  pt (-122.133, 34.700) kind 3  box (-122.44, 33.146, -121.561, 33.512)
+   |diff| 0.071 km  geo 42.507  ref 42.436  pt (178.892, -23.768) kind 2  box (178.467, -24.518, 179.359, -24.151)
+   |diff| 0.061 km  geo 99.732  ref 99.671  pt (-179.647, 20.932) kind 2  box (-179.918, 21.832, -178.955, 22.412)
+   |diff| 0.056 km  geo 136.054  ref 136.111  pt (3.597, -47.140) kind 0  box (3.173, -45.915, 3.867, -45.508)
+   |diff| 0.053 km  geo 69.104  ref 69.156  pt (33.953, -38.161) kind 3  box (33.793, -37.538, 34.642, -37.352)
+   max relative error by kind (0 random, 1 poles, 2 antimeridian, 3 random): {3: 0.00082, 2: 0.00227, 0: 0.00131, 1: 9e-05}
+max_km=50 cut-off disagreements (beyond 0.5 km of the limit): 0
+seconds 1.2
+Natural Earth countries: 192 points; max |diff| 0.046 km; median 0.0000 km; seconds 15
+   |diff| 0.046 km  geo 15.479  ref 15.525  Greenland (-24.938, 70.452)
+   |diff| 0.041 km  geo 44.892  ref 44.852  United States of America (-83.795, 29.366)
+   |diff| 0.021 km  geo 46.605  ref 46.584  Vietnam (105.976, 8.846)
+   |diff| 0.015 km  geo 2.194  ref 2.210  Greenland (-18.294, 77.689)
+   |diff| 0.015 km  geo 1.926  ref 1.940  New Zealand (166.742, -45.425)
+records 85-115 km from their reported country: rec_id, Country, geo_country, geodesic_km (pipeline), reference km, f_coord, reference > 100
+   ('srdb_3051', 'India', 'Pakistan', 95.58946734310796, 95.58946734310729, False, False) 
+   ('srdb_3052', 'India', 'Pakistan', 95.58946734310796, 95.58946734310729, False, False) 
+   ('srdb_3053', 'India', 'Pakistan', 95.58946734310796, 95.58946734310729, False, False) 
+   ('srdb_3054', 'India', 'Pakistan', 95.58946734310796, 95.58946734310729, False, False) 
+   ('srdb_3055', 'India', 'Pakistan', 95.58946734310796, 95.58946734310729, False, False) 
+   ('srdb_3056', 'India', 'Pakistan', 95.58946734310796, 95.58946734310729, False, False) 
+   ('srdb_7329', 'China', 'Vietnam', 96.04320737126963, 96.04320737126963, False, False) 
+   ('srdb_10004', 'Indonesia', 'Malaysia', 85.7540402159491, 85.75404021594964, False, False) 
+   ('srdb_10005', 'Indonesia', 'Malaysia', 85.7540402159491, 85.75404021594964, False, False) 
+   ('srdb_10006', 'Indonesia', 'Malaysia', 85.7540402159491, 85.75404021594964, False, False) 
+   ('srdb_10007', 'Indonesia', 'Malaysia', 85.7540402159491, 85.75404021594964, False, False) 
+   ('srdb_10008', 'Indonesia', 'Malaysia', 85.7540402159491, 85.75404021594964, False, False) 
+   ('srdb_10009', 'Indonesia', 'Malaysia', 85.7540402159491, 85.75404021594964, False, False) 
+   ('srdb_10010', 'Indonesia', 'Malaysia', 85.7540402159491, 85.75404021594964, False, False) 
+   ('srdb_10011', 'Indonesia', 'Malaysia', 85.7540402159491, 85.75404021594964, False, False) 
+   ('srdb_10012', 'Indonesia', 'Malaysia', 85.7540402159491, 85.75404021594964, False, False) 
+   ('srdb_10013', 'Indonesia', 'Malaysia', 85.7540402159491, 85.75404021594964, False, False) 
+   ('srdb_10014', 'Indonesia', 'Malaysia', 85.7540402159491, 85.75404021594964, False, False) 
+   ('srdb_11712', 'Italy', 'Malta', 98.06018484593967, 98.06018484594003, False, False) 
+   ('srdb_11713', 'Italy', 'Malta', 97.99433642315194, 97.99433642315194, False, False) 
+   ('srdb_11714', 'Italy', 'Malta', 98.16000690520637, 98.16000690520603, False, False) 
+  nearest (-9.65, 38.7): mshi Portugal 15.68 km; brute force Portugal 15.68 km
+  nearest (14.0, 36.2): mshi Malta 22.44 km; brute force Malta 22.44 km
+  nearest (-16.0, 28.6): mshi Canary Islands 12.38 km; brute force Canary Islands 12.38 km
+  nearest (179.95, -16.5): mshi Fiji 3.00 km; brute force Fiji 3.00 km
+  nearest (-179.95, -16.6): mshi Fiji 8.38 km; brute force Fiji 8.39 km
+  nearest (-171.0, 65.6): mshi Russia 4.48 km; brute force Russia 4.48 km
+  nearest (179.5, 71.2): mshi Russia 0.00 km; brute force Russia 0.00 km
+  nearest (-61.0, 14.9): mshi Martinique 8.61 km; brute force Martinique 8.61 km
+  nearest (-52.5, 5.6): mshi French Guiana 45.93 km; brute force French Guiana 45.94 km
+  nearest (100.0, 1.0): mshi Indonesia 0.00 km; brute force Indonesia 0.00 km
+  nearest (-155.0, 19.0): mshi Hawaii 35.66 km; brute force Hawaii 35.66 km
+  nearest (19.0, 54.6): mshi Poland 13.47 km; brute force Poland 13.47 km
+  nearest (-70.5, -54.9): mshi Chile 1.93 km; brute force Chile 1.93 km
+  nearest (166.4, -78.0): mshi Antarctica 12.03 km; brute force Antarctica 12.03 km

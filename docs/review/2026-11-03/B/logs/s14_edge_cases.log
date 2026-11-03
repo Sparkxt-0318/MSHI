@@ -1,0 +1,4 @@
+(a) duplicates: port q 13 sizes [5, 4, 4, 4, 3] W 422.33 | naive-R q 13 W 422.33 same partition True
+(b) k clusters of n/k: port q 5 sizes [2, 2, 2, 2, 2] | R: ran
+(c) n = k+2: 5 [2, 2, 1, 1, 1] False
+(c') n = k+1: kNNDM needs at least k + 2 = 7 training sites, got 6

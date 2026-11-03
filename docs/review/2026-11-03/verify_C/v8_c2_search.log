@@ -1,0 +1,36 @@
+== HEAD
+ec43c6c geographic continent: Russia east of the antimeridian is Asia; open-ocean Americas subunits by sub-region
+== every line of the brief that mentions a ceiling, ICC, REML, a formula, J_i or a site mean:
+20:- **Exploratory transfer results.** The transfer penalty between continents is small. The binding limit is that climate explains little within any continent (R² 0.06–0.45) against a same-site agreement of ICC 0.62–0.82.
+114:3. **Noise ceiling.** Rerun E1 and N3 with a 3-level REML model (site / study within site / record) by continent. Report both ceilings: for a new record from the same study, and for one from an independent study.
+171:5. Continent transfer matrix, with within-continent benchmark and noise ceilings.
+== the handoff scripts' ceiling formulas (E1, N3):
+docs/handoff/scripts/exp_noise_ceiling.py:1:"""Exploratory E1: noise ceiling for site-level Rs prediction from within-site replicate records (SRDB v5 + COSORE).
+docs/handoff/scripts/exp_noise_ceiling.py:4:rel_i = s2b/(s2b + s2w/n_i); expected ceiling R2 over a test set = mean signal variance / mean total variance.
+docs/handoff/scripts/exp_noise_ceiling.py:43:    # ceiling for the actual site-mean target (all sites, incl. singletons)
+docs/handoff/scripts/exp_noise_ceiling.py:45:    sig = vc["s2_between"]; noise = vc["s2_within"] / n_i
+docs/handoff/scripts/exp_noise_ceiling.py:46:    R[tag]["ceiling_r2_site_mean_target"] = float(sig / (sig + noise.mean()))
+docs/handoff/scripts/exp_noise_ceiling.py:47:    R[tag]["ceiling_r2_single_record_target"] = vc["icc_single_record"]
+docs/handoff/scripts/exp_reproducibility.py:6:and the 'reproducibility ceiling': share of variance a perfect site-level model could explain for a record
+docs/handoff/scripts/exp_reproducibility.py:65:                                             ceiling_independent_study=round(s2_site / tot, 3),
+docs/handoff/scripts/exp_reproducibility.py:66:                                             ceiling_same_study=round((s2_site + s2_study) / tot, 3))
+== tracked text files mentioning J_i / equal-study weights (whole repo, binaries excluded):
+docs/DECISIONS.md:862:equal-study-weight formula, s²_study/J_i + s²_record/n_i, is reported alongside and differs by at most about
+mshi/analysis/noise_ceiling.py:49:  ``site_mean_equal_study_weights`` puts s2_study / J_i (J_i studies) in place of the first term (the brief's formula):
+mshi/analysis/noise_ceiling.py:130:    "ceiling_site_mean_equal_study_weights": "s2_site / (s2_site + mean_i (s2_study / J_i + s2_record / n_i)), J_i "
+mshi/analysis/noise_ceiling.py:140:             "ceiling_site_mean_equal_study_weights", "mean_noise_site_mean", "check_site_mean_var_diff",
+mshi/analysis/noise_ceiling.py:180:    n_study: np.ndarray        # (S,) studies per site (J_i)
+mshi/analysis/noise_ceiling.py:184:    study_local: np.ndarray    # (N,) the record's study index within its site, 0 .. J_i - 1
+mshi/analysis/noise_ceiling.py:402:            "ceiling_site_mean_equal_study_weights": s2_site / (s2_site + noise_eq.mean()),
+mshi/analysis/noise_ceiling.py:546:                                                                   "ceiling_site_mean_equal_study_weights")},
+results/noise_ceiling.json:33:  "ceiling_site_mean_equal_study_weights": "s2_site / (s2_site + mean_i (s2_study / J_i + s2_record / n_i)), J_i studies at site i (the brief's formula; exact for equal m_ij)",
+results/noise_ceiling.json:83:    "site_mean_equal_study_weights": {
+results/noise_ceiling.json:310:    "site_mean_equal_study_weights": {
+results/noise_ceiling.json:537:    "site_mean_equal_study_weights": {
+results/noise_ceiling.json:764:    "site_mean_equal_study_weights": {
+results/noise_ceiling.json:991:    "site_mean_equal_study_weights": {
+results/noise_ceiling.json:1218:    "site_mean_equal_study_weights": {
+results/noise_ceiling.json:1448:    "site_mean_equal_study_weights": {
+tests/test_noise_ceiling.py:193:    assert out["ceiling_site_mean_equal_study_weights"] == pytest.approx(0.3 / (0.3 + 0.325 / 3))
+== the author's Checkpoint-1 decisions (D-C1-*) mentioning the noise ceiling or a formula:
+(none)

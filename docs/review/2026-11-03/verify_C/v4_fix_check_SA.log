@@ -1,0 +1,11 @@
+== South America: candidate refits with a fallback method: 189
+ fix A: status {'ok': 200}; replicates whose kept fit is below my REML max by > 1e-3: 2 [(58, 0.0333), (197, 0.0053)]; max gap 3.33e-02
+   share_site           CI [0.4454, 0.8352] (n 200) | committed [0.4712, 0.8353] (n 199)
+   share_study          CI [0.0, 0.0] (n 200) | committed [0.0, 0.0021] (n 199)
+   ceiling_same_study   CI [0.4454, 0.8352] (n 200) | committed [0.4746, 0.8353] (n 199)
+   ceiling_site_mean    CI [0.6099, 0.9167] (n 200) | committed [0.6401, 0.9168] (n 199)
+ fix A+B: status {'ok': 200}; replicates whose kept fit is below my REML max by > 1e-3: 0 []; max gap 3.25e-10
+   share_site           CI [0.4454, 0.8352] (n 200) | committed [0.4712, 0.8353] (n 199)
+   share_study          CI [0.0, 0.0] (n 200) | committed [0.0, 0.0021] (n 199)
+   ceiling_same_study   CI [0.4454, 0.8352] (n 200) | committed [0.4746, 0.8353] (n 199)
+   ceiling_site_mean    CI [0.6099, 0.9167] (n 200) | committed [0.6401, 0.9168] (n 199)

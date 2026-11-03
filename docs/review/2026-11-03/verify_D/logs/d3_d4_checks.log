@@ -1,0 +1,13 @@
+us_r2              skipped: reproduction gate closed (repro_checks: results/reproduction_check.json has {'NOT RUN': 10})
+stages not completed: {'us_r2': "skipped: reproduction gate closed (repro_checks: results/reproduction_check.json has {'NOT RUN': 10})"}
+README:25-27: upstream stages, e.g. `make all`), or a stage was skipped because of one of these. Stages of later phases run only after a complete, passing reproduction table: current, and no FAIL, STALE or NOT RUN row (smoke runs do not apply this gate).
+README:59-61: Stages after `repro_checks` (later phases; all exploratory) run only if the reproduction rows they build on passed: a stage that uses the gridded features needs the whole table, the noise ceiling only the site-build rows (D-P2-5).
+committed reproduction_check summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 17, 'STALE': 0}
+committed run log noise_ceiling: 2026-11-03T06:10:24+00:00 ok invocation ['all'] commit 22dec9465bbe3387dce955ba0d2705066ad3387d exploratory True
+committed results/noise_ceiling.json exists; exploratory = True
+sandbox, committed rows (17 PASS, 10 NOT RUN): exit 2; ran ['noise_ceiling']; statuses {'noise_ceiling': 'ok', 'us_r2': "skipped: reproduction gate closed (repro_checks: results/reproduction_check.json has {'NOT RUN': 10})"}
+tests/test_us_r2.py:58-60: def settings(data: dict, **us) -> None: | """Test settings: the config keys this module needs that configs/v3.yaml does not have yet (train_continent, | test_continent, xgb_seed_spread; a short seed spread here), and fewer bootstrap replicates."""
+configs/v3.yaml phase2.us_r2 keys: ['asia_box', 'learners', 'test_continent', 'train_continent', 'us_box', 'xgb_seed_spread']
+has train_continent/test_continent/xgb_seed_spread: {'train_continent': 'Asia', 'test_continent': 'North America', 'xgb_seed_spread': [0, 19]}
+Settings.from_cfg(committed config) OK: Asia -> North America seeds (0, 19) bootstrap n 2000
+what settings() changes in phase2.us_r2 (committed, test): {'xgb_seed_spread': ([0, 19], [0, 2])} | bootstrap n: 2000 -> 200

@@ -1,0 +1,42 @@
+== South America: replicates 200; ok 199; failed 1; unidentified 0
+  llf gap (own REML max - kept): max 0.1733; > 1e-3 in 7 replicates; > 0.1 in 2
+   b=  2 chosen interior  kept s2 [0.0845 0.0011 0.1176] llf -69.7420 | own s2 [0.086  0.     0.1174] llf -69.6903
+        cand interior  usable True conv True llf -69.7419864024784 s2 (0.08448396221176672, 0.0010512979964282841, 0.11756167746900034) err None
+        cand no_study  usable False conv True llf inf s2 (0.0, 0.0, 0.0881526226658691) err None
+        cand no_site   usable False conv True llf inf s2 (0.0, 0.0, 0.08676401053358312) err None
+   b= 19 chosen interior  kept s2 [0.137  0.001  0.1517] llf -92.2176 | own s2 [0.1245 0.     0.1549] llf -92.0780
+        cand interior  usable True conv True llf -92.21761806185577 s2 (0.13696124059648576, 0.0009807191332740991, 0.1516910174680369) err None
+        cand no_study  usable False conv True llf inf s2 (0.0, 0.0, 0.11734866568347312) err None
+        cand no_site   usable False conv None llf None s2 (None, None, None) err LinAlgError: Singular matrix
+   b= 29 chosen interior  kept s2 [6.760e-02 2.000e-04 2.071e-01] llf -95.9750 | own s2 [0.0666 0.     0.2076] llf -95.9711
+        cand interior  usable True conv True llf -95.9750174920469 s2 (0.0675522522135048, 0.00017427333038379624, 0.20711540106095527) err None
+        cand no_study  usable False conv None llf None s2 (None, None, None) err LinAlgError: Singular matrix
+        cand no_site   usable False conv None llf None s2 (None, None, None) err LinAlgError: Singular matrix
+   b= 58 chosen interior  kept s2 [2.226e-01 1.000e-04 6.110e-02] llf -46.3688 | own s2 [0.2189 0.005  0.0601] llf -46.3355
+        cand interior  usable True conv True llf -46.368800820727074 s2 (0.22256924935694844, 0.00012229727345270457, 0.061146511852170224) err None
+        cand no_study  usable True conv True llf -46.37041085244982 s2 (0.22163399947958298, 0.0, 0.061277461400481514) err None
+        cand no_site   usable True conv True llf -51.78823638010931 s2 (0.0, 0.2065254664573681, 0.05940028156805222) err None
+   b=172 chosen interior  kept s2 [0.2125 0.0023 0.2036] llf -92.3435 | own s2 [0.2017 0.     0.2067] llf -92.2579
+        cand interior  usable True conv True llf -92.343458789647 s2 (0.212536300230458, 0.002348778854190665, 0.2036466636533556) err None
+        cand no_study  usable False conv True llf inf s2 (0.0, 0.0, 0.15530528450918774) err None
+        cand no_site   usable False conv True llf inf s2 (0.0, 0.0, 0.15052498166588238) err None
+   b=175 chosen interior  kept s2 [0.1322 0.0006 0.1676] llf -112.4324 | own s2 [0.1123 0.     0.1725] llf -112.2591
+        cand interior  usable True conv True llf -112.43243311295555 s2 (0.13215930010697557, 0.000607014388288124, 0.16762676392579645) err None
+        cand no_study  usable False conv True llf inf s2 (0.0, 0.0, 0.13436612505846882) err None
+        cand no_site   usable False conv True llf inf s2 (0.0, 0.0, 0.12828532719476649) err None
+   b=197 chosen interior  kept s2 [0.2655 0.001  0.0685] llf -49.0103 | own s2 [0.2629 0.0036 0.0681] llf -49.0049
+        cand interior  usable True conv True llf -49.01025102283904 s2 (0.2654797018410404, 0.0009734773868175719, 0.0684982670096052) err None
+        cand no_study  usable True conv True llf -49.01491706139484 s2 (0.26481279090573634, 0.0, 0.06880702709756485) err None
+        cand no_site   usable True conv True llf -54.13741405599518 s2 (0.0, 0.26408691825576003, 0.06747217384513457) err None
+   FAILED b=33: own max s2 [0.1055 0.     0.1236] llf -58.9224
+        cand interior  usable False conv False llf -59.11649405130001 s2 (0.10692841151806769, 0.0036542188303561205, 0.12197933117464457) err None
+        cand no_study  usable False conv True llf inf s2 (0.0, 0.0, 0.09042126853177172) err None
+        cand no_site   usable False conv True llf inf s2 (0.0, 0.0, 0.08513644658284658) err None
+  share_site CI: stage [0.4712324097920853, 0.8353122143760014] | recomputed from kept fits [0.471232, 0.835312] | own REML maxima [0.44542, 0.835245]
+  same_study CI: stage [0.47455021821436927, 0.8353122144200336] | kept [0.47455, 0.835312] | own [0.44542, 0.835245]
+
+real	17m43.945s
+user	16m54.630s
+sys	0m1.383s
+
+[exited with code 0]

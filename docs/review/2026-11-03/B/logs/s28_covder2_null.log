@@ -1,0 +1,2 @@
+bio01: eigenvalues of cov_der2 = [-2.220e-18  3.764e-03  1.831e-02  5.768e-02  7.592e-02]; penalty of the exact linear trend c'Cc = -1.12e-15 (relative to max eigenvalue x |c|^2: -1.6e-17)
+ln bio12: eigenvalues of cov_der2 = [1.706e-16 1.260e+00 6.809e+00 1.487e+01 3.369e+01]; penalty of the exact linear trend c'Cc = -3.20e-14 (relative to max eigenvalue x |c|^2: -4.7e-17)

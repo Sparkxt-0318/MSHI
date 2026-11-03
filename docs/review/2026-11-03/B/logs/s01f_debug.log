@@ -1,0 +1,4 @@
+port d_num: 2850  max over all positions: 2850  m*n: 2850
+R-literal stat*m*n: 2850.000000000004  p: 0.0  port p: 1.00494839284972e-31
+all-x-first path reaches D+ = 2850 -> the extreme path; m, n = 57 50
+1/choose(m+n, m) = 1.0049483928497206e-31

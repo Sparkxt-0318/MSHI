@@ -1,0 +1,23 @@
+South America point fit: stage kept no_study s2 (0.248035, 0.000000, 0.119115) statsmodels llf -79.496624; my REML at those s2 -79.496624; my max s2 [0.24803, 0.0, 0.119116] llf -79.496624
+== South America: 200 replicates in 1352 s; ok 199 failed 1 unidentified 0
+  replicates with a candidate llf=+inf: 17 (b = [1, 2, 19, 33, 34, 60, 76, 79, 100, 127, 152, 162, 172, 175, 177, 181, 187])
+  replicates with a candidate that raised: 10 (b = [19, 29, 46, 101, 104, 110, 111, 145, 159, 189])
+  kept fit below my REML max by > 1e-3: 7, > 0.05: 4, max gap 0.1733; my max below kept by > 1e-6 (my optimiser worse): 0 (min gap 3.87e-12)
+   b=  2 kept interior s2 [0.0845, 0.0011, 0.1176] llf(mine) -69.7420 (sm -69.7420) | my max s2 [0.086, 0.0, 0.1174] llf -69.6903 | share_site kept 0.4160 max 0.4228; dropped/inf ['no_study', 'no_site'] raised []
+   b= 19 kept interior s2 [0.137, 0.001, 0.1517] llf(mine) -92.2176 (sm -92.2176) | my max s2 [0.1245, 0.0, 0.1549] llf -92.0780 | share_site kept 0.4729 max 0.4456; dropped/inf ['no_study'] raised ['no_site']
+   b= 29 kept interior s2 [0.0676, 0.0002, 0.2071] llf(mine) -95.9750 (sm -95.9750) | my max s2 [0.0666, 0.0, 0.2076] llf -95.9711 | share_site kept 0.2458 max 0.2429; dropped/inf [] raised ['no_study', 'no_site']
+   b= 58 kept interior s2 [0.2226, 0.0001, 0.0611] llf(mine) -46.3688 (sm -46.3688) | my max s2 [0.2189, 0.005, 0.0601] llf -46.3355 | share_site kept 0.7841 max 0.7709; dropped/inf [] raised []
+   b=172 kept interior s2 [0.2125, 0.0023, 0.2036] llf(mine) -92.3435 (sm -92.3435) | my max s2 [0.2017, 0.0, 0.2067] llf -92.2579 | share_site kept 0.5078 max 0.4938; dropped/inf ['no_study', 'no_site'] raised []
+   b=175 kept interior s2 [0.1322, 0.0006, 0.1676] llf(mine) -112.4324 (sm -112.4324) | my max s2 [0.1123, 0.0, 0.1725] llf -112.2591 | share_site kept 0.4400 max 0.3943; dropped/inf ['no_study', 'no_site'] raised []
+   b=197 kept interior s2 [0.2655, 0.001, 0.0685] llf(mine) -49.0103 (sm -49.0103) | my max s2 [0.2629, 0.0036, 0.0681] llf -49.0049 | share_site kept 0.7926 max 0.7858; dropped/inf [] raised []
+   FAILED b=33: my max s2 [0.1055, 0.0, 0.1236] llf -58.9224 share_site 0.4605; candidates interior: conv False llf -59.11649405130001 err None; no_study: conv True llf inf err None; no_site: conv True llf inf err None
+  share_site                             committed [0.4712, 0.8353] n 199 | stage recomputed [0.4712, 0.8353] n 199 | my REML maxima [0.4454, 0.8352] n 200 | diff lo -0.0258 hi -0.0001
+  share_study                            committed [0.0, 0.0021] n 199 | stage recomputed [0.0, 0.0021] n 199 | my REML maxima [0.0, 0.0] n 200 | diff lo +0.0000 hi -0.0021
+  ceiling_independent_study              committed [0.4712, 0.8353] n 199 | stage recomputed [0.4712, 0.8353] n 199 | my REML maxima [0.4454, 0.8352] n 200 | diff lo -0.0258 hi -0.0001
+  ceiling_same_study                     committed [0.4746, 0.8353] n 199 | stage recomputed [0.4746, 0.8353] n 199 | my REML maxima [0.4454, 0.8352] n 200 | diff lo -0.0291 hi -0.0001
+  ceiling_site_mean                      committed [0.6401, 0.9168] n 199 | stage recomputed [0.6401, 0.9168] n 199 | my REML maxima [0.6099, 0.9167] n 200 | diff lo -0.0303 hi -0.0001
+  ceiling_site_mean_equal_study_weights  committed [0.6401, 0.9168] n 199 | stage recomputed [0.6401, 0.9168] n 199 | my REML maxima [0.6099, 0.9167] n 200 | diff lo -0.0303 hi -0.0001
+
+real	22m34.485s
+user	20m48.909s
+sys	1m29.778s

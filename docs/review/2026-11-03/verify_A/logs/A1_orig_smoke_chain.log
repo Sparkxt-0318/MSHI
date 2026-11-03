@@ -1,0 +1,487 @@
+08:43:33 INFO mshi: build_sites        uses existing outputs of fetch_srdb, cosore_annual, fetch_naturalearth (not requested; checked for currency)
+08:43:33 INFO mshi: build_sites        start
+08:43:37 INFO mshi.sites: sites: qc 971, repo 1225
+08:43:37 INFO mshi: build_sites        OK (4.3s)
+08:43:37 INFO mshi: build_sites_analysis uses existing outputs of fetch_srdb, cosore_annual_analysis, fetch_naturalearth (not requested; checked for currency)
+08:43:37 INFO mshi: build_sites_analysis start
+08:43:46 INFO mshi.sites_analysis: analysis sites: qc 965, repo 1221
+08:43:46 INFO mshi: build_sites_analysis OK (8.4s)
+08:43:46 INFO mshi: smoke_subset       start
+08:43:46 INFO mshi: smoke_subset       OK (0.1s)
+08:43:46 INFO mshi: features           uses existing outputs of build_sites, fetch_worldclim, fetch_soilgrids, modis_points (not requested; checked for currency)
+08:43:46 INFO mshi: features           start
+08:43:47 INFO mshi: features           OK (0.6s)
+08:43:47 INFO mshi: clean_test         not part of smoke runs (locked test and targets need the full site set)
+08:43:47 INFO mshi: repro_checks       not part of smoke runs (locked test and targets need the full site set)
+08:43:47 INFO mshi: noise_ceiling      uses existing outputs of build_sites_analysis (not requested; checked for currency)
+08:43:47 INFO mshi: noise_ceiling      smoke run: reproduction gate not applied (smoke outputs are not results)
+08:43:47 INFO mshi: noise_ceiling      start
+08:43:55 INFO mshi.noise_ceiling: noise_ceiling: 15 point fits in 0.6 s; 144 bootstrap fits in 7.1 s (20.29 fits/s, n_jobs 1)
+08:43:57 INFO fontTools.subset: maxp pruned
+08:43:57 INFO fontTools.subset: cmap pruned
+08:43:57 INFO fontTools.subset: post pruned
+08:43:57 INFO fontTools.subset: CFF  pruned
+08:43:57 INFO fontTools.subset: GPOS pruned
+08:43:57 INFO fontTools.subset: GSUB pruned
+08:43:57 INFO fontTools.subset: Added .notdef to subset
+08:43:57 INFO fontTools.subset: Closing glyph list over 'GSUB': 57 glyphs before
+08:43:57 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'C', 'D', 'E', 'I', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'V', 'a', 'asterisk', 'b', 'c', 'colon', 'comma', 'd', 'e', 'eight', 'f', 'five', 'four', 'g', 'h', 'hyphen', 'i', 'l', 'm', 'n', 'nine', 'o', 'one', 'p', 'parenleft.case', 'parenright.case', 'percent', 'period', 'r', 's', 'seven', 'six', 'slash', 'space', 't', 'three', 'two', 'two.sups', 'u', 'v', 'w', 'x', 'y', 'zero']
+08:43:57 INFO fontTools.subset: Glyph IDs:   [0, 2, 73, 84, 95, 197, 282, 293, 301, 322, 376, 385, 398, 457, 508, 579, 587, 598, 615, 648, 659, 671, 690, 738, 768, 775, 792, 845, 854, 873, 891, 917, 982, 986, 995, 1000, 1343, 1344, 1345, 1347, 1348, 1349, 1351, 1352, 1353, 1354, 1448, 1449, 1457, 1461, 1503, 1504, 1507, 1549, 1607, 1738, 1771]
+08:43:57 INFO fontTools.subset: Closed glyph list over 'GSUB': 84 glyphs after
+08:43:57 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'C', 'D', 'E', 'I', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'V', 'a', 'asterisk', 'asterisk.case', 'b', 'c', 'colon', 'colon.case', 'comma', 'd', 'e', 'eight', 'eight.dnom', 'eight.numr', 'f', 'five', 'five.dnom', 'five.numr', 'four', 'four.dnom', 'four.numr', 'fraction', 'g', 'h', 'hyphen', 'hyphen.case', 'i', 'i.numr', 'l', 'm', 'multiply.case', 'n', 'n.numr', 'nine', 'nine.dnom', 'nine.numr', 'o', 'one', 'one.dnom', 'one.numr', 'p', 'parenleft.case', 'parenright.case', 'percent', 'period', 'r', 's', 'seven', 'seven.dnom', 'seven.numr', 'six', 'six.dnom', 'six.numr', 'slash', 'space', 't', 'three', 'three.dnom', 'three.numr', 'two', 'two.dnom', 'two.numr', 'two.sups', 'u', 'v', 'w', 'x', 'y', 'zero', 'zero.dnom', 'zero.numr']
+08:43:57 INFO fontTools.subset: Glyph IDs:   [0, 2, 73, 84, 95, 197, 282, 293, 301, 322, 376, 385, 398, 457, 508, 579, 587, 598, 615, 648, 659, 671, 690, 738, 768, 775, 792, 845, 854, 873, 891, 917, 982, 986, 995, 1000, 1343, 1344, 1345, 1347, 1348, 1349, 1351, 1352, 1353, 1354, 1448, 1449, 1457, 1461, 1473, 1503, 1504, 1507, 1508, 1539, 1549, 1550, 1564, 1565, 1607, 1675, 1676, 1678, 1680, 1681, 1683, 1685, 1686, 1688, 1689, 1690, 1697, 1699, 1701, 1702, 1704, 1706, 1707, 1709, 1710, 1711, 1738, 1771]
+08:43:57 INFO fontTools.subset: Closing glyph list over 'CFF ': 84 glyphs before
+08:43:57 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'C', 'D', 'E', 'I', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'V', 'a', 'asterisk', 'asterisk.case', 'b', 'c', 'colon', 'colon.case', 'comma', 'd', 'e', 'eight', 'eight.dnom', 'eight.numr', 'f', 'five', 'five.dnom', 'five.numr', 'four', 'four.dnom', 'four.numr', 'fraction', 'g', 'h', 'hyphen', 'hyphen.case', 'i', 'i.numr', 'l', 'm', 'multiply.case', 'n', 'n.numr', 'nine', 'nine.dnom', 'nine.numr', 'o', 'one', 'one.dnom', 'one.numr', 'p', 'parenleft.case', 'parenright.case', 'percent', 'period', 'r', 's', 'seven', 'seven.dnom', 'seven.numr', 'six', 'six.dnom', 'six.numr', 'slash', 'space', 't', 'three', 'three.dnom', 'three.numr', 'two', 'two.dnom', 'two.numr', 'two.sups', 'u', 'v', 'w', 'x', 'y', 'zero', 'zero.dnom', 'zero.numr']
+08:43:57 INFO fontTools.subset: Glyph IDs:   [0, 2, 73, 84, 95, 197, 282, 293, 301, 322, 376, 385, 398, 457, 508, 579, 587, 598, 615, 648, 659, 671, 690, 738, 768, 775, 792, 845, 854, 873, 891, 917, 982, 986, 995, 1000, 1343, 1344, 1345, 1347, 1348, 1349, 1351, 1352, 1353, 1354, 1448, 1449, 1457, 1461, 1473, 1503, 1504, 1507, 1508, 1539, 1549, 1550, 1564, 1565, 1607, 1675, 1676, 1678, 1680, 1681, 1683, 1685, 1686, 1688, 1689, 1690, 1697, 1699, 1701, 1702, 1704, 1706, 1707, 1709, 1710, 1711, 1738, 1771]
+08:43:57 INFO fontTools.subset: Closed glyph list over 'CFF ': 84 glyphs after
+08:43:57 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'C', 'D', 'E', 'I', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'V', 'a', 'asterisk', 'asterisk.case', 'b', 'c', 'colon', 'colon.case', 'comma', 'd', 'e', 'eight', 'eight.dnom', 'eight.numr', 'f', 'five', 'five.dnom', 'five.numr', 'four', 'four.dnom', 'four.numr', 'fraction', 'g', 'h', 'hyphen', 'hyphen.case', 'i', 'i.numr', 'l', 'm', 'multiply.case', 'n', 'n.numr', 'nine', 'nine.dnom', 'nine.numr', 'o', 'one', 'one.dnom', 'one.numr', 'p', 'parenleft.case', 'parenright.case', 'percent', 'period', 'r', 's', 'seven', 'seven.dnom', 'seven.numr', 'six', 'six.dnom', 'six.numr', 'slash', 'space', 't', 'three', 'three.dnom', 'three.numr', 'two', 'two.dnom', 'two.numr', 'two.sups', 'u', 'v', 'w', 'x', 'y', 'zero', 'zero.dnom', 'zero.numr']
+08:43:57 INFO fontTools.subset: Glyph IDs:   [0, 2, 73, 84, 95, 197, 282, 293, 301, 322, 376, 385, 398, 457, 508, 579, 587, 598, 615, 648, 659, 671, 690, 738, 768, 775, 792, 845, 854, 873, 891, 917, 982, 986, 995, 1000, 1343, 1344, 1345, 1347, 1348, 1349, 1351, 1352, 1353, 1354, 1448, 1449, 1457, 1461, 1473, 1503, 1504, 1507, 1508, 1539, 1549, 1550, 1564, 1565, 1607, 1675, 1676, 1678, 1680, 1681, 1683, 1685, 1686, 1688, 1689, 1690, 1697, 1699, 1701, 1702, 1704, 1706, 1707, 1709, 1710, 1711, 1738, 1771]
+08:43:57 INFO fontTools.subset: Retaining 84 glyphs
+08:43:57 INFO fontTools.subset: head subsetting not needed
+08:43:57 INFO fontTools.subset: hhea subsetting not needed
+08:43:57 INFO fontTools.subset: maxp subsetting not needed
+08:43:57 INFO fontTools.subset: OS/2 subsetting not needed
+08:43:57 INFO fontTools.subset: cmap subsetted
+08:43:57 INFO fontTools.subset: post subsetted
+08:43:57 INFO fontTools.subset: CFF  subsetted
+08:43:57 INFO fontTools.subset: hmtx subsetted
+08:43:57 INFO fontTools.subset: GDEF subsetted
+08:43:57 INFO fontTools.subset: GPOS subsetted
+08:43:57 INFO fontTools.subset: GSUB subsetted
+08:43:57 INFO fontTools.subset: name subsetting not needed
+08:43:57 INFO fontTools.subset: head pruned
+08:43:57 INFO fontTools.subset: OS/2 Unicode ranges pruned: [0, 1, 60]
+08:43:57 INFO fontTools.subset: OS/2 CodePage ranges pruned: [0]
+08:43:57 INFO fontTools.subset: CFF  pruned
+08:43:57 INFO fontTools.subset: GDEF pruned
+08:43:57 INFO fontTools.subset: GPOS pruned
+08:43:57 INFO fontTools.subset: GSUB pruned
+08:43:57 INFO fontTools.subset: name pruned
+08:43:57 INFO fontTools.subset: maxp pruned
+08:43:57 INFO fontTools.subset: cmap pruned
+08:43:57 INFO fontTools.subset: post pruned
+08:43:57 INFO fontTools.subset: CFF  pruned
+08:43:57 INFO fontTools.subset: GPOS pruned
+08:43:57 INFO fontTools.subset: GSUB pruned
+08:43:57 INFO fontTools.subset: Added .notdef to subset
+08:43:57 INFO fontTools.subset: Closing glyph list over 'GSUB': 3 glyphs before
+08:43:57 INFO fontTools.subset: Glyph names: ['.notdef', 'parenleft', 'parenright']
+08:43:57 INFO fontTools.subset: Glyph IDs:   [0, 1439, 1440]
+08:43:57 INFO fontTools.subset: Closed glyph list over 'GSUB': 7 glyphs after
+08:43:57 INFO fontTools.subset: Glyph names: ['.notdef', 'parenleft', 'parenleft.dnom', 'parenleft.numr', 'parenright', 'parenright.dnom', 'parenright.numr']
+08:43:57 INFO fontTools.subset: Glyph IDs:   [0, 1439, 1440, 1695, 1696, 1716, 1717]
+08:43:57 INFO fontTools.subset: Closing glyph list over 'CFF ': 7 glyphs before
+08:43:57 INFO fontTools.subset: Glyph names: ['.notdef', 'parenleft', 'parenleft.dnom', 'parenleft.numr', 'parenright', 'parenright.dnom', 'parenright.numr']
+08:43:57 INFO fontTools.subset: Glyph IDs:   [0, 1439, 1440, 1695, 1696, 1716, 1717]
+08:43:57 INFO fontTools.subset: Closed glyph list over 'CFF ': 7 glyphs after
+08:43:57 INFO fontTools.subset: Glyph names: ['.notdef', 'parenleft', 'parenleft.dnom', 'parenleft.numr', 'parenright', 'parenright.dnom', 'parenright.numr']
+08:43:57 INFO fontTools.subset: Glyph IDs:   [0, 1439, 1440, 1695, 1696, 1716, 1717]
+08:43:57 INFO fontTools.subset: Retaining 7 glyphs
+08:43:57 INFO fontTools.subset: head subsetting not needed
+08:43:57 INFO fontTools.subset: hhea subsetting not needed
+08:43:57 INFO fontTools.subset: maxp subsetting not needed
+08:43:57 INFO fontTools.subset: OS/2 subsetting not needed
+08:43:57 INFO fontTools.subset: cmap subsetted
+08:43:57 INFO fontTools.subset: post subsetted
+08:43:57 INFO fontTools.subset: CFF  subsetted
+08:43:57 INFO fontTools.subset: hmtx subsetted
+08:43:57 INFO fontTools.subset: GDEF subsetted
+08:43:57 INFO fontTools.subset: GPOS subsetted
+08:43:57 INFO fontTools.subset: GSUB subsetted
+08:43:57 INFO fontTools.subset: name subsetting not needed
+08:43:57 INFO fontTools.subset: head pruned
+08:43:57 INFO fontTools.subset: OS/2 Unicode ranges pruned: [0]
+08:43:57 INFO fontTools.subset: OS/2 CodePage ranges pruned: [0]
+08:43:57 INFO fontTools.subset: CFF  pruned
+08:43:57 INFO fontTools.subset: GDEF pruned to empty; dropped
+08:43:57 INFO fontTools.subset: GPOS pruned
+08:43:57 INFO fontTools.subset: GSUB pruned
+08:43:57 INFO fontTools.subset: name pruned
+08:43:57 INFO mshi: noise_ceiling      OK (10.0s)
+08:43:57 INFO mshi: europe_geo_sensitivity smoke run: reproduction gate not applied (smoke outputs are not results)
+08:43:57 INFO mshi: europe_geo_sensitivity start
+08:43:59 ERROR mshi: europe_geo_sensitivity failed
+Traceback (most recent call last):
+  File "/home/user/MSHI/mshi/run.py", line 226, in run
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+  File "/home/user/MSHI/mshi/analysis/europe_geo.py", line 56, in europe_geo_sensitivity
+    raise ControlMismatch(f"full locked Europe set: max |diff| {diff:.3g} from the locked primary metrics; "
+                          "the sensitivity analysis is not reported")
+mshi.analysis.europe_geo.ControlMismatch: full locked Europe set: max |diff| 271 from the locked primary metrics; the sensitivity analysis is not reported
+08:43:59 INFO mshi: features_analysis  uses existing outputs of build_sites_analysis, fetch_worldclim, fetch_soilgrids, modis_points (not requested; checked for currency)
+08:43:59 INFO mshi: features_analysis  smoke run: reproduction gate not applied (smoke outputs are not results)
+08:43:59 INFO mshi: features_analysis  start
+08:44:00 INFO mshi: features_analysis  OK (0.6s)
+08:44:00 INFO mshi: transfer_matrix    smoke run: reproduction gate not applied (smoke outputs are not results)
+08:44:00 INFO mshi: transfer_matrix    start
+08:44:00 INFO mshi.transfer: transfer loco     train LOCO           (n=33) OLS-TP
+08:44:00 INFO mshi.transfer: transfer loco     train LOCO           (n=33) GAM
+08:44:01 INFO mshi.transfer: transfer loco     train LOCO           (n=33) RF
+08:44:01 INFO mshi.transfer: transfer loco     train LOCO           (n=33) XGB
+08:44:01 INFO mshi.transfer: transfer loco     train LOCO           (n=35) OLS-TP
+08:44:01 INFO mshi.transfer: transfer loco     train LOCO           (n=35) GAM
+08:44:06 INFO mshi.transfer: transfer loco     train LOCO           (n=35) RF
+08:44:07 INFO mshi.transfer: transfer loco     train LOCO           (n=35) XGB
+08:44:07 INFO mshi.transfer: transfer loco     train LOCO           (n=41) OLS-TP
+08:44:07 INFO mshi.transfer: transfer loco     train LOCO           (n=41) GAM
+08:44:11 INFO mshi.transfer: transfer loco     train LOCO           (n=41) RF
+08:44:12 INFO mshi.transfer: transfer loco     train LOCO           (n=41) XGB
+08:44:12 INFO mshi.transfer: transfer loco     train LOCO           (n=48) OLS-TP
+08:44:12 INFO mshi.transfer: transfer loco     train LOCO           (n=48) GAM
+08:44:17 INFO mshi.transfer: transfer loco     train LOCO           (n=48) RF
+08:44:17 INFO mshi.transfer: transfer loco     train LOCO           (n=48) XGB
+08:44:17 INFO mshi.transfer: transfer loco     train LOCO           (n=48) OLS-TP
+08:44:17 INFO mshi.transfer: transfer loco     train LOCO           (n=48) GAM
+08:44:18 INFO mshi.transfer: transfer loco     train LOCO           (n=48) RF
+08:44:18 INFO mshi.transfer: transfer loco     train LOCO           (n=48) XGB
+08:44:18 INFO mshi.transfer: transfer loco     train LOCO           (n=45) OLS-TP
+08:44:18 INFO mshi.transfer: transfer loco     train LOCO           (n=45) GAM
+08:44:19 INFO mshi.transfer: transfer loco     train LOCO           (n=45) RF
+08:44:20 INFO mshi.transfer: transfer loco     train LOCO           (n=45) XGB
+08:44:23 INFO fontTools.subset: maxp pruned
+08:44:23 INFO fontTools.subset: cmap pruned
+08:44:23 INFO fontTools.subset: post pruned
+08:44:23 INFO fontTools.subset: CFF  pruned
+08:44:23 INFO fontTools.subset: GPOS pruned
+08:44:23 INFO fontTools.subset: GSUB pruned
+08:44:23 INFO fontTools.subset: Added .notdef to subset
+08:44:23 INFO fontTools.subset: Closing glyph list over 'GSUB': 50 glyphs before
+08:44:23 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'B', 'C', 'E', 'F', 'G', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'X', 'a', 'b', 'c', 'comma', 'd', 'e', 'f', 'five', 'g', 'h', 'hyphen.case', 'i', 'l', 'm', 'n', 'o', 'one', 'p', 'parenleft.case', 'parenright.case', 'period', 'r', 's', 'seven', 'space', 't', 'three', 'two', 'two.sups', 'u', 'v', 'w', 'y', 'zero']
+08:44:23 INFO fontTools.subset: Glyph IDs:   [0, 2, 65, 73, 95, 137, 141, 282, 293, 301, 322, 376, 385, 398, 412, 467, 508, 579, 587, 598, 615, 648, 659, 671, 690, 738, 768, 775, 792, 845, 854, 873, 891, 917, 982, 986, 1000, 1343, 1344, 1345, 1347, 1349, 1352, 1448, 1449, 1473, 1503, 1504, 1607, 1771]
+08:44:23 INFO fontTools.subset: Closed glyph list over 'GSUB': 64 glyphs after
+08:44:23 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'B', 'C', 'E', 'F', 'G', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'X', 'a', 'b', 'c', 'comma', 'd', 'e', 'f', 'five', 'five.dnom', 'five.numr', 'g', 'h', 'hyphen.case', 'i', 'i.numr', 'l', 'm', 'n', 'n.numr', 'o', 'one', 'one.dnom', 'one.numr', 'p', 'parenleft.case', 'parenright.case', 'period', 'r', 's', 'seven', 'seven.dnom', 'seven.numr', 'space', 't', 'three', 'three.dnom', 'three.numr', 'two', 'two.dnom', 'two.numr', 'two.sups', 'u', 'v', 'w', 'y', 'zero', 'zero.dnom', 'zero.numr']
+08:44:23 INFO fontTools.subset: Glyph IDs:   [0, 2, 65, 73, 95, 137, 141, 282, 293, 301, 322, 376, 385, 398, 412, 467, 508, 579, 587, 598, 615, 648, 659, 671, 690, 738, 768, 775, 792, 845, 854, 873, 891, 917, 982, 986, 1000, 1343, 1344, 1345, 1347, 1349, 1352, 1448, 1449, 1473, 1503, 1504, 1564, 1565, 1607, 1676, 1678, 1680, 1681, 1685, 1688, 1697, 1699, 1701, 1702, 1706, 1709, 1771]
+08:44:23 INFO fontTools.subset: Closing glyph list over 'CFF ': 64 glyphs before
+08:44:23 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'B', 'C', 'E', 'F', 'G', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'X', 'a', 'b', 'c', 'comma', 'd', 'e', 'f', 'five', 'five.dnom', 'five.numr', 'g', 'h', 'hyphen.case', 'i', 'i.numr', 'l', 'm', 'n', 'n.numr', 'o', 'one', 'one.dnom', 'one.numr', 'p', 'parenleft.case', 'parenright.case', 'period', 'r', 's', 'seven', 'seven.dnom', 'seven.numr', 'space', 't', 'three', 'three.dnom', 'three.numr', 'two', 'two.dnom', 'two.numr', 'two.sups', 'u', 'v', 'w', 'y', 'zero', 'zero.dnom', 'zero.numr']
+08:44:23 INFO fontTools.subset: Glyph IDs:   [0, 2, 65, 73, 95, 137, 141, 282, 293, 301, 322, 376, 385, 398, 412, 467, 508, 579, 587, 598, 615, 648, 659, 671, 690, 738, 768, 775, 792, 845, 854, 873, 891, 917, 982, 986, 1000, 1343, 1344, 1345, 1347, 1349, 1352, 1448, 1449, 1473, 1503, 1504, 1564, 1565, 1607, 1676, 1678, 1680, 1681, 1685, 1688, 1697, 1699, 1701, 1702, 1706, 1709, 1771]
+08:44:23 INFO fontTools.subset: Closed glyph list over 'CFF ': 64 glyphs after
+08:44:23 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'B', 'C', 'E', 'F', 'G', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'X', 'a', 'b', 'c', 'comma', 'd', 'e', 'f', 'five', 'five.dnom', 'five.numr', 'g', 'h', 'hyphen.case', 'i', 'i.numr', 'l', 'm', 'n', 'n.numr', 'o', 'one', 'one.dnom', 'one.numr', 'p', 'parenleft.case', 'parenright.case', 'period', 'r', 's', 'seven', 'seven.dnom', 'seven.numr', 'space', 't', 'three', 'three.dnom', 'three.numr', 'two', 'two.dnom', 'two.numr', 'two.sups', 'u', 'v', 'w', 'y', 'zero', 'zero.dnom', 'zero.numr']
+08:44:23 INFO fontTools.subset: Glyph IDs:   [0, 2, 65, 73, 95, 137, 141, 282, 293, 301, 322, 376, 385, 398, 412, 467, 508, 579, 587, 598, 615, 648, 659, 671, 690, 738, 768, 775, 792, 845, 854, 873, 891, 917, 982, 986, 1000, 1343, 1344, 1345, 1347, 1349, 1352, 1448, 1449, 1473, 1503, 1504, 1564, 1565, 1607, 1676, 1678, 1680, 1681, 1685, 1688, 1697, 1699, 1701, 1702, 1706, 1709, 1771]
+08:44:23 INFO fontTools.subset: Retaining 64 glyphs
+08:44:23 INFO fontTools.subset: head subsetting not needed
+08:44:23 INFO fontTools.subset: hhea subsetting not needed
+08:44:23 INFO fontTools.subset: maxp subsetting not needed
+08:44:23 INFO fontTools.subset: OS/2 subsetting not needed
+08:44:23 INFO fontTools.subset: cmap subsetted
+08:44:23 INFO fontTools.subset: post subsetted
+08:44:23 INFO fontTools.subset: CFF  subsetted
+08:44:23 INFO fontTools.subset: hmtx subsetted
+08:44:23 INFO fontTools.subset: GDEF subsetted
+08:44:23 INFO fontTools.subset: GPOS subsetted
+08:44:23 INFO fontTools.subset: GSUB subsetted
+08:44:23 INFO fontTools.subset: name subsetting not needed
+08:44:23 INFO fontTools.subset: head pruned
+08:44:23 INFO fontTools.subset: OS/2 Unicode ranges pruned: [0, 1, 60]
+08:44:23 INFO fontTools.subset: OS/2 CodePage ranges pruned: [0]
+08:44:23 INFO fontTools.subset: CFF  pruned
+08:44:23 INFO fontTools.subset: GDEF pruned
+08:44:23 INFO fontTools.subset: GPOS pruned
+08:44:23 INFO fontTools.subset: GSUB pruned
+08:44:23 INFO fontTools.subset: name pruned
+08:44:23 INFO fontTools.subset: maxp pruned
+08:44:23 INFO fontTools.subset: cmap pruned
+08:44:23 INFO fontTools.subset: post pruned
+08:44:23 INFO fontTools.subset: CFF  pruned
+08:44:23 INFO fontTools.subset: GPOS pruned
+08:44:23 INFO fontTools.subset: GSUB pruned
+08:44:23 INFO fontTools.subset: Added .notdef to subset
+08:44:23 INFO fontTools.subset: Closing glyph list over 'GSUB': 5 glyphs before
+08:44:23 INFO fontTools.subset: Glyph names: ['.notdef', 'hyphen', 'minus.case', 'parenleft', 'parenright']
+08:44:23 INFO fontTools.subset: Glyph IDs:   [0, 1439, 1440, 1461, 1538]
+08:44:23 INFO fontTools.subset: Closed glyph list over 'GSUB': 12 glyphs after
+08:44:23 INFO fontTools.subset: Glyph names: ['.notdef', 'hyphen', 'hyphen.case', 'minus.case', 'parenleft', 'parenleft.case', 'parenleft.dnom', 'parenleft.numr', 'parenright', 'parenright.case', 'parenright.dnom', 'parenright.numr']
+08:44:23 INFO fontTools.subset: Glyph IDs:   [0, 1439, 1440, 1448, 1449, 1461, 1473, 1538, 1695, 1696, 1716, 1717]
+08:44:23 INFO fontTools.subset: Closing glyph list over 'CFF ': 12 glyphs before
+08:44:23 INFO fontTools.subset: Glyph names: ['.notdef', 'hyphen', 'hyphen.case', 'minus.case', 'parenleft', 'parenleft.case', 'parenleft.dnom', 'parenleft.numr', 'parenright', 'parenright.case', 'parenright.dnom', 'parenright.numr']
+08:44:23 INFO fontTools.subset: Glyph IDs:   [0, 1439, 1440, 1448, 1449, 1461, 1473, 1538, 1695, 1696, 1716, 1717]
+08:44:23 INFO fontTools.subset: Closed glyph list over 'CFF ': 12 glyphs after
+08:44:23 INFO fontTools.subset: Glyph names: ['.notdef', 'hyphen', 'hyphen.case', 'minus.case', 'parenleft', 'parenleft.case', 'parenleft.dnom', 'parenleft.numr', 'parenright', 'parenright.case', 'parenright.dnom', 'parenright.numr']
+08:44:23 INFO fontTools.subset: Glyph IDs:   [0, 1439, 1440, 1448, 1449, 1461, 1473, 1538, 1695, 1696, 1716, 1717]
+08:44:23 INFO fontTools.subset: Retaining 12 glyphs
+08:44:23 INFO fontTools.subset: head subsetting not needed
+08:44:23 INFO fontTools.subset: hhea subsetting not needed
+08:44:23 INFO fontTools.subset: maxp subsetting not needed
+08:44:23 INFO fontTools.subset: OS/2 subsetting not needed
+08:44:23 INFO fontTools.subset: cmap subsetted
+08:44:23 INFO fontTools.subset: post subsetted
+08:44:23 INFO fontTools.subset: CFF  subsetted
+08:44:23 INFO fontTools.subset: hmtx subsetted
+08:44:23 INFO fontTools.subset: GDEF subsetted
+08:44:23 INFO fontTools.subset: GPOS subsetted
+08:44:23 INFO fontTools.subset: GSUB subsetted
+08:44:23 INFO fontTools.subset: name subsetting not needed
+08:44:23 INFO fontTools.subset: head pruned
+08:44:23 INFO fontTools.subset: OS/2 Unicode ranges pruned: [0, 60]
+08:44:23 INFO fontTools.subset: OS/2 CodePage ranges pruned: [0]
+08:44:23 INFO fontTools.subset: CFF  pruned
+08:44:23 INFO fontTools.subset: GDEF pruned to empty; dropped
+08:44:23 INFO fontTools.subset: GPOS pruned
+08:44:23 INFO fontTools.subset: GSUB pruned
+08:44:23 INFO fontTools.subset: name pruned
+08:44:23 INFO mshi: transfer_matrix    OK (23.1s)
+08:44:23 INFO mshi: within_continent   uses existing outputs of fetch_worldclim (not requested; checked for currency)
+08:44:23 INFO mshi: within_continent   smoke run: reproduction gate not applied (smoke outputs are not results)
+08:44:23 INFO mshi: within_continent   start
+08:44:23 INFO mshi: within_continent   OK (0.3s)
+08:44:23 INFO mshi: aoa_sensitivity    uses existing outputs of fetch_worldclim (not requested; checked for currency)
+08:44:23 INFO mshi: aoa_sensitivity    smoke run: reproduction gate not applied (smoke outputs are not results)
+08:44:23 INFO mshi: aoa_sensitivity    start
+08:51:22 INFO fontTools.subset: maxp pruned
+08:51:22 INFO fontTools.subset: cmap pruned
+08:51:22 INFO fontTools.subset: post pruned
+08:51:22 INFO fontTools.subset: CFF  pruned
+08:51:22 INFO fontTools.subset: GPOS pruned
+08:51:22 INFO fontTools.subset: GSUB pruned
+08:51:22 INFO fontTools.subset: Added .notdef to subset
+08:51:22 INFO fontTools.subset: Closing glyph list over 'GSUB': 47 glyphs before
+08:51:22 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'B', 'D', 'G', 'I', 'O', 'X', 'a', 'b', 'c', 'colon', 'comma', 'd', 'degree', 'e', 'eight', 'equal.case', 'f', 'five', 'g', 'h', 'i', 'k', 'l', 'm', 'n', 'nine', 'o', 'one', 'p', 'parenleft', 'parenright', 'period', 'r', 's', 'six', 'space', 't', 'three', 'two', 'u', 'underscore', 'w', 'x', 'y', 'zero']
+08:51:22 INFO fontTools.subset: Glyph IDs:   [0, 2, 65, 84, 141, 197, 322, 467, 508, 579, 587, 598, 615, 648, 659, 671, 690, 729, 738, 768, 775, 792, 845, 854, 873, 891, 917, 986, 995, 1000, 1343, 1344, 1345, 1347, 1349, 1351, 1353, 1354, 1439, 1440, 1503, 1504, 1507, 1535, 1545, 1561, 1771]
+08:51:22 INFO fontTools.subset: Closed glyph list over 'GSUB': 73 glyphs after
+08:51:22 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'B', 'D', 'G', 'I', 'O', 'X', 'a', 'b', 'c', 'colon', 'colon.case', 'comma', 'd', 'degree', 'e', 'eight', 'eight.dnom', 'eight.numr', 'equal.case', 'f', 'five', 'five.dnom', 'five.numr', 'g', 'h', 'i', 'i.numr', 'k', 'l', 'm', 'multiply.case', 'n', 'n.numr', 'nine', 'nine.dnom', 'nine.numr', 'o', 'one', 'one.dnom', 'one.numr', 'p', 'parenleft', 'parenleft.case', 'parenleft.dnom', 'parenleft.numr', 'parenright', 'parenright.case', 'parenright.dnom', 'parenright.numr', 'period', 'r', 's', 'six', 'six.dnom', 'six.numr', 'space', 't', 'three', 'three.dnom', 'three.numr', 'two', 'two.dnom', 'two.numr', 'u', 'underscore', 'w', 'x', 'y', 'zero', 'zero.dnom', 'zero.numr']
+08:51:22 INFO fontTools.subset: Glyph IDs:   [0, 2, 65, 84, 141, 197, 322, 467, 508, 579, 587, 598, 615, 648, 659, 671, 690, 729, 738, 768, 775, 792, 845, 854, 873, 891, 917, 986, 995, 1000, 1343, 1344, 1345, 1347, 1349, 1351, 1353, 1354, 1439, 1440, 1448, 1449, 1503, 1504, 1507, 1508, 1535, 1539, 1545, 1561, 1564, 1565, 1676, 1678, 1680, 1681, 1685, 1686, 1689, 1690, 1695, 1696, 1697, 1699, 1701, 1702, 1706, 1707, 1710, 1711, 1716, 1717, 1771]
+08:51:22 INFO fontTools.subset: Closing glyph list over 'CFF ': 73 glyphs before
+08:51:22 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'B', 'D', 'G', 'I', 'O', 'X', 'a', 'b', 'c', 'colon', 'colon.case', 'comma', 'd', 'degree', 'e', 'eight', 'eight.dnom', 'eight.numr', 'equal.case', 'f', 'five', 'five.dnom', 'five.numr', 'g', 'h', 'i', 'i.numr', 'k', 'l', 'm', 'multiply.case', 'n', 'n.numr', 'nine', 'nine.dnom', 'nine.numr', 'o', 'one', 'one.dnom', 'one.numr', 'p', 'parenleft', 'parenleft.case', 'parenleft.dnom', 'parenleft.numr', 'parenright', 'parenright.case', 'parenright.dnom', 'parenright.numr', 'period', 'r', 's', 'six', 'six.dnom', 'six.numr', 'space', 't', 'three', 'three.dnom', 'three.numr', 'two', 'two.dnom', 'two.numr', 'u', 'underscore', 'w', 'x', 'y', 'zero', 'zero.dnom', 'zero.numr']
+08:51:22 INFO fontTools.subset: Glyph IDs:   [0, 2, 65, 84, 141, 197, 322, 467, 508, 579, 587, 598, 615, 648, 659, 671, 690, 729, 738, 768, 775, 792, 845, 854, 873, 891, 917, 986, 995, 1000, 1343, 1344, 1345, 1347, 1349, 1351, 1353, 1354, 1439, 1440, 1448, 1449, 1503, 1504, 1507, 1508, 1535, 1539, 1545, 1561, 1564, 1565, 1676, 1678, 1680, 1681, 1685, 1686, 1689, 1690, 1695, 1696, 1697, 1699, 1701, 1702, 1706, 1707, 1710, 1711, 1716, 1717, 1771]
+08:51:22 INFO fontTools.subset: Closed glyph list over 'CFF ': 73 glyphs after
+08:51:22 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'B', 'D', 'G', 'I', 'O', 'X', 'a', 'b', 'c', 'colon', 'colon.case', 'comma', 'd', 'degree', 'e', 'eight', 'eight.dnom', 'eight.numr', 'equal.case', 'f', 'five', 'five.dnom', 'five.numr', 'g', 'h', 'i', 'i.numr', 'k', 'l', 'm', 'multiply.case', 'n', 'n.numr', 'nine', 'nine.dnom', 'nine.numr', 'o', 'one', 'one.dnom', 'one.numr', 'p', 'parenleft', 'parenleft.case', 'parenleft.dnom', 'parenleft.numr', 'parenright', 'parenright.case', 'parenright.dnom', 'parenright.numr', 'period', 'r', 's', 'six', 'six.dnom', 'six.numr', 'space', 't', 'three', 'three.dnom', 'three.numr', 'two', 'two.dnom', 'two.numr', 'u', 'underscore', 'w', 'x', 'y', 'zero', 'zero.dnom', 'zero.numr']
+08:51:22 INFO fontTools.subset: Glyph IDs:   [0, 2, 65, 84, 141, 197, 322, 467, 508, 579, 587, 598, 615, 648, 659, 671, 690, 729, 738, 768, 775, 792, 845, 854, 873, 891, 917, 986, 995, 1000, 1343, 1344, 1345, 1347, 1349, 1351, 1353, 1354, 1439, 1440, 1448, 1449, 1503, 1504, 1507, 1508, 1535, 1539, 1545, 1561, 1564, 1565, 1676, 1678, 1680, 1681, 1685, 1686, 1689, 1690, 1695, 1696, 1697, 1699, 1701, 1702, 1706, 1707, 1710, 1711, 1716, 1717, 1771]
+08:51:22 INFO fontTools.subset: Retaining 73 glyphs
+08:51:22 INFO fontTools.subset: head subsetting not needed
+08:51:22 INFO fontTools.subset: hhea subsetting not needed
+08:51:22 INFO fontTools.subset: maxp subsetting not needed
+08:51:22 INFO fontTools.subset: OS/2 subsetting not needed
+08:51:22 INFO fontTools.subset: cmap subsetted
+08:51:22 INFO fontTools.subset: post subsetted
+08:51:22 INFO fontTools.subset: CFF  subsetted
+08:51:22 INFO fontTools.subset: hmtx subsetted
+08:51:22 INFO fontTools.subset: GDEF subsetted
+08:51:22 INFO fontTools.subset: GPOS subsetted
+08:51:22 INFO fontTools.subset: GSUB subsetted
+08:51:22 INFO fontTools.subset: name subsetting not needed
+08:51:22 INFO fontTools.subset: head pruned
+08:51:22 INFO fontTools.subset: OS/2 Unicode ranges pruned: [0, 1, 60]
+08:51:22 INFO fontTools.subset: OS/2 CodePage ranges pruned: [0]
+08:51:22 INFO fontTools.subset: CFF  pruned
+08:51:22 INFO fontTools.subset: GDEF pruned
+08:51:22 INFO fontTools.subset: GPOS pruned
+08:51:22 INFO fontTools.subset: GSUB pruned
+08:51:22 INFO fontTools.subset: name pruned
+08:51:22 INFO fontTools.subset: maxp pruned
+08:51:22 INFO fontTools.subset: cmap pruned
+08:51:22 INFO fontTools.subset: post pruned
+08:51:22 INFO fontTools.subset: CFF  pruned
+08:51:22 INFO fontTools.subset: GPOS pruned
+08:51:22 INFO fontTools.subset: GSUB pruned
+08:51:22 INFO fontTools.subset: Added .notdef to subset
+08:51:22 INFO fontTools.subset: Closing glyph list over 'GSUB': 4 glyphs before
+08:51:22 INFO fontTools.subset: Glyph names: ['.notdef', 'minus.case', 'parenleft.case', 'parenright.case']
+08:51:22 INFO fontTools.subset: Glyph IDs:   [0, 1448, 1449, 1538]
+08:51:22 INFO fontTools.subset: Closed glyph list over 'GSUB': 4 glyphs after
+08:51:22 INFO fontTools.subset: Glyph names: ['.notdef', 'minus.case', 'parenleft.case', 'parenright.case']
+08:51:22 INFO fontTools.subset: Glyph IDs:   [0, 1448, 1449, 1538]
+08:51:22 INFO fontTools.subset: Closing glyph list over 'CFF ': 4 glyphs before
+08:51:22 INFO fontTools.subset: Glyph names: ['.notdef', 'minus.case', 'parenleft.case', 'parenright.case']
+08:51:22 INFO fontTools.subset: Glyph IDs:   [0, 1448, 1449, 1538]
+08:51:22 INFO fontTools.subset: Closed glyph list over 'CFF ': 4 glyphs after
+08:51:22 INFO fontTools.subset: Glyph names: ['.notdef', 'minus.case', 'parenleft.case', 'parenright.case']
+08:51:22 INFO fontTools.subset: Glyph IDs:   [0, 1448, 1449, 1538]
+08:51:22 INFO fontTools.subset: Retaining 4 glyphs
+08:51:22 INFO fontTools.subset: head subsetting not needed
+08:51:22 INFO fontTools.subset: hhea subsetting not needed
+08:51:22 INFO fontTools.subset: maxp subsetting not needed
+08:51:22 INFO fontTools.subset: OS/2 subsetting not needed
+08:51:22 INFO fontTools.subset: cmap subsetted
+08:51:22 INFO fontTools.subset: post subsetted
+08:51:22 INFO fontTools.subset: CFF  subsetted
+08:51:22 INFO fontTools.subset: hmtx subsetted
+08:51:22 INFO fontTools.subset: GDEF subsetted
+08:51:22 INFO fontTools.subset: GPOS subsetted
+08:51:22 INFO fontTools.subset: GSUB subsetted
+08:51:22 INFO fontTools.subset: name subsetting not needed
+08:51:22 INFO fontTools.subset: head pruned
+08:51:22 INFO fontTools.subset: OS/2 Unicode ranges pruned: [60]
+08:51:22 INFO fontTools.subset: OS/2 CodePage ranges pruned: [0]
+08:51:22 INFO fontTools.subset: CFF  pruned
+08:51:22 INFO fontTools.subset: GDEF pruned to empty; dropped
+08:51:22 INFO fontTools.subset: GPOS pruned
+08:51:22 INFO fontTools.subset: GSUB pruned
+08:51:22 INFO fontTools.subset: name pruned
+08:51:26 INFO fontTools.subset: maxp pruned
+08:51:26 INFO fontTools.subset: cmap pruned
+08:51:26 INFO fontTools.subset: post pruned
+08:51:26 INFO fontTools.subset: CFF  pruned
+08:51:26 INFO fontTools.subset: GPOS pruned
+08:51:26 INFO fontTools.subset: GSUB pruned
+08:51:26 INFO fontTools.subset: Added .notdef to subset
+08:51:26 INFO fontTools.subset: Closing glyph list over 'GSUB': 50 glyphs before
+08:51:26 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'B', 'D', 'G', 'I', 'O', 'X', 'a', 'bar', 'c', 'colon', 'comma', 'd', 'e', 'eight', 'f', 'five', 'four', 'g', 'h', 'i', 'k', 'l', 'm', 'n', 'nine', 'o', 'one', 'p', 'parenleft.case', 'parenright.case', 'percent', 'period', 'q', 'r', 's', 'semicolon', 'seven', 'six', 'space', 't', 'three', 'two', 'u', 'underscore', 'w', 'x', 'y', 'zero']
+08:51:26 INFO fontTools.subset: Glyph IDs:   [0, 2, 65, 84, 141, 197, 322, 467, 508, 587, 598, 615, 648, 659, 671, 690, 729, 738, 768, 775, 792, 845, 851, 854, 873, 891, 917, 986, 995, 1000, 1343, 1344, 1345, 1347, 1348, 1349, 1351, 1352, 1353, 1354, 1448, 1449, 1458, 1503, 1504, 1507, 1510, 1545, 1738, 1771]
+08:51:26 INFO fontTools.subset: Closed glyph list over 'GSUB': 74 glyphs after
+08:51:26 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'B', 'D', 'G', 'I', 'O', 'X', 'a', 'bar', 'c', 'colon', 'colon.case', 'comma', 'd', 'e', 'eight', 'eight.dnom', 'eight.numr', 'f', 'five', 'five.dnom', 'five.numr', 'four', 'four.dnom', 'four.numr', 'g', 'h', 'i', 'i.numr', 'k', 'l', 'm', 'multiply.case', 'n', 'n.numr', 'nine', 'nine.dnom', 'nine.numr', 'o', 'one', 'one.dnom', 'one.numr', 'p', 'parenleft.case', 'parenright.case', 'percent', 'period', 'q', 'r', 's', 'semicolon', 'seven', 'seven.dnom', 'seven.numr', 'six', 'six.dnom', 'six.numr', 'space', 't', 'three', 'three.dnom', 'three.numr', 'two', 'two.dnom', 'two.numr', 'u', 'underscore', 'w', 'x', 'y', 'zero', 'zero.dnom', 'zero.numr']
+08:51:26 INFO fontTools.subset: Glyph IDs:   [0, 2, 65, 84, 141, 197, 322, 467, 508, 587, 598, 615, 648, 659, 671, 690, 729, 738, 768, 775, 792, 845, 851, 854, 873, 891, 917, 986, 995, 1000, 1343, 1344, 1345, 1347, 1348, 1349, 1351, 1352, 1353, 1354, 1448, 1449, 1458, 1503, 1504, 1507, 1508, 1510, 1539, 1545, 1564, 1565, 1676, 1678, 1680, 1681, 1683, 1685, 1686, 1688, 1689, 1690, 1697, 1699, 1701, 1702, 1704, 1706, 1707, 1709, 1710, 1711, 1738, 1771]
+08:51:26 INFO fontTools.subset: Closing glyph list over 'CFF ': 74 glyphs before
+08:51:26 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'B', 'D', 'G', 'I', 'O', 'X', 'a', 'bar', 'c', 'colon', 'colon.case', 'comma', 'd', 'e', 'eight', 'eight.dnom', 'eight.numr', 'f', 'five', 'five.dnom', 'five.numr', 'four', 'four.dnom', 'four.numr', 'g', 'h', 'i', 'i.numr', 'k', 'l', 'm', 'multiply.case', 'n', 'n.numr', 'nine', 'nine.dnom', 'nine.numr', 'o', 'one', 'one.dnom', 'one.numr', 'p', 'parenleft.case', 'parenright.case', 'percent', 'period', 'q', 'r', 's', 'semicolon', 'seven', 'seven.dnom', 'seven.numr', 'six', 'six.dnom', 'six.numr', 'space', 't', 'three', 'three.dnom', 'three.numr', 'two', 'two.dnom', 'two.numr', 'u', 'underscore', 'w', 'x', 'y', 'zero', 'zero.dnom', 'zero.numr']
+08:51:26 INFO fontTools.subset: Glyph IDs:   [0, 2, 65, 84, 141, 197, 322, 467, 508, 587, 598, 615, 648, 659, 671, 690, 729, 738, 768, 775, 792, 845, 851, 854, 873, 891, 917, 986, 995, 1000, 1343, 1344, 1345, 1347, 1348, 1349, 1351, 1352, 1353, 1354, 1448, 1449, 1458, 1503, 1504, 1507, 1508, 1510, 1539, 1545, 1564, 1565, 1676, 1678, 1680, 1681, 1683, 1685, 1686, 1688, 1689, 1690, 1697, 1699, 1701, 1702, 1704, 1706, 1707, 1709, 1710, 1711, 1738, 1771]
+08:51:26 INFO fontTools.subset: Closed glyph list over 'CFF ': 74 glyphs after
+08:51:26 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'B', 'D', 'G', 'I', 'O', 'X', 'a', 'bar', 'c', 'colon', 'colon.case', 'comma', 'd', 'e', 'eight', 'eight.dnom', 'eight.numr', 'f', 'five', 'five.dnom', 'five.numr', 'four', 'four.dnom', 'four.numr', 'g', 'h', 'i', 'i.numr', 'k', 'l', 'm', 'multiply.case', 'n', 'n.numr', 'nine', 'nine.dnom', 'nine.numr', 'o', 'one', 'one.dnom', 'one.numr', 'p', 'parenleft.case', 'parenright.case', 'percent', 'period', 'q', 'r', 's', 'semicolon', 'seven', 'seven.dnom', 'seven.numr', 'six', 'six.dnom', 'six.numr', 'space', 't', 'three', 'three.dnom', 'three.numr', 'two', 'two.dnom', 'two.numr', 'u', 'underscore', 'w', 'x', 'y', 'zero', 'zero.dnom', 'zero.numr']
+08:51:26 INFO fontTools.subset: Glyph IDs:   [0, 2, 65, 84, 141, 197, 322, 467, 508, 587, 598, 615, 648, 659, 671, 690, 729, 738, 768, 775, 792, 845, 851, 854, 873, 891, 917, 986, 995, 1000, 1343, 1344, 1345, 1347, 1348, 1349, 1351, 1352, 1353, 1354, 1448, 1449, 1458, 1503, 1504, 1507, 1508, 1510, 1539, 1545, 1564, 1565, 1676, 1678, 1680, 1681, 1683, 1685, 1686, 1688, 1689, 1690, 1697, 1699, 1701, 1702, 1704, 1706, 1707, 1709, 1710, 1711, 1738, 1771]
+08:51:26 INFO fontTools.subset: Retaining 74 glyphs
+08:51:26 INFO fontTools.subset: head subsetting not needed
+08:51:26 INFO fontTools.subset: hhea subsetting not needed
+08:51:26 INFO fontTools.subset: maxp subsetting not needed
+08:51:26 INFO fontTools.subset: OS/2 subsetting not needed
+08:51:26 INFO fontTools.subset: cmap subsetted
+08:51:26 INFO fontTools.subset: post subsetted
+08:51:26 INFO fontTools.subset: CFF  subsetted
+08:51:26 INFO fontTools.subset: hmtx subsetted
+08:51:26 INFO fontTools.subset: GDEF subsetted
+08:51:26 INFO fontTools.subset: GPOS subsetted
+08:51:26 INFO fontTools.subset: GSUB subsetted
+08:51:26 INFO fontTools.subset: name subsetting not needed
+08:51:26 INFO fontTools.subset: head pruned
+08:51:26 INFO fontTools.subset: OS/2 Unicode ranges pruned: [0, 60]
+08:51:26 INFO fontTools.subset: OS/2 CodePage ranges pruned: [0]
+08:51:26 INFO fontTools.subset: CFF  pruned
+08:51:26 INFO fontTools.subset: GDEF pruned
+08:51:26 INFO fontTools.subset: GPOS pruned
+08:51:26 INFO fontTools.subset: GSUB pruned
+08:51:26 INFO fontTools.subset: name pruned
+08:51:26 INFO fontTools.subset: maxp pruned
+08:51:26 INFO fontTools.subset: cmap pruned
+08:51:26 INFO fontTools.subset: post pruned
+08:51:26 INFO fontTools.subset: CFF  pruned
+08:51:26 INFO fontTools.subset: GPOS pruned
+08:51:26 INFO fontTools.subset: GSUB pruned
+08:51:26 INFO fontTools.subset: Added .notdef to subset
+08:51:26 INFO fontTools.subset: Closing glyph list over 'GSUB': 5 glyphs before
+08:51:26 INFO fontTools.subset: Glyph names: ['.notdef', 'colon.case', 'minus.case', 'parenleft', 'parenright']
+08:51:26 INFO fontTools.subset: Glyph IDs:   [0, 1439, 1440, 1508, 1538]
+08:51:26 INFO fontTools.subset: Closed glyph list over 'GSUB': 11 glyphs after
+08:51:26 INFO fontTools.subset: Glyph names: ['.notdef', 'colon.case', 'minus.case', 'parenleft', 'parenleft.case', 'parenleft.dnom', 'parenleft.numr', 'parenright', 'parenright.case', 'parenright.dnom', 'parenright.numr']
+08:51:26 INFO fontTools.subset: Glyph IDs:   [0, 1439, 1440, 1448, 1449, 1508, 1538, 1695, 1696, 1716, 1717]
+08:51:26 INFO fontTools.subset: Closing glyph list over 'CFF ': 11 glyphs before
+08:51:26 INFO fontTools.subset: Glyph names: ['.notdef', 'colon.case', 'minus.case', 'parenleft', 'parenleft.case', 'parenleft.dnom', 'parenleft.numr', 'parenright', 'parenright.case', 'parenright.dnom', 'parenright.numr']
+08:51:26 INFO fontTools.subset: Glyph IDs:   [0, 1439, 1440, 1448, 1449, 1508, 1538, 1695, 1696, 1716, 1717]
+08:51:26 INFO fontTools.subset: Closed glyph list over 'CFF ': 11 glyphs after
+08:51:26 INFO fontTools.subset: Glyph names: ['.notdef', 'colon.case', 'minus.case', 'parenleft', 'parenleft.case', 'parenleft.dnom', 'parenleft.numr', 'parenright', 'parenright.case', 'parenright.dnom', 'parenright.numr']
+08:51:26 INFO fontTools.subset: Glyph IDs:   [0, 1439, 1440, 1448, 1449, 1508, 1538, 1695, 1696, 1716, 1717]
+08:51:26 INFO fontTools.subset: Retaining 11 glyphs
+08:51:26 INFO fontTools.subset: head subsetting not needed
+08:51:26 INFO fontTools.subset: hhea subsetting not needed
+08:51:26 INFO fontTools.subset: maxp subsetting not needed
+08:51:26 INFO fontTools.subset: OS/2 subsetting not needed
+08:51:26 INFO fontTools.subset: cmap subsetted
+08:51:26 INFO fontTools.subset: post subsetted
+08:51:26 INFO fontTools.subset: CFF  subsetted
+08:51:26 INFO fontTools.subset: hmtx subsetted
+08:51:26 INFO fontTools.subset: GDEF subsetted
+08:51:26 INFO fontTools.subset: GPOS subsetted
+08:51:26 INFO fontTools.subset: GSUB subsetted
+08:51:26 INFO fontTools.subset: name subsetting not needed
+08:51:26 INFO fontTools.subset: head pruned
+08:51:26 INFO fontTools.subset: OS/2 Unicode ranges pruned: [0, 60]
+08:51:26 INFO fontTools.subset: OS/2 CodePage ranges pruned: [0]
+08:51:26 INFO fontTools.subset: CFF  pruned
+08:51:26 INFO fontTools.subset: GDEF pruned to empty; dropped
+08:51:26 INFO fontTools.subset: GPOS pruned
+08:51:26 INFO fontTools.subset: GSUB pruned
+08:51:26 INFO fontTools.subset: name pruned
+08:51:26 INFO mshi: aoa_sensitivity    OK (422.9s)
+08:51:26 INFO mshi: us_r2              uses existing outputs of build_sites_analysis (not requested; checked for currency)
+08:51:26 INFO mshi: us_r2              smoke run: reproduction gate not applied (smoke outputs are not results)
+08:51:26 INFO mshi: us_r2              start
+08:51:28 INFO fontTools.subset: maxp pruned
+08:51:28 INFO fontTools.subset: cmap pruned
+08:51:28 INFO fontTools.subset: post pruned
+08:51:28 INFO fontTools.subset: CFF  pruned
+08:51:28 INFO fontTools.subset: GPOS pruned
+08:51:28 INFO fontTools.subset: GSUB pruned
+08:51:28 INFO fontTools.subset: Added .notdef to subset
+08:51:28 INFO fontTools.subset: Closing glyph list over 'GSUB': 60 glyphs before
+08:51:28 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'B', 'C', 'D', 'E', 'G', 'I', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'X', 'a', 'b', 'c', 'colon.case', 'comma', 'd', 'degree', 'e', 'eight', 'equal', 'f', 'five', 'four', 'g', 'h', 'hyphen', 'i', 'k', 'l', 'm', 'n', 'nine', 'o', 'one', 'p', 'parenleft', 'parenright', 'percent', 'period', 'r', 's', 'six', 'slash', 'space', 't', 'two', 'two.sups', 'u', 'x', 'y', 'zero']
+08:51:28 INFO fontTools.subset: Glyph IDs:   [0, 2, 65, 73, 84, 95, 141, 197, 282, 293, 301, 322, 376, 383, 385, 398, 412, 425, 467, 508, 579, 587, 598, 615, 648, 659, 671, 690, 729, 738, 768, 775, 792, 845, 854, 873, 891, 917, 995, 1000, 1343, 1344, 1345, 1348, 1349, 1351, 1353, 1354, 1439, 1440, 1457, 1461, 1503, 1504, 1508, 1522, 1561, 1607, 1738, 1771]
+08:51:28 INFO fontTools.subset: Closed glyph list over 'GSUB': 90 glyphs after
+08:51:28 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'B', 'C', 'D', 'E', 'G', 'I', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'X', 'a', 'b', 'c', 'colon.case', 'comma', 'd', 'degree', 'e', 'eight', 'eight.dnom', 'eight.numr', 'equal', 'equal.case', 'equal.dnom', 'equal.numr', 'f', 'five', 'five.dnom', 'five.numr', 'four', 'four.dnom', 'four.numr', 'fraction', 'g', 'h', 'hyphen', 'hyphen.case', 'i', 'i.numr', 'k', 'l', 'm', 'multiply.case', 'n', 'n.numr', 'nine', 'nine.dnom', 'nine.numr', 'o', 'one', 'one.dnom', 'one.numr', 'p', 'parenleft', 'parenleft.case', 'parenleft.dnom', 'parenleft.numr', 'parenright', 'parenright.case', 'parenright.dnom', 'parenright.numr', 'percent', 'period', 'r', 's', 'six', 'six.dnom', 'six.numr', 'slash', 'space', 't', 'two', 'two.dnom', 'two.numr', 'two.sups', 'u', 'x', 'y', 'zero', 'zero.dnom', 'zero.numr']
+08:51:28 INFO fontTools.subset: Glyph IDs:   [0, 2, 65, 73, 84, 95, 141, 197, 282, 293, 301, 322, 376, 383, 385, 398, 412, 425, 467, 508, 579, 587, 598, 615, 648, 659, 671, 690, 729, 738, 768, 775, 792, 845, 854, 873, 891, 917, 995, 1000, 1343, 1344, 1345, 1348, 1349, 1351, 1353, 1354, 1439, 1440, 1448, 1449, 1457, 1461, 1473, 1503, 1504, 1508, 1522, 1535, 1539, 1561, 1564, 1565, 1607, 1675, 1676, 1678, 1680, 1683, 1685, 1686, 1689, 1690, 1694, 1695, 1696, 1697, 1699, 1701, 1704, 1706, 1707, 1710, 1711, 1715, 1716, 1717, 1738, 1771]
+08:51:28 INFO fontTools.subset: Closing glyph list over 'CFF ': 90 glyphs before
+08:51:28 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'B', 'C', 'D', 'E', 'G', 'I', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'X', 'a', 'b', 'c', 'colon.case', 'comma', 'd', 'degree', 'e', 'eight', 'eight.dnom', 'eight.numr', 'equal', 'equal.case', 'equal.dnom', 'equal.numr', 'f', 'five', 'five.dnom', 'five.numr', 'four', 'four.dnom', 'four.numr', 'fraction', 'g', 'h', 'hyphen', 'hyphen.case', 'i', 'i.numr', 'k', 'l', 'm', 'multiply.case', 'n', 'n.numr', 'nine', 'nine.dnom', 'nine.numr', 'o', 'one', 'one.dnom', 'one.numr', 'p', 'parenleft', 'parenleft.case', 'parenleft.dnom', 'parenleft.numr', 'parenright', 'parenright.case', 'parenright.dnom', 'parenright.numr', 'percent', 'period', 'r', 's', 'six', 'six.dnom', 'six.numr', 'slash', 'space', 't', 'two', 'two.dnom', 'two.numr', 'two.sups', 'u', 'x', 'y', 'zero', 'zero.dnom', 'zero.numr']
+08:51:28 INFO fontTools.subset: Glyph IDs:   [0, 2, 65, 73, 84, 95, 141, 197, 282, 293, 301, 322, 376, 383, 385, 398, 412, 425, 467, 508, 579, 587, 598, 615, 648, 659, 671, 690, 729, 738, 768, 775, 792, 845, 854, 873, 891, 917, 995, 1000, 1343, 1344, 1345, 1348, 1349, 1351, 1353, 1354, 1439, 1440, 1448, 1449, 1457, 1461, 1473, 1503, 1504, 1508, 1522, 1535, 1539, 1561, 1564, 1565, 1607, 1675, 1676, 1678, 1680, 1683, 1685, 1686, 1689, 1690, 1694, 1695, 1696, 1697, 1699, 1701, 1704, 1706, 1707, 1710, 1711, 1715, 1716, 1717, 1738, 1771]
+08:51:28 INFO fontTools.subset: Closed glyph list over 'CFF ': 90 glyphs after
+08:51:28 INFO fontTools.subset: Glyph names: ['.notdef', 'A', 'B', 'C', 'D', 'E', 'G', 'I', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'X', 'a', 'b', 'c', 'colon.case', 'comma', 'd', 'degree', 'e', 'eight', 'eight.dnom', 'eight.numr', 'equal', 'equal.case', 'equal.dnom', 'equal.numr', 'f', 'five', 'five.dnom', 'five.numr', 'four', 'four.dnom', 'four.numr', 'fraction', 'g', 'h', 'hyphen', 'hyphen.case', 'i', 'i.numr', 'k', 'l', 'm', 'multiply.case', 'n', 'n.numr', 'nine', 'nine.dnom', 'nine.numr', 'o', 'one', 'one.dnom', 'one.numr', 'p', 'parenleft', 'parenleft.case', 'parenleft.dnom', 'parenleft.numr', 'parenright', 'parenright.case', 'parenright.dnom', 'parenright.numr', 'percent', 'period', 'r', 's', 'six', 'six.dnom', 'six.numr', 'slash', 'space', 't', 'two', 'two.dnom', 'two.numr', 'two.sups', 'u', 'x', 'y', 'zero', 'zero.dnom', 'zero.numr']
+08:51:28 INFO fontTools.subset: Glyph IDs:   [0, 2, 65, 73, 84, 95, 141, 197, 282, 293, 301, 322, 376, 383, 385, 398, 412, 425, 467, 508, 579, 587, 598, 615, 648, 659, 671, 690, 729, 738, 768, 775, 792, 845, 854, 873, 891, 917, 995, 1000, 1343, 1344, 1345, 1348, 1349, 1351, 1353, 1354, 1439, 1440, 1448, 1449, 1457, 1461, 1473, 1503, 1504, 1508, 1522, 1535, 1539, 1561, 1564, 1565, 1607, 1675, 1676, 1678, 1680, 1683, 1685, 1686, 1689, 1690, 1694, 1695, 1696, 1697, 1699, 1701, 1704, 1706, 1707, 1710, 1711, 1715, 1716, 1717, 1738, 1771]
+08:51:28 INFO fontTools.subset: Retaining 90 glyphs
+08:51:28 INFO fontTools.subset: head subsetting not needed
+08:51:28 INFO fontTools.subset: hhea subsetting not needed
+08:51:28 INFO fontTools.subset: maxp subsetting not needed
+08:51:28 INFO fontTools.subset: OS/2 subsetting not needed
+08:51:28 INFO fontTools.subset: cmap subsetted
+08:51:28 INFO fontTools.subset: post subsetted
+08:51:28 INFO fontTools.subset: CFF  subsetted
+08:51:28 INFO fontTools.subset: hmtx subsetted
+08:51:28 INFO fontTools.subset: GDEF subsetted
+08:51:28 INFO fontTools.subset: GPOS subsetted
+08:51:28 INFO fontTools.subset: GSUB subsetted
+08:51:28 INFO fontTools.subset: name subsetting not needed
+08:51:28 INFO fontTools.subset: head pruned
+08:51:28 INFO fontTools.subset: OS/2 Unicode ranges pruned: [0, 1, 60]
+08:51:28 INFO fontTools.subset: OS/2 CodePage ranges pruned: [0]
+08:51:28 INFO fontTools.subset: CFF  pruned
+08:51:28 INFO fontTools.subset: GDEF pruned
+08:51:28 INFO fontTools.subset: GPOS pruned
+08:51:28 INFO fontTools.subset: GSUB pruned
+08:51:28 INFO fontTools.subset: name pruned
+08:51:28 INFO fontTools.subset: maxp pruned
+08:51:28 INFO fontTools.subset: cmap pruned
+08:51:28 INFO fontTools.subset: post pruned
+08:51:28 INFO fontTools.subset: CFF  pruned
+08:51:28 INFO fontTools.subset: GPOS pruned
+08:51:28 INFO fontTools.subset: GSUB pruned
+08:51:28 INFO fontTools.subset: Added .notdef to subset
+08:51:28 INFO fontTools.subset: Closing glyph list over 'GSUB': 6 glyphs before
+08:51:28 INFO fontTools.subset: Glyph names: ['.notdef', 'colon', 'equal.case', 'hyphen.case', 'parenleft.case', 'parenright.case']
+08:51:28 INFO fontTools.subset: Glyph IDs:   [0, 1448, 1449, 1473, 1507, 1535]
+08:51:28 INFO fontTools.subset: Closed glyph list over 'GSUB': 7 glyphs after
+08:51:28 INFO fontTools.subset: Glyph names: ['.notdef', 'colon', 'colon.case', 'equal.case', 'hyphen.case', 'parenleft.case', 'parenright.case']
+08:51:28 INFO fontTools.subset: Glyph IDs:   [0, 1448, 1449, 1473, 1507, 1508, 1535]
+08:51:28 INFO fontTools.subset: Closing glyph list over 'CFF ': 7 glyphs before
+08:51:28 INFO fontTools.subset: Glyph names: ['.notdef', 'colon', 'colon.case', 'equal.case', 'hyphen.case', 'parenleft.case', 'parenright.case']
+08:51:28 INFO fontTools.subset: Glyph IDs:   [0, 1448, 1449, 1473, 1507, 1508, 1535]
+08:51:28 INFO fontTools.subset: Closed glyph list over 'CFF ': 7 glyphs after
+08:51:28 INFO fontTools.subset: Glyph names: ['.notdef', 'colon', 'colon.case', 'equal.case', 'hyphen.case', 'parenleft.case', 'parenright.case']
+08:51:28 INFO fontTools.subset: Glyph IDs:   [0, 1448, 1449, 1473, 1507, 1508, 1535]
+08:51:28 INFO fontTools.subset: Retaining 7 glyphs
+08:51:28 INFO fontTools.subset: head subsetting not needed
+08:51:28 INFO fontTools.subset: hhea subsetting not needed
+08:51:28 INFO fontTools.subset: maxp subsetting not needed
+08:51:28 INFO fontTools.subset: OS/2 subsetting not needed
+08:51:28 INFO fontTools.subset: cmap subsetted
+08:51:28 INFO fontTools.subset: post subsetted
+08:51:28 INFO fontTools.subset: CFF  subsetted
+08:51:28 INFO fontTools.subset: hmtx subsetted
+08:51:28 INFO fontTools.subset: GDEF subsetted
+08:51:28 INFO fontTools.subset: GPOS subsetted
+08:51:28 INFO fontTools.subset: GSUB subsetted
+08:51:28 INFO fontTools.subset: name subsetting not needed
+08:51:28 INFO fontTools.subset: head pruned
+08:51:28 INFO fontTools.subset: OS/2 Unicode ranges pruned: [0, 60]
+08:51:28 INFO fontTools.subset: OS/2 CodePage ranges pruned: [0]
+08:51:28 INFO fontTools.subset: CFF  pruned
+08:51:28 INFO fontTools.subset: GDEF pruned to empty; dropped
+08:51:28 INFO fontTools.subset: GPOS pruned
+08:51:28 INFO fontTools.subset: GSUB pruned
+08:51:28 INFO fontTools.subset: name pruned
+08:51:28 INFO mshi: us_r2              OK (1.9s)
+08:51:28 WARNING mshi: stages not completed: {'europe_geo_sensitivity': 'error: ControlMismatch: full locked Europe set: max |diff| 271 from the locked primary metrics; the sensitivity analysis is not reported'}
+build + smoke_subset exit: 0
+smoke run of the stages after the site build: exit code 1
+  features                 ok
+  clean_test               (not run: excluded from smoke runs)
+  repro_checks             (not run: excluded from smoke runs)
+  noise_ceiling            ok
+  europe_geo_sensitivity   error: ControlMismatch: full locked Europe set: max |diff| 271 from the locked primary metrics; the sensitivity analysis is not reported
+  features_analysis        ok
+  transfer_matrix          ok
+  within_continent         ok
+  aoa_sensitivity          ok
+  us_r2                    ok

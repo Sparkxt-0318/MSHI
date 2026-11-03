@@ -1,0 +1,2 @@
+max relative differences, module vs CAST transcription over 30 random cases: {'di': 7.193995287638024e-13, 'tdi': 9.97129646833936e-13, 'thr': np.float64(5.169168508672606e-15), 'aoa_mismatch': 0}
+dbar: module mean over unordered pairs == CAST mean of per-point averages (checked through the DI above)

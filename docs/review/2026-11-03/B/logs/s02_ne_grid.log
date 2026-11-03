@@ -1,0 +1,13 @@
+85699 land cells, 1s
+area (million km2) by continent_geo:
+ continent_geo
+Africa           30.01
+Antarctica       12.24
+Asia             44.13
+Europe            9.81
+North America    24.22
+Oceania           8.53
+South America    17.76
+Name: area_km2, dtype: float64
+North America: Greenland share of area = 0.089 (cells 2658 of 14852)
+Europe subunits with the largest area: {'Russia': 3.89, 'Ukraine': 0.58, 'France': 0.53, 'Spain': 0.49, 'Sweden': 0.44, 'Germany': 0.36}

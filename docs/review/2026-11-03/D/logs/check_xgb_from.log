@@ -1,0 +1,4 @@
+transfer_matrix learner_settings XGB: {'max_depth': 6, 'n_estimators': 100, 'from': 'phase2.transfer.xgb_alt'}
+us_r2 learner_settings XGB: {'max_depth': 3, 'n_estimators': 250, 'from': 'clean_test.locked.xgb'}
+OLS-TP: transfer_matrix r2 0.611631 rmse_log 0.344355 | us_r2 r2 0.611631 rmse_log 0.344355 | equal: True
+XGB: transfer_matrix r2 0.546899 rmse_log 0.371948 | us_r2 r2 0.533340 rmse_log 0.377472 | equal: False

@@ -1,0 +1,11 @@
+clean_test.locked.xgb: {'n_estimators': 250, 'max_depth': 3, 'learning_rate': 0.05, 'subsample': 0.85, 'colsample_bytree': 0.85, 'min_child_weight': 4, 'reg_alpha': 0.5, 'reg_lambda': 2.0, 'n_jobs': 2, 'verbosity': 0}
+committed phase2.transfer.xgb_from: clean_test.locked.xgb
+transfer_matrix XGB settings: {'learning_rate': 0.025, 'from': 'phase2.transfer.xgb_alt2'}
+us_r2 XGB settings:           {'learning_rate': 0.05, 'from': 'clean_test.locked.xgb'}
+[seed-3 synth] OLS-TP: n_test 88/88; r2 transfer_matrix 0.515323 vs us_r2 0.515323; ci ['0.1471', '0.6848'] vs ['0.1471', '0.6848']; equal: True
+[seed-3 synth] XGB: n_test 88/88; r2 transfer_matrix 0.427901 vs us_r2 0.370959; ci ['-0.0050', '0.5927'] vs ['-0.0776', '0.5503']; equal: False
+aoa.fit_xgb == XGB(xgb_from block): False | == XGB(clean_test.locked.xgb): True | max |aoa - xgb_from block| = 0.2529754638671875
+transfer.fit_learner XGB == XGB(xgb_from block): True
+transfer Spec.from_cfg with dangling xgb_from: KeyError: 'nope'
+us_r2 Settings.from_cfg with dangling xgb_from: accepted; describe()['XGB']['from'] = clean_test.locked.xgb
+today: transfer Spec xgb == clean_test.locked.xgb: True | us_r2 Settings xgb == locked: True

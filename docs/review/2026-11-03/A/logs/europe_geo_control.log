@@ -1,0 +1,4 @@
+(0) unchanged features: control passes, n = 232
+(1) table changed after features.json recorded it -> refused: results/features.json: its output /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpa
+(2) re-recorded features with one Asia bio01 changed -> ControlMismatch: full locked Europe set: max |diff| 0.0259 from the locked primary metrics; the sensitivity analysis  ; result written: False
+(3) locked plan and locked results unchanged: True

@@ -1,0 +1,21 @@
+GAM settings: {'features': ['bio01', 'bio12'], 'log': ['bio12'], 'df': 6, 'degree': 3, 'penalty_criterion': 'aic', 'penalty_optimizer': 'nm', 'extrapolation': 'linear'}
+n=386 alpha=[132.583, 0.944] edf=6.93 aic=175.99 deterministic=True
+    bio01-lo: jump=5.19e-07 slope_in=0.1056 slope_out=0.1056 far 2nd diff=0.0e+00 far slope=0.1056
+    bio01-hi: jump=2.15e-06 slope_in=0.0862 slope_out=0.0862 far 2nd diff=1.8e-15 far slope=0.0862
+    ln bio12-lo: jump=1.45e-06 slope_in=0.3004 slope_out=0.3004 far 2nd diff=0.0e+00 far slope=0.3004
+    ln bio12-hi: jump=1.33e-06 slope_in=0.1666 slope_out=0.1666 far 2nd diff=0.0e+00 far slope=0.1666
+n=233 alpha=[186.711, 1231714298023.646] edf=5.23 aic=113.42 deterministic=True
+    bio01-lo: jump=4.52e-07 slope_in=0.0904 slope_out=0.0904 far 2nd diff=8.9e-16 far slope=0.0904
+    bio01-hi: jump=1.46e-06 slope_in=0.0590 slope_out=0.0590 far 2nd diff=1.8e-15 far slope=0.0590
+    ln bio12-lo: jump=1.46e-06 slope_in=0.2793 slope_out=0.2793 far 2nd diff=0.0e+00 far slope=0.2793
+    ln bio12-hi: jump=2.29e-06 slope_in=0.2793 slope_out=0.2793 far 2nd diff=-1.8e-15 far slope=0.2793
+n=120 alpha=[46.187, 866239581.81] edf=5.53 aic=64.19 deterministic=True
+    bio01-lo: jump=6.65e-07 slope_in=0.1414 slope_out=0.1414 far 2nd diff=0.0e+00 far slope=0.1414
+    bio01-hi: jump=2.60e-06 slope_in=0.1077 slope_out=0.1077 far 2nd diff=-1.8e-15 far slope=0.1077
+    ln bio12-lo: jump=1.66e-06 slope_in=0.2949 slope_out=0.2949 far 2nd diff=0.0e+00 far slope=0.2949
+    ln bio12-hi: jump=2.40e-06 slope_in=0.2949 slope_out=0.2949 far 2nd diff=0.0e+00 far slope=0.2949
+n=60 alpha=[46.86, 922199859.983] edf=5.19 aic=17.70 deterministic=True
+    bio01-lo: jump=5.03e-07 slope_in=0.1112 slope_out=0.1112 far 2nd diff=8.9e-16 far slope=0.1112
+    bio01-hi: jump=1.70e-06 slope_in=0.0687 slope_out=0.0687 far 2nd diff=0.0e+00 far slope=0.0687
+    ln bio12-lo: jump=1.39e-06 slope_in=0.2670 slope_out=0.2670 far 2nd diff=0.0e+00 far slope=0.2670
+    ln bio12-hi: jump=2.04e-06 slope_in=0.2670 slope_out=0.2670 far 2nd diff=1.8e-15 far slope=0.2670

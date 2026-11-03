@@ -1,0 +1,20 @@
+mshi imported from /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/verify_A/sb/repo22/mshi
+reproduction_check.json      current under 22dec94 code: True (None)
+noise_ceiling.json           current under 22dec94 code: True (None)
+build_sites_analysis.json    current under 22dec94 code: True (None)
+committed table summary: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 17, 'STALE': 0}
+  gate for noise_ceiling            needs=site_build                     -> ok
+  gate for europe_geo_sensitivity   needs=site_build/locked_test/npp     -> results/reproduction_check.json has {'NOT RUN': 10}
+  gate for features_analysis        needs=site_build/locked_test/npp     -> results/reproduction_check.json has {'NOT RUN': 10}
+  gate for transfer_matrix          needs=site_build/locked_test/npp     -> results/reproduction_check.json has {'NOT RUN': 10}
+  gate for within_continent         needs=site_build/locked_test/npp     -> results/reproduction_check.json has {'NOT RUN': 10}
+  gate for aoa_sensitivity          needs=site_build/locked_test/npp     -> results/reproduction_check.json has {'NOT RUN': 10}
+  gate for us_r2                    needs=site_build/locked_test/npp     -> results/reproduction_check.json has {'NOT RUN': 10}
+noise_ceiling.json top-level keys: ['data', 'exploratory', 'fits', 'formulas', 'groups', 'method', 'settings', 'variant', 'versions']
+noise_ceiling.json _inputs: ['build_sites_analysis.json']
+README (22dec94) lines 25-27: upstream stages, e.g. `make all`), or a stage was skipped because of one of these. Stages of later phases run only after a complete, passing reproduction table: current, and no FAIL, STALE or NOT RUN row (smoke runs do not apply this gate).
+README (HEAD)   lines 25-27: upstream stages, e.g. `make all`), or a stage was skipped because of one of these. Stages of later phases run only after a complete, passing reproduction table: current, and no FAIL, STALE or NOT RUN row (smoke runs do not apply this gate).
+README (HEAD)   lines 59-61: Stages after `repro_checks` (later phases; all exploratory) run only if the reproduction rows they build on passed: a stage that uses the gridded features needs the whole table, the noise ceiling only the site-build rows (D-P2-5).
+  run log: 2026-11-03T03:44:44+00:00 repro_checks   ok                                       commit 92b5914edd28b7d67c06398abd0a85642761388e+dirty invocation ['cosore_annual', 'build_sites', 'site_diagnostics', 'build_sites_analysis', 'repro_checks']
+  run log: 2026-11-03T06:10:24+00:00 repro_checks   ok                                       commit 22dec9465bbe3387dce955ba0d2705066ad3387d invocation ['all']
+  run log: 2026-11-03T06:10:24+00:00 noise_ceiling  ok                                       commit 22dec9465bbe3387dce955ba0d2705066ad3387d invocation ['all']

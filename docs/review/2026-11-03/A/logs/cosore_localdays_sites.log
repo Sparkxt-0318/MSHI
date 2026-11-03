@@ -1,0 +1,30 @@
+                               utc          loc         tz       rel      dlog
+dataset                                                                       
+d20190821_LIU           443.932666   438.388274  Etc/GMT-8 -0.012489 -0.012568
+d20190430_DESAI        1404.371535  1394.398420  Etc/GMT+6 -0.007101 -0.007127
+d20190409_ANJILELI      478.284636   475.127739  Etc/GMT+8 -0.006600 -0.006622
+d20190918_MIAO          856.150137   851.305126  Etc/GMT+5 -0.005659 -0.005675
+d20200417_ARAIN_TP39    901.635775   905.243888  Etc/GMT+4  0.004002  0.003994
+d20200212_KAYE_LSW     1923.831413  1930.848487  Etc/GMT+5  0.003647  0.003641
+d20200212_KAYE_LNW      948.878860   951.844565  Etc/GMT+5  0.003125  0.003121
+d20190526_MINIONS_EML   188.144326   187.578069  Etc/GMT+9 -0.003010 -0.003014
+d20200212_KAYE_LSE     1160.651026  1163.649142  Etc/GMT+5  0.002583  0.002580
+d20200212_KAYE_UNW      767.061665   765.139563  Etc/GMT+5 -0.002506 -0.002509
+max |rel| site: 0.012489262971632886 median 0.00107616140118727
+tz
+Etc/GMT+5              299
+Etc/GMT+8              105
+Etc/GMT-1               32
+Etc/GMT+4               30
+Etc/GMT-8               29
+Etc/GMT-9               29
+Etc/GMT+6               21
+Etc/GMT-7               21
+Etc/GMT+7               18
+Etc/GMT+3               15
+UTC                     10
+Etc/GMT+9                9
+America/Puerto_Rico      6
+Etc/GMT-11               3
+Asia/Tokyo               2
+Name: count, dtype: int64

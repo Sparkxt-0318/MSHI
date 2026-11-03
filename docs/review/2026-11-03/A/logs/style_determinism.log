@@ -1,0 +1,6 @@
+[PosixPath('sb/style/fig1.png'), PosixPath('sb/style/fig1.pdf')]
+[PosixPath('sb/style/fig2.png'), PosixPath('sb/style/fig2.pdf')]
+png identical across processes: True 5d69f26d4ec3
+pdf identical across processes: True 1c156688256b
+PDF date fields: [] ; Producer/Creator: []
+PNG text chunks: []

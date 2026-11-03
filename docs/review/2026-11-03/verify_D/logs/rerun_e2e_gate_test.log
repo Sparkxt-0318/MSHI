@@ -1,0 +1,27 @@
+us_r2              skipped: reproduction gate closed (repro_checks: results/reproduction_check.json has {'FAIL': 1, 'NOT RUN': 8})
+stages not completed: {'us_r2': "skipped: reproduction gate closed (repro_checks: results/reproduction_check.json has {'FAIL': 1, 'NOT RUN': 8})"}
+repro_checks failed
+Traceback (most recent call last):
+  File "/home/user/MSHI/mshi/run.py", line 226, in run
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+  File "/home/user/MSHI/mshi/analysis/repro_checks.py", line 225, in repro_checks
+    raise ReproductionFailure(f"{summary['FAIL']} reproduction target(s) outside tolerance: {bad}; "
+                              "see results/reproduction_check.md. Stop and report (ground rule 2).")
+mshi.analysis.repro_checks.ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2).
+noise_ceiling      skipped: reproduction gate closed (repro_checks: error: ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2).)
+us_r2              skipped: reproduction gate closed (repro_checks: error: ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2).)
+stages not completed: {'repro_checks': "error: ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2).", 'noise_ceiling': "skipped: reproduction gate closed (repro_checks: error: ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2).)", 'us_r2': "skipped: reproduction gate closed (repro_checks: error: ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2).)"}
+us_r2              skipped: reproduction gate closed (repro_checks: results/reproduction_check.json has {'FAIL': 1})
+stages not completed: {'us_r2': "skipped: reproduction gate closed (repro_checks: results/reproduction_check.json has {'FAIL': 1})"}
+S1 stored table summary: {'PASS': 17, 'FAIL': 1, 'DEVIATION': 0, 'STALE': 0, 'NOT RUN': 8, 'INFO': 1}
+S1 run(['noise_ceiling','us_r2']): (2, {'noise_ceiling': 'ok', 'us_r2': "skipped: reproduction gate closed (repro_checks: results/reproduction_check.json has {'FAIL': 1, 'NOT RUN': 8})"}, ['noise_ceiling'])
+S2 run(['repro_checks','noise_ceiling','us_r2']): (1, {'repro_checks': "error: ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2).", 'noise_ceiling': "skipped: reproduction gate closed (repro_checks: error: ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2).)", 'us_r2': "skipped: reproduction gate closed (repro_checks: error: ReproductionFailure: 1 reproduction target(s) outside tolerance: ['NPP r vs committed NPP (original 889 sites)']; see results/reproduction_check.md. Stop and report (ground rule 2).)"}, [])
+S2 stored table summary: {'DEVIATION': 0, 'FAIL': 1, 'INFO': 1, 'NOT RUN': 0, 'PASS': 25, 'STALE': 0} | FAIL rows: [('NPP r vs committed NPP (original 889 sites)', 'npp')]
+S2 site_build rows: {'PASS'}
+S3 run(['noise_ceiling','us_r2']): (2, {'noise_ceiling': 'ok', 'us_r2': "skipped: reproduction gate closed (repro_checks: results/reproduction_check.json has {'FAIL': 1})"}, ['noise_ceiling'])
+S3 _gate_status(site_build): ok
+
+real	0m3.347s
+user	0m3.404s
+sys	0m0.466s

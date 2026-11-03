@@ -1,0 +1,3 @@
+Asia: n=386 heights equal (rtol 1e-9)=True NaN heights scipy=0 naive=0 monotone=True cut mismatches over 83 grid q: []
+Europe: n=233 heights equal (rtol 1e-9)=True NaN heights scipy=0 naive=0 monotone=True cut mismatches over 78 grid q: []
+North America: n=246 heights equal (rtol 1e-9)=True NaN heights scipy=0 naive=0 monotone=True cut mismatches over 79 grid q: []

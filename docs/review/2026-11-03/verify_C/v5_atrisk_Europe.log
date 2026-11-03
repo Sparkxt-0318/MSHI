@@ -1,0 +1,4 @@
+== Europe: stage fits of 200 replicates in 192 s; status {'ok': 200}; replicates with an unusable candidate: 2 [(131, {'interior': 'not_converged'}), (140, {'no_study': 'llf_inf'})]
+  b=131: kept no_study s2 [0.17922, 0.0, 0.11108] llf -348.23697 | my max s2 [0.17922, 0.0, 0.11108] llf -348.23697 | gap 1.72e-10
+  b=140: kept interior s2 [0.0552, 0.11748, 0.08656] llf -325.07978 | my max s2 [0.05519, 0.11749, 0.08656] llf -325.07978 | gap 6.32e-08
+done in 268 s

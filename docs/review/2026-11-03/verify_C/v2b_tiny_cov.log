@@ -1,0 +1,16 @@
+cov_re/scale =   1e-300: statsmodels REML loglike -596.7903917548365
+cov_re/scale =   1e-200: statsmodels REML loglike -596.7903917548365
+cov_re/scale =   1e-100: statsmodels REML loglike -596.7903917548365
+cov_re/scale =    1e-50: statsmodels REML loglike -596.7903917548365
+cov_re/scale =    1e-30: statsmodels REML loglike -596.7903917548365
+cov_re/scale =    1e-20: statsmodels REML loglike -596.7903917548365
+cov_re/scale =    1e-17: statsmodels REML loglike -596.7903917548365
+cov_re/scale =    1e-16: statsmodels REML loglike -596.7903917548365
+cov_re/scale =    1e-15: statsmodels REML loglike -596.7903917548363
+cov_re/scale =    1e-14: statsmodels REML loglike -596.790391754834
+cov_re/scale =    1e-13: statsmodels REML loglike -596.7903917548106
+cov_re/scale =    1e-12: statsmodels REML loglike -596.7903917545786
+cov_re/scale =    1e-10: statsmodels REML loglike -85.3486342887868
+cov_re/scale =    1e-08: statsmodels REML loglike -85.34863307253687
+cov_re/scale =    1e-06: statsmodels REML loglike -85.34851144825342
+cov_re/scale =    1e-04: statsmodels REML loglike -85.33635609242248

@@ -1,0 +1,31 @@
+== R1: results/features_analysis.json missing
+   exit=2
+    transfer_matrix | stale: results/features_analysis.json: missing; re-run the stage that writes it (or `make all`) | exploratory True
+    within_continent | skipped: upstream transfer_matrix not available | exploratory True
+    aoa_sensitivity | stale: results/features_analysis.json: missing; re-run the stage that writes it (or `make all`) | exploratory True
+    us_r2 | stale: results/features_analysis.json: missing; re-run the stage that writes it (or `make all`) | exploratory True
+== R2: interim/features_analysis_qc.parquet changed after its run
+   exit=2
+    transfer_matrix | stale: results/features_analysis.json: its output /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/D/e | exploratory True
+    within_continent | skipped: upstream transfer_matrix not available | exploratory True
+    aoa_sensitivity | stale: results/features_analysis.json: its output /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/D/e | exploratory True
+    us_r2 | stale: results/features_analysis.json: its output /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/D/e | exploratory True
+== R2b: interim/features_analysis_repo.parquet changed (read only by us_r2)
+   exit=2
+    us_r2 | stale: results/features_analysis.json: its output /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/D/e | exploratory True
+== R3: interim/transfer_predictions_qc.parquet changed after its run
+   exit=2
+    within_continent | stale: results/transfer_matrix.json: its output /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/D/e2e | exploratory True
+== R4: derived/records_analysis.parquet changed after its run
+   exit=2
+    noise_ceiling | skipped: reproduction gate closed (repro_checks: stale: results/reproduction_check.json: its input results/clean_test_rerun_qc.json is not c | exploratory True
+    us_r2 | skipped: reproduction gate closed (repro_checks: stale: results/reproduction_check.json: its input results/clean_test_rerun_qc.json is not c | exploratory True
+== R5: fetch_worldclim raster replaced (within_continent and aoa read the climate grid)
+   exit=2
+    within_continent | skipped: reproduction gate closed (repro_checks: stale: results/reproduction_check.json: its input results/clean_test_rerun_qc.json is not c | exploratory True
+    aoa_sensitivity | skipped: reproduction gate closed (repro_checks: stale: results/reproduction_check.json: its input results/clean_test_rerun_qc.json is not c | exploratory True
+== R6: another config (phase2.bootstrap.n + 1)
+   exit=2
+    noise_ceiling | skipped: reproduction gate closed (repro_checks: stale: results/reproduction_check.json: produced with a different config; re-run the stage  | exploratory True
+    us_r2 | skipped: reproduction gate closed (repro_checks: stale: results/reproduction_check.json: produced with a different config; re-run the stage  | exploratory True
+   direct us_r2 call refused: StaleInputError results/features_analysis.json: produced with a different config; re-run the stage that writes it (or `make all`)

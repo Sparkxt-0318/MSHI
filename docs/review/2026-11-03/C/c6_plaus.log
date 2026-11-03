@@ -1,0 +1,8 @@
+estimates outside their CI:
+Africa shares sum 1.0 supp True 28
+Asia shares sum 0.9999999999999999 supp False 386
+Europe shares sum 1.0 supp False 233
+North America shares sum 1.0 supp False 246
+Oceania shares sum 1.0 supp True 28
+South America shares sum 1.0 supp False 44
+pooled shares sum 1.0 supp False 965

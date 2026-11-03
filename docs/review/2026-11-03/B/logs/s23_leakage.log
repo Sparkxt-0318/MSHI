@@ -1,0 +1,19 @@
+site v3aqc_00007: 16 of 16 (table, train, learner) predictions and nulls bit-identical
+                                pred_log  null_log      pert  same
+table    train         learner                                    
+loco     LOCO          GAM      6.544706  7.693318  6.544706  True
+                       OLS-TP   6.552230  7.693318  6.552230  True
+                       RF       6.798288  7.693318  6.798288  True
+                       XGB      6.642395  7.693318  6.642395  True
+pairwise Asia          GAM      6.665128  7.821037  6.665128  True
+                       OLS-TP   6.682607  7.821037  6.682607  True
+                       RF       6.933355  7.821037  6.933355  True
+                       XGB      6.846081  7.821037  6.846081  True
+         North America GAM      6.479270  7.292494  6.479270  True
+                       OLS-TP   6.441796  7.292494  6.441796  True
+                       RF       6.716625  7.292494  6.716625  True
+                       XGB      6.455729  7.292494  6.455729  True
+         South America GAM      6.914386  8.437438  6.914386  True
+                       OLS-TP   6.903163  8.437438  6.903163  True
+                       RF       7.654230  8.437438  7.654230  True
+                       XGB      7.949159  8.437438  7.949159  True

@@ -1,0 +1,19 @@
+--- brief, Phase 2 item 3 (the whole text on the noise ceiling):
+114:3. **Noise ceiling.** Rerun E1 and N3 with a 3-level REML model (site / study within site / record) by continent. Report both ceilings: for a new record from the same study, and for one from an independent study.
+--- any formula / J_i / 'site mean' / 'equal' in the brief and the handoff bundle docs:
+/home/user/MSHI/docs/handoff/PROMPT_mshi_v3.md:201:- Diggle, Menezes & Su 2010 *JRSS-C*, doi:10.1111/j.1467-9876.2009.00701.x (preferential sampling).
+/home/user/MSHI/docs/handoff/PROMPT_mshi_v3.md:208:- Janssens et al. 2001, doi:10.1046/j.1365-2486.2001.00412.x.
+/home/user/MSHI/docs/handoff/PROMPT_mshi_v3.md:216:- Wadoux et al. 2021, doi:10.1016/j.ecolmodel.2021.109692.
+/home/user/MSHI/docs/handoff/PROMPT_mshi_v3.md:219:- Chu et al. 2021 *AFM*, doi:10.1016/j.agrformet.2021.108350.
+/home/user/MSHI/docs/handoff/prep_log.md:154:- **D7:** QC filters, coordinate check (>100 km from reported country), 5-km site merging with site-mean log Rs target, Natural Earth continents (Russia split at 60°E). 971 QC sites: Asia 387, N America 257, Europe 236, S America 42, Africa 26, Oceania 23.
+/home/user/MSHI/docs/handoff/prep_log.md:165:- **E1 noise ceiling:** ICC of log Rs among records within 5 km = 0.75 (605 sites); ceiling R² ≈ 0.75 single record, ≈ 0.84 site mean. Within-site variance mostly plot-to-plot.
+/home/user/MSHI/docs/handoff/prep_log.md:168:- **E4 ablation:** site-mean vs single-record target: no change. Test region drives R²: CONUS box 0.13 (RMSE 0.56); NA outside box 0.51 (RMSE 0.66); all NA 0.31. **R² is not comparable across transfer tests → always report RMSE + skill vs constant.**
+--- where the attribution 'the brief's formula' / 'brief's equal-study-weight formula' appears:
+/home/user/MSHI/mshi/analysis/noise_ceiling.py:49:  ``site_mean_equal_study_weights`` puts s2_study / J_i (J_i studies) in place of the first term (the brief's formula):
+/home/user/MSHI/mshi/analysis/noise_ceiling.py:131:                                             "studies at site i (the brief's formula; exact for equal m_ij)",
+grep: /home/user/MSHI/mshi/analysis/__pycache__/noise_ceiling.cpython-313.pyc: binary file matches
+/home/user/MSHI/tests/test_noise_ceiling.py:192:    # the brief's formula: 0.1/1 + 0.05; 0.1/2 + 0.05/4; 0.1/1 + 0.05/4 -> mean 0.325/3
+/home/user/MSHI/results/noise_ceiling.json:33:  "ceiling_site_mean_equal_study_weights": "s2_site / (s2_site + mean_i (s2_study / J_i + s2_record / n_i)), J_i studies at site i (the brief's formula; exact for equal m_ij)",
+--- DECISIONS.md D-P2-9 (line-wrapped, so grep the two halves):
+861:with v_i = s²_study Σ_j (m_ij/n_i)² + s²_record/n_i (exact for how site means are built; the brief's
+862:equal-study-weight formula, s²_study/J_i + s²_record/n_i, is reported alongside and differs by at most about

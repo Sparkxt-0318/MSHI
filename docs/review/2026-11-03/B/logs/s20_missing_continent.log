@@ -1,0 +1,5 @@
+dtype: str values: ['Europe', 'Asia', 'North America', nan, nan, 'Europe']
+Europe domain: [[10.25, 50.25], [10.25, 50.25], [10.25, 50.25]]
+string -> ERROR ValueError Cannot mask with non-boolean array containing NA / NaN values
+object -> 10
+category -> 10

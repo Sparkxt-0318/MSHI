@@ -1,0 +1,39 @@
+== Asia (sites 386, multi-study share 0.254)
+  (a) new study       sim R2 0.6230   ceiling_independent_study 0.6265
+  (b) observed study, pred = site effect          sim R2 0.6237
+  (b) observed study, pred = site + study effect  sim R2 0.8355   ceiling_same_study 0.8373
+  (b) observed study, pred = site + weighted mean of its b (best site-constant) sim R2 0.8065
+  (c) site mean       sim R2 0.6941   ceiling_site_mean 0.6956
+  E[check_site_mean_var_diff] -0.00099  E[check_singleton_var_diff] 9.909711048236492e-05
+== Europe (sites 233, multi-study share 0.197)
+  (a) new study       sim R2 0.5727   ceiling_independent_study 0.5739
+  (b) observed study, pred = site effect          sim R2 0.5713
+  (b) observed study, pred = site + study effect  sim R2 0.7420   ceiling_same_study 0.7460
+  (b) observed study, pred = site + weighted mean of its b (best site-constant) sim R2 0.7253
+  (c) site mean       sim R2 0.6478   ceiling_site_mean 0.6518
+  E[check_site_mean_var_diff] +0.00023  E[check_singleton_var_diff] 0.0026260953566945152
+== North America (sites 246, multi-study share 0.228)
+  (a) new study       sim R2 0.8125   ceiling_independent_study 0.8132
+  (b) observed study, pred = site effect          sim R2 0.8135
+  (b) observed study, pred = site + study effect  sim R2 0.8903   ceiling_same_study 0.8905
+  (b) observed study, pred = site + weighted mean of its b (best site-constant) sim R2 0.8816
+  (c) site mean       sim R2 0.8657   ceiling_site_mean 0.8656
+  E[check_site_mean_var_diff] +0.00265  E[check_singleton_var_diff] 0.0042061799604448105
+== South America (sites 44, multi-study share 0.227)
+  (a) new study       sim R2 0.6643   ceiling_independent_study 0.6756
+  (b) observed study, pred = site effect          sim R2 0.6507
+  (b) observed study, pred = site + study effect  sim R2 0.6507   ceiling_same_study 0.6756
+  (b) observed study, pred = site + weighted mean of its b (best site-constant) sim R2 0.6507
+  (c) site mean       sim R2 0.7929   ceiling_site_mean 0.8078
+  E[check_site_mean_var_diff] +0.00256  E[check_singleton_var_diff] 0.025123242570125864
+== pooled (sites 965, multi-study share 0.223)
+  (a) new study       sim R2 0.6793   ceiling_independent_study 0.6795
+  (b) observed study, pred = site effect          sim R2 0.6802
+  (b) observed study, pred = site + study effect  sim R2 0.8396   ceiling_same_study 0.8397
+  (b) observed study, pred = site + weighted mean of its b (best site-constant) sim R2 0.8216
+  (c) site mean       sim R2 0.7458   ceiling_site_mean 0.7452
+  E[check_site_mean_var_diff] +0.00156  E[check_singleton_var_diff] 0.0002937243227627776
+
+real	0m4.803s
+user	0m4.708s
+sys	0m0.578s

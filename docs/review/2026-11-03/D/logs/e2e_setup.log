@@ -1,0 +1,4 @@
+config: /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/D/e2e/v3_sandbox.yaml
+worldclim zip: /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/D/e2e/sb/raw/worldclim/2.1/wc2.1_2.5m_bio.zip 889b56070ffa36e30b529d2a97c1df17b7823edcab9d4d778dd4e58c075c74bb
+soilgrids ok
+land cells (0.25): 360071

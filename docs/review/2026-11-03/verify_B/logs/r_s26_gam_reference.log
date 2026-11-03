@@ -1,0 +1,27 @@
+alpha        max|ref - OLS(1,bio01,ln bio12)|   max|statsmodels - ref|   statsmodels edf   statsmodels aic
+1e0         2.36e-01                        1.06e-13                7.77                43.29
+1e4         1.41e-03                        5.71e-13                3.09                36.34
+1e8         1.47e-07                        5.00e-09                3.00                36.17
+1e10        1.47e-09                        5.16e-06                3.00                36.17
+1e12        1.47e-11                        5.71e-04                3.00                36.17
+1e13        1.48e-12                        1.59e-05                3.00                36.17
+1e14        1.51e-13                        9.53e-03                2.98                36.17
+1e15        1.78e-14                        2.20e-01                2.60                53.11
+1e16        2.22e-14                        4.24e-01                2.22                94.95
+1e18        2.31e-14                        6.92e-01                1.40               196.99
+1e20        2.31e-14                        9.38e-01                1.01               284.14
+
+49 training sets; fit_gam vs reference at the selected alpha, largest differences:
+  8.48e-03  transfer train South America     alpha=['1.6e+15', '6.7e+02'] edf=2.99 aic=2.08
+  6.23e-03  Europe seed 42 fold 4            alpha=['4.3e+02', '1.4e+14'] edf=3.79 aic=26.34
+  6.06e-03  Europe seed 43 fold 3            alpha=['4.6e+02', '1.8e+14'] edf=3.81 aic=41.34
+  6.01e-03  Europe seed 44 fold 2            alpha=['4.9e+02', '2.8e+14'] edf=3.75 aic=36.84
+  5.93e-03  Europe seed 44 fold 1            alpha=['4.4e+02', '1.6e+14'] edf=3.88 aic=42.28
+  5.81e-03  transfer train Europe            alpha=['6.3e+02', '1.0e+15'] edf=3.76 aic=37.57
+  5.77e-03  Europe seed 43 fold 1            alpha=['5.6e+02', '5.7e+14'] edf=3.73 aic=22.55
+  5.57e-03  Europe seed 42 fold 2            alpha=['4.5e+02', '1.8e+14'] edf=3.81 aic=40.23
+sets with max |difference| > 1e-3: 37 ; > 1e-2: 0
+
+real	1m34.008s
+user	1m33.102s
+sys	0m0.323s

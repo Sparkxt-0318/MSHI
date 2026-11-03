@@ -1,0 +1,11 @@
+no_study lbfgs: converged True llf inf cov_re [0.] scale 0.0881526226658691
+  params_object.cov_re [0.]  slogdet SlogdetResult(sign=np.float64(0.0), logabsdet=np.float64(-inf))
+  optimiser history (last): None
+  loglike(profile_fe=True) at cov_re/scale = 1e-12: -596.790392
+  loglike(profile_fe=True) at cov_re/scale = 1e-06: -85.348511
+  loglike(profile_fe=True) at cov_re/scale = 0.7325: -69.690268
+  REML log-likelihood at cov_re = 0 by hand (OLS, intercept only): -85.348634
+no_study method=['lbfgs', 'bfgs']: converged True llf inf cov_re [0.]
+no_study method=['lbfgs', 'nm']: converged True llf inf cov_re [0.]
+fit_nested optimizer=lbfgs: chosen interior s2 (0.084484, 0.001051, 0.117562); candidate llfs interior -69.7419864024784, no_study inf, no_site inf
+fit_nested optimizer=('lbfgs', 'bfgs'): chosen interior s2 (0.084484, 0.001051, 0.117562); candidate llfs interior -69.7419864024784, no_study inf, no_site inf

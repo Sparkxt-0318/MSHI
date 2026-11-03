@@ -1,0 +1,5 @@
+08:11:06 INFO mshi: noise_ceiling      uses existing outputs of build_sites_analysis (not requested; checked for currency)
+08:11:06 WARNING mshi: noise_ceiling      skipped: reproduction gate closed (repro_checks: stale: results/reproduction_check.json: produced with a different config; re-run the stage that writes it (or `make all`))
+08:11:06 INFO mshi: us_r2              uses existing outputs of features_analysis, build_sites_analysis (not requested; checked for currency)
+08:11:06 WARNING mshi: us_r2              skipped: reproduction gate closed (repro_checks: stale: results/reproduction_check.json: produced with a different config; re-run the stage that writes it (or `make all`))
+08:11:06 WARNING mshi: stages not completed: {'noise_ceiling': 'skipped: reproduction gate closed (repro_checks: stale: results/reproduction_check.json: produced with a different config; re-run the stage that writes it (or `make all`))', 'us_r2': 'skipped: reproduction gate closed (repro_checks: stale: results/reproduction_check.json: produced with a different config; re-run the stage that writes it (or `make all`))'}

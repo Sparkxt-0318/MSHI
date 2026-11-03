@@ -1,0 +1,12 @@
+08:10:43 INFO mshi: transfer_matrix    uses existing outputs of features_analysis (not requested; checked for currency)
+08:10:43 INFO mshi: transfer_matrix    start
+08:10:43 INFO mshi: transfer_matrix    STALE (0.0s)
+08:10:43 INFO mshi: within_continent   uses existing outputs of fetch_worldclim (not requested; checked for currency)
+08:10:43 WARNING mshi: within_continent   skipped: upstream transfer_matrix not available
+08:10:43 INFO mshi: aoa_sensitivity    uses existing outputs of features_analysis, fetch_worldclim (not requested; checked for currency)
+08:10:43 INFO mshi: aoa_sensitivity    start
+08:10:43 INFO mshi: aoa_sensitivity    STALE (0.0s)
+08:10:43 INFO mshi: us_r2              uses existing outputs of features_analysis, build_sites_analysis (not requested; checked for currency)
+08:10:43 INFO mshi: us_r2              start
+08:10:43 INFO mshi: us_r2              STALE (0.0s)
+08:10:43 WARNING mshi: stages not completed: {'transfer_matrix': 'stale: results/features_analysis.json: missing; re-run the stage that writes it (or `make all`)', 'within_continent': 'skipped: upstream transfer_matrix not available', 'aoa_sensitivity': 'stale: results/features_analysis.json: missing; re-run the stage that writes it (or `make all`)', 'us_r2': 'stale: results/features_analysis.json: missing; re-run the stage that writes it (or `make all`)'}

@@ -1,0 +1,7 @@
+07:30:32 INFO mshi: modis_points       uses existing outputs of build_sites, build_sites_analysis (not requested; checked for currency)
+07:30:32 INFO mshi: modis_points       start
+07:30:32 INFO mshi.modis: modis_points: cached extraction matches the MODIS config, code, libraries and 1548 points
+07:30:32 INFO mshi: modis_points       OK (0.3s)
+07:30:32 INFO mshi: features           uses existing outputs of build_sites, fetch_worldclim, fetch_soilgrids (not requested; checked for currency)
+07:30:32 INFO mshi: features           start
+07:30:37 INFO mshi: features           OK (4.3s)

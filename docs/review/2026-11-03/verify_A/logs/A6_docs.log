@@ -1,0 +1,16 @@
+make data runs: ['fetch_srdb', 'fetch_cosore', 'fetch_naturalearth', 'cosore_annual', 'build_sites', 'repro_checks']
+  cosore_annual.csv            rows    66 | producer ['cosore_annual'] | run by `make data`: True | row count in derived README: 66
+  cosore_annual_analysis.csv   rows    39 | producer ['cosore_annual_analysis'] | run by `make data`: False | row count in derived README: not listed
+  records_analysis.parquet     rows  4810 | producer ['build_sites_analysis'] | run by `make data`: False | row count in derived README: not listed
+  records_v3.parquet           rows  4837 | producer ['build_sites'] | run by `make data`: True | row count in derived README: 4,837
+  sites_analysis_qc.parquet    rows   965 | producer ['build_sites_analysis'] | run by `make data`: False | row count in derived README: not listed
+  sites_analysis_repo.parquet  rows  1221 | producer ['build_sites_analysis'] | run by `make data`: False | row count in derived README: not listed
+  sites_v3_qc.parquet          rows   971 | producer ['build_sites'] | run by `make data`: True | row count in derived README: 971
+  sites_v3_repo.parquet        rows  1225 | producer ['build_sites'] | run by `make data`: True | row count in derived README: 1,225
+CC-BY 'changes made' note: ['Changes made: per-port fluxes were integrated to annual values and averaged per dataset (see']
+cosore_annual_analysis.csv columns: ['site_id', 'source', 'longitude', 'latitude', 'rs_annual', 'rs_annual_obs_mean', 'n_ports_qualifying', 'n_ports_total', 'site_name', 'igbp', 'primary_publication', 'other_publications', 'acknowledgment']
+main README line 74: | `data/derived/` | COSORE annual values, record and site tables of both builds (with licence and attribution notes) |
+README line 3: > **Status (2026-11-02): rebuild in progress — end of Phase 1.** This README is interim; i
+DECISIONS sections dated 2026-11-03: ["## 2026-11-03 — The author's decisions on Checkpoint 1 (Q-1–Q-8)", '## 2026-11-03 — Phase 2 (exploratory; started while the gridded sources are unreachable)']
+Makefile: ['all:            ## every stage, in order (fetch -> sites -> features -> locked test re-run -> reproduction checks)']
+--stage all runs after repro_checks: ['noise_ceiling', 'europe_geo_sensitivity', 'features_analysis', 'transfer_matrix', 'within_continent', 'aoa_sensitivity', 'us_r2']

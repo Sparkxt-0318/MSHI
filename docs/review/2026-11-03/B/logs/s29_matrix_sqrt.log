@@ -1,0 +1,5 @@
+alpha=1e8: largest singular value 6.74e+09; the 3 smallest (null space: constant + 2 linear trends) [2.84e-08 1.17e-10 0.00e+00]; kept by matrix_sqrt (> 1e-15): 10 of 11
+alpha=1e12: largest singular value 6.74e+13; the 3 smallest (null space: constant + 2 linear trends) [3.25e-03 2.22e-06 0.00e+00]; kept by matrix_sqrt (> 1e-15): 10 of 11
+alpha=1e14: largest singular value 6.74e+15; the 3 smallest (null space: constant + 2 linear trends) [0.06 0.   0.  ]; kept by matrix_sqrt (> 1e-15): 10 of 11
+alpha=1e15: largest singular value 6.74e+16; the 3 smallest (null space: constant + 2 linear trends) [2.08 0.01 0.  ]; kept by matrix_sqrt (> 1e-15): 10 of 11
+alpha=1e16: largest singular value 6.74e+17; the 3 smallest (null space: constant + 2 linear trends) [10.68  0.03  0.  ]; kept by matrix_sqrt (> 1e-15): 10 of 11

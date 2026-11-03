@@ -1,0 +1,118 @@
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+/home/user/MSHI/.venv/lib/python3.13/site-packages/statsmodels/gam/generalized_additive_model.py:1223: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = lm.WLS(aug_y, aug_x, aug_weights).fit()
+WARNING mshi: stages not completed: {'features_analysis': 'stale: /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/A/sb/chain/interim/modis_points.parquet (or its .meta.json) is missing; run stage modis_points'}
+exit code 2
+   features_analysis | stale: /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/A/sb/chain/interim/modis_points.parquet (or its .meta.json) is missing; run stage modis_points
+   within_continent | ok

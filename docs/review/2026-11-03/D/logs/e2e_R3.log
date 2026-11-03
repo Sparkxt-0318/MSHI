@@ -1,0 +1,4 @@
+08:10:56 INFO mshi: within_continent   uses existing outputs of transfer_matrix, fetch_worldclim (not requested; checked for currency)
+08:10:56 INFO mshi: within_continent   start
+08:10:56 INFO mshi: within_continent   STALE (0.2s)
+08:10:56 WARNING mshi: stages not completed: {'within_continent': 'stale: results/transfer_matrix.json: its output /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/D/e2e/sb/interim/transfer_predictions_qc.parquet changed after the run; re-run the stage that writes it (or `make all`)'}

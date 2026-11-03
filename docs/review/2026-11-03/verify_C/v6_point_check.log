@@ -1,0 +1,7 @@
+Asia           committed s2 [0.270411, 0.090971, 0.070218] (kept interior) llf statsmodels -645.684377 mine -645.684377 | best found -645.684377 s2 [0.270405, 0.090974, 0.070218] | gain 4.07e-08
+Europe         committed s2 [0.193849, 0.058136, 0.085805] (kept interior) llf statsmodels -351.070418 mine -351.070418 | best found -351.070418 s2 [0.193843, 0.058137, 0.085806] | gain 1.51e-08
+North America  committed s2 [0.354125, 0.033636, 0.04769] (kept interior) llf statsmodels -252.296217 mine -252.296217 | best found -252.296217 s2 [0.354128, 0.033636, 0.04769] | gain 1.85e-09
+South America  committed s2 [0.248035, 0.0, 0.119115] (kept no_study) llf statsmodels -79.496624 mine -79.496624 | best found -79.496624 s2 [0.24803, 0.0, 0.119116] | gain 2.18e-09
+Africa         committed s2 [0.065098, 0.61965, 0.043233] (kept interior) llf statsmodels -25.993895 mine -25.993895 | best found -25.993895 s2 [0.064654, 0.620103, 0.043232] | gain 1.10e-07
+Oceania        committed s2 [0.031689, 0.223914, 0.031106] (kept interior) llf statsmodels -9.404039 mine -9.404039 | best found -9.404039 s2 [0.031679, 0.223932, 0.031105] | gain 1.85e-08
+pooled         committed s2 [0.291481, 0.068707, 0.068783] (kept interior) llf statsmodels -1440.550969 mine -1440.550969 | best found -1440.550969 s2 [0.291485, 0.068709, 0.068782] | gain 4.16e-08

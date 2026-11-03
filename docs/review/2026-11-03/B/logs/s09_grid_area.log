@@ -1,0 +1,3 @@
+sum of 0.5-deg cell areas / (4 pi R^2) = 1.0000000000000002
+1-deg cell at the equator: 12363.683990261117 vs (pi R/180)^2 = 12364.311711488797
+Russian cells with lon<0 labelled: {'Asia': 93}

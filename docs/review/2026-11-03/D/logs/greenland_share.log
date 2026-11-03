@@ -1,0 +1,2 @@
+NA cells 16104 NA area km2 2.59e+07 ice-sheet (Greenland) share of NA area: 0.088
+ice counts {'continent_geo': 25000, 'continent_geo_or_south_of_lat': 25000, 'n_cells': 27852, 'n_cells_looked_up': 16104, 'south_of_lat': 25000, 'subunits': {'Greenland': 2852}}

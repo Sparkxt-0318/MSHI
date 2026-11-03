@@ -1,0 +1,19 @@
+closed-form REML == dense REML at 4 test points (abs diff < 1e-8)
+
+South America, bootstrap replicate b=2 (the stage's own draw):
+  interior  usable True converged True llf -69.7419864024784 s2 (0.08448396221176672, 0.0010512979964282841, 0.11756167746900034) warnings ['ConvergenceWarning: The MLE may be on the boundary of the parameter space.']
+  no_study  usable False converged True llf inf s2 (0.0, 0.0, 0.0881526226658691) warnings ['ConvergenceWarning: The Hessian matrix at the estimated parameter values is not positive definite.', 'ConvergenceWarning: The MLE may be on the boundary of the parameter space.']
+  no_site   usable False converged True llf inf s2 (0.0, 0.0, 0.08676401053358312) warnings ['ConvergenceWarning: The Hessian matrix at the estimated parameter values is not positive definite.', 'ConvergenceWarning: The MLE may be on the boundary of the parameter space.']
+  stage keeps: interior s2 (0.084484, 0.001051, 0.117562) llf -69.741986
+  bounded REML maximum: s2 [0.086008 0.       0.117417] llf -69.690268
+  MixedLM(groups=site, exog_re=1).fit(reml=True, method='lbfgs'): converged True llf inf cov_re 0.0 scale 0.0881526226658691
+    same model, method bfgs: converged True llf -69.69026756089153 cov_re 0.08600812732029549 scale 0.11741636107936416
+    same model, method nm: converged True llf -69.6902675608398 cov_re 0.08600714230612906 scale 0.11741665216828222
+    same model, method powell: converged True llf -69.6902675607065 cov_re 0.08600757271320199 scale 0.11741652497479522
+    loglike at 0.7324996525463623: AttributeError: 'MixedLM' object has no attribute 'cov_pen'
+    loglike at 1e-08: AttributeError: 'MixedLM' object has no attribute 'cov_pen'
+    loglike at 0.0: AttributeError: 'MixedLM' object has no attribute '_cov_sing'
+
+real	0m3.856s
+user	0m3.526s
+sys	0m0.677s

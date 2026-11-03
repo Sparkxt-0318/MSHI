@@ -1,0 +1,24 @@
+== South America: point own REML max s2 [0.24803, 0.0, 0.119116] llf -79.496624 | stage [0.248035, 0.0, 0.119115]
+  share_site                   stage [0.4712, 0.8353] (n 199) | REML maxima [0.4454, 0.8352] (n 200) | diff [-0.0258, -0.0001]  <-- differs by > 0.005
+  share_study                  stage [0.0, 0.0021] (n 199) | REML maxima [0.0, 0.0] (n 200) | diff [+0.0000, -0.0021]
+  ceiling_independent_study    stage [0.4712, 0.8353] (n 199) | REML maxima [0.4454, 0.8352] (n 200) | diff [-0.0258, -0.0001]  <-- differs by > 0.005
+  ceiling_same_study           stage [0.4746, 0.8353] (n 199) | REML maxima [0.4454, 0.8352] (n 200) | diff [-0.0291, -0.0001]  <-- differs by > 0.005
+  ceiling_site_mean            stage [0.6401, 0.9168] (n 199) | REML maxima [0.6099, 0.9167] (n 200) | diff [-0.0303, -0.0001]  <-- differs by > 0.005
+== Asia: point own REML max s2 [0.270406, 0.090974, 0.070218] llf -645.684377 | stage [0.270411, 0.090971, 0.070218]
+  share_site                   stage [0.5126, 0.7012] (n 200) | REML maxima [0.5126, 0.7012] (n 200) | diff [+0.0000, +0.0000]
+  share_study                  stage [0.144, 0.2945] (n 200) | REML maxima [0.144, 0.2945] (n 200) | diff [+0.0000, +0.0000]
+  ceiling_independent_study    stage [0.5126, 0.7012] (n 200) | REML maxima [0.5126, 0.7012] (n 200) | diff [+0.0000, +0.0000]
+  ceiling_same_study           stage [0.7676, 0.8864] (n 200) | REML maxima [0.7676, 0.8864] (n 200) | diff [+0.0000, +0.0000]
+  ceiling_site_mean            stage [0.5876, 0.766] (n 200) | REML maxima [0.5876, 0.766] (n 200) | diff [-0.0000, +0.0000]
+== North America: point own REML max s2 [0.354128, 0.033636, 0.04769] llf -252.296217 | stage [0.354125, 0.033636, 0.04769]
+  share_site                   stage [0.7456, 0.8655] (n 200) | REML maxima [0.7457, 0.8656] (n 200) | diff [+0.0000, +0.0000]
+  share_study                  stage [0.0445, 0.1216] (n 200) | REML maxima [0.0445, 0.1216] (n 200) | diff [-0.0000, -0.0000]
+  ceiling_independent_study    stage [0.7456, 0.8655] (n 200) | REML maxima [0.7457, 0.8656] (n 200) | diff [+0.0000, +0.0000]
+  ceiling_same_study           stage [0.8478, 0.9195] (n 200) | REML maxima [0.8478, 0.9195] (n 200) | diff [+0.0000, +0.0000]
+  ceiling_site_mean            stage [0.8139, 0.9084] (n 200) | REML maxima [0.8139, 0.9084] (n 200) | diff [-0.0000, -0.0000]
+== pooled: point own REML max s2 [0.291485, 0.068708, 0.068782] llf -1440.550969 | stage [0.291481, 0.068707, 0.068783]
+  share_site                   stage [0.6188, 0.7299] (n 200) | REML maxima [0.6188, 0.7299] (n 200) | diff [+0.0000, +0.0000]
+  share_study                  stage [0.1178, 0.2054] (n 200) | REML maxima [0.1178, 0.2054] (n 200) | diff [+0.0000, +0.0000]
+  ceiling_independent_study    stage [0.6188, 0.7299] (n 200) | REML maxima [0.6188, 0.7299] (n 200) | diff [+0.0000, +0.0000]
+  ceiling_same_study           stage [0.8066, 0.8705] (n 200) | REML maxima [0.8066, 0.8705] (n 200) | diff [+0.0000, -0.0000]
+  ceiling_site_mean            stage [0.6869, 0.7923] (n 200) | REML maxima [0.6869, 0.7923] (n 200) | diff [-0.0000, +0.0000]

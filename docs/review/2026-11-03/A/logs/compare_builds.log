@@ -1,0 +1,156 @@
+records locked 4837 analysis 4810
+only locked 27 all cosore: True only analysis 0
+  lat          equal for all common records: True  (differ: 0)
+  lon          equal for all common records: True  (differ: 0)
+  rs           equal for all common records: False  (differ: 39)
+  continent    equal for all common records: False  (differ: 4)
+  geo_country  equal for all common records: False  (differ: 4)
+  f_offland    equal for all common records: True  (differ: 0)
+  f_method     equal for all common records: True  (differ: 0)
+  f_quality    equal for all common records: True  (differ: 0)
+  f_coverage   equal for all common records: True  (differ: 0)
+  f_ecosys     equal for all common records: True  (differ: 0)
+  f_dup        equal for all common records: True  (differ: 0)
+  Country      equal for all common records: False  (differ: 39)
+common COSORE records: 39  rs changed: 39
+                                     rec_id         rs_l         rs_a     ratio
+4772           cosore_d20190424_ZHANG_maple  1123.408335   918.249942  0.817379
+4807         cosore_d20200419_PEREZ-QUEZADA  1457.905919  1215.558217  0.833770
+4794              cosore_d20200212_KAYE_LNW  1118.122517   948.878860  0.848636
+4796              cosore_d20200212_KAYE_LSW  2239.542161  1923.831413  0.859029
+4776                 cosore_d20190607_RUEHR   911.194470   783.574381  0.859942
+4795              cosore_d20200212_KAYE_LSE  1313.797536  1160.651026  0.883432
+4800              cosore_d20200212_KAYE_USW  1623.617226  1436.638513  0.884838
+4797              cosore_d20200212_KAYE_UNE  1070.539752   954.643704  0.891741
+4774           cosore_d20190526_MINIONS_EML   210.548402   188.144326  0.893592
+4793              cosore_d20200212_KAYE_LNE  1314.895057  1176.521190  0.894764
+4799              cosore_d20200212_KAYE_USE  1273.496943  1166.818742  0.916232
+4786            cosore_d20200109_HIRANO_PDF  1358.748211  1250.536198  0.920359
+4798              cosore_d20200212_KAYE_UNW   831.677098   767.061665  0.922307
+4809        cosore_d20200423_SANCHEZ-CANETE   204.468042   191.244839  0.935329
+4788         cosore_d20200114_CARBONE_JAMES   895.086212   841.577592  0.940220
+4784                    cosore_d20200108_HE   714.700671   673.921823  0.942943
+4783           cosore_d20190919_MIGLIAVACCA   183.428277   173.992749  0.948560
+4780                   cosore_d20190821_LIU   464.626192   443.932666  0.955462
+4802               cosore_d20200220_GAVAZZI   989.234303   955.657455  0.966058
+4803               cosore_d20200228_RENCHON   968.831823   936.319937  0.966442
+4801        cosore_d20200214_SZUTU_BOULDINA   541.008331   530.433929  0.980454
+4773                 cosore_d20190430_DESAI  1430.602376  1404.371535  0.981664
+4777             cosore_d20190617_SCOTT_SRM   253.852967   251.140104  0.989313
+4779                cosore_d20190626_VARGAS  2620.406288  2599.953006  0.992195
+4785                cosore_d20200108_JASSAL  1590.989730  1585.111493  0.996305
+4791  cosore_d20200207_GUTIERREZ_DEL_ARROYO  2691.829575  2682.558623  0.996556
+4782                  cosore_d20190918_MIAO   852.893657   856.150137  1.003818
+4787            cosore_d20200109_HIRANO_PUF  1616.877382  1632.689904  1.009780
+4804                cosore_d20200305_VARGAS   679.069804   690.868044  1.017374
+4806            cosore_d20200417_ARAIN_TP39   881.207372   901.635775  1.023182
+4771              cosore_d20190409_ANJILELI   460.236701   478.284636  1.039214
+4775            cosore_d20190526_PENNINGTON  1940.157957  2077.610125  1.070846
+4808              cosore_d20200423_OYONARTE   565.585133   609.563521  1.077757
+4790                 cosore_d20200122_BLACK   520.177068   576.535823  1.108345
+4805      cosore_d20200328_UEYAMA_YAMASHIRO   696.455896   778.871107  1.118335
+4781                 cosore_d20190830_LIANG  1046.163054  1186.175290  1.133834
+4792                 cosore_d20200212_ATAKA   895.598895  1033.866408  1.154386
+4789     cosore_d20200114_CARBONE_SC_EMBUDO   768.538278   909.690885  1.183664
+4778             cosore_d20190617_SCOTT_WKG   277.372018   354.092719  1.276599
+[qc] locked sites 971, analysis sites 965; identical record sets: 949
+   locked sites whose record set is not in analysis: 22; analysis-only sets: 16
+     analysis-only site record set: ['cosore_d20190424_ZHANG_maple', 'srdb_2843', 'srdb_2844', 'srdb_2845', 'srdb_2846', 'srdb_2847'] ...
+     analysis-only site record set: ['cosore_d20200109_HIRANO_PDF', 'srdb_5840', 'srdb_5841', 'srdb_5851'] 
+     analysis-only site record set: ['cosore_d20200114_CARBONE_SC_EMBUDO', 'srdb_4399'] 
+     analysis-only site record set: ['cosore_d20200417_ARAIN_TP39', 'srdb_4247', 'srdb_4248', 'srdb_5845', 'srdb_5846'] 
+     analysis-only site record set: ['srdb_1006'] 
+     analysis-only site record set: ['srdb_10632', 'srdb_10634', 'srdb_10636', 'srdb_10637', 'srdb_10696', 'srdb_10698'] ...
+     analysis-only site record set: ['srdb_11712', 'srdb_11713', 'srdb_11714'] 
+     analysis-only site record set: ['srdb_12240', 'srdb_12243', 'srdb_12597', 'srdb_12598', 'srdb_12599', 'srdb_12600'] ...
+     analysis-only site record set: ['srdb_123', 'srdb_124', 'srdb_125', 'srdb_126', 'srdb_127', 'srdb_2020'] ...
+     analysis-only site record set: ['srdb_1303', 'srdb_1304', 'srdb_1305', 'srdb_1306', 'srdb_188', 'srdb_189'] ...
+     analysis-only site record set: ['srdb_2069'] 
+     analysis-only site record set: ['srdb_3416', 'srdb_3417', 'srdb_3418', 'srdb_3419', 'srdb_3420'] 
+     analysis-only site record set: ['srdb_4245', 'srdb_5843'] 
+     analysis-only site record set: ['srdb_5737', 'srdb_6751', 'srdb_6752', 'srdb_6753', 'srdb_6754', 'srdb_6755'] ...
+     analysis-only site record set: ['srdb_7329'] 
+     analysis-only site record set: ['srdb_9696', 'srdb_9700', 'srdb_9704'] 
+     locked-only site record set: ['cosore_d20190409_ZOU', 'srdb_10632', 'srdb_10634', 'srdb_10636', 'srdb_10637', 'srdb_10696'] ...
+     locked-only site record set: ['cosore_d20190415_VARNER', 'cosore_d20190504_SAVAGE_hf006-05', 'srdb_12240', 'srdb_12243', 'srdb_12597', 'srdb_12598'] ...
+     locked-only site record set: ['cosore_d20190424_ZHANG_maple', 'cosore_d20190424_ZHANG_oak', 'srdb_2843', 'srdb_2844', 'srdb_2845', 'srdb_2846'] ...
+     locked-only site record set: ['cosore_d20190517_MAURITZ'] 
+     locked-only site record set: ['cosore_d20190526_MINIONS_HCB', 'cosore_d20190526_MINIONS_HCU'] 
+     locked-only site record set: ['cosore_d20190526_MINIONS_IMNH', 'cosore_d20190526_MINIONS_IMNL'] 
+     locked-only site record set: ['cosore_d20190526_MINIONS_NCU_OLD'] 
+     locked-only site record set: ['cosore_d20190610_SIHI_H1', 'cosore_d20190610_SIHI_H2', 'srdb_1303', 'srdb_1304', 'srdb_1305', 'srdb_1306'] ...
+     locked-only site record set: ['cosore_d20190617_SCOTT_WHS'] 
+     locked-only site record set: ['cosore_d20190831_SIHI', 'srdb_9696', 'srdb_9700', 'srdb_9704'] 
+     locked-only site record set: ['cosore_d20191214_PANG'] 
+     locked-only site record set: ['cosore_d20200109_HIRANO_PDB', 'cosore_d20200109_HIRANO_PDF', 'srdb_5840', 'srdb_5841', 'srdb_5851'] 
+     locked-only site record set: ['cosore_d20200114_CARBONE_SC_EMBUDO', 'cosore_d20200114_CARBONE_SC_SAUCE', 'srdb_4399'] 
+     locked-only site record set: ['cosore_d20200120_CHANG'] 
+     locked-only site record set: ['cosore_d20200214_SZUTU_TONZI', 'srdb_2069'] 
+     locked-only site record set: ['cosore_d20200214_SZUTU_TWITCHELL'] 
+     locked-only site record set: ['cosore_d20200224_MATHES', 'srdb_123', 'srdb_124', 'srdb_125', 'srdb_126', 'srdb_127'] ...
+     locked-only site record set: ['cosore_d20200328_UEYAMA_FAIRBANKS', 'srdb_1006'] 
+     locked-only site record set: ['cosore_d20200328_UEYAMA_HOKUROKU', 'srdb_5737', 'srdb_6751', 'srdb_6752', 'srdb_6753', 'srdb_6754'] ...
+     locked-only site record set: ['cosore_d20200328_UEYAMA_TESHIO', 'srdb_3416', 'srdb_3417', 'srdb_3418', 'srdb_3419', 'srdb_3420'] 
+     locked-only site record set: ['cosore_d20200417_ARAIN_TP39', 'cosore_d20200417_ARAIN_TP74', 'srdb_4247', 'srdb_4248', 'srdb_5845', 'srdb_5846'] 
+     locked-only site record set: ['cosore_d20200417_ARAIN_TPD', 'srdb_4245', 'srdb_5843'] 
+   sites with records on >1 continent_geo: 0
+   sites with records in >1 subunit: 0
+   sites whose centroid continent_geo differs from the record mode: 0
+[repo] locked sites 1225, analysis sites 1221; identical record sets: 1203
+   locked sites whose record set is not in analysis: 22; analysis-only sets: 18
+     analysis-only site record set: ['cosore_d20190424_ZHANG_maple', 'srdb_2843', 'srdb_2844', 'srdb_2845', 'srdb_2846', 'srdb_2847'] ...
+     analysis-only site record set: ['cosore_d20200109_HIRANO_PDF', 'srdb_5840', 'srdb_5841', 'srdb_5851'] 
+     analysis-only site record set: ['cosore_d20200114_CARBONE_SC_EMBUDO', 'srdb_4399'] 
+     analysis-only site record set: ['cosore_d20200417_ARAIN_TP39', 'srdb_4247', 'srdb_4248', 'srdb_5845', 'srdb_5846'] 
+     analysis-only site record set: ['srdb_1006'] 
+     analysis-only site record set: ['srdb_10632', 'srdb_10634', 'srdb_10636', 'srdb_10637', 'srdb_10696', 'srdb_10698'] ...
+     analysis-only site record set: ['srdb_11712', 'srdb_11713', 'srdb_11714'] 
+     analysis-only site record set: ['srdb_12240', 'srdb_12243', 'srdb_12597', 'srdb_12598', 'srdb_12599', 'srdb_12600'] ...
+     analysis-only site record set: ['srdb_123', 'srdb_124', 'srdb_125', 'srdb_126', 'srdb_127', 'srdb_2020'] ...
+     analysis-only site record set: ['srdb_1300', 'srdb_1301', 'srdb_1302', 'srdb_1303', 'srdb_1304', 'srdb_1305'] ...
+     analysis-only site record set: ['srdb_1356'] 
+     analysis-only site record set: ['srdb_2069'] 
+     analysis-only site record set: ['srdb_2130', 'srdb_2131', 'srdb_2628', 'srdb_2629', 'srdb_4435', 'srdb_4437'] ...
+     analysis-only site record set: ['srdb_3051', 'srdb_3052', 'srdb_3053', 'srdb_3054', 'srdb_3055', 'srdb_3056'] 
+     analysis-only site record set: ['srdb_3416', 'srdb_3417', 'srdb_3418', 'srdb_3419', 'srdb_3420'] 
+     analysis-only site record set: ['srdb_4245', 'srdb_5843'] 
+     analysis-only site record set: ['srdb_5737', 'srdb_6751', 'srdb_6752', 'srdb_6753', 'srdb_6754', 'srdb_6755'] ...
+     analysis-only site record set: ['srdb_7329'] 
+     locked-only site record set: ['cosore_d20190409_ZOU', 'srdb_10632', 'srdb_10634', 'srdb_10636', 'srdb_10637', 'srdb_10696'] ...
+     locked-only site record set: ['cosore_d20190415_VARNER', 'cosore_d20190504_SAVAGE_hf006-05', 'srdb_12240', 'srdb_12243', 'srdb_12597', 'srdb_12598'] ...
+     locked-only site record set: ['cosore_d20190424_ZHANG_maple', 'cosore_d20190424_ZHANG_oak', 'srdb_2843', 'srdb_2844', 'srdb_2845', 'srdb_2846'] ...
+     locked-only site record set: ['cosore_d20190517_MAURITZ'] 
+     locked-only site record set: ['cosore_d20190526_MINIONS_HCB', 'cosore_d20190526_MINIONS_HCU'] 
+     locked-only site record set: ['cosore_d20190526_MINIONS_IMNH', 'cosore_d20190526_MINIONS_IMNL'] 
+     locked-only site record set: ['cosore_d20190526_MINIONS_NCU_OLD'] 
+     locked-only site record set: ['cosore_d20190610_SIHI_H1', 'cosore_d20190610_SIHI_H2', 'cosore_d20190610_SIHI_H2wetland', 'srdb_1300', 'srdb_1301', 'srdb_1302'] ...
+     locked-only site record set: ['cosore_d20190617_SCOTT_WHS'] 
+     locked-only site record set: ['cosore_d20190831_SIHI', 'srdb_2130', 'srdb_2131', 'srdb_2628', 'srdb_2629', 'srdb_4435'] ...
+     locked-only site record set: ['cosore_d20191214_PANG'] 
+     locked-only site record set: ['cosore_d20200109_HIRANO_PDB', 'cosore_d20200109_HIRANO_PDF', 'srdb_5840', 'srdb_5841', 'srdb_5851'] 
+     locked-only site record set: ['cosore_d20200114_CARBONE_SC_EMBUDO', 'cosore_d20200114_CARBONE_SC_SAUCE', 'srdb_4399'] 
+     locked-only site record set: ['cosore_d20200120_CHANG', 'srdb_1356'] 
+     locked-only site record set: ['cosore_d20200214_SZUTU_TONZI', 'srdb_2069'] 
+     locked-only site record set: ['cosore_d20200214_SZUTU_TWITCHELL'] 
+     locked-only site record set: ['cosore_d20200224_MATHES', 'srdb_123', 'srdb_124', 'srdb_125', 'srdb_126', 'srdb_127'] ...
+     locked-only site record set: ['cosore_d20200328_UEYAMA_FAIRBANKS', 'srdb_1006'] 
+     locked-only site record set: ['cosore_d20200328_UEYAMA_HOKUROKU', 'srdb_5737', 'srdb_6751', 'srdb_6752', 'srdb_6753', 'srdb_6754'] ...
+     locked-only site record set: ['cosore_d20200328_UEYAMA_TESHIO', 'srdb_3416', 'srdb_3417', 'srdb_3418', 'srdb_3419', 'srdb_3420'] 
+     locked-only site record set: ['cosore_d20200417_ARAIN_TP39', 'cosore_d20200417_ARAIN_TP74', 'srdb_4247', 'srdb_4248', 'srdb_5845', 'srdb_5846'] 
+     locked-only site record set: ['cosore_d20200417_ARAIN_TPD', 'srdb_4245', 'srdb_5843'] 
+   sites with records on >1 continent_geo: 0
+   sites with records in >1 subunit: 0
+   sites whose centroid continent_geo differs from the record mode: 0
+locked QC sites whose centroid continent_geo != locked continent: 9
+        site_id        lat         lon                   country      continent             cg              su
+91   v3qc_00091   5.030000  -53.000000                    France         Europe  South America   French Guiana
+165  v3qc_00165  19.770000 -155.940000  United States of America  North America        Oceania          Hawaii
+175  v3qc_00175  19.840000 -155.120000  United States of America  North America        Oceania          Hawaii
+185  v3qc_00185   5.282000  -52.912000                    France         Europe  South America   French Guiana
+270  v3qc_00270  28.292000  -16.629000                     Spain         Europe         Africa  Canary Islands
+368  v3qc_00368  19.944915 -155.262122  United States of America  North America        Oceania          Hawaii
+369  v3qc_00369  19.842028 -155.293111  United States of America  North America        Oceania          Hawaii
+423  v3qc_00423  28.305972  -16.568278                     Spain         Europe         Africa  Canary Islands
+707  v3qc_00707  20.890000 -156.410000  United States of America  North America        Oceania          Hawaii
+geographic Europe in the locked QC set (centroid): 232 ; locked Europe: 236
+  locked QC records without an analysis continent_geo (dropped COSORE): 26

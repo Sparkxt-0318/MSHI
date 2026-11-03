@@ -1,0 +1,92 @@
+WARNING mshi: features           skipped: upstream modis_points not available
+WARNING mshi: stages not completed: {'modis_points': 'stale: results/build_sites_analysis.json: missing; re-run the stage that writes it (or `make all`)', 'features': 'skipped: upstream modis_points not available'}
+WARNING mshi: features           skipped: upstream modis_points not available
+WARNING mshi: stages not completed: {'modis_points': 'stale: results/build_sites_analysis.json: produced with a different code; re-run the stage that writes it (or `make all`)', 'features': 'skipped: upstream modis_points not available'}
+ERROR mshi: build_sites_analysis failed
+Traceback (most recent call last):
+  File "/home/user/MSHI/mshi/run.py", line 226, in run
+    rec["result"] = st.func(cfg)
+                    ~~~~~~~^^^^^
+  File "/tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/verify_A/scripts/a5_targets.py", line 175, in boom
+    raise RuntimeError("simulated failure in the exploratory analysis build")
+RuntimeError: simulated failure in the exploratory analysis build
+WARNING mshi: modis_points       skipped: upstream build_sites_analysis not available
+WARNING mshi: features           skipped: upstream modis_points not available
+WARNING mshi: clean_test         skipped: upstream features not available
+WARNING mshi: noise_ceiling      skipped: upstream build_sites_analysis not available
+WARNING mshi: europe_geo_sensitivity skipped: upstream features not available
+WARNING mshi: features_analysis  skipped: upstream build_sites_analysis, modis_points not available
+WARNING mshi: transfer_matrix    skipped: upstream features_analysis not available
+WARNING mshi: within_continent   skipped: upstream transfer_matrix not available
+WARNING mshi: aoa_sensitivity    skipped: upstream features_analysis not available
+WARNING mshi: us_r2              skipped: upstream features_analysis, build_sites_analysis not available
+WARNING mshi: stages not completed: {'build_sites_analysis': 'error: RuntimeError: simulated failure in the exploratory analysis build', 'modis_points': 'skipped: upstream build_sites_analysis not available', 'features': 'skipped: upstream modis_points not available', 'clean_test': 'skipped: upstream features not available', 'noise_ceiling': 'skipped: upstream build_sites_analysis not available', 'europe_geo_sensitivity': 'skipped: upstream features not available', 'features_analysis': 'skipped: upstream build_sites_analysis, modis_points not available', 'transfer_matrix': 'skipped: upstream features_analysis not available', 'within_continent': 'skipped: upstream transfer_matrix not available', 'aoa_sensitivity': 'skipped: upstream features_analysis not available', 'us_r2': 'skipped: upstream features_analysis, build_sites_analysis not available'}
+Makefile stage lists: {'data': ['fetch_srdb', 'fetch_cosore', 'fetch_naturalearth', 'cosore_annual', 'build_sites', 'repro_checks'], 'analysis': ['cosore_annual_analysis', 'build_sites_analysis'], 'features': ['fetch_worldclim', 'fetch_soilgrids', 'modis_points', 'features']}
+(a1) fresh sandbox
+   make data      -> exit 0
+        fetch_srdb             ok
+        fetch_cosore           ok
+        fetch_naturalearth     ok
+        cosore_annual          ok
+        build_sites            ok
+        repro_checks           ok
+   make features  -> exit 2
+        fetch_worldclim        ok
+        fetch_soilgrids        ok
+        modis_points           stale: results/build_sites_analysis.json: missing; re-run the stage that writes it (or `make all`)
+        features               skipped: upstream modis_points not available
+(a2) build_sites_analysis.json produced by other code (the repo's state after ec43c6c)
+   make data      -> exit 0
+        fetch_srdb             ok
+        fetch_cosore           ok
+        fetch_naturalearth     ok
+        cosore_annual          ok
+        build_sites            ok
+        repro_checks           ok
+   make features  -> exit 2
+        fetch_worldclim        ok
+        fetch_soilgrids        ok
+        modis_points           stale: results/build_sites_analysis.json: produced with a different code; re-run the stage that writes it (or `make all`)
+        features               skipped: upstream modis_points not available
+   make analysis  -> exit 0
+        cosore_annual_analysis ok
+        build_sites_analysis   ok
+   make features  -> exit 0
+        fetch_worldclim        ok
+        fetch_soilgrids        ok
+        modis_points           ok
+        features               ok
+(b) make all with build_sites_analysis failing
+   make all -> exit 1
+        fetch_srdb               ok
+        fetch_cosore             ok
+        fetch_naturalearth       ok
+        cosore_annual            ok
+        cosore_annual_analysis   ok
+        build_sites              ok
+        site_diagnostics         ok
+        build_sites_analysis     error: RuntimeError: simulated failure in the exploratory analysis build
+        fetch_worldclim          ok
+        fetch_soilgrids          ok
+        modis_points             skipped: upstream build_sites_analysis not available
+        features                 skipped: upstream modis_points not available
+        clean_test               skipped: upstream features not available
+        repro_checks             ok
+        noise_ceiling            skipped: upstream build_sites_analysis not available
+        europe_geo_sensitivity   skipped: upstream features not available
+        features_analysis        skipped: upstream build_sites_analysis, modis_points not available
+        transfer_matrix          skipped: upstream features_analysis not available
+        within_continent         skipped: upstream transfer_matrix not available
+        aoa_sensitivity          skipped: upstream features_analysis not available
+        us_r2                    skipped: upstream features_analysis, build_sites_analysis not available
+   reproduction table: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 17, 'STALE': 0}
+        locked_test NOT RUN  Locked test: selected model                             | modis_points: skipped: upstream build_sites_analysis not available
+        locked_test NOT RUN  Locked test: Asia spatial-CV R²                         | modis_points: skipped: upstream build_sites_analysis not available
+        locked_test NOT RUN  Locked test: Europe n                                   | modis_points: skipped: upstream build_sites_analysis not available
+        locked_test NOT RUN  Locked test: Europe R²                                  | modis_points: skipped: upstream build_sites_analysis not available
+        locked_test NOT RUN  Locked test: site-bootstrap CI low                      | modis_points: skipped: upstream build_sites_analysis not available
+        locked_test NOT RUN  Locked test: site-bootstrap CI high                     | modis_points: skipped: upstream build_sites_analysis not available
+        locked_test NOT RUN  Locked test: re-run identical to the locked result      | modis_points: skipped: upstream build_sites_analysis not available
+        locked_test NOT RUN  Locked test (repo-filter sensitivity): re-run identical | modis_points: skipped: upstream build_sites_analysis not available
+        npp         NOT RUN  NPP r vs committed NPP (original 889 sites)             | modis_points: skipped: upstream build_sites_analysis not available
+        npp         NOT RUN  Original sites with NPP missing in the committed tables | modis_points: skipped: upstream build_sites_analysis not available

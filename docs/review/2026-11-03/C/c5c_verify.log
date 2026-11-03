@@ -1,0 +1,9 @@
+cells flagged ice: 26823; south of -60: 24165; inside the Greenland polygon: 2658; flagged ice north of -60: 2658 (of which inside the polygon 2658)
+result: {'continent_geo': 24165, 'continent_geo_or_south_of_lat': 24165, 'n_cells': 26823, 'n_cells_looked_up': 14851, 'south_of_lat': 24165, 'subunits': {'Greenland': 2658}}
+ice cells north of -60 outside the Greenland polygon (nearest-subunit rule within 50 km): 0; their continent_geo: {}
+cells inside the Greenland polygon not flagged: 0
+[all] weights max |diff| vs direct sklearn: 0; weights {'bio01': np.float64(0.096), 'bio04': np.float64(0.104), 'bio05': np.float64(0.016), 'bio06': np.float64(0.092), 'bio12': np.float64(0.555), 'bio14': np.float64(0.094), 'bio15': np.float64(0.04), 'bio17': np.float64(0.002)}; fold sizes ok: True
+[Asia] weights max |diff| vs direct sklearn: 0; weights {'bio01': np.float64(0.049), 'bio04': np.float64(0.02), 'bio05': np.float64(0.006), 'bio06': np.float64(0.021), 'bio12': np.float64(0.744), 'bio14': np.float64(0.117), 'bio15': np.float64(0.041), 'bio17': np.float64(0.001)}; fold sizes ok: True
+thresholds recomputed from scratch: equal (asserted)
+share mismatches (by continent and latitude band, both domains, 8 variants): 0
+lat bands present: ['Antarctic', 'Arctic', 'N boreal', 'N temperate', 'S temperate', 'Tropics'] | band of cells south of -60: ['Antarctic']

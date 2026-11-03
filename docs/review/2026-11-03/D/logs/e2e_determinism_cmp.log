@@ -1,0 +1,9 @@
+51 identical; 0 differ; only in A: []; only in B: []
+repro_checks ok exploratory=False ec43c6c70c38a001d48a168d6d1bfd967bf70047
+noise_ceiling ok exploratory=True ec43c6c70c38a001d48a168d6d1bfd967bf70047
+europe_geo_sensitivity error: ControlMismatch: full locked Europe set: max |diff| 2 exploratory=True ec43c6c70c38a001d48a168d6d1bfd967bf70047
+features_analysis ok exploratory=True ec43c6c70c38a001d48a168d6d1bfd967bf70047
+transfer_matrix ok exploratory=True ec43c6c70c38a001d48a168d6d1bfd967bf70047
+within_continent ok exploratory=True ec43c6c70c38a001d48a168d6d1bfd967bf70047
+aoa_sensitivity ok exploratory=True ec43c6c70c38a001d48a168d6d1bfd967bf70047
+us_r2 ok exploratory=True ec43c6c70c38a001d48a168d6d1bfd967bf70047

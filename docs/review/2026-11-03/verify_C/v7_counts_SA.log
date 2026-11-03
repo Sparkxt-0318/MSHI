@@ -1,0 +1,3 @@
+committed: {'boundary': 191, 'dropped_candidate': {'interior': 80, 'no_site': 26, 'no_study': 7}, 'failed': 1, 'kept_candidate': {'interior': 18, 'no_site': 0, 'no_study': 181}, 'n': 200, 'ok': 199, 'too_few_sites': 0, 'unidentified': 0}
+stage (recomputed here): {'ok': 199, 'failed': 1, 'kept': {'interior': 18, 'no_study': 181, 'no_site': 0}}
+implied by the REML maxima: ok 200 failed 0 kept {'interior': 178, 'no_study': 22, 'no_site': 0} boundary 197

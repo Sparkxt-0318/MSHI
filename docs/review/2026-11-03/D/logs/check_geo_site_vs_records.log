@@ -1,0 +1,6 @@
+locked qc: sites 971; point rule vs record-mode rule differ at 0 sites
+locked qc: locked-Europe sites 236; geographic Europe by point 232, by record mode 232
+locked repo: sites 1225; point rule vs record-mode rule differ at 0 sites
+locked repo: locked-Europe sites 284; geographic Europe by point 279, by record mode 279
+analysis qc: site continent_geo (record mode) vs point rule at the site mean: 0 differ
+analysis repo: site continent_geo (record mode) vs point rule at the site mean: 0 differ

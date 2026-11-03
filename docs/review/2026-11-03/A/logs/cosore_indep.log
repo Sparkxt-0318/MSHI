@@ -1,0 +1,91 @@
+/tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/A/scripts/cosore_indep.py:131: Pandas4Warning: The 'lsuffix' and 'rsuffix' keywords in DataFrame.join are deprecated and will be removed in a future version. Use the 'suffixes' keyword instead.
+  m = P.set_index(["dataset", "port"]).join(committed_ports, how="outer", rsuffix="_c")
+ports: independent 629 committed 629 joined 629
+kept mismatches (UTC days): 0
+n_days mismatches: 0  min_dpm mismatches: 0
+annual value max |diff| (kept/any port): 0.0
+obs mean max |diff|: 0.0
+sites: independent 39 csv 39
+site rs max |diff|: 0.0  obs max |diff|: 0.0
+site n_ports mismatch: 0
+timestamp dtypes: {'float64': 39}
+kept ports with duplicated timestamps: 63 rows: 676582
+                         dataset  port       n  n_dup_ts
+0             d20190409_ANJILELI     0   46271       359
+32               d20190430_DESAI     1   13500         2
+33               d20190430_DESAI     2   13455         2
+34               d20190430_DESAI     3   13450         2
+73         d20190526_MINIONS_EML     0    7185       596
+137          d20190617_SCOTT_SRM     1    9590       502
+138          d20190617_SCOTT_SRM     2    9269       485
+139          d20190617_SCOTT_SRM     3    8615       508
+148          d20190617_SCOTT_WKG     1   17148      1086
+149          d20190617_SCOTT_WKG     2   18017      1187
+150          d20190617_SCOTT_WKG     3   17922      1190
+151          d20190617_SCOTT_WKG     4   13586       931
+155             d20190626_VARGAS     0   19998        13
+165                d20190821_LIU     1   43622       168
+166                d20190821_LIU     2   43743       168
+167                d20190821_LIU     3   43727       168
+168                d20190821_LIU     4   43685       168
+169                d20190821_LIU     5   39335       168
+171                d20190821_LIU     7   43640       168
+173                d20190821_LIU     9   43638       168
+174                d20190821_LIU    10   43633       168
+175                d20190821_LIU    11   43592       168
+176                d20190821_LIU    12   43551       168
+178                d20190821_LIU    14   43533       167
+227             d20200108_JASSAL     1   87449     31273
+228             d20200108_JASSAL     2  139446     72433
+229             d20200108_JASSAL     3  139448     72435
+230             d20200108_JASSAL     4  139391     72383
+231             d20200108_JASSAL     5  139440     72429
+232             d20200108_JASSAL     6  139448     72435
+239         d20200109_HIRANO_PDF     1   24208         8
+240         d20200109_HIRANO_PDF     2   23605         8
+241         d20200109_HIRANO_PDF     3   24448         8
+243         d20200109_HIRANO_PDF     5   24400         8
+244         d20200109_HIRANO_PDF     6   24537         8
+247         d20200109_HIRANO_PUF     2   23403         6
+248         d20200109_HIRANO_PUF     3   28690         8
+249         d20200109_HIRANO_PUF     4   29381         8
+250         d20200109_HIRANO_PUF     5   23073         7
+251         d20200109_HIRANO_PUF     6   29248         8
+252         d20200109_HIRANO_PUF     7   18262         6
+284  d20200114_CARBONE_SC_EMBUDO     1    5027        16
+285  d20200114_CARBONE_SC_EMBUDO     2    4965        17
+286  d20200114_CARBONE_SC_EMBUDO     3    4925        17
+287  d20200114_CARBONE_SC_EMBUDO     4    5006        17
+288  d20200114_CARBONE_SC_EMBUDO     5    5058        17
+289  d20200114_CARBONE_SC_EMBUDO     6    5053        16
+290  d20200114_CARBONE_SC_EMBUDO     7    5029        17
+291  d20200114_CARBONE_SC_EMBUDO     8    4962        15
+301              d20200122_BLACK     2  105216     45295
+303              d20200122_BLACK     4  105216     45295
+304              d20200122_BLACK     5  105216     45295
+305              d20200122_BLACK     6  105216     45295
+307              d20200122_BLACK    10  105216     45295
+308              d20200122_BLACK    11  105216     45295
+318           d20200212_KAYE_LNE     0   16004        12
+319           d20200212_KAYE_LNW     0   15459        12
+320           d20200212_KAYE_LSE     0   16130        12
+321           d20200212_KAYE_LSW     0   13723        12
+338            d20200220_GAVAZZI     1   89662      2439
+370             d20200305_VARGAS     1   18397         4
+371             d20200305_VARGAS     2   18399         4
+372             d20200305_VARGAS     3   18399         4
+ports whose kept status differs, UTC vs local days:
+Empty DataFrame
+Columns: [dataset, port, tz, n_days_utc, n_days_loc, min_dpm_utc, min_dpm_loc, kept_utc, kept_local]
+Index: []
+kept ports: annual (local days) vs (UTC days): max rel diff 0.03589, median 0.001144
+                         dataset  port         tz   annual_utc   annual_loc       rel
+176                d20190821_LIU    12  Etc/GMT-8   320.031142   308.545232  0.035890
+33               d20190430_DESAI     2  Etc/GMT+6  1482.708245  1430.523569  0.035196
+175                d20190821_LIU    11  Etc/GMT-8   360.948833   351.522272  0.026116
+34               d20190430_DESAI     3  Etc/GMT+6  1509.609408  1548.121298  0.025511
+168                d20190821_LIU     4  Etc/GMT-8   321.460973   313.613410  0.024412
+291  d20200114_CARBONE_SC_EMBUDO     8  Etc/GMT+8   339.910817   335.155644  0.013989
+171                d20190821_LIU     7  Etc/GMT-8   503.616176   496.790242  0.013554
+32               d20190430_DESAI     1  Etc/GMT+6  1220.796951  1204.550394  0.013308
+kept ports by number of years with data: {2: 34, 3: 34, 4: 7, 5: 6, 6: 13, 7: 22, 9: 6, 10: 1, 11: 1}

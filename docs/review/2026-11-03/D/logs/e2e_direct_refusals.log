@@ -1,0 +1,7 @@
+R4 direct: records_analysis.parquet changed
+   noise_ceiling: StaleInputError: results/build_sites_analysis.json: its output /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scratchpad/p2review/D/e2e/sb/derived/records_analysis.par
+   us_r2: StaleInputError: results/features_analysis.json: its input results/build_sites_analysis.json is not current (its output /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/
+R5 direct: wc2.1_2.5m_bio_1.tif changed
+   within_continent: StaleInputError: results/features_analysis.json: its input results/fetch_worldclim.json is not current (its output /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scrat
+   aoa_sensitivity: StaleInputError: results/features_analysis.json: its input results/fetch_worldclim.json is not current (its output /tmp/claude-0/-home-user-MSHI/efd5d835-bc76-551b-aa46-a19c5a194351/scrat
+51 identical; 0 differ; only in A: []; only in B: []

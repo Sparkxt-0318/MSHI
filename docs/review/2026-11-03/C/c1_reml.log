@@ -1,0 +1,49 @@
+== Asia: records_fit 1433 sites_fit 236
+  N3 formula : s2 [0.270411 0.090971 0.070218] llf -645.684377 (own llf at it -645.684377) conv True
+  stage kept : interior s2 [0.270411 0.090971 0.070218] own llf at it -645.684377
+    cand interior : stage llf -645.684377  own llf -645.684377  diff -3.33e-11
+    cand no_site  : stage llf -706.125985  own llf -706.125985  diff +8.94e-11
+    cand no_study : stage llf -761.301807  own llf -761.301807  diff -1.64e-11
+  own bounded REML: s2 [0.270406 0.090974 0.070218] llf -645.684377  (stage kept - own max: -4.08e-08)
+== Europe: records_fit 737 sites_fit 135
+  N3 formula : s2 [0.193849 0.058136 0.085805] llf -351.070418 (own llf at it -351.070418) conv True
+  stage kept : interior s2 [0.193849 0.058136 0.085805] own llf at it -351.070418
+    cand interior : stage llf -351.070418  own llf -351.070418  diff +9.04e-12
+    cand no_site  : stage llf -371.604205  own llf -371.604205  diff +6.31e-12
+    cand no_study : stage llf -394.622647  own llf -394.622647  diff +1.75e-11
+  own bounded REML: s2 [0.193843 0.058137 0.085806] llf -351.070418  (stage kept - own max: -1.52e-08)
+== South America: records_fit 124 sites_fit 33
+  N3 formula : s2 [0.216255 0.003664 0.123463] llf -79.839483 (own llf at it -79.839483) conv True
+  stage kept : no_study s2 [0.248035 0.       0.119115] own llf at it -79.496624
+    cand interior : stage llf -79.839483  own llf -79.839483  diff -1.38e-12
+    cand no_site  : stage llf -86.834336  own llf -86.834336  diff +8.95e-13
+    cand no_study : stage llf -79.496624  own llf -79.496624  diff -4.26e-13
+  own bounded REML: s2 [0.24803  0.       0.119116] llf -79.496624  (stage kept - own max: -2.18e-09)
+== Africa: records_fit 53 sites_fit 16
+  N3 formula : s2 [0.065098 0.61965  0.043233] llf -25.993895 (own llf at it -25.993895) conv True
+  stage kept : interior s2 [0.065098 0.61965  0.043233] own llf at it -25.993895
+    cand interior : stage llf -25.993895  own llf -25.993895  diff +1.14e-13
+    cand no_site  : stage llf -25.995806  own llf -25.995806  diff -6.39e-14
+    cand no_study : stage llf -35.422100  own llf -35.422100  diff +1.71e-13
+  own bounded REML: s2 [0.064654 0.620104 0.043232] llf -25.993895  (stage kept - own max: -1.10e-07)
+== Oceania: records_fit 69 sites_fit 14
+  N3 formula : s2 [0.031689 0.223914 0.031106] llf -9.404039 (own llf at it -9.404039) conv True
+  stage kept : interior s2 [0.031689 0.223914 0.031106] own llf at it -9.404039
+    cand interior : stage llf -9.404039  own llf -9.404039  diff +2.59e-13
+    cand no_site  : stage llf -9.509473  own llf -9.509473  diff -2.06e-13
+    cand no_study : stage llf -31.750288  own llf -31.750288  diff +3.91e-14
+  own bounded REML: s2 [0.031679 0.223932 0.031105] llf -9.404039  (stage kept - own max: -1.85e-08)
+== North America: records_fit 893 sites_fit 168
+  N3 formula : s2 [0.354125 0.033636 0.04769 ] llf -252.296217 (own llf at it -252.296217) conv True
+  stage kept : interior s2 [0.354125 0.033636 0.04769 ] own llf at it -252.296217
+    cand interior : stage llf -252.296217  own llf -252.296217  diff -2.90e-11
+    cand no_site  : stage llf -322.217611  own llf -322.217611  diff +2.44e-11
+    cand no_study : stage llf -294.678682  own llf -294.678682  diff +3.27e-11
+  own bounded REML: s2 [0.354129 0.033636 0.04769 ] llf -252.296217  (stage kept - own max: -1.64e-09)
+== pooled: records_fit 3309 sites_fit 602
+  N3 formula : s2 [0.291481 0.068707 0.068783] llf -1440.550969 (own llf at it -1440.550969) conv True
+  stage kept : interior s2 [0.291481 0.068707 0.068783] own llf at it -1440.550969
+    cand interior : stage llf -1440.550969  own llf -1440.550969  diff +1.62e-10
+    cand no_site  : stage llf -1601.818824  own llf -1601.818824  diff -4.92e-10
+    cand no_study : stage llf -1654.539942  own llf -1654.539942  diff -2.02e-11
+  own bounded REML: s2 [0.291484 0.068708 0.068782] llf -1440.550969  (stage kept - own max: -4.23e-08)

@@ -1,0 +1,2 @@
+degenerate (constant y): status failed | warnings emitted: 0 | candidates usable: {'interior': False, 'no_study': False, 'no_site': False}
+test_boundary_model case: status ok chosen no_study boundary True share_study 0.0

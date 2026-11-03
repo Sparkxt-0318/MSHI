@@ -1,0 +1,47 @@
+staleness us_r2: None
+exploratory: True | inputs: ['build_sites_analysis.json', 'features_analysis.json'] | outputs: ['figures:phase2/us_r2.pdf', 'figures:phase2/us_r2.png']
+rows: 48 target effects: 24 skipped: []
+distinct row keys: 48
+[qc] sites: {'n_missing_values': 3, 'n_nonpositive_log_predictor': 0, 'n_table': 965, 'n_used': 962} | single_record: {'max_abs_diff_from_site_mean_log': 1.4407184671863469, 'mean_abs_diff_from_site_mean_log': 0.18685920577953008, 'n_chosen_cosore': 28, 'n_sites': 962, 'n_sites_with_several_cosore_records': 3, 'n_sites_with_several_records': 600, 'records_of_sites_not_used': 5}
+[qc]   Asia: n=385 {'Asia': 385}
+[qc]   Asia box: n=427 {'Africa': 10, 'Asia': 385, 'Europe': 30, 'Oceania': 2}
+[qc]   North America: n=246 {'Canada': 34, 'Costa Rica': 4, 'Greenland': 1, 'Mexico': 6, 'Panama': 13, 'Puerto Rico': 3, 'United States of America': 185}
+[qc]   North America outside the US bounding box: n=55 {'Canada': 19, 'Costa Rica': 4, 'Greenland': 1, 'Mexico': 5, 'Panama': 13, 'Puerto Rico': 3, 'United States of America': 10}
+[qc]   US bounding box: n=191 {'Canada': 15, 'Mexico': 1, 'United States of America': 175}
+[qc]   overlaps: []
+[repo] sites: {'n_missing_values': 8, 'n_nonpositive_log_predictor': 0, 'n_table': 1221, 'n_used': 1213} | single_record: {'max_abs_diff_from_site_mean_log': 1.5559069133505945, 'mean_abs_diff_from_site_mean_log': 0.20498391731358415, 'n_chosen_cosore': 30, 'n_sites': 1213, 'n_sites_with_several_cosore_records': 3, 'n_sites_with_several_records': 767, 'records_of_sites_not_used': 15}
+[repo]   Asia: n=481 {'Asia': 481}
+[repo]   Asia box: n=532 {'Africa': 11, 'Asia': 481, 'Europe': 38, 'Oceania': 2}
+[repo]   North America: n=311 {'Canada': 41, 'Costa Rica': 5, 'Greenland': 4, 'Mexico': 8, 'Panama': 14, 'Puerto Rico': 4, 'United States of America': 235}
+[repo]   North America outside the US bounding box: n=74 {'Canada': 23, 'Costa Rica': 5, 'Greenland': 4, 'Mexico': 7, 'Panama': 14, 'Puerto Rico': 4, 'United States of America': 17}
+[repo]   US bounding box: n=237 {'Canada': 18, 'Mexico': 1, 'United States of America': 218}
+[repo]   overlaps: []
+seed spread seeds: {(0, 3)} | seed-0 r2 within [min,max]: True
+ci contains point (r2): 48 of 48
+  qc site_mean Asia      XGB    -> US bounding box                            n=385/191 r2=-0.259 [-0.568,-0.060] rmse=0.621 sd=0.553 seeds r2 {'max': -0.20250139022271574, 'mean': -0.24661566195881351, 'min': -0.2813151056494474}
+  qc site_mean Asia      XGB    -> North America                              n=385/246 r2=0.034 [-0.170,0.178] rmse=0.650 sd=0.662 seeds r2 {'max': 0.061487935919428915, 'mean': 0.04458304661156465, 'min': 0.022308840156629595}
+  qc site_mean Asia      XGB    -> North America outside the US bounding box  n=385/55 r2=0.363 [-0.008,0.420] rmse=0.744 sd=0.932 seeds r2 {'max': 0.4049446350717726, 'mean': 0.3719048812237695, 'min': 0.3559982687080009}
+  qc site_mean Asia      OLS-TP -> US bounding box                            n=385/191 r2=-0.028 [-0.145,0.049] rmse=0.561 sd=0.553 seeds r2 None
+  qc site_mean Asia      OLS-TP -> North America                              n=385/246 r2=0.260 [0.112,0.374] rmse=0.569 sd=0.662 seeds r2 None
+  qc site_mean Asia      OLS-TP -> North America outside the US bounding box  n=385/55 r2=0.591 [0.202,0.690] rmse=0.596 sd=0.932 seeds r2 None
+  qc site_mean Asia box  XGB    -> US bounding box                            n=427/191 r2=-0.195 [-0.420,-0.034] rmse=0.605 sd=0.553 seeds r2 {'max': -0.19461402573284947, 'mean': -0.21211629057450204, 'min': -0.2343120351838266}
+  qc site_mean Asia box  XGB    -> North America                              n=427/246 r2=0.064 [-0.109,0.200] rmse=0.640 sd=0.662 seeds r2 {'max': 0.07421095138073608, 'mean': 0.056984648480969124, 'min': 0.040546186388419336}
+  qc site_mean Asia box  XGB    -> North America outside the US bounding box  n=427/55 r2=0.351 [-0.072,0.435] rmse=0.751 sd=0.932 seeds r2 {'max': 0.3794158637481614, 'mean': 0.3576181727920158, 'min': 0.3477266026304867}
+  qc site_mean Asia box  OLS-TP -> US bounding box                            n=427/191 r2=-0.061 [-0.199,0.022] rmse=0.570 sd=0.553 seeds r2 None
+  qc site_mean Asia box  OLS-TP -> North America                              n=427/246 r2=0.229 [0.096,0.329] rmse=0.581 sd=0.662 seeds r2 None
+  qc site_mean Asia box  OLS-TP -> North America outside the US bounding box  n=427/55 r2=0.561 [0.199,0.640] rmse=0.617 sd=0.932 seeds r2 None
+seam us_r2 vs transfer_matrix (OLS-TP): n 385/246 vs 385/246; metrics equal: True; CIs equal: True
+seam us_r2 vs transfer_matrix (XGB): n 385/246 vs 385/246; metrics equal: True; CIs equal: True
+run log noise_ceiling: 1 records, exploratory flags ['True'], statuses ['ok']
+run log europe_geo_sensitivity: 1 records, exploratory flags ['True'], statuses ['error: ControlMismatch: full locked Euro']
+run log features_analysis: 1 records, exploratory flags ['True'], statuses ['ok']
+run log transfer_matrix: 2 records, exploratory flags ['True'], statuses ['ok', 'ok']
+run log within_continent: 2 records, exploratory flags ['True'], statuses ['stale: results/features_analysis.json: m', 'ok']
+run log aoa_sensitivity: 2 records, exploratory flags ['True'], statuses ['stale: results/features_analysis.json: m', 'ok']
+run log us_r2: 2 records, exploratory flags ['True'], statuses ['stale: results/features_analysis.json: m', 'ok']
+noise_ceiling: exploratory=True inputs=['build_sites_analysis.json'] outputs=['figures:phase2/noise_ceiling.pdf', 'figures:phase2/noise_ceiling.png'] stale=None
+transfer_matrix: exploratory=True inputs=['features_analysis.json'] outputs=['figures:phase2/transfer_matrix.pdf', 'figures:phase2/transfer_matrix.png', 'interim:transfer_predictions_qc.parquet'] stale=None
+within_continent: exploratory=True inputs=['features_analysis.json', 'fetch_worldclim.json', 'transfer_matrix.json'] outputs=['figures:phase2/within_continent.pdf', 'figures:phase2/within_continent.png', 'interim:within_predictions_qc.parquet'] stale=None
+aoa_sensitivity: exploratory=True inputs=['features_analysis.json', 'fetch_worldclim.json'] outputs=['figures:phase2/aoa_di_map.pdf', 'figures:phase2/aoa_di_map.png', 'figures:phase2/aoa_variants.pdf', 'figures:phase2/aoa_variants.png', 'interim:aoa_di_grid.parquet'] stale=None
+us_r2: exploratory=True inputs=['build_sites_analysis.json', 'features_analysis.json'] outputs=['figures:phase2/us_r2.pdf', 'figures:phase2/us_r2.png'] stale=None
+features_analysis: exploratory=True inputs=['build_sites_analysis.json', 'fetch_soilgrids.json', 'fetch_worldclim.json', 'modis_points.json'] outputs=['interim:features_analysis_qc.parquet', 'interim:features_analysis_repo.parquet'] stale=None

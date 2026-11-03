@@ -1,0 +1,15 @@
+WARNING mshi: stages not completed: {'features_analysis': 'stale: results/build_sites_analysis.json: missing; re-run the stage that writes it (or `make all`)'}
+WARNING mshi: transfer_matrix    skipped: upstream features_analysis not available
+WARNING mshi: within_continent   skipped: upstream transfer_matrix not available
+WARNING mshi: stages not completed: {'features_analysis': 'stale: results/build_sites_analysis.json: missing; re-run the stage that writes it (or `make all`)', 'transfer_matrix': 'skipped: upstream features_analysis not available', 'within_continent': 'skipped: upstream transfer_matrix not available'}
+1. declared deps of within_continent: ['transfer_matrix', 'fetch_worldclim'] | of transfer_matrix: ['features_analysis']
+   transfer_matrix -> 0 ; within_continent -> 0
+   within_continent.json _inputs: ['features_analysis.json', 'fetch_worldclim.json', 'transfer_matrix.json']
+2. [features_analysis, within_continent]: exit 2
+     features_analysis  stale: results/build_sites_analysis.json: missing; re-run the stage that writes it (or `make all`)
+     within_continent   ok
+   within_continent.json byte-identical to the clean run: True
+3. [features_analysis, transfer_matrix, within_continent]: exit 2
+     features_analysis  stale: results/build_sites_analysis.json: missing; re-run the stage that writes it (or `make all`)
+     transfer_matrix    skipped: upstream features_analysis not available
+     within_continent   skipped: upstream transfer_matrix not available

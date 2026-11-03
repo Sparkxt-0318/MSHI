@@ -1,0 +1,9 @@
+rep 0: with Greenland: q=25 r2=0.464 | without Greenland: q=29 r2=0.484
+rep 1: with Greenland: q=25 r2=0.535 | without Greenland: q=29 r2=0.498
+rep 2: with Greenland: q=25 r2=0.593 | without Greenland: q=29 r2=0.665
+rep 3: with Greenland: q=25 r2=0.636 | without Greenland: q=29 r2=0.612
+rep 4: with Greenland: q=25 r2=0.614 | without Greenland: q=29 r2=0.604
+
+real	0m3.107s
+user	0m3.061s
+sys	0m0.530s

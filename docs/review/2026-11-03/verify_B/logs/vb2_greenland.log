@@ -1,0 +1,24 @@
+(1) geographic_continent of Greenland ice-sheet points: [('North America', 'Greenland'), ('North America', 'Greenland'), ('North America', 'Greenland'), ('North America', 'Greenland'), ('North America', 'Greenland')]
+(2) geodesic area: Greenland 2.171 M km2; North America (continent_geo) 24.240 M km2; share 0.090
+(3) ne_50m_land stand-in: 16474 cells in the window labelled in 0s
+    North America cells 14851, Greenland 2658; Greenland area share 0.089
+    NA analysis-QC sites: 246; sites in Greenland: 1
+    seed 42 with    Greenland: draws on Greenland  352 | q=25 sizes=[46, 69, 61, 29, 41] W=143.0 W_random=387.7 W_blocks=[217.6, 202.5, 205.1] Gij q50/75/90 = [293.0, 690.0, 1152.0] KS p=0
+    seed 42 without Greenland: draws on Greenland    - | q=29 sizes=[60, 51, 46, 54, 35] W=144.5 W_random=347.5 W_blocks=[183.2, 172.9, 177.1] Gij q50/75/90 = [259.0, 583.0, 1080.0] KS p=0
+    seed 42: same partition with and without Greenland: False
+    seed 43 with    Greenland: draws on Greenland  377 | q=25 sizes=[46, 69, 61, 29, 41] W=142.0 W_random=392.2 W_blocks=[226.6, 210.2, 213.3] Gij q50/75/90 = [293.0, 720.0, 1183.0] KS p=0
+    seed 43 without Greenland: draws on Greenland    - | q=29 sizes=[60, 51, 46, 54, 35] W=139.3 W_random=355.8 W_blocks=[193.0, 180.9, 184.9] Gij q50/75/90 = [271.0, 600.0, 1126.0] KS p=0
+    seed 43: same partition with and without Greenland: False
+    seed 44 with    Greenland: draws on Greenland  365 | q=25 sizes=[46, 69, 61, 29, 41] W=135.5 W_random=396.0 W_blocks=[224.8, 207.2, 209.7] Gij q50/75/90 = [302.0, 700.0, 1191.0] KS p=0
+    seed 44 without Greenland: draws on Greenland    - | q=29 sizes=[60, 51, 46, 54, 35] W=139.4 W_random=365.1 W_blocks=[198.3, 183.8, 188.3] Gij q50/75/90 = [278.0, 629.0, 1112.0] KS p=0
+    seed 44: same partition with and without Greenland: False
+    seed 45 with    Greenland: draws on Greenland  331 | q=25 sizes=[46, 69, 61, 29, 41] W=143.7 W_random=382.7 W_blocks=[222.2, 206.2, 209.8] Gij q50/75/90 = [290.0, 705.0, 1169.0] KS p=0
+    seed 45 without Greenland: draws on Greenland    - | q=29 sizes=[60, 51, 46, 54, 35] W=147.7 W_random=325.6 W_blocks=[171.0, 162.0, 165.7] Gij q50/75/90 = [256.0, 566.0, 1022.0] KS p=0
+    seed 45: same partition with and without Greenland: False
+    seed 46 with    Greenland: draws on Greenland  368 | q=25 sizes=[46, 69, 61, 29, 41] W=146.4 W_random=383.9 W_blocks=[214.5, 198.9, 201.1] Gij q50/75/90 = [294.0, 701.0, 1115.0] KS p=0
+    seed 46 without Greenland: draws on Greenland    - | q=29 sizes=[60, 51, 46, 54, 35] W=142.4 W_random=345.7 W_blocks=[181.8, 170.4, 174.3] Gij q50/75/90 = [266.0, 587.0, 1074.0] KS p=0
+    seed 46: same partition with and without Greenland: False
+
+real	0m8.604s
+user	0m6.973s
+sys	0m1.670s

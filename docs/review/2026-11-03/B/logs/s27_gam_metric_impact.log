@@ -1,0 +1,10 @@
+largest differences (table, train, test, max|dpred|, r2(fit_gam) - r2(exact), alpha):
+  pairwise South America  North America  1.77e-02 -1.95e-02 ['1.6e+15', '6.7e+02']
+  pairwise South America  Europe         1.52e-02 +2.11e-02 ['1.6e+15', '6.7e+02']
+  pairwise South America  Asia           1.33e-02 -3.35e-03 ['1.6e+15', '6.7e+02']
+  pairwise South America  Oceania        9.82e-03 -2.69e-03 ['1.6e+15', '6.7e+02']
+  pairwise Europe         Asia           8.20e-03 -3.06e-03 ['6.3e+02', '1.0e+15']
+  pairwise Europe         South America  7.76e-03 -5.81e-03 ['6.3e+02', '1.0e+15']
+  pairwise Europe         Oceania        6.77e-03 -5.35e-03 ['6.3e+02', '1.0e+15']
+  pairwise South America  Africa         6.68e-03 -7.11e-04 ['1.6e+15', '6.7e+02']
+rows: 26  max |r2 difference|: 0.02108071283813373

@@ -1,0 +1,14 @@
+ERR {'kind': 'dominant', 'n': 41, 'k': 7, 'maxp': 0.16285714285714284, 'nk_len': 100, 'error': "RuntimeError: kNNDM: no split into 7 folds keeps every fold within maxp = 0.16285714285714284 of the 41 sites; increase maxp or decrease k (CAST's advice)"}
+ERR {'kind': 'clustered', 'n': 21, 'k': 2, 'maxp': 0.52, 'nk_len': 2, 'error': "RuntimeError: kNNDM: no split into 2 folds keeps every fold within maxp = 0.52 of the 21 sites; increase maxp or decrease k (CAST's advice)"}
+ERR {'kind': 'line', 'n': 37, 'k': 2, 'maxp': 0.6, 'nk_len': 1, 'error': "RuntimeError: kNNDM: no split into 2 folds keeps every fold within maxp = 0.6 of the 37 sites; increase maxp or decrease k (CAST's advice)"}
+ERR {'kind': 'dominant', 'n': 30, 'k': 2, 'maxp': 0.6, 'nk_len': 1, 'error': "RuntimeError: kNNDM: no split into 2 folds keeps every fold within maxp = 0.6 of the 30 sites; increase maxp or decrease k (CAST's advice)"}
+ERR {'kind': 'dominant', 'n': 33, 'k': 10, 'maxp': 0.12000000000000001, 'nk_len': 2, 'error': "RuntimeError: kNNDM: no split into 10 folds keeps every fold within maxp = 0.12000000000000001 of the 33 sites; increase maxp or decrease k (CAST's advice)"}
+ERR {'kind': 'clustered', 'n': 103, 'k': 2, 'maxp': 0.52, 'nk_len': 1, 'error': "RuntimeError: kNNDM: no split into 2 folds keeps every fold within maxp = 0.52 of the 103 sites; increase maxp or decrease k (CAST's advice)"}
+60 cases, 6 errors, 3 mismatches, 12 random fallbacks, 3.8s
+MISMATCH {'n': 57, 'k': 8, 'maxp': 0.75, 'nk_len': 10, 'ks_D_diff': np.float64(1.5543122344752192e-15), 'ks_p_rel': 1.0049483928497198e+269, 'random_same': True, 'random': False, 'q_same': True, 'W_rel': 0.0, 'part_same': True, 'labels_equal_minus1': False, 'grid_same': True, 'n_valid_same': True, 'Wgrid_maxrel': 0.0, 'kind': 'clustered'}
+MISMATCH {'n': 50, 'k': 2, 'maxp': 0.75, 'nk_len': 2, 'ks_D_diff': np.float64(4.440892098500626e-16), 'ks_p_rel': 9.911653021418338e+270, 'random_same': True, 'random': False, 'q_same': True, 'W_rel': 0.0, 'part_same': True, 'labels_equal_minus1': True, 'grid_same': True, 'n_valid_same': True, 'Wgrid_maxrel': 0.0, 'kind': 'clustered'}
+MISMATCH {'n': 155, 'k': 2, 'maxp': 0.75, 'nk_len': 100, 'ks_D_diff': np.float64(1.5543122344752192e-15), 'ks_p_rel': 5.358170576139417e+251, 'random_same': True, 'random': False, 'q_same': True, 'W_rel': 0.0, 'part_same': True, 'labels_equal_minus1': True, 'grid_same': True, 'n_valid_same': True, 'Wgrid_maxrel': 2.08147176689545e-16, 'kind': 'clustered'}
+fold labels identical to R's cluster ids - 1 (same PC sign as numpy SVD): 27 of 42
+max relative KS p difference: 9.911653021418338e+270  exact KS cases: 54
+ward.D2 naive vs scipy + R cutree vs cut_tree_labels: mismatching cases = 0 of 25
+PC sign flip changes the partition in 0 of 30 cases

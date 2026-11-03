@@ -1,0 +1,29 @@
+sites 965; with complete c8: 932
+aoa_sensitivity ran in 22.8 s
+{
+ "primary": {
+  "train": "all",
+  "threshold": "whisker_max",
+  "weights": "permutation",
+  "area_frac_outside": 0.1450909704183065,
+  "area_frac_outside_excluding_ice_sheets": 0.08361171907408203
+ },
+ "n_variants": 8,
+ "n_train": {
+  "all": 932,
+  "Asia": 373
+ }
+}
+grid: {"continent_geo": 1516, "continent_geo_or_south_of_lat": 1516, "n_cells": 1684, "n_cells_looked_up": 924, "south_of_lat": 1516, "subunits": {"Greenland": 168}} unassigned 0
+domains all_land n_cells 5374 excl 3690
+by continent (all_land): {'Africa': 638, 'Antarctica': 1516, 'Asia': 1354, 'Europe': 358, 'North America': 924, 'Oceania': 199, 'South America': 385}
+training sets: {'Asia': (373, False), 'all': (932, False)}
+all whisker_max permutation 0.1182 area out 0.1451 0.0836
+all whisker_max none 0.1255 area out 0.38 0.3237
+all q95 permutation 0.1096 area out 0.1836 0.1217
+all q95 none 0.1283 area out 0.3684 0.3117
+Asia whisker_max permutation 0.0957 area out 0.5835 0.5485
+Asia whisker_max none 0.2065 area out 0.772 0.7478
+Asia q95 permutation 0.1275 area out 0.4368 0.394
+Asia q95 none 0.2417 area out 0.7419 0.7151
+transfer check all: 242 [('whisker_max', 'permutation', 112, 130), ('whisker_max', 'none', 0, 242), ('q95', 'permutation', 157, 85), ('q95', 'none', 3, 239)]

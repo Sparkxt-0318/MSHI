@@ -1,0 +1,25 @@
+WARNING mshi: build_sites_analysis skipped: upstream cosore_annual_analysis not available
+WARNING mshi: modis_points       skipped: upstream build_sites_analysis not available
+WARNING mshi: features           skipped: upstream modis_points not available
+WARNING mshi: clean_test         skipped: upstream features not available
+WARNING mshi: stages not completed: {'cosore_annual_analysis': 'error: RuntimeError: simulated failure of the exploratory COSORE analysis rule', 'build_sites_analysis': 'skipped: upstream cosore_annual_analysis not available', 'modis_points': 'skipped: upstream build_sites_analysis not available', 'features': 'skipped: upstream modis_points not available', 'clean_test': 'skipped: upstream features not available'}
+exit 1
+   cosore_annual | ok
+   cosore_annual_analysis | error: RuntimeError: simulated failure of the exploratory COSORE analysis rule
+   build_sites | ok
+   build_sites_analysis | skipped: upstream cosore_annual_analysis not available
+   modis_points | skipped: upstream build_sites_analysis not available
+   features | skipped: upstream modis_points not available
+   clean_test | skipped: upstream features not available
+   repro_checks | ok
+reproduction table: {'DEVIATION': 0, 'FAIL': 0, 'INFO': 0, 'NOT RUN': 10, 'PASS': 17, 'STALE': 0}
+NOT RUN | Locked test: selected model | modis_points: skipped: upstream build_sites_analysis not available
+NOT RUN | Locked test: Asia spatial-CV R² | modis_points: skipped: upstream build_sites_analysis not available
+NOT RUN | Locked test: Europe n | modis_points: skipped: upstream build_sites_analysis not available
+NOT RUN | Locked test: Europe R² | modis_points: skipped: upstream build_sites_analysis not available
+NOT RUN | Locked test: site-bootstrap CI low | modis_points: skipped: upstream build_sites_analysis not available
+NOT RUN | Locked test: site-bootstrap CI high | modis_points: skipped: upstream build_sites_analysis not available
+NOT RUN | Locked test: re-run identical to the locked result | modis_points: skipped: upstream build_sites_analysis not available
+NOT RUN | Locked test (repo-filter sensitivity): re-run identical to the locked result | modis_points: skipped: upstream build_sites_analysis not available
+NOT RUN | NPP r vs committed NPP (original 889 sites) | modis_points: skipped: upstream build_sites_analysis not available
+NOT RUN | Original sites with NPP missing in the committed tables but present in v3 | modis_points: skipped: upstream build_sites_analysis not available

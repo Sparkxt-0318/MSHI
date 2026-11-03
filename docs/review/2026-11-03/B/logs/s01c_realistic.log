@@ -1,0 +1,11 @@
+Europe   rep0 n=233 random=False q=15 vs 15 W=59.8627 vs 59.8627 p=0 vs 0 partition_same=True sizes=[49, 39, 57, 29, 59]
+Asia     rep0 n=386 random=False q=23 vs 23 W=148.6289 vs 148.6289 p=0 vs 0 partition_same=True sizes=[101, 70, 84, 45, 86]
+NorthAm  rep0 n=246 random=False q=14 vs 14 W=86.1352 vs 86.1352 p=0 vs 0 partition_same=True sizes=[35, 44, 49, 88, 30]
+Europe   rep1 n=233 random=False q=9 vs 9 W=72.6896 vs 72.6896 p=0 vs 0 partition_same=True sizes=[65, 53, 13, 52, 50]
+Asia     rep1 n=386 random=False q=26 vs 26 W=77.6212 vs 77.6212 p=0 vs 0 partition_same=True sizes=[83, 131, 41, 61, 70]
+NorthAm  rep1 n=246 random=False q=13 vs 13 W=40.0856 vs 40.0856 p=0 vs 0 partition_same=True sizes=[75, 33, 54, 45, 39]
+Europe   rep2 n=233 random=False q=26 vs 26 W=55.5012 vs 55.5012 p=0 vs 0 partition_same=True sizes=[58, 37, 38, 52, 48]
+Asia     rep2 n=386 random=False q=24 vs 24 W=229.6325 vs 229.6325 p=0 vs 0 partition_same=True sizes=[88, 99, 39, 123, 37]
+NorthAm  rep2 n=246 random=False q=12 vs 12 W=238.9205 vs 238.9205 p=0 vs 0 partition_same=True sizes=[66, 42, 55, 57, 26]
+7.1s
+error-case agreement: 200 of 200; cases with an error: 60

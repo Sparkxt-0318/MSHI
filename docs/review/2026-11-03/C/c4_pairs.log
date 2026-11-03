@@ -1,0 +1,20 @@
+== Europe
+  same : brute 0.103350689963 n 1921 sites 127 maxshare 0.207704 | stage 0.103350689963 n 1921 sites 127 maxshare 0.207704
+  diff : brute 0.203771795609 n 2265 sites 46 maxshare 0.364680 | stage 0.203771795609 n 2265 sites 46 maxshare 0.364680
+  diff-same brute 0.100421105646 stage 0.100421105646
+  SRDB-only pairs (N3): same 0.1034 (n 1921), diff 0.2048 (n 2252)
+== South America
+  same : brute 0.163108609105 n 164 sites 30 maxshare 0.170732 | stage 0.163108609105 n 164 sites 30 maxshare 0.170732
+  diff : brute 0.027781817373 n 67 sites 10 maxshare 0.597015 | stage 0.027781817373 n 67 sites 10 maxshare 0.597015
+  diff-same brute -0.135326791732 stage -0.135326791732
+  SRDB-only pairs (N3): same 0.1631 (n 164), diff 0.0282 (n 66)
+== Africa
+  same : brute 0.033478294335 n 70 sites 16 maxshare 0.214286 | stage 0.033478294335 n 70 sites 16 maxshare 0.214286
+  diff : brute 0.491146505476 n 7 sites 2 maxshare 0.571429 | stage 0.491146505476 n 7 sites 2 maxshare 0.571429
+  diff-same brute 0.457668211140 stage 0.457668211140
+  SRDB-only pairs (N3): same 0.0335 (n 70), diff 0.4911 (n 7)
+== Oceania
+  same : brute 0.019414812405 n 156 sites 14 maxshare 0.365385 | stage 0.019414812405 n 156 sites 14 maxshare 0.365385
+  diff : brute 0.176413113348 n 82 sites 3 maxshare 0.768293 | stage 0.176413113348 n 82 sites 3 maxshare 0.768293
+  diff-same brute 0.156998300943 stage 0.156998300943
+  SRDB-only pairs (N3): same 0.0194 (n 156), diff 0.1599 (n 76)

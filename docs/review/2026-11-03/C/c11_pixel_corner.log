@@ -1,0 +1,2 @@
+0.5-deg cell centres on 2.5-arcmin pixel edges (col coordinate integral): 1.0
+cols picked minus exact edge index (0 = pixel east of centre, -1 = west): [np.int64(0)]

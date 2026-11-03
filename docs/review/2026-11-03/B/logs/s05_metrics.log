@@ -1,0 +1,4 @@
+metric_arrays vs naive replicate loop (same draws as bootstrap_ci): max rel diff = 1.2212453270876722e-15
+CI r2 vs bootstrap_ci: [0.41062695494501666, 0.6382545466286875] [0.41062695494501705, 0.638254546628688]
+block labels: ['-1_0', '0_-1', '89_5', '-90_5', '-1_0', '-1_0']
+number of 2-degree blocks: 231  mean replicate size: 232.98  (n = 233 )

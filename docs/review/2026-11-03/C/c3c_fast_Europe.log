@@ -1,0 +1,8 @@
+closed-form REML == dense REML at 4 test points (abs diff < 1e-8)
+
+
+== Europe: ok 200 failed 0 unidentified 0; replicates with a candidate llf = +inf: 1; kept fit below the REML max by > 1e-3: 0 (> 0.05: 0; max 0.0000); failed replicates with a finite REML max: 0
+  share_site           stage CI [0.3987, 0.715] (n 200) | recomputed kept [0.3987, 0.715] (n 200) | REML maxima [0.3987, 0.715] (n 200)
+  ceiling_same_study   stage CI [0.6522, 0.8179] (n 200) | recomputed kept [0.6522, 0.8179] (n 200) | REML maxima [0.6522, 0.8179] (n 200)
+  ceiling_site_mean    stage CI [0.4694, 0.7913] (n 200) | recomputed kept [0.4694, 0.7913] (n 200) | REML maxima [0.4694, 0.7913] (n 200)
+  share_study          stage CI [0.046, 0.3278] (n 200) | recomputed kept [0.046, 0.3278] (n 200) | REML maxima [0.046, 0.3278] (n 200)

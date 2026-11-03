@@ -1,0 +1,106 @@
+subunits: 308
+open-ocean subunits (18):
+                                   ADMIN                              SUBUNIT   REGION_UN                SUBREGION  continent_geo
+20         South Georgia and the Islands               South Sandwich Islands    Americas  Seven seas (open ocean)  South America
+21         South Georgia and the Islands                        South Georgia    Americas  Seven seas (open ocean)  South America
+22        British Indian Ocean Territory  Diego Garcia Naval Support Facility      Africa  Seven seas (open ocean)         Africa
+23                          Saint Helena                         Saint Helena      Africa           Western Africa         Africa
+24                          Saint Helena                            Ascension      Africa  Seven seas (open ocean)         Africa
+72                          South Africa                Prince Edward Islands      Africa  Seven seas (open ocean)         Africa
+80                            Seychelles                           Seychelles      Africa           Eastern Africa         Africa
+100                             Portugal                               Azores      Europe          Southern Europe         Europe
+140                            Mauritius                            Mauritius      Africa           Eastern Africa         Africa
+144                             Maldives                             Maldives        Asia            Southern Asia           Asia
+186                                India                          Nicobar Is.        Asia       South-Eastern Asia           Asia
+187                                India                          Andaman Is.        Asia       South-Eastern Asia           Asia
+188                                India                          Lakshadweep        Asia            Southern Asia           Asia
+207                               France                              Réunion      Africa           Eastern Africa         Africa
+217  French Southern and Antarctic Lands  French Southern and Antarctic Lands      Africa  Seven seas (open ocean)         Africa
+253                                Chile                    Isla Sala y Gomez    Americas            South America  South America
+289    Heard Island and McDonald Islands    Heard Island and McDonald Islands      Africa  Seven seas (open ocean)         Africa
+302                           Antarctica                 South Orkney Islands  Antarctica  Seven seas (open ocean)     Antarctica
+continent_geo values: {'Asia': 72, 'Africa': 69, 'Europe': 68, 'North America': 44, 'Oceania': 34, 'South America': 18, 'Antarctica': 3}
+Russian subunits: [['Russia', 'Asia'], ['Russia', 'Europe'], ['Kaliningrad', 'Europe'], ['Crimea', 'Europe']]
+subunits with SUBUNIT/ADMIN containing Russia but ADMIN != Russia: []
+                                             continent_geo                          geo_subunit                    geo_subunit_admin  geo_subunit_km       expected     ok
+French Guiana (Paracou)                      South America                        French Guiana                               France        0.000000  South America   True
+Guadeloupe                                   North America                           Guadeloupe                               France        1.260544  North America   True
+Martinique                                   North America                           Martinique                               France        0.000000  North America   True
+Reunion                                             Africa                              Réunion                               France        0.000000         Africa   True
+Mayotte                                             Africa                              Mayotte                               France        0.000000         Africa   True
+New Caledonia                                      Oceania                        New Caledonia                        New Caledonia        0.000000        Oceania   True
+Tahiti                                             Oceania                     French Polynesia                     French Polynesia        0.000000        Oceania   True
+Saint Pierre and Miquelon                    North America            Saint Pierre and Miquelon            Saint Pierre and Miquelon        0.000000  North America   True
+Tenerife                                            Africa                       Canary Islands                                Spain        0.000000         Africa   True
+Gran Canaria                                        Africa                       Canary Islands                                Spain        0.000000         Africa   True
+Madeira                                             Africa                              Madeira                             Portugal        0.000000         Africa   True
+Azores                                              Europe                               Azores                             Portugal        0.280853         Europe   True
+Ceuta                                               Africa                              Morocco                              Morocco        0.000000         Africa   True
+Melilla                                             Africa                              Morocco                              Morocco        0.000000         Africa   True
+Svalbard                                            Europe                             Svalbard                               Norway        0.000000         Europe   True
+Faroe Islands                                       Europe                        Faroe Islands                        Faroe Islands        2.065534         Europe   True
+Iceland                                             Europe                              Iceland                              Iceland        0.000000         Europe   True
+Greenland                                    North America                            Greenland                            Greenland        0.000000  North America   True
+Hawaii (Big Island)                                Oceania                               Hawaii             United States of America        0.000000        Oceania   True
+Kauai                                              Oceania                               Hawaii             United States of America        0.000000        Oceania   True
+Alaska (Fairbanks)                           North America                               Alaska             United States of America        0.000000  North America   True
+Attu (Aleutians, east longitude)             North America                               Alaska             United States of America        0.000000  North America   True
+Guam                                               Oceania                                 Guam                                 Guam        0.000000        Oceania   True
+Puerto Rico                                  North America                          Puerto Rico                          Puerto Rico        0.000000  North America   True
+American Samoa                                     Oceania                       American Samoa                       American Samoa        0.000000        Oceania   True
+Galapagos                                    South America                    Galapagos Islands                              Ecuador        0.000000  South America   True
+Easter Island                                      Oceania                        Easter Island                                Chile        0.000000        Oceania   True
+Falklands                                    South America                     Falkland Islands                     Falkland Islands        0.000000  South America   True
+South Georgia                                South America                        South Georgia        South Georgia and the Islands        0.000000  South America   True
+Bermuda                                      North America                              Bermuda                              Bermuda        0.000000  North America   True
+Kaliningrad                                         Europe                          Kaliningrad                               Russia        0.000000         Europe   True
+Moscow                                              Europe                               Russia                               Russia        0.000000         Europe   True
+Urals 59.9E                                         Europe                               Russia                               Russia        0.000000         Europe   True
+Urals 60.1E                                           Asia                               Russia                               Russia        0.000000           Asia   True
+Sakhalin                                              Asia                               Russia                               Russia        0.000000           Asia   True
+Chukotka east of 180                                  Asia                               Russia                               Russia        0.000000           Asia   True
+Wrangel west of 180                                   Asia                               Russia                               Russia        0.000000           Asia   True
+Wrangel east of 180                                   Asia                               Russia                               Russia        0.000000           Asia   True
+Crimea                                              Europe                               Crimea                               Russia        0.000000         Europe   True
+Istanbul (European side; Turkey kept whole)           Asia                               Turkey                               Turkey        0.906990           Asia   True
+Cairo                                               Africa                                Egypt                                Egypt        0.000000         Africa   True
+Sinai (Egypt kept whole)                            Africa                                Egypt                                Egypt        0.000000         Africa   True
+Panama                                       North America                               Panama                               Panama        0.000000  North America   True
+Papua (Indonesia)                                     Asia                            Indonesia                            Indonesia        0.000000           Asia   True
+Papua New Guinea                                   Oceania                     Papua New Guinea                     Papua New Guinea        0.000000        Oceania   True
+Cyprus                                                Asia                               Cyprus                               Cyprus        0.000000           Asia   True
+Antarctica                                      Antarctica                           Antarctica                           Antarctica        0.000000     Antarctica   True
+Tasmania                                           Oceania                             Tasmania                            Australia        0.000000        Oceania   True
+Madagascar                                          Africa                           Madagascar                           Madagascar        0.000000         Africa   True
+Sri Lanka                                             Asia                            Sri Lanka                            Sri Lanka        0.000000           Asia   True
+Maldives                                              Asia                             Maldives                             Maldives        0.000000           Asia   True
+Seychelles (Mahe)                                   Africa                           Seychelles                           Seychelles        0.000000         Africa   True
+Mauritius                                           Africa                            Mauritius                            Mauritius        0.000000         Africa   True
+Fiji east of 180                                   Oceania                                 Fiji                                 Fiji        9.839707        Oceania   True
+Fiji (Viti Levu)                                   Oceania                                 Fiji                                 Fiji        0.000000        Oceania   True
+Kiribati (Kiritimati)                              Oceania                             Kiribati                             Kiribati        0.000000        Oceania   True
+Tonga                                              Oceania                                Tonga                                Tonga        0.000000        Oceania   True
+Malta                                               Europe                                Malta                                Malta        0.000000         Europe   True
+Gibraltar                                           Europe                                Spain                                Spain        0.817246         Europe   True
+Sicily                                              Europe                               Sicily                                Italy        0.000000         Europe   True
+Trinidad                                     North America                             Trinidad                  Trinidad and Tobago        0.000000  North America   True
+Aruba                                        North America                                Aruba                                Aruba        0.000000  North America   True
+Curacao                                      North America                              Curaçao                              Curaçao        0.000000  North America   True
+Bonaire                                      North America                Caribbean Netherlands                          Netherlands        0.000000  North America   True
+Saint Helena                                        Africa                         Saint Helena                         Saint Helena        0.000000         Africa   True
+Kerguelen                                           Africa  French Southern and Antarctic Lands  French Southern and Antarctic Lands        0.000000            NaN  False
+Heard Island                                        Africa    Heard Island and McDonald Islands    Heard Island and McDonald Islands        0.000000            NaN  False
+Bouvet                                                 NaN                                  NaN                                  NaN             NaN            NaN  False
+Cocos (Keeling)                                       Asia              Cocos (Keeling) Islands             Indian Ocean Territories        1.440368            NaN  False
+Christmas Island                                      Asia                     Christmas Island             Indian Ocean Territories        0.000000            NaN  False
+Socotra                                               Asia                              Suqutra                                Yemen        0.000000           Asia   True
+Canary 20 km off coast                              Africa                       Canary Islands                                Spain       22.315819         Africa   True
+Portugal 20 km off                                  Europe                             Portugal                             Portugal       15.675497         Europe   True
+mid-Atlantic                                           NaN                                  NaN                                  NaN             NaN            NaN  False
+lon exactly 180 (Russia)                              Asia                               Russia                               Russia        0.000000           Asia   True
+lon exactly -180 (Russia)                             Asia                               Russia                               Russia        0.000000           Asia   True
+north pole                                             NaN                                  NaN                                  NaN             NaN            NaN  False
+south pole                                      Antarctica                           Antarctica                           Antarctica        0.000000     Antarctica   True
+unexpected: ['Kerguelen', 'Heard Island', 'Bouvet', 'Cocos (Keeling)', 'Christmas Island', 'mid-Atlantic', 'north pole']
+records inside more than one subunit: 0
+0.25-deg cell centres inside more than one subunit: 0

@@ -1,0 +1,9 @@
+WARNING mshi: features           skipped: upstream modis_points not available
+WARNING mshi: stages not completed: {'modis_points': 'stale: results/build_sites_analysis.json: missing; re-run the stage that writes it (or `make all`)', 'features': 'skipped: upstream modis_points not available'}
+make data (minus fetches): exit 0
+make features (minus fetches): exit 2
+   cosore_annual | ok
+   build_sites | ok
+   repro_checks | ok
+   modis_points | stale: results/build_sites_analysis.json: missing; re-run the stage that writes it (or `make all`)
+   features | skipped: upstream modis_points not available

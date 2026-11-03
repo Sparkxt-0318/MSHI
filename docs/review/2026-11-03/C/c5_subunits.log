@@ -1,0 +1,18 @@
+308
+                                   ADMIN                              SUBUNIT                CONTINENT   REGION_UN                  SUBREGION  continent_geo
+21         South Georgia and the Islands                        South Georgia  Seven seas (open ocean)    Americas    Seven seas (open ocean)  South America
+113                               Norway                             Svalbard                   Europe      Europe            Northern Europe         Europe
+120                          New Zealand     New Zealand SubAntarctic islands                  Oceania     Oceania  Australia and New Zealand        Oceania
+217  French Southern and Antarctic Lands  French Southern and Antarctic Lands  Seven seas (open ocean)      Africa    Seven seas (open ocean)         Africa
+233                            Greenland                            Greenland            North America    Americas           Northern America  North America
+289    Heard Island and McDonald Islands    Heard Island and McDonald Islands  Seven seas (open ocean)      Africa    Seven seas (open ocean)         Africa
+304                           Antarctica                           Antarctica               Antarctica  Antarctica                 Antarctica     Antarctica
+continent_geo
+Asia             72
+Africa           69
+Europe           68
+North America    44
+Oceania          34
+South America    18
+Antarctica        3
+Name: count, dtype: int64
