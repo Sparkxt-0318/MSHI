@@ -15,7 +15,9 @@ Stages
   ``mshi.analysis.knndm.knndm_folds``, called with every setting of ``within.knndm`` except those of the prediction
   domain, and ``earth_radius_km = site_build.earth_radius_km``; prediction domain = ``max_pred_points`` draws from
   the continent's cells of the ``within.knndm.grid_deg`` climate grid, with probability proportional to cell area
-  (``pred_weight: area``, D-P2-7), seeded with the kNNDM seed). Each split's W (``knndm.fold_match``: how far its CV
+  (``pred_weight: area``, D-P2-7), seeded with the kNNDM seed; with ``exclude_ice_sheets`` the cells of
+  ``phase2.aoa.ice_sheets`` are left out first, as no Rs is predicted there (D-P2-16: in North America the whole
+  Greenland subunit, ice-free margin included). Each split's W (``knndm.fold_match``: how far its CV
   distances are from the prediction distances) is reported, for the block splits too. The transfer predictions for
   the same sites (LOCO and every pairwise training continent) are read from ``transfer_matrix``'s table, and the
   transfer penalty r2(within) - r2(transfer) gets a paired block-bootstrap CI. Out-of-fold predictions go to
@@ -31,9 +33,13 @@ Learners (``phase2.transfer``)
 - OLS-TP: least squares on bio01 and ln bio12 (the locked form).
 - GAM: statsmodels ``GLMGam`` (Gaussian, identity link): an intercept plus cubic B-spline smooths of bio01 and
   ln bio12 (``gam.df``, ``gam.degree``; knots at training quantiles). The penalty weights are chosen on the training
-  data only, by minimising ``gam.penalty_criterion`` (AIC with effective degrees of freedom) with
-  ``GLMGam.select_penweight`` and the deterministic Nelder-Mead optimiser (``gam.penalty_optimizer: nm``, start
-  alpha = 1; it can stop in a local optimum). statsmodels refuses to evaluate B-splines outside the training range,
+  data only, by minimising ``gam.penalty_criterion`` (AIC with effective degrees of freedom) over ln alpha with the
+  deterministic Nelder-Mead optimiser (``gam.penalty_optimizer: nm``), as ``GLMGam.select_penweight(method="nm")``
+  does (start alpha = 1, 1000 iterations, 2000 evaluations; it can stop in a local optimum), except that every
+  weight is capped at ``gam.alpha_max`` inside the criterion: above about 1e12 statsmodels' penalised fit starts to
+  penalise the linear trend of a smooth (which no weight should), and its AIC then falls spuriously, pulling the
+  search to ever larger weights (D-P2-15). At the cap the smooth is linear to within about 1e-4 log units, so a
+  smooth whose best shape is linear loses nothing. statsmodels refuses to evaluate B-splines outside the training range,
   so each smooth continues linearly beyond its boundary knots (``gam.extrapolation: linear``: value and slope at the
   boundary), the null space of the second-derivative penalty.
 - RF: scikit-learn random forest on ``phase2.c8``, tuned by spatial-block CV inside the training data only: every
@@ -98,7 +104,7 @@ LOCO = "LOCO"
 TABLES = ("pairwise", "loco")
 NEUTRAL = "#F0EFEC"          # display only: neutral midpoint of the diverging r2 colour scale
 R2_FLOOR = -1.0              # display only: lower end of the r2 colour scale and axes (lower values are labelled)
-DOMAIN_KEYS = ("grid_deg", "max_pred_points", "pred_weight")   # within.knndm: prediction domain, not kNNDM's
+DOMAIN_KEYS = ("grid_deg", "max_pred_points", "pred_weight", "exclude_ice_sheets")   # within.knndm: domain, not kNNDM's
 
 
 
@@ -142,6 +148,17 @@ def _lookup(cfg: Config, dotted: str):
     return node
 
 
+def xgb_block(cfg: Config) -> tuple[dict, str]:
+    """The XGB parameters named by ``phase2.transfer.xgb_from``, and that name. Every Phase-2 stage that fits XGB
+    (transfer_matrix, within_continent, aoa_sensitivity, us_r2) takes them from here, so a row that two tables
+    share cannot differ between them (review D-1)."""
+    name = cfg["phase2"]["transfer"]["xgb_from"]
+    xgb = _lookup(cfg, name)
+    if not isinstance(xgb, dict):
+        raise ValueError(f"phase2.transfer.xgb_from ({name}) does not name a parameter block")
+    return dict(xgb), name
+
+
 @dataclass(frozen=True)
 class Spec:
     """Everything that defines the learners and the target (from ``phase2``)."""
@@ -164,11 +181,11 @@ class Spec:
             raise ValueError("phase2.transfer.gam.extrapolation: only 'linear' is implemented")
         if tr["gam"]["penalty_optimizer"] != "nm":
             raise ValueError("phase2.transfer.gam.penalty_optimizer: only 'nm' (deterministic Nelder-Mead) is implemented")
-        xgb = _lookup(cfg, tr["xgb_from"])
-        if not isinstance(xgb, dict):
-            raise ValueError(f"phase2.transfer.xgb_from ({tr['xgb_from']}) does not name a parameter block")
-        return cls(p2["target"], list(p2["c8"]), dict(tr["ols_tp"]), dict(tr["gam"]), dict(tr["rf"]), dict(xgb),
-                   int(tr["xgb_seed"]), tr["xgb_from"])
+        if not float(tr["gam"]["alpha_max"]) > 0:
+            raise ValueError("phase2.transfer.gam.alpha_max must be positive")
+        xgb, name = xgb_block(cfg)
+        return cls(p2["target"], list(p2["c8"]), dict(tr["ols_tp"]), dict(tr["gam"]), dict(tr["rf"]), xgb,
+                   int(tr["xgb_seed"]), name)
 
     def features(self) -> list[str]:
         """Every predictor any learner uses, in a fixed order."""
@@ -236,6 +253,23 @@ def spline_basis(smoother, x: np.ndarray) -> np.ndarray:
     return smoother.transform(xc) + (x - xc)[:, None] * smoother.transform(xc, deriv=1)
 
 
+def select_alpha(y: np.ndarray, bs, g: dict) -> tuple[np.ndarray, dict]:
+    """Penalty weights minimising ``g["penalty_criterion"]``: Nelder-Mead over ln alpha from 0 with the settings of
+    ``GLMGam.select_penweight(method="nm")``, every weight capped at ``g["alpha_max"]`` inside the criterion (module
+    docstring). Each evaluation is a fresh fit (statsmodels warm-starts its own; the criterion agrees to 1e-13)."""
+    from scipy import optimize
+    from statsmodels.gam.api import GLMGam
+    ones, cap = np.ones((len(y), 1)), float(np.log(float(g["alpha_max"])))
+
+    def crit(p: np.ndarray) -> float:
+        return float(getattr(GLMGam(y, exog=ones, smoother=bs, alpha=np.exp(np.minimum(p, cap))).fit(),
+                             g["penalty_criterion"]))
+    p, _f, n_iter, n_eval, flag = optimize.fmin(crit, np.zeros(len(bs.smoothers)), full_output=True,
+                                                 maxiter=1000, maxfun=2000, disp=False)
+    return np.exp(np.minimum(p, cap)), {"at_alpha_max": [bool(v >= cap) for v in p], "n_evaluations": int(n_eval),
+                                        "converged": flag == 0}
+
+
 def fit_gam(spec: Spec, train: pd.DataFrame) -> Fitted:
     from statsmodels.gam.api import BSplines, GLMGam
     g = spec.gam
@@ -244,9 +278,7 @@ def fit_gam(spec: Spec, train: pd.DataFrame) -> Fitted:
     k = X.shape[1]
     bs = BSplines(X, df=[g["df"]] * k, degree=[g["degree"]] * k)
     ones = np.ones((len(X), 1))
-    sel = GLMGam(y, exog=ones, smoother=bs)
-    sel.fit()                    # statsmodels 0.15: select_penweight needs the scale set by a first fit
-    alpha = sel.select_penweight(criterion=g["penalty_criterion"], method="nm", disp=False)[0]
+    alpha, search = select_alpha(y, bs, g)
     res = GLMGam(y, exog=ones, smoother=bs, alpha=alpha).fit()
     params = np.asarray(res.params, float)
 
@@ -255,7 +287,7 @@ def fit_gam(spec: Spec, train: pd.DataFrame) -> Fitted:
         B = np.hstack([spline_basis(s, Xn[:, j]) for j, s in enumerate(bs.smoothers)])
         return params[0] + B @ params[1:]
     return Fitted(predict, {"alpha": [float(a) for a in alpha], "edf": float(np.sum(res.edf)),
-                            g["penalty_criterion"]: float(getattr(res, g["penalty_criterion"]))})
+                            g["penalty_criterion"]: float(getattr(res, g["penalty_criterion"])), **search})
 
 
 def _rf(spec: Spec, X: np.ndarray, y: np.ndarray, params: dict) -> RandomForestRegressor:
@@ -686,6 +718,16 @@ def within_continent(cfg: Config) -> dict:
         from .knndm import fold_match, knndm_folds      # mshi.analysis.knndm: imported here, at use
         grid = climate_grid(cfg, W["knndm"]["grid_deg"])
         inputs.append("fetch_worldclim.json")
+        dom = {"n_cells": int(len(grid)), "exclude_ice_sheets": bool(W["knndm"]["exclude_ice_sheets"])}
+        if W["knndm"]["exclude_ice_sheets"]:
+            from .aoa import ice_sheet_mask             # imported here: aoa imports this module
+            ice, counts = ice_sheet_mask(cfg, grid, p2["aoa"]["ice_sheets"])
+            dom.update(ice_sheets=dict(p2["aoa"]["ice_sheets"]), ice_cells=counts,
+                       ice_cells_by_continent={str(k): int(v) for k, v in
+                                               grid.loc[ice, "continent_geo"].value_counts().sort_index().items()})
+            grid = grid[~ice].reset_index(drop=True)
+        dom["n_cells_used"] = int(len(grid))
+        res["prediction_domain"] = dom
         rows = tm["main"] + tm["supplementary"]
         for c in eligible:
             sub = d[d.continent_geo == c].reset_index(drop=True)

@@ -183,6 +183,131 @@ def test_gate_opens_per_row_group(cfg, tmp_path, monkeypatch):
     assert R.run(["noise"], sand) == 2 and ran == ["noise"]                     # a site-build FAIL closes it
 
 
+def _gate_stages(ran, repro):
+    from mshi.run import Stage
+    return [Stage("repro_checks", repro),
+            Stage("noise", lambda c: ran.append("noise") or {}, [], needs=("site_build",)),
+            Stage("transfer", lambda c: ran.append("transfer") or {}, [])]
+
+
+def _table(npp="NOT RUN", locked="NOT RUN"):
+    rows = ([{"quantity": f"QC sites: {i}", "status": "PASS", "group": "site_build"} for i in range(17)]
+            + [{"quantity": "Locked test: Europe n", "status": locked, "group": "locked_test"},
+               {"quantity": "NPP r", "status": npp, "group": "npp"}])
+    summary = {k: sum(r["status"] == k for r in rows) for k in ("PASS", "FAIL", "STALE", "NOT RUN")}
+    return {"rows": rows, "summary": summary}
+
+
+def test_gate_is_closed_for_every_stage_by_a_fail_or_stale_row_anywhere(cfg, tmp_path, monkeypatch):
+    """Review A-3/D-2 (D-P2-14): the decision depends only on the stored table, whether or not repro_checks ran
+    in the same invocation. A FAIL or STALE row in any group stops every later stage; NOT RUN only those that
+    need its group."""
+    import mshi.run as R
+    from mshi.analysis.repro_checks import ReproductionFailure
+    from mshi.io import StaleInputError as SIE
+    sand = full_sandbox(cfg, tmp_path)
+    ran = []
+
+    def repro(table, exc=None):
+        def f(c):
+            write_result(c, table, "reproduction_check.json")
+            if exc:
+                raise exc
+            return table["summary"]
+        return f
+
+    cases = [  # (table, exception raised by repro_checks after writing it, stages that may run)
+        (_table(), None, ["noise"]),                                              # network rows NOT RUN
+        (_table(npp="FAIL"), ReproductionFailure("NPP r outside tolerance"), []),  # stop and report
+        (_table(locked="STALE"), SIE("1 reproduction row(s) come from results that are not current"), []),
+        (_table(npp="PASS", locked="PASS"), None, ["noise", "transfer"]),
+    ]
+    for table, exc, expect in cases:
+        for with_repro in (True, False):         # same invocation, or a later one on the stored table
+            ran.clear()
+            monkeypatch.setattr(R, "_stages", lambda: _gate_stages(ran, repro(table, exc)))
+            names = (["repro_checks"] if with_repro else []) + ["noise", "transfer"]
+            if not with_repro:
+                write_result(sand, table, "reproduction_check.json")
+            R.run(names, sand)
+            assert ran == expect, (table["summary"], exc, with_repro, ran)
+
+    def crash(c):
+        raise RuntimeError("repro_checks crashed before writing a table")
+    write_result(sand, _table(npp="PASS", locked="PASS"), "reproduction_check.json")    # an older, all-PASS table
+    ran.clear()
+    monkeypatch.setattr(R, "_stages", lambda: _gate_stages(ran, crash))
+    assert R.run(["repro_checks", "noise", "transfer"], sand) == 1 and ran == []
+
+
+def test_stages_that_need_the_full_site_set_do_not_run_in_smoke_runs(cfg, tmp_path, monkeypatch):
+    """Review A-1: europe_geo_sensitivity (like clean_test, repro_checks and site_diagnostics) is not part of a
+    smoke run, whose 50-site subset can never reproduce the locked test set."""
+    import mshi.run as R
+    from mshi.run import Stage
+    smoke_only = {s.name for s in R._stages() if not s.smoke}
+    assert smoke_only == {"site_diagnostics", "clean_test", "repro_checks", "europe_geo_sensitivity"}
+    ran = []
+    monkeypatch.setattr(R, "_stages", lambda: [
+        Stage("full_set", lambda c: ran.append("full_set") or {}, [], smoke=False),
+        Stage("subset", lambda c: ran.append("subset") or {}, [])])
+    assert R.run(["full_set", "subset"], sandbox(cfg, tmp_path)) == 0 and ran == ["subset"]
+
+
+def test_within_continent_declares_every_stage_it_reads():
+    """Review A-4: within_continent reads features_analysis outputs, so it depends on that stage."""
+    import mshi.run as R
+    deps = {s.name: set(s.deps) for s in R._stages()}
+    assert {"features_analysis", "transfer_matrix", "fetch_worldclim"} <= deps["within_continent"]
+    assert {"modis_points", "modis_points_analysis"} <= deps["features_analysis"]
+    assert deps["modis_points"] == {"build_sites"}            # D-P2-13: the reproduction never waits for Phase 2
+
+
+def test_modis_points_reads_only_the_locked_build_and_the_analysis_stage_the_rest(cfg, tmp_path, monkeypatch):
+    """Review A-5 (D-P2-13): modis_points runs without an analysis build; modis_points_analysis extracts only the
+    analysis points the locked set lacks, and nothing (no network) when there are none."""
+    from mshi.data import modis
+    from test_robustness import fake_build
+    import mshi.netutil as N
+    sand = sandbox(cfg, tmp_path)
+    fake_build(sand)
+    sand.path("results", "build_sites_analysis.json").unlink()          # no analysis build at all
+    monkeypatch.setattr(N, "check_reachable", lambda *a, **k: None)
+    seen = []
+
+    def fake_extract(p, m):
+        seen.append(sorted(p.site_key))
+        out = pd.DataFrame({"site_key": p.site_key, "npp": 500.0, "npp_n": 5, "lst_day": 20.0, "lst_day_n": 60,
+                            "lst_night": 5.0, "lst_night_n": 60})
+        return out, {"n_jobs": 1, "n_reads": 1, "n_tiles": 1, "failed_reads": [], "catalog_gaps": [],
+                     "accepted_catalog_gaps": [], "lst_same_date_ties": [], "npp_duplicate_years": [],
+                     "periods_outside_datetime": []}
+    monkeypatch.setattr(modis, "extract_points", fake_extract)
+    rec = modis.modis_points(sand)
+    assert rec["n_points"] == 2 and "exploratory" not in rec
+    res = json.loads(sand.path("results", "modis_points.json").read_text())
+    assert set(res["_inputs"]) == {"build_sites.json"}
+    # the analysis build: the same two sites plus one more
+    st = pd.DataFrame({"site_id": ["s0", "s1", "s2"], "lat": [45.0, 45.01, 50.0], "lon": [10.0, 10.02, 12.0],
+                       "continent": "Europe", "continent_geo": "Europe", "log_rs": 6.0})
+    aouts = [write_table(st, sand.path("derived", f"sites_analysis_{t}.parquet")) for t in ("qc", "repo")]
+    write_result(sand, {"fake": True}, "build_sites_analysis.json", outputs=aouts)
+    seen.clear()
+    rec = modis.modis_points_analysis(sand)
+    assert rec["n_points"] == 1 and rec["exploratory"] is True and len(seen) == 1 and len(seen[0]) == 1
+    res = json.loads(sand.path("results", "modis_points_analysis.json").read_text())
+    assert set(res["_inputs"]) == {"build_sites.json", "build_sites_analysis.json"} and res["exploratory"] is True
+    assert len(modis.load_modis_points(sand, name="modis_points_analysis")) == 1
+    # no extra point: nothing is extracted and an empty table is recorded
+    write_result(sand, {"fake": True}, "build_sites_analysis.json",
+                 outputs=[write_table(st.iloc[:2], p) for p in aouts])
+    seen.clear()
+    monkeypatch.setattr(N, "check_reachable", lambda *a, **k: (_ for _ in ()).throw(AssertionError("network")))
+    rec = modis.modis_points_analysis(sand)
+    assert rec["n_points"] == 0 and seen == []
+    assert modis.load_modis_points(sand, name="modis_points_analysis").empty
+
+
 # ---------------------------------------------------------------- geographic-Europe sensitivity (Q-5)
 
 def _synthetic_locked_features(cfg, sand, rng):
@@ -285,16 +410,20 @@ def test_features_analysis_attaches_the_same_features(cfg, tmp_path, monkeypatch
     keys = site_key(st.lat, st.lon).values
     mod = pd.DataFrame({"site_key": keys, "npp": [400.0, 900.0, 300.0], "npp_n": 5, "lst_day": [20.0, 30.0, 5.0],
                         "lst_night": [8.0, 22.0, -10.0]})
-    out = write_modis_cache(sand, mod, modis_cache_key(sand, keys), {"n_failed_reads": 0})
-    write_result(sand, {"n_failed_reads": 0}, "modis_points.json", outputs=[out])
+    # D-P2-13: the first two points come from the locked extraction, the third from modis_points_analysis
+    for name, rows in (("modis_points", [0, 1]), ("modis_points_analysis", [2])):
+        part = mod.iloc[rows]
+        out = write_modis_cache(sand, part, modis_cache_key(sand, part.site_key), {"n_failed_reads": 0}, name)
+        write_result(sand, {"n_failed_reads": 0}, f"{name}.json", outputs=[out])
     F.features_analysis(sand)
     d = pd.read_parquet(sand.path("interim", "features_analysis_qc.parquet"))
     assert list(d.site_id) == ["a1", "a2", "a3"] and (d.continent_geo == st.continent_geo).all()
     assert d[["bio01", "bio12", "clay", "npp", "lst_diurnal_range"]].notna().all().all()
-    assert d.lst_diurnal_range.tolist() == [12.0, 8.0, 15.0]
+    assert d.lst_diurnal_range.tolist() == [12.0, 8.0, 15.0] and d.npp.tolist() == [400.0, 900.0, 300.0]
     res = json.loads(sand.path("results", "features_analysis.json").read_text())
-    assert res["exploratory"] is True and set(res["_inputs"]) == {"build_sites_analysis.json", "modis_points.json",
-                                                                 "fetch_worldclim.json", "fetch_soilgrids.json"}
+    assert res["exploratory"] is True and set(res["_inputs"]) == {
+        "build_sites_analysis.json", "modis_points.json", "modis_points_analysis.json", "fetch_worldclim.json",
+        "fetch_soilgrids.json"}
     write_table(st.assign(log_rs=7.0), tabs[1])                        # an analysis table replaced
     with pytest.raises(StaleInputError, match="sites_analysis_qc.parquet changed after the run"):
         F.features_analysis(sand)

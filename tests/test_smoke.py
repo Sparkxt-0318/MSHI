@@ -74,7 +74,7 @@ def test_smoke_50_sites(cfg, tmp_path, monkeypatch):
     write_result(sand, {"synthetic": True}, "fetch_soilgrids.json",
                  outputs=[paths[("sg", k)] for k in cfg["sources"]["soilgrids"]["variables"]])
     pts = modis_point_set(sand)
-    assert len(pts) <= 4 * cfg["smoke"]["n_sites"]           # 4 subset tables; smoke runs exclude the 889 legacy points
+    assert len(pts) <= 2 * cfg["smoke"]["n_sites"]   # the 2 locked subset tables; smoke runs exclude the 889 legacy points
     mod = pd.DataFrame({"site_key": site_key(pts.lat, pts.lon).values,
                         "npp": 300 + 3 * pts.lat.abs().values, "npp_n": 5,
                         "lst_day": 20 - 0.3 * pts.lat.abs().values, "lst_night": 5 - 0.3 * pts.lat.abs().values})

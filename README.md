@@ -1,6 +1,7 @@
 # MSHI v3 — soil respiration: site data, transfer evaluation and upscaling bias
 
-> **Status (2026-11-02): rebuild in progress — end of Phase 1.** This README is interim; it is
+> **Status (2026-11-03): rebuild in progress — Phase 2 (exploratory) implemented; the results that need
+> the gridded sources (WorldClim, SoilGrids, MODIS) wait for network access.** This README is interim; it is
 > rewritten for the paper in Phase 4. The previous (v1/v2) pipeline, its outputs and its claims are in
 > `legacy/` (see `legacy/README.md` for what each item was and why it was superseded).
 
@@ -23,8 +24,9 @@ With conda instead: `conda env create -f environment.yml`, activate it, then the
 shows the stages. Exit codes: 0 all stages ok; 1 a stage failed or a reproduction target is outside
 its tolerance; 2 no failure, but a source was blocked or unreachable, an input was stale (re-run the
 upstream stages, e.g. `make all`), or a stage was skipped because of one of these. Stages of later
-phases run only after a complete, passing reproduction table: current, and no FAIL, STALE or NOT RUN
-row (smoke runs do not apply this gate).
+phases (all exploratory) run only if the reproduction table is current, has no FAIL or STALE row in any
+group (a target outside tolerance stops them all: stop and report), and has no NOT RUN row among the rows
+they build on (see "Two site builds" below; smoke runs do not apply this gate).
 
 Every source version, path, analysis threshold, reproduction tolerance and seed is in `configs/v3.yaml`;
 the code keeps only numerical slack, network retry/timeout defaults and how many examples a result lists.
@@ -56,9 +58,12 @@ policy, not a property of the pipeline.
   COSORE restricted to untreated soil-respiration ports with full-year coverage
   (`cosore_annual_analysis.csv`). See `docs/DECISIONS.md` D-P2-1 to D-P2-3.
 
-Stages after `repro_checks` (later phases; all exploratory) run only if the reproduction rows they build on
-passed: a stage that uses the gridded features needs the whole table, the noise ceiling only the site-build
-rows (D-P2-5).
+Stages after `repro_checks` (later phases; all exploratory) need a current reproduction table without FAIL
+or STALE rows; a stage that uses the gridded features also needs every row to have run, the noise ceiling only
+the site-build rows, so it can run while sources for the other rows are unreachable (D-P2-5, D-P2-14). The
+decision depends only on the stored table, not on whether `repro_checks` ran in the same invocation. The
+locked chain does not read the analysis build: MODIS values for the analysis sites that the locked sites do
+not cover come from a separate stage after the gate, `modis_points_analysis` (D-P2-13).
 
 ## Where things are
 
@@ -69,9 +74,12 @@ rows (D-P2-5).
 | `tests/` | reproduction-target regression tests, guards (demo table, locked plan), unit and robustness tests, smoke test |
 | `docs/DECISIONS.md` | dated log of decisions, deviations, versions and open questions |
 | `docs/CHECKPOINT1.md` | Checkpoint 1 report: reproduction table, deviations, run times, what in the handoff is wrong, decisions needed |
+| `docs/CHECKPOINT2.md` | Checkpoint 2 report: Phase-2 results so far, what waits for the network, the review, questions |
 | `docs/review/2026-11-02/` | the package review and the handoff critique (findings, verifier notes, review scripts; exploratory) |
+| `docs/review/2026-11-03/` | the Phase-2 code review (findings, verdicts, the reviewers' scripts and logs) |
 | `docs/handoff/` | the 2026-11-02 handoff bundle (audit log, locked plan, prototype scripts, pilot results) |
 | `data/derived/` | COSORE annual values, record and site tables of both builds (with licence and attribution notes) |
 | `results/` | stage outputs, `reproduction_check.md`, `run_log.jsonl` |
+| `figures/phase2/` | Phase-2 figures (PNG 300 dpi and PDF, byte-reproducible) |
 | `legacy/` | superseded v1/v2 code, tables, figures and website artefacts |
 | `biosensor_samples/` | centimetre-tier biosensor data for a separate manuscript (not used by v3) |

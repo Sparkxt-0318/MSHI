@@ -23,7 +23,18 @@ count as site variance)
   e ~ N(0, s2_record). REML with statsmodels MixedLM: groups = site, a random intercept for site and a variance
   component for study within site. This is N3's model (``vc_formula={"study": "0 + C(study)"}``) built from arrays
   (``VCSpec``): the formula interface calls patsy once per site, so the array form gives the same estimates 3-4 times
-  faster (tests/test_noise_ceiling.py checks the two agree). Optimizer: ``noise_ceiling.optimizer`` (N3: lbfgs).
+  faster (tests/test_noise_ceiling.py checks the two agree). Optimizer: ``noise_ceiling.optimizer``, a list tried in
+  order (lbfgs first, as N3): a fit that raises, does not converge or returns a non-finite REML log-likelihood or
+  variance is refitted with the next method. statsmodels' lbfgs does all three on some boundary models (e.g. llf =
+  +inf with a zero random-intercept variance in South America bootstrap replicates; review C-1, D-P2-17), where bfgs
+  and Nelder-Mead reach the REML maximum. Which method produced each fit is recorded.
+- Polishing: lbfgs can also report convergence of the interior model short of its maximum, where no fallback is
+  triggered (2 of 200 South America replicates, by 0.03 and 0.005 in log-likelihood). So the kept estimate is then
+  refined on the closed space directly: the exact REML log-likelihood of this model has a closed form from per-study
+  sums (``reml_llf``: compound symmetry within a study, the site intercept by the Woodbury identity; it equals
+  statsmodels' REML log-likelihood to about 1e-12, tests/test_noise_ceiling.py), maximised by L-BFGS-B with every
+  variance >= 0, started from each usable candidate. The polished components replace the candidate's if their
+  log-likelihood is higher by more than ``LLF_TIE``; the gain is recorded (``polish``).
 - Fitted on the sites with at least ``noise_ceiling.min_records_per_site`` records.
 - The REML maximum over the closed parameter space (variances >= 0). L-BFGS on statsmodels' square-root
   parameterisation can stop short of a zero variance and still report convergence: on the real South America QC records
@@ -41,15 +52,23 @@ count as site variance)
 Ceilings (shares of total = s2_site + s2_study + s2_record)
 - independent_study = s2_site / total: the R2 of a perfect site-level predictor for one new record from an independent
   study at the site (N3's "reproducibility ceiling");
-- same_study = (s2_site + s2_study) / total: for a new record from a study already observed at the site;
+- same_study = (s2_site + s2_study) / total: the R2 of a perfect predictor of the study mean (the same-study ICC)
+  for a new record from a study already observed at the site. It needs a predictor that knows the record's study:
+  for predictors constant within a site it is reached only at single-study sites, and is otherwise an upper bound
+  that they cannot reach (review C-3). For them the attainable value is ``same_study_site_constant`` =
+  (s2_site + s2_study * mean_i sum_j (m_ij / n_i)^2) / total (the new record's study drawn with probability
+  m_ij / n_i; the best site-constant predictor is the site effect plus the record-weighted mean of its study effects;
+  mean over all sites, singletons included);
 - site_mean: for the Phase-2 target, the mean log Rs of all n_i records of site i. Given a_i, that mean has the noise
   variance v_i = s2_study * sum_j (m_ij / n_i)^2 + s2_record / n_i (m_ij records of study j), and
   R2_max = s2_site / (s2_site + mean_i v_i), the mean over ALL sites of the continent, singletons included (their
   v_i = s2_study + s2_record extrapolates components fitted on multi-record sites; checked below).
-  ``site_mean_equal_study_weights`` puts s2_study / J_i (J_i studies) in place of the first term (the brief's formula):
-  exact only when a site's studies have equal record counts, otherwise it understates the noise; reported alongside.
-These are ceilings for predictors that are constant within a 5-km site (gridded climate and soil): the within-site
-variance includes real plot-to-plot differences (e.g. ecosystem type, F-H19), not only measurement noise.
+  ``site_mean_equal_study_weights`` puts s2_study / J_i (J_i studies) in place of the first term (an equal-study-weight
+  approximation, not from the brief, which gives no formula): exact only when a site's studies have equal record
+  counts, otherwise it understates the noise; reported alongside.
+independent_study and site_mean are ceilings for predictors that are constant within a 5-km site (gridded climate
+and soil); same_study is one only for a predictor of the study. The within-site variance includes real
+plot-to-plot differences (e.g. ecosystem type, F-H19), not only measurement noise.
 
 Checks of that extrapolation (F-H19): the observed variance of the site-mean target over all sites minus the model's
 s2_site + mean_i v_i, and the observed variance of the singleton sites' values minus the model's total; both with CIs.
@@ -124,11 +143,15 @@ METHOD = (
 FORMULAS = {
     "ceiling_independent_study": "s2_site / (s2_site + s2_study + s2_record)",
     "ceiling_same_study": "(s2_site + s2_study) / (s2_site + s2_study + s2_record)",
+    "ceiling_same_study_site_constant": "(s2_site + s2_study * mean_i sum_j (m_ij / n_i)^2) / (s2_site + s2_study + "
+                                        "s2_record), mean over all sites: a new record from an observed study (study j "
+                                        "with probability m_ij / n_i), best predictor constant within the site",
     "ceiling_site_mean": "s2_site / (s2_site + mean_i v_i), v_i = s2_study * sum_j (m_ij / n_i)^2 + s2_record / n_i, "
                          "mean over all sites (singletons included); m_ij records of study j at site i, "
                          "n_i = sum_j m_ij",
     "ceiling_site_mean_equal_study_weights": "s2_site / (s2_site + mean_i (s2_study / J_i + s2_record / n_i)), J_i "
-                                             "studies at site i (the brief's formula; exact for equal m_ij)",
+                                             "studies at site i (equal-study-weight approximation; exact for equal "
+                                             "m_ij)",
     "pairs": "mean over record pairs within a site of (log_rs_a - log_rs_b)^2 / 2, pairs pooled over sites",
     "check_site_mean_var_diff": "var(site means over all sites) - (s2_site + mean_i v_i)",
     "check_singleton_var_diff": "var(singleton site values) - (s2_site + s2_study + s2_record)",
@@ -136,7 +159,7 @@ FORMULAS = {
 
 # per-replicate statistics, in output order (fit statistics are NaN when the fit is not "ok")
 FIT_STATS = ("s2_site", "s2_study", "s2_record", "total", "share_site", "share_study", "share_record",
-             "ceiling_independent_study", "ceiling_same_study", "ceiling_site_mean",
+             "ceiling_independent_study", "ceiling_same_study", "ceiling_same_study_site_constant", "ceiling_site_mean",
              "ceiling_site_mean_equal_study_weights", "mean_noise_site_mean", "check_site_mean_var_diff",
              "check_singleton_var_diff")
 PAIR_STATS = ("pairs_same_study", "pairs_diff_study", "pairs_diff_minus_same")
@@ -150,7 +173,7 @@ class Settings:
     n_boot: int
     seed: int
     quantiles: tuple[float, float]
-    optimizer: str | tuple[str, ...]
+    optimizer: tuple[str, ...]
     n_jobs: int
     min_test_sites: int
 
@@ -165,7 +188,7 @@ class Settings:
         return cls(variant=p2["variant"], continents=tuple(p2["continents"]),
                    min_records=int(nc["min_records_per_site"]), n_boot=int(nc["n_boot"]), seed=int(nc["seed"]),
                    quantiles=tuple(p2["bootstrap"]["quantiles"]),
-                   optimizer=opt if isinstance(opt, str) else tuple(opt), n_jobs=int(nc.get("n_jobs", 1)),
+                   optimizer=(opt,) if isinstance(opt, str) else tuple(opt), n_jobs=int(nc.get("n_jobs", 1)),
                    min_test_sites=int(p2["min_test_sites"]))
 
 
@@ -333,7 +356,21 @@ def _vcspec(site: np.ndarray, study: np.ndarray):
 
 
 def _fit_candidate(kind: str, y: np.ndarray, site: np.ndarray, study: np.ndarray, optimizer) -> dict:
-    """One REML fit: the interior model or a boundary model (module docstring)."""
+    """One REML fit: the interior model or a boundary model (module docstring), with the methods of ``optimizer``
+    tried in order until a fit is usable (converged, finite log-likelihood and variances, no error)."""
+    methods = (optimizer,) if isinstance(optimizer, str) else tuple(optimizer)
+    failed = []
+    for method in methods:
+        out = _fit_once(kind, y, site, study, method)
+        if out["usable"]:
+            break
+        failed.append({"method": method, "converged": out["converged"], "llf": out["llf"], "error": out["error"]})
+    out["method"] = method if out["usable"] else None
+    out["failed_methods"] = failed
+    return out
+
+
+def _fit_once(kind: str, y: np.ndarray, site: np.ndarray, study: np.ndarray, method: str) -> dict:
     one = np.ones((len(y), 1))
     out: dict = {"usable": False, "converged": None, "llf": None, "error": None}
     with warnings.catch_warnings(record=True) as caught:
@@ -345,7 +382,7 @@ def _fit_candidate(kind: str, y: np.ndarray, site: np.ndarray, study: np.ndarray
                 model = MixedLM(y, one, groups=site, exog_re=one)
             else:
                 model = MixedLM(y, one, groups=study, exog_re=one)
-            f = model.fit(reml=True, method=list(optimizer) if isinstance(optimizer, tuple) else optimizer)
+            f = model.fit(reml=True, method=method)
             re = float(np.asarray(f.cov_re)[0, 0])
             vc = float(np.asarray(f.vcomp)[0]) if kind == "interior" else 0.0
             s2 = {"interior": (re, vc), "no_study": (re, 0.0), "no_site": (0.0, re)}[kind]
@@ -356,6 +393,47 @@ def _fit_candidate(kind: str, y: np.ndarray, site: np.ndarray, study: np.ndarray
             out["error"] = f"{type(e).__name__}: {e}"
     out["warnings"] = sorted({f"{w.category.__name__}: {w.message}" for w in caught})
     return out
+
+
+def study_sums(y: np.ndarray, site: np.ndarray, study: np.ndarray) -> tuple:
+    """Per study (records in site and study order): its site index (0 .. sites - 1), record count, sum and sum of
+    squares of y; plus the numbers of sites and records."""
+    starts = np.flatnonzero(np.r_[True, (site[1:] != site[:-1]) | (study[1:] != study[:-1])])
+    m = np.diff(np.r_[starts, len(y)]).astype(float)
+    _, st_site = np.unique(site[starts], return_inverse=True)
+    return st_site, m, np.add.reduceat(y, starts), np.add.reduceat(y * y, starts), int(st_site.max()) + 1, len(y)
+
+
+def reml_llf(s2, sums: tuple) -> float:
+    """Exact REML log-likelihood of log_rs = mu + a_i + b_ij + e_ijk at s2 = (s2_site, s2_study, s2_record), from
+    ``study_sums`` (statsmodels' convention, including the constant)."""
+    sa, sb, se = (float(v) for v in s2)
+    st_site, m, S, Q, n_sites, N = sums
+    a = 1.0 / (se + m * sb)                          # 1'B_j^-1 1 = m_j a_j for the study block B_j
+    c = np.bincount(st_site, m * a, n_sites)         # per site: 1'B^-1 1
+    u = np.bincount(st_site, a * S, n_sites)         # 1'B^-1 y
+    w = np.bincount(st_site, (Q - sb * a * S * S) / se, n_sites)    # y'B^-1 y
+    den = 1.0 + sa * c                               # V_i = B + s2_site 11' (Woodbury)
+    logdet = float(np.sum((m - 1) * np.log(se) + np.log(se + m * sb)) + np.sum(np.log(den)))
+    A, b1, yy = float(np.sum(c / den)), float(np.sum(u / den)), float(np.sum(w - sa * u * u / den))
+    mu = b1 / A
+    return -0.5 * ((N - 1) * np.log(2 * np.pi) + logdet + np.log(A) + yy - 2 * mu * b1 + mu * mu * A)
+
+
+def polish(sums: tuple, starts: list[tuple[float, float, float]], var_y: float) -> tuple[np.ndarray, float]:
+    """The REML maximum over the closed parameter space found by L-BFGS-B from each start (module docstring)."""
+    from scipy.optimize import minimize
+    lo = 1e-9 * var_y if var_y > 0 else 1e-12        # s2_record must stay positive
+    best_x, best_f = None, -np.inf
+    for x0 in starts:
+        x0 = np.maximum(np.asarray(x0, float), [0.0, 0.0, lo])
+        r = minimize(lambda x: -reml_llf(x, sums), x0, method="L-BFGS-B",
+                     bounds=[(0.0, None), (0.0, None), (lo, None)], options={"ftol": 1e-15, "gtol": 1e-10,
+                                                                             "maxiter": 2000})
+        f = -float(r.fun)
+        if np.isfinite(f) and f > best_f:
+            best_x, best_f = np.asarray(r.x, float), f
+    return best_x, best_f
 
 
 def choose(cands: dict[str, dict]) -> str | None:
@@ -382,10 +460,20 @@ def fit_nested(y: np.ndarray, site: np.ndarray, study: np.ndarray, optimizer) ->
     if k is None:
         return {**out, "status": "failed"}
     c = cands[k]
-    total = c["s2_site"] + c["s2_study"] + c["s2_record"]
-    boundary = k != "interior" or min(c["s2_site"], c["s2_study"]) < ZERO_SHARE * total
+    s2 = np.array([c["s2_site"], c["s2_study"], c["s2_record"]])
+    sums = study_sums(y, site, study)
+    llf0 = reml_llf(s2, sums)
+    starts = [(v["s2_site"], v["s2_study"], v["s2_record"]) for v in cands.values() if v["usable"]]
+    x, llf1 = polish(sums, starts, float(np.var(y)))
+    applied = x is not None and llf1 > llf0 + LLF_TIE
+    if applied:
+        s2 = x
+    out["polish"] = {"applied": bool(applied), "llf_gain": float(llf1 - llf0) if x is not None else None,
+                     "llf": float(max(llf0, llf1) if x is not None else llf0)}
+    total = float(s2.sum())
+    boundary = k != "interior" or min(s2[0], s2[1]) < ZERO_SHARE * total
     return {**out, "status": "ok", "chosen": k, "boundary": bool(boundary),
-            "s2_site": c["s2_site"], "s2_study": c["s2_study"], "s2_record": c["s2_record"]}
+            "s2_site": float(s2[0]), "s2_study": float(s2[1]), "s2_record": float(s2[2])}
 
 
 def ceilings(s2_site: float, s2_study: float, s2_record: float, n_rec: np.ndarray, n_study: np.ndarray,
@@ -398,6 +486,7 @@ def ceilings(s2_site: float, s2_study: float, s2_record: float, n_rec: np.ndarra
     return {"total": total, "share_site": s2_site / total, "share_study": s2_study / total,
             "share_record": s2_record / total, "ceiling_independent_study": s2_site / total,
             "ceiling_same_study": (s2_site + s2_study) / total,
+            "ceiling_same_study_site_constant": (s2_site + s2_study * float(w2.mean())) / total,
             "ceiling_site_mean": s2_site / (s2_site + noise.mean()),
             "ceiling_site_mean_equal_study_weights": s2_site / (s2_site + noise_eq.mean()),
             "mean_noise_site_mean": float(noise.mean())}
@@ -467,7 +556,9 @@ def _boot_task(task: tuple[str, np.ndarray]) -> dict:
     cands = fit.get("candidates") or {}
     return {"stats": res["stats"], "status": fit["status"], "chosen": fit.get("chosen"),
             "boundary": bool(fit.get("boundary", False)),
-            "dropped": [k for k in CANDIDATES if k in cands and not cands[k]["usable"]]}
+            "dropped": [k for k in CANDIDATES if k in cands and not cands[k]["usable"]],
+            "fallback": [k for k in CANDIDATES if k in cands and cands[k]["usable"] and cands[k]["failed_methods"]],
+            "polished": bool((fit.get("polish") or {}).get("applied", False))}
 
 
 def run_bootstrap(groups: dict[str, Group], s: Settings) -> dict[str, list[dict]]:
@@ -505,7 +596,9 @@ def summarise_boot(reps: list[dict], q: tuple[float, float]) -> tuple[dict, dict
     counts = {"n": len(reps), **{k: status.count(k) for k in ("ok", "failed", "unidentified", "too_few_sites")},
               "boundary": int(sum(r["boundary"] for r in reps if r["status"] == "ok")),
               "kept_candidate": {k: sum(r["chosen"] == k for r in reps) for k in CANDIDATES},
-              "dropped_candidate": {k: sum(k in r["dropped"] for r in reps) for k in CANDIDATES}}
+              "dropped_candidate": {k: sum(k in r["dropped"] for r in reps) for k in CANDIDATES},
+              "candidate_fit_by_fallback_method": {k: sum(k in r["fallback"] for r in reps) for k in CANDIDATES},
+              "polished": int(sum(r["polished"] for r in reps if r["status"] == "ok"))}
     return ci, counts
 
 
@@ -526,8 +619,8 @@ def group_result(g: Group, point: dict, ci: dict, counts: dict, s: Settings) -> 
     def est(k: str) -> dict:
         return {"estimate": st[k], **ci[k]}
 
-    cands = {k: {kk: v.get(kk) for kk in ("usable", "converged", "llf", "error", "warnings", "s2_site", "s2_study",
-                                          "s2_record")}
+    cands = {k: {kk: v.get(kk) for kk in ("usable", "method", "failed_methods", "converged", "llf", "error",
+                                          "warnings", "s2_site", "s2_study", "s2_record")}
              for k, v in (fit.get("candidates") or {}).items()}
     single = g.n_rec == 1
     return {
@@ -538,10 +631,11 @@ def group_result(g: Group, point: dict, ci: dict, counts: dict, s: Settings) -> 
               "studies_fit_2plus_records": fit["n"]["studies_2plus_records"],
               "srdb_studies_at_2plus_sites": g.srdb_studies_multi_site},
         "fit": {"status": fit["status"], "kept": fit.get("chosen"), "boundary": fit.get("boundary"),
-                "candidates": cands},
+                "polish": fit.get("polish"), "candidates": cands},
         "components": {k: est(k) for k in ("s2_site", "s2_study", "s2_record", "total")},
         "shares": {k.removeprefix("share_"): est(k) for k in ("share_site", "share_study", "share_record")},
         "ceilings": {k.removeprefix("ceiling_"): est(k) for k in ("ceiling_independent_study", "ceiling_same_study",
+                                                                   "ceiling_same_study_site_constant",
                                                                    "ceiling_site_mean",
                                                                    "ceiling_site_mean_equal_study_weights")},
         "mean_noise_site_mean": est("mean_noise_site_mean"),
@@ -584,7 +678,7 @@ def noise_ceiling(cfg: Config) -> dict:
         res_groups[name] = group_result(g, points[name], ci, counts, s)
     res = {"exploratory": True, "method": METHOD, "formulas": FORMULAS, "variant": s.variant,
            "settings": {"continents": list(s.continents), "min_records_per_site": s.min_records, "n_boot": s.n_boot,
-                        "seed": s.seed, "quantiles": list(s.quantiles), "optimizer": s.optimizer,
+                        "seed": s.seed, "quantiles": list(s.quantiles), "optimizer": list(s.optimizer),
                         "llf_tie": LLF_TIE, "zero_share": ZERO_SHARE, "continent_column": "continent_geo"},
            "data": {"records": int(len(r)), "sites": int(len(st)),
                     "cosore_records": int(r.src.astype(str).eq("cosore").sum()), **info},
@@ -638,7 +732,7 @@ def figure(cfg: Config, res: dict, s: Settings) -> list[Path]:
     axes[0].set_xlabel("Share of log Rs variance (REML)")
     axes[0].set_title("a  Variance shares", loc="left")
     series_b = [("independent_study", "New record, independent study", PALETTE["blue"], "o", 0.2),
-                ("same_study", "New record, same study", PALETTE["orange"], "s", 0.0),
+                ("same_study", "New record, same study (a predictor of the study)", PALETTE["orange"], "s", 0.0),
                 ("site_mean", "Site mean (the Phase-2 target)", PALETTE["black"], "D", -0.2)]
     _dots(axes[1], rows, [[G[k]["ceilings"][key] for k in names] for key, *_ in series_b], series_b)
     axes[1].set_xlim(0, 1)

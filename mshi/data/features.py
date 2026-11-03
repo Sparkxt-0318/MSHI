@@ -22,7 +22,7 @@ import pandas as pd
 
 from ..config import Config
 from ..io import read_json, read_table, require_outputs, write_result, write_table
-from .modis import load_modis_points, site_key
+from .modis import ANALYSIS, LOCKED, StaleModisError, load_modis_points, site_key
 from .rasters import soilgrids_path, worldclim_path
 
 log = logging.getLogger("mshi.features")
@@ -96,20 +96,29 @@ ANALYSIS_TABLES = ("sites_analysis_qc.parquet", "sites_analysis_repo.parquet")
 def features_analysis(cfg: Config) -> dict:
     """Phase 2 input: the same features (WorldClim, SoilGrids, MODIS window means), attached the same way, to
     the analysis site tables (``build_sites_analysis``: geodesic distances, geographic continent, restricted
-    COSORE). Writes data/interim/features_analysis_{qc,repo}.parquet (gitignored, as the locked tables)."""
+    COSORE). MODIS values come from ``modis_points`` (the points the locked build shares) and
+    ``modis_points_analysis`` (the rest). Writes data/interim/features_analysis_{qc,repo}.parquet (gitignored,
+    as the locked tables)."""
     nd = cfg["features"]["site_key_round"]
     tags = cfg["site_build"]["variants"]
     tables = [cfg.path("derived", f"sites_analysis_{t}.parquet") for t in tags]
     require_outputs(cfg, "build_sites_analysis.json", tables)
-    require_outputs(cfg, "modis_points.json", [cfg.path("interim", "modis_points.parquet")])
+    for name in (LOCKED, ANALYSIS):
+        require_outputs(cfg, f"{name}.json", [cfg.path("interim", f"{name}.parquet")])
     require_outputs(cfg, "fetch_worldclim.json",
                     [worldclim_path(cfg, i) for i in range(1, cfg["features"]["worldclim_vars"] + 1)])
     require_outputs(cfg, "fetch_soilgrids.json",
                     [soilgrids_path(cfg, v) for v in cfg["sources"]["soilgrids"]["variables"]])
     sites = {t: read_table(cfg, p) for t, p in zip(tags, tables)}
     keys = set().union(*(site_key(d.lat, d.lon, nd) for d in sites.values()))
-    modis = load_modis_points(cfg, keys)
-    res = {"exploratory": True, "modis_cache_key": read_json(cfg.path("interim", "modis_points.meta.json"))["key"]}
+    parts = [load_modis_points(cfg, name=name) for name in (LOCKED, ANALYSIS)]
+    modis = pd.concat([d for d in parts if len(d)], ignore_index=True).drop_duplicates("site_key")
+    miss = keys - set(modis.site_key)
+    if miss:
+        raise StaleModisError(f"the MODIS tables lack {len(miss)} analysis site points; re-run modis_points and "
+                              "modis_points_analysis")
+    res = {"exploratory": True,
+           "modis_cache_key": {n: read_json(cfg.path("interim", f"{n}.meta.json"))["key"] for n in (LOCKED, ANALYSIS)}}
     outputs = []
     for tag, d in sites.items():
         d = attach_features(cfg, d, modis)
@@ -118,6 +127,7 @@ def features_analysis(cfg: Config) -> dict:
                     "missing": d[["bio01", "bio12", "clay", "npp", "lst_day"]].isna().sum().to_dict(),
                     "by_continent_geo": d.continent_geo.value_counts().to_dict()}
     write_result(cfg, res, "features_analysis.json", outputs=outputs,
-                 inputs=["build_sites_analysis.json", "modis_points.json", "fetch_worldclim.json", "fetch_soilgrids.json"])
+                 inputs=["build_sites_analysis.json", "modis_points.json", "modis_points_analysis.json",
+                         "fetch_worldclim.json", "fetch_soilgrids.json"])
     return res
 

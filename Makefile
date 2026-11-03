@@ -5,7 +5,7 @@ PY ?= $(shell test -x .venv/bin/python && echo .venv/bin/python || echo python)
 
 .PHONY: all data analysis features clean-test repro phase2 smoke test list env lock
 
-all:            ## every stage, in order (fetch -> sites -> features -> locked test re-run -> reproduction checks)
+all:            ## every stage, in order (fetch -> sites -> features -> locked test re-run -> reproduction checks -> exploratory Phase-2 stages, gated)
 	$(PY) -m mshi.run --stage all
 
 data:           ## pinned sources + COSORE annual + site build (no gridded features)
@@ -24,10 +24,10 @@ clean-test:     ## hash-verified re-run of the locked Asia -> Europe test (never
 repro:
 	$(PY) -m mshi.run --stage repro_checks
 
-phase2:         ## exploratory Phase-2 stages (they run only if the reproduction rows they build on passed)
+phase2:         ## exploratory Phase-2 stages (gated: no FAIL or STALE reproduction row; the rows they build on all run)
 	$(PY) -m mshi.run --stage repro_checks --stage noise_ceiling --stage europe_geo_sensitivity \
-	    --stage features_analysis --stage transfer_matrix --stage within_continent --stage aoa_sensitivity \
-	    --stage us_r2
+	    --stage modis_points_analysis --stage features_analysis --stage transfer_matrix --stage within_continent \
+	    --stage aoa_sensitivity --stage us_r2
 
 smoke:          ## 50-site smoke run into data/interim/smoke/
 	$(PY) -m mshi.run --stage all --smoke

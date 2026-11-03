@@ -30,11 +30,10 @@ def frozen_code_hash():
 
 
 def settings(data: dict, **nc) -> None:
-    """Test settings: three continents, few replicates, and the config key this module needs that configs/v3.yaml does
-    not have yet (``optimizer``)."""
+    """Test settings: three continents and few replicates (configs/v3.yaml has the real ones)."""
     data["phase2"]["continents"] = list(CONTINENTS)
-    data["phase2"]["noise_ceiling"].update({"n_boot": 6, "seed": 7, "min_records_per_site": 2, "optimizer": "lbfgs",
-                                            **nc})
+    data["phase2"]["noise_ceiling"].update({"n_boot": 6, "seed": 7, "min_records_per_site": 2,
+                                            "optimizer": ["lbfgs", "bfgs", "nm"], **nc})
 
 
 def simulate(seed: int, n_sites: int, s2: tuple[float, float, float], studies=(1, 4), records=(1, 4)):
@@ -186,10 +185,12 @@ def test_ceiling_formulas_on_a_hand_computed_case():
     assert out["total"] == pytest.approx(0.45)
     assert out["ceiling_independent_study"] == pytest.approx(0.3 / 0.45)
     assert out["ceiling_same_study"] == pytest.approx(0.4 / 0.45)
+    # site-constant bound for a new record of an observed study: (0.3 + 0.1 * mean w2) / 0.45, w2 = 1, 10/16, 1/1
+    assert out["ceiling_same_study_site_constant"] == pytest.approx((0.3 + 0.1 * (1 + 10 / 16 + 1) / 3) / 0.45)
     # v = 0.1 + 0.05; 0.1 * 10/16 + 0.05/4; 0.1 + 0.05/4  -> mean 0.1125
     assert out["mean_noise_site_mean"] == pytest.approx(0.1125)
     assert out["ceiling_site_mean"] == pytest.approx(0.3 / (0.3 + 0.1125))
-    # the brief's formula: 0.1/1 + 0.05; 0.1/2 + 0.05/4; 0.1/1 + 0.05/4 -> mean 0.325/3
+    # the equal-study-weight approximation: 0.1/1 + 0.05; 0.1/2 + 0.05/4; 0.1/1 + 0.05/4 -> mean 0.325/3
     assert out["ceiling_site_mean_equal_study_weights"] == pytest.approx(0.3 / (0.3 + 0.325 / 3))
     assert out["share_site"] + out["share_study"] + out["share_record"] == pytest.approx(1.0)
 
@@ -261,16 +262,82 @@ def test_study_ids_nest_srdb_studies_in_sites_and_make_each_cosore_record_a_stud
 
 def test_summarise_boot_counts_outcomes_and_uses_defined_replicates_only():
     stats = dict.fromkeys(NC.FIT_STATS + NC.PAIR_STATS, np.nan)
-    reps = [{"stats": {**stats, "s2_site": v}, "status": "ok", "chosen": "interior", "boundary": False, "dropped": []}
-            for v in (0.1, 0.2, 0.3, 0.4)]
-    reps.append({"stats": stats, "status": "unidentified", "chosen": None, "boundary": False, "dropped": []})
-    reps.append({"stats": stats, "status": "failed", "chosen": None, "boundary": False, "dropped": list(NC.CANDIDATES)})
+    reps = [{"stats": {**stats, "s2_site": v}, "status": "ok", "chosen": "interior", "boundary": False, "dropped": [],
+             "fallback": [], "polished": False} for v in (0.1, 0.2, 0.3, 0.4)]
+    reps.append({"stats": stats, "status": "unidentified", "chosen": None, "boundary": False, "dropped": [],
+                 "fallback": [], "polished": False})
+    reps.append({"stats": stats, "status": "failed", "chosen": None, "boundary": False, "dropped": list(NC.CANDIDATES),
+                 "fallback": [], "polished": False})
+    reps[1]["fallback"] = ["no_study"]
+    reps[2]["polished"] = True
     reps[0].update(chosen="no_study", boundary=True)
     ci, counts = NC.summarise_boot(reps, (0.0, 1.0))
     assert ci["s2_site"] == {"ci": [0.1, 0.4], "n_boot_used": 4} and ci["s2_study"] == {"ci": None, "n_boot_used": 0}
     assert counts["n"] == 6 and counts["ok"] == 4 and counts["unidentified"] == 1 and counts["failed"] == 1
     assert counts["boundary"] == 1 and counts["kept_candidate"] == {"interior": 3, "no_study": 1, "no_site": 0}
     assert counts["dropped_candidate"] == {k: 1 for k in NC.CANDIDATES}
+    assert counts["candidate_fit_by_fallback_method"] == {"interior": 0, "no_study": 1, "no_site": 0}
+    assert counts["polished"] == 1
+
+
+def test_an_unusable_fit_is_refitted_with_the_next_method(monkeypatch):
+    """Review C-1 (D-P2-17): a method whose fit raises, does not converge or has a non-finite log-likelihood is
+    followed by the next one; the method that produced the fit and the failed ones are recorded."""
+    y, site, study = simulate(5, 30, (0.25, 0.05, 0.12))
+    real = NC._fit_once
+    bad = {"lbfgs": {"usable": False, "converged": True, "llf": float("inf"), "error": None},
+           "bfgs": {"usable": False, "converged": None, "llf": None, "error": "LinAlgError: Singular matrix"}}
+    monkeypatch.setattr(NC, "_fit_once", lambda k, y, s, t, m: dict(bad[m]) if m in bad else real(k, y, s, t, m))
+    out = NC._fit_candidate("no_study", y, site, study, ("lbfgs", "bfgs", "nm"))
+    assert out["usable"] and out["method"] == "nm" and np.isfinite(out["llf"])
+    assert [f["method"] for f in out["failed_methods"]] == ["lbfgs", "bfgs"]
+    none = NC._fit_candidate("no_study", y, site, study, ("lbfgs", "bfgs"))
+    assert not none["usable"] and none["method"] is None and len(none["failed_methods"]) == 2
+
+
+def test_closed_form_reml_equals_statsmodels_and_the_polish_finds_the_maximum():
+    """reml_llf equals statsmodels' REML log-likelihood (constant included) at every candidate fit; polishing from the
+    candidates never lowers the kept log-likelihood and lands on the best point of a fine grid (D-P2-17)."""
+    for seed, s2 in [(5, (0.25, 0.0, 0.12)), (1, (0.3, 0.1, 0.05)), (2, (0.0, 0.2, 0.1)), (3, (0.4, 0.05, 0.2))]:
+        y, site, study = simulate(seed, 40, s2)
+        sums = NC.study_sums(y, site, study)
+        fit = NC.fit_nested(y, site, study, ("lbfgs", "bfgs", "nm"))
+        for c in fit["candidates"].values():
+            if c["usable"]:
+                assert NC.reml_llf((c["s2_site"], c["s2_study"], c["s2_record"]), sums) == pytest.approx(c["llf"],
+                                                                                                         abs=1e-8)
+        kept = NC.reml_llf((fit["s2_site"], fit["s2_study"], fit["s2_record"]), sums)
+        # candidates within LLF_TIE are tied (the first in CANDIDATES is kept), and so is a polished point
+        assert kept >= max(c["llf"] for c in fit["candidates"].values() if c["usable"]) - NC.LLF_TIE
+        grid = np.linspace(0.0, 0.6, 31)
+        best = max(NC.reml_llf((a, b, e), sums) for a in grid for b in grid for e in grid[1:])
+        assert kept >= best - NC.LLF_TIE
+
+
+@pytest.mark.data
+def test_south_america_replicate_reaches_the_reml_maximum(cfg):
+    """Review C-1: in the stage's bootstrap draw 2 for South America (seed 7), statsmodels' lbfgs returns llf = +inf
+    for the s2_study = 0 model, so lbfgs alone keeps an interior fit 0.05 below the REML maximum; with the fallback
+    methods the s2_study = 0 model is kept, at the maximum found by bfgs, Nelder-Mead and an independent REML."""
+    s = NC.Settings.from_cfg(cfg)
+    rec = pd.read_parquet(cfg.path("derived", "records_analysis.parquet"))
+    sites = pd.read_parquet(cfg.path("derived", f"sites_analysis_{s.variant}.parquet"))
+    r, st, _ = NC.prepare(rec, sites, s)
+    groups = NC.build_groups(r, st, s.continents)
+    draw = NC.draws(groups, s)[2]["South America"]
+    only = NC.replicate_stats(groups["South America"], draw, s.min_records, ("lbfgs",))["fit"]
+    assert not only["candidates"]["no_study"]["usable"] and only["chosen"] == "interior"
+    fit = NC.replicate_stats(groups["South America"], draw, s.min_records, s.optimizer)["fit"]
+    assert fit["chosen"] == "no_study" and fit["candidates"]["no_study"]["method"] != "lbfgs"
+    assert fit["candidates"]["no_study"]["llf"] > only["candidates"]["interior"]["llf"] + 0.04
+    assert fit["s2_study"] == 0.0 and fit["s2_site"] == pytest.approx(0.0860, abs=5e-4)
+    assert fit["s2_record"] == pytest.approx(0.1174, abs=5e-4)
+    # draw 58: lbfgs reports convergence of the interior model at s2_study 1e-4, 0.033 below its maximum (s2_study
+    # 0.005), and no fallback is triggered; the polish reaches it (an independent REML of the review gave -46.3355)
+    g, d58 = groups["South America"], NC.draws(groups, s)[58]["South America"]
+    fit58 = NC.replicate_stats(g, d58, s.min_records, s.optimizer)["fit"]
+    assert fit58["polish"]["applied"] and fit58["polish"]["llf_gain"] > 0.03
+    assert fit58["polish"]["llf"] >= -46.3355 - 1e-4 and fit58["s2_study"] == pytest.approx(0.0050, abs=5e-4)
 
 
 # ---------------------------------------------------------------- the stage

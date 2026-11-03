@@ -339,6 +339,8 @@ phase2:
       degree: 3
       penalty_criterion: aic           # penalty weight chosen on the training data only
       penalty_optimizer: nm            # Nelder-Mead from alpha = 1 (deterministic; statsmodels' default restarts randomly)
+      alpha_max: 1.0e+8                # cap on each penalty weight, inside the AIC search (D-P2-15: statsmodels is
+                                       # inaccurate above ~1e12; at 1e8 a smooth is linear to ~1e-4 log units)
       extrapolation: linear            # beyond the training range each smooth continues linearly (statsmodels refuses)
     rf:                                # features c8; tuned by nested spatial CV inside the training data only
       n_estimators: 500
@@ -367,13 +369,15 @@ phase2:
       ks_alpha: 0.05                   # CAST's random-CV fallback when sites are not more clustered than the domain
       grid_deg: 0.5                    # prediction domain: the continent's land cells (mshi/analysis/grid.py)
       pred_weight: area                # cells drawn with probability proportional to their area (equal-area domain)
+      exclude_ice_sheets: true         # leave out the cells of phase2.aoa.ice_sheets (no Rs predicted there; D-P2-16)
       max_pred_points: 4000
       seed: 42
   noise_ceiling:                       # item 3: 3-level REML (site / study within site / record) by continent
     min_records_per_site: 2
     n_boot: 200                        # site-cluster bootstrap of the variance shares
     seed: 7
-    optimizer: lbfgs                   # statsmodels MixedLM.fit method (as N3); boundary models also fitted (D-P2-9)
+    optimizer: [lbfgs, bfgs, nm]       # MixedLM.fit methods, tried in order until a fit is usable (lbfgs first, as
+                                       # N3; D-P2-17); boundary models also fitted (D-P2-9)
     n_jobs: 4                          # bootstrap processes; no effect on any result (checked: byte-identical)
   aoa:                                 # item 4: area-of-applicability sensitivity (Meyer & Pebesma 2021)
     learner: XGB                       # on c8, as the handoff's E5

@@ -19,8 +19,9 @@ Inputs
   cell's area on the sphere, ``continent_geo``; it verifies the rasters against the current fetch_worldclim result).
 
 Model and DI (Meyer & Pebesma 2021, doi:10.1111/2041-210X.13650; as ``LockedTest.aoa`` and the handoff's E5)
-- XGBoost with the locked fixed parameters (``clean_test.locked.xgb``), random_state ``phase2.transfer.xgb_seed``,
-  fitted on the training set's c8 values as float32 (as LockedTest and mshi.analysis.transfer).
+- XGBoost with the locked fixed parameters (the block named by ``phase2.transfer.xgb_from``, ``clean_test.locked.xgb``,
+  through ``transfer.xgb_block``, as every Phase-2 stage), random_state ``phase2.transfer.xgb_seed``, fitted on the
+  training set's c8 values as float32 (as LockedTest and mshi.analysis.transfer).
 - Weighted predictor space: each predictor is standardised with the training mean and SD (population SD; a constant
   predictor gets SD 1) and multiplied by a weight. "permutation": scikit-learn ``permutation_importance`` of the
   fitted model on its training data (score R2, ``aoa.perm_repeats`` repeats, random_state ``aoa.perm_seed``), mean
@@ -111,6 +112,7 @@ from ..geo import geographic_continent, subunits
 from ..io import read_table, require_outputs, write_result, write_table
 from ..spatial import block_folds, bootstrap_ci
 from .grid import climate_grid
+from .transfer import xgb_block
 
 log = logging.getLogger("mshi.aoa")
 
@@ -167,7 +169,7 @@ def train_continents(name: str, continents: list[str]) -> list[str]:
 
 def method_text(cfg: Config) -> str:
     A, p2 = cfg["phase2"]["aoa"], cfg["phase2"]
-    return (f"XGB (clean_test.locked.xgb, random_state phase2.transfer.xgb_seed) of {p2['target']} on c8 per training "
+    return (f"XGB ({xgb_block(cfg)[1]}, random_state phase2.transfer.xgb_seed) of {p2['target']} on c8 per training "
             f"set {A['train']}; DI (Meyer & Pebesma 2021, as LockedTest.aoa and CAST 1.2.0): predictors standardised "
             f"with the training mean/SD and weighted (permutation importance clipped at 0 and normalised, or equal), "
             f"distance to the nearest training point / mean pairwise training distance; training DI from "
@@ -220,8 +222,7 @@ def analysis_sites(cfg: Config) -> tuple[pd.DataFrame, dict]:
 
 def fit_xgb(cfg: Config, X32: np.ndarray, y: np.ndarray):
     import xgboost
-    return xgboost.XGBRegressor(**cfg["clean_test"]["locked"]["xgb"],
-                                random_state=cfg["phase2"]["transfer"]["xgb_seed"]).fit(X32, y)
+    return xgboost.XGBRegressor(**xgb_block(cfg)[0], random_state=cfg["phase2"]["transfer"]["xgb_seed"]).fit(X32, y)
 
 
 def importance_weights(kind: str, model, X: np.ndarray, y: np.ndarray, repeats: int,
@@ -622,8 +623,7 @@ def aoa_sensitivity(cfg: Config) -> dict:
     groups = {"by_continent_geo": cont, "by_lat_band": band}
     res = {"exploratory": True, "method": method_text(cfg), "variant": p2["variant"], "target": p2["target"],
            "continent_column": "continent_geo", "predictors": c8, "settings": A,
-           "xgb": {**cfg["clean_test"]["locked"]["xgb"], "random_state": p2["transfer"]["xgb_seed"],
-                   "from": "clean_test.locked.xgb"},
+           "xgb": {**xgb_block(cfg)[0], "random_state": p2["transfer"]["xgb_seed"], "from": xgb_block(cfg)[1]},
            "bootstrap": p2["bootstrap"], "versions": _versions(), "sites": site_info,
            "grid": {"deg": A["grid_deg"], "ice_sheets": ice_counts,
                     "n_cells_unassigned_continent": int((cont == UNASSIGNED).sum()),

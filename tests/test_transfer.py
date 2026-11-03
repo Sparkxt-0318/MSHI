@@ -27,6 +27,7 @@ BOXES = {"Asia": ((90, 130), (20, 45), 120), "Europe": ((0, 25), (40, 60), 90),
          "North America": ((-120, -80), (30, 50), 90), "South America": ((-70, -45), (-30, 0), 40),
          "Africa": ((10, 35), (-20, 5), 20), "Oceania": ((115, 150), (-40, -15), 20)}
 Q = [0.025, 0.975]
+ICE_LAT = 48.0      # the fake ice sheet: North America's cells north of this latitude (review B-2)
 
 
 def light(data: dict) -> None:
@@ -97,8 +98,15 @@ def install_fakes(mp, sand) -> list:
         return {"W": float(len(np.unique(folds))), "Gjstar_median_km": 1.0, "Gij_median_km": 2.0,
                 "n_folds": int(len(np.unique(folds)))}
 
+    def ice_sheet_mask(cfg, grid, spec):    # mshi.analysis.aoa's needs the Natural Earth files; a fake ice sheet
+        calls.append(SimpleNamespace(ice_spec=spec))
+        ice = grid.continent_geo.eq("North America").to_numpy() & (grid.lat.to_numpy() > ICE_LAT)
+        return ice, {"n_cells": int(ice.sum()), "fake": True}
+
     fake = types.ModuleType("mshi.analysis.knndm")
     fake.knndm_folds, fake.fold_match = knndm_folds, fold_match
+    from mshi.analysis import aoa as A
+    mp.setattr(A, "ice_sheet_mask", ice_sheet_mask)
     mp.setattr(T, "climate_grid", climate_grid)
     mp.setitem(sys.modules, "mshi.analysis.knndm", fake)
     mp.setattr(analysis_pkg, "knndm", fake, raising=False)
@@ -405,16 +413,48 @@ def test_within_continent_benchmark(run):
 
 def test_knndm_gets_the_continents_sites_and_its_grid_cells(run):
     K = run.sand["phase2"]["within"]["knndm"]
-    assert len(run.knndm) == 3
-    for call, c in zip(run.knndm, ["Asia", "Europe", "North America"]):
+    folds = [c for c in run.knndm if hasattr(c, "train")]
+    assert len(folds) == 3
+    for call, c in zip(folds, ["Asia", "Europe", "North America"]):
         (x0, x1), (y0, y1), n = BOXES[c]
         assert call.train.shape == (n, 2) and len(call.pred) == K["max_pred_points"]
         assert ((call.pred[:, 0] > x0) & (call.pred[:, 0] < x1) & (call.pred[:, 1] > y0) & (call.pred[:, 1] < y1)).all()
+        if c == "North America":                                       # no point on the (fake) ice sheet
+            assert (call.pred[:, 1] < ICE_LAT).all()
         assert (call.k, call.maxp, call.clustering, call.seed) == (K["k"], K["maxp"], K["clustering"], K["seed"])
         assert call.radius == run.sand["site_build"]["earth_radius_km"]
         assert call.kw == {k: K[k] for k in ("nk_len", "linkage", "ks_alpha")}          # configured, passed through
         sites = run.d[run.d.continent_geo == c].sort_values("site_id")
         assert np.array_equal(call.train, np.c_[sites.lon, sites.lat])
+
+
+def test_knndm_prediction_domain_leaves_out_the_ice_sheets(run):
+    """Review B-2 (D-P2-16): the cells of phase2.aoa.ice_sheets are left out of the kNNDM prediction domain, and the
+    result says how many."""
+    spec = [c.ice_spec for c in run.knndm if hasattr(c, "ice_spec")]
+    assert spec == [run.sand["phase2"]["aoa"]["ice_sheets"]]
+    (x0, x1), (_y0, y1), _n = BOXES["North America"]
+    deg = run.sand["phase2"]["within"]["knndm"]["grid_deg"]
+    n_ice = int(round((x1 - x0) / deg)) * int(np.sum(np.arange(_y0 + deg / 2, y1, deg) > ICE_LAT))
+    dom = run.wc["prediction_domain"]
+    assert dom["exclude_ice_sheets"] is True and dom["ice_cells_by_continent"] == {"North America": n_ice}
+    assert dom["n_cells_used"] == dom["n_cells"] - n_ice and dom["ice_sheets"] == spec[0]
+
+
+def test_gam_penalty_search_is_capped_and_a_linear_truth_gives_the_linear_fit(cfg, tmp_path):
+    """Review B-1 (D-P2-15): statsmodels' own search ran to alpha 1e13-1e16 on these data, where its fit penalises
+    the linear trend; capped at gam.alpha_max inside the criterion, a linear truth gives the least-squares line."""
+    spec = T.Spec.from_cfg(sandbox(cfg, tmp_path, edit=light))
+    cap = spec.gam["alpha_max"]
+    for seed in (1, 4, 5):
+        rng, n = np.random.default_rng(seed), 200
+        d = pd.DataFrame({"bio01": rng.uniform(-5, 25, n), "bio12": np.exp(rng.uniform(5, 8, n))})
+        d["log_rs"] = 5 + 0.05 * d.bio01 + 0.3 * np.log(d.bio12) + rng.normal(0, 0.2, n)
+        m = T.fit_gam(spec, d)
+        assert max(m.info["alpha"]) <= cap * (1 + 1e-12) and m.info["at_alpha_max"] == [True, True]
+        X = np.c_[np.ones(n), d.bio01, np.log(d.bio12)]
+        line = X @ np.linalg.lstsq(X, d.log_rs, rcond=None)[0]
+        assert np.abs(m.predict(d) - line).max() < 1e-5
 
 
 def test_stages_refuse_stale_inputs(cfg, tmp_path):

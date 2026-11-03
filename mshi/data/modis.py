@@ -41,6 +41,14 @@ share the earliest date of a month (each such tie is recorded):
     dates it so; this could not be checked here) can be returned. As in the prototype it is used (NPP: its
     year; LST: its month counts as one more month); such periods are listed in results/modis_points.json
     (``periods_outside_datetime``).
+
+Two stages share this code (docs/DECISIONS.md D-P2-13, which replaces D-P2-6). ``modis_points`` extracts the
+reproduction's point set: every site of the locked build and the original 889 v1/v2 sites (NPP check); it
+does not read the analysis build, so exploratory code cannot hold up the locked-test re-run or the NPP check.
+``modis_points_analysis`` (Phase 2, exploratory, after the reproduction gate) extracts only the analysis sites
+whose point is not in that set; ``features_analysis`` reads both tables. Window means are computed per point,
+so splitting the points over two extractions changes no value. Each stage has its own cache
+(data/interim/<stage>.parquet and .meta.json) and result (results/<stage>.json).
 """
 from __future__ import annotations
 
@@ -311,23 +319,36 @@ def extract_points(pts: pd.DataFrame, m: dict, kinds: tuple[str, ...] = ("npp", 
     return out, {**info, "n_reads": len(jobs), "failed_reads": failed}
 
 
+LOCKED, ANALYSIS = "modis_points", "modis_points_analysis"          # stage, result and cache names
+
+
+def _site_points(cfg: Config, prefix: str) -> list[pd.DataFrame]:
+    return [read_table(cfg, cfg.path("derived", f"{prefix}_{tag}.parquet"))[["lat", "lon"]]
+            for tag in cfg["site_build"]["variants"]]
+
+
+def _unique_points(cfg: Config, frames: list[pd.DataFrame]) -> pd.DataFrame:
+    pts = pd.concat([pd.DataFrame({"lat": f.lat.values, "lon": f.lon.values}) for f in frames], ignore_index=True)
+    pts["site_key"] = site_key(pts.lat, pts.lon, cfg["features"]["site_key_round"]).values
+    return pts.drop_duplicates("site_key").reset_index(drop=True)
+
+
 def modis_point_set(cfg: Config) -> pd.DataFrame:
-    """Unique points: every v3 site (both variants of the locked build and of the analysis build) plus the
-    original 889 v1/v2 sites (NPP check). Window means are computed per point, so the analysis sites, added
-    so that one extraction serves the reproduction and Phase 2, change no value at the other points."""
-    nd = cfg["features"]["site_key_round"]
-    frames = []
-    for prefix in ("sites_v3", "sites_analysis"):
-        for tag in cfg["site_build"]["variants"]:
-            st = read_table(cfg, cfg.path("derived", f"{prefix}_{tag}.parquet"))
-            frames.append(pd.DataFrame({"lat": st.lat.values, "lon": st.lon.values}))
+    """The reproduction's unique points (stage ``modis_points``): every site of the locked build (both variants)
+    plus the original 889 v1/v2 sites (NPP check; not in smoke runs)."""
+    frames = _site_points(cfg, "sites_v3")
     if cfg.out_root is None:          # not in smoke runs
         for rel in cfg["legacy_allowlist"]:
             o = read_table(cfg, cfg.repo_path(rel))
             frames.append(pd.DataFrame({"lat": o.latitude.values, "lon": o.longitude.values}))
-    pts = pd.concat(frames, ignore_index=True)
-    pts["site_key"] = site_key(pts.lat, pts.lon, nd).values
-    return pts.drop_duplicates("site_key").reset_index(drop=True)
+    return _unique_points(cfg, frames)
+
+
+def analysis_point_set(cfg: Config) -> pd.DataFrame:
+    """The unique points of the analysis build (both variants) that are not in ``modis_point_set``
+    (stage ``modis_points_analysis``)."""
+    pts = _unique_points(cfg, _site_points(cfg, "sites_analysis"))
+    return pts[~pts.site_key.isin(set(modis_point_set(cfg).site_key))].reset_index(drop=True)
 
 
 def _extraction_code_sha256() -> str:
@@ -353,9 +374,9 @@ def modis_cache_key(cfg: Config, keys) -> dict:
             "n_points": int(len(keys))}
 
 
-def write_modis_cache(cfg: Config, table: pd.DataFrame, key: dict, record: dict) -> Path:
+def write_modis_cache(cfg: Config, table: pd.DataFrame, key: dict, record: dict, name: str = LOCKED) -> Path:
     """Write the cached table and its sidecar (key, run record, SHA-256 of the table's bytes)."""
-    out_path, meta_path = _paths(cfg)
+    out_path, meta_path = _paths(cfg, name)
     meta_path.unlink(missing_ok=True)
     table = table.copy()
     table.attrs = {}
@@ -364,33 +385,33 @@ def write_modis_cache(cfg: Config, table: pd.DataFrame, key: dict, record: dict)
     return out_path
 
 
-def _paths(cfg: Config):
-    return cfg.path("interim", "modis_points.parquet"), cfg.path("interim", "modis_points.meta.json")
+def _paths(cfg: Config, name: str = LOCKED):
+    return cfg.path("interim", f"{name}.parquet"), cfg.path("interim", f"{name}.meta.json")
 
 
-def load_modis_points(cfg: Config, keys=None) -> pd.DataFrame:
-    """The cached MODIS table, only if it was produced by the current MODIS config, extraction code and
-    libraries, with no failed reads, its bytes are those recorded in the sidecar, and it covers ``keys``;
-    raises StaleModisError otherwise."""
-    out_path, meta_path = _paths(cfg)
+def load_modis_points(cfg: Config, keys=None, name: str = LOCKED) -> pd.DataFrame:
+    """The cached MODIS table of stage ``name``, only if it was produced by the current MODIS config, extraction
+    code and libraries, with no failed reads, its bytes are those recorded in the sidecar, and it covers
+    ``keys``; raises StaleModisError otherwise."""
+    out_path, meta_path = _paths(cfg, name)
     if not (out_path.exists() and meta_path.exists()):
-        raise StaleModisError(f"{out_path} (or its .meta.json) is missing; run stage modis_points")
+        raise StaleModisError(f"{out_path} (or its .meta.json) is missing; run stage {name}")
     meta = read_json(meta_path)
     k, cur = meta.get("key", {}), modis_cache_key(cfg, [])
     bad = [f for f in KEY_FIELDS if k.get(f) != cur[f]]
     if bad:
         raise StaleModisError(f"{out_path} was produced with a different {', '.join(bad)} (MODIS config, "
-                              "extraction code or libraries); re-run stage modis_points")
+                              f"extraction code or libraries); re-run stage {name}")
     if meta.get("record", {}).get("n_failed_reads", 1) != 0:
-        raise StaleModisError(f"{out_path} comes from a run with failed reads; re-run stage modis_points")
+        raise StaleModisError(f"{out_path} comes from a run with failed reads; re-run stage {name}")
     if meta.get("parquet_sha256") != sha256_file(out_path):
         raise StaleModisError(f"{out_path} changed after the extraction (SHA-256 differs from its .meta.json); "
-                              "re-run stage modis_points")
+                              f"re-run stage {name}")
     df = read_table(cfg, out_path)
     if keys is not None:
         miss = set(keys) - set(df.site_key)
         if miss:
-            raise StaleModisError(f"{out_path} lacks {len(miss)} of the requested points; re-run modis_points")
+            raise StaleModisError(f"{out_path} lacks {len(miss)} of the requested points; re-run {name}")
     return df
 
 
@@ -399,29 +420,49 @@ ANALYSIS_SITE_TABLES = ("sites_analysis_qc.parquet", "sites_analysis_repo.parque
 
 
 def modis_points(cfg: Config) -> dict:
-    from ..netutil import check_reachable
-    m = cfg["sources"]["modis"]
+    """Stage ``modis_points``: the reproduction's points (``modis_point_set``); reads only the locked build."""
+    require_outputs(cfg, "build_sites.json", [cfg.path("derived", f) for f in SITE_TABLES])
+    return _extract_stage(cfg, modis_point_set(cfg), LOCKED, ["build_sites.json"], {})
+
+
+def modis_points_analysis(cfg: Config) -> dict:
+    """Stage ``modis_points_analysis`` (Phase 2, exploratory): the analysis sites' points that ``modis_points``
+    does not extract (``analysis_point_set``)."""
     require_outputs(cfg, "build_sites.json", [cfg.path("derived", f) for f in SITE_TABLES])
     require_outputs(cfg, "build_sites_analysis.json", [cfg.path("derived", f) for f in ANALYSIS_SITE_TABLES])
-    ins = ["build_sites.json", "build_sites_analysis.json"]
-    pts = modis_point_set(cfg)
+    return _extract_stage(cfg, analysis_point_set(cfg), ANALYSIS, ["build_sites.json", "build_sites_analysis.json"],
+                          {"exploratory": True})
+
+
+def _extract_stage(cfg: Config, pts: pd.DataFrame, name: str, ins: list[str], extra: dict) -> dict:
+    """Extract (or reuse the cached extraction of) ``pts`` and record the result ``<name>.json``."""
+    from ..netutil import check_reachable
+    m = cfg["sources"]["modis"]
     key = modis_cache_key(cfg, pts.site_key)
-    out_path, meta_path = _paths(cfg)
+    out_path, meta_path = _paths(cfg, name)
     if out_path.exists() and meta_path.exists():
         meta = read_json(meta_path)
         if (meta.get("key") == key and meta.get("record", {}).get("n_failed_reads") == 0
                 and meta.get("parquet_sha256") == sha256_file(out_path)):
-            log.info("modis_points: cached extraction matches the MODIS config, code, libraries and %d points",
-                     len(pts))
-            write_result(cfg, meta["record"], "modis_points.json", outputs=[out_path], inputs=ins)  # same record
+            log.info("%s: cached extraction matches the MODIS config, code, libraries and %d points", name, len(pts))
+            write_result(cfg, meta["record"], f"{name}.json", outputs=[out_path], inputs=ins)  # same record
             return {**meta["record"], "cached": True}
+    if pts.empty:                     # nothing to extract (e.g. every analysis point is in the locked set)
+        cols = {"site_key": pd.Series(dtype=str)}          # the columns ``aggregate`` writes, in its order
+        for k in ["npp", *m["lst"]["assets"]]:
+            cols[k], cols[f"{k}_n"] = pd.Series(dtype=float), pd.Series(dtype="int64")
+        vals = pd.DataFrame(cols)
+        rec = {**extra, "n_points": 0, "n_failed_reads": 0, "failed_reads": [], "cache_key": key}
+        write_modis_cache(cfg, vals, key, rec, name)
+        write_result(cfg, rec, f"{name}.json", outputs=[out_path], inputs=ins)
+        return rec
     # A stale cache is left in place until a new extraction replaces it (write_modis_cache): if the sources
     # cannot be reached, readers still see why the old table is refused (load_modis_points).
     check_reachable(m["stac_url"])
     check_reachable(m["sas_token_url"])
     vals, info = extract_points(pts, m)
     failed, gaps = info["failed_reads"], info["catalog_gaps"]
-    rec = {"n_points": int(len(pts)), "n_tiles": info["n_tiles"], "n_planned_reads": info["n_jobs"],
+    rec = {**extra, "n_points": int(len(pts)), "n_tiles": info["n_tiles"], "n_planned_reads": info["n_jobs"],
            "n_raster_reads": info["n_reads"],
            "n_failed_reads": len(failed), "failed_reads": failed[:100], "cache_key": key,
            "n_catalog_gaps": len(gaps), "catalog_gaps": gaps,          # complete: copied after review
@@ -434,11 +475,11 @@ def modis_points(cfg: Config) -> dict:
     if failed or gaps:
         out_path.unlink(missing_ok=True)
         meta_path.unlink(missing_ok=True)
-        write_result(cfg, {**rec, "status": "incomplete: no values written"}, "modis_points.json", inputs=ins)
+        write_result(cfg, {**rec, "status": "incomplete: no values written"}, f"{name}.json", inputs=ins)
         why = (f"the STAC catalog lacks {len(gaps)} expected item(s) (first: {gaps[0]}); after review, list "
                "genuine gaps in sources.modis.accepted_catalog_gaps (and log the decision)" if gaps else
                f"{len(failed)} of {info['n_jobs']} MODIS raster reads failed after retries (first: {failed[0]})")
-        raise ModisIncompleteError(f"{why}; no values written, see results/modis_points.json")
-    write_modis_cache(cfg, vals, key, rec)
-    write_result(cfg, rec, "modis_points.json", outputs=[out_path], inputs=ins)
+        raise ModisIncompleteError(f"{why}; no values written, see results/{name}.json")
+    write_modis_cache(cfg, vals, key, rec, name)
+    write_result(cfg, rec, f"{name}.json", outputs=[out_path], inputs=ins)
     return rec

@@ -40,8 +40,9 @@ Targets (training and test use the same one)
 Both targets use the same sites and the same features (sampled at the site's coordinates by features_analysis).
 
 Learners (``us_r2.learners``)
-- XGB: ``xgboost.XGBRegressor(**clean_test.locked.xgb, random_state=phase2.transfer.xgb_seed)`` on ``phase2.c8``
-  (float32, as LockedTest and mshi.analysis.transfer). Refitted with every seed of ``us_r2.xgb_seed_spread``
+- XGB: ``xgboost.XGBRegressor(**<the block named by phase2.transfer.xgb_from>, random_state=phase2.transfer.xgb_seed)``
+  on ``phase2.c8`` (float32, as LockedTest and mshi.analysis.transfer; the block is the locked ``clean_test.locked.xgb``
+  and comes from ``transfer.xgb_block``, so the row this stage shares with transfer_matrix cannot differ). Refitted with every seed of ``us_r2.xgb_seed_spread``
   (inclusive range; the fit with ``xgb_seed`` is reused) to report the range and mean over seeds of r2 and rmse_log
   next to each row, and of the target effect's r2 difference (E4 reported a 5-seed mean; the critique's verifier found
   seed 0 to be a high draw for E4's single-record box row, F-H22). Library versions are recorded (F-H21).
@@ -105,7 +106,7 @@ from sklearn.linear_model import LinearRegression
 
 from ..config import Config
 from ..io import read_table, require_outputs, write_result
-from .transfer import Replicates, block_replicates, ci, design
+from .transfer import Replicates, block_replicates, ci, design, xgb_block
 
 log = logging.getLogger("mshi.us_r2")
 
@@ -147,6 +148,7 @@ class Settings:
     c8: tuple[str, ...]
     ols_tp: dict
     xgb: dict
+    xgb_from: str
     xgb_seed: int
     seed_spread: tuple[int, int]
     learners: tuple[str, ...]
@@ -181,8 +183,9 @@ class Settings:
         if any(v not in VARIANTS for v in variants) or p2["variant"] not in variants:
             raise ValueError(f"site_build.variants {list(variants)} must be among {list(VARIANTS)} (the filter sets "
                              f"this stage can name) and include phase2.variant {p2['variant']!r}")
+        xgb, xgb_from = xgb_block(cfg)
         return cls(variants=variants, primary=p2["variant"], target=p2["target"], c8=tuple(p2["c8"]),
-                   ols_tp=dict(p2["transfer"]["ols_tp"]), xgb=dict(cfg["clean_test"]["locked"]["xgb"]),
+                   ols_tp=dict(p2["transfer"]["ols_tp"]), xgb=xgb, xgb_from=xgb_from,
                    xgb_seed=int(p2["transfer"]["xgb_seed"]), seed_spread=(lo, hi), learners=tuple(learners),
                    train_continent=U["train_continent"], test_continent=U["test_continent"],
                    asia_box=check_box("asia_box", U["asia_box"]), us_box=check_box("us_box", U["us_box"]),
@@ -197,7 +200,7 @@ class Settings:
 
     def describe(self) -> dict:
         return {"XGB": {**self.xgb, "random_state": self.xgb_seed, "features": list(self.c8),
-                        "from": "clean_test.locked.xgb", "seed_spread": list(self.seed_spread)},
+                        "from": self.xgb_from, "seed_spread": list(self.seed_spread)},
                 "OLS-TP": {**self.ols_tp, "from": "phase2.transfer.ols_tp"}}
 
 
@@ -228,7 +231,7 @@ def method_text(S: Settings) -> str:
             f"{a[1]:g}, lat {a[2]:g} to {a[3]:g}; any continent); test on the original US bounding box (lon {u[0]:g} "
             f"to {u[1]:g}, lat {u[2]:g} to {u[3]:g}; any continent), on {S.test_continent} (geographic) and on "
             f"{S.test_continent} outside that box; test sites that are training sites are excluded. Learners: XGB "
-            f"(clean_test.locked.xgb, random_state phase2.transfer.xgb_seed; seeds {S.seed_spread[0]}-"
+            f"({S.xgb_from}, random_state phase2.transfer.xgb_seed; seeds {S.seed_spread[0]}-"
             f"{S.seed_spread[1]} as a range) on c8, OLS-TP log Rs ~ bio01 + ln bio12. Targets: site-mean log Rs, and "
             f"one record per site by the original rule (COSORE first, then the lowest SRDB row), on the same sites and "
             f"features. Variants {list(S.variants)} (filter sets named under 'variants'). Metrics on log Rs of the "

@@ -736,7 +736,9 @@ the scoring, descriptively and outside the locked rule.
 committed and hashed before the analysis". This governs every text we write (README, docs, the paper);
 the handoff bundle in `docs/handoff/` is provenance and is not edited, and the dated Checkpoint-1 report
 is left as written. Changed now: README (the locked test's description) and the heading of the Phase-3
-part of the handoff critique.
+part of the handoff critique (its summary in this file). *Added 2026-11-03 after review A-7: three unquoted
+phrases in docs/review/2026-11-02/handoff_critique.md were reworded to this rule; quotations of the corrected
+claims are kept.*
 
 
 ## 2026-11-03 — Phase 2 (exploratory; started while the gridded sources are unreachable)
@@ -801,17 +803,18 @@ reported precision; a difference is reported, not tuned away. The result is labe
 post hoc). Expected n: 232 geographic-Europe sites, minus the one locked test site without WorldClim values,
 if it is not one of the four removed.
 
-**D-P2-5 Reproduction gate per row group.** The gate (D-P1-18 (b), R-P1-21) now checks only the reproduction
+**D-P2-5 Reproduction gate per row group** (*amended by D-P2-14*). The gate (D-P1-18 (b), R-P1-21) now checks only the reproduction
 rows a later-phase stage builds on: `site_build` (COSORE and site-build counts), `locked_test`, `npp`. A stage
 that uses gridded features needs all three; one that uses only the site records (the noise ceiling) needs
 `site_build`, which reproduces exactly. This is "reproduce before you extend" applied to each stage's inputs;
 nothing that depends on the unreproduced rows can run.
 
-**D-P2-6 One MODIS extraction for both builds.** The MODIS point set now also holds the analysis sites. Window
+**D-P2-6 One MODIS extraction for both builds** (*replaced by D-P2-13*). The MODIS point set now also holds the analysis sites. Window
 means are computed per point, so extra points change no value at the locked sites or at the 889 original
 sites; this avoids a second ~1-hour extraction for Phase 2. Smoke runs subset both builds.
 
-**D-P2-7 kNNDM, implemented from the authors' reference code (brief Phase 2 item 2).** No maintained Python
+**D-P2-7 kNNDM, implemented from the authors' reference code (brief Phase 2 item 2; prediction domain amended by
+D-P2-16).** No maintained Python
 implementation exists (PyPI has no `knndm`/`pyknndm`; `spatial-kfold` 0.0.4 and `spacv` 0.0.22 do not
 implement kNNDM). The paper (Linnenbrink et al. 2024, doi:10.5194/gmd-17-5897-2024) could not be read: its
 publisher and CRAN are blocked here. `mshi/analysis/knndm.py` ports `knndm_geo` of the authors' R package CAST
@@ -828,7 +831,8 @@ fixed here, before any continent is scored. Known limit, kept for fidelity: CAST
 leave-one-out distances as independent and rejects too often (14% at a nominal 5% in toy draws); kNNDM then
 returns a near-random split, so the effect on the benchmark is small.
 
-**D-P2-8 Continent transfer matrix and within-continent benchmark (brief Phase 2 items 1-2; exploratory).**
+**D-P2-8 Continent transfer matrix and within-continent benchmark (brief Phase 2 items 1-2; exploratory; GAM
+penalty search amended by D-P2-15).**
 Stages `transfer_matrix` and `within_continent` (`mshi/analysis/transfer.py`), on `features_analysis_qc`, by
 geographic continent. Learners: OLS-TP (log Rs ~ MAT + ln MAP, the locked form); a GAM with cubic B-spline
 smooths of MAT and ln MAP (statsmodels `GLMGam`, df 6; penalty weight by AIC on the training data, searched by
@@ -858,14 +862,16 @@ besides the interior fit, the two boundary models (study variance 0; site varian
 reported convergence short of the boundary (South America: 0.34 log-likelihood below the study-variance-0
 model). Ceilings: a record from an independent study, s²_site / total; a record from the same study, (s²_site +
 s²_study) / total; the actual Phase-2 target, the record-weighted site mean, s²_site / (s²_site + mean_i v_i)
-with v_i = s²_study Σ_j (m_ij/n_i)² + s²_record/n_i (exact for how site means are built; the brief's
-equal-study-weight formula, s²_study/J_i + s²_record/n_i, is reported alongside and differs by at most about
-0.003 on the QC data). CIs: site-cluster bootstrap within each continent (200 replicates, duplicated sites
+with v_i = s²_study Σ_j (m_ij/n_i)² + s²_record/n_i (exact for how site means are built; an
+equal-study-weight approximation, s²_study/J_i + s²_record/n_i, is reported alongside and differs by at most about
+0.003 on the QC data) [corrected 2026-11-03 after review C-2: this said "the brief's formula"; the brief gives no
+formula]. CIs: site-cluster bootstrap within each continent (200 replicates, duplicated sites
 relabelled; replicates that cannot separate site and study variance are excluded and counted; the pooled
 replicate is the union of the continent replicates). N3's same- vs different-study pair semivariances are
 redone with the same site-cluster bootstrap (F-H20). Limits: nested model only (the crossed site x study model
 of F-H26 is not fitted); Africa and Oceania have 2-3 multi-study sites, so their split is barely identified
-(supplementary). Runs now: it needs only the site-build reproduction rows (D-P2-5).
+(supplementary). Runs now: it needs only the site-build reproduction rows (D-P2-5). *Amended by D-P2-14 (gate)
+and D-P2-17 (refits with fallback optimisers; the same-study ceiling's meaning).*
 
 **D-P2-10 Area-of-applicability sensitivity (brief Phase 2 item 4; exploratory).** Stage `aoa_sensitivity`
 (`mshi/analysis/aoa.py`): XGBoost on the 8 bioclim variables (the original fixed parameters), trained on all
@@ -918,3 +924,111 @@ implies: Turkey, Kazakhstan, Georgia, Azerbaijan, Armenia (Asia), Egypt (Africa)
 Guinea included). No analysis QC site lies in their other-continent parts; in the repo variant 2 sites lie in
 European Turkey (East Thrace: `v3arepo_00484`, 1 record; `v3arepo_00599`, 5 records) and are labelled Asia.
 *Open question for the author:* keep such countries whole, or split Turkey at the Bosporus and Dardanelles?
+
+
+## 2026-11-03 — The Phase-2 code review (one round) and its fixes
+
+**R-P2-1 The review.** One round, as the author asked. Four areas, each reviewed by running code in scratch
+sandboxes (the repository read-only), and every finding re-run by an independent adversarial verifier:
+(A) integration, provenance, the analysis site build and the docs; (B) the transfer matrix, the
+within-continent benchmark and kNNDM; (C) the noise ceiling and the AOA sensitivity; (D) the US R² re-run and an
+end-to-end run of every Phase-2 stage on stand-ins for the blocked sources. The findings, the verdicts and the
+reviewers' and verifiers' scripts and logs are in `docs/review/2026-11-03/`. 17 findings; after verification 1 high,
+3 medium and 13 low (14 confirmed as reported, 3 in part: A-3, C-3, D-2). Fixes: D-P2-13 to D-P2-17 and the list
+below; every code fix has tests (tests/test_analysis_build.py, test_transfer.py, test_us_r2.py,
+test_noise_ceiling.py), the documentation fixes have none.
+
+Checked and found correct, among others (each by a script in the record): every COSORE port and site of the
+analysis rule, recomputed from the raw files with an independent parser (all 629 ports, exact), and every number
+in D-P2-1; geodesic distances against pyproj.Geod on densified edges (400 random boxes incl. poles and the
+antimeridian: max 0.10 km); the geographic continent at 80 places; MODIS window means bit-identical when points are
+added; kNNDM against a literal re-derivation of CAST 1.2.0's R code (identical cluster number, W and partition in 60
+random and 9 realistic configurations; R's KS p-values to 2e-13); the D-P2-7 figures (14% KS rejection at a nominal
+5%; spherical vs WGS84 distances), which no committed code had computed, reproduced by review scripts B/s08 and
+B/s11; no leakage of test-continent or test-fold outcomes (perturbation tests); the REML components by N3's
+formula model and an independent REML; the three ceiling formulas by simulation with the real design; the noise
+ceiling re-run in a sandbox with 0 differences from the committed result; the AOA dissimilarity index against a
+transcription of CAST's R code; and an end-to-end run of the Phase-2 stages in Makefile order whose second run
+wrote 51 of 51 files byte-identical, with every Phase-2 record labelled exploratory.
+
+**D-P2-13 MODIS: two extractions, so the reproduction never waits for Phase-2 code (replaces D-P2-6; review
+A-5).** With one extraction for both builds, `modis_points` needed a current analysis build, so a failure of
+exploratory code (or `make data` followed by `make features`) left the locked-test re-run and the NPP check NOT
+RUN. Now `modis_points` extracts the reproduction's points only, as in Phase 1 (the locked sites of both variants
+and the 889 original sites: 1,530 points in 126 MODIS tiles), and reads only the locked build. A new stage after the
+gate, `modis_points_analysis` (exploratory), extracts the analysis sites whose point the first set lacks (18 points,
+in 10 of the same tiles: about 8% of the reads), and `features_analysis` reads both tables. Window means are per
+point, so the values are those one extraction would give (verified bit-identical in the review). Each stage has its
+own cache and result.
+
+**D-P2-14 The reproduction gate depends only on the stored table (amends D-P2-5; reviews A-2, A-3, D-2, D-3).** As
+written, a FAIL or STALE row outside the site-build rows closed the gate for the noise ceiling when `repro_checks` ran
+in the same invocation (`make all`, `make phase2`; D-P1-18 (b)) but not when the noise ceiling ran on its own, and
+the README still stated the Phase-1 rule. Now, for every later-phase stage and any invocation: the stored table must
+be current; a FAIL or STALE row in any group closes the gate for every later stage (a target outside tolerance
+stops the extension: ground rule 2, stop and report); a NOT RUN row closes it only for stages that need its group;
+the stage's own groups need at least one PASS. If `repro_checks` runs and fails without writing a table (an error
+other than a FAIL or STALE row), every later stage of the invocation is skipped. The committed noise ceiling was
+produced under the same conditions (17 PASS, 10 NOT RUN, no FAIL or STALE).
+
+**D-P2-15 GAM penalty search capped at alpha = 1e8 (amends D-P2-8; review B-1).** The AIC search
+(`select_penweight`, Nelder-Mead over ln alpha) ran to weights of 1e13-1e16, and in the verifier's tests up to 4e28,
+whenever a smooth's best shape is nearly linear. There statsmodels' penalised fit penalises the linear trend of the
+smooth, which no weight should, and its AIC falls spuriously, pulling the search further out and moving the other
+smooth's weight too (in one synthetic case to 3.5e12 instead of the 11 the capped search finds). On a plausible synthetic outcome the verifier found test r²
+off by 0.03-0.07 in main-table rows and 0.40 in a supplementary row. Now each weight is capped at
+`phase2.transfer.gam.alpha_max` = 1e8 inside the criterion, with the same optimiser settings (start alpha = 1, 1000
+iterations, 2000 evaluations); at the cap a smooth is linear to about 1e-4 log units and statsmodels is accurate
+to about 2e-6. Test: on three linear synthetic truths both weights stop at the cap and the fit equals least squares
+to 1e-5, where statsmodels' own search took one of the two weights to 6e13-4e14. Fixed before any GAM result exists.
+
+**D-P2-16 Ice sheets are left out of the kNNDM prediction domain (amends D-P2-7; review B-2).** North America's
+domain held the Greenland ice sheet (about 9% of the area-weighted draws on a Natural-Earth stand-in grid; with it,
+the kNNDM split of the real North America coordinates changed systematically: 25 vs 29 clusters at five domain
+seeds), although no Rs is predicted on ice and the AOA stage treats it as an excluded domain (F-H25). Now the cells
+of `phase2.aoa.ice_sheets` (Antarctica, cells south of 60°S, the Natural Earth subunit Greenland) are dropped from
+the grid before the prediction points are drawn (`phase2.within.knndm.exclude_ice_sheets`); the result records how
+many cells per continent. The subunit rule drops Greenland's ice-free margin too, where one North America QC site
+lies; the site itself stays among the training sites. Fixed before any continent is scored.
+
+**D-P2-17 Noise ceiling: REML refits with fallback optimisers and a polish at the REML maximum; two descriptions
+corrected (amends D-P2-9; reviews C-1, C-2, C-3).** (C-1) In the 200 South America bootstrap replicates statsmodels'
+lbfgs, the N3 optimiser, returned a log-likelihood of +inf for a boundary model (it drives the random-intercept
+variance to exactly 0 and reports convergence) in 17 replicates and raised in 10; those candidates were dropped. In
+7 replicates the kept fit lay below the REML maximum (in 4 by more than 0.05), one replicate was counted as failed
+although its maximum is finite, and South America's CIs came out too narrow by about 0.03 (verifier: site-mean
+ceiling [0.610, 0.917] at the REML maxima, committed [0.640, 0.917]). Point estimates of every group and the CIs of
+every other group were unaffected (to 4 decimals). Two changes: (i) `noise_ceiling.optimizer` is a list,
+`[lbfgs, bfgs, nm]`, tried in order until a candidate's fit is usable (converged, finite log-likelihood and variances,
+no error); each candidate records the method that produced it and the methods that failed. This alone left 2 of
+the 7 replicates short (lbfgs reports convergence of the interior model short of its maximum, so nothing is
+refitted). (ii) So the kept estimate is polished: the REML log-likelihood of this model has a closed form from
+per-study sums (compound symmetry within a study, the site intercept by the Woodbury identity; equal to statsmodels'
+to about 1e-12, constant included), maximised by L-BFGS-B over all variances >= 0 from every usable candidate; the
+polished components replace the kept ones if they are higher by more than LLF_TIE, and the gain is recorded. With
+both, every bootstrap replicate of South America (200), Europe (200), Oceania (195) and Africa (176 identified)
+reaches the independent REML maximum of the review to 1.2e-9 in log-likelihood, and none fails (the polish changed
+2 South America and 3 Africa replicates; check scripts in the review record). Tests: the stage's draw 2 for South
+America keeps the s²_study = 0 model at the maximum (0.0860, 0, 0.1174); its draw 58 is polished to s²_study 0.005
+(gain 0.033); on simulated data the kept fit is the best point of a fine grid. (C-2) The equal-study-weight site-mean formula was attributed to the brief, which gives
+none; corrected in the code, the result and D-P2-9. (C-3) The same-study ceiling, (s²_site + s²_study)/total, is the
+R² of a perfect predictor of the study mean. A predictor constant within a site (gridded climate and soil) reaches it
+only at single-study sites; with the real design the reviewer's simulation gives 0.81 instead of 0.84 for Asia
+(Europe 0.73 vs 0.75, North America 0.88 vs 0.89, pooled 0.82 vs 0.84); the verifier derived it analytically:
+(s²_site + s²_study · mean_i Σ_j (m_ij/n_i)²)/total. That value is now reported next to the same-study ceiling
+(`same_study_site_constant`, with its bootstrap CI). Docstring, figure legend and this log say so; the
+independent-study and site-mean ceilings, and `same_study_site_constant`, are the ones that bound gridded predictors.
+
+**Other fixes from the review.** A-1: `europe_geo_sensitivity` is not run in smoke runs (a 50-site subset can never
+reproduce the locked test set; stages now carry a `smoke` flag). A-4: `within_continent` declares its dependency on
+`features_analysis`. A-6: README status line, the Makefile `all` help, and `data/derived/README.md` (the four
+analysis-build tables, their producers, and the COSORE changes made for `cosore_annual_analysis.csv`). A-7: the
+wording rule (D-C1-8, addendum). B-3: two statements in `mshi/analysis/knndm.py` about CAST's behaviour corrected
+(CAST also evaluates the exactly-k-clusters split; an empty random fold occurs exactly when
+n <= (k - 1) ceiling(n/k)). D-1: every Phase-2 stage that fits XGB takes its parameters from
+`phase2.transfer.xgb_from` (`transfer.xgb_block`), so a row two tables share cannot differ. D-4: a test docstring.
+
+*Open, for the author (from the review, not decided here):* (a) the other half of Q-6: dropping COSORE fluxes outside
+[-2, 50] µmol m⁻² s⁻¹ instead of clipping them (as the handoff does) would lower one site's annual value (LIU) by 24%
+and move every other site by 6% or less (reviewer A's computation). (b) CAST weights the DI by the model's internal
+importance, here by permutation importance (D-P2-10); R is not available here to compare.

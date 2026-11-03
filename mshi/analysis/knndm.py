@@ -55,13 +55,15 @@ Port notes: the places where the R code leaves a choice open, and every differen
 - Centroids are arithmetic means of lon/lat degrees, as in CAST, so a cluster that spans the antimeridian gets
   a misplaced centroid; this can only change the order in which clusters are dealt to folds.
 - Random split: CAST draws n labels without replacement from ``rep(1:k, ceiling(n/k))`` with R's generator, so
-  fold sizes can differ by more than one and, for n <= (k - 1)^2, a fold can be empty. Here a balanced random
+  fold sizes can differ by more than one, and a fold can be empty exactly when n <= (k - 1) * ceiling(n/k)
+  (e.g. k = 5: n in {7, 8, 11, 12, 16}, not 9, 10 or 13-15). Here a balanced random
   permutation from ``numpy.random.default_rng(seed)`` (sizes floor(n/k) or ceil(n/k)). R's draw cannot be
   reproduced in Python either way.
 - Fold ids are CAST's cluster labels (its ``clusters`` element) minus one.
-- Edge cases: exactly k clusters of n/k sites and no smaller one: CAST stops (``rep`` over an empty set of
-  folds), here the split is used. No grid value satisfies ``maxp``: CAST fails without a clear message, here
-  RuntimeError. n < k + 2 (the grid would contain q < k): CAST runs, here ValueError.
+- Edge cases: exactly k clusters of n/k sites and no smaller one: CAST evaluates this split too (R's ``rep`` of a
+  zero-length vector returns it before checking ``times``, so the merge assigns nothing), as here. No grid value
+  satisfies ``maxp``: CAST fails without a clear message, here RuntimeError. n < k + 2 (the grid would contain
+  q < k): CAST runs, here ValueError.
 - Not ported: feature space (``dist_space = "feature"``), k-means (CAST refuses it for lon/lat), train/test
   splits (``test_prop``), sampling prediction points from a ``modeldomain`` polygon, plots.
 

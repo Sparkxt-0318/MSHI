@@ -56,8 +56,8 @@ def frozen_code_hash():
 
 
 def settings(data: dict, **us) -> None:
-    """Test settings: the config keys this module needs that configs/v3.yaml does not have yet (train_continent,
-    test_continent, xgb_seed_spread; a short seed spread here), and fewer bootstrap replicates."""
+    """Lighter test settings: a 3-seed XGB spread and 200 bootstrap replicates (configs/v3.yaml has the real ones,
+    and the same continents)."""
     data["phase2"]["us_r2"].update({"train_continent": "Asia", "test_continent": "North America",
                                     "xgb_seed_spread": [0, 2], **us})
     data["phase2"]["bootstrap"]["n"] = 200
@@ -300,6 +300,24 @@ def test_single_record_refuses_tables_that_do_not_match(change, match):
 
 
 # ---------------------------------------------------------------- learners
+
+def test_xgb_parameters_come_from_transfer_xgb_from(cfg, tmp_path):
+    """Review D-1: us_r2 and aoa_sensitivity take the XGB block named by phase2.transfer.xgb_from, as
+    transfer_matrix does, so a row the tables share cannot differ between them."""
+    from mshi.analysis import aoa
+
+    def alt(data):
+        settings(data)
+        data["phase2"]["transfer"]["xgb_alt"] = {**data["clean_test"]["locked"]["xgb"], "max_depth": 2}
+        data["phase2"]["transfer"]["xgb_from"] = "phase2.transfer.xgb_alt"
+    sand = sandbox(cfg, tmp_path, edit=alt)
+    S = U.Settings.from_cfg(sand)
+    assert S.xgb["max_depth"] == 2 and S.describe()["XGB"]["from"] == "phase2.transfer.xgb_alt"
+    assert T.Spec.from_cfg(sand).xgb == S.xgb and "phase2.transfer.xgb_alt" in U.method_text(S)
+    X = np.random.default_rng(0).normal(size=(40, 3)).astype("float32")
+    assert aoa.fit_xgb(sand, X, X[:, 0].astype(float)).get_params()["max_depth"] == 2
+    assert "phase2.transfer.xgb_alt" in aoa.method_text(sand)
+
 
 def test_learners_are_the_specified_ones(cfg, tmp_path):
     """OLS-TP is least squares on bio01 and ln bio12; XGB is XGBRegressor(**clean_test.locked.xgb, random_state =

@@ -19,13 +19,19 @@ so a result never claims code that was edited while the stage ran.
 
 Reproduction gate ("reproduce before you extend"): a stage ordered after ``repro_checks`` (later phases)
 runs only if results/reproduction_check.json is current (its inputs included, mshi.io.result_staleness) and
-every target row the stage builds on was compared and is within tolerance: no FAIL, STALE or NOT RUN row in
-the row groups the stage ``needs`` (``site_build``: COSORE and site-build counts; ``locked_test``: the locked
-test and its re-runs; ``npp``: the NPP check). A stage that uses gridded features needs all three; one that
-uses only the site records needs ``site_build``. A DEVIATION (a locked-test re-run that differs from the
-locked result) is reported but does not close the gate. If ``repro_checks`` is part of the invocation it must
-also have finished ``ok``. Smoke runs do not apply the gate: their outputs (data/interim/smoke/) are not
-results, and they never run ``repro_checks``.
+- no row of the table is FAIL or STALE: a target outside tolerance stops every later stage (ground rule 2:
+  stop and report), and so does a row from results that are not current; and
+- no row in the row groups the stage ``needs`` is NOT RUN (``site_build``: COSORE and site-build counts;
+  ``locked_test``: the locked test and its re-runs; ``npp``: the NPP check), and at least one of them PASSed.
+  A stage that uses gridded features needs all three groups; one that uses only the site records (the noise
+  ceiling) needs ``site_build``, so a source that cannot be reached for the other rows does not hold it back.
+The decision depends only on the stored table, not on whether ``repro_checks`` ran in the same invocation
+(which, after a FAIL or STALE row, has written such a table before raising); if it ran and failed without
+writing one (an error other than a FAIL or STALE row), every later stage of the invocation is skipped. A
+DEVIATION (a locked-test re-run that differs from the locked result) is reported but does not close the gate.
+Smoke runs do not apply the gate: their outputs (data/interim/smoke/) are not results, and stages with
+``smoke=False`` (the locked test, the reproduction table, the site diagnostics and the geographic-Europe
+sensitivity, which all need the full site set) do not run in them.
 """
 from __future__ import annotations
 
@@ -57,6 +63,7 @@ class Stage:
     needs: tuple[str, ...] = ROW_GROUPS      # reproduction-row groups a stage after the gate builds on
     exploratory: bool = False                # not part of the reproduction or a plan committed before analysis
                                              # (ground rule 3); recorded in every run-log record
+    smoke: bool = True                       # False: needs the full site set, so not run in smoke runs
 
 
 def _stages() -> list[Stage]:
@@ -72,7 +79,7 @@ def _stages() -> list[Stage]:
     from .data.features import features, features_analysis
     from .data.sites_analysis import build_sites_analysis
     from .data.fetch import fetch_cosore, fetch_naturalearth, fetch_srdb
-    from .data.modis import modis_points
+    from .data.modis import modis_points, modis_points_analysis
     from .data.rasters import fetch_soilgrids, fetch_worldclim
     from .data.sites import build_sites
     return [
@@ -85,7 +92,8 @@ def _stages() -> list[Stage]:
         Stage("build_sites", build_sites, ["fetch_srdb", "cosore_annual", "fetch_naturalearth"],
               "records, QC flags, coordinate check, 5-km sites, continents"),
         Stage("site_diagnostics", site_diagnostics, ["build_sites"],
-              "exploratory: Mercator vs true distance in the coordinate check, 5-km chaining", exploratory=True),
+              "exploratory: Mercator vs true distance in the coordinate check, 5-km chaining", exploratory=True,
+              smoke=False),
         Stage("build_sites_analysis", build_sites_analysis,
               ["fetch_srdb", "cosore_annual_analysis", "fetch_naturalearth", "build_sites"],
               "site tables for v3 analyses: geodesic distances, geographic continent (Q-2, Q-5, Q-6)",
@@ -94,24 +102,30 @@ def _stages() -> list[Stage]:
               "(smoke runs only) keep a 50-site subset"),
         Stage("fetch_worldclim", fetch_worldclim, [], "WorldClim 2.1 bioclim 2.5'"),
         Stage("fetch_soilgrids", fetch_soilgrids, [], "SoilGrids 2.0 5-15 cm mean, 0.05 deg WCS"),
-        Stage("modis_points", modis_points, ["build_sites", "build_sites_analysis"],
-              "MODIS NPP/LST window means (Planetary Computer)"),
+        Stage("modis_points", modis_points, ["build_sites"],
+              "MODIS NPP/LST window means at the locked sites and the original 889 (Planetary Computer)"),
         Stage("features", features, ["build_sites", "fetch_worldclim", "fetch_soilgrids", "modis_points"],
               "attach WorldClim, SoilGrids, MODIS to sites"),
-        Stage("clean_test", clean_test, ["features"], "locked Asia -> Europe test (hash-verified re-run)"),
-        Stage("repro_checks", repro_checks, [], "compare outputs with the handoff reproduction targets"),
+        Stage("clean_test", clean_test, ["features"], "locked Asia -> Europe test (hash-verified re-run)",
+              smoke=False),
+        Stage("repro_checks", repro_checks, [], "compare outputs with the handoff reproduction targets",
+              smoke=False),
         # ---- after the reproduction gate (module docstring): later phases, all exploratory
         Stage("noise_ceiling", noise_ceiling, ["build_sites_analysis"],
               "3-level REML noise ceilings by geographic continent (Phase 2 item 3)", needs=("site_build",),
               exploratory=True),
         Stage("europe_geo_sensitivity", europe_geo_sensitivity, ["features"],
-              "declared post-hoc sensitivity of the locked test on geographic Europe (Q-5)", exploratory=True),
+              "declared post-hoc sensitivity of the locked test on geographic Europe (Q-5)", exploratory=True,
+              smoke=False),
+        Stage("modis_points_analysis", modis_points_analysis, ["build_sites", "build_sites_analysis"],
+              "MODIS window means at the analysis sites that modis_points does not cover (Phase 2)",
+              exploratory=True),
         Stage("features_analysis", features_analysis,
-              ["build_sites_analysis", "fetch_worldclim", "fetch_soilgrids", "modis_points"],
+              ["build_sites_analysis", "fetch_worldclim", "fetch_soilgrids", "modis_points", "modis_points_analysis"],
               "Phase 2 input: features attached to the analysis site tables", exploratory=True),
         Stage("transfer_matrix", transfer_matrix, ["features_analysis"],
               "continent transfer matrix and leave-one-continent-out (Phase 2 item 1)", exploratory=True),
-        Stage("within_continent", within_continent, ["transfer_matrix", "fetch_worldclim"],
+        Stage("within_continent", within_continent, ["features_analysis", "transfer_matrix", "fetch_worldclim"],
               "within-continent benchmark: spatial blocks and kNNDM, transfer penalties (item 2)", exploratory=True),
         Stage("aoa_sensitivity", aoa_sensitivity, ["features_analysis", "fetch_worldclim"],
               "area-of-applicability sensitivity: DI thresholds x importance weights, global DI map (item 4)",
@@ -155,24 +169,33 @@ def smoke_subset(cfg: Config) -> dict:
     return out
 
 
+WROTE_TABLE = ("error: ReproductionFailure", "stale:")    # repro_checks statuses raised after writing its table
+
+
 def _gate_status(cfg: Config, status: dict[str, str], names: list[str], needs: tuple[str, ...] = ROW_GROUPS) -> str:
     """'ok' if the reproduction gate is open for a stage that ``needs`` these row groups (module docstring),
     else the reason it is closed."""
-    if GATE in names and status.get(GATE) != "ok":
-        return status.get(GATE, "not run")
+    st = status.get(GATE)
+    if GATE in names and st != "ok" and not (st or "").startswith(WROTE_TABLE):
+        return st or "not run"
     try:
         rc = require_current(cfg, "reproduction_check.json")
     except StaleInputError as e:
         return f"stale: {e}"
-    if set(needs) >= set(ROW_GROUPS):
+    rows = rc.get("rows")
+    if rows is None:                     # no row list: the summary is all there is
         summary = rc.get("summary") or {}
-    else:                  # only the rows the stage builds on; a row without a group counts for every stage
-        rows = [r for r in rc.get("rows") or [] if "group" not in r or r["group"] in needs]
-        summary = {k: sum(r.get("status") == k for r in rows) for k in ("PASS", "FAIL", "STALE", "NOT RUN")}
-    bad = {k: summary.get(k, 0) for k in ("FAIL", "STALE", "NOT RUN") if summary.get(k, 0)}
-    if not summary.get("PASS"):
-        bad["PASS"] = summary.get("PASS", 0)
-    where = "" if set(needs) >= set(ROW_GROUPS) else f" in the {'/'.join(needs)} rows"
+        bad = {k: summary.get(k, 0) for k in ("FAIL", "STALE", "NOT RUN") if summary.get(k, 0)}
+        mine = summary.get("PASS", 0)
+    else:                                # a row without a group counts for every stage
+        own = [r for r in rows if "group" not in r or r["group"] in needs]
+        bad = {k: n for k in ("FAIL", "STALE") if (n := sum(r.get("status") == k for r in rows))}
+        if n := sum(r.get("status") == "NOT RUN" for r in own):
+            bad["NOT RUN"] = n
+        mine = sum(r.get("status") == "PASS" for r in own)
+    if not mine:
+        bad["PASS"] = 0
+    where = "" if set(needs) >= set(ROW_GROUPS) else f" (NOT RUN and PASS counted in the {'/'.join(needs)} rows)"
     return f"results/reproduction_check.json has {bad}{where}" if bad else "ok"
 
 
@@ -198,8 +221,8 @@ def run(stage_names: list[str], cfg: Config, full: bool = False) -> int:
             st = stages[name]
             if name == "smoke_subset" and not smoke:
                 continue
-            if smoke and name in ("clean_test", "repro_checks", "site_diagnostics"):
-                log.info("%-18s not part of smoke runs (locked test and targets need the full site set)", name)
+            if smoke and not st.smoke:
+                log.info("%-18s not part of smoke runs (it needs the full site set)", name)
                 continue
             absent = [d for d in st.deps if d not in names]
             if absent and not full:
