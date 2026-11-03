@@ -204,6 +204,9 @@ site_build:
 site_build_analysis:
   geo_continent:
     subunits_file: ne_50m_admin_0_map_subunits.geojson
+    # open-ocean subunits of the UN Americas region: North America for these UN sub-regions, else South
+    # America (D-P2-12: South Georgia and the South Sandwich Islands)
+    americas_north_subregions: [Northern America, Central America, Caribbean]
   max_far_km: 2000.0                   # geodesic distances beyond this are reported as "far" (inf)
 
 site_diagnostics:                      # exploratory checks only; no table is changed

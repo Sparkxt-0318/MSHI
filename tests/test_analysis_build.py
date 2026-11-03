@@ -55,7 +55,13 @@ def test_geographic_continent_assigns_overseas_territories_by_location(cfg):
            "Moscow": (37.6, 55.75, "Europe"), "Novosibirsk": (82.9, 55.0, "Asia"),
            "Russia west of 60E (locked split kept)": (59.0, 58.0, "Europe"),
            "Azores (open ocean: UN region)": (-25.67, 37.75, "Europe"), "Reunion (open ocean: UN region)": (55.5, -21.1, "Africa"),
-           "Paris": (2.35, 48.85, "Europe"), "Sao Paulo": (-46.6, -23.5, "South America")}
+           "Paris": (2.35, 48.85, "Europe"), "Sao Paulo": (-46.6, -23.5, "South America"),
+           # D-P2-12: Russian land east of the antimeridian is Asia; Kaliningrad stays Europe
+           "Chukotka east of 180 (4.5 km off the 1:50m coast)": (-171.0, 65.6, "Asia"),
+           "Wrangel Island east of 180": (-179.5, 71.3, "Asia"), "Wrangel Island west of 180": (179.5, 71.3, "Asia"),
+           "Kaliningrad": (20.5, 54.7, "Europe"),
+           # D-P2-12: open-ocean subunit of the UN Americas region outside the North American sub-regions
+           "South Georgia (open ocean: UN region)": (-36.5, -54.3, "South America")}
     lon = [v[0] for v in pts.values()]
     lat = [v[1] for v in pts.values()]
     got = geographic_continent(cfg, lon, lat)
@@ -68,15 +74,19 @@ def test_geographic_continent_assigns_overseas_territories_by_location(cfg):
 def test_open_ocean_subunits_take_their_un_region(cfg, monkeypatch):
     import geopandas as gpd
     from mshi import geo
-    fake = gpd.GeoDataFrame({"ADMIN": ["X", "Y", "Z"], "SUBUNIT": ["a", "b", "c"],
-                             "CONTINENT": [geo.OPEN_OCEAN, geo.OPEN_OCEAN, "Asia"],
-                             "REGION_UN": ["Americas", "Americas", "Asia"],
-                             "SUBREGION": ["South America", "Caribbean", "Eastern Asia"]},
-                            geometry=[box(0, 0, 1, 1), box(2, 0, 3, 1), box(4, 0, 5, 1)], crs=4326)
+    fake = gpd.GeoDataFrame({"ADMIN": ["X", "Y", "Z", "W", "V"], "SUBUNIT": ["a", "b", "c", "d", "e"],
+                             "CONTINENT": [geo.OPEN_OCEAN, geo.OPEN_OCEAN, "Asia", geo.OPEN_OCEAN, "South America"],
+                             "REGION_UN": ["Americas", "Americas", "Asia", "Americas", "Americas"],
+                             "SUBREGION": ["South America", "Caribbean", "Eastern Asia", geo.OPEN_OCEAN,
+                                           "Northern America"]},
+                            geometry=[box(0, 0, 1, 1), box(2, 0, 3, 1), box(4, 0, 5, 1), box(6, 0, 7, 1),
+                                      box(8, 0, 9, 1)], crs=4326)
     monkeypatch.setattr(geo.gpd, "read_file", lambda p: fake)
     monkeypatch.setattr(geo, "verify_sha256", lambda p, h: None)
     su = geo.subunits(cfg)
-    assert list(su.continent_geo) == ["South America", "North America", "Asia"]
+    # an open-ocean Americas subunit outside the North American sub-regions (South Georgia) -> South America;
+    # a subunit with a continent keeps it whatever its UN sub-region
+    assert list(su.continent_geo) == ["South America", "North America", "Asia", "South America", "South America"]
 
 
 # ---------------------------------------------------------------- COSORE analysis rule

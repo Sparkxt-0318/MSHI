@@ -780,7 +780,8 @@ admin-0 *map subunit* containing the point (file pinned by SHA-256 `b1df8433…`
 the countries). Natural Earth gives overseas subunits the continent where they lie: French Guiana South
 America, the Canary Islands and Madeira Africa, Hawaii and Easter Island Oceania, Guadeloupe and Martinique
 North America, Svalbard Europe. Subunits labelled "Seven seas (open ocean)" take their UN region (Azores:
-Europe; Réunion: Africa; Americas split by UN sub-region). Russia keeps the locked 60°E split, because Natural
+Europe; Réunion: Africa; Americas split by UN sub-region, corrected in D-P2-12). Russia keeps the locked 60°E
+split (its part east of the antimeridian corrected in D-P2-12), because Natural
 Earth splits Russia along another line and only overseas territories were to change. Points off the coastline:
 nearest subunit within 50 km, geodesic. Checked against the locked QC table: 9 of 971 sites change continent,
 2 in French Guiana (Europe → South America), 2 in the Canary Islands (Europe → Africa) and 5 in Hawaii (North
@@ -897,3 +898,23 @@ configuration (F-H29): v3 sites, WorldClim 2.5' and the restricted COSORE replac
 WorldClim 10' and 66 COSORE sites; E4's rows on the original 889 sites are not re-run (they would use the legacy
 tables outside their allow-listed purpose). The Asia box includes 30 geographic-Europe QC sites, some of them in the
 locked Europe test set (F-H2); this is exploratory and does not touch the locked test.
+
+**D-P2-12 Two corrections to the geographic continent (before any gridded result exists).** Found by checking
+`geographic_continent` (`mshi/geo.py`) on places near the antimeridian and on the 18 open-ocean subunits.
+(a) Russia: the locked split kept in D-P2-3 (west of 60°E = Europe) also made Europe of the Russian land at
+negative longitude, i.e. eastern Chukotka and the part of Wrangel Island east of 180°, which lie in Asia.
+`continent_geo` now labels a Russian point Europe only for 0 ≤ lon < 60°E. (b) Open-ocean subunits of the UN
+Americas region: "South America if the UN sub-region is South America, else North America" sent South Georgia
+and the South Sandwich Islands (UN sub-region "Seven seas (open ocean)") to North America. Now: North America for
+the UN sub-regions Northern America, Central America and Caribbean (config
+`site_build_analysis.geo_continent.americas_north_subregions`), South America otherwise. Effect: no record of
+the analysis build changes continent or subunit (all 4,810 records recomputed with the corrected code; so no site
+changes either). Of the 0.5° cell centres inside Natural Earth subunits, 93 in Russia east of the antimeridian
+move from Europe to Asia and 2 in South Georgia from North America to South America; which of them enter the
+Phase-2 grid depends on the WorldClim land mask, not available here. Not changed: the locked build, and the
+locked-rule `continent` column of the analysis build (kept for comparison with the locked build). Countries that
+span two continents, other than Russia, stay whole, as the author's rule (overseas territories by location)
+implies: Turkey, Kazakhstan, Georgia, Azerbaijan, Armenia (Asia), Egypt (Africa), Indonesia (Asia, western New
+Guinea included). No analysis QC site lies in their other-continent parts; in the repo variant 2 sites lie in
+European Turkey (East Thrace: `v3arepo_00484`, 1 record; `v3arepo_00599`, 5 records) and are labelled Asia.
+*Open question for the author:* keep such countries whole, or split Turkey at the Bosporus and Dardanelles?

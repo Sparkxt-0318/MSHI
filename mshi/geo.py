@@ -14,9 +14,14 @@ test. Everything new uses this module:
   point. Natural Earth splits overseas territories into their own subunits and gives each the continent where
   it lies (French Guiana: South America; the Canary Islands and Madeira: Africa; Hawaii and Easter Island:
   Oceania; Guadeloupe and Martinique: North America; Svalbard: Europe). Subunits labelled "Seven seas (open
-  ocean)" take their UN region (Americas: South America if the UN sub-region is South America, otherwise
-  North America). Russia keeps the locked rule (west of ``site_build.continent.russia_split_lon`` = Europe):
-  Natural Earth's subunits split Russia along another line, and only overseas territories were to change.
+  ocean)" take their UN region; the UN Americas region is split by UN sub-region: North America for the
+  sub-regions in ``site_build_analysis.geo_continent.americas_north_subregions`` (Northern America, Central
+  America, Caribbean), South America otherwise (South Georgia and the South Sandwich Islands, whose sub-region
+  is the open ocean, included; D-P2-12). Russia keeps the locked split at
+  ``site_build.continent.russia_split_lon`` (Natural Earth's subunits split Russia along another line, and only
+  overseas territories were to change), with one correction (D-P2-12): Europe is 0 <= lon < the split, so the
+  Russian land east of the antimeridian (negative longitude: eastern Chukotka, part of Wrangel Island) is Asia.
+  Countries spanning two continents other than Russia stay whole (Turkey, Kazakhstan, Egypt, ...).
   Points off the 1:50m coastline take the nearest subunit within ``site_build.continent.nearest_max_m``,
   measured geodesically; points farther from land get None.
 """
@@ -89,11 +94,12 @@ def nearest_within_km(lon: float, lat: float, geoms: gpd.GeoSeries, max_km: floa
 def subunits(cfg: Config) -> gpd.GeoDataFrame:
     """Natural Earth 1:50m map subunits (hash-verified) with ``continent_geo`` per subunit (module docstring)."""
     from .data.fetch import naturalearth_path
-    f = cfg["site_build_analysis"]["geo_continent"]["subunits_file"]
+    gc = cfg["site_build_analysis"]["geo_continent"]
+    f = gc["subunits_file"]
     verify_sha256(naturalearth_path(cfg, f), cfg["sources"]["naturalearth"]["files"][f])
     su = gpd.read_file(naturalearth_path(cfg, f))[["ADMIN", "SUBUNIT", "CONTINENT", "REGION_UN", "SUBREGION",
                                                    "geometry"]]
-    americas = np.where(su.SUBREGION.eq("South America"), "South America", "North America")
+    americas = np.where(su.SUBREGION.isin(list(gc["americas_north_subregions"])), "North America", "South America")
     region = np.where(su.REGION_UN.eq("Americas"), americas, su.REGION_UN)
     su["continent_geo"] = np.where(su.CONTINENT.eq(OPEN_OCEAN), region, su.CONTINENT)
     su["geometry"] = [g if g.is_valid else make_valid(g) for g in su.geometry]
@@ -119,5 +125,6 @@ def geographic_continent(cfg: Config, lon, lat, su: gpd.GeoDataFrame | None = No
                                                                                            "ADMIN"]].values
             out.loc[i, "geo_subunit_km"] = km
     rus = out.geo_subunit_admin.eq("Russia").values
-    out.loc[rus, "continent_geo"] = np.where(lon[rus] >= sb["russia_split_lon"], "Asia", "Europe")
+    europe = (lon[rus] >= 0.0) & (lon[rus] < sb["russia_split_lon"])    # lon < 0: east of the antimeridian
+    out.loc[rus, "continent_geo"] = np.where(europe, "Europe", "Asia")
     return out
