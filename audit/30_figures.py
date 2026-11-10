@@ -30,6 +30,9 @@ import pandas as pd  # noqa: E402
 from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 from matplotlib.patches import Patch, Rectangle  # noqa: E402
+from matplotlib.text import Text  # noqa: E402
+from matplotlib.transforms import Bbox  # noqa: E402
+import matplotlib.patheffects as pe  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import mshi_common as C  # noqa: E402
@@ -45,6 +48,7 @@ DIV = LinearSegmentedColormap.from_list(
     "r2div", [(0.0, "#7a1c1c"), (0.2, "#c73a39"), (0.4, "#f4b3a6"), (0.5, "#f0efec"),
               (0.6, "#b7d3f6"), (0.8, "#2a78d6"), (1.0, "#104281")])
 NORM = TwoSlopeNorm(vmin=-0.5, vcenter=0.0, vmax=0.5)
+LABEL_REPORT = 200  # place_labels reports labels at or above this penalty
 
 
 def text_on(rgba):
@@ -55,9 +59,174 @@ def text_on(rgba):
 
 def save(fig, name):
     for ext in ("png", "pdf"):
-        fig.savefig(FIG / f"{name}.{ext}", dpi=300, bbox_inches="tight", facecolor="white")
+        meta = {"CreationDate": None} if ext == "pdf" else {}  # no timestamp: re-renders are byte-identical
+        fig.savefig(FIG / f"{name}.{ext}", dpi=300, bbox_inches="tight", facecolor="white", metadata=meta)
     plt.close(fig)
     print("wrote", FIG / f"{name}.png")
+
+
+def _dist_box(p, bb):
+    """Distance (display units) from point p to bounding box bb (0 if inside)."""
+    dx = max(bb.x0 - p[0], 0.0, p[0] - bb.x1)
+    dy = max(bb.y0 - p[1], 0.0, p[1] - bb.y1)
+    return float(np.hypot(dx, dy))
+
+
+def _seg_hits_box(p, q, bb, n=40):
+    return any(bb.x0 <= p[0] + t * (q[0] - p[0]) <= bb.x1 and bb.y0 <= p[1] + t * (q[1] - p[1]) <= bb.y1
+               for t in np.linspace(0.0, 1.0, n))
+
+
+def _exit_point(bb, p):
+    """Point where the line from the centre of bb towards p leaves bb (start of a leader line)."""
+    cx, cy = 0.5 * (bb.x0 + bb.x1), 0.5 * (bb.y0 + bb.y1)
+    dx, dy = p[0] - cx, p[1] - cy
+    t = 1.0
+    if dx:
+        t = min(t, ((bb.x1 if dx > 0 else bb.x0) - cx) / dx)
+    if dy:
+        t = min(t, ((bb.y1 if dy > 0 else bb.y0) - cy) / dy)
+    return (cx + t * dx, cy + t * dy)
+
+
+def _segs_cross(a, b, c, d):
+    def orient(p, q, r):
+        return np.sign((q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0]))
+    return orient(a, b, c) != orient(a, b, d) and orient(c, d, a) != orient(c, d, b)
+
+
+def _spread(want, h):
+    """Positions as close as possible (least squares) to `want` (sorted high to low) while
+    keeping consecutive positions at least h apart: isotonic regression by pool-adjacent-violators
+    on want_i + i*h."""
+    blocks = []  # [sum, count]
+    for i, w in enumerate(want):
+        blocks.append([w + i * h, 1])
+        while len(blocks) > 1 and blocks[-2][0] / blocks[-2][1] < blocks[-1][0] / blocks[-1][1]:
+            s_, c_ = blocks.pop()
+            blocks[-1][0] += s_
+            blocks[-1][1] += c_
+    r = [b[0] / b[1] for b in blocks for _ in range(b[1])]
+    return [ri - i * h for i, ri in enumerate(r)]
+
+
+def place_labels(ax, pts, column_from=None, fontsize=5, color=INK2):
+    """Label points without overlaps.
+
+    pts: list of (x, y, lo, hi, text).
+    1. Points with x >= column_from get their labels in a column to the right of the rightmost
+       of them, ordered by y and spaced least-squares (_spread), each joined to its point by a
+       leader line; ordered labels keep the lines from crossing.
+    2. Every other label is placed greedily, crowded points first (higher first among equals),
+       at its lowest-penalty candidate: 8 positions next to the point; positions 7 pt right or
+       left shifted up or down in 3 pt steps; positions 12-48 pt away every 30 degrees (all but
+       the first 8 with a leader line). Penalties:
+         1000 per overlap with a marker or a placed label, and for leaving the axes;
+          300 per leader line crossing another leader line, label or marker;
+          200 per earlier leader line running through the label;
+           60 if ambiguous (a label next to its point must be nearer to it than to any other
+              marker by 1.5 pt; a label with a leader line must keep 5 pt from other markers);
+           20 per error bar under the label (labels carry a white halo);
+           25 + 1.5 x distance (pt) for a leader line.
+       Labels at or above LABEL_REPORT are reported.
+    Geometry is in points, so it does not depend on dpi.
+    """
+    fig = ax.figure
+    fig.canvas.draw()
+    rend = fig.canvas.get_renderer()
+    k = fig.dpi / 72.0
+    axbox = ax.get_window_extent(rend)
+    tr = ax.transData
+    y0, y1 = ax.get_ylim()
+    pix = [tuple(tr.transform((x, y))) for x, y, *_ in pts]
+    markers = [Bbox.from_extents(px - 3.2 * k, py - 3.2 * k, px + 3.2 * k, py + 3.2 * k) for px, py in pix]
+    bars = [Bbox.from_extents(px - 0.8 * k, tr.transform((x, max(lo, y0)))[1], px + 0.8 * k,
+                              tr.transform((x, min(hi, y1)))[1])
+            for (px, _), (x, _, lo, hi, _) in zip(pix, pts)]
+    halo = [pe.withStroke(linewidth=1.8, foreground="white")]
+    line = dict(arrowstyle="-", color=MUTED, linewidth=0.4, shrinkA=0.5, shrinkB=2.8)
+    placed, segments = [], []  # label boxes and leader lines (start, end) in display units
+    inside_y = [i for i in range(len(pts)) if y0 <= pts[i][1] <= y1]
+    for i in set(range(len(pts))) - set(inside_y):
+        print(f"  label '{pts[i][4]}' skipped: point outside the y range")
+
+    # 1. callout column
+    col = [i for i in inside_y if column_from is not None and pts[i][0] >= column_from]
+    if col:
+        order = sorted(col, key=lambda j: -pix[j][1])
+        t = ax.text(0, 0, "Xg", fontsize=fontsize)
+        h = t.get_window_extent(rend).height + 1.5 * k
+        t.remove()
+        pos = np.array(_spread([pix[j][1] for j in order], h))
+        pos -= max(0.0, pos[0] - (axbox.y1 - h / 2))
+        pos += max(0.0, (axbox.y0 + h / 2) - pos[-1])
+        xcol = max(pix[j][0] for j in col) + 7 * k
+        for j, py_lab in zip(order, pos):
+            x, y, _, _, text = pts[j]
+            ann = ax.annotate(text, (x, y), xytext=((xcol - pix[j][0]) / k, (py_lab - pix[j][1]) / k),
+                              textcoords="offset points", ha="left", va="center", fontsize=fontsize,
+                              color=color, zorder=4, path_effects=halo, arrowprops=dict(line, relpos=(0.0, 0.5)))
+            ann.update_positions(rend)  # place the text first, then measure it without its leader line
+            bb = Text.get_window_extent(ann, rend).padded(0.8 * k)
+            placed.append(bb)
+            segments.append(((bb.x0, 0.5 * (bb.y0 + bb.y1)), pix[j]))
+
+    # 2. greedy placement of the rest
+    def align(dx, dy):
+        ha = "left" if dx > 1 else ("right" if dx < -1 else "center")
+        va = "bottom" if dy > 1 else ("top" if dy < -1 else "center")
+        return ha, va
+
+    cands = ([(dx, dy, *align(dx, dy), False)
+              for dx, dy in [(5, 0), (-5, 0), (0, 6), (0, -6), (4, 5), (4, -5), (-4, 5), (-4, -5)]]
+             + [(sd * 7, dy, "left" if sd > 0 else "right", "center", True)
+                for sd in (1, -1) for dy in range(-36, 37, 3) if abs(dy) > 4]
+             + [(dx, dy, *align(dx, dy), True)
+                for dx, dy in [(r * np.cos(a), r * np.sin(a)) for r in (12, 18, 26, 34, 42, 48)
+                               for a in np.deg2rad(np.arange(0, 360, 30))]])
+
+    def penalty(i, bb, dist_pt):
+        if not (axbox.x0 <= bb.x0 and bb.x1 <= axbox.x1 and axbox.y0 <= bb.y0 and bb.y1 <= axbox.y1):
+            return 1e6
+        pen = 1000.0 * sum(bb.overlaps(o) for o in placed + markers)
+        pen += 200.0 * sum(_seg_hits_box(a, b, bb) for a, b in segments)
+        pen += 20.0 * sum(bb.overlaps(b) for b in bars)
+        others = [_dist_box(pix[j], bb) for j in range(len(pix)) if j != i]
+        if dist_pt is None:
+            if others and _dist_box(pix[i], bb) >= min(others) - 1.5 * k:
+                pen += 60.0
+            return pen
+        pen += 25.0 + 1.5 * dist_pt
+        if others and min(others) < 5 * k:
+            pen += 60.0
+        start = _exit_point(bb, pix[i])
+        pen += 300.0 * sum(_seg_hits_box(start, pix[i], m) for j, m in enumerate(markers) if j != i)
+        pen += 300.0 * sum(_seg_hits_box(start, pix[i], o) for o in placed)
+        pen += 300.0 * sum(_segs_cross(start, pix[i], a, b) for a, b in segments)
+        return pen
+
+    rest = [i for i in inside_y if i not in col]
+    crowd = {i: sum(abs(pix[i][0] - q[0]) < 30 * k and abs(pix[i][1] - q[1]) < 30 * k for q in pix) for i in rest}
+    for i in sorted(rest, key=lambda j: (-crowd[j], -pts[j][1])):
+        x, y, _, _, text = pts[i]
+        best = None
+        for dx, dy, ha, va, is_far in cands:
+            # measure the text alone (an annotation's extent would include its leader line)
+            t = ax.annotate(text, (x, y), xytext=(dx, dy), textcoords="offset points", ha=ha, va=va,
+                            fontsize=fontsize, color=color, zorder=4, path_effects=halo)
+            bb = t.get_window_extent(rend).padded(0.8 * k)
+            t.remove()
+            pen = penalty(i, bb, float(np.hypot(dx, dy)) if is_far else None)
+            if best is None or pen < best[0]:
+                best = (pen, dx, dy, ha, va, bb, is_far)
+        pen, dx, dy, ha, va, bb, is_far = best
+        ax.annotate(text, (x, y), xytext=(dx, dy), textcoords="offset points", ha=ha, va=va, fontsize=fontsize,
+                    color=color, zorder=4, path_effects=halo, **({"arrowprops": line} if is_far else {}))
+        if is_far:
+            segments.append((_exit_point(bb, pix[i]), pix[i]))
+        placed.append(bb)
+        if pen >= LABEL_REPORT:
+            print(f"  label '{text}' at ({x:.2f}, {y:.2f}) placed with penalty {pen:.0f}")
 
 
 def heat(ax, res, model, title, counts, show_cbar=False):
@@ -101,12 +270,13 @@ def fig1(v):
     res = pd.read_csv(C.OUT / "a1" / f"transfer_{v}.csv")
     cov = pd.read_csv(C.OUT / "a1" / f"coverage_{v}.csv")
     counts = json.loads((C.OUT / "a1" / f"run_{v}.json").read_text())["counts"]
-    fig = plt.figure(figsize=(7.2, 8.6))
-    gs = fig.add_gridspec(3, 2, height_ratios=[0.78, 0.78, 1.0], hspace=0.62, wspace=0.3)
+    fig = plt.figure(figsize=(7.2, 9.4))
+    gs = fig.add_gridspec(3, 2, height_ratios=[0.78, 0.78, 1.25], hspace=0.55, wspace=0.3)
     ax1, ax2 = fig.add_subplot(gs[0, :]), fig.add_subplot(gs[1, :])
     heat(ax1, res, "xgb", "a  XGBoost on 8 bioclim variables (mean of 20 seeds; hyperparameters by spatial-block CV in the training continent)", counts)
     heat(ax2, res, "ols_P", "b  OLS on log annual precipitation", counts)
-    cax = fig.add_axes([0.93, 0.47, 0.012, 0.4])
+    top, bot = ax1.get_position().y1, ax2.get_position().y0  # colour bar spans panels a-b
+    cax = fig.add_axes([0.93, bot + 0.1 * (top - bot), 0.012, 0.8 * (top - bot)])
     sm = plt.cm.ScalarMappable(norm=NORM, cmap=DIV)
     cb = fig.colorbar(sm, cax=cax, extend="both")
     cb.set_label("R$^2$ (log Rs); colour saturates at $\\pm$0.5", fontsize=6.5)
@@ -117,30 +287,29 @@ def fig1(v):
             ("share_TP_in_range", "Share of test sites inside the training range\nof MAT and annual precipitation", gs[2, 1], "ols_P")]):
         ax = fig.add_subplot(ax_pos)
         ax.axhline(0, color=BASE, linewidth=0.6, zorder=0)
-        placed = []
+        pts = []
         for _, r in cov.sort_values(col).iterrows():
             y, lo, hi = r[f"r2_{model}"], r[f"r2_{model}_lo"], r[f"r2_{model}_hi"]
             ax.errorbar(r[col], y, yerr=[[y - lo], [hi - y]], fmt=CONT_MARK[r["train"]], color=CONT_COL[r["train"]],
                         markersize=5, markeredgecolor="white", markeredgewidth=0.6, elinewidth=0.6, capsize=0,
                         zorder=3)
-            dy = 2
-            for (px, py) in placed:
-                if abs(px - r[col]) < 0.09 and abs(py - y) < 0.09:
-                    dy -= 7
-            placed.append((r[col], y))
-            ax.annotate(f"{ABBR[r['train']]}$\\rightarrow${ABBR[r['test']]}", (r[col], y), xytext=(4, dy),
-                        textcoords="offset points", fontsize=5, color=INK2)
+            # marker colour/shape = training continent, so the label only names the test continent
+            pts.append((r[col], y, lo, hi, f"$\\rightarrow${ABBR[r['test']]}"))
         ax.set_ylim(-1.2, 0.75)
-        ax.set_xlim(-0.03, 1.05)
+        ax.set_xlim(-0.11, 1.2)  # room for labels beside points at 0 and 1; shares lie in [0, 1]
+        ax.set_xticks(np.arange(0, 1.01, 0.2))
         ax.set_xlabel(xlab, fontsize=6.5)
         ax.set_ylabel("Transfer R$^2$ (95% interval)", fontsize=6.5)
         ax.grid(axis="y", color=GRID, linewidth=0.4)
         ttl = "c  XGBoost skill vs climate coverage" if model == "xgb" else "d  OLS (log P) skill vs range coverage"
         ax.set_title(ttl, loc="left", fontsize=8)
-        if k == 0:
-            hs = [Line2D([], [], marker=CONT_MARK[c], color=CONT_COL[c], linestyle="", markersize=5,
-                         markeredgecolor="white", label=f"trained on {c}") for c in CONT_COL]
-            ax.legend(handles=hs, loc="upper left", frameon=False, fontsize=6)
+        place_labels(ax, pts, column_from=0.88)
+    # one legend for c-d, below the panels, so it never covers data
+    hs = [Line2D([], [], marker=CONT_MARK[c], color=CONT_COL[c], linestyle="", markersize=5,
+                 markeredgecolor="white", label=f"trained on {c}") for c in CONT_COL]
+    hs.append(Line2D([], [], linestyle="", label="label: $\\rightarrow$test continent"))
+    fig.legend(handles=hs, loc="upper center", bbox_to_anchor=(0.5, 0.042), ncol=4, frameon=False, fontsize=6,
+               handletextpad=0.3, columnspacing=1.6)
     fig.text(0.01, 0.005, f"Variant: {v}. Diagonal = within-continent 5° spatial-block CV (outlined). Bracketed: "
              "95% bootstrap interval over test sites (2000 resamples). Descriptive only; no tests fitted to c-d.",
              fontsize=5.5, color=MUTED)

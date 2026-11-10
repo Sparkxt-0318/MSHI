@@ -405,7 +405,11 @@ Findings and actions (first-run values superseded by the reruns reported above):
 - REML and method-of-moments estimates agree (one-way and nested).
 - Multi-record cell share 60.5% reproduces the audit's 61%.
 - All model comparisons use identical test sites and identical bootstrap resamples.
-- Figures rendered and inspected; palette validated.
+- Figures rendered and inspected at full resolution; palette validated. A full-resolution check
+  found colliding point labels in Figure 1c-d. `30_figures.py` now places them with a
+  collision-checking routine: each label names only the test continent, and points with
+  coverage >= 0.88 are labelled in an ordered column. No label is reported as overlapping. PDFs
+  carry no timestamp, so re-rendering gives byte-identical files.
 
 ### Open questions
 
