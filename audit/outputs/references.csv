@@ -55,3 +55,10 @@ Ribeiro2022_bdc,10.1111/2041-210X.13868,"<i>bdc</i> : A toolkit for standardizin
 Hsu2025_GlobalRx,10.1038/s41597-025-04941-w,A global assemblage of regional prescribed burn records — GlobalRx,A3 precedent: manual swap/sign fixes
 Smykalov2026,10.1029/2025GB008899,Deep Learning Reconstruction of Daily Soil CO<sub>2</sub> Efflux Reveals Biogeochemical Insights and Reduces Annual Estimate Uncertainty Despite Limited Daily Predictability,A2/A1 adjacent: COSORE LSTM
 Giasson2013,10.1890/es13.00183.1,Soil respiration in a northeastern US temperate forest: a 22-year synthesis,A2 adjacent: 23 studies at Harvard Forest
+Jiang2025_AFM,10.1016/j.agrformet.2025.110734,Spatial non-uniformity in the distribution of global soil respiration observation data: Implications for model predictions,A1 novelty: SRDB spatial clustering handled by weighting (no region hold-out in abstract)
+Cao2026,10.1111/gcb.70956,Spatially-Uneven Observations Cause Overestimation of Global Soil Respiration,A1 novelty: SRDB representativeness pruning (no region hold-out in abstract)
+Gomes2026,10.1016/j.scitotenv.2026.181663,On the importance of soil texture for predicting future global soil respiration,A1 novelty: validation scheme unreadable (possible spatial folds)
+SaezSandino2026,10.1111/gcb.71101,Microbial Functional Genes Help Explain Soil Carbon Sensitivity to Temperature Across Global Biomes,A1 adjacent: spatial CV for laboratory Q10
+Sun2023,10.1029/2023gb007761,Forest Soil Carbon Efflux Evaluation Across China: A New Estimate With Machine Learning,A1/A2 comparator: random 10-fold CV and no noise ceiling
+Lobell2021,10.3390/rs13163160,Twice Is Nice: The Benefits of Two Ground Measures for Evaluating the Accuracy of Satellite-Based Sustainability Estimates,A2 precedent: replicate-based noise correction of r2 (other field)
+Lavoie2015,10.1002/2014JG002773,A practical approach for uncertainty quantification of high-frequency soil respiration using Forced Diffusion chambers,A2 adjacent: within-site Rs scaling and random error

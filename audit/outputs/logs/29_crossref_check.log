@@ -55,4 +55,11 @@
 53         Hsu2025_GlobalRx        10.1038/s41597-025-04941-w     ok         1.00               Hsu  2025                                                                                     Scientific Data
 54             Smykalov2026              10.1029/2025GB008899     ok         1.00          Smykalov  2026                                                                        Global Biogeochemical Cycles
 55              Giasson2013              10.1890/es13.00183.1     ok         1.00           Giasson  2013                                                                                           Ecosphere
-{'ok': 56}
+56            Jiang2025_AFM   10.1016/j.agrformet.2025.110734     ok         1.00             Jiang  2025                                                                 Agricultural and Forest Meteorology
+57                  Cao2026                 10.1111/gcb.70956     ok         1.00               Cao  2026                                                                               Global Change Biology
+58                Gomes2026   10.1016/j.scitotenv.2026.181663     ok         1.00             Gomes  2026                                                                    Science of The Total Environment
+59          SaezSandino2026                 10.1111/gcb.71101     ok         1.00      Sáez‐Sandino  2026                                                                               Global Change Biology
+60                  Sun2023              10.1029/2023gb007761     ok         1.00               Sun  2023                                                                        Global Biogeochemical Cycles
+61               Lobell2021                10.3390/rs13163160     ok         1.00            Lobell  2021                                                                                      Remote Sensing
+62               Lavoie2015              10.1002/2014JG002773     ok         1.00            Lavoie  2015                                                     Journal of Geophysical Research: Biogeosciences
+{'ok': 63}

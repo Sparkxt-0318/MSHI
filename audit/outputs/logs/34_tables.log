@@ -1,8 +1,1 @@
-Traceback (most recent call last):
-  File "/home/user/MSHI/audit/34_tables.py", line 188, in <module>
-    raise SystemExit(main())
-                     ^^^^^^
-  File "/home/user/MSHI/audit/34_tables.py", line 81, in main
-    md.append(f"| {A[r['train']]} -> {A[r['test']]} | {r['n_train']} | {r['n_test']} | {MODEL_NAME[r['model']]} | "
-                                                                                        ~~~~~~~~~~^^^^^^^^^^^^
-KeyError: 'xgb_npp@xgb'
+wrote /home/user/MSHI/audit/outputs/tables.md (1090 lines)

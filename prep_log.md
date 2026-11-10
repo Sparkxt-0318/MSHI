@@ -296,7 +296,11 @@ Search modes: WebSearch, Crossref search, Europe PMC full-text search (about 400
 323 full texts machine-scanned for A1), full-text reads where hosts allowed (ESSD, OSTI accepted
 manuscripts, PMC), SRDB git history and GitHub issue search. No Web of Science or Google Scholar;
 OpenAlex unavailable. Every DOI cited here was checked against Crossref by
-`29_crossref_check.py` (56 of 56 ok).
+`29_crossref_check.py` (63 of 63 ok). After the two search workflows, one adversarial agent per
+analysis tried to refute the A1 and A2 novelty claims (79 and 75 searches; their WebSearch budget ran
+out before two planned queries each). Papers were read by those agents, not by me, except where a
+statement below says the abstract was checked in Crossref. "Abstract only" claims are
+[UNVERIFIED] beyond the abstract.
 
 - **A1.** No soil-respiration (Rs or Rh) upscaling study found that holds out a continent or large
   region or reports a transfer matrix. Where methods were readable, validation is random k-fold
@@ -309,7 +313,19 @@ OpenAlex unavailable. Every DOI cited here was checked against Crossref by
   degrade in the tropics (abstract); Liu L 2024 used spatially grouped hold-outs for ecosystem
   respiration in the US Midwest; Malhotra 2026 assessed SRDB's representativeness in bioclimatic
   space. The idea itself is established outside Rs (Ploton 2020; Meyer & Pebesma 2021, 2022 -
-  which explicitly asks for accuracy by continent; Roberts 2017; Ludwig 2023). Refuter: see addendum.
+  which explicitly asks for accuracy by continent; Roberts 2017; Ludwig 2023).
+  Refuter: the claim survives for continents, but "large region" must be narrowed to "continent or
+  comparably large multi-country region". About 94 more Europe PMC full texts were scanned with no
+  hits. The closest verified analogue is Liu L 2024 (full text): spatial groups of towers and one
+  US state held out, but for tower Reco/NEE and yield inside the US Midwest, not soil Rs. Two recent
+  papers deal with SRDB's spatial clustering by sample weighting (Jiang 2025 AFM; title in Crossref,
+  abstract read by the agent) or representativeness pruning (Cao 2026 GCB; abstract checked in
+  Crossref: a 1,363-site subset lowers global Rs from 100.5 to 94.1 Pg C/yr), not by geographic
+  hold-out. Both must be cited, and they undercut any claim to be first to show that sampling bias
+  distorts machine-learning Rs estimates. Jiang 2025's reference list cites spatial
+  cross-validation methods and Gomes 2026's cites the area-of-applicability literature, so either
+  may use spatial folds [UNVERIFIED; full texts blocked]. Spatial CV exists for laboratory Q10
+  (Saez-Sandino 2026), not for field Rs.
 - **A2.** No study found that uses replicated annual Rs records within a grid cell (or site) to bound
   explainable variance. SRDB-V5 (read in full) partitions no variance. Jian 2018 (abstract: the
   "sources of variability" are upscaling assumptions such as model form and data time step) and
@@ -321,7 +337,22 @@ OpenAlex unavailable. Every DOI cited here was checked against Crossref by
   Lage-Castellanos 2019), Hengl 2017 (SoilGrids residual variograms pure nugget below 300 km), Cai
   2023 and Giasson 2013 for within-site Rs variability. Reported random-split R2 for SRDB machine
   learning (0.76-0.79; Laffitte 2026, Liu J 2024) exceed the site-level ceiling here, which suggests
-  but does not prove leakage through replicated sites (targets differ). Refuter: see addendum.
+  but does not prove leakage through replicated sites (targets differ).
+  Refuter: the claim survives only in its soil-respiration form and is not safe as a claim of
+  methodological novelty. The same idea, correcting skill for noise in replicate ground data,
+  exists for satellite estimates of yields and household outcomes (Lobell 2021; abstract checked in
+  Crossref: with noise accounted for, satellite r2 is higher and occasionally doubles) and for DGVM
+  pixel-to-plot comparisons (Rammig 2018, abstract only). Bahn 2010 (full text) remains the
+  closest Rs precedent. Its within-site benchmark comes from the literature, its main predictor is
+  measured at the site, and it computes no R2 bound. Within-site noise without a skill bound:
+  Lavoie 2015 (abstract checked in Crossref: random error about 40% and spatial scaling error about
+  50% of mean Rs), Cai 2023, Giasson 2013, Smykalov 2026. Full texts with no ceiling: Sun 2023 (10-fold
+  CV R2 0.69, as reported by the agent), Ciais 2021, Huang 2020, Laffitte 2026. Methods or
+  supplements were blocked for Warner 2019, Stell 2021, Hashimoto 2015, Konings 2019, Yao 2021, He
+  2022, Lu 2021 and Jian 2018, so a ceiling-like passage there cannot be excluded [UNVERIFIED].
+  Wording to use: "To our knowledge, no published soil-respiration upscaling study has used
+  replicate annual Rs records sharing a grid cell or site to estimate a maximum attainable R2 for
+  models driven by gridded predictors", citing Bahn 2010, Rammig 2018 and Lobell 2021.
 - **A3.** The method is not new: country-mismatch, sea and sign/swap tests are standard in
   biodiversity data cleaning (Yesson 2007; CoordinateCleaner, Zizka 2019; biogeo, Robertson 2016;
   bdc, Ribeiro 2022; GBIF flags) and have been applied to other ecological databases (Tallo, Jucker
@@ -367,7 +398,10 @@ Findings and actions (first-run values superseded by the reruns reported above):
 ### Checks run
 
 - Every DOI cited is checked against Crossref (`audit/outputs/references_crossref.csv`; Crossref
-  rate limits are retried, not reported as missing).
+  rate limits are retried, not reported as missing). A script matched every author-year citation in
+  this log, the comparison, the issue draft and the Step 0 summary to a checked DOI. Two papers
+  carry their online year in Crossref and are cited by volume year: Ciais 2021 (Crossref 2020) and
+  Hill 2017 (Crossref 2016).
 - REML and method-of-moments estimates agree (one-way and nested).
 - Multi-record cell share 60.5% reproduces the audit's 61%.
 - All model comparisons use identical test sites and identical bootstrap resamples.
@@ -392,3 +426,7 @@ Findings and actions (first-run values superseded by the reruns reported above):
    better justified but needs the study-effect assumption stated.
 9. The Jian 2018 and Bond-Lamberty & Thomson 2010 full texts should be checked by hand before any
    novelty claim for Analysis 2.
+10. Before any novelty claim for Analysis 1, check the validation sections of Jiang 2025 (AFM) and
+    Gomes 2026 by hand, then Cao 2026. The refuter could not open them, and the first two may use
+    spatial folds. Even ecoregion folds would not be a continent hold-out, but they would narrow the
+    claim further.
