@@ -14,18 +14,18 @@
     "in_sea": 7,
     "lon_sign": 4
   },
-  "flagged_total": 283,
+  "flagged_total": 284,
   "flagged_also_in_issue50": 26,
-  "flagged_not_in_issue50": 257,
+  "flagged_not_in_issue50": 258,
   "high_conf_flagged": 41,
   "high_conf_also_in_issue50": 0,
   "flagged_original_point_in_sea_gt10km": 94,
-  "flagged_original_point_on_land_other_country": 189,
+  "flagged_original_point_on_land_other_country": 190,
   "high_conf_on_land_other_country": 29,
   "by_class_on_land": {
     "coords_wrong": {
-      "on_land": 14,
-      "n": 14
+      "on_land": 22,
+      "n": 22
     },
     "in_sea": {
       "on_land": 0,
@@ -40,8 +40,8 @@
       "n": 14
     },
     "lon_sign": {
-      "on_land": 31,
-      "n": 44
+      "on_land": 24,
+      "n": 37
     },
     "near_border": {
       "on_land": 42,

@@ -1,0 +1,59 @@
+/home/user/MSHI/audit/23_build_site_table.py:62: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  rec = pd.concat([srdb, cos], ignore_index=True)
+# Step 0 site table: summary
+
+Created 2026-11-10T08:11:56+00:00 by `audit/23_build_site_table.py`. SRDB commit 02163a7 (data update 30 Dec 2025); COSORE 0.8.0 (git 02f32e8); WorldClim 2.1 30" bioclim 1, 4, 5, 6, 12, 14, 15, 17; Natural Earth 1:10m map units.
+
+## Record filters (applied in order)
+
+| Source | Rule | Before | Removed | After |
+|---|---|---:|---:|---:|
+| SRDB | all SRDB records (srdb-data.csv @02163a7) | 14169 | 0 | 14169 |
+| SRDB | Rs_annual reported | 14169 | 6377 | 7792 |
+| SRDB | unmanipulated (Manipulation == 'None' or missing) | 7792 | 2828 | 4964 |
+| SRDB | coordinates present and in bounds | 4964 | 134 | 4830 |
+| SRDB | Rs_annual within 50-4500 g C m-2 yr-1 | 4830 | 60 | 4770 |
+| SRDB | no quality flag Q10-Q14 | 4770 | 262 | 4508 |
+| SRDB | not a known duplicate (Duplicate_record empty) | 4508 | 13 | 4495 |
+| SRDB | annual coverage >= 1 or missing | 4495 | 881 | 3614 |
+| SRDB | country field agrees with coordinates (flagged records excluded) | 3614 | 81 | 3533 |
+| COSORE | COSORE full-year dataset-year records (Rs ports, treatment None) | 63 | 0 | 63 |
+| COSORE | Rs_annual within 50-4500 and coordinates present | 63 | 0 | 63 |
+| Both | COSORE dataset-year not already in SRDB (same cell, overlapping year) (21 COSORE records dropped as duplicates of SRDB records) | 3596 | 21 | 3575 |
+| Both | record located on land or within 10 km of land (continent assigned) | 3575 | 0 | 3575 |
+| Both | WorldClim value found within 3 pixels (~2.7 km) (12 records used a neighbouring pixel) | 3575 | 8 | 3567 |
+
+Marginal counts (records with Rs_annual failing each rule on its own): manipulated (Manipulation not 'None' or missing): 2828; no/invalid coordinates: 162; Rs_annual outside 50-4500: 72; quality flag Q10-Q14: 318; known duplicate (Duplicate_record set): 64; annual coverage < 1: 1482; annual coverage missing: 613; country/coordinate mismatch: 149.
+
+Records with annual coverage missing kept in `incl_missing`: 368 (SRDB). Records in `strict`: 3199.
+
+## Variant `strict`: 3199 records, 965 sites (0.05-degree cells)
+
+Share of cells with more than one record: 60.5%. Cells whose records fall in two continents: 0. Sites with a MODIS NPP value: 575.
+
+| Continent | Records | SRDB | COSORE | Studies | Sites | Sites with 2+ records | 3+ | Median Rs (g C m-2 yr-1) | Var log Rs |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Asia | 1386 | 1380 | 6 | 486 | 391 | 244 | 167 | 772 | 0.374 |
+| North America | 739 | 713 | 26 | 201 | 210 | 135 | 95 | 767 | 0.391 |
+| Europe | 744 | 737 | 7 | 199 | 227 | 131 | 85 | 656 | 0.323 |
+| South & Central America | 205 | 203 | 2 | 71 | 77 | 47 | 26 | 1401 | 0.410 |
+| Africa | 58 | 58 | 0 | 25 | 27 | 13 | 8 | 893 | 0.384 |
+| Oceania | 67 | 66 | 1 | 28 | 33 | 14 | 10 | 908 | 0.263 |
+| Total | 3199 | 3157 | 42 | 1008 | 965 | 584 | 391 | 767 | 0.392 |
+
+## Variant `incl_missing`: 3567 records, 1061 sites (0.05-degree cells)
+
+Share of cells with more than one record: 59.6%. Cells whose records fall in two continents: 0. Sites with a MODIS NPP value: 638.
+
+| Continent | Records | SRDB | COSORE | Studies | Sites | Sites with 2+ records | 3+ | Median Rs (g C m-2 yr-1) | Var log Rs |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Asia | 1572 | 1566 | 6 | 533 | 431 | 266 | 185 | 766 | 0.383 |
+| North America | 788 | 762 | 26 | 224 | 236 | 141 | 97 | 764 | 0.425 |
+| Europe | 826 | 819 | 7 | 217 | 244 | 140 | 94 | 653 | 0.338 |
+| South & Central America | 229 | 227 | 2 | 79 | 84 | 53 | 31 | 1348 | 0.406 |
+| Africa | 71 | 71 | 0 | 29 | 31 | 17 | 11 | 872 | 0.594 |
+| Oceania | 81 | 80 | 1 | 33 | 35 | 15 | 11 | 899 | 0.250 |
+| Total | 3567 | 3525 | 42 | 1111 | 1061 | 632 | 429 | 764 | 0.408 |
+
+Continents: Natural Earth CONTINENT field, with Central America, the Caribbean and South America grouped as South & Central America (UN subregions; includes Mexico), Russia east of 60 E assigned to Asia, Hawaii to Oceania and the Canary Islands to Africa.
+

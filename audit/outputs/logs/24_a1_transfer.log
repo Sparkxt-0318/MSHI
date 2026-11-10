@@ -1,0 +1,118 @@
+[strict] counts {'Asia': 391, 'Europe': 227, 'North America': 210, 'South & Central America': 77, 'Oceania': 33, 'Africa': 27}
+[strict] train Asia n=391 xgb {'max_depth': 1, 'learning_rate': 0.03, 'min_child_weight': 10.0, 'reg_lambda': 1.0} n_est=100 cvMSE=0.294 (25.2 s)
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+[strict] train North America n=210 xgb {'max_depth': 6, 'learning_rate': 0.1, 'min_child_weight': 5.0, 'reg_lambda': 1.0} n_est=30 cvMSE=0.263 (18.5 s)
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+[strict] train Europe n=227 xgb {'max_depth': 1, 'learning_rate': 0.03, 'min_child_weight': 1.0, 'reg_lambda': 1.0} n_est=5 cvMSE=0.337 (18.4 s)
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+[strict] within Asia done
+[strict] within North America done
+[strict] within Europe done
+[strict] within South & Central America done
+              kind                    train                     test  n_train  n_test  model     r2  r2_lo  r2_hi   rmse_g  spearman
+1         transfer                     Asia            North America      391     210  ols_P  0.201  0.114  0.267  485.374     0.397
+3         transfer                     Asia            North America      391     210    xgb  0.197  0.097  0.278  489.903     0.362
+5         transfer                     Asia                   Europe      391     227  ols_P -0.001 -0.065  0.049  341.102     0.084
+7         transfer                     Asia                   Europe      391     227    xgb -0.131 -0.252 -0.020  344.055     0.142
+9         transfer                     Asia  South & Central America      391      77  ols_P  0.021 -0.514  0.267  747.943     0.551
+11        transfer                     Asia  South & Central America      391      77    xgb  0.111 -0.432  0.370  682.061     0.591
+13        transfer                     Asia                   Africa      391      27  ols_P  0.142 -0.639  0.349  659.613     0.586
+15        transfer                     Asia                   Africa      391      27    xgb  0.383 -0.074  0.573  581.014     0.533
+17        transfer                     Asia                  Oceania      391      33  ols_P -0.099 -0.768  0.152  492.669     0.171
+19        transfer                     Asia                  Oceania      391      33    xgb -0.073 -0.776  0.226  450.208     0.234
+21        transfer            North America                     Asia      210     391  ols_P  0.033 -0.137  0.169  540.478     0.285
+23        transfer            North America                     Asia      210     391    xgb -0.141 -0.294 -0.021  596.636     0.061
+25        transfer            North America                   Europe      210     227  ols_P -0.041 -0.155  0.045  355.137     0.084
+27        transfer            North America                   Europe      210     227    xgb -0.124 -0.265  0.001  355.975     0.142
+29        transfer            North America  South & Central America      210      77  ols_P  0.202 -0.297  0.467  602.433     0.551
+31        transfer            North America  South & Central America      210      77    xgb -0.747 -1.894 -0.206  901.842     0.082
+33        transfer            North America                   Africa      210      27  ols_P  0.320 -0.363  0.532  604.220     0.586
+35        transfer            North America                   Africa      210      27    xgb -0.046 -1.247  0.329  682.658     0.213
+37        transfer            North America                  Oceania      210      33  ols_P -0.497 -1.736  0.064  605.494     0.171
+39        transfer            North America                  Oceania      210      33    xgb -0.866 -2.277 -0.366  593.697    -0.081
+41        transfer                   Europe                     Asia      227     391  ols_P  0.080 -0.001  0.143  564.836     0.285
+43        transfer                   Europe                     Asia      227     391    xgb -0.115 -0.217 -0.050  608.854     0.129
+45        transfer                   Europe            North America      227     210  ols_P  0.115  0.023  0.176  518.262     0.397
+47        transfer                   Europe            North America      227     210    xgb -0.052 -0.167  0.012  553.743     0.241
+49        transfer                   Europe  South & Central America      227      77  ols_P -0.351 -1.163  0.013  862.829     0.551
+51        transfer                   Europe  South & Central America      227      77    xgb -1.059 -2.399 -0.494  988.108       NaN
+53        transfer                   Europe                   Africa      227      27  ols_P -0.114 -1.329  0.204  720.271     0.586
+55        transfer                   Europe                   Africa      227      27    xgb -0.489 -2.209 -0.068  778.919       NaN
+57        transfer                   Europe                  Oceania      227      33  ols_P -0.176 -0.989  0.084  523.620     0.171
+59        transfer                   Europe                  Oceania      227      33    xgb -0.515 -1.726 -0.113  584.861       NaN
+61  within_blockcv                     Asia                     Asia      391     391  ols_P  0.106  0.018  0.179  539.188     0.263
+63  within_blockcv                     Asia                     Asia      391     391    xgb  0.159  0.064  0.238  528.173     0.265
+65  within_blockcv            North America            North America      210     210  ols_P  0.210  0.059  0.324  485.035     0.364
+67  within_blockcv            North America            North America      210     210    xgb  0.254  0.153  0.339  468.844     0.441
+69  within_blockcv                   Europe                   Europe      227     227  ols_P -0.034 -0.089 -0.001  354.745    -0.050
+71  within_blockcv                   Europe                   Europe      227     227    xgb -0.075 -0.122 -0.048  360.586    -0.222
+73  within_blockcv  South & Central America  South & Central America       77      77  ols_P -0.014 -0.484  0.228  675.637     0.309
+75  within_blockcv  South & Central America  South & Central America       77      77    xgb  0.482  0.239  0.668  497.377     0.607
+[incl_missing] counts {'Asia': 431, 'Europe': 244, 'North America': 236, 'South & Central America': 84, 'Oceania': 35, 'Africa': 31}
+[incl_missing] train Asia n=431 xgb {'max_depth': 1, 'learning_rate': 0.1, 'min_child_weight': 10.0, 'reg_lambda': 10.0} n_est=50 cvMSE=0.301 (8.2 s)
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+[incl_missing] train North America n=236 xgb {'max_depth': 2, 'learning_rate': 0.03, 'min_child_weight': 10.0, 'reg_lambda': 1.0} n_est=150 cvMSE=0.281 (6.6 s)
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+[incl_missing] train Europe n=244 xgb {'max_depth': 6, 'learning_rate': 0.1, 'min_child_weight': 10.0, 'reg_lambda': 1.0} n_est=5 cvMSE=0.335 (6.3 s)
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+[incl_missing] within Asia done
+[incl_missing] within North America done
+[incl_missing] within Europe done
+[incl_missing] within South & Central America done
+              kind                    train                     test  n_train  n_test  model     r2  r2_lo  r2_hi   rmse_g  spearman
+1         transfer                     Asia            North America      431     236  ols_P  0.255  0.165  0.323  471.780     0.448
+3         transfer                     Asia            North America      431     236    xgb  0.285  0.185  0.362  473.898     0.470
+5         transfer                     Asia                   Europe      431     244  ols_P -0.003 -0.072  0.052  357.169     0.096
+7         transfer                     Asia                   Europe      431     244    xgb -0.067 -0.162  0.013  349.447     0.127
+9         transfer                     Asia  South & Central America      431      84  ols_P  0.019 -0.442  0.241  728.922     0.531
+11        transfer                     Asia  South & Central America      431      84    xgb  0.085 -0.313  0.294  675.800     0.401
+13        transfer                     Asia                   Africa      431      31  ols_P  0.180 -0.129  0.402  640.467     0.571
+15        transfer                     Asia                   Africa      431      31    xgb  0.299  0.066  0.518  562.555     0.641
+17        transfer                     Asia                  Oceania      431      35  ols_P -0.103 -0.696  0.176  475.415     0.203
+19        transfer                     Asia                  Oceania      431      35    xgb -0.052 -0.538  0.224  431.378     0.227
+21        transfer            North America                     Asia      236     431  ols_P  0.004 -0.183  0.154  542.093     0.336
+23        transfer            North America                     Asia      236     431    xgb  0.061 -0.069  0.174  544.828     0.193
+25        transfer            North America                   Europe      236     244  ols_P -0.074 -0.206  0.034  374.616     0.096
+27        transfer            North America                   Europe      236     244    xgb -0.062 -0.205  0.066  353.969     0.224
+29        transfer            North America  South & Central America      236      84  ols_P  0.144 -0.310  0.418  583.332     0.531
+31        transfer            North America  South & Central America      236      84    xgb -0.239 -0.916  0.113  761.409     0.233
+33        transfer            North America                   Africa      236      31  ols_P  0.261 -0.101  0.600  584.200     0.571
+35        transfer            North America                   Africa      236      31    xgb  0.254 -0.072  0.482  594.884     0.477
+37        transfer            North America                  Oceania      236      35  ols_P -0.642 -1.947  0.055  644.103     0.203
+39        transfer            North America                  Oceania      236      35    xgb -0.295 -1.046  0.057  479.397     0.034
+41        transfer                   Europe                     Asia      244     431  ols_P  0.085  0.022  0.135  557.628     0.336
+43        transfer                   Europe                     Asia      244     431    xgb -0.032 -0.114  0.024  585.392     0.163
+45        transfer                   Europe            North America      244     236  ols_P  0.130  0.053  0.175  507.556     0.448
+47        transfer                   Europe            North America      244     236    xgb  0.044 -0.052  0.097  525.946     0.263
+49        transfer                   Europe  South & Central America      244      84  ols_P -0.405 -1.170 -0.053  858.683     0.531
+51        transfer                   Europe  South & Central America      244      84    xgb -0.853 -1.877 -0.400  933.986    -0.127
+53        transfer                   Europe                   Africa      244      31  ols_P  0.039 -0.530  0.189  698.251     0.571
+55        transfer                   Europe                   Africa      244      31    xgb  0.016 -0.656  0.132  705.864     0.367
+57        transfer                   Europe                  Oceania      244      35  ols_P -0.180 -0.853  0.076  506.838     0.203
+59        transfer                   Europe                  Oceania      244      35    xgb -0.293 -1.091  0.021  527.023     0.139
+61  within_blockcv                     Asia                     Asia      431     431  ols_P  0.132  0.041  0.208  527.773     0.321
+63  within_blockcv                     Asia                     Asia      431     431    xgb  0.189  0.106  0.263  515.291     0.356
+65  within_blockcv            North America            North America      236     236  ols_P  0.296  0.129  0.426  464.449     0.429
+67  within_blockcv            North America            North America      236     236    xgb  0.301  0.168  0.405  449.056     0.451
+69  within_blockcv                   Europe                   Europe      244     244  ols_P -0.019 -0.065  0.013  363.911    -0.002
+71  within_blockcv                   Europe                   Europe      244     244    xgb -0.047 -0.100 -0.014  367.808    -0.098
+73  within_blockcv  South & Central America  South & Central America       84      84  ols_P  0.108 -0.192  0.292  607.563     0.344
+75  within_blockcv  South & Central America  South & Central America       84      84    xgb  0.150 -0.242  0.396  587.292     0.477

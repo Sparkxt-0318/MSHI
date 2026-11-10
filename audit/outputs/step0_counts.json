@@ -1,5 +1,5 @@
 {
-  "created": "2026-11-10T07:15:43+00:00",
+  "created": "2026-11-10T08:11:56+00:00",
   "versions": {
     "python": "3.11.18",
     "numpy": "1.26.4",
@@ -99,19 +99,190 @@
       "note": ""
     }
   ],
+  "cosore_srdb_duplicates": [
+    {
+      "cosore": "cosore_d20190607_RUEHR_2007",
+      "srdb": [
+        "srdb_4234",
+        "srdb_4235",
+        "srdb_4236",
+        "srdb_4237",
+        "srdb_4238",
+        "srdb_4239",
+        "srdb_4240",
+        "srdb_4241",
+        "srdb_4242",
+        "srdb_4243"
+      ]
+    },
+    {
+      "cosore": "cosore_d20190626_VARGAS_2006",
+      "srdb": [
+        "srdb_1578",
+        "srdb_5101"
+      ]
+    },
+    {
+      "cosore": "cosore_d20190626_VARGAS_2007",
+      "srdb": [
+        "srdb_5101"
+      ]
+    },
+    {
+      "cosore": "cosore_d20190821_LIU_2013",
+      "srdb": [
+        "srdb_11032",
+        "srdb_11033",
+        "srdb_11034"
+      ]
+    },
+    {
+      "cosore": "cosore_d20190821_LIU_2014",
+      "srdb": [
+        "srdb_11035",
+        "srdb_11036",
+        "srdb_11037"
+      ]
+    },
+    {
+      "cosore": "cosore_d20190821_LIU_2015",
+      "srdb": [
+        "srdb_11038",
+        "srdb_11039",
+        "srdb_11040"
+      ]
+    },
+    {
+      "cosore": "cosore_d20190830_LIANG_2011",
+      "srdb": [
+        "srdb_7824"
+      ]
+    },
+    {
+      "cosore": "cosore_d20200108_HE_2009",
+      "srdb": [
+        "srdb_5505"
+      ]
+    },
+    {
+      "cosore": "cosore_d20200108_HE_2010",
+      "srdb": [
+        "srdb_5506"
+      ]
+    },
+    {
+      "cosore": "cosore_d20200108_HE_2011",
+      "srdb": [
+        "srdb_5507"
+      ]
+    },
+    {
+      "cosore": "cosore_d20200108_HE_2012",
+      "srdb": [
+        "srdb_11392",
+        "srdb_11393",
+        "srdb_11394",
+        "srdb_5508"
+      ]
+    },
+    {
+      "cosore": "cosore_d20200108_JASSAL_2006",
+      "srdb": [
+        "srdb_4886",
+        "srdb_4887"
+      ]
+    },
+    {
+      "cosore": "cosore_d20200108_JASSAL_2007",
+      "srdb": [
+        "srdb_4016",
+        "srdb_4887",
+        "srdb_4888"
+      ]
+    },
+    {
+      "cosore": "cosore_d20200108_JASSAL_2008",
+      "srdb": [
+        "srdb_4016",
+        "srdb_4888",
+        "srdb_4889"
+      ]
+    },
+    {
+      "cosore": "cosore_d20200108_JASSAL_2009",
+      "srdb": [
+        "srdb_4889"
+      ]
+    },
+    {
+      "cosore": "cosore_d20200109_HIRANO_PDF_2005",
+      "srdb": [
+        "srdb_5889"
+      ]
+    },
+    {
+      "cosore": "cosore_d20200207_GUTIERREZ_DEL_ARROYO_2012",
+      "srdb": [
+        "srdb_10851",
+        "srdb_11797"
+      ]
+    },
+    {
+      "cosore": "cosore_d20200228_RENCHON_2014",
+      "srdb": [
+        "srdb_11942",
+        "srdb_11944"
+      ]
+    },
+    {
+      "cosore": "cosore_d20200228_RENCHON_2015",
+      "srdb": [
+        "srdb_11944",
+        "srdb_13430"
+      ]
+    },
+    {
+      "cosore": "cosore_d20200305_VARGAS_2006",
+      "srdb": [
+        "srdb_1579",
+        "srdb_1580",
+        "srdb_3938",
+        "srdb_3939",
+        "srdb_3940",
+        "srdb_3941",
+        "srdb_3942",
+        "srdb_3943"
+      ]
+    },
+    {
+      "cosore": "cosore_d20200305_VARGAS_2007",
+      "srdb": [
+        "srdb_3941",
+        "srdb_3942",
+        "srdb_3943"
+      ]
+    }
+  ],
   "steps_combined": [
     {
-      "rule": "record located on land or within 10 km of land (continent assigned)",
+      "rule": "COSORE dataset-year not already in SRDB (same cell, overlapping year)",
       "n_before": 3596,
+      "n_removed": 21,
+      "n_after": 3575,
+      "note": "21 COSORE records dropped as duplicates of SRDB records"
+    },
+    {
+      "rule": "record located on land or within 10 km of land (continent assigned)",
+      "n_before": 3575,
       "n_removed": 0,
-      "n_after": 3596,
+      "n_after": 3575,
       "note": ""
     },
     {
       "rule": "WorldClim value found within 3 pixels (~2.7 km)",
-      "n_before": 3596,
+      "n_before": 3575,
       "n_removed": 8,
-      "n_after": 3588,
+      "n_after": 3567,
       "note": "12 records used a neighbouring pixel"
     }
   ],
@@ -127,59 +298,59 @@
   },
   "variants": {
     "strict": {
-      "n_records": 3220,
+      "n_records": 3199,
       "n_sites": 965,
       "share_cells_multi_record": 0.6051813471502591,
       "cells_spanning_two_continents": 0,
-      "sites_with_npp": 576,
+      "sites_with_npp": 575,
       "by_continent": [
         {
           "continent": "Asia",
-          "records": 1401,
-          "records_srdb": 1386,
-          "records_cosore": 15,
-          "studies": 490,
-          "sites": 392,
-          "sites_with_2plus_records": 245,
-          "sites_with_3plus_records": 168,
-          "median_rs_gm": 771.4754920712155,
-          "var_log_rs_sites": 0.37225522889303003
+          "records": 1386,
+          "records_srdb": 1380,
+          "records_cosore": 6,
+          "studies": 486,
+          "sites": 391,
+          "sites_with_2plus_records": 244,
+          "sites_with_3plus_records": 167,
+          "median_rs_gm": 772.2931035106252,
+          "var_log_rs_sites": 0.37382241968729396
         },
         {
           "continent": "North America",
-          "records": 745,
+          "records": 739,
           "records_srdb": 713,
-          "records_cosore": 32,
-          "studies": 205,
+          "records_cosore": 26,
+          "studies": 201,
           "sites": 210,
           "sites_with_2plus_records": 135,
           "sites_with_3plus_records": 95,
           "median_rs_gm": 767.0335472829495,
-          "var_log_rs_sites": 0.3908769069041444
+          "var_log_rs_sites": 0.39054173300896927
         },
         {
           "continent": "Europe",
-          "records": 739,
-          "records_srdb": 731,
-          "records_cosore": 8,
+          "records": 744,
+          "records_srdb": 737,
+          "records_cosore": 7,
           "studies": 199,
-          "sites": 226,
-          "sites_with_2plus_records": 130,
-          "sites_with_3plus_records": 84,
-          "median_rs_gm": 653.0369147911945,
-          "var_log_rs_sites": 0.32381065038834095
+          "sites": 227,
+          "sites_with_2plus_records": 131,
+          "sites_with_3plus_records": 85,
+          "median_rs_gm": 656.1757734022189,
+          "var_log_rs_sites": 0.32250483308344696
         },
         {
           "continent": "South & Central America",
-          "records": 208,
+          "records": 205,
           "records_srdb": 203,
-          "records_cosore": 5,
-          "studies": 73,
+          "records_cosore": 2,
+          "studies": 71,
           "sites": 77,
           "sites_with_2plus_records": 47,
-          "sites_with_3plus_records": 28,
+          "sites_with_3plus_records": 26,
           "median_rs_gm": 1401.335599235017,
-          "var_log_rs_sites": 0.410931266398038
+          "var_log_rs_sites": 0.4101666007673444
         },
         {
           "continent": "Africa",
@@ -195,84 +366,84 @@
         },
         {
           "continent": "Oceania",
-          "records": 69,
+          "records": 67,
           "records_srdb": 66,
-          "records_cosore": 3,
+          "records_cosore": 1,
           "studies": 28,
           "sites": 33,
           "sites_with_2plus_records": 14,
           "sites_with_3plus_records": 10,
           "median_rs_gm": 907.9999999999995,
-          "var_log_rs_sites": 0.26274086811078873
+          "var_log_rs_sites": 0.26313872350241996
         },
         {
           "continent": "Total",
-          "records": 3220,
+          "records": 3199,
           "records_srdb": 3157,
-          "records_cosore": 63,
-          "studies": 1018,
+          "records_cosore": 42,
+          "studies": 1008,
           "sites": 965,
           "sites_with_2plus_records": 584,
-          "sites_with_3plus_records": 393,
+          "sites_with_3plus_records": 391,
           "median_rs_gm": 767.1998969899224,
-          "var_log_rs_sites": 0.3915340056589003
+          "var_log_rs_sites": 0.39165887516760184
         }
       ]
     },
     "incl_missing": {
-      "n_records": 3588,
+      "n_records": 3567,
       "n_sites": 1061,
       "share_cells_multi_record": 0.5956644674835061,
       "cells_spanning_two_continents": 0,
-      "sites_with_npp": 639,
+      "sites_with_npp": 638,
       "by_continent": [
         {
           "continent": "Asia",
-          "records": 1587,
-          "records_srdb": 1572,
-          "records_cosore": 15,
-          "studies": 537,
-          "sites": 432,
-          "sites_with_2plus_records": 267,
-          "sites_with_3plus_records": 186,
-          "median_rs_gm": 764.7539865865359,
-          "var_log_rs_sites": 0.38177281227529775
+          "records": 1572,
+          "records_srdb": 1566,
+          "records_cosore": 6,
+          "studies": 533,
+          "sites": 431,
+          "sites_with_2plus_records": 266,
+          "sites_with_3plus_records": 185,
+          "median_rs_gm": 765.9999999999999,
+          "var_log_rs_sites": 0.3832142703198685
         },
         {
           "continent": "North America",
-          "records": 794,
+          "records": 788,
           "records_srdb": 762,
-          "records_cosore": 32,
-          "studies": 228,
+          "records_cosore": 26,
+          "studies": 224,
           "sites": 236,
           "sites_with_2plus_records": 141,
           "sites_with_3plus_records": 97,
           "median_rs_gm": 764.4263445602418,
-          "var_log_rs_sites": 0.4256067753723354
+          "var_log_rs_sites": 0.42529456846762326
         },
         {
           "continent": "Europe",
-          "records": 821,
-          "records_srdb": 813,
-          "records_cosore": 8,
+          "records": 826,
+          "records_srdb": 819,
+          "records_cosore": 7,
           "studies": 217,
-          "sites": 243,
-          "sites_with_2plus_records": 139,
-          "sites_with_3plus_records": 93,
-          "median_rs_gm": 649.9130711102833,
-          "var_log_rs_sites": 0.3388096406111055
+          "sites": 244,
+          "sites_with_2plus_records": 140,
+          "sites_with_3plus_records": 94,
+          "median_rs_gm": 653.0369147911945,
+          "var_log_rs_sites": 0.3375230602633074
         },
         {
           "continent": "South & Central America",
-          "records": 232,
+          "records": 229,
           "records_srdb": 227,
-          "records_cosore": 5,
-          "studies": 81,
+          "records_cosore": 2,
+          "studies": 79,
           "sites": 84,
           "sites_with_2plus_records": 53,
-          "sites_with_3plus_records": 33,
+          "sites_with_3plus_records": 31,
           "median_rs_gm": 1348.069649414333,
-          "var_log_rs_sites": 0.4065730327853141
+          "var_log_rs_sites": 0.4058547654314113
         },
         {
           "continent": "Africa",
@@ -288,27 +459,27 @@
         },
         {
           "continent": "Oceania",
-          "records": 83,
+          "records": 81,
           "records_srdb": 80,
-          "records_cosore": 3,
+          "records_cosore": 1,
           "studies": 33,
           "sites": 35,
           "sites_with_2plus_records": 15,
           "sites_with_3plus_records": 11,
-          "median_rs_gm": 898.2113634357398,
-          "var_log_rs_sites": 0.24982008418863402
+          "median_rs_gm": 899.2186316111536,
+          "var_log_rs_sites": 0.2498236921972957
         },
         {
           "continent": "Total",
-          "records": 3588,
+          "records": 3567,
           "records_srdb": 3525,
-          "records_cosore": 63,
-          "studies": 1121,
+          "records_cosore": 42,
+          "studies": 1111,
           "sites": 1061,
           "sites_with_2plus_records": 632,
-          "sites_with_3plus_records": 431,
+          "sites_with_3plus_records": 429,
           "median_rs_gm": 763.5099999999995,
-          "var_log_rs_sites": 0.4083888383031782
+          "var_log_rs_sites": 0.40847122911481715
         }
       ]
     }

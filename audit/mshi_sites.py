@@ -136,8 +136,11 @@ def cosore_records():
     m = c["rs_annual"].between(C.RS_MIN, C.RS_MAX) & c["latitude"].notna() & c["longitude"].notna()
     c = c[m]
     _step(steps, "Rs_annual within 50-4500 and coordinates present", n, len(c))
+    # one study per contributor submission (review finding: e.g. d20200212_KAYE_UNE/UNW/USE/USW are
+    # plots ~20 m apart in one study): group by the first two tokens of the dataset name
+    study = "cosore_" + c["dataset"].str.split("_").str[:2].str.join("_")
     out = pd.DataFrame({
-        "record_id": c["record_id"], "source": "cosore", "study_id": c["study_id"],
+        "record_id": c["record_id"], "source": "cosore", "study_id": study,
         "record_number": np.nan, "study_number": np.nan,
         "year": c["year"].astype(float) + 0.5, "years_of_data": 1.0,
         "lat": c["latitude"].astype(float), "lon": c["longitude"].astype(float),
@@ -149,6 +152,24 @@ def cosore_records():
     out["cov_missing"] = False
     out["log_rs"] = np.log(out["rs_annual"])
     return out.reset_index(drop=True), steps
+
+
+def drop_cosore_duplicates(rec: pd.DataFrame):
+    """Drop COSORE dataset-years that duplicate an SRDB record of the same 0.05-degree cell and an
+    overlapping 12-month window (|delta mid-year| <= 0.5): several COSORE datasets are the raw data
+    behind SRDB entries (e.g. Haibei, El Eden), and counting both would double-weight them in cell
+    means and create spurious 'different study' pairs in Analysis 2. SRDB's published value is kept.
+    Returns (records, list of dropped COSORE record ids with the matching SRDB record ids)."""
+    ix, iy = C.cell_index(rec["lat"].values, rec["lon"].values)
+    cell = ix.astype(np.int64) * 10000 + iy
+    r = rec.assign(_cell=cell)
+    srdb = r[r["source"] == "srdb"][["_cell", "year", "record_id"]]
+    cos = r[r["source"] == "cosore"][["_cell", "year", "record_id"]]
+    m = cos.merge(srdb, on="_cell", suffixes=("_c", "_s"))
+    m = m[(m["year_c"] - m["year_s"]).abs() <= 0.5]
+    dup = sorted(set(m["record_id_c"]))
+    log = [{"cosore": c_id, "srdb": sorted(m.loc[m["record_id_c"] == c_id, "record_id_s"].tolist())} for c_id in dup]
+    return rec[~rec["record_id"].isin(dup)].reset_index(drop=True), log
 
 
 _LOC = None

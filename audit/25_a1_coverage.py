@@ -67,8 +67,10 @@ def main() -> int:
         tr_pairs = res[res["kind"] == "transfer"][["train", "test"]].drop_duplicates()
         for T, E in tr_pairs.itertuples(index=False):
             tr, te = sites[sites["continent"] == T], sites[sites["continent"] == E]
-            imp = np.array([run["fits"][T]["xgb_gain_importance"][c] for c in C.BIO_COLS])
+            imp = np.array([run["fits"][T]["xgb_total_gain_share"][c] for c in C.BIO_COLS])
+            imp_avg = np.array([run["fits"][T]["xgb_avg_gain_share"][c] for c in C.BIO_COLS])
             d_w, thr_w, _ = di_stats(tr, te, imp)
+            d_a, thr_a, _ = di_stats(tr, te, imp_avg)
             d_u, thr_u, _ = di_stats(tr, te, np.ones(len(C.BIO_COLS)))
             inT = te["bio1"].between(tr["bio1"].min(), tr["bio1"].max())
             inP = te["bio12"].between(tr["bio12"].min(), tr["bio12"].max())
@@ -78,7 +80,8 @@ def main() -> int:
                    "di_weighted_mean": float(d_w.mean()), "di_weighted_median": float(np.median(d_w)),
                    "aoa_threshold_weighted": float(thr_w), "share_in_aoa_weighted": float((d_w <= thr_w).mean()),
                    "di_unweighted_mean": float(d_u.mean()), "aoa_threshold_unweighted": float(thr_u),
-                   "share_in_aoa_unweighted": float((d_u <= thr_u).mean())}
+                   "share_in_aoa_unweighted": float((d_u <= thr_u).mean()),
+                   "di_avggain_mean": float(d_a.mean()), "share_in_aoa_avggain": float((d_a <= thr_a).mean())}
             for m in ["ols_P", "ols_TP", "xgb"]:
                 r = res[(res["kind"] == "transfer") & (res["train"] == T) & (res["test"] == E) & (res["model"] == m)].iloc[0]
                 row[f"r2_{m}"], row[f"r2_{m}_lo"], row[f"r2_{m}_hi"] = r["r2"], r["r2_lo"], r["r2_hi"]

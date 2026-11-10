@@ -5,50 +5,77 @@
     "North America": 46
   },
   "dropped_west_of_125W": 13,
+  "dropped_by_cause": [
+    {
+      "continent": "Asia",
+      "cause": "inside footprint, pixel empty (north of the NA data edge, water/urban)",
+      "n": 24
+    },
+    {
+      "continent": "North America",
+      "cause": "inside bounding box, column empty (66 W-25 E band)",
+      "n": 4
+    },
+    {
+      "continent": "North America",
+      "cause": "inside footprint, pixel empty (north of the NA data edge, water/urban)",
+      "n": 29
+    },
+    {
+      "continent": "North America",
+      "cause": "outside raster bounding box (west of 125 W)",
+      "n": 13
+    }
+  ],
+  "dropped_north_of_50N_in_NA": 33,
+  "empty_raster_columns_lon_range": [
+    -66.00057178523141,
+    24.999428214768585
+  ],
   "kept": {
-    "Asia": 408,
+    "Asia": 407,
     "North America": 190
   },
   "fits": {
     "Asia->North America:xgb": {
       "params": {
         "max_depth": 1,
-        "learning_rate": 0.03,
+        "learning_rate": 0.1,
         "min_child_weight": 10.0,
         "reg_lambda": 10.0
       },
-      "n_estimators": 150,
-      "cv_mse": 0.30948174413485396,
-      "gain_importance": {
-        "bio1": 0.18767772527379484,
-        "bio4": 0.14711757420202634,
-        "bio5": 0.05102764990870414,
-        "bio6": 0.1907869294068263,
-        "bio12": 0.2412878935471896,
-        "bio14": 0.06270697766456315,
-        "bio15": 0.05611329229729256,
-        "bio17": 0.06328195769960311
+      "n_estimators": 50,
+      "cv_mse": 0.3071490047394842,
+      "total_gain_share": {
+        "bio1": 0.1025610898067769,
+        "bio4": 0.14910494509176667,
+        "bio5": 0.012624188944433153,
+        "bio6": 0.2286753834913025,
+        "bio12": 0.4527841527637085,
+        "bio14": 0.009777819865050809,
+        "bio15": 0.026446226261480153,
+        "bio17": 0.01802619377548134
       }
     },
     "Asia->North America:xgb_npp": {
       "params": {
         "max_depth": 1,
-        "learning_rate": 0.1,
-        "min_child_weight": 10.0,
-        "reg_lambda": 1.0
+        "learning_rate": 0.03,
+        "min_child_weight": 1.0,
+        "reg_lambda": 10.0
       },
-      "n_estimators": 50,
-      "cv_mse": 0.29961623008784344,
-      "gain_importance": {
-        "bio1": 0.09227882965978786,
-        "bio4": 0.12150207638490679,
-        "bio5": 0.0321450552690109,
-        "bio6": 0.1584689298712003,
-        "bio12": 0.30225789758643123,
-        "bio14": 0.04270139781221368,
-        "bio15": 0.06389313857606972,
-        "bio17": 0.035371803579248115,
-        "npp": 0.15138087126113142
+      "n_estimators": 150,
+      "cv_mse": 0.2987363422271695,
+      "total_gain_share": {
+        "bio1": 0.08496751814222324,
+        "bio4": 0.11718652404230509,
+        "bio5": 0.008202130507802267,
+        "bio6": 0.20064840128388484,
+        "bio12": 0.3328302955463246,
+        "bio14": 0.0027600668329345653,
+        "bio15": 0.03316395833873863,
+        "bio17": 0.006604325706274532,
+        "npp": 0.21363677959951227
       }
     },
     "North America->Asia:xgb": {
@@ -59,38 +86,76 @@
         "reg_lambda": 1.0
       },
       "n_estimators": 100,
-      "cv_mse": 0.25175002045527106,
-      "gain_importance": {
-        "bio1": 0.10017332672517307,
-        "bio4": 0.07897208246853303,
-        "bio5": 0.07773514883606597,
-        "bio6": 0.10462547698940865,
-        "bio12": 0.28116211180259465,
-        "bio14": 0.1379539499675951,
-        "bio15": 0.0857918133839703,
-        "bio17": 0.13358608982665923
+      "cv_mse": 0.2517133718819773,
+      "total_gain_share": {
+        "bio1": 0.08854056379948459,
+        "bio4": 0.038231525556436594,
+        "bio5": 0.014530537159153648,
+        "bio6": 0.09557685992230389,
+        "bio12": 0.5250211095801155,
+        "bio14": 0.0812251506991278,
+        "bio15": 0.08227381587003453,
+        "bio17": 0.07460043741334345
       }
     },
     "North America->Asia:xgb_npp": {
       "params": {
         "max_depth": 4,
-        "learning_rate": 0.03,
+        "learning_rate": 0.1,
         "min_child_weight": 5.0,
         "reg_lambda": 10.0
       },
-      "n_estimators": 150,
-      "cv_mse": 0.2536872071140319,
-      "gain_importance": {
-        "bio1": 0.09966936575294033,
-        "bio4": 0.0721729465120744,
-        "bio5": 0.06897778601111271,
-        "bio6": 0.09534872730292963,
-        "bio12": 0.27936926055138783,
-        "bio14": 0.09421794896910417,
-        "bio15": 0.08387058339518307,
-        "bio17": 0.08326612125022272,
-        "npp": 0.12310726025504516
+      "n_estimators": 50,
+      "cv_mse": 0.25281897016961974,
+      "total_gain_share": {
+        "bio1": 0.1070476515985262,
+        "bio4": 0.07050215174785834,
+        "bio5": 0.03935164731579672,
+        "bio6": 0.06974457655477755,
+        "bio12": 0.34992550406390044,
+        "bio14": 0.07705948418186255,
+        "bio15": 0.08395567942214163,
+        "bio17": 0.030588559615497526,
+        "npp": 0.17182474549963903
       }
     }
-  }
+  },
+  "versions": {
+    "python": "3.11.18",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "scipy": "1.13.1",
+    "sklearn": "1.5.2",
+    "xgboost": "2.0.3",
+    "geopandas": "1.0.1",
+    "shapely": "2.0.6",
+    "pyproj": "3.7.0",
+    "rasterio": "1.4.3",
+    "matplotlib": "3.9.2",
+    "statsmodels": "0.14.4",
+    "rdata": "0.11.2",
+    "remotezip": "not installed",
+    "pyarrow": "17.0.0",
+    "gdal": "3.9.3"
+  },
+  "selection_effect": [
+    {
+      "train": "Asia",
+      "test": "North America",
+      "model": "ols_TP",
+      "sites": "all A1 sites",
+      "n_train": 431,
+      "n_test": 236,
+      "r2": 0.25187827187033285
+    },
+    {
+      "train": "North America",
+      "test": "Asia",
+      "model": "ols_TP",
+      "sites": "all A1 sites",
+      "n_train": 236,
+      "n_test": 431,
+      "r2": -0.014994808304520824
+    }
+  ]
 }

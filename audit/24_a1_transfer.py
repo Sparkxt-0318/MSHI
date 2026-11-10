@@ -64,10 +64,11 @@ def fit_predict_all(tr: pd.DataFrame, tests: list[pd.DataFrame], tune_tag: str |
     info["tune_seconds"] = round(time.time() - t0, 1)
     if tune_tag:
         tab.to_csv(OUTD / f"tuning_{tune_tag}.csv", index=False)
-    outs, imp = C.xgb_seed_predictions(tr[C.BIO_COLS].values, y, [t[C.BIO_COLS].values for t in tests],
-                                       params, n_est)
+    outs, imp_tot, imp_avg = C.xgb_seed_predictions(tr[C.BIO_COLS].values, y, [t[C.BIO_COLS].values for t in tests],
+                                                    params, n_est, return_both=True)
     preds["xgb"] = outs
-    info["xgb_gain_importance"] = dict(zip(C.BIO_COLS, imp.tolist()))
+    info["xgb_total_gain_share"] = dict(zip(C.BIO_COLS, imp_tot.tolist()))
+    info["xgb_avg_gain_share"] = dict(zip(C.BIO_COLS, imp_avg.tolist()))
     return preds, info
 
 
@@ -84,11 +85,18 @@ def evaluate(obs, pm: dict, tag: dict, rows: list, prow: list):
         rows.append(r)
     for a, b in PAIRS:
         for k in ["r2", "rmse_g", "spearman"]:
+            if k == "spearman" and "baseline" in (a, b):
+                # a constant (transfer) or fold-wise constant (CV) prediction has no meaningful rank
+                # correlation; differences against it are undefined or artefactual
+                continue
             diff = boots[a][k + "_boot"] - boots[b][k + "_boot"]
+            fin = diff[np.isfinite(diff)]
+            better = (fin > 0) if k != "rmse_g" else (fin < 0)
             prow.append({**tag, "model_a": a, "model_b": b, "metric": k,
                          "diff": boots[a][k]["est"] - boots[b][k]["est"],
-                         "lo": float(np.nanpercentile(diff, 2.5)), "hi": float(np.nanpercentile(diff, 97.5)),
-                         "share_boot_a_better": float(np.nanmean(diff > 0) if k != "rmse_g" else np.nanmean(diff < 0))})
+                         "lo": float(np.percentile(fin, 2.5)) if fin.size else np.nan,
+                         "hi": float(np.percentile(fin, 97.5)) if fin.size else np.nan,
+                         "share_boot_a_better": float(better.mean()) if fin.size else np.nan})
 
 
 def run_variant(v: str) -> None:

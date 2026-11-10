@@ -415,9 +415,9 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 423.0,1116,Finland,,Lakkasuo-L24,61.78,24.3,Finland,Europe,match,,0.0,,,,,,,,178.0,None,,1.0,1992.0,Wetland,IRGA
 424.0,1116,Finland,,Lakkasuo-L25,61.78,24.3,Finland,Europe,match,,0.0,,,,,,,,445.0,Drained,,1.0,1992.0,Wetland,IRGA
 425.0,1116,Finland,,Ilomantsi-I26,62.77,30.97,Finland,Europe,match,,0.0,,,,,,,,183.0,None,,1.0,1992.0,Wetland,IRGA
-426.0,3811,Norway,,Endalen,78.0,19.0,Svalbard Is. (coast),Europe,match_tolerance,,7.636359999393202,,,,,,,,152.0,None,,0.33,2004.5,Shrubland,IRGA
-427.0,3811,Norway,,Endalen,78.0,19.0,Svalbard Is. (coast),Europe,match_tolerance,,7.636359999393202,,,,,,,,103.0,None,,0.33,2004.5,Shrubland,IRGA
-428.0,3811,Norway,,Endalen,78.0,19.0,Svalbard Is. (coast),Europe,match_tolerance,,7.636359999393202,,,,,,,,176.0,None,,0.33,2004.5,Shrubland,IRGA
+426.0,3811,Norway,,Endalen,78.0,19.0,Svalbard Is. (coast),Europe,match_tolerance,,5.38355741601435,,,,,,,,152.0,None,,0.33,2004.5,Shrubland,IRGA
+427.0,3811,Norway,,Endalen,78.0,19.0,Svalbard Is. (coast),Europe,match_tolerance,,5.38355741601435,,,,,,,,103.0,None,,0.33,2004.5,Shrubland,IRGA
+428.0,3811,Norway,,Endalen,78.0,19.0,Svalbard Is. (coast),Europe,match_tolerance,,5.38355741601435,,,,,,,,176.0,None,,0.33,2004.5,Shrubland,IRGA
 429.0,3315,Finland,,Koli NP-30,63.05,29.08,Finland,Europe,match,,0.0,,,,,,,,1040.0,None,,,2004.5,Forest,IRGA
 430.0,3315,Finland,,Koli NP-60,63.05,29.08,Finland,Europe,match,,0.0,,,,,,,,,None,,,2004.5,Forest,IRGA
 431.0,3315,Finland,,Koli NP-90,63.05,29.08,Finland,Europe,match,,0.0,,,,,,,,,None,,,2004.5,Forest,IRGA
@@ -452,8 +452,8 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 460.0,3796,China,,Fengqui State Key Agro-Ecological Experimental Station,37.0,114.4,China,Asia,match,,0.0,,,,,,,,219.0,Fertilized,,1.0,2003.0,Agriculture,IRGA
 461.0,1679,Canada,Saskatchewan,BOREAS SSA-OBS,53.99,-105.12,Canada,North America,match,,0.0,,,,,,,,896.0,None,,0.6,1996.0,Forest,IRGA
 462.0,2001,USA,North Dakota,USDA Northern Great Plains Research Laboratory,46.77,-100.92,United States of America,North America,match,,0.0,,,,,,,,814.0,None,Q11,0.5,1998.0,Grassland,IRGA
-463.0,2347,Canada,Ontario,Turkey Lakes Watershed #31,47.05,-87.4,United States of America,North America,mismatch,coords_wrong,87.328779412749,,,,,medium,Region names 'ontario' in the stated country,,,None,,0.5,1998.0,Forest,IRGA
-464.0,2347,Canada,Ontario,Turkey Lakes Watershed #31,47.05,-87.4,United States of America,North America,mismatch,coords_wrong,87.328779412749,,,,,medium,Region names 'ontario' in the stated country,,,Scarified,,0.5,1998.0,Forest,IRGA
+463.0,2347,Canada,Ontario,Turkey Lakes Watershed #31,47.05,-87.4,United States of America,North America,mismatch,coords_wrong,84.3123301370276,,,,,medium,Region names 'ontario' in the stated country,,,None,,0.5,1998.0,Forest,IRGA
+464.0,2347,Canada,Ontario,Turkey Lakes Watershed #31,47.05,-87.4,United States of America,North America,mismatch,coords_wrong,84.3123301370276,,,,,medium,Region names 'ontario' in the stated country,,,Scarified,,0.5,1998.0,Forest,IRGA
 465.0,1953,Germany,,Solling,51.77,9.57,Germany,Europe,match,,0.0,,,,,,,,510.0,None,,0.67,1998.0,Forest,Gas chromatography
 466.0,1953,Germany,,Solling,51.77,9.57,Germany,Europe,match,,0.0,,,,,,,,630.0,Fertilized,,0.67,1998.0,Forest,Gas chromatography
 467.0,1953,Germany,,Unterlüß,52.83,10.28,Germany,Europe,match,,0.0,,,,,,,,420.0,None,,0.67,1998.0,Forest,Gas chromatography
@@ -526,7 +526,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 534.0,1976,USA,North Carolina,Coweeta-WS17,35.05,-83.4,United States of America,North America,match,,0.0,,,,,,,,218.0,None,Q01,1.0,1995.0,Forest,Alkali absorption
 535.0,1976,USA,North Carolina,Coweeta-WS18,35.05,-83.4,United States of America,North America,match,,0.0,,,,,,,,252.0,None,Q01,1.0,1995.0,Forest,Alkali absorption
 536.0,1371,Netherlands,,Fochtelooër,53.00833333,-6.397777778,Ireland,Europe,mismatch,lon_sign,688.1724662538873,53.00833333,6.397777778,,Europe,high,,,,"Drained, re-dammed",,,1994.5,Wetland,IRGA
-537.0,1118,USA,Maine,Simmons-1,48.81,-69.1,Canada,North America,mismatch,coords_wrong,150.42057131329227,,,,,medium,Region names 'maine' in the stated country,,,None,,0.5,1993.5,Forest,Gas chromatography
+537.0,1118,USA,Maine,Simmons-1,48.81,-69.1,Canada,North America,mismatch,coords_wrong,150.41931269734317,,,,,medium,Region names 'maine' in the stated country,,,None,,0.5,1993.5,Forest,Gas chromatography
 538.0,1118,USA,Maine,Simmons-2,46.81,-68.83,United States of America,North America,match,,0.0,,,,,,,,,None,Q03,0.5,1993.5,Forest,Gas chromatography
 539.0,1118,USA,Maine,Simmons-3,46.8,-68.71,United States of America,North America,match,,0.0,,,,,,,,,None,Q03,0.5,1993.5,Forest,Gas chromatography
 540.0,1118,USA,Maine,Simmons-4,46.78,-68.44,United States of America,North America,match,,0.0,,,,,,,,,None,,0.5,1993.5,Forest,Gas chromatography
@@ -766,9 +766,9 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 774.0,1582,Brazil,,Fazenda Vitória,-2.98,-47.52,Brazil,South & Central America,match,,0.0,,,,,,,,1800.0,None,,1.0,1995.5,Forest,IRGA
 775.0,1582,Brazil,,Fazenda Vitória,-2.98,-47.52,Brazil,South & Central America,match,,0.0,,,,,,,,1500.0,None,,1.0,1995.5,Grassland,IRGA
 776.0,1582,Brazil,,Fazenda Vitória,-2.98,-47.52,Brazil,South & Central America,match,,0.0,,,,,,,,1000.0,None,,1.0,1995.5,Grassland,IRGA
-777.0,1599,Norway,,Skogaby,56.55,13.22,Sweden,Europe,mismatch,label_wrong,279.2307078143126,56.55,13.22,Sweden,Europe,medium,title names 'sweden',,,None,,0.06,1995.0,Forest,IRGA
-778.0,1599,Norway,,Skogaby,56.55,13.22,Sweden,Europe,mismatch,label_wrong,279.2307078143126,56.55,13.22,Sweden,Europe,medium,title names 'sweden',,,Fertilized,,0.06,1995.0,Forest,IRGA
-779.0,1599,Norway,,Skogaby,56.55,13.22,Sweden,Europe,mismatch,label_wrong,279.2307078143126,56.55,13.22,Sweden,Europe,medium,title names 'sweden',,,Drought,,0.06,1995.0,Forest,IRGA
+777.0,1599,Norway,,Skogaby,56.55,13.22,Sweden,Europe,mismatch,label_wrong,277.9877472618353,56.55,13.22,Sweden,Europe,medium,title names 'sweden',,,None,,0.06,1995.0,Forest,IRGA
+778.0,1599,Norway,,Skogaby,56.55,13.22,Sweden,Europe,mismatch,label_wrong,277.9877472618353,56.55,13.22,Sweden,Europe,medium,title names 'sweden',,,Fertilized,,0.06,1995.0,Forest,IRGA
+779.0,1599,Norway,,Skogaby,56.55,13.22,Sweden,Europe,mismatch,label_wrong,277.9877472618353,56.55,13.22,Sweden,Europe,medium,title names 'sweden',,,Drought,,0.06,1995.0,Forest,IRGA
 780.0,2382,USA,Kansas,Konza Prairie,39.08,-96.58,United States of America,North America,match,,0.0,,,,,,,,1593.0,None,Q01,1.0,2000.0,Grassland,IRGA
 781.0,2382,USA,Kansas,Konza Prairie,39.08,-96.58,United States of America,North America,match,,0.0,,,,,,,,1304.0,None,Q01,1.0,2000.0,Grassland,IRGA
 782.0,1682,Canada,Québec,St-Lambert Research Farm,46.08,-71.03,Canada,North America,match,,0.0,,,,,,,,,None,,0.5,1997.0,Agriculture,IRGA
@@ -792,7 +792,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 800.0,94,USA,South Carolina,U-GA Field 3-412,33.5,-81.67,United States of America,North America,match,,0.0,,,,,,,,357.0,None,,1.0,1969.5,Grassland,Alkali absorption
 801.0,94,USA,South Carolina,U-GA Field 3-412,33.5,-81.67,United States of America,North America,match,,0.0,,,,,,,,422.0,None,,1.0,1970.5,Grassland,Alkali absorption
 802.0,114,Japan,,Nara,34.75,135.25,Japan,Asia,match,,0.0,,,,,,,,1098.0,None,Q10,,1974.0,Forest,Alkali absorption
-803.0,243,Japan,,Nara,32.0,135.42,,Sea,mismatch,in_sea,162.5230329073385,,,,,low,,,494.0,None,Q10,,1976.0,Forest,Alkali absorption
+803.0,243,Japan,,Nara,32.0,135.42,,Sea,mismatch,in_sea,162.1206293028946,,,,,low,,,494.0,None,Q10,,1976.0,Forest,Alkali absorption
 804.0,243,Malaysia,,Pasoh Forest Reserve,2.98,102.31,Malaysia,Asia,match,,0.0,,,,,,,,1429.0,None,Q10,,1971.5,Forest,Alkali absorption
 805.0,145,USA,Utah,Curlew Valley,41.87,-113.08,United States of America,North America,match,,0.0,,,,,,,,187.0,None,,1.0,1971.0,Desert,Alkali absorption
 806.0,145,USA,Utah,Curlew Valley,41.87,-113.08,United States of America,North America,match,,0.0,,,,,,,,184.0,None,,1.0,1971.0,Desert,Alkali absorption
@@ -1103,7 +1103,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 1111.0,2349,Canada,,Lavigne-warm,46.03,-66.38,Canada,North America,match,,0.0,,,,,,,,1540.0,None,,1.0,1998.0,Forest,IRGA
 1112.0,2349,Canada,,Lavigne-warm,46.03,-66.38,Canada,North America,match,,0.0,,,,,,,,1680.0,None,,1.0,1999.0,Forest,IRGA
 1113.0,2349,Canada,,Lavigne-warm,46.03,-66.38,Canada,North America,match,,0.0,,,,,,,,1350.0,None,,1.0,2000.0,Forest,IRGA
-1114.0,2355,Japan,,Mount Norikura,37.33,137.43,,Sea,mismatch,offshore_near,14.625620191814043,,,,,low,,,,None,,,2000.5,Forest,IRGA
+1114.0,2355,Japan,,Mount Norikura,37.33,137.43,,Sea,mismatch,offshore_near,14.612072578262493,,,,,low,,,,None,,,2000.5,Forest,IRGA
 1115.0,2371,Finland,,Jokioinen,60.85,23.52,Finland,Europe,match,,0.0,,,,,,,,,Fertilized,,,2000.0,Agriculture,IRGA
 1116.0,2371,Finland,,Jokioinen,60.85,23.52,Finland,Europe,match,,0.0,,,,,,,,,Fertilized,,,2000.0,Agriculture,IRGA
 1117.0,2371,Finland,,Jokioinen,60.85,23.52,Finland,Europe,match,,0.0,,,,,,,,,Fertilized,,,2000.0,Agriculture,IRGA
@@ -1494,7 +1494,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 1518.0,4539,Canada,Alberta,Al-Pac plantation,54.82,-113.52,Canada,North America,match,,0.0,,,,,,,,,None,Q01,,2005.0,Forest,Gas chromatography
 1519.0,4539,Canada,Alberta,Al-Pac plantation,54.82,-113.52,Canada,North America,match,,0.0,,,,,,,,,None,Q01,,2005.0,Forest,Gas chromatography
 1520.0,4539,Canada,Alberta,Al-Pac plantation,54.82,-113.52,Canada,North America,match,,0.0,,,,,,,,,None,Q01,,2005.0,Forest,Gas chromatography
-1521.0,4544,Austria,,Northern Limestone Alps,47.71,11.64,Germany,Europe,mismatch,near_border,13.425221216430064,,,,,low,,,,Warmed,,,2006.0,Forest,IRGA
+1521.0,4544,Austria,,Northern Limestone Alps,47.71,11.64,Germany,Europe,mismatch,near_border,13.421640056514741,,,,,low,,,,Warmed,,,2006.0,Forest,IRGA
 1522.0,4548,USA,Virginia,Reynolds Homestead Forest Resources Research Center,36.62,-80.12,United States of America,North America,match,,0.0,,,,,,,,1179.0,None,Q01,1.0,2002.5,Forest,IRGA
 1523.0,4548,USA,Virginia,Reynolds Homestead Forest Resources Research Center,36.62,-80.12,United States of America,North America,match,,0.0,,,,,,,,1126.0,Thinned,Q01,1.0,2002.5,Forest,IRGA
 1524.0,4549,USA,Arizona,Fort Valley Experimental Forest,35.27,-111.73,United States of America,North America,match,,0.0,,,,,,,,900.0,None,Q01,1.0,2000.5,Forest,Alkali absorption
@@ -1519,7 +1519,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 1543.0,4564,Denmark,,Mols,53.05,3.47,,Sea,mismatch,same_site_conflict,408.85383070468225,56.38,10.95,,Sea,high,was in_sea; 1 other record(s) of the same study and site name lie in the stated country (spread 0.00 deg),1546;1971;2099;2103;3584,597.0,None,,1.0,2001.0,Shrubland,IRGA
 1544.0,4564,United Kingdom,,Clocaenog,53.05,-3.44,Wales,Europe,match,,0.0,,,,,,,,,Drought,"Q01,Q11",1.0,2001.0,Shrubland,IRGA
 1545.0,4564,Netherlands,,Oldebroek,52.4,5.92,Netherlands,Europe,match,,0.0,,,,,,,,213.0,Drought,,1.0,2001.0,Shrubland,Gas chromatography
-1546.0,4564,Denmark,,Mols,56.38,10.95,Denmark (coast),Europe,match_tolerance,,1.6612877678562925,,,,,,,,237.0,Drought,,1.0,2001.0,Shrubland,IRGA
+1546.0,4564,Denmark,,Mols,56.38,10.95,Denmark (coast),Europe,match_tolerance,,1.62613016434689,,,,,,,,237.0,Drought,,1.0,2001.0,Shrubland,IRGA
 1547.0,4566,USA,Arizona,Sycamore Creek-1,33.5,-112.08,United States of America,North America,match,,0.0,,,,,,,,185.0,None,,1.0,2003.5,Desert,IRGA
 1548.0,4566,USA,Arizona,Sycamore Creek-2,33.5,-112.08,United States of America,North America,match,,0.0,,,,,,,,306.0,None,,1.0,2003.5,Desert,IRGA
 1549.0,4566,USA,Arizona,Sycamore Creek-3,33.5,-112.08,United States of America,North America,match,,0.0,,,,,,,,688.0,None,,1.0,2003.5,Desert,IRGA
@@ -1791,7 +1791,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 1815.0,2265,USA,Wisconsin,Red pine,46.67,-91.25,United States of America,North America,match,,0.0,,,,,,,,,None,,,2000.0,Forest,IRGA
 1816.0,2265,USA,Wisconsin,Pine barrens,46.67,-91.25,United States of America,North America,match,,0.0,,,,,,,,,None,,,2000.0,Forest,IRGA
 1817.0,2265,USA,Wisconsin,Young hardwood,46.67,-91.25,United States of America,North America,match,,0.0,,,,,,,,,None,,,2000.0,Forest,IRGA
-1818.0,2305,Japan,Hokkaido,Tomakomai Experimental Forest,42.4,141.4,,Sea,mismatch,offshore_near,13.403878903708376,,,,,low,Region names 'hokkaido' in the stated country,,,None,Q01,,2000.0,Forest,Gradient
+1818.0,2305,Japan,Hokkaido,Tomakomai Experimental Forest,42.4,141.4,,Sea,mismatch,offshore_near,12.95562388543127,,,,,low,Region names 'hokkaido' in the stated country,,,None,Q01,,2000.0,Forest,Gradient
 1819.0,2325,USA,Washington,Olympic National Park-DLS,47.8,-123.6,United States of America,North America,match,,0.0,,,,,,,,1230.0,None,,0.5,1999.5,Forest,IRGA
 1820.0,2325,USA,Washington,Olympic National Park-DLN,47.8,-123.6,United States of America,North America,match,,0.0,,,,,,,,1100.0,None,,0.5,1999.5,Forest,IRGA
 1821.0,2325,USA,Washington,Olympic National Park-DMS,47.8,-123.6,United States of America,North America,match,,0.0,,,,,,,,890.0,None,Q16,0.5,1999.5,Forest,IRGA
@@ -1819,12 +1819,12 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 1843.0,4442,Israel,,Yatir Forest,31.33,35.05,Israel,Asia,match,,0.0,,,,,,,,364.0,None,,,2003.5,Forest,IRGA
 1844.0,4442,Israel,,Yatir Forest,31.33,35.05,Israel,Asia,match,,0.0,,,,,,,,424.0,None,,,2004.5,Forest,IRGA
 1845.0,4442,Israel,,Yatir Forest,31.33,35.05,Israel,Asia,match,,0.0,,,,,,,,307.0,None,,,2005.5,Forest,IRGA
-1846.0,4435,Finland,,Kannus-1,65.92,23.85,Sweden,Europe,mismatch,near_border,17.902522947845913,,,,,low,,,682.0,None,,1.0,2004.0,Forest,IRGA
-1847.0,4435,Finland,,Kannus-2,65.92,23.85,Sweden,Europe,mismatch,near_border,17.902522947845913,,,,,low,,,805.0,None,,1.0,2004.0,Forest,IRGA
-1848.0,4435,Finland,,Kannus-3,65.92,23.85,Sweden,Europe,mismatch,near_border,17.902522947845913,,,,,low,,,559.0,None,,1.0,2004.0,Forest,IRGA
-1849.0,4435,Finland,,Kannus-4,65.92,23.85,Sweden,Europe,mismatch,near_border,17.902522947845913,,,,,low,,,524.0,None,,1.0,2004.0,Forest,IRGA
-1850.0,4435,Finland,,Kannus-5,65.92,23.85,Sweden,Europe,mismatch,near_border,17.902522947845913,,,,,low,,,938.0,None,,1.0,2004.0,Forest,IRGA
-1851.0,4435,Finland,,Kannus-6,65.92,23.85,Sweden,Europe,mismatch,near_border,17.902522947845913,,,,,low,,,668.0,None,,1.0,2004.0,Forest,IRGA
+1846.0,4435,Finland,,Kannus-1,65.92,23.85,Sweden,Europe,match_tolerance,,9.828359634388862,,,,,,,,682.0,None,,1.0,2004.0,Forest,IRGA
+1847.0,4435,Finland,,Kannus-2,65.92,23.85,Sweden,Europe,match_tolerance,,9.828359634388862,,,,,,,,805.0,None,,1.0,2004.0,Forest,IRGA
+1848.0,4435,Finland,,Kannus-3,65.92,23.85,Sweden,Europe,match_tolerance,,9.828359634388862,,,,,,,,559.0,None,,1.0,2004.0,Forest,IRGA
+1849.0,4435,Finland,,Kannus-4,65.92,23.85,Sweden,Europe,match_tolerance,,9.828359634388862,,,,,,,,524.0,None,,1.0,2004.0,Forest,IRGA
+1850.0,4435,Finland,,Kannus-5,65.92,23.85,Sweden,Europe,match_tolerance,,9.828359634388862,,,,,,,,938.0,None,,1.0,2004.0,Forest,IRGA
+1851.0,4435,Finland,,Kannus-6,65.92,23.85,Sweden,Europe,match_tolerance,,9.828359634388862,,,,,,,,668.0,None,,1.0,2004.0,Forest,IRGA
 1852.0,4430,China,Jiangxi,Qianyanzhou Ecological Station,26.73,115.07,China,Asia,match,,0.0,,,,,,,,537.0,None,,,2004.0,Forest,Alkali absorption
 1853.0,4430,China,Jiangxi,Qianyanzhou Ecological Station,26.73,115.07,China,Asia,match,,0.0,,,,,,,,632.0,None,,,2005.0,Forest,Alkali absorption
 1854.0,4426,Panama,,Bocas del Toro-dwarf,9.35,-82.25,Panama,South & Central America,match,,0.0,,,,,,,,605.0,None,Q01,0.08,2004.0,Forest,IRGA
@@ -1835,8 +1835,8 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 1859.0,4426,Australia,Queensland,Hinchinbrook Channel-dwarf,-18.33,146.17,Australia,Oceania,match,,0.0,,,,,,,,-114.0,None,Q01,0.08,2006.0,Forest,IRGA
 1860.0,4426,Australia,Queensland,Hinchinbrook Channel-dwarf,-18.33,146.17,Australia,Oceania,match,,0.0,,,,,,,,151.0,None,Q01,0.08,2006.0,Forest,IRGA
 1861.0,4426,Australia,Queensland,Cape Cleveland,-19.27,147.02,Australia,Oceania,match,,0.0,,,,,,,,1116.0,None,Q01,0.08,2006.0,Forest,IRGA
-1862.0,4426,Australia,Western Australia,Giralia-dwarf,-21.73,114.58,,Sea,mismatch,offshore_near,14.36541175394596,,,,,low,Region names 'western australia' in the stated country,,189.0,None,Q01,0.08,2006.0,Forest,IRGA
-1863.0,4426,Australia,Western Australia,Giralia-fringe,-21.73,114.58,,Sea,mismatch,offshore_near,14.36541175394596,,,,,low,Region names 'western australia' in the stated country,,984.0,None,Q01,0.08,2006.0,Forest,IRGA
+1862.0,4426,Australia,Western Australia,Giralia-dwarf,-21.73,114.58,,Sea,mismatch,offshore_near,14.324163247008292,,,,,low,Region names 'western australia' in the stated country,,189.0,None,Q01,0.08,2006.0,Forest,IRGA
+1863.0,4426,Australia,Western Australia,Giralia-fringe,-21.73,114.58,,Sea,mismatch,offshore_near,14.324163247008292,,,,,low,Region names 'western australia' in the stated country,,984.0,None,Q01,0.08,2006.0,Forest,IRGA
 1864.0,4426,Australia,Western Australia,Exmouth,-21.97,113.95,Australia,Oceania,match,,0.0,,,,,,,,605.0,None,Q01,0.08,2004.0,Forest,IRGA
 1865.0,4426,Australia,Queensland,Moreton Bay,-27.87,153.33,Australia,Oceania,match,,0.0,,,,,,,,189.0,None,Q01,0.08,2005.0,Forest,IRGA
 1866.0,4426,New Zealand,,Whangapoua-dwarf,-36.75,175.5,New Zealand,Oceania,match,,0.0,,,,,,,,208.0,None,Q01,0.08,2004.0,Forest,IRGA
@@ -1916,8 +1916,8 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 1940.0,4257,USA,California,Sierra Foothills Research and Extension Center,39.25,-121.28,United States of America,North America,match,,0.0,,,,,,,,950.0,Irrigated,Q01,1.0,2006.0,Grassland,IRGA
 1941.0,4246,USA,California,Owens Valley,37.41,-118.43,United States of America,North America,match,,0.0,,,,,,,,,None,,,2005.5,Grassland,IRGA
 1942.0,4246,USA,California,Owens Valley,37.32,-118.36,United States of America,North America,match,,0.0,,,,,,,,,None,,,2005.5,Shrubland,IRGA
-1943.0,4244,Italy,,Zennare Basin-Cordenazzo,45.33,12.33,Italy (coast),Europe,match_tolerance,,2.110778740274543,,,,,,,,,None,Q01,,2004.0,Agriculture,IRGA
-1944.0,4244,Italy,,Zennare Basin-Viale,45.33,12.33,Italy (coast),Europe,match_tolerance,,2.110778740274543,,,,,,,,,None,Q01,,2004.0,Agriculture,IRGA
+1943.0,4244,Italy,,Zennare Basin-Cordenazzo,45.33,12.33,Italy (coast),Europe,match_tolerance,,2.1104060755607854,,,,,,,,,None,Q01,,2004.0,Agriculture,IRGA
+1944.0,4244,Italy,,Zennare Basin-Viale,45.33,12.33,Italy (coast),Europe,match_tolerance,,2.1104060755607854,,,,,,,,,None,Q01,,2004.0,Agriculture,IRGA
 1947.0,4237,Canada,Manitoba,Boreal Soil and Air Warming Experiment,55.5,-98.5,Canada,North America,match,,0.0,,,,,,,,,None,Q03,,2004.0,Forest,IRGA
 1948.0,4237,Canada,Manitoba,Boreal Soil and Air Warming Experiment,55.5,-98.5,Canada,North America,match,,0.0,,,,,,,,,None,Q03,,2004.0,Forest,IRGA
 1949.0,4237,Canada,Manitoba,Boreal Soil and Air Warming Experiment,55.5,-98.5,Canada,North America,match,,0.0,,,,,,,,,Warmed,Q03,,2004.0,Forest,IRGA
@@ -1942,7 +1942,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 1968.0,2552,Brazil,Amazonas,INPA reserve,-3.0,-60.0,Brazil,South & Central America,match,,0.0,,,,,,,,984.0,None,,1.0,2000.5,Forest,IRGA
 1969.0,2552,Brazil,Amazonas,INPA reserve,-3.0,-60.0,Brazil,South & Central America,match,,0.0,,,,,,,,1211.0,None,,1.0,2000.5,Forest,IRGA
 1970.0,2552,Brazil,Amazonas,INPA reserve,-3.0,-60.0,Brazil,South & Central America,match,,0.0,,,,,,,,1438.0,None,,1.0,2000.5,Forest,IRGA
-1971.0,2583,Denmark,,Mols,56.38,10.95,Denmark (coast),Europe,match_tolerance,,1.6612877678562925,,,,,,,,,None,,,2000.0,Grassland,IRGA
+1971.0,2583,Denmark,,Mols,56.38,10.95,Denmark (coast),Europe,match_tolerance,,1.62613016434689,,,,,,,,,None,,,2000.0,Grassland,IRGA
 1972.0,2583,United Kingdom,,Clocaenog,53.05,-3.47,Wales,Europe,match,,0.0,,,,,,,,,None,Q11,,2000.0,Grassland,IRGA
 1973.0,2583,Netherlands,,Oldebroek,52.4,5.92,Netherlands,Europe,match,,0.0,,,,,,,,,None,,,2000.0,Grassland,IRGA
 1974.0,2583,Spain,,Garraf,41.32,1.82,Spain,Europe,match,,0.0,,,,,,,,,None,,,2000.0,Grassland,IRGA
@@ -2055,14 +2055,14 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 2093.0,2960,USA,Utah,Great Basin,40.28,-112.47,United States of America,North America,match,,0.0,,,,,,,,,None,,,2001.5,Grassland,IRGA
 2094.0,2960,USA,California,Ione,38.4,-120.95,United States of America,North America,match,,0.0,,,,,,,,,None,,,2001.0,Grassland,IRGA
 2095.0,2960,USA,California,Ione,38.4,-120.95,United States of America,North America,match,,0.0,,,,,,,,,None,,,2000.5,Grassland,IRGA
-2096.0,2962,Japan,,Tomakomai Experimental Forest,42.4,141.4,,Sea,mismatch,offshore_near,13.403878903708376,,,,,low,,,878.0,None,,0.5,2000.5,Forest,Gradient
+2096.0,2962,Japan,,Tomakomai Experimental Forest,42.4,141.4,,Sea,mismatch,offshore_near,12.95562388543127,,,,,low,,,878.0,None,,0.5,2000.5,Forest,Gradient
 2097.0,4230,France,French Guyana,Paracou,5.282,-52.912,French Guiana,South & Central America,match,,0.0,,,,,,,,1278.0,None,Q01,1.0,2005.0,Forest,IRGA
 2098.0,4225,Finland,Tuupovaara,Linnansuo,62.5,30.5,Finland,Europe,match,,0.0,,,,,,,,336.0,Fertilized,,0.5,2006.0,Agriculture,IRGA
-2099.0,4220,Denmark,,Mols,56.38,10.95,Denmark (coast),Europe,match_tolerance,,1.6612877678562925,,,,,,,,,None,Q01,,,Shrubland,IRGA
+2099.0,4220,Denmark,,Mols,56.38,10.95,Denmark (coast),Europe,match_tolerance,,1.62613016434689,,,,,,,,,None,Q01,,,Shrubland,IRGA
 2100.0,4220,Netherlands,,Oldebroek,52.4,5.92,Netherlands,Europe,match,,0.0,,,,,,,,,None,Q01,,,Shrubland,IRGA
 2101.0,4220,United Kingdom,,Clocaenog,53.05,-3.47,Wales,Europe,match,,0.0,,,,,,,,,None,Q01,,,Shrubland,IRGA
 2102.0,4220,Spain,,Garraf,41.3,1.82,Spain,Europe,match,,0.0,,,,,,,,,None,Q01,,,Shrubland,IRGA
-2103.0,4220,Denmark,,Mols,56.38,10.95,Denmark (coast),Europe,match_tolerance,,1.6612877678562925,,,,,,,,,Warmed,Q01,,,Shrubland,IRGA
+2103.0,4220,Denmark,,Mols,56.38,10.95,Denmark (coast),Europe,match_tolerance,,1.62613016434689,,,,,,,,,Warmed,Q01,,,Shrubland,IRGA
 2104.0,4220,Netherlands,,Oldebroek,52.4,5.92,Netherlands,Europe,match,,0.0,,,,,,,,,Warmed,Q01,,,Shrubland,IRGA
 2105.0,4220,United Kingdom,,Clocaenog,53.05,-3.47,Wales,Europe,match,,0.0,,,,,,,,,Warmed,Q01,,,Shrubland,IRGA
 2106.0,4220,Spain,,Garraf,41.3,1.82,Spain,Europe,match,,0.0,,,,,,,,,Warmed,Q01,,,Shrubland,IRGA
@@ -2370,8 +2370,8 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 2414.0,256,Belarus,,Ivatsevichi Reclamation Experiment Station,52.67,24.67,Belarus,Europe,match,,0.0,,,,,,,,,None,,,1977.0,Agriculture,Alkali absorption
 2415.0,256,Belarus,,Ivatsevichi Reclamation Experiment Station,52.67,24.67,Belarus,Europe,match,,0.0,,,,,,,,,None,,,1977.0,Agriculture,Alkali absorption
 2416.0,256,Belarus,,Ivatsevichi Reclamation Experiment Station,52.67,24.67,Belarus,Europe,match,,0.0,,,,,,,,,None,,,1977.0,Agriculture,Alkali absorption
-2417.0,142,Czechoslovakia,,Lanzhot,48.67,16.25,Austria,Europe,match_tolerance,,7.666114600403038,,,,,,,,830.0,None,Q01,1.0,1971.0,Grassland,Alkali absorption
-2418.0,142,Czechoslovakia,,Lanzhot,48.67,16.25,Austria,Europe,match_tolerance,,7.666114600403038,,,,,,,,600.0,None,Q01,1.0,1971.5,Grassland,Alkali absorption
+2417.0,142,Czechoslovakia,,Lanzhot,48.67,16.25,Austria,Europe,match_tolerance,,7.643238544449261,,,,,,,,830.0,None,Q01,1.0,1971.0,Grassland,Alkali absorption
+2418.0,142,Czechoslovakia,,Lanzhot,48.67,16.25,Austria,Europe,match_tolerance,,7.643238544449261,,,,,,,,600.0,None,Q01,1.0,1971.5,Grassland,Alkali absorption
 2419.0,620,Canada,Ontario,Petawawa Research Forest,46.0,-77.55,Canada,North America,match,,0.0,,,,,,,,,None,,,1985.5,Forest,Alkali absorption
 2420.0,620,Canada,Ontario,Petawawa Research Forest,46.0,-77.55,Canada,North America,match,,0.0,,,,,,,,,None,,,1985.5,Forest,Alkali absorption
 2421.0,620,Canada,Ontario,Petawawa Research Forest,46.0,-77.55,Canada,North America,match,,0.0,,,,,,,,,None,,,1985.5,Forest,Alkali absorption
@@ -2568,7 +2568,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 2652.0,3420,USA,California,Stanislaus National Forest,39.88,-123.0,United States of America,North America,match,,0.0,,,,,,,,,Burned,,,2005.0,Forest,IRGA
 2653.0,2856,Germany,,Kranzberger Forest,48.41,11.66,Germany,Europe,match,,0.0,,,,,,,,,None,,,2003.0,Forest,IRGA
 2654.0,2856,Germany,,Kranzberger Forest,48.41,11.66,Germany,Europe,match,,0.0,,,,,,,,,None,,,2003.0,Forest,IRGA
-2655.0,3445,Japan,,Takayama Experimental Field Station,36.13,135.42,,Sea,mismatch,offshore_near,43.406406501770284,,,,,low,,,,None,"Q10,Q13",,2000.0,Forest,Unknown
+2655.0,3445,Japan,,Takayama Experimental Field Station,36.13,135.42,,Sea,mismatch,offshore_near,43.34464589893134,,,,,low,,,,None,"Q10,Q13",,2000.0,Forest,Unknown
 2656.0,3450,USA,Puerto Rico,Luquillo Experimental Forest-Guzman,18.3,-65.83,Puerto Rico,South & Central America,match,,0.0,,,,,,,,770.0,None,,0.92,1996.5,Forest,Alkali absorption
 2657.0,3450,USA,Puerto Rico,Luquillo Experimental Forest-Guzman,18.3,-65.83,Puerto Rico,South & Central America,match,,0.0,,,,,,,,1048.0,None,,0.92,1996.5,Forest,Alkali absorption
 2658.0,321,Costa Rica,,La Selva Field Station,10.43,-83.83,Costa Rica,South & Central America,match,,0.0,,,,,,,,1241.0,None,,0.21,1979.0,Forest,Alkali absorption
@@ -2867,7 +2867,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 2968.0,1831,Russia,,Pushchino Scientific Centre,54.13,37.1,Russia,Europe,match,,0.0,,,,,,,,145.0,None,,1.0,1992.5,Agriculture,Gas chromatography
 2969.0,326,USA,Louisiana,Barataria Basin,29.75,-90.58,United States of America,North America,match,,0.0,,,,,,,,418.0,None,,1.0,1980.5,Wetland,Gas chromatography
 2970.0,326,USA,Louisiana,Barataria Basin,29.58,-90.33,United States of America,North America,match,,0.0,,,,,,,,180.0,None,,1.0,1980.5,Wetland,Gas chromatography
-2971.0,326,USA,Louisiana,Barataria Basin,29.25,-90.08,United States of America (coast),North America,match_tolerance,,1.5572867337253355,,,,,,,,616.0,None,,1.0,1980.5,Wetland,Gas chromatography
+2971.0,326,USA,Louisiana,Barataria Basin,29.25,-90.08,United States of America (coast),North America,match_tolerance,,1.5479757011549988,,,,,,,,616.0,None,,1.0,1980.5,Wetland,Gas chromatography
 2972.0,844,Chile,,Torres del Paine National Park,-51.0,-73.0,Chile,South & Central America,match,,0.0,,,,,,,,362.0,None,,0.75,1986.0,Forest,Alkali absorption
 2975.0,1304,Russia,,Kolyma lowland,62.0,149.0,Russia,Asia,match,,0.0,,,,,,,,144.0,None,,,1990.0,Shrubland,Gas chromatography
 2976.0,1304,Russia,,Kolyma lowland,62.0,149.0,Russia,Asia,match,,0.0,,,,,,,,105.0,None,,,1990.0,Wetland,Gas chromatography
@@ -2972,12 +2972,12 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 3089.0,4045,China,,Taoyuan Station of Agricultural Ecosystem Research,28.92,111.45,China,Asia,match,,0.0,,,,,,,,622.0,None,,1.0,2005.0,Agriculture,IRGA
 3092.0,4132,China,,Changbai Mountain,42.4,128.1,China,Asia,match,,0.0,,,,,,,,,None,,,2004.0,Forest,IRGA
 3093.0,4132,China,,Changbai Mountain,42.4,128.1,China,Asia,match,,0.0,,,,,,,,,None,,,2004.0,Forest,IRGA
-3094.0,571,India,Haryana,Siwaliks,33.0,73.0,Pakistan,Asia,match_political,,94.95001994298704,,,,,,,,590.0,None,,1.0,1984.5,Forest,Alkali absorption
-3095.0,571,India,Haryana,Siwaliks,33.0,73.0,Pakistan,Asia,match_political,,94.95001994298704,,,,,,,,533.0,None,,1.0,1984.5,Forest,Alkali absorption
-3096.0,571,India,Haryana,Siwaliks,33.0,73.0,Pakistan,Asia,match_political,,94.95001994298704,,,,,,,,359.0,None,,1.0,1984.5,Forest,Alkali absorption
-3097.0,571,India,Haryana,Siwaliks,33.0,73.0,Pakistan,Asia,match_political,,94.95001994298704,,,,,,,,743.0,None,,1.0,1985.5,Forest,Alkali absorption
-3098.0,571,India,Haryana,Siwaliks,33.0,73.0,Pakistan,Asia,match_political,,94.95001994298704,,,,,,,,504.0,None,,1.0,1985.5,Forest,Alkali absorption
-3099.0,571,India,Haryana,Siwaliks,33.0,73.0,Pakistan,Asia,match_political,,94.95001994298704,,,,,,,,331.0,None,,1.0,1985.5,Forest,Alkali absorption
+3094.0,571,India,Haryana,Siwaliks,33.0,73.0,Pakistan,Asia,mismatch,coords_wrong,94.95001994298704,,,,,medium,Region names 'haryana' in the stated country,,590.0,None,,1.0,1984.5,Forest,Alkali absorption
+3095.0,571,India,Haryana,Siwaliks,33.0,73.0,Pakistan,Asia,mismatch,coords_wrong,94.95001994298704,,,,,medium,Region names 'haryana' in the stated country,,533.0,None,,1.0,1984.5,Forest,Alkali absorption
+3096.0,571,India,Haryana,Siwaliks,33.0,73.0,Pakistan,Asia,mismatch,coords_wrong,94.95001994298704,,,,,medium,Region names 'haryana' in the stated country,,359.0,None,,1.0,1984.5,Forest,Alkali absorption
+3097.0,571,India,Haryana,Siwaliks,33.0,73.0,Pakistan,Asia,mismatch,coords_wrong,94.95001994298704,,,,,medium,Region names 'haryana' in the stated country,,743.0,None,,1.0,1985.5,Forest,Alkali absorption
+3098.0,571,India,Haryana,Siwaliks,33.0,73.0,Pakistan,Asia,mismatch,coords_wrong,94.95001994298704,,,,,medium,Region names 'haryana' in the stated country,,504.0,None,,1.0,1985.5,Forest,Alkali absorption
+3099.0,571,India,Haryana,Siwaliks,33.0,73.0,Pakistan,Asia,mismatch,coords_wrong,94.95001994298704,,,,,medium,Region names 'haryana' in the stated country,,331.0,None,,1.0,1985.5,Forest,Alkali absorption
 3100.0,1464,Finland,,Agricultural Research Centre of Finland,60.82,23.5,Finland,Europe,match,,0.0,,,,,,,,,Fertilized,,,1992.0,Agriculture,IRGA
 3101.0,1464,Finland,,Agricultural Research Centre of Finland,60.82,23.5,Finland,Europe,match,,0.0,,,,,,,,,Fertilized,,,1992.0,Agriculture,IRGA
 3102.0,1464,Finland,,Agricultural Research Centre of Finland,60.82,23.5,Finland,Europe,match,,0.0,,,,,,,,,Fertilized,,,1992.0,Agriculture,IRGA
@@ -3341,12 +3341,12 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 3492.0,4687,Spain,Murcia,Cehegin,38.1,-1.8,Spain,Europe,match,,0.0,,,,,,,,766.0,None,,1.0,2006.5,Forest,IRGA
 3493.0,4687,Spain,Murcia,Cehegin,38.1,-1.8,Spain,Europe,match,,0.0,,,,,,,,648.0,None,,1.0,2006.5,Shrubland,IRGA
 3494.0,4687,Spain,Murcia,Cehegin,38.1,-1.8,Spain,Europe,match,,0.0,,,,,,,,427.0,None,,1.0,2006.5,Forest,IRGA
-3495.0,4688,Canada,Quebec,Lods Agronomy Research Centre,45.42916667,-73.93333333,Canada (coast),North America,match_tolerance,,0.15033283315344195,,,,,,,,,No-till,Q01,,2003.0,Agriculture,IRGA
-3496.0,4688,Canada,Quebec,Lods Agronomy Research Centre,45.42916667,-73.93333333,Canada (coast),North America,match_tolerance,,0.15033283315344195,,,,,,,,,"No-till, fertilized",Q01,,2003.0,Agriculture,IRGA
-3497.0,4688,Canada,Quebec,Lods Agronomy Research Centre,45.42916667,-73.93333333,Canada (coast),North America,match_tolerance,,0.15033283315344195,,,,,,,,,Conventional tillage,Q01,,2003.0,Agriculture,IRGA
-3498.0,4688,Canada,Quebec,Lods Agronomy Research Centre,45.42916667,-73.93333333,Canada (coast),North America,match_tolerance,,0.15033283315344195,,,,,,,,,"Conventional tillage, fertilized",Q01,,2003.0,Agriculture,IRGA
-3499.0,4689,Canada,Quebec,Lods Agronomy Research Centre,45.42916667,-73.93333333,Canada (coast),North America,match_tolerance,,0.15033283315344195,,,,,,,,,Conventional tillage,Q01,,2003.0,Agriculture,IRGA
-3500.0,4689,Canada,Quebec,Lods Agronomy Research Centre,45.42916667,-73.93333333,Canada (coast),North America,match_tolerance,,0.15033283315344195,,,,,,,,,No-till,Q01,,2003.0,Agriculture,IRGA
+3495.0,4688,Canada,Quebec,Lods Agronomy Research Centre,45.42916667,-73.93333333,Canada (coast),North America,match_tolerance,,0.1501526995566446,,,,,,,,,No-till,Q01,,2003.0,Agriculture,IRGA
+3496.0,4688,Canada,Quebec,Lods Agronomy Research Centre,45.42916667,-73.93333333,Canada (coast),North America,match_tolerance,,0.1501526995566446,,,,,,,,,"No-till, fertilized",Q01,,2003.0,Agriculture,IRGA
+3497.0,4688,Canada,Quebec,Lods Agronomy Research Centre,45.42916667,-73.93333333,Canada (coast),North America,match_tolerance,,0.1501526995566446,,,,,,,,,Conventional tillage,Q01,,2003.0,Agriculture,IRGA
+3498.0,4688,Canada,Quebec,Lods Agronomy Research Centre,45.42916667,-73.93333333,Canada (coast),North America,match_tolerance,,0.1501526995566446,,,,,,,,,"Conventional tillage, fertilized",Q01,,2003.0,Agriculture,IRGA
+3499.0,4689,Canada,Quebec,Lods Agronomy Research Centre,45.42916667,-73.93333333,Canada (coast),North America,match_tolerance,,0.1501526995566446,,,,,,,,,Conventional tillage,Q01,,2003.0,Agriculture,IRGA
+3500.0,4689,Canada,Quebec,Lods Agronomy Research Centre,45.42916667,-73.93333333,Canada (coast),North America,match_tolerance,,0.1501526995566446,,,,,,,,,No-till,Q01,,2003.0,Agriculture,IRGA
 3501.0,4894,Finland,,SMEAR II,61.85,24.28333333,Finland,Europe,match,,0.0,,,,,,,,,None,,,1997.0,Forest,IRGA
 3502.0,4894,Finland,,SMEAR II,61.85,24.28333333,Finland,Europe,match,,0.0,,,,,,,,737.0,None,,1.0,1998.0,Forest,IRGA
 3503.0,4894,Finland,,SMEAR II,61.85,24.28333333,Finland,Europe,match,,0.0,,,,,,,,627.0,None,,1.0,1999.0,Forest,IRGA
@@ -3430,7 +3430,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 3581.0,4915,Taiwan,Nantou,Tartarchia Anpu,23.48333333,120.8,Taiwan,Asia,match,,0.0,,,,,,,,530.0,None,Q01,1.0,2004.0,Grassland,IRGA
 3582.0,4915,Taiwan,Nantou,Tartarchia Anpu,23.48333333,120.8,Taiwan,Asia,match,,0.0,,,,,,,,341.0,None,Q01,1.0,2004.0,Forest,IRGA
 3583.0,4725,United Kingdom,,Clocaenog,53.05,-3.466666667,Wales,Europe,match,,0.0,,,,,,,,580.0,None,,1.0,2003.5,Shrubland,IRGA
-3584.0,4725,Denmark,,Mols,56.38333333,10.95,Denmark (coast),Europe,match_tolerance,,1.6221267367822343,,,,,,,,520.0,None,,1.0,2003.5,Shrubland,IRGA
+3584.0,4725,Denmark,,Mols,56.38333333,10.95,Denmark (coast),Europe,match_tolerance,,1.5878044306285148,,,,,,,,520.0,None,,1.0,2003.5,Shrubland,IRGA
 3585.0,4725,Netherlands,,Oldebroek,52.4,5.92,Netherlands,Europe,match,,0.0,,,,,,,,320.0,None,,1.0,2003.5,Shrubland,IRGA
 3586.0,4725,Hungary,,Kiskun Sag,46.88333333,19.38333333,Hungary,Europe,match,,0.0,,,,,,,,151.0,None,,1.0,2003.5,Shrubland,IRGA
 3587.0,4725,Spain,,Garraf,41.3,1.816666667,Spain,Europe,match,,0.0,,,,,,,,440.0,None,,1.0,2003.5,Shrubland,IRGA
@@ -3494,7 +3494,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 3647.0,4979,Brazil,Amazonas,Manaus,-3.0,-60.0,Brazil,South & Central America,match,,0.0,,,,,,,,1210.0,None,,,2000.5,Forest,
 3648.0,4979,Brazil,Pará,Tapajós,-1.717638889,-51.46,Brazil,South & Central America,match,,0.0,,,,,,,,1200.0,None,,,2002.0,Forest,
 3649.0,4979,Brazil,,Caxiuanã,-2.8968,-54.9519,Brazil,South & Central America,match,,0.0,,,,,,,,1350.0,None,,,2003.0,Forest,
-3650.0,4974,Finland,,,65.91666667,23.85,Sweden,Europe,mismatch,near_border,18.254815761698758,,,,,low,,,,None,,,2003.0,Forest,IRGA
+3650.0,4974,Finland,,,65.91666667,23.85,Sweden,Europe,match_tolerance,,9.952885342523576,,,,,,,,,None,,,2003.0,Forest,IRGA
 3651.0,4957,Italy,,,37.467,14.967,Italy,Europe,match,,0.0,,,,,,,,590.0,None,,1.0,2005.5,Forest,IRGA
 3652.0,4957,Italy,,,37.467,14.967,Italy,Europe,match,,0.0,,,,,,,,420.0,None,,1.0,2005.5,Forest,IRGA
 3653.0,4955,China,Heilongjiang,"National Field Research Station, Hailun",47.43333333,126.6333333,China,Asia,match,,0.0,,,,,,,,,None,,,2006.0,Grassland,Gas chromatography
@@ -3834,12 +3834,12 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 4029.0,5597,Canada,Newfoundland and Labrador,Goose Bay-OG,53.333,-60.4,Canada,North America,match,,0.0,,,,,,,,,None,Q03,,2008.0,Forest,IRGA
 4030.0,5597,Canada,Newfoundland and Labrador,Goose Bay-H,53.333,-60.4,Canada,North America,match,,0.0,,,,,,,,,None,Q03,,2008.0,Forest,IRGA
 4031.0,5597,Canada,Newfoundland and Labrador,Goose Bay-B,53.333,-60.4,Canada,North America,match,,0.0,,,,,,,,,None,Q03,,2008.0,Forest,IRGA
-4032.0,5016,Canada,Newfoundland and Labrador,,48.96527778,-63.63027778,,Sea,mismatch,offshore_near,46.244334143989555,,,,,low,Region names 'newfoundland' in the stated country,,,None,Q01,,2004.5,Forest,IRGA
-4033.0,5016,Canada,Newfoundland and Labrador,,48.96527778,-63.63027778,,Sea,mismatch,offshore_near,46.244334143989555,,,,,low,Region names 'newfoundland' in the stated country,,,Clearcut,Q01,,2004.5,Forest,IRGA
-4034.0,5016,Canada,Newfoundland and Labrador,,48.96527778,-63.63027778,,Sea,mismatch,offshore_near,46.244334143989555,,,,,low,Region names 'newfoundland' in the stated country,,,Clearcut,Q01,,2004.5,Forest,IRGA
-4035.0,5016,Canada,Newfoundland and Labrador,,48.88722222,-63.40222222,,Sea,mismatch,offshore_near,45.05850642452906,,,,,low,Region names 'newfoundland' in the stated country,,,None,Q01,,2004.5,Forest,IRGA
-4036.0,5016,Canada,Newfoundland and Labrador,,48.88722222,-63.40222222,,Sea,mismatch,offshore_near,45.05850642452906,,,,,low,Region names 'newfoundland' in the stated country,,,Clearcut,Q01,,2004.5,Forest,IRGA
-4037.0,5016,Canada,Newfoundland and Labrador,,48.88722222,-63.40222222,,Sea,mismatch,offshore_near,45.05850642452906,,,,,low,Region names 'newfoundland' in the stated country,,,Clearcut,Q01,,2004.5,Forest,IRGA
+4032.0,5016,Canada,Newfoundland and Labrador,,48.96527778,-63.63027778,,Sea,mismatch,offshore_near,43.549691142748976,,,,,low,Region names 'newfoundland' in the stated country,,,None,Q01,,2004.5,Forest,IRGA
+4033.0,5016,Canada,Newfoundland and Labrador,,48.96527778,-63.63027778,,Sea,mismatch,offshore_near,43.549691142748976,,,,,low,Region names 'newfoundland' in the stated country,,,Clearcut,Q01,,2004.5,Forest,IRGA
+4034.0,5016,Canada,Newfoundland and Labrador,,48.96527778,-63.63027778,,Sea,mismatch,offshore_near,43.549691142748976,,,,,low,Region names 'newfoundland' in the stated country,,,Clearcut,Q01,,2004.5,Forest,IRGA
+4035.0,5016,Canada,Newfoundland and Labrador,,48.88722222,-63.40222222,,Sea,mismatch,offshore_near,44.58089973395203,,,,,low,Region names 'newfoundland' in the stated country,,,None,Q01,,2004.5,Forest,IRGA
+4036.0,5016,Canada,Newfoundland and Labrador,,48.88722222,-63.40222222,,Sea,mismatch,offshore_near,44.58089973395203,,,,,low,Region names 'newfoundland' in the stated country,,,Clearcut,Q01,,2004.5,Forest,IRGA
+4037.0,5016,Canada,Newfoundland and Labrador,,48.88722222,-63.40222222,,Sea,mismatch,offshore_near,44.58089973395203,,,,,low,Region names 'newfoundland' in the stated country,,,Clearcut,Q01,,2004.5,Forest,IRGA
 4038.0,5389,Denmark,Greenland,Adventdalen,78.16666667,16.1,Svalbard Is.,Europe,mismatch,label_wrong,643.479060437192,78.16666667,16.1,Svalbard Is.,Europe,medium,title names 'svalbard',,204.0,None,,0.375,2007.5,Shrubland,IRGA
 4039.0,5389,Denmark,Greenland,Adventdalen,78.16666667,16.1,Svalbard Is.,Europe,mismatch,label_wrong,643.479060437192,78.16666667,16.1,Svalbard Is.,Europe,medium,title names 'svalbard',,292.0,None,,0.375,2007.5,Shrubland,IRGA
 4040.0,5390,Denmark,Greenland,Adventdalen,78.16666667,16.1,Svalbard Is.,Europe,mismatch,unclear,643.479060437192,,,,,low,,,125.0,None,,0.375,2007.5,Shrubland,IRGA
@@ -4016,8 +4016,8 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 4229.0,5385,South Korea,Kyung-Gi,Gwangneung Experimental Forest,37.73333333,127.15,South Korea,Asia,match,,0.0,,,,,,,,1258.0,None,,1.0,2002.5,Forest,IRGA
 4230.0,5385,South Korea,Kyung-Gi,Gwangneung Experimental Forest,37.75,127.15,South Korea,Asia,match,,0.0,,,,,,,,971.0,None,,1.0,2002.5,Forest,IRGA
 4231.0,5385,South Korea,Kyung-Gi,Gwangneung Experimental Forest,37.75,127.15,South Korea,Asia,match,,0.0,,,,,,,,1060.0,None,,1.0,2002.5,Forest,IRGA
-4232.0,5298,Turkey,,Kesan Forest District,40.58333333,26.51666667,Turkey (coast),Asia,match_tolerance,,1.97523382515622,,,,,,,,418.0,None,,1.0,2006.0,Forest,Alkali absorption
-4233.0,5298,Turkey,,Kesan Forest District,40.58333333,26.51666667,Turkey (coast),Asia,match_tolerance,,1.97523382515622,,,,,,,,515.0,Burned,,1.0,2006.0,Forest,Alkali absorption
+4232.0,5298,Turkey,,Kesan Forest District,40.58333333,26.51666667,Turkey (coast),Asia,match_tolerance,,1.9337277991626762,,,,,,,,418.0,None,,1.0,2006.0,Forest,Alkali absorption
+4233.0,5298,Turkey,,Kesan Forest District,40.58333333,26.51666667,Turkey (coast),Asia,match_tolerance,,1.9337277991626762,,,,,,,,515.0,Burned,,1.0,2006.0,Forest,Alkali absorption
 4234.0,5317,Switzerland,,LŠgeren,47.47833333,8.364388889,Switzerland,Europe,match,,0.0,,,,,,,,783.0,None,,1.0,2007.0,Forest,IRGA
 4235.0,5317,Switzerland,,LŠgeren,47.47833333,8.364388889,Switzerland,Europe,match,,0.0,,,,,,,,901.0,None,,1.0,2007.0,Forest,IRGA
 4236.0,5317,Switzerland,,LŠgeren,47.47833333,8.364388889,Switzerland,Europe,match,,0.0,,,,,,,,752.0,None,,1.0,2007.0,Forest,IRGA
@@ -4505,12 +4505,12 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 4730.0,6220,USA,Georgia,Joseph W. Jones Ecological Research Center,31.25,-84.5,United States of America,North America,match,,0.0,,,,,,,,709.0,Burned,Q03,1.0,2006.5,Forest,IRGA
 4731.0,6226,United Kingdom,,Byrom Street,53.41252778,-2.980722222,England,Europe,match,,0.0,,,,,,,,1000.0,None,,0.5,2008.0,Urban,IRGA
 4732.0,6226,United Kingdom,,Byrom Street,53.41252778,-2.980722222,England,Europe,match,,0.0,,,,,,,,2500.0,Fertilized,,0.5,2008.0,Urban,IRGA
-4733.0,6237,Canada,Ellesmere Island,Alexandra Fjord,78.9,-76.0,Canada (coast),North America,match_tolerance,,1.964313136686838,,,,,,,,,None,,,2009.0,Shrubland,Gradient
-4734.0,6237,Canada,Ellesmere Island,Alexandra Fjord,78.9,-76.0,Canada (coast),North America,match_tolerance,,1.964313136686838,,,,,,,,,None,,,2009.0,Shrubland,Gradient
-4735.0,6237,Canada,Ellesmere Island,Alexandra Fjord,78.9,-76.0,Canada (coast),North America,match_tolerance,,1.964313136686838,,,,,,,,,None,,,2009.0,Shrubland,Gradient
-4736.0,6237,Canada,Ellesmere Island,Alexandra Fjord,78.9,-76.0,Canada (coast),North America,match_tolerance,,1.964313136686838,,,,,,,,,None,,,2009.0,Shrubland,Gradient
-4737.0,6237,Canada,Ellesmere Island,Alexandra Fjord,78.9,-76.0,Canada (coast),North America,match_tolerance,,1.964313136686838,,,,,,,,,None,,,2009.0,Shrubland,Gradient
-4738.0,6237,Canada,Ellesmere Island,Alexandra Fjord,78.9,-76.0,Canada (coast),North America,match_tolerance,,1.964313136686838,,,,,,,,,None,,,2009.0,Wetland,Gradient
+4733.0,6237,Canada,Ellesmere Island,Alexandra Fjord,78.9,-76.0,Canada (coast),North America,match_tolerance,,1.9206276657429828,,,,,,,,,None,,,2009.0,Shrubland,Gradient
+4734.0,6237,Canada,Ellesmere Island,Alexandra Fjord,78.9,-76.0,Canada (coast),North America,match_tolerance,,1.9206276657429828,,,,,,,,,None,,,2009.0,Shrubland,Gradient
+4735.0,6237,Canada,Ellesmere Island,Alexandra Fjord,78.9,-76.0,Canada (coast),North America,match_tolerance,,1.9206276657429828,,,,,,,,,None,,,2009.0,Shrubland,Gradient
+4736.0,6237,Canada,Ellesmere Island,Alexandra Fjord,78.9,-76.0,Canada (coast),North America,match_tolerance,,1.9206276657429828,,,,,,,,,None,,,2009.0,Shrubland,Gradient
+4737.0,6237,Canada,Ellesmere Island,Alexandra Fjord,78.9,-76.0,Canada (coast),North America,match_tolerance,,1.9206276657429828,,,,,,,,,None,,,2009.0,Shrubland,Gradient
+4738.0,6237,Canada,Ellesmere Island,Alexandra Fjord,78.9,-76.0,Canada (coast),North America,match_tolerance,,1.9206276657429828,,,,,,,,,None,,,2009.0,Wetland,Gradient
 4739.0,6243,Brazil,Mato Grosso,Parque Municipal do Bacaba-Cerrado,-14.683,-52.333,Brazil,South & Central America,match,,0.0,,,,,,,,1741.0,None,,1.0,2008.5,Savanna,IRGA
 4740.0,6243,Brazil,Mato Grosso,Parque Municipal do Bacaba-Cerradão,-14.683,-52.333,Brazil,South & Central America,match,,0.0,,,,,,,,1722.0,None,,1.0,2008.5,Savanna,IRGA
 4741.0,6245,Brazil,São Paulo,,-22.96777778,-48.82777778,Brazil,South & Central America,match,,0.0,,,,,,,,1135.0,Fertilized,,1.0,2008.5,Forest,IRGA
@@ -4814,7 +4814,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 5046.0,6493,USA,Alabama,Escambia Experimental Forest,31.01666667,-87.06666667,United States of America,North America,match,,0.0,,,,,,,,1570.0,None,,0.9,2008.0,Forest,IRGA
 5047.0,6495,Malaysia,Sabah,Malua Forest Reserve,5.333611111,117.4405556,Malaysia,Asia,match,,0.0,,,,,,,,2160.0,None,,0.1,2007.0,Forest,IRGA
 5048.0,6495,Malaysia,Sabah,Malua Forest Reserve,5.088888889,117.6422222,Malaysia,Asia,match,,0.0,,,,,,,,2860.0,None,,0.1,2007.0,Forest,IRGA
-5049.0,6497,Japan,,Kurose River Estuary,34.08,133.29,,Sea,mismatch,offshore_near,10.39002171375648,,,,,low,,,92.0,None,,1.0,2007.0,Wetland,IRGA
+5049.0,6497,Japan,,Kurose River Estuary,34.08,133.29,,Sea,mismatch,offshore_near,10.368621160735067,,,,,low,,,92.0,None,,1.0,2007.0,Wetland,IRGA
 5050.0,6501,USA,Wisconsin,Flambeau River State Forest,45.62333333,-90.79666667,United States of America,North America,match,,0.0,,,,,,,,,None,,0.5,2010.0,Forest,IRGA
 5051.0,6501,USA,Wisconsin,Flambeau River State Forest,45.62333333,-90.79666667,United States of America,North America,match,,0.0,,,,,,,,,Gap,,0.5,2010.0,Forest,IRGA
 5052.0,6504,Germany,,Neuglobsow,53.13333333,13.03333333,Germany,Europe,match,,0.0,,,,,,,,556.0,None,,1.0,2004.0,Forest,IRGA
@@ -4849,18 +4849,18 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 5081.0,6534,Sweden,,Stadra,59.0,14.0,Sweden,Europe,match,,0.0,,,,,,,,,Harvest,,0.5,2008.0,Forest,IRGA
 5082.0,6534,Sweden,,Stadra,59.0,14.0,Sweden,Europe,match,,0.0,,,,,,,,,Harvest,,0.5,2008.0,Forest,IRGA
 5083.0,6534,Sweden,,Stadra,59.0,14.0,Sweden,Europe,match,,0.0,,,,,,,,,Harvest,,0.5,2008.0,Forest,IRGA
-5084.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.929143971962024,,,,,low,,,,None,,0.6,2008.0,Forest,IRGA
-5085.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.929143971962024,,,,,low,,,,None,,0.6,2009.0,Forest,IRGA
-5086.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.929143971962024,,,,,low,,,,None,,0.6,2010.0,Forest,IRGA
-5087.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.929143971962024,,,,,low,,,,Warmed,,0.6,2008.0,Forest,IRGA
-5088.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.929143971962024,,,,,low,,,,Warmed,,0.6,2009.0,Forest,IRGA
-5089.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.929143971962024,,,,,low,,,,Warmed,,0.6,2010.0,Forest,IRGA
-5090.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.929143971962024,,,,,low,,,,Drought,,0.6,2008.0,Forest,IRGA
-5091.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.929143971962024,,,,,low,,,,Drought,,0.6,2009.0,Forest,IRGA
-5092.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.929143971962024,,,,,low,,,,Drought,,0.6,2010.0,Forest,IRGA
-5093.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.929143971962024,,,,,low,,,,"Warmed, drought",,0.6,2008.0,Forest,IRGA
-5094.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.929143971962024,,,,,low,,,,"Warmed, drought",,0.6,2009.0,Forest,IRGA
-5095.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.929143971962024,,,,,low,,,,"Warmed, drought",,0.6,2010.0,Forest,IRGA
+5084.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.925686977923004,,,,,low,,,,None,,0.6,2008.0,Forest,IRGA
+5085.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.925686977923004,,,,,low,,,,None,,0.6,2009.0,Forest,IRGA
+5086.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.925686977923004,,,,,low,,,,None,,0.6,2010.0,Forest,IRGA
+5087.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.925686977923004,,,,,low,,,,Warmed,,0.6,2008.0,Forest,IRGA
+5088.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.925686977923004,,,,,low,,,,Warmed,,0.6,2009.0,Forest,IRGA
+5089.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.925686977923004,,,,,low,,,,Warmed,,0.6,2010.0,Forest,IRGA
+5090.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.925686977923004,,,,,low,,,,Drought,,0.6,2008.0,Forest,IRGA
+5091.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.925686977923004,,,,,low,,,,Drought,,0.6,2009.0,Forest,IRGA
+5092.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.925686977923004,,,,,low,,,,Drought,,0.6,2010.0,Forest,IRGA
+5093.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.925686977923004,,,,,low,,,,"Warmed, drought",,0.6,2008.0,Forest,IRGA
+5094.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.925686977923004,,,,,low,,,,"Warmed, drought",,0.6,2009.0,Forest,IRGA
+5095.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,mismatch,near_border,12.925686977923004,,,,,low,,,,"Warmed, drought",,0.6,2010.0,Forest,IRGA
 5096.0,6540,USA,Massachusetts,University of Massachusetts Suburban Experiment Station,43.385,-71.215,United States of America,North America,match,,0.0,,,,,,,,,None,,1.0,2009.0,Grassland,IRGA
 5097.0,6540,USA,Massachusetts,University of Massachusetts Suburban Experiment Station,43.385,-71.215,United States of America,North America,match,,0.0,,,,,,,,,Irrigated,,1.0,2009.0,Grassland,IRGA
 5098.0,6540,USA,Massachusetts,University of Massachusetts Suburban Experiment Station,43.385,-71.215,United States of America,North America,match,,0.0,,,,,,,,,Drought,,1.0,2009.0,Grassland,IRGA
@@ -4907,10 +4907,10 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 5139.0,6576,Germany,Bavaria,RIE,48.933,11.767,Germany,Europe,match,,0.0,,,,,,,,615.0,None,,1.0,2008.0,Forest,IRGA
 5140.0,6576,Germany,Bavaria,RIE,48.933,11.767,Germany,Europe,match,,0.0,,,,,,,,548.0,None,,1.0,2009.0,Forest,IRGA
 5141.0,6576,Germany,Bavaria,RIE,48.933,11.767,Germany,Europe,match,,0.0,,,,,,,,560.0,None,,1.0,2010.0,Forest,IRGA
-5142.0,6589,Japan,,Takayama experimental forest,37.13333333,137.4166667,,Sea,mismatch,offshore_near,21.14925440284383,,,,,low,,,,None,,0.67,2001.0,Forest,IRGA
-5143.0,6589,Japan,,Takayama experimental forest,37.13333333,137.4166667,,Sea,mismatch,offshore_near,21.14925440284383,,,,,low,,,,None,,0.67,2001.0,Forest,IRGA
-5144.0,6589,Japan,,Takayama experimental forest,37.13333333,137.4166667,,Sea,mismatch,offshore_near,21.14925440284383,,,,,low,,,,None,,0.67,2001.0,Forest,IRGA
-5145.0,6589,Japan,,Takayama experimental forest,37.13333333,137.4166667,,Sea,mismatch,offshore_near,21.14925440284383,,,,,low,,,,None,,0.67,2001.0,Forest,IRGA
+5142.0,6589,Japan,,Takayama experimental forest,37.13333333,137.4166667,,Sea,mismatch,offshore_near,21.03655155592189,,,,,low,,,,None,,0.67,2001.0,Forest,IRGA
+5143.0,6589,Japan,,Takayama experimental forest,37.13333333,137.4166667,,Sea,mismatch,offshore_near,21.03655155592189,,,,,low,,,,None,,0.67,2001.0,Forest,IRGA
+5144.0,6589,Japan,,Takayama experimental forest,37.13333333,137.4166667,,Sea,mismatch,offshore_near,21.03655155592189,,,,,low,,,,None,,0.67,2001.0,Forest,IRGA
+5145.0,6589,Japan,,Takayama experimental forest,37.13333333,137.4166667,,Sea,mismatch,offshore_near,21.03655155592189,,,,,low,,,,None,,0.67,2001.0,Forest,IRGA
 5146.0,6597,China,Jiangsu,Jingtang,31.4,119.6833333,China,Asia,match,,0.0,,,,,,,,,None,,0.4,2009.0,Agriculture,Gas chromatography
 5147.0,6597,China,Jiangsu,Jingtang,31.4,119.6833333,China,Asia,match,,0.0,,,,,,,,,Fertilized,,0.4,2009.0,Agriculture,Gas chromatography
 5148.0,6597,China,Jiangsu,Jingtang,31.4,119.6833333,China,Asia,match,,0.0,,,,,,,,,Fertilized,,0.4,2009.0,Agriculture,Gas chromatography
@@ -4937,7 +4937,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 5171.0,6611,Congo,,Kissoko,-4.733333333,12.01666667,Congo,Africa,match,,0.0,,,,,,,,1380.0,Fertilized,,1.0,2004.0,Forest,IRGA
 5172.0,6611,Congo,,Kissoko,-4.733333333,12.01666667,Congo,Africa,match,,0.0,,,,,,,,2020.0,Fertilized,,1.0,2004.0,Forest,IRGA
 5173.0,6611,Congo,,Kissoko,-4.733333333,12.01666667,Congo,Africa,match,,0.0,,,,,,,,1780.0,Fertilized,,1.0,2004.0,Forest,IRGA
-5174.0,6617,Italy,South Tyrol,Renon,49.58333333,11.43333333,Germany,Europe,mismatch,unclear,286.48084507852946,,,,,low,,,,None,,0.01,2005.0,Forest,IRGA
+5174.0,6617,Italy,South Tyrol,Renon,49.58333333,11.43333333,Germany,Europe,mismatch,unclear,283.2503310652879,,,,,low,,,,None,,0.01,2005.0,Forest,IRGA
 5175.0,6617,Germany,Thuringia,Wetzstein,50.45,11.45,Germany,Europe,match,,0.0,,,,,,,,,None,,0.01,2006.0,Forest,IRGA
 5176.0,6617,Sweden,Uppland,Norunda,60.08333333,17.46666667,Sweden,Europe,match,,0.0,,,,,,,,,None,,0.01,2007.0,Forest,IRGA
 5177.0,6617,Czech Republic,Beskydy,Bílý Kříž,49.5,18.53333333,Czechia,Europe,match,,0.0,,,,,,,,,None,,0.01,2006.0,Forest,IRGA
@@ -5189,7 +5189,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 5430.0,7048,China,Guangdong,Dinghushan Biosphere Reserve,23.17,112.54,China,Asia,match,,0.0,,,,,,,,999.0,Precipitation amount change,,1.0,2007.5,Forest,IRGA
 5431.0,7048,China,Guangdong,Dinghushan Biosphere Reserve,23.17,112.54,China,Asia,match,,0.0,,,,,,,,1124.0,Precipitation amount change,,1.0,2007.5,Forest,IRGA
 5432.0,7048,China,Guangdong,Dinghushan Biosphere Reserve,23.17,112.54,China,Asia,match,,0.0,,,,,,,,1116.0,Precipitation amount change,,1.0,2007.5,Forest,IRGA
-5433.0,7053,China,Fujian,Zhangzhou Mangrove Nature Reserve,24.4,117.91,China (coast),Asia,match_tolerance,,1.6280257798829516,,,,,,,,650.0,None,,1.0,2011.0,Wetland,IRGA
+5433.0,7053,China,Fujian,Zhangzhou Mangrove Nature Reserve,24.4,117.91,China (coast),Asia,match_tolerance,,1.6213543154087968,,,,,,,,650.0,None,,1.0,2011.0,Wetland,IRGA
 5434.0,7056,Brazil,Mato Grosso,SESC-Pantanal,-16.57,-56.28,Brazil,South & Central America,match,,0.0,,,,,,,,1220.0,None,,1.0,2009.5,Wetland,Gradient
 5435.0,7087,USA,Alaska,UT,68.9047,-148.8758,United States of America,North America,match,,0.0,,,,,,,,296.0,None,,1.0,2008.0,Tundra,IRGA
 5436.0,7087,USA,Alaska,SaT,68.1753,-149.4406,United States of America,North America,match,,0.0,,,,,,,,125.0,None,,1.0,2008.0,Tundra,IRGA
@@ -5214,9 +5214,9 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 5455.0,7181,China,Henan,Baotianman Natural Reserve,33.5,111.9,China,Asia,match,,0.0,,,,,,,,761.0,None,,1.0,2009.0,Forest,IRGA
 5456.0,7191,China,Jiangxi,,29.13333333,117.9166667,China,Asia,match,,0.0,,,,,,,,508.0,None,,1.0,2010.0,Forest,IRGA
 5457.0,7191,China,Jiangxi,,29.13333333,117.9166667,China,Asia,match,,0.0,,,,,,,,480.0,None,,1.0,2010.0,Forest,IRGA
-5458.0,7228,Indonesia,Sarawak,,2.82,111.85,Malaysia,Asia,mismatch,label_wrong,154.48749181084932,2.82,111.85,Malaysia,Asia,high,Region 'Sarawak' = admin-1 'sarawak' at the coordinates,,681.0,None,,1.0,2003.0,Forest,IRGA
-5459.0,7228,Indonesia,Sarawak,,2.82,111.93,Malaysia,Asia,mismatch,label_wrong,151.1641905140063,2.82,111.93,Malaysia,Asia,high,Region 'Sarawak' = admin-1 'sarawak' at the coordinates,,494.0,Fertilized,,1.0,2003.0,Forest,IRGA
-5460.0,7228,Indonesia,Sarawak,,2.78,111.83,Malaysia,Asia,mismatch,label_wrong,151.02693704353757,2.78,111.83,Malaysia,Asia,high,Region 'Sarawak' = admin-1 'sarawak' at the coordinates,,436.0,None,,1.0,2003.0,Forest,IRGA
+5458.0,7228,Indonesia,Sarawak,,2.82,111.85,Malaysia,Asia,mismatch,label_wrong,153.73356628213784,2.82,111.85,Malaysia,Asia,high,Region 'Sarawak' = admin-1 'sarawak' at the coordinates,,681.0,None,,1.0,2003.0,Forest,IRGA
+5459.0,7228,Indonesia,Sarawak,,2.82,111.93,Malaysia,Asia,mismatch,label_wrong,150.4683741239059,2.82,111.93,Malaysia,Asia,high,Region 'Sarawak' = admin-1 'sarawak' at the coordinates,,494.0,Fertilized,,1.0,2003.0,Forest,IRGA
+5460.0,7228,Indonesia,Sarawak,,2.78,111.83,Malaysia,Asia,mismatch,label_wrong,150.30466577634806,2.78,111.83,Malaysia,Asia,high,Region 'Sarawak' = admin-1 'sarawak' at the coordinates,,436.0,None,,1.0,2003.0,Forest,IRGA
 5461.0,7290,USA,North Carolina,Duke Forest,35.97,-79.13,United States of America,North America,match,,0.0,,,,,,,,1430.1,None,,1.0,2001.5,Forest,IRGA
 5462.0,7290,USA,North Carolina,Duke Forest,35.97,-79.13,United States of America,North America,match,,0.0,,,,,,,,1331.1,None,,1.0,2002.5,Forest,IRGA
 5463.0,7290,USA,North Carolina,Duke Forest,35.97,-79.13,United States of America,North America,match,,0.0,,,,,,,,1541.5,None,,1.0,2003.5,Forest,IRGA
@@ -5753,7 +5753,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 6003.0,9835,USA,Tennessee,Stones River National Battlefield,35.876,-86.433,United States of America,North America,match,,0.0,,,,,,,,1022.0,None,,1.0,2013.0,Forest,IRGA
 6004.0,9844,Estonia,,Kambja,58.05,27.02,Estonia,Europe,match,,0.0,,,,,,,,618.0,None,,0.5,2010.5,Forest,IRGA
 6005.0,9844,Estonia,,Alatskivi 2,58.62,27.03,Estonia,Europe,match,,0.0,,,,,,,,972.0,None,,0.5,2010.5,Forest,IRGA
-6006.0,9844,Estonia,,Erastvere,57.13,26.93,Latvia,Europe,mismatch,near_border,47.98484865427474,,,,,low,,,817.0,None,,0.5,2010.5,Forest,IRGA
+6006.0,9844,Estonia,,Erastvere,57.13,26.93,Latvia,Europe,mismatch,near_border,47.638208434889876,,,,,low,,,817.0,None,,0.5,2010.5,Forest,IRGA
 6007.0,9881,China,Chongming Island,Dongtan wetland-H,31.525,121.958,China,Asia,match,,0.0,,,,,,,,444.0,None,,0.9,2009.5,Wetland,Gas chromatography
 6008.0,9881,China,Chongming Island,Dongtan wetland-H,31.525,121.958,China,Asia,match,,0.0,,,,,,,,340.0,None,,0.9,2009.5,Wetland,Gas chromatography
 6009.0,9881,China,Chongming Island,Dongtan wetland-L,31.525,121.958,China,Asia,match,,0.0,,,,,,,,382.0,None,,0.75,2009.5,Wetland,Gas chromatography
@@ -5999,9 +5999,9 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 6262.0,8289,China,,Hilly Ecology Experimentation Station,37.88333333,114.2666667,China,Asia,match,,0.0,,,,,,,,685.0,None,,1.0,2013.0,Forest,IRGA
 6263.0,8289,China,,Hilly Ecology Experimentation Station,37.88333333,114.2666667,China,Asia,match,,0.0,,,,,,,,484.0,None,,1.0,2013.0,Shrubland,IRGA
 6264.0,8289,China,,Hilly Ecology Experimentation Station,37.88333333,114.2666667,China,Asia,match,,0.0,,,,,,,,704.0,None,,1.0,2013.0,Grassland,IRGA
-6265.0,9856,Germany,,,51.78333333,14.61666667,Poland,Europe,match_tolerance,,0.1188092616135796,,,,,,,,,None,,0.75,2012.5,Agriculture,IRGA
-6266.0,9856,Germany,,,51.78333333,14.61666667,Poland,Europe,match_tolerance,,0.1188092616135796,,,,,,,,,None,,0.75,2012.5,Agriculture,IRGA
-6267.0,9856,Germany,,,51.78333333,14.61666667,Poland,Europe,match_tolerance,,0.1188092616135796,,,,,,,,,None,,0.75,2012.5,Agriculture,IRGA
+6265.0,9856,Germany,,,51.78333333,14.61666667,Poland,Europe,match_tolerance,,0.11182642413587439,,,,,,,,,None,,0.75,2012.5,Agriculture,IRGA
+6266.0,9856,Germany,,,51.78333333,14.61666667,Poland,Europe,match_tolerance,,0.11182642413587439,,,,,,,,,None,,0.75,2012.5,Agriculture,IRGA
+6267.0,9856,Germany,,,51.78333333,14.61666667,Poland,Europe,match_tolerance,,0.11182642413587439,,,,,,,,,None,,0.75,2012.5,Agriculture,IRGA
 6268.0,9857,Spain,,Deheson del Encinar,39.98333333,-5.133333333,Spain,Europe,match,,0.0,,,,,,,,742.0,None,,0.58,2009.5,Forest,IRGA
 6269.0,9857,Spain,,Deheson del Encinar,39.98333333,-5.133333333,Spain,Europe,match,,0.0,,,,,,,,719.0,Conventional tillage,,0.58,2009.5,Forest,IRGA
 6270.0,9857,Spain,,Deheson del Encinar,39.98333333,-5.133333333,Spain,Europe,match,,0.0,,,,,,,,640.0,Grazing,,0.58,2009.5,Forest,IRGA
@@ -6274,11 +6274,11 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 6537.0,7688,China,,Shapotou,37.5333,105.0333,China,Asia,match,,0.0,,,,,,,,33.0,None,,1.0,2007.5,Desert,IRGA
 6538.0,7688,China,,Shapotou,37.5333,105.0333,China,Asia,match,,0.0,,,,,,,,106.0,None,,1.0,2007.5,Desert,IRGA
 6539.0,7689,China,Xinjiang,Aksu National Experimental Station of Oasis Farmland Ecosys- tem,40.62,80.75,China,Asia,match,,0.0,,,,,,,,,None,,0.25,2009.5,Agriculture,IRGA
-6540.0,7694,China,,Dongtan of Chongming Island,31.633,121.967,China (coast),Asia,match_tolerance,,7.659496967537028,,,,,,,,1200.0,None,,1.0,2011.5,Wetland,IRGA
-6541.0,7694,China,,Dongtan of Chongming Island,31.633,121.967,China (coast),Asia,match_tolerance,,7.659496967537028,,,,,,,,1347.0,None,,1.0,2011.5,Wetland,IRGA
-6542.0,7694,China,,Dongtan of Chongming Island,31.633,121.967,China (coast),Asia,match_tolerance,,7.659496967537028,,,,,,,,976.0,None,,1.0,2011.5,Wetland,IRGA
-6543.0,7695,China,,Chongming Island,31.633,121.967,China (coast),Asia,match_tolerance,,7.659496967537028,,,,,,,,1105.0,None,,1.0,2011.0,Wetland,IRGA
-6544.0,7695,China,,Chongming Island,31.633,121.967,China (coast),Asia,match_tolerance,,7.659496967537028,,,,,,,,995.0,Warmed,,1.0,2011.0,Wetland,IRGA
+6540.0,7694,China,,Dongtan of Chongming Island,31.633,121.967,China (coast),Asia,match_tolerance,,7.57163433235909,,,,,,,,1200.0,None,,1.0,2011.5,Wetland,IRGA
+6541.0,7694,China,,Dongtan of Chongming Island,31.633,121.967,China (coast),Asia,match_tolerance,,7.57163433235909,,,,,,,,1347.0,None,,1.0,2011.5,Wetland,IRGA
+6542.0,7694,China,,Dongtan of Chongming Island,31.633,121.967,China (coast),Asia,match_tolerance,,7.57163433235909,,,,,,,,976.0,None,,1.0,2011.5,Wetland,IRGA
+6543.0,7695,China,,Chongming Island,31.633,121.967,China (coast),Asia,match_tolerance,,7.57163433235909,,,,,,,,1105.0,None,,1.0,2011.0,Wetland,IRGA
+6544.0,7695,China,,Chongming Island,31.633,121.967,China (coast),Asia,match_tolerance,,7.57163433235909,,,,,,,,995.0,Warmed,,1.0,2011.0,Wetland,IRGA
 6545.0,7727,China,Zhejiang,Tianmu Mountain,30.2,119.23,China,Asia,match,,0.0,,,,,,,,571.0,None,,1.0,2011.0,Forest,IRGA
 6546.0,7727,China,Zhejiang,Tianmu Mountain,30.2,119.23,China,Asia,match,,0.0,,,,,,,,537.0,Acidification,,1.0,2011.0,Forest,IRGA
 6547.0,7727,China,Zhejiang,Tianmu Mountain,30.2,119.23,China,Asia,match,,0.0,,,,,,,,677.0,Acidification,,1.0,2011.0,Forest,IRGA
@@ -6345,7 +6345,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 6608.0,11264,England,,Exmoor National Park-Spooners,49.78095556,-3.748027778,,Sea,mismatch,offshore_near,48.02113303564675,,,,,low,,,,Drained,,0.5,2012.5,Wetland,IRGA
 6609.0,8076,Indonesia,,Arang-arang,-1.637622222,103.7800389,Indonesia,Asia,match,,0.0,,,,,,,,1219.0,Fertilized,,0.5,2012.0,Forest,IRGA
 6610.0,8076,Indonesia,,Sumber Agung,-1.716861111,103.8824167,Indonesia,Asia,match,,0.0,,,,,,,,1304.0,Fertilized,,0.1,2012.0,Forest,IRGA
-6611.0,8077,Indonesia,Jambi,J-OP-6,1.637622222,103.7800278,Malaysia,Asia,mismatch,lat_sign,57.259766491487646,-1.637622222,103.7800278,,Asia,high,Region matches admin-1 'jambi' at the fixed point,,1036.0,"Fertilized, drained",,0.67,2012.0,Forest,IRGA
+6611.0,8077,Indonesia,Jambi,J-OP-6,1.637622222,103.7800278,Malaysia,Asia,mismatch,lat_sign,57.03166212556412,-1.637622222,103.7800278,,Asia,high,Region matches admin-1 'jambi' at the fixed point,,1036.0,"Fertilized, drained",,0.67,2012.0,Forest,IRGA
 6612.0,8077,Indonesia,Jambi,J-OP-15,-1.716861111,103.8824167,Indonesia,Asia,match,,0.0,,,,,,,,927.0,"Fertilized, drained",,0.67,2011.0,Forest,IRGA
 6613.0,8077,Indonesia,Jambi,J-OP-14,-1.716861111,103.8824167,Indonesia,Asia,match,,0.0,,,,,,,,1227.0,"Fertilized, drained",,0.67,2012.0,Forest,IRGA
 6614.0,8077,Indonesia,Riau,R-OP-4,0.491472222,101.6854444,Indonesia,Asia,match,,0.0,,,,,,,,1800.0,"Fertilized, drained",,0.67,2012.0,Forest,IRGA
@@ -6375,7 +6375,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 6638.0,7966,China,Guangdong,Heshan,22.56666667,112.8333333,China,Asia,match,,0.0,,,,,,,,455.0,Thinned,,1.0,2009.0,Agriculture,IRGA
 6639.0,7966,China,Guangdong,Heshan,22.56666667,112.8333333,China,Asia,match,,0.0,,,,,,,,856.0,Girdling,,1.0,2009.0,Agriculture,IRGA
 6640.0,7966,China,Guangdong,Heshan,22.56666667,112.8333333,China,Asia,match,,0.0,,,,,,,,670.0,Girdling,,1.0,2009.0,Agriculture,IRGA
-6641.0,7991,Japan,Hokkaido,Rishiri-Rebun-Sarobetsu,45.11666667,141.2,Japan (coast),Asia,match_tolerance,,0.169949195833909,,,,,,,,,None,,0.33,,Forest,Gradient
+6641.0,7991,Japan,Hokkaido,Rishiri-Rebun-Sarobetsu,45.11666667,141.2,Japan (coast),Asia,match_tolerance,,0.16477935195363408,,,,,,,,,None,,0.33,,Forest,Gradient
 6642.0,7996,USA,New York,,42.79166667,-76.125,United States of America,North America,match,,0.0,,,,,,,,794.0,None,,,2011.0,Agriculture,IRGA
 6643.0,7996,USA,New York,,42.79166667,-76.125,United States of America,North America,match,,0.0,,,,,,,,968.0,None,,,2011.0,Agriculture,IRGA
 6644.0,7996,USA,New York,,42.79166667,-76.125,United States of America,North America,match,,0.0,,,,,,,,963.0,None,,,2011.0,Agriculture,IRGA
@@ -6445,8 +6445,8 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 6709.0,7902,Isreal,Rishon LeTsiyon,Gilat Research Center,31.33,34.68,Israel,Asia,match,,0.0,,,,,,,,111.0,"Conventional tillage, fertilized",,0.75,2008.0,Agriculture,IRGA
 6710.0,11572,Indonesia,Central Kalimantan,Jabiren,-2.49722222,114.1888889,Indonesia,Asia,match,,0.0,,,,,,,,3293.0,Fertilized,,1.0,2015.5,Agriculture,IRGA
 6711.0,11619,Benin,Materi,,10.82,1.12,Benin,Africa,match,,0.0,,,,,,,,805.0,"Fertilized, tillage",,1.0,2015.0,Agriculture,IRGA
-6712.0,10442,Republic of Congo,Kissoko Village,,-4.7447,10.0211,,Sea,mismatch,in_sea,150.84112913775314,,,,,low,,,653.0,Reduced tillage,,1.0,2006.0,Agriculture,IRGA
-6713.0,10442,Republic of Congo,Kissoko Village,,-4.7447,10.0211,,Sea,mismatch,in_sea,150.84112913775314,,,,,low,,,662.0,Weed control,,1.0,2006.0,Agriculture,IRGA
+6712.0,10442,Republic of Congo,Kissoko Village,,-4.7447,10.0211,,Sea,mismatch,in_sea,150.65709725851895,,,,,low,,,653.0,Reduced tillage,,1.0,2006.0,Agriculture,IRGA
+6713.0,10442,Republic of Congo,Kissoko Village,,-4.7447,10.0211,,Sea,mismatch,in_sea,150.65709725851895,,,,,low,,,662.0,Weed control,,1.0,2006.0,Agriculture,IRGA
 6714.0,10445,Tanzania,Morogoro,Clayey,-6.833,37.65,Tanzania,Africa,match,,0.0,,,,,,,,570.0,None,,1.0,2009.0,Agriculture,Gas chromatography
 6715.0,10445,Tanzania,Morogoro,Clayey,-6.833,37.65,Tanzania,Africa,match,,0.0,,,,,,,,660.0,Plant residue,,1.0,2009.0,Agriculture,Gas chromatography
 6716.0,10445,Tanzania,Morogoro,Clayey,-6.833,37.65,Tanzania,Africa,match,,0.0,,,,,,,,1220.0,Fertilized,,1.0,2009.0,Agriculture,Gas chromatography
@@ -6632,9 +6632,9 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 6904.0,10520,Burkina Faso,Laba,,11.67,2.83,Benin,Africa,mismatch,lon_sign,53.62224153240571,11.67,-2.83,,Africa,medium,,,,None,,,2002.5,Forest,IRGA
 6905.0,10520,Burkina Faso,Laba,,11.67,2.83,Benin,Africa,mismatch,lon_sign,53.62224153240571,11.67,-2.83,,Africa,medium,,,,Burned,,,2002.5,Forest,IRGA
 6906.0,10520,Burkina Faso,Laba,,11.67,2.83,Benin,Africa,mismatch,lon_sign,53.62224153240571,11.67,-2.83,,Africa,medium,,,,Grazing,,,2002.5,Forest,IRGA
-6907.0,10520,Burkina Faso,Tiogo,,12.23,2.7,Benin,Africa,mismatch,lon_sign,50.09956616592138,12.23,-2.7,,Africa,medium,,,,None,,,2002.5,Forest,IRGA
-6908.0,10520,Burkina Faso,Tiogo,,12.23,2.7,Benin,Africa,mismatch,lon_sign,50.09956616592138,12.23,-2.7,,Africa,medium,,,,Burned,,,2002.5,Forest,IRGA
-6909.0,10520,Burkina Faso,Tiogo,,12.23,2.7,Benin,Africa,mismatch,lon_sign,50.09956616592138,12.23,-2.7,,Africa,medium,,,,Grazing,,,2002.5,Forest,IRGA
+6907.0,10520,Burkina Faso,Tiogo,,12.23,2.7,Benin,Africa,mismatch,near_border,49.98724595862738,,,,,low,,,,None,,,2002.5,Forest,IRGA
+6908.0,10520,Burkina Faso,Tiogo,,12.23,2.7,Benin,Africa,mismatch,near_border,49.98724595862738,,,,,low,,,,Burned,,,2002.5,Forest,IRGA
+6909.0,10520,Burkina Faso,Tiogo,,12.23,2.7,Benin,Africa,mismatch,near_border,49.98724595862738,,,,,low,,,,Grazing,,,2002.5,Forest,IRGA
 6910.0,11751,China,Tibet,Datong river basin,37.62,101.32,China,Asia,match,,0.0,,,,,,,,663.02,Grazing,,,1998.5,Grassland,Gas chromatography
 6911.0,11751,China,Tibet,Datong river basin,37.62,101.32,China,Asia,match,,0.0,,,,,,,,462.02,Grazing,,,1998.5,Grassland,Gas chromatography
 6912.0,11751,China,Tibet,Datong river basin,37.62,101.32,China,Asia,match,,0.0,,,,,,,,660.63,Grazing,,,1998.5,Grassland,Gas chromatography
@@ -6692,8 +6692,8 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 6964.0,11778,China,Heilongjiang,Maoershan,45.4,127.67,China,Asia,match,,0.0,,,,,,,,,None,,0.5,2008.5,Forest,Gas chromatography
 6965.0,11778,China,Heilongjiang,Maoershan,45.4,127.67,China,Asia,match,,0.0,,,,,,,,,None,,0.5,2008.5,Forest,Gas chromatography
 6966.0,11778,China,Heilongjiang,Maoershan,45.4,127.67,China,Asia,match,,0.0,,,,,,,,,None,,0.5,2008.5,Forest,Gas chromatography
-6967.0,11780,China,Yunnan,Xishuangbanna,21.5,100.83,Myanmar,Asia,mismatch,near_border,10.859443456389103,,,,,low,,,1006.64,None,,1.0,2008.5,Forest,IRGA
-6968.0,11780,China,Yunnan,Xishuangbanna,21.5,100.83,Myanmar,Asia,mismatch,near_border,10.859443456389103,,,,,low,,,779.57,None,,1.0,2008.5,Forest,IRGA
+6967.0,11780,China,Yunnan,Xishuangbanna,21.5,100.83,Myanmar,Asia,mismatch,near_border,10.83140692331932,,,,,low,,,1006.64,None,,1.0,2008.5,Forest,IRGA
+6968.0,11780,China,Yunnan,Xishuangbanna,21.5,100.83,Myanmar,Asia,mismatch,near_border,10.83140692331932,,,,,low,,,779.57,None,,1.0,2008.5,Forest,IRGA
 6969.0,11781,China,Hubei,Shennongjia,31.35,110.52,China,Asia,match,,0.0,,,,,,,,615.71,None,,1.0,2009.5,Forest,IRGA
 6970.0,11781,China,Hubei,Shennongjia,31.32,110.48,China,Asia,match,,0.0,,,,,,,,677.28,None,,1.0,2009.5,Forest,IRGA
 6971.0,11781,China,Hubei,Shennongjia,31.3,110.52,China,Asia,match,,0.0,,,,,,,,657.72,None,,1.0,2009.5,Forest,IRGA
@@ -6709,7 +6709,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 6981.0,11786,China,Yunnan,Xishuangbanna,21.93,101.27,China,Asia,match,,0.0,,,,,,,,1273.64,None,,1.0,2003.0,Forest,Gas chromatography
 6982.0,11786,China,Yunnan,Xishuangbanna,21.93,101.27,China,Asia,match,,0.0,,,,,,,,1456.36,None,,1.0,2003.0,Forest,Gas chromatography
 6983.0,11789,China,Sichuan,Muchuan county,28.77,103.8,China,Asia,match,,0.0,,,,,,,,831.0,None,,0.67,2006.0,Forest,Alkali absorption
-6984.0,11790,China,Jiangsu,Zhoushang,32.33,119.67,China (coast),Asia,match_tolerance,,0.4070710085466292,,,,,,,,1500.0,None,,0.58,2001.5,Forest,Gas chromatography
+6984.0,11790,China,Jiangsu,Zhoushang,32.33,119.67,China (coast),Asia,match_tolerance,,0.40155782383801825,,,,,,,,1500.0,None,,0.58,2001.5,Forest,Gas chromatography
 6985.0,11793,China,Jiangsu,Nanjing Forestry University,31.98,119.23,China,Asia,match,,0.0,,,,,,,,598.6,None,,1.0,2004.0,Forest,IRGA
 6986.0,11793,China,Jiangsu,Nanjing Forestry University,31.98,119.23,China,Asia,match,,0.0,,,,,,,,547.5,None,,1.0,2004.0,Forest,IRGA
 6987.0,11794,China,Hunan,Tianjiling Changsha,28.1,113.02,China,Asia,match,,0.0,,,,,,,,418.52,Litter manipulation,,1.0,2007.0,Forest,IRGA
@@ -6722,9 +6722,9 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 6994.0,11798,China,Sichuan,Yanting,31.27,105.45,China,Asia,match,,0.0,,,,,,,,347.7,None,,1.0,2004.5,Agriculture,Gas chromatography
 6995.0,11800,China,,Huitong,26.8,109.5,China,Asia,match,,0.0,,,,,,,,515.48,None,,1.0,2002.5,Forest,IRGA
 6996.0,11800,China,,Huitong,26.8,109.5,China,Asia,match,,0.0,,,,,,,,286.82,None,,1.0,2002.5,Forest,IRGA
-6997.0,11801,China,Fujian,Huian county,24.92,118.92,China (coast),Asia,match_tolerance,,1.3443968873102654,,,,,,,,1026.69,None,,1.0,2006.5,Forest,IRGA
-6998.0,11801,China,Fujian,Huian county,24.92,118.92,China (coast),Asia,match_tolerance,,1.3443968873102654,,,,,,,,1468.33,None,,1.0,2006.5,Forest,IRGA
-6999.0,11801,China,Fujian,Huian county,24.92,118.92,China (coast),Asia,match_tolerance,,1.3443968873102654,,,,,,,,1210.99,None,,1.0,2006.5,Forest,IRGA
+6997.0,11801,China,Fujian,Huian county,24.92,118.92,China (coast),Asia,match_tolerance,,1.3443684039252397,,,,,,,,1026.69,None,,1.0,2006.5,Forest,IRGA
+6998.0,11801,China,Fujian,Huian county,24.92,118.92,China (coast),Asia,match_tolerance,,1.3443684039252397,,,,,,,,1468.33,None,,1.0,2006.5,Forest,IRGA
+6999.0,11801,China,Fujian,Huian county,24.92,118.92,China (coast),Asia,match_tolerance,,1.3443684039252397,,,,,,,,1210.99,None,,1.0,2006.5,Forest,IRGA
 7000.0,11802,China,Sichuan,Yaan,29.97,102.98,China,Asia,match,,0.0,,,,,,,,352.41,None,,1.0,2008.0,Forest,IRGA
 7001.0,11802,China,Sichuan,Yaan,29.97,102.98,China,Asia,match,,0.0,,,,,,,,400.77,None,,1.0,2008.0,Forest,IRGA
 7002.0,11802,China,Sichuan,Yaan,29.97,102.98,China,Asia,match,,0.0,,,,,,,,510.27,None,,1.0,2008.0,Forest,IRGA
@@ -6990,7 +6990,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 7262.0,11949,China,Inner Mongolia,Hulunber,49.32,120.05,China,Asia,match,,0.0,,,,,,,,553.2,None,,1.0,2011.0,Grassland,IRGA
 7263.0,11950,South Africa,Khawa,Khawa,-26.25,21.35,Botswana,Africa,mismatch,unclear,52.41150310934553,,,,,low,,,,None,,0.25,2008.0,Grassland,Gas chromatography
 7264.0,11950,South Africa,Tsabong,Tsabong,-25.57,22.25,Botswana,Africa,mismatch,unclear,53.855649209088334,,,,,low,,,,None,,0.25,2008.0,Grassland,Gas chromatography
-7265.0,11950,South Africa,Tshane,Tshane,-24.12,21.52,Botswana,Africa,mismatch,unclear,154.90786533006582,,,,,low,,,,Grazing,,0.25,2008.0,Grassland,Gas chromatography
+7265.0,11950,South Africa,Tshane,Tshane,-24.12,21.52,Botswana,Africa,mismatch,unclear,154.6655504537493,,,,,low,,,,Grazing,,0.25,2008.0,Grassland,Gas chromatography
 7266.0,11950,South Africa,Takatshwaane,Takatshwaane,-22.47,21.57,Botswana,Africa,mismatch,unclear,301.00785012612835,,,,,low,,,,Grazing,,0.25,2008.0,Grassland,Gas chromatography
 7267.0,11950,South Africa,Ngami,Ngami,-20.44,22.3,Botswana,Africa,mismatch,unclear,535.3122900109043,,,,,low,,,,Grazing,,0.25,2008.0,Savanna,Gas chromatography
 7268.0,11951,China,Tibet,Gongga Mountain,30.0,101.83,China,Asia,match,,0.0,,,,,,,,908.24,None,,1.0,2008.5,Forest,IRGA
@@ -7104,7 +7104,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 7398.0,8537,China,Hebei,Saihanba National Forest Park,42.412,117.2474,China,Asia,match,,0.0,,,,,,,,427.0,None,Q01,0.416,2011.0,Forest,IRGA
 7399.0,8537,China,Hebei,Saihanba National Forest Park,42.412,117.2474,China,Asia,match,,0.0,,,,,,,,448.0,None,Q01,0.416,2011.0,Forest,IRGA
 7400.0,8537,China,Hebei,Saihanba National Forest Park,42.412,117.2474,China,Asia,match,,0.0,,,,,,,,468.0,None,Q01,0.416,2011.0,Forest,IRGA
-7401.0,8568,China,Guangxi,Shi Kang township,21.744,104.314,Vietnam,Asia,mismatch,coords_wrong,92.37572689177267,,,,,medium,Region names 'guangxi' in the stated country,,1022.72,None,,1.0,2013.5,Forest,IRGA
+7401.0,8568,China,Guangxi,Shi Kang township,21.744,104.314,Vietnam,Asia,mismatch,coords_wrong,92.07432931962299,,,,,medium,Region names 'guangxi' in the stated country,,1022.72,None,,1.0,2013.5,Forest,IRGA
 7402.0,8573,China,Shandong,Agronomy Station of Shandong Agricultural  University,36.1719,117.1508,China,Asia,match,,0.0,,,,,,,,,Litter manipulation,Q01,0.33,2012.5,Agriculture,IRGA
 7403.0,8573,China,Shandong,Agronomy Station of Shandong Agricultural  University,36.1719,117.1508,China,Asia,match,,0.0,,,,,,,,,Litter manipulation,Q01,0.33,2012.5,Agriculture,IRGA
 7404.0,8573,China,Shandong,Agronomy Station of Shandong Agricultural  University,36.1719,117.1508,China,Asia,match,,0.0,,,,,,,,,Litter manipulation,Q01,0.33,2012.5,Agriculture,IRGA
@@ -7136,12 +7136,12 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 7435.0,9594,China,Guangdong province,Heshan National Field Research Station,22.617,112.333,China,Asia,match,,0.0,,,,,,,,551.93,"Litter manipulation, fertilized",Q01,1.0,2010.5,Forest,IRGA
 7436.0,9562,Austria,Northern Austria,Zobelboden,47.8417,14.4417,Austria,Europe,match,,0.0,,,,,,,,751.0,None,,1.0,2011.5,Forest,IRGA
 7437.0,9562,Austria,Northern Austria,Zobelboden,47.8417,14.4417,Austria,Europe,match,,0.0,,,,,,,,933.0,None,,1.0,2011.5,Forest,IRGA
-7438.0,9548,China,Jiangsu,Nanjing Agricultural University,33.316,120.75,China (coast),Asia,match_tolerance,,4.235168776930549,,,,,,,,278.0,None,Q01,1.0,2009.8,Agriculture,Gas chromatography
-7439.0,9548,China,Jiangsu,Nanjing Agricultural University,33.316,120.75,China (coast),Asia,match_tolerance,,4.235168776930549,,,,,,,,299.0,Fertilized,Q01,1.0,2009.8,Agriculture,Gas chromatography
-7440.0,9548,China,Jiangsu,Nanjing Agricultural University,33.316,120.75,China (coast),Asia,match_tolerance,,4.235168776930549,,,,,,,,367.0,Fertilized,Q01,1.0,2009.8,Agriculture,Gas chromatography
-7441.0,9548,China,Jiangsu,Nanjing Agricultural University,33.316,120.75,China (coast),Asia,match_tolerance,,4.235168776930549,,,,,,,,293.0,None,Q01,1.0,2009.8,Agriculture,Gas chromatography
-7442.0,9548,China,Jiangsu,Nanjing Agricultural University,33.316,120.75,China (coast),Asia,match_tolerance,,4.235168776930549,,,,,,,,300.0,Fertilized,Q01,1.0,2009.8,Agriculture,Gas chromatography
-7443.0,9548,China,Jiangsu,Nanjing Agricultural University,33.316,120.75,China (coast),Asia,match_tolerance,,4.235168776930549,,,,,,,,312.0,Fertilized,Q01,1.0,2009.8,Agriculture,Gas chromatography
+7438.0,9548,China,Jiangsu,Nanjing Agricultural University,33.316,120.75,China (coast),Asia,match_tolerance,,4.2040719875365316,,,,,,,,278.0,None,Q01,1.0,2009.8,Agriculture,Gas chromatography
+7439.0,9548,China,Jiangsu,Nanjing Agricultural University,33.316,120.75,China (coast),Asia,match_tolerance,,4.2040719875365316,,,,,,,,299.0,Fertilized,Q01,1.0,2009.8,Agriculture,Gas chromatography
+7440.0,9548,China,Jiangsu,Nanjing Agricultural University,33.316,120.75,China (coast),Asia,match_tolerance,,4.2040719875365316,,,,,,,,367.0,Fertilized,Q01,1.0,2009.8,Agriculture,Gas chromatography
+7441.0,9548,China,Jiangsu,Nanjing Agricultural University,33.316,120.75,China (coast),Asia,match_tolerance,,4.2040719875365316,,,,,,,,293.0,None,Q01,1.0,2009.8,Agriculture,Gas chromatography
+7442.0,9548,China,Jiangsu,Nanjing Agricultural University,33.316,120.75,China (coast),Asia,match_tolerance,,4.2040719875365316,,,,,,,,300.0,Fertilized,Q01,1.0,2009.8,Agriculture,Gas chromatography
+7443.0,9548,China,Jiangsu,Nanjing Agricultural University,33.316,120.75,China (coast),Asia,match_tolerance,,4.2040719875365316,,,,,,,,312.0,Fertilized,Q01,1.0,2009.8,Agriculture,Gas chromatography
 7444.0,9574,China,Changwu county,State Key Agro-Ecological Experimental Station,35.2,107.667,China,Asia,match,,0.0,,,,,,,,693.5,None,,1.0,2012.0,Agriculture,IRGA
 7445.0,9574,China,Changwu county,State Key Agro-Ecological Experimental Station,35.2,107.667,China,Asia,match,,0.0,,,,,,,,759.2,None,,1.0,2012.0,Agriculture,IRGA
 7446.0,9574,China,Changwu county,State Key Agro-Ecological Experimental Station,35.2,107.667,China,Asia,match,,0.0,,,,,,,,646.05,None,,1.0,2012.0,Agriculture,IRGA
@@ -7391,7 +7391,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 7752.0,11024,South Africa,Pietermaritzburg,Ukulinga Farm,-30.4,24.4,South Africa,Africa,match,,0.0,,,,,,,,885.54,Burned,Q01,1.0,2014.0,Grassland,IRGA
 7753.0,11024,South Africa,Pietermaritzburg,Ukulinga Farm,-30.4,24.4,South Africa,Africa,match,,0.0,,,,,,,,912.03,Mowed,Q01,1.0,2014.0,Grassland,IRGA
 7754.0,11033,Czechia,Ore Mts.,,50.59,15.253,Czechia,Europe,match,,0.0,,,,,,,,987.0,None,,0.66,,Forest,IRGA
-7755.0,11033,Czechia,Ore Mts.,,50.589,13.267,Germany,Europe,match_tolerance,,1.4357249184780485,,,,,,,,901.0,None,,0.66,,Forest,IRGA
+7755.0,11033,Czechia,Ore Mts.,,50.589,13.267,Germany,Europe,match_tolerance,,1.3570036138038564,,,,,,,,901.0,None,,0.66,,Forest,IRGA
 7756.0,11038,China,Hubei Province,Tian'e Zhou Wetland Reserve,29.8,112.55,China,Asia,match,,0.0,,,,,,,,725.64,None,Q01,1.0,2010.0,Wetland,IRGA
 7757.0,11038,China,Hubei Province,Tian'e Zhou Wetland Reserve,29.8,112.55,China,Asia,match,,0.0,,,,,,,,668.56,None,Q01,1.0,2010.0,Wetland,IRGA
 7758.0,11034,Canada,Western,Anzac,56.4,-111.03,Canada,North America,match,,0.0,,,,,,,,,None,Q01,0.33,2008.0,Tundra,IRGA
@@ -7449,7 +7449,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 7810.0,11058,Sudan,Demokeya,Sahel,13.28,30.48,Sudan,Africa,match,,0.0,,,,,,,,,None,Q10,,2008.5,Desert,IRGA
 7811.0,11058,Sudan,Demokeya,Sahel,13.28,30.48,Sudan,Africa,match,,0.0,,,,,,,,,None,Q10,,2009.5,Desert,IRGA
 7812.0,11058,Mali,Agoufou,Sahel,15.34,1.48,Mali,Africa,match,,0.0,,,,,,,,,None,Q10,,2007.5,Desert,IRGA
-7813.0,11058,Mali,Kelma,Sahel,15.22,1.57,Niger,Africa,match_tolerance,,7.962481795462192,,,,,,,,,None,Q10,,2007.5,Grassland,IRGA
+7813.0,11058,Mali,Kelma,Sahel,15.22,1.57,Niger,Africa,match_tolerance,,7.924073932671251,,,,,,,,,None,Q10,,2007.5,Grassland,IRGA
 7814.0,11058,Senegal,Dahra,Sahel,15.4,15.43,Chad,Africa,mismatch,lon_sign,2901.863041596891,15.4,-15.43,,Africa,medium,other transforms also land in stated country: swap_signs,,,None,Q10,,2010.5,Grassland,IRGA
 7815.0,11058,Senegal,Dahra,Sahel,15.4,15.43,Chad,Africa,mismatch,lon_sign,2901.863041596891,15.4,-15.43,,Africa,medium,other transforms also land in stated country: swap_signs,,,None,Q10,,2011.5,Grassland,IRGA
 7816.0,11058,Senegal,Dahra,Sahel,15.4,15.43,Chad,Africa,mismatch,lon_sign,2901.863041596891,15.4,-15.43,,Africa,medium,other transforms also land in stated country: swap_signs,,,None,Q10,,2012.5,Grassland,IRGA
@@ -7541,10 +7541,10 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 7903.0,11082,Brazil,Uberlândia,Pedology Laboratory,-19.216,-48.14,Brazil,South & Central America,match,,0.0,,,,,,,,,None,,,2013.5,Agriculture,IRGA
 7904.0,11082,Brazil,Uberlândia,Pedology Laboratory,-19.216,-48.14,Brazil,South & Central America,match,,0.0,,,,,,,,,None,,,2013.5,Agriculture,IRGA
 7905.0,11082,Brazil,Uberlândia,Pedology Laboratory,-19.216,-48.14,Brazil,South & Central America,match,,0.0,,,,,,,,,None,,,2013.5,Agriculture,IRGA
-7906.0,11076,Turkey,Istanbul Province,Istanbul University,41.17,29.76,Turkey (coast),Asia,match_tolerance,,0.7697599982124951,,,,,,,,580.35,None,,0.5,2011.5,Forest,Alkali absorption
-7907.0,11076,Turkey,Istanbul Province,Istanbul University,41.17,29.76,Turkey (coast),Asia,match_tolerance,,0.7697599982124951,,,,,,,,642.4,Thinned,,0.5,2011.5,Forest,Alkali absorption
-7908.0,11076,Turkey,Istanbul Province,Istanbul University,41.17,29.76,Turkey (coast),Asia,match_tolerance,,0.7697599982124951,,,,,,,,675.25,None,,0.41,2012.5,Forest,Alkali absorption
-7909.0,11076,Turkey,Istanbul Province,Istanbul University,41.17,29.76,Turkey (coast),Asia,match_tolerance,,0.7697599982124951,,,,,,,,646.05,Thinned,,0.41,2012.5,Forest,Alkali absorption
+7906.0,11076,Turkey,Istanbul Province,Istanbul University,41.17,29.76,Turkey (coast),Asia,match_tolerance,,0.7655565915408193,,,,,,,,580.35,None,,0.5,2011.5,Forest,Alkali absorption
+7907.0,11076,Turkey,Istanbul Province,Istanbul University,41.17,29.76,Turkey (coast),Asia,match_tolerance,,0.7655565915408193,,,,,,,,642.4,Thinned,,0.5,2011.5,Forest,Alkali absorption
+7908.0,11076,Turkey,Istanbul Province,Istanbul University,41.17,29.76,Turkey (coast),Asia,match_tolerance,,0.7655565915408193,,,,,,,,675.25,None,,0.41,2012.5,Forest,Alkali absorption
+7909.0,11076,Turkey,Istanbul Province,Istanbul University,41.17,29.76,Turkey (coast),Asia,match_tolerance,,0.7655565915408193,,,,,,,,646.05,Thinned,,0.41,2012.5,Forest,Alkali absorption
 7910.0,11077,China,Guangxi Zhuang Autonomous Region,Chinese Academy of Forestry,22.1,106.77,China,Asia,match,,0.0,,,,,,,,,None,,0.91,2012.0,Agriculture,
 7911.0,11077,China,Guangxi Zhuang Autonomous Region,Chinese Academy of Forestry,22.1,106.77,China,Asia,match,,0.0,,,,,,,,,None,,0.91,2012.0,Agriculture,
 7912.0,11077,China,Guangxi Zhuang Autonomous Region,Chinese Academy of Forestry,22.1,106.77,China,Asia,match,,0.0,,,,,,,,,None,,0.91,2012.0,Agriculture,
@@ -7560,11 +7560,11 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 7922.0,11094,Switzerland,Swiss Alps,Nant Valley,46.22,7.1,Switzerland,Europe,match,,0.0,,,,,,,,,None,Q01,0.33,2012.5,Tundra,IRGA
 7923.0,11094,Switzerland,Swiss Alps,Nant Valley,46.22,7.1,Switzerland,Europe,match,,0.0,,,,,,,,,None,Q01,0.33,2012.5,Tundra,IRGA
 7924.0,11094,Switzerland,Swiss Alps,Nant Valley,46.22,7.1,Switzerland,Europe,match,,0.0,,,,,,,,,None,Q01,0.33,2012.5,Tundra,IRGA
-7925.0,11098,Serbia,,Bugac,46.69,19.6,Hungary,Europe,mismatch,unclear,57.507469822738486,,,,,low,,,,None,,0.5,2010.5,Grassland,EC
-7926.0,11098,Serbia,,Bugac,46.69,19.6,Hungary,Europe,mismatch,unclear,57.507469822738486,,,,,low,,,,None,,0.5,2010.5,Grassland,EC
-7927.0,11098,Serbia,,Bugac,46.69,19.6,Hungary,Europe,mismatch,unclear,57.507469822738486,,,,,low,,,,None,,0.5,2010.5,Grassland,EC
-7928.0,11098,Serbia,,Bugac,46.69,19.6,Hungary,Europe,mismatch,unclear,57.507469822738486,,,,,low,,,,None,,0.5,2010.5,Grassland,EC
-7929.0,11098,Serbia,,Bugac,46.69,19.6,Hungary,Europe,mismatch,unclear,57.507469822738486,,,,,low,,,,None,,0.5,2010.5,Grassland,EC
+7925.0,11098,Serbia,,Bugac,46.69,19.6,Hungary,Europe,mismatch,unclear,57.48994892708452,,,,,low,,,,None,,0.5,2010.5,Grassland,EC
+7926.0,11098,Serbia,,Bugac,46.69,19.6,Hungary,Europe,mismatch,unclear,57.48994892708452,,,,,low,,,,None,,0.5,2010.5,Grassland,EC
+7927.0,11098,Serbia,,Bugac,46.69,19.6,Hungary,Europe,mismatch,unclear,57.48994892708452,,,,,low,,,,None,,0.5,2010.5,Grassland,EC
+7928.0,11098,Serbia,,Bugac,46.69,19.6,Hungary,Europe,mismatch,unclear,57.48994892708452,,,,,low,,,,None,,0.5,2010.5,Grassland,EC
+7929.0,11098,Serbia,,Bugac,46.69,19.6,Hungary,Europe,mismatch,unclear,57.48994892708452,,,,,low,,,,None,,0.5,2010.5,Grassland,EC
 7930.0,11086,Korea,Gyeonggi,Ansan,37.286,137.921,,Sea,mismatch,in_sea,536.0709844105494,,,,,low,Region names 'gyeonggi' in the stated country,,,None,,0.6,2012.5,Agriculture,Gas chromatography
 7931.0,11086,Korea,Gyeonggi,Ansan,37.286,137.921,,Sea,mismatch,in_sea,536.0709844105494,,,,,low,Region names 'gyeonggi' in the stated country,,,None,,0.6,2012.5,Agriculture,Gas chromatography
 7932.0,11086,Korea,Gyeonggi,Ansan,37.286,137.921,,Sea,mismatch,in_sea,536.0709844105494,,,,,low,Region names 'gyeonggi' in the stated country,,,None,,0.6,2012.5,Agriculture,Gas chromatography
@@ -7880,8 +7880,8 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 8282.0,8752,Russia,Seida,,67.05,62.95,Russia,Asia,match,,0.0,,,,,,,,,None,,0.25,2007.5,Tundra,IRGA
 8283.0,8752,Russia,Seida,,67.05,62.95,Russia,Asia,match,,0.0,,,,,,,,,None,,0.25,2007.5,Tundra,IRGA
 8284.0,8760,China,Chongqing,Southwest University,30.433,106.433,China,Asia,match,,0.0,,,,,,,,,None,,0.5,2009.5,Agriculture,Gas chromatography
-8285.0,8824,USA,Maryland,,39.0,-76.5,United States of America (coast),North America,match_tolerance,,0.2828025706891316,,,,,,,,2153.0,None,,1.0,2011.0,Forest,Gas chromatography
-8286.0,8824,USA,Maryland,,39.0,-76.5,United States of America (coast),North America,match_tolerance,,0.2828025706891316,,,,,,,,4230.0,None,,1.0,2011.0,Grassland,Gas chromatography
+8285.0,8824,USA,Maryland,,39.0,-76.5,United States of America (coast),North America,match_tolerance,,0.2747522761364459,,,,,,,,2153.0,None,,1.0,2011.0,Forest,Gas chromatography
+8286.0,8824,USA,Maryland,,39.0,-76.5,United States of America (coast),North America,match_tolerance,,0.2747522761364459,,,,,,,,4230.0,None,,1.0,2011.0,Grassland,Gas chromatography
 8287.0,8847,Ireland,,Oak Park Research Centre,53.433,-6.9,Ireland,Europe,match,,0.0,,,,,,,,961.7,None,,1.0,2009.5,Agriculture,IRGA
 8288.0,8847,Ireland,,Oak Park Research Centre,53.433,-6.9,Ireland,Europe,match,,0.0,,,,,,,,968.9,Reduced tillage,,1.0,2009.5,Agriculture,IRGA
 8289.0,8851,Finland,,SMEARII Station,61.866,24.283,Finland,Europe,match,,0.0,,,,,,,,1920.24,None,Q01,0.4,2008.5,Forest,IRGA
@@ -8012,18 +8012,18 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 8424.0,11243,China,Heilongjiang,Liangshui National Nature Reserve,47.18,128.89,China,Asia,match,,0.0,,,,,,,,,None,,0.5,2013.5,Forest,IRGA
 8425.0,11243,China,Heilongjiang,Liangshui National Nature Reserve,47.18,128.89,China,Asia,match,,0.0,,,,,,,,,None,,0.5,2013.5,Forest,IRGA
 8426.0,11243,China,Heilongjiang,Liangshui National Nature Reserve,47.18,128.89,China,Asia,match,,0.0,,,,,,,,,None,,0.5,2013.5,Forest,IRGA
-8427.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,171.89071812543244,,,,,low,,,,Irrigated,,0.11,2009.5,Grassland,IRGA
-8428.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,171.89071812543244,,,,,low,,,,None,,0.11,2009.5,Grassland,IRGA
-8429.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,171.89071812543244,,,,,low,,,,Irrigated,,0.11,2010.5,Grassland,IRGA
-8430.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,171.89071812543244,,,,,low,,,,None,,0.11,2010.5,Grassland,IRGA
-8431.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,171.89071812543244,,,,,low,,,,Irrigated,,0.19,2011.5,Grassland,IRGA
-8432.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,171.89071812543244,,,,,low,,,,None,,0.19,2011.5,Grassland,IRGA
-8433.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,171.89071812543244,,,,,low,,,,Grazing,,0.19,2009.5,Grassland,IRGA
-8434.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,171.89071812543244,,,,,low,,,,None,,0.19,2009.5,Grassland,IRGA
-8435.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,171.89071812543244,,,,,low,,,,Grazing,,0.06,2010.5,Grassland,IRGA
-8436.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,171.89071812543244,,,,,low,,,,None,,0.06,2010.5,Grassland,IRGA
-8437.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,171.89071812543244,,,,,low,,,,Grazing,,0.06,2011.5,Grassland,IRGA
-8438.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,171.89071812543244,,,,,low,,,,None,,0.06,2011.5,Grassland,IRGA
+8427.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,165.97455738727024,,,,,low,,,,Irrigated,,0.11,2009.5,Grassland,IRGA
+8428.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,165.97455738727024,,,,,low,,,,None,,0.11,2009.5,Grassland,IRGA
+8429.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,165.97455738727024,,,,,low,,,,Irrigated,,0.11,2010.5,Grassland,IRGA
+8430.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,165.97455738727024,,,,,low,,,,None,,0.11,2010.5,Grassland,IRGA
+8431.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,165.97455738727024,,,,,low,,,,Irrigated,,0.19,2011.5,Grassland,IRGA
+8432.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,165.97455738727024,,,,,low,,,,None,,0.19,2011.5,Grassland,IRGA
+8433.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,165.97455738727024,,,,,low,,,,Grazing,,0.19,2009.5,Grassland,IRGA
+8434.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,165.97455738727024,,,,,low,,,,None,,0.19,2009.5,Grassland,IRGA
+8435.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,165.97455738727024,,,,,low,,,,Grazing,,0.06,2010.5,Grassland,IRGA
+8436.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,165.97455738727024,,,,,low,,,,None,,0.06,2010.5,Grassland,IRGA
+8437.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,165.97455738727024,,,,,low,,,,Grazing,,0.06,2011.5,Grassland,IRGA
+8438.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,mismatch,unclear,165.97455738727024,,,,,low,,,,None,,0.06,2011.5,Grassland,IRGA
 8439.0,11246,China,Fuijan,Xiayang Forest,26.8,117.97,China,Asia,match,,0.0,,,,,,,,,None,,,2012.0,Forest,
 8440.0,11246,China,Fuijan,Xiayang Forest,26.8,117.97,China,Asia,match,,0.0,,,,,,,,,None,,,2012.0,Forest,
 8441.0,11247,Italy,South Tyrol,Vadena,46.382,11.288,Italy,Europe,match,,0.0,,,,,,,,660.65,None,,1.0,2014.0,Agriculture,IRGA
@@ -8546,9 +8546,9 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 8961.0,9310,China,Sichuan,Yanting,31.27,105.48,China,Asia,match,,0.0,,,,,,,,466.8,None,,1.0,2011.5,Agriculture,Gas chromatography
 8962.0,9355,Italy,Novara,Prato Sesia,45.65,8.35,Italy,Europe,match,,0.0,,,,,,,,,None,,0.75,2012.0,Forest,IRGA
 8963.0,9355,UK,Pulborough,West Sussex,50.95,-0.5,England,Europe,match,,0.0,,,,,,,,,None,,0.75,2012.0,Forest,IRGA
-8964.0,9370,USA,Florida,Ona,27.4,-82.93,,Sea,mismatch,offshore_near,23.136893381329678,,,,,low,Region names 'florida' in the stated country,,,None,,0.58,2013.0,Grassland,IRGA
-8965.0,9370,USA,Florida,Ona,27.4,-82.93,,Sea,mismatch,offshore_near,23.136893381329678,,,,,low,Region names 'florida' in the stated country,,,None,,0.58,2013.0,Grassland,IRGA
-8966.0,9370,USA,Florida,Ona,27.4,-82.93,,Sea,mismatch,offshore_near,23.136893381329678,,,,,low,Region names 'florida' in the stated country,,,None,,0.58,2013.0,Grassland,IRGA
+8964.0,9370,USA,Florida,Ona,27.4,-82.93,,Sea,mismatch,offshore_near,23.079451344630925,,,,,low,Region names 'florida' in the stated country,,,None,,0.58,2013.0,Grassland,IRGA
+8965.0,9370,USA,Florida,Ona,27.4,-82.93,,Sea,mismatch,offshore_near,23.079451344630925,,,,,low,Region names 'florida' in the stated country,,,None,,0.58,2013.0,Grassland,IRGA
+8966.0,9370,USA,Florida,Ona,27.4,-82.93,,Sea,mismatch,offshore_near,23.079451344630925,,,,,low,Region names 'florida' in the stated country,,,None,,0.58,2013.0,Grassland,IRGA
 8967.0,9373,Italy,Viterbo,University of Tuscia,45.42,12.07,Italy,Europe,match,,0.0,,,,,,,,,None,,0.33,2012.5,Agriculture,IRGA
 8968.0,9373,Italy,Viterbo,University of Tuscia,45.42,12.07,Italy,Europe,match,,0.0,,,,,,,,,Cover crop,,0.33,2012.5,Agriculture,IRGA
 8969.0,9373,Italy,Viterbo,University of Tuscia,45.42,12.07,Italy,Europe,match,,0.0,,,,,,,,,Litter manipulation,,0.33,2012.5,Agriculture,IRGA
@@ -8561,8 +8561,8 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 8976.0,9375,South Korea,Jinju,,36.83,128.43,South Korea,Asia,match,,0.0,,,,,,,,,Litter manipulation,,0.33,2010.0,Agriculture,Gas chromatography
 8977.0,9451,China,Hunan,Huitong Experimental Station of Forest Ecology,26.92,109.98,China,Asia,match,,0.0,,,,,,,,711.45,None,,1.0,2013.0,Forest,IRGA
 8978.0,9451,China,Hunan,Huitong Experimental Station of Forest Ecology,26.92,109.98,China,Asia,match,,0.0,,,,,,,,673.61,Pruned,,1.0,2013.0,Agriculture,IRGA
-8979.0,9453,Signapore,North Singapore,Singtel-Kranji Radio Transmission Station,1.43,103.73,Singapore (coast),Asia,match_tolerance,,0.06598499141835988,,,,,,,,,None,,0.5,2012.5,Grassland,IRGA
-8980.0,9453,Signapore,North Singapore,Singtel-Kranji Radio Transmission Station,1.43,103.73,Singapore (coast),Asia,match_tolerance,,0.06598499141835988,,,,,,,,,Clip,,0.5,2012.5,Grassland,IRGA
+8979.0,9453,Signapore,North Singapore,Singtel-Kranji Radio Transmission Station,1.43,103.73,Singapore (coast),Asia,match_tolerance,,0.0656214255162199,,,,,,,,,None,,0.5,2012.5,Grassland,IRGA
+8980.0,9453,Signapore,North Singapore,Singtel-Kranji Radio Transmission Station,1.43,103.73,Singapore (coast),Asia,match_tolerance,,0.0656214255162199,,,,,,,,,Clip,,0.5,2012.5,Grassland,IRGA
 8981.0,9383,Canada,Quebec,Baie Comeau,49.12,-68.17,Canada (coast),North America,match_tolerance,,0.9451989802013014,,,,,,,,,None,,0.25,2011.0,Forest,IRGA
 8982.0,9383,Canada,Quebec,Baie Comeau,49.12,-68.17,Canada (coast),North America,match_tolerance,,0.9451989802013014,,,,,,,,,None,,0.25,2011.0,Forest,IRGA
 8983.0,9383,Canada,Quebec,Baie Comeau,49.12,-68.17,Canada (coast),North America,match_tolerance,,0.9451989802013014,,,,,,,,,None,,0.25,2011.0,Forest,IRGA
@@ -8824,10 +8824,10 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 9242.0,10533,Austria,Böbelboden,Northern Limestone Alps,47.83,14.43,Austria,Europe,match,,0.0,,,,,,,,890.0,None,,0.83,2014.0,Forest,IRGA
 9243.0,10533,Austria,Böbelboden,Northern Limestone Alps,47.83,14.43,Austria,Europe,match,,0.0,,,,,,,,850.0,Clearcut,,0.83,2014.0,Forest,IRGA
 9244.0,10533,Austria,Böbelboden,Northern Limestone Alps,47.83,14.43,Austria,Europe,match,,0.0,,,,,,,,890.0,Clearcut,,0.83,2014.0,Forest,IRGA
-9245.0,10536,China,Taiwan,Nantou County,23.68,120.8,Taiwan,Asia,match_political,,208.5556481879277,,,,,,,,1121.0,None,,1.0,2012.0,Forest,IRGA
-9246.0,10536,China,Taiwan,Nantou County,23.68,120.8,Taiwan,Asia,match_political,,208.5556481879277,,,,,,,,1129.0,None,,1.0,2013.0,Forest,IRGA
-9247.0,10536,China,Taiwan,Nantou County,23.68,120.8,Taiwan,Asia,match_political,,208.5556481879277,,,,,,,,1200.0,None,,1.0,2014.0,Forest,IRGA
-9248.0,10536,China,Taiwan,Nantou County,23.68,120.8,Taiwan,Asia,match_political,,208.5556481879277,,,,,,,,1115.0,None,,1.0,2015.0,Forest,IRGA
+9245.0,10536,China,Taiwan,Nantou County,23.68,120.8,Taiwan,Asia,match_political,,208.1813798339515,,,,,,,,1121.0,None,,1.0,2012.0,Forest,IRGA
+9246.0,10536,China,Taiwan,Nantou County,23.68,120.8,Taiwan,Asia,match_political,,208.1813798339515,,,,,,,,1129.0,None,,1.0,2013.0,Forest,IRGA
+9247.0,10536,China,Taiwan,Nantou County,23.68,120.8,Taiwan,Asia,match_political,,208.1813798339515,,,,,,,,1200.0,None,,1.0,2014.0,Forest,IRGA
+9248.0,10536,China,Taiwan,Nantou County,23.68,120.8,Taiwan,Asia,match_political,,208.1813798339515,,,,,,,,1115.0,None,,1.0,2015.0,Forest,IRGA
 9249.0,10539,China,Yunnan,Naban River Watershed National Nature Reserve,22.2,100.63,China,Asia,match,,0.0,,,,,,,,480.06,None,Q01,1.0,2015.0,Forest,IRGA
 9250.0,10539,China,Yunnan,Naban River Watershed National Nature Reserve,22.2,100.63,China,Asia,match,,0.0,,,,,,,,,None,Q01,1.0,2015.0,Forest,IRGA
 9251.0,10539,China,Yunnan,Naban River Watershed National Nature Reserve,22.2,100.63,China,Asia,match,,0.0,,,,,,,,,None,Q01,1.0,2015.0,Forest,IRGA
@@ -8958,14 +8958,14 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 9381.0,10581,China,Inner Mongolia,Horqin Sandy Land,43.33,122.6,China,Asia,match,,0.0,,,,,,,,,None,,0.58,2014.0,Grassland,IRGA
 9382.0,10581,China,Inner Mongolia,Horqin Sandy Land,43.33,122.6,China,Asia,match,,0.0,,,,,,,,,None,,0.58,2014.0,Grassland,IRGA
 9383.0,10584,USA,Alaska,Fairbanks,64.84,-147.72,United States of America,North America,match,,0.0,,,,,,,,,None,,0.17,2014.0,Forest,IRGA
-9384.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,mismatch,near_border,16.045058245729297,,,,,low,,,817.6,None,,1.0,2004.0,Agriculture,IRGA
-9385.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,mismatch,near_border,16.045058245729297,,,,,low,,,777.45,None,,1.0,2004.0,Agriculture,IRGA
-9386.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,mismatch,near_border,16.045058245729297,,,,,low,,,1197.2,None,,1.0,2004.0,Agriculture,IRGA
-9387.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,mismatch,near_border,16.045058245729297,,,,,low,,,861.4,None,,1.0,2004.0,Agriculture,IRGA
-9388.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,mismatch,near_border,16.045058245729297,,,,,low,,,978.2,None,,1.0,2004.0,Agriculture,IRGA
-9389.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,mismatch,near_border,16.045058245729297,,,,,low,,,1011.05,None,,1.0,2004.0,Agriculture,IRGA
-9390.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,mismatch,near_border,16.045058245729297,,,,,low,,,876.0,None,,1.0,2004.0,Agriculture,IRGA
-9391.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,mismatch,near_border,16.045058245729297,,,,,low,,,952.65,None,,1.0,2004.0,Agriculture,IRGA
+9384.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,mismatch,near_border,15.776858140394497,,,,,low,,,817.6,None,,1.0,2004.0,Agriculture,IRGA
+9385.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,mismatch,near_border,15.776858140394497,,,,,low,,,777.45,None,,1.0,2004.0,Agriculture,IRGA
+9386.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,mismatch,near_border,15.776858140394497,,,,,low,,,1197.2,None,,1.0,2004.0,Agriculture,IRGA
+9387.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,mismatch,near_border,15.776858140394497,,,,,low,,,861.4,None,,1.0,2004.0,Agriculture,IRGA
+9388.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,mismatch,near_border,15.776858140394497,,,,,low,,,978.2,None,,1.0,2004.0,Agriculture,IRGA
+9389.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,mismatch,near_border,15.776858140394497,,,,,low,,,1011.05,None,,1.0,2004.0,Agriculture,IRGA
+9390.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,mismatch,near_border,15.776858140394497,,,,,low,,,876.0,None,,1.0,2004.0,Agriculture,IRGA
+9391.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,mismatch,near_border,15.776858140394497,,,,,low,,,952.65,None,,1.0,2004.0,Agriculture,IRGA
 9392.0,10602,China,Jiangsu,Kunshan Irrigation and Drainage Experiment Station,31.254,120.961,China,Asia,match,,0.0,,,,,,,,,None,,0.3,2014.5,Agriculture,Gas chromatography
 9393.0,10602,China,Jiangsu,Kunshan Irrigation and Drainage Experiment Station,31.254,120.961,China,Asia,match,,0.0,,,,,,,,,None,,0.3,2014.5,Agriculture,Gas chromatography
 9394.0,10602,China,Jiangsu,Kunshan Irrigation and Drainage Experiment Station,31.254,120.961,China,Asia,match,,0.0,,,,,,,,,None,,0.3,2015.5,Agriculture,Gas chromatography
@@ -9048,7 +9048,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 9471.0,10641,USA,Michigan,Seney National Wildlife Refuge,46.316,-86.05,United States of America,North America,match,,0.0,,,,,,,,,None,,1.0,2010.0,Wetland,EC
 9472.0,10641,USA,Michigan,Seney National Wildlife Refuge,46.316,-86.05,United States of America,North America,match,,0.0,,,,,,,,,None,,1.0,2011.0,Wetland,EC
 9480.0,10610,Argentina,Buenos Aires province,Carlos Casares county,-35.91,-61.15,Argentina,South & Central America,match,,0.0,,,,,,,,,None,,0.33,2008.5,Grassland,IRGA
-9486.0,10613,China,Fuzhou,Fujian,25.95,119.7,China (coast),Asia,match_tolerance,,1.150351802595598,,,,,,,,,None,,0.083,2011.5,Forest,IRGA
+9486.0,10613,China,Fuzhou,Fujian,25.95,119.7,China (coast),Asia,match_tolerance,,1.1471964032003708,,,,,,,,,None,,0.083,2011.5,Forest,IRGA
 9487.0,10614,USA,North Carolina,Duke Forest FACE site,36.97,-79.1,United States of America,North America,match,,0.0,,,,,,,,999.0,None,,1.0,2009.0,Forest,IRGA
 9488.0,10614,USA,North Carolina,Duke Forest FACE site,36.97,-79.1,United States of America,North America,match,,0.0,,,,,,,,1003.0,None,,1.0,2009.0,Forest,IRGA
 9489.0,10614,USA,North Carolina,Duke Forest FACE site,36.97,-79.1,United States of America,North America,match,,0.0,,,,,,,,856.0,CO2,,1.0,2010.0,Forest,IRGA
@@ -9312,7 +9312,7 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 9756.0,10805,United Kingdom,Mid Wales,Clocaenog,53.05,-3.47,Wales,Europe,match,,0.0,,,,,,,,,"Precipitation amount change, warmed",,1.0,1999.0,Shrubland,
 9757.0,10805,The Netherlands,Gelderland,Oldebroek,52.4,5.92,Netherlands,Europe,match,,0.0,,,,,,,,,"Precipitation amount change, warmed",,1.0,1999.0,Shrubland,
 9758.0,10805,Denmark,Syddanmark,Brandbjerg,55.89,11.97,Denmark,Europe,match,,0.0,,,,,,,,,"Precipitation amount change, warmed",,1.0,2006.0,Shrubland,
-9759.0,10805,Denmark,Midtjylland,Mols,56.38,10.95,Denmark (coast),Europe,match_tolerance,,1.6612877678562925,,,,,,,,,"Precipitation amount change, warmed",,1.0,1999.0,Shrubland,
+9759.0,10805,Denmark,Midtjylland,Mols,56.38,10.95,Denmark (coast),Europe,match_tolerance,,1.62613016434689,,,,,,,,,"Precipitation amount change, warmed",,1.0,1999.0,Shrubland,
 9760.0,10805,Hungary,Del-Alfold,Kiskunsag,46.88,19.38,Hungary,Europe,match,,0.0,,,,,,,,,"Precipitation amount change, warmed",,1.0,2002.0,Shrubland,
 9761.0,10805,Spain,Catalonia,Garraf,41.3,1.82,Spain,Europe,match,,0.0,,,,,,,,,"Precipitation amount change, warmed",,1.0,1999.0,Shrubland,
 9762.0,10805,Italy,Sardinia,Capo Caccia,40.6,8.15,Italy,Europe,match,,0.0,,,,,,,,,"Precipitation amount change, warmed",,1.0,2002.0,Shrubland,
@@ -9510,15 +9510,15 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 9956.0,10893,China,Huitong Experimental Station of Forest Ecology,,26.67,109.43,China,Asia,match,,0.0,,,,,,,,529.25,None,,1.0,2015.0,Forest,IRGA
 9957.0,10893,China,Huitong Experimental Station of Forest Ecology,,26.67,109.43,China,Asia,match,,0.0,,,,,,,,551.15,None,,1.0,2015.0,Forest,IRGA
 9958.0,10893,China,Huitong Experimental Station of Forest Ecology,,26.67,109.43,China,Asia,match,,0.0,,,,,,,,540.2,None,,1.0,2015.0,Forest,IRGA
-9959.0,10897,China,Eastern Himalayas,,27.47,89.73,Bhutan,Asia,mismatch,label_wrong,58.944428194378034,27.47,89.73,Bhutan,Asia,medium,title names 'bhutan',,1280.0,None,,1.0,2015.5,Forest,IRGA
+9959.0,10897,China,Eastern Himalayas,,27.47,89.73,Bhutan,Asia,mismatch,label_wrong,58.87722866659662,27.47,89.73,Bhutan,Asia,medium,title names 'bhutan',,1280.0,None,,1.0,2015.5,Forest,IRGA
 9960.0,10897,China,Eastern Himalayas,,28.47,89.85,China,Asia,match,,0.0,,,,,,,,1450.0,None,,1.0,2015.5,Forest,IRGA
 9961.0,10898,USA,Hawaii,,20.89,-156.41,United States of America,Oceania,match,,0.0,,,,,,,,1193.55,None,,1.0,2011.5,Agriculture,IRGA
 9962.0,10898,USA,Hawaii,,20.89,-156.41,United States of America,Oceania,match,,0.0,,,,,,,,1208.15,None,,1.0,2011.5,Agriculture,IRGA
 9963.0,10898,USA,Hawaii,,20.89,-156.41,United States of America,Oceania,match,,0.0,,,,,,,,1043.9,None,,1.0,2011.5,Agriculture,IRGA
 9964.0,10898,USA,Hawaii,,20.89,-156.41,United States of America,Oceania,match,,0.0,,,,,,,,1142.45,None,,1.0,2011.5,Agriculture,IRGA
-9965.0,10905,Spain,Lanjaron,,36.9,3.5,,Sea,mismatch,lon_sign,250.8788236788686,36.9,-3.5,,Europe,high,,,1073.1,None,,1.0,2014.0,Grassland,IRGA
-9966.0,10905,Spain,Lanjaron,,36.9,3.5,,Sea,mismatch,lon_sign,250.8788236788686,36.9,-3.5,,Europe,high,,,1379.7,None,,1.0,2014.0,Grassland,IRGA
-9967.0,10905,Spain,Lanjaron,,36.9,3.5,,Sea,mismatch,lon_sign,250.8788236788686,36.9,-3.5,,Europe,high,,,850.45,None,,1.0,2014.0,Grassland,IRGA
+9965.0,10905,Spain,Lanjaron,,36.9,3.5,,Sea,mismatch,lon_sign,250.4681783449945,36.9,-3.5,,Europe,high,,,1073.1,None,,1.0,2014.0,Grassland,IRGA
+9966.0,10905,Spain,Lanjaron,,36.9,3.5,,Sea,mismatch,lon_sign,250.4681783449945,36.9,-3.5,,Europe,high,,,1379.7,None,,1.0,2014.0,Grassland,IRGA
+9967.0,10905,Spain,Lanjaron,,36.9,3.5,,Sea,mismatch,lon_sign,250.4681783449945,36.9,-3.5,,Europe,high,,,850.45,None,,1.0,2014.0,Grassland,IRGA
 9968.0,10910,China,Hunan,Taoyuan agroecological experimental station,28.91,111.45,China,Asia,match,,0.0,,,,,,,,705.0,None,,1.0,2003.0,Agriculture,Equation
 9969.0,10910,China,Hunan,Taoyuan agroecological experimental station,28.91,111.45,China,Asia,match,,0.0,,,,,,,,730.0,None,,1.0,2004.0,Agriculture,Equation
 9970.0,10910,China,Hunan,Taoyuan agroecological experimental station,28.91,111.45,China,Asia,match,,0.0,,,,,,,,538.0,None,,1.0,2005.0,Agriculture,Equation
@@ -9697,20 +9697,20 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 10145.0,10997,Hungary,Kiskunsag,,46.87,19.4,Hungary,Europe,match,,0.0,,,,,,,,317.52,None,,1.0,2011.0,Shrubland,IRGA
 10146.0,10997,Spain,Garraf,,41.3,1.8,Spain,Europe,match,,0.0,,,,,,,,438.48,None,,1.0,2002.5,Shrubland,IRGA
 10147.0,10997,Italy,Capo Caccia,,40.6,8.15,Italy,Europe,match,,0.0,,,,,,,,1001.7,None,,1.0,2010.5,Shrubland,IRGA
-10148.0,10997,Denmark,Mols,,56.4,10.95,Denmark (coast),Europe,match_tolerance,,1.665863797946335,,,,,,,,1402.38,None,,1.0,2011.5,Shrubland,IRGA
+10148.0,10997,Denmark,Mols,,56.4,10.95,Denmark (coast),Europe,match_tolerance,,1.3961751983874409,,,,,,,,1402.38,None,,1.0,2011.5,Shrubland,IRGA
 10149.0,10997,Denmark,Brandbjerg,,55.9,11.95,Denmark,Europe,match,,0.0,,,,,,,,601.02,None,,1.0,2011.5,Shrubland,IRGA
 10150.0,10997,Netherlands,Oldebroek,,52.4,5.91,Netherlands,Europe,match,,0.0,,,,,,,,370.44,None,,1.0,2011.0,Shrubland,IRGA
 10151.0,10997,UK,Clocaenog,,53.05,-3.46,Wales,Europe,match,,0.0,,,,,,,,434.7,None,,1.0,2011.0,Shrubland,IRGA
-10152.0,11105,China,Jiuduansha,,31.22,121.9,China (coast),Asia,match_tolerance,,9.444567712984366,,,,,,,,3666.6,None,,1.0,2011.5,Wetland,
-10153.0,11105,China,Jiuduansha,,31.15,121.95,China (coast),Asia,match_tolerance,,8.957684737159962,,,,,,,,1107.54,None,,1.0,2011.5,Wetland,
-10154.0,11105,China,Jiuduansha,,31.2,121.9,China (coast),Asia,match_tolerance,,8.523046917175773,,,,,,,,5556.6,None,,1.0,2011.5,Wetland,
-10155.0,11105,China,Jiuduansha,,31.2,121.9,China (coast),Asia,match_tolerance,,8.523046917175773,,,,,,,,5828.76,None,,1.0,2011.5,Wetland,
-10156.0,11105,China,Jiuduansha,,31.2,121.95,,Sea,mismatch,offshore_near,12.39552928965582,,,,,low,,,5084.1,None,,1.0,2011.5,Wetland,
-10157.0,11105,China,Jiuduansha,,31.2,121.96,,Sea,mismatch,offshore_near,13.170085758510785,,,,,low,,,5840.1,None,,1.0,2011.5,Wetland,
+10152.0,11105,China,Jiuduansha,,31.22,121.9,China (coast),Asia,match_tolerance,,9.428548776373528,,,,,,,,3666.6,None,,1.0,2011.5,Wetland,
+10153.0,11105,China,Jiuduansha,,31.15,121.95,China (coast),Asia,match_tolerance,,8.949984706497782,,,,,,,,1107.54,None,,1.0,2011.5,Wetland,
+10154.0,11105,China,Jiuduansha,,31.2,121.9,China (coast),Asia,match_tolerance,,8.421676087366512,,,,,,,,5556.6,None,,1.0,2011.5,Wetland,
+10155.0,11105,China,Jiuduansha,,31.2,121.9,China (coast),Asia,match_tolerance,,8.421676087366512,,,,,,,,5828.76,None,,1.0,2011.5,Wetland,
+10156.0,11105,China,Jiuduansha,,31.2,121.95,,Sea,mismatch,offshore_near,12.24994938802925,,,,,low,,,5084.1,None,,1.0,2011.5,Wetland,
+10157.0,11105,China,Jiuduansha,,31.2,121.96,,Sea,mismatch,offshore_near,13.015757967971773,,,,,low,,,5840.1,None,,1.0,2011.5,Wetland,
 10158.0,11111,Estonia,Vihterpalu,,59.2,23.77,Estonia,Europe,match,,0.0,,,,,,,,,Burned,,0.5,2015.0,Forest,Gradient
 10159.0,11111,Estonia,Vihterpalu,,59.2,23.8,Estonia,Europe,match,,0.0,,,,,,,,,Burned,,0.5,2015.0,Forest,Gradient
 10160.0,11111,Estonia,Vihterpalu,,59.2,23.8,Estonia,Europe,match,,0.0,,,,,,,,,Burned,,0.5,2015.0,Forest,Gradient
-10161.0,11111,Estonia,Vihterpalu,,59.23,23.5,Estonia (coast),Europe,match_tolerance,,0.8263457228263076,,,,,,,,,Burned,,0.5,2015.0,Forest,Gradient
+10161.0,11111,Estonia,Vihterpalu,,59.23,23.5,Estonia (coast),Europe,match_tolerance,,0.7596219794972549,,,,,,,,,Burned,,0.5,2015.0,Forest,Gradient
 10162.0,11111,Estonia,Vihterpalu,,59.18,23.7,Estonia,Europe,match,,0.0,,,,,,,,,Burned,,0.5,2015.0,Forest,Gradient
 10163.0,11111,Estonia,Vihterpalu,,59.21,23.7,Estonia,Europe,match,,0.0,,,,,,,,,Burned,,0.5,2015.0,Forest,Gradient
 10165.0,11113,USA,Maine,Bangor,44.8,-68.77,United States of America,North America,match,,0.0,,,,,,,,,None,,0.68,2012.0,Forest,IRGA
@@ -9718,10 +9718,10 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 10167.0,11116,China,Guangxi,Pingxiang,22.2,106.7,China,Asia,match,,0.0,,,,,,,,,None,Q10,1.0,2013.0,Forest,
 10168.0,11116,China,Guangxi,Pingxiang,22.2,106.7,China,Asia,match,,0.0,,,,,,,,,None,Q10,1.0,2013.0,Forest,
 10169.0,11116,China,Guangxi,Pingxiang,22.2,106.7,China,Asia,match,,0.0,,,,,,,,,None,Q10,1.0,2013.0,Forest,
-10170.0,11120,Spain,Iberian Peninsula,Prades Mountains,42.62,2.42,France,Europe,mismatch,lon_sign,25.201998572273425,42.62,-2.42,,Europe,medium,,,1135.15,None,,1.0,2012.5,Forest,IRGA
-10171.0,11120,Spain,Iberian Peninsula,Prades Mountains,42.62,2.42,France,Europe,mismatch,lon_sign,25.201998572273425,42.62,-2.42,,Europe,medium,,,1069.45,None,,1.0,2012.5,Forest,IRGA
-10172.0,11120,Spain,Iberian Peninsula,Prades Mountains,42.62,2.42,France,Europe,mismatch,lon_sign,25.201998572273425,42.62,-2.42,,Europe,medium,,,1065.8,None,,1.0,2012.5,Forest,IRGA
-10173.0,11120,Spain,Iberian Peninsula,Prades Mountains,42.62,2.42,France,Europe,mismatch,lon_sign,25.201998572273425,42.62,-2.42,,Europe,medium,,,792.05,None,,1.0,2012.5,Forest,IRGA
+10170.0,11120,Spain,Iberian Peninsula,Prades Mountains,42.62,2.42,France,Europe,mismatch,near_border,24.273249502829117,,,,,low,,,1135.15,None,,1.0,2012.5,Forest,IRGA
+10171.0,11120,Spain,Iberian Peninsula,Prades Mountains,42.62,2.42,France,Europe,mismatch,near_border,24.273249502829117,,,,,low,,,1069.45,None,,1.0,2012.5,Forest,IRGA
+10172.0,11120,Spain,Iberian Peninsula,Prades Mountains,42.62,2.42,France,Europe,mismatch,near_border,24.273249502829117,,,,,low,,,1065.8,None,,1.0,2012.5,Forest,IRGA
+10173.0,11120,Spain,Iberian Peninsula,Prades Mountains,42.62,2.42,France,Europe,mismatch,near_border,24.273249502829117,,,,,low,,,792.05,None,,1.0,2012.5,Forest,IRGA
 10174.0,11125,Denmark,Foulum,Aarhus University,54.95,9.77,Denmark,Europe,match,,0.0,,,,,,,,,None,,,2014.0,Grassland,IRGA
 10175.0,11125,Denmark,Rønhave,Aarhus University,56.5,9.58,Denmark,Europe,match,,0.0,,,,,,,,,None,,,2014.0,Grassland,IRGA
 10176.0,11125,Denmark,Store Vildmose,Aarhus University,57.23,9.79,Denmark,Europe,match,,0.0,,,,,,,,,None,,,2014.0,Grassland,IRGA
@@ -9765,8 +9765,8 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 10217.0,11146,China,Dinghuashan,Dinghushan Biosphere Reserve,23.15,112.5,China,Asia,match,,0.0,,,,,,,,1003.75,None,,1.0,2011.0,Forest,IRGA
 10218.0,11146,China,Dinghuashan,Dinghushan Biosphere Reserve,23.15,112.5,China,Asia,match,,0.0,,,,,,,,1102.3,None,,1.0,2010.0,Forest,IRGA
 10219.0,11146,China,Dinghuashan,Dinghushan Biosphere Reserve,23.15,112.5,China,Asia,match,,0.0,,,,,,,,1164.35,None,,1.0,2011.0,Forest,IRGA
-10220.0,11148,USA,Ontario,Catchacoma,44.73,-78.34,Canada,North America,mismatch,label_wrong,122.24826736188014,44.73,-78.34,Canada,North America,high,Region 'Ontario' = admin-1 'ontario' at the coordinates,,640.0,None,,1.0,2014.5,Forest,IRGA
-10221.0,11148,USA,Ontario,Catchacoma,44.73,-78.34,Canada,North America,mismatch,label_wrong,122.24826736188014,44.73,-78.34,Canada,North America,high,Region 'Ontario' = admin-1 'ontario' at the coordinates,,680.0,Warmed,,1.0,2014.5,Forest,IRGA
+10220.0,11148,USA,Ontario,Catchacoma,44.73,-78.34,Canada,North America,mismatch,label_wrong,122.15421446591473,44.73,-78.34,Canada,North America,high,Region 'Ontario' = admin-1 'ontario' at the coordinates,,640.0,None,,1.0,2014.5,Forest,IRGA
+10221.0,11148,USA,Ontario,Catchacoma,44.73,-78.34,Canada,North America,mismatch,label_wrong,122.15421446591473,44.73,-78.34,Canada,North America,high,Region 'Ontario' = admin-1 'ontario' at the coordinates,,680.0,Warmed,,1.0,2014.5,Forest,IRGA
 10222.0,11149,China,Fujian,Chenda Experimental Station,26.2,117.6,China,Asia,match,,0.0,,,,,,,,1421.0,None,,1.0,2011.0,Forest,IRGA
 10223.0,11149,China,Fujian,Chenda Experimental Station,26.2,117.6,China,Asia,match,,0.0,,,,,,,,837.0,None,,1.0,2011.0,Forest,IRGA
 10224.0,11149,China,Fujian,Chenda Experimental Station,26.2,117.6,China,Asia,match,,0.0,,,,,,,,907.0,None,,1.0,2011.0,Forest,IRGA
@@ -9954,17 +9954,17 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 10424.0,11965,Russia,Far East,Primorskii,43.63,132.25,Russia,Asia,match,,0.0,,,,,,,,,None,,0.58,2014.0,Forest,IRGA
 10425.0,11965,Russia,Far East,Primorskii,43.63,132.25,Russia,Asia,match,,0.0,,,,,,,,,None,,0.58,2015.0,Forest,IRGA
 10426.0,11965,Russia,Far East,Primorskii,43.63,132.25,Russia,Asia,match,,0.0,,,,,,,,,None,,0.58,2016.0,Forest,IRGA
-10427.0,11966,Russia,Far East,,46.63,132.26,China,Asia,mismatch,unclear,118.10205528882229,,,,,low,,,,None,,0.42,2015.0,Forest,IRGA
-10428.0,12000,Russia,Novgorod,Valday,50.012,33.345,Ukraine,Europe,match_political,,149.78123237582386,,,,,,,,,None,,0.17,,Forest,
-10429.0,12000,Russia,Novgorod,Valday,50.012,33.345,Ukraine,Europe,match_political,,149.78123237582386,,,,,,,,,None,,0.17,,Forest,
+10427.0,11966,Russia,Far East,,46.63,132.26,China,Asia,mismatch,unclear,118.08108274703005,,,,,low,,,,None,,0.42,2015.0,Forest,IRGA
+10428.0,12000,Russia,Novgorod,Valday,50.012,33.345,Ukraine,Europe,mismatch,coords_wrong,149.78123237582386,,,,,medium,Region names 'novgorod' in the stated country,,,None,,0.17,,Forest,
+10429.0,12000,Russia,Novgorod,Valday,50.012,33.345,Ukraine,Europe,mismatch,coords_wrong,149.78123237582386,,,,,medium,Region names 'novgorod' in the stated country,,,None,,0.17,,Forest,
 10430.0,12047,Malaysia,Sarawak,Maludam National Park,1.45,111.15,Malaysia,Asia,match,,0.0,,,,,,,,926.0,None,,1.0,2016.0,Forest,IRGA
 10431.0,12049,China,,Green tea,31.35,119.05,China,Asia,match,,0.0,,,,,,,,488.18,Fertilized,,1.0,2017.0,Forest,Gas chromatography
 10432.0,12049,China,,Bamboo forest,31.35,119.05,China,Asia,match,,0.0,,,,,,,,836.33,None,,1.0,2017.0,Forest,Gas chromatography
 10433.0,12011,Canada,Quebec,Laurentide Wildlife Reserve,48.21,71.25,Kazakhstan,Asia,mismatch,lon_sign,8072.17463696732,48.21,-71.25,,North America,high,Region matches admin-1 'quebec' at the fixed point,,,Warming,,1.0,2013.0,Forest,IRGA
-10434.0,12014,France,Auvergne,Laqueuille,45.63,-2.73,,Sea,mismatch,lon_sign,122.60579718623423,45.63,2.73,,Europe,high,,,,None,Q1,0.58,2016.0,Grassland,IRGA
-10435.0,12014,France,Auvergne,Laqueuille,45.63,-2.73,,Sea,mismatch,lon_sign,122.60579718623423,45.63,2.73,,Europe,high,,,,Lime,Q1,0.58,2016.0,Grassland,IRGA
-10436.0,12014,France,Auvergne,Laqueuille,45.63,-2.73,,Sea,mismatch,lon_sign,122.60579718623423,45.63,2.73,,Europe,high,,,,None,Q1,0.58,2017.0,Grassland,IRGA
-10437.0,12014,France,Auvergne,Laqueuille,45.63,-2.73,,Sea,mismatch,lon_sign,122.60579718623423,45.63,2.73,,Europe,high,,,,Lime,Q1,0.58,2017.0,Grassland,IRGA
+10434.0,12014,France,Auvergne,Laqueuille,45.63,-2.73,,Sea,mismatch,lon_sign,111.88989825498862,45.63,2.73,,Europe,high,,,,None,Q1,0.58,2016.0,Grassland,IRGA
+10435.0,12014,France,Auvergne,Laqueuille,45.63,-2.73,,Sea,mismatch,lon_sign,111.88989825498862,45.63,2.73,,Europe,high,,,,Lime,Q1,0.58,2016.0,Grassland,IRGA
+10436.0,12014,France,Auvergne,Laqueuille,45.63,-2.73,,Sea,mismatch,lon_sign,111.88989825498862,45.63,2.73,,Europe,high,,,,None,Q1,0.58,2017.0,Grassland,IRGA
+10437.0,12014,France,Auvergne,Laqueuille,45.63,-2.73,,Sea,mismatch,lon_sign,111.88989825498862,45.63,2.73,,Europe,high,,,,Lime,Q1,0.58,2017.0,Grassland,IRGA
 10438.0,12021,USA,Wisconsin,DOE-Great Lakes Bioenergy Research Center,43.3,-89.38,United States of America,North America,match,,0.0,,,,,,,,,Fertilized,Q1,1.0,2015.0,Agriculture,IRGA
 10439.0,12021,USA,Wisconsin,DOE-Great Lakes Bioenergy Research Center,43.3,-89.38,United States of America,North America,match,,0.0,,,,,,,,,Fertilized,Q1,1.0,2015.0,Grassland,IRGA
 10440.0,12021,USA,Wisconsin,DOE-Great Lakes Bioenergy Research Center,43.3,-89.38,United States of America,North America,match,,0.0,,,,,,,,,Fertilized,Q1,1.0,2016.0,Agriculture,IRGA
@@ -9980,11 +9980,11 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 10450.0,12136,China,Jiangsu,Lishui Tree Farm,31.6,119.02,China,Asia,match,,0.0,,,,,,,,,None,"Q01,Q14",1.0,2013.5,Forest,IRGA
 10451.0,12136,China,Jiangsu,Lishui Tree Farm,31.6,119.02,China,Asia,match,,0.0,,,,,,,,,Thinned,"Q01,Q14",1.0,2013.5,Forest,IRGA
 10452.0,12136,China,Jiangsu,Lishui Tree Farm,31.6,119.02,China,Asia,match,,0.0,,,,,,,,,Thinned,"Q01,Q14",1.0,2013.5,Forest,IRGA
-10453.0,13988,China,Hong Kong,Tai Po Kau Nature Reserve,22.45,114.18,Hong Kong (coast),Asia,match_tolerance,,0.051921649267900806,,,,,,,,1110.0,None,,0.25,2017.5,Forest,IRGA
-10454.0,13988,China,Hong Kong,Tai Po Kau Nature Reserve,22.45,114.18,Hong Kong (coast),Asia,match_tolerance,,0.051921649267900806,,,,,,,,,None,,0.25,2017.5,Forest,IRGA
-10455.0,13988,China,Hong Kong,Tai Po Kau Nature Reserve,22.45,114.18,Hong Kong (coast),Asia,match_tolerance,,0.051921649267900806,,,,,,,,610.0,None,,0.25,2017.5,Forest,IRGA
-10456.0,13988,China,Hong Kong,Tai Po Kau Nature Reserve,22.45,114.18,Hong Kong (coast),Asia,match_tolerance,,0.051921649267900806,,,,,,,,610.0,None,,0.25,2017.5,Forest,IRGA
-10457.0,13988,China,Hong Kong,Tai Po Kau Nature Reserve,22.45,114.18,Hong Kong (coast),Asia,match_tolerance,,0.051921649267900806,,,,,,,,,None,,0.25,2017.5,Forest,IRGA
+10453.0,13988,China,Hong Kong,Tai Po Kau Nature Reserve,22.45,114.18,Hong Kong (coast),Asia,match_tolerance,,0.0517283393604909,,,,,,,,1110.0,None,,0.25,2017.5,Forest,IRGA
+10454.0,13988,China,Hong Kong,Tai Po Kau Nature Reserve,22.45,114.18,Hong Kong (coast),Asia,match_tolerance,,0.0517283393604909,,,,,,,,,None,,0.25,2017.5,Forest,IRGA
+10455.0,13988,China,Hong Kong,Tai Po Kau Nature Reserve,22.45,114.18,Hong Kong (coast),Asia,match_tolerance,,0.0517283393604909,,,,,,,,610.0,None,,0.25,2017.5,Forest,IRGA
+10456.0,13988,China,Hong Kong,Tai Po Kau Nature Reserve,22.45,114.18,Hong Kong (coast),Asia,match_tolerance,,0.0517283393604909,,,,,,,,610.0,None,,0.25,2017.5,Forest,IRGA
+10457.0,13988,China,Hong Kong,Tai Po Kau Nature Reserve,22.45,114.18,Hong Kong (coast),Asia,match_tolerance,,0.0517283393604909,,,,,,,,,None,,0.25,2017.5,Forest,IRGA
 10458.0,13974,China,Shandong,Research Station of Coastal Wetland in Yellow River Delta,37.76,118.99,China,Asia,match,,0.0,,,,,,,,1160.7,None,,1.0,2012.5,Wetland,IRGA
 10459.0,13974,China,Shandong,Research Station of Coastal Wetland in Yellow River Delta,37.76,118.99,China,Asia,match,,0.0,,,,,,,,1175.3,None,,1.0,2013.5,Wetland,IRGA
 10460.0,13974,China,Shandong,Research Station of Coastal Wetland in Yellow River Delta,37.76,118.99,China,Asia,match,,0.0,,,,,,,,846.8,None,,1.0,2014.5,Wetland,IRGA
@@ -10189,38 +10189,38 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 10661.0,12250,USA,"Colorado, Elk Mountains",Mexican Cut Natural Preserve,39.09,-107.03,United States of America,North America,match,,0.0,,,,,,,,,None,,0.17,2017.0,Forest,IRGA
 10662.0,12250,USA,"Colorado, Elk Mountains",Mexican Cut Natural Preserve,39.09,-107.03,United States of America,North America,match,,0.0,,,,,,,,,None,,0.17,2017.0,Forest,IRGA
 10663.0,12250,USA,"Colorado, Elk Mountains",Mexican Cut Natural Preserve,39.09,-107.03,United States of America,North America,match,,0.0,,,,,,,,,None,,0.17,2017.0,Forest,IRGA
-10664.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9983442840446219,,,,,,,,1286.67,None,"Q01, Q03",0.67,2013.5,Forest,IRGA
-10665.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9983442840446219,,,,,,,,1248.83,Fertilization,"Q01, Q03",0.67,2013.5,Forest,IRGA
-10666.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9983442840446219,,,,,,,,1229.9,Acidification,"Q01, Q03",0.67,2013.5,Forest,IRGA
-10667.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9983442840446219,,,,,,,,1173.14,Fertilization+Acidification,"Q01, Q03",0.67,2013.5,Forest,IRGA
-10668.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9983442840446219,,,,,,,,1475.88,None,"Q01, Q03",0.67,2014.5,Forest,IRGA
-10669.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9983442840446219,,,,,,,,1456.96,Fertilization,"Q01, Q03",0.67,2014.5,Forest,IRGA
-10670.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9983442840446219,,,,,,,,1324.51,Acidification,"Q01, Q03",0.67,2014.5,Forest,IRGA
-10671.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9983442840446219,,,,,,,,1343.43,Fertilization+Acidification,"Q01, Q03",0.67,2014.5,Forest,IRGA
-10672.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9983442840446219,,,,,,,,1210.98,None,"Q01, Q03",0.67,2015.5,Forest,IRGA
-10673.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9983442840446219,,,,,,,,1305.59,Fertilization,"Q01, Q03",0.67,2015.5,Forest,IRGA
-10674.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9983442840446219,,,,,,,,1116.37,Acidification,"Q01, Q03",0.67,2015.5,Forest,IRGA
-10675.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9983442840446219,,,,,,,,1135.5,Fertilization+Acidification,"Q01, Q03",0.67,2015.5,Forest,IRGA
-10676.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9983442840446219,,,,,,,,1154.22,None,"Q01, Q03",0.67,2016.6,Forest,IRGA
-10677.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9983442840446219,,,,,,,,1173.14,Fertilization,"Q01, Q03",0.67,2016.5,Forest,IRGA
-10678.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9983442840446219,,,,,,,,983.92,Acidification,"Q01, Q03",0.67,2016.5,Forest,IRGA
-10679.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9983442840446219,,,,,,,,1059.61,Fertilization+Acidification,"Q01, Q03",0.67,2016.5,Forest,IRGA
-10680.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.6610756889511775,,,,,,,,1400.2,None,"Q01, Q03",0.67,2013.5,Forest,IRGA
-10681.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.6610756889511775,,,,,,,,1351.0,Fertilization,"Q01, Q03",0.67,2013.5,Forest,IRGA
-10682.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.6610756889511775,,,,,,,,1313.16,Acidification,"Q01, Q03",0.67,2013.5,Forest,IRGA
-10683.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.6610756889511775,,,,,,,,1358.57,Fertilization+Acidification,"Q01, Q03",0.67,2013.5,Forest,IRGA
-10684.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.6610756889511775,,,,,,,,1419.12,None,"Q01, Q03",0.67,2014.5,Forest,IRGA
-10685.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.6610756889511775,,,,,,,,1362.36,Fertilization,"Q01, Q03",0.67,2014.5,Forest,IRGA
-10686.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.6610756889511775,,,,,,,,1282.88,Acidification,"Q01, Q03",0.67,2014.5,Forest,IRGA
-10687.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.6610756889511775,,,,,,,,1513.73,Fertilization+Acidification,"Q01, Q03",0.67,2014.5,Forest,IRGA
-10688.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.6610756889511775,,,,,,,,1324.51,None,"Q01, Q03",0.67,2015.5,Forest,IRGA
-10689.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.6610756889511775,,,,,,,,1305.59,Fertilization,"Q01, Q03",0.67,2015.5,Forest,IRGA
-10690.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.6610756889511775,,,,,,,,1154.22,Acidification,"Q01, Q03",0.67,2015.5,Forest,IRGA
-10691.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.6610756889511775,,,,,,,,1347.22,Fertilization+Acidification,"Q01, Q03",0.67,2015.5,Forest,IRGA
-10692.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.6610756889511775,,,,,,,,1078.53,None,"Q01, Q03",0.67,2016.6,Forest,IRGA
-10693.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.6610756889511775,,,,,,,,1002.84,Fertilization,"Q01, Q03",0.67,2016.5,Forest,IRGA
-10694.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.6610756889511775,,,,,,,,953.65,Acidification,"Q01, Q03",0.67,2016.5,Forest,IRGA
-10695.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.6610756889511775,,,,,,,,1040.69,Fertilization+Acidification,"Q01, Q03",0.67,2016.5,Forest,IRGA
+10664.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9972516284517803,,,,,,,,1286.67,None,"Q01, Q03",0.67,2013.5,Forest,IRGA
+10665.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9972516284517803,,,,,,,,1248.83,Fertilization,"Q01, Q03",0.67,2013.5,Forest,IRGA
+10666.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9972516284517803,,,,,,,,1229.9,Acidification,"Q01, Q03",0.67,2013.5,Forest,IRGA
+10667.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9972516284517803,,,,,,,,1173.14,Fertilization+Acidification,"Q01, Q03",0.67,2013.5,Forest,IRGA
+10668.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9972516284517803,,,,,,,,1475.88,None,"Q01, Q03",0.67,2014.5,Forest,IRGA
+10669.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9972516284517803,,,,,,,,1456.96,Fertilization,"Q01, Q03",0.67,2014.5,Forest,IRGA
+10670.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9972516284517803,,,,,,,,1324.51,Acidification,"Q01, Q03",0.67,2014.5,Forest,IRGA
+10671.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9972516284517803,,,,,,,,1343.43,Fertilization+Acidification,"Q01, Q03",0.67,2014.5,Forest,IRGA
+10672.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9972516284517803,,,,,,,,1210.98,None,"Q01, Q03",0.67,2015.5,Forest,IRGA
+10673.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9972516284517803,,,,,,,,1305.59,Fertilization,"Q01, Q03",0.67,2015.5,Forest,IRGA
+10674.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9972516284517803,,,,,,,,1116.37,Acidification,"Q01, Q03",0.67,2015.5,Forest,IRGA
+10675.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9972516284517803,,,,,,,,1135.5,Fertilization+Acidification,"Q01, Q03",0.67,2015.5,Forest,IRGA
+10676.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9972516284517803,,,,,,,,1154.22,None,"Q01, Q03",0.67,2016.6,Forest,IRGA
+10677.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9972516284517803,,,,,,,,1173.14,Fertilization,"Q01, Q03",0.67,2016.5,Forest,IRGA
+10678.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9972516284517803,,,,,,,,983.92,Acidification,"Q01, Q03",0.67,2016.5,Forest,IRGA
+10679.0,13903,Czech Republic,Kalek,Spruce,50.59,13.25,Germany,Europe,match_tolerance,,0.9972516284517803,,,,,,,,1059.61,Fertilization+Acidification,"Q01, Q03",0.67,2016.5,Forest,IRGA
+10680.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.569995815703663,,,,,,,,1400.2,None,"Q01, Q03",0.67,2013.5,Forest,IRGA
+10681.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.569995815703663,,,,,,,,1351.0,Fertilization,"Q01, Q03",0.67,2013.5,Forest,IRGA
+10682.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.569995815703663,,,,,,,,1313.16,Acidification,"Q01, Q03",0.67,2013.5,Forest,IRGA
+10683.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.569995815703663,,,,,,,,1358.57,Fertilization+Acidification,"Q01, Q03",0.67,2013.5,Forest,IRGA
+10684.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.569995815703663,,,,,,,,1419.12,None,"Q01, Q03",0.67,2014.5,Forest,IRGA
+10685.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.569995815703663,,,,,,,,1362.36,Fertilization,"Q01, Q03",0.67,2014.5,Forest,IRGA
+10686.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.569995815703663,,,,,,,,1282.88,Acidification,"Q01, Q03",0.67,2014.5,Forest,IRGA
+10687.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.569995815703663,,,,,,,,1513.73,Fertilization+Acidification,"Q01, Q03",0.67,2014.5,Forest,IRGA
+10688.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.569995815703663,,,,,,,,1324.51,None,"Q01, Q03",0.67,2015.5,Forest,IRGA
+10689.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.569995815703663,,,,,,,,1305.59,Fertilization,"Q01, Q03",0.67,2015.5,Forest,IRGA
+10690.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.569995815703663,,,,,,,,1154.22,Acidification,"Q01, Q03",0.67,2015.5,Forest,IRGA
+10691.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.569995815703663,,,,,,,,1347.22,Fertilization+Acidification,"Q01, Q03",0.67,2015.5,Forest,IRGA
+10692.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.569995815703663,,,,,,,,1078.53,None,"Q01, Q03",0.67,2016.6,Forest,IRGA
+10693.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.569995815703663,,,,,,,,1002.84,Fertilization,"Q01, Q03",0.67,2016.5,Forest,IRGA
+10694.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.569995815703663,,,,,,,,953.65,Acidification,"Q01, Q03",0.67,2016.5,Forest,IRGA
+10695.0,13903,Czech Republic,Kalek,Beech,50.59,13.27,Germany,Europe,match_tolerance,,1.569995815703663,,,,,,,,1040.69,Fertilization+Acidification,"Q01, Q03",0.67,2016.5,Forest,IRGA
 10696.0,13910,China,Inner Mongolia,Inner Mongolia Grassland Ecosystem Research Station of the Chinese Academy of Sciences,43.63,116.7,China,Asia,match,,0.0,,,,,,,,911.39,None,Q03,0.5,2014.5,Grassland,IRGA
 10697.0,13910,China,Inner Mongolia,Inner Mongolia Grassland Ecosystem Research Station of the Chinese Academy of Sciences,43.63,116.7,China,Asia,match,,0.0,,,,,,,,863.46,Fertilized,Q03,0.5,2014.5,Grassland,IRGA
 10698.0,13910,China,Inner Mongolia,Inner Mongolia Grassland Ecosystem Research Station of the Chinese Academy of Sciences,43.63,116.7,China,Asia,match,,0.0,,,,,,,,1032.49,Precipitation amount change,Q03,0.5,2014.5,Grassland,IRGA
@@ -10424,9 +10424,9 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 10896.0,15265,Italy,Marche,Monte San Vicino,43.354,13.059,Italy,Europe,match,,0.0,,,,,,,,,Abandonment,Q01,0.83,2018.5,Grassland,IRGA
 10901.0,14886,South Korea,Korean Peninsula,The Mt. Nam ecological experimental site,37.55,126.983,South Korea,Asia,match,,0.0,,,,,,,,1313.5,,,1.0,2011.5,Forest,IRGA
 10902.0,14886,South Korea,Gangwon,The Mt. Jeombong ecological experimental site,38.033,128.467,South Korea,Asia,match,,0.0,,,,,,,,1288.86,,,1.0,2011.5,Forest,IRGA
-10903.0,14958,China,Liaohe Delta,Liaohe Delta,36.076,122.393,,Sea,mismatch,in_sea,83.3137876316708,,,,,low,,,,None,Q01,0.67,2012.5,Wetland,IRGA
-10904.0,14958,China,Liaohe Delta,Liaohe Delta,36.076,122.393,,Sea,mismatch,in_sea,83.3137876316708,,,,,low,,,,None,Q01,0.67,2013.5,Wetland,IRGA
-10905.0,14958,China,Liaohe Delta,Liaohe Delta,36.076,122.393,,Sea,mismatch,in_sea,83.3137876316708,,,,,low,,,,None,Q01,0.67,2014.5,Wetland,IRGA
+10903.0,14958,China,Liaohe Delta,Liaohe Delta,36.076,122.393,,Sea,mismatch,in_sea,83.14540732618778,,,,,low,,,,None,Q01,0.67,2012.5,Wetland,IRGA
+10904.0,14958,China,Liaohe Delta,Liaohe Delta,36.076,122.393,,Sea,mismatch,in_sea,83.14540732618778,,,,,low,,,,None,Q01,0.67,2013.5,Wetland,IRGA
+10905.0,14958,China,Liaohe Delta,Liaohe Delta,36.076,122.393,,Sea,mismatch,in_sea,83.14540732618778,,,,,low,,,,None,Q01,0.67,2014.5,Wetland,IRGA
 10906.0,14857,Mexico,Quintana Roo,Instituto Tecnológico de la Zona Maya,18.5,-88.483,Mexico,South & Central America,match,,0.0,,,,,,,,2270.4,,Q01,0.75,2017.5,Grassland,IRGA
 10907.0,14857,Mexico,Quintana Roo,Instituto Tecnológico de la Zona Maya,18.5,-88.483,Mexico,South & Central America,match,,0.0,,,,,,,,2308.24,,Q01,0.75,2017.5,Grassland,IRGA
 10908.0,14795,China,Tianzhu Tibetan Autonomous County of Gansu,Qinghai-Tibet Plateau,37.183,102.767,China,Asia,match,,0.0,,,,,,,,,None,Q01,0.5,2017.5,Grassland,IRGA
@@ -10746,12 +10746,12 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 11222.0,15264,Japan,Hokkaido,,42.733,141.517,Japan,Asia,match,,0.0,,,,,,,,1255.0,"Sampling collars, SC",,0.67,2014.5,Forest,IRGA
 11223.0,15264,Japan,Hokkaido,,42.733,141.517,Japan,Asia,match,,0.0,,,,,,,,1255.0,"Litter removal collars, LC",,0.67,2014.5,Forest,IRGA
 11224.0,15264,Japan,Hokkaido,,42.733,141.517,Japan,Asia,match,,0.0,,,,,,,,776.0,Trenched collars,,0.67,2014.5,Forest,IRGA
-11225.0,15266,Japan,Okinawa Prefecture,Upper zone,24.483,124.383,Japan (coast),Asia,match_tolerance,,9.44268538565288,,,,,,,,,Burrow removed,Q01,0.25,2016.5,Forest,IRGA
-11226.0,15266,Japan,Okinawa Prefecture,Upper zone,24.483,124.383,Japan (coast),Asia,match_tolerance,,9.44268538565288,,,,,,,,,With burrow,Q01,0.25,2016.5,Forest,IRGA
-11227.0,15266,Japan,Okinawa Prefecture,Middle Zone,24.483,124.383,Japan (coast),Asia,match_tolerance,,9.44268538565288,,,,,,,,,Burrow removed,Q01,0.25,2016.5,Forest,IRGA
-11228.0,15266,Japan,Okinawa Prefecture,Middle Zone,24.483,124.383,Japan (coast),Asia,match_tolerance,,9.44268538565288,,,,,,,,,With burrow,Q01,0.25,2016.5,Forest,IRGA
-11229.0,15266,Japan,Okinawa Prefecture,Downward Zone,24.483,124.383,Japan (coast),Asia,match_tolerance,,9.44268538565288,,,,,,,,,Burrow removed,Q01,0.25,2016.5,Forest,IRGA
-11230.0,15266,Japan,Okinawa Prefecture,Downward Zone,24.483,124.383,Japan (coast),Asia,match_tolerance,,9.44268538565288,,,,,,,,,With burrow,Q01,0.25,2016.5,Forest,IRGA
+11225.0,15266,Japan,Okinawa Prefecture,Upper zone,24.483,124.383,Japan (coast),Asia,match_tolerance,,9.426018808410488,,,,,,,,,Burrow removed,Q01,0.25,2016.5,Forest,IRGA
+11226.0,15266,Japan,Okinawa Prefecture,Upper zone,24.483,124.383,Japan (coast),Asia,match_tolerance,,9.426018808410488,,,,,,,,,With burrow,Q01,0.25,2016.5,Forest,IRGA
+11227.0,15266,Japan,Okinawa Prefecture,Middle Zone,24.483,124.383,Japan (coast),Asia,match_tolerance,,9.426018808410488,,,,,,,,,Burrow removed,Q01,0.25,2016.5,Forest,IRGA
+11228.0,15266,Japan,Okinawa Prefecture,Middle Zone,24.483,124.383,Japan (coast),Asia,match_tolerance,,9.426018808410488,,,,,,,,,With burrow,Q01,0.25,2016.5,Forest,IRGA
+11229.0,15266,Japan,Okinawa Prefecture,Downward Zone,24.483,124.383,Japan (coast),Asia,match_tolerance,,9.426018808410488,,,,,,,,,Burrow removed,Q01,0.25,2016.5,Forest,IRGA
+11230.0,15266,Japan,Okinawa Prefecture,Downward Zone,24.483,124.383,Japan (coast),Asia,match_tolerance,,9.426018808410488,,,,,,,,,With burrow,Q01,0.25,2016.5,Forest,IRGA
 11231.0,14982,China,Heilongjiang,Liangshui National Nature Reserve,47.181,128.889,China,Asia,match,,0.0,,,,,,,,,None,Q01,0.5,2016.5,Forest,IRGA
 11232.0,14982,China,Heilongjiang,Liangshui National Nature Reserve,47.181,128.889,China,Asia,match,,0.0,,,,,,,,,Small canopy gap level,Q01,0.5,2016.5,Forest,IRGA
 11233.0,14982,China,Heilongjiang,Liangshui National Nature Reserve,47.181,128.889,China,Asia,match,,0.0,,,,,,,,,Medium canopy gap level,Q01,0.5,2016.5,Forest,IRGA
@@ -11327,9 +11327,9 @@ Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name
 11803.0,13138,China,Xinyang,Xinyang Forest Ecosystem Research Station,32.11472222,114.0311111,China,Asia,match,,0.0,,,,,,,,580.35,Litter added,Q01,1.0,2017.5,Forest,IRGA
 11804.0,13138,China,Xinyang,Xinyang Forest Ecosystem Research Station,32.11472222,114.0311111,China,Asia,match,,0.0,,,,,,,,116.35,Litter added,Q01,1.0,2017.5,Forest,IRGA
 11805.0,13138,China,Xinyang,Xinyang Forest Ecosystem Research Station,32.11472222,114.0311111,China,Asia,match,,0.0,,,,,,,,722.7,Litter added,Q01,1.0,2017.5,Forest,IRGA
-11806.0,13249,Italy,Malta,Xrobb L-Ghaġin Nature park,35.84278,14.56865,Malta (coast),Europe,mismatch,label_wrong,97.12805231579122,35.84278,14.56865,Malta,Europe,medium,Region/Site_name names 'malta',,345.887,None,Q0,0.83,2016.5,Shrubland,IRGA
-11807.0,13249,Italy,Malta,Xrobb L-Ghaġin Nature park,35.84372,14.56652,Malta (coast),Europe,mismatch,label_wrong,97.06313525392181,35.84372,14.56652,Malta,Europe,medium,Region/Site_name names 'malta',,658.093,None,Q0,0.83,2016.5,Grassland,IRGA
-11808.0,13249,Italy,Malta,Xrobb L-Ghaġin Nature park,35.8417,14.5697,Malta (coast),Europe,mismatch,label_wrong,97.22748445944768,35.8417,14.5697,Malta,Europe,medium,Region/Site_name names 'malta',,1591.307,None,Q0,0.83,2016.5,Forest,IRGA
+11806.0,13249,Italy,Malta,Xrobb L-Ghaġin Nature park,35.84278,14.56865,Malta (coast),Europe,mismatch,label_wrong,96.94254973038883,35.84278,14.56865,Malta,Europe,medium,Region/Site_name names 'malta',,345.887,None,Q0,0.83,2016.5,Shrubland,IRGA
+11807.0,13249,Italy,Malta,Xrobb L-Ghaġin Nature park,35.84372,14.56652,Malta (coast),Europe,mismatch,label_wrong,96.87811505020458,35.84372,14.56652,Malta,Europe,medium,Region/Site_name names 'malta',,658.093,None,Q0,0.83,2016.5,Grassland,IRGA
+11808.0,13249,Italy,Malta,Xrobb L-Ghaġin Nature park,35.8417,14.5697,Malta (coast),Europe,mismatch,label_wrong,97.0415893914681,35.8417,14.5697,Malta,Europe,medium,Region/Site_name names 'malta',,1591.307,None,Q0,0.83,2016.5,Forest,IRGA
 11809.0,13253,Turkey,Harran Plain,Harran University,37.16666667,38.98333333,Turkey,Asia,match,,0.0,,,,,,,,724.2,None,Q01,1.0,2009.5,Agriculture,Soda lime
 11810.0,13253,Turkey,Harran Plain,Harran University,37.16666667,38.98333333,Turkey,Asia,match,,0.0,,,,,,,,810.82,None,Q01,1.0,2010.5,Agriculture,Soda lime
 11811.0,13253,Turkey,Harran Plain,Harran University,37.16666667,38.98333333,Turkey,Asia,match,,0.0,,,,,,,,1590.4,None,Q01,1.0,2011.5,Agriculture,Soda lime
@@ -11374,13 +11374,13 @@ District",2.013333333,100.2686111,Indonesia,Asia,match,,0.0,,,,,,,,39.3,Deep Col
 11848.0,13282,China,Heilongjiang,Maoershan Forest Ecosystem Research Station of Northeast Forestry University,45.4,127.667,China,Asia,match,,0.0,,,,,,,,786.2,None,,1.0,2010.5,Forest,IRGA
 11849.0,13282,China,Heilongjiang,Maoershan Forest Ecosystem Research Station of Northeast Forestry University,45.4,127.667,China,Asia,match,,0.0,,,,,,,,876.26,None,,1.0,2010.5,Forest,IRGA
 11850.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,42.302,114.683,China,Asia,match,,0.0,,,,,,,,,"T0WL: ambient temperature, low irrigation",Q01,,2014.5,Agriculture,Gas chromatography
-11851.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.169,114.683,Mongolia,Asia,mismatch,coords_wrong,82.5049878864847,,,,,medium,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,,"T0WH: ambient temperature, high irrigation",Q01,,2014.5,Agriculture,Gas chromatography
-11852.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.168,114.683,Mongolia,Asia,mismatch,coords_wrong,82.39381336091677,,,,,medium,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,,"T1WL: increased temperature, low irrigation",Q01,,2014.5,Agriculture,Gas chromatography
-11853.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.118,114.683,Mongolia,Asia,mismatch,coords_wrong,76.83516292488869,,,,,medium,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,,"T1WH: increased temperature, high irrigation",Q01,,2014.5,Agriculture,Gas chromatography
+11851.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.169,114.683,Mongolia,Asia,mismatch,coords_wrong,82.46968849599071,,,,,medium,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,,"T0WH: ambient temperature, high irrigation",Q01,,2014.5,Agriculture,Gas chromatography
+11852.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.168,114.683,Mongolia,Asia,mismatch,coords_wrong,82.35855456703219,,,,,medium,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,,"T1WL: increased temperature, low irrigation",Q01,,2014.5,Agriculture,Gas chromatography
+11853.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.118,114.683,Mongolia,Asia,mismatch,coords_wrong,76.80195933233595,,,,,medium,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,,"T1WH: increased temperature, high irrigation",Q01,,2014.5,Agriculture,Gas chromatography
 11854.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,43.085,114.683,China,Asia,match,,0.0,,,,,,,,,"T0WL: ambient temperature, low irrigation",Q01,,2015.5,Agriculture,Gas chromatography
-11855.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.952,114.683,Mongolia,Asia,mismatch,coords_wrong,125.89711423069178,,,,,medium,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,,"T0WH: ambient temperature, high irrigation",Q01,,2015.5,Agriculture,Gas chromatography
-11856.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.949,114.683,Mongolia,Asia,mismatch,coords_wrong,126.18042448998041,,,,,medium,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,,"T1WL: increased temperature, low irrigation",Q01,,2015.5,Agriculture,Gas chromatography
-11857.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.849,114.683,Mongolia,Asia,mismatch,coords_wrong,134.53661495597748,,,,,medium,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,,"T1WH: increased temperature, high irrigation",Q01,,2015.5,Agriculture,Gas chromatography
+11855.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.952,114.683,Mongolia,Asia,mismatch,coords_wrong,121.8015743647217,,,,,medium,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,,"T0WH: ambient temperature, high irrigation",Q01,,2015.5,Agriculture,Gas chromatography
+11856.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.949,114.683,Mongolia,Asia,mismatch,coords_wrong,122.03301256001224,,,,,medium,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,,"T1WL: increased temperature, low irrigation",Q01,,2015.5,Agriculture,Gas chromatography
+11857.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.849,114.683,Mongolia,Asia,mismatch,coords_wrong,130.00152824343155,,,,,medium,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,,"T1WH: increased temperature, high irrigation",Q01,,2015.5,Agriculture,Gas chromatography
 11858.0,13389,China,Inner Mongolia,DaXing'anling Mountains,51.892,121.912,China,Asia,match,,0.0,,,,,,,,,None,,0.4167,2015.5,Forest,IRGA
 11859.0,13389,China,Inner Mongolia,DaXing'anling Mountains,51.892,121.912,China,Asia,match,,0.0,,,,,,,,,Burned,,0.4167,2015.5,Forest,IRGA
 11860.0,13389,China,Inner Mongolia,DaXing'anling Mountains,51.892,121.912,China,Asia,match,,0.0,,,,,,,,,Burned + Warmed,,0.4167,2015.5,Forest,IRGA
@@ -11445,14 +11445,14 @@ Scrub Ecosystem Research Station of the Chinese Academy of Science",32.98,103.67
 11915.0,13490,China,Northeast China,Liaohe River estuarine wetland,40.92778333,122.1646667,China,Asia,match,,0.0,,,,,,,,,3% Salinity Treatment,,,2014.0,Wetland,
 11916.0,13490,China,Northeast China,Liaohe River estuarine wetland,40.92778333,122.1646667,China,Asia,match,,0.0,,,,,,,,,5% Salinity Treatment,,,2014.0,Wetland,
 11917.0,13490,China,Northeast China,Liaohe River estuarine wetland,40.92778333,122.1646667,China,Asia,match,,0.0,,,,,,,,,10% Salinity Treatment,,,2014.0,Wetland,
-11918.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,mismatch,in_sea,247.27429760983756,,,,,low,Region names 'jiangsu' in the stated country,,,Invaded,,1.0,2010.5,Grassland,Gas chromatography
-11919.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,mismatch,in_sea,247.27429760983756,,,,,low,Region names 'jiangsu' in the stated country,,,Invaded,,1.0,2010.5,Grassland,Gas chromatography
-11920.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,mismatch,in_sea,247.27429760983756,,,,,low,Region names 'jiangsu' in the stated country,,,Noninvaded,,1.0,2010.5,Grassland,Gas chromatography
-11921.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,mismatch,in_sea,247.27429760983756,,,,,low,Region names 'jiangsu' in the stated country,,,Noninvaded,,1.0,2010.5,Grassland,Gas chromatography
-11922.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,mismatch,in_sea,247.27429760983756,,,,,low,Region names 'jiangsu' in the stated country,,,Invaded,,1.0,2011.5,Grassland,Gas chromatography
-11923.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,mismatch,in_sea,247.27429760983756,,,,,low,Region names 'jiangsu' in the stated country,,,Invaded,,1.0,2011.5,Grassland,Gas chromatography
-11924.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,mismatch,in_sea,247.27429760983756,,,,,low,Region names 'jiangsu' in the stated country,,,Noninvaded,,1.0,2011.5,Grassland,Gas chromatography
-11925.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,mismatch,in_sea,247.27429760983756,,,,,low,Region names 'jiangsu' in the stated country,,,Noninvaded,,1.0,2011.5,Grassland,Gas chromatography
+11918.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,mismatch,in_sea,236.21055997278168,,,,,low,Region names 'jiangsu' in the stated country,,,Invaded,,1.0,2010.5,Grassland,Gas chromatography
+11919.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,mismatch,in_sea,236.21055997278168,,,,,low,Region names 'jiangsu' in the stated country,,,Invaded,,1.0,2010.5,Grassland,Gas chromatography
+11920.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,mismatch,in_sea,236.21055997278168,,,,,low,Region names 'jiangsu' in the stated country,,,Noninvaded,,1.0,2010.5,Grassland,Gas chromatography
+11921.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,mismatch,in_sea,236.21055997278168,,,,,low,Region names 'jiangsu' in the stated country,,,Noninvaded,,1.0,2010.5,Grassland,Gas chromatography
+11922.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,mismatch,in_sea,236.21055997278168,,,,,low,Region names 'jiangsu' in the stated country,,,Invaded,,1.0,2011.5,Grassland,Gas chromatography
+11923.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,mismatch,in_sea,236.21055997278168,,,,,low,Region names 'jiangsu' in the stated country,,,Invaded,,1.0,2011.5,Grassland,Gas chromatography
+11924.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,mismatch,in_sea,236.21055997278168,,,,,low,Region names 'jiangsu' in the stated country,,,Noninvaded,,1.0,2011.5,Grassland,Gas chromatography
+11925.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,mismatch,in_sea,236.21055997278168,,,,,low,Region names 'jiangsu' in the stated country,,,Noninvaded,,1.0,2011.5,Grassland,Gas chromatography
 11926.0,13483,China,Hebei Province,Saihanba ecological station of Peking University,42.41205,117.2474,China,Asia,match,,0.0,,,,,,,,,"Sapling strands (11 year old), no N addition",,,2013.0,Forest,
 11927.0,13483,China,Hebei Province,Saihanba ecological station of Peking University,42.41205,117.2474,China,Asia,match,,0.0,,,,,,,,,"Sapling strands (11 year old), low N addition",,,2013.0,Forest,
 11928.0,13483,China,Hebei Province,Saihanba ecological station of Peking University,42.41205,117.2474,China,Asia,match,,0.0,,,,,,,,,"Sapling strands (11 year old), high N addition",,,2013.0,Forest,
@@ -12497,22 +12497,22 @@ Cobre de Loncha’",-34.133,-71.05,Chile,South & Central America,match,,0.0,,,,,
 12972.0,15330,China,,Horqin Sandy Land,43.33,122.62,China,Asia,match,,0.0,,,,,,,,,None,,0.42,2016.5,Grassland,IRGA
 12973.0,15330,China,,Horqin Sandy Land,43.33,122.62,China,Asia,match,,0.0,,,,,,,,,None,,0.42,2016.5,Desert,IRGA
 12974.0,15330,China,,Horqin Sandy Land,43.33,122.62,China,Asia,match,,0.0,,,,,,,,,None,,0.42,2016.5,Desert,IRGA
-12975.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.68384032704021,,,,,low,,,1021.77,None,,1.0,2011.0,Forest,IRGA
-12976.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.68384032704021,,,,,low,,,1048.26,None,,1.0,2011.0,Forest,IRGA
-12977.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.68384032704021,,,,,low,,,1036.9,None,,1.0,2011.0,Forest,IRGA
-12978.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.68384032704021,,,,,low,,,1165.57,None,,1.0,2011.0,Forest,IRGA
-12979.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.68384032704021,,,,,low,,,1044.47,None,,1.0,2011.0,Forest,IRGA
-12980.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.68384032704021,,,,,low,,,1029.34,None,,1.0,2011.0,Forest,IRGA
-12981.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.68384032704021,,,,,low,,,900.67,None,,1.0,2011.0,Forest,IRGA
-12982.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.68384032704021,,,,,low,,,1116.37,None,,1.0,2011.0,Forest,IRGA
-12983.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.68384032704021,,,,,low,,,1097.45,None,,1.0,2011.0,Forest,IRGA
-12984.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.68384032704021,,,,,low,,,1089.88,None,,1.0,2011.0,Forest,IRGA
-12985.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.68384032704021,,,,,low,,,1101.24,None,,1.0,2011.0,Forest,IRGA
-12986.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.68384032704021,,,,,low,,,1120.16,None,,1.0,2011.0,Forest,IRGA
-12987.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.68384032704021,,,,,low,,,1078.53,None,,1.0,2011.0,Forest,IRGA
-12988.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.68384032704021,,,,,low,,,1017.98,None,,1.0,2011.0,Forest,IRGA
-12989.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.68384032704021,,,,,low,,,1070.96,None,,1.0,2011.0,Forest,IRGA
-12990.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.68384032704021,,,,,low,,,1120.16,None,,1.0,2011.0,Forest,IRGA
+12975.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.60374150392,,,,,low,,,1021.77,None,,1.0,2011.0,Forest,IRGA
+12976.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.60374150392,,,,,low,,,1048.26,None,,1.0,2011.0,Forest,IRGA
+12977.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.60374150392,,,,,low,,,1036.9,None,,1.0,2011.0,Forest,IRGA
+12978.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.60374150392,,,,,low,,,1165.57,None,,1.0,2011.0,Forest,IRGA
+12979.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.60374150392,,,,,low,,,1044.47,None,,1.0,2011.0,Forest,IRGA
+12980.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.60374150392,,,,,low,,,1029.34,None,,1.0,2011.0,Forest,IRGA
+12981.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.60374150392,,,,,low,,,900.67,None,,1.0,2011.0,Forest,IRGA
+12982.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.60374150392,,,,,low,,,1116.37,None,,1.0,2011.0,Forest,IRGA
+12983.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.60374150392,,,,,low,,,1097.45,None,,1.0,2011.0,Forest,IRGA
+12984.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.60374150392,,,,,low,,,1089.88,None,,1.0,2011.0,Forest,IRGA
+12985.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.60374150392,,,,,low,,,1101.24,None,,1.0,2011.0,Forest,IRGA
+12986.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.60374150392,,,,,low,,,1120.16,None,,1.0,2011.0,Forest,IRGA
+12987.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.60374150392,,,,,low,,,1078.53,None,,1.0,2011.0,Forest,IRGA
+12988.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.60374150392,,,,,low,,,1017.98,None,,1.0,2011.0,Forest,IRGA
+12989.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.60374150392,,,,,low,,,1070.96,None,,1.0,2011.0,Forest,IRGA
+12990.0,15324,Taiwan,,,22.31,120.36,,Sea,mismatch,offshore_near,18.60374150392,,,,,low,,,1120.16,None,,1.0,2011.0,Forest,IRGA
 12991.0,15320,China,Nanjing,Agriculture and Meteorology Experimental Station,32.21,118.71,China,Asia,match,,0.0,,,,,,,,783.4,None,,1.0,2017.5,Agriculture,IRGA
 12992.0,15320,China,Nanjing,Agriculture and Meteorology Experimental Station,32.21,118.71,China,Asia,match,,0.0,,,,,,,,719.0,None,,1.0,2018.5,Agriculture,IRGA
 12993.0,15320,China,Nanjing,Agriculture and Meteorology Experimental Station,32.21,118.71,China,Asia,match,,0.0,,,,,,,,982.0,Straw added,,1.0,2017.5,Agriculture,IRGA
@@ -12723,11 +12723,11 @@ Cobre de Loncha’",-34.133,-71.05,Chile,South & Central America,match,,0.0,,,,,
 13207.0,15919,Hungary,,Karcag Research Institute,47.29,20.92,Hungary,Europe,match,,0.0,,,,,,,,1934.2,Mulch,Q11,0.5,2020.5,Grassland,IRGA
 13208.0,15919,Hungary,,Karcag Research Institute,47.29,20.92,Hungary,Europe,match,,0.0,,,,,,,,1934.2,Mowing,Q11,0.5,2020.5,Grassland,IRGA
 13209.0,15919,Hungary,,Karcag Research Institute,47.29,20.92,Hungary,Europe,match,,0.0,,,,,,,,1934.2,None,Q11,0.5,2020.5,Grassland,IRGA
-13210.0,15924,United Kingdom,Devon,Rothamsted Research,50.77,3.9,Flemish,Europe,mismatch,lon_sign,184.33181414004605,50.77,-3.9,,Europe,high,Region matches admin-1 'devon' at the fixed point,,1044.0,Fertilized,,0.42,2019.5,Agriculture,Gas chromatography
-13211.0,15924,United Kingdom,Devon,Rothamsted Research,50.77,3.9,Flemish,Europe,mismatch,lon_sign,184.33181414004605,50.77,-3.9,,Europe,high,Region matches admin-1 'devon' at the fixed point,,533.0,Fertilized,,0.42,2019.5,Agriculture,Gas chromatography
-13212.0,15924,United Kingdom,Devon,Rothamsted Research,50.77,3.9,Flemish,Europe,mismatch,lon_sign,184.33181414004605,50.77,-3.9,,Europe,high,Region matches admin-1 'devon' at the fixed point,,1655.0,Fertilized,,0.42,2019.5,Agriculture,Gas chromatography
-13213.0,15924,United Kingdom,Devon,Rothamsted Research,50.77,3.9,Flemish,Europe,mismatch,lon_sign,184.33181414004605,50.77,-3.9,,Europe,high,Region matches admin-1 'devon' at the fixed point,,1005.0,Fertilized,,0.42,2019.5,Agriculture,Gas chromatography
-13214.0,15924,United Kingdom,Devon,Rothamsted Research,50.77,3.9,Flemish,Europe,mismatch,lon_sign,184.33181414004605,50.77,-3.9,,Europe,high,Region matches admin-1 'devon' at the fixed point,,2041.0,Fertilized,,0.42,2019.5,Agriculture,Gas chromatography
+13210.0,15924,United Kingdom,Devon,Rothamsted Research,50.77,3.9,Flemish,Europe,mismatch,lon_sign,181.17289571385518,50.77,-3.9,,Europe,high,Region matches admin-1 'devon' at the fixed point,,1044.0,Fertilized,,0.42,2019.5,Agriculture,Gas chromatography
+13211.0,15924,United Kingdom,Devon,Rothamsted Research,50.77,3.9,Flemish,Europe,mismatch,lon_sign,181.17289571385518,50.77,-3.9,,Europe,high,Region matches admin-1 'devon' at the fixed point,,533.0,Fertilized,,0.42,2019.5,Agriculture,Gas chromatography
+13212.0,15924,United Kingdom,Devon,Rothamsted Research,50.77,3.9,Flemish,Europe,mismatch,lon_sign,181.17289571385518,50.77,-3.9,,Europe,high,Region matches admin-1 'devon' at the fixed point,,1655.0,Fertilized,,0.42,2019.5,Agriculture,Gas chromatography
+13213.0,15924,United Kingdom,Devon,Rothamsted Research,50.77,3.9,Flemish,Europe,mismatch,lon_sign,181.17289571385518,50.77,-3.9,,Europe,high,Region matches admin-1 'devon' at the fixed point,,1005.0,Fertilized,,0.42,2019.5,Agriculture,Gas chromatography
+13214.0,15924,United Kingdom,Devon,Rothamsted Research,50.77,3.9,Flemish,Europe,mismatch,lon_sign,181.17289571385518,50.77,-3.9,,Europe,high,Region matches admin-1 'devon' at the fixed point,,2041.0,Fertilized,,0.42,2019.5,Agriculture,Gas chromatography
 13215.0,16852,Canada,Ontario,Mer Bleue,45.41,-75.52,Canada,North America,match,,0.0,,,,,,,,,None,,,2018.5,Wetland,IRGA
 13216.0,16852,Canada,Ontario,Mer Bleue,45.41,-75.52,Canada,North America,match,,0.0,,,,,,,,,None,,,2018.5,Wetland,IRGA
 13217.0,16852,Canada,Ontario,Mer Bleue,45.41,-75.52,Canada,North America,match,,0.0,,,,,,,,,None,,,2019.5,Wetland,IRGA
@@ -13293,10 +13293,10 @@ Cobre de Loncha’",-34.133,-71.05,Chile,South & Central America,match,,0.0,,,,,
 13784.0,14379,China,Henan,NA,31.866,114.087,China,Asia,match,,0.0,,,,,,,,949.49,Fertilized and Acidification,,1.0,2015.5,Forest,IRGA
 13785.0,14405,Finland,Helsinki,SC1,61.845,24.288,Finland,Europe,match,,0.0,,,,,,,,,None,,0.5,2015.5,Forest,IRGA
 13786.0,14405,Finland,Helsinki,SC2,61.845,24.288,Finland,Europe,match,,0.0,,,,,,,,,None,,0.5,2015.5,Forest,IRGA
-13787.0,14499,Israel,Kibbutz Mizra,FW,32.667,35.617,Jordan,Asia,match_tolerance,,1.5535433352960455,,,,,,,,,None,,,2014.5,Agriculture,IRGA
-13788.0,14499,Israel,Kibbutz Mizra,TWW,32.667,35.617,Jordan,Asia,match_tolerance,,1.5535433352960455,,,,,,,,,None,,,2014.5,Agriculture,IRGA
-13789.0,14499,Israel,Kibbutz Mizra,FW,32.667,35.617,Jordan,Asia,match_tolerance,,1.5535433352960455,,,,,,,,,None,,,2015.5,Agriculture,IRGA
-13790.0,14499,Israel,Kibbutz Mizra,TWW,32.667,35.617,Jordan,Asia,match_tolerance,,1.5535433352960455,,,,,,,,,None,,,2015.5,Agriculture,IRGA
+13787.0,14499,Israel,Kibbutz Mizra,FW,32.667,35.617,Jordan,Asia,match_tolerance,,1.5486282414592103,,,,,,,,,None,,,2014.5,Agriculture,IRGA
+13788.0,14499,Israel,Kibbutz Mizra,TWW,32.667,35.617,Jordan,Asia,match_tolerance,,1.5486282414592103,,,,,,,,,None,,,2014.5,Agriculture,IRGA
+13789.0,14499,Israel,Kibbutz Mizra,FW,32.667,35.617,Jordan,Asia,match_tolerance,,1.5486282414592103,,,,,,,,,None,,,2015.5,Agriculture,IRGA
+13790.0,14499,Israel,Kibbutz Mizra,TWW,32.667,35.617,Jordan,Asia,match_tolerance,,1.5486282414592103,,,,,,,,,None,,,2015.5,Agriculture,IRGA
 13791.0,12050,China,Beijing,PT,39.567,116.467,China,Asia,match,,0.0,,,,,,,,475.38,None,,0.58,2013.5,Forest,IRGA
 13792.0,12050,China,Beijing,PO,39.567,116.467,China,Asia,match,,0.0,,,,,,,,277.76,None,,0.58,2013.5,Forest,IRGA
 13793.0,12050,China,Beijing,QV,39.567,116.467,China,Asia,match,,0.0,,,,,,,,337.9,None,,0.58,2013.5,Forest,IRGA
@@ -13490,8 +13490,8 @@ Experimental Forest Farm of Northwest A&F University in the Qinling Mountains",3
 13973.0,14825,Mongolia,Genhe,Kailaqi Forest,51.172,121.811,China,Asia,mismatch,label_wrong,437.2998143476878,51.172,121.811,China,Asia,medium,title names 'china',,1146.6,None,,0.42,2017.0,Forest,IRGA
 13974.0,14825,Mongolia,Genhe,Kailaqi Forest,51.172,121.811,China,Asia,mismatch,label_wrong,437.2998143476878,51.172,121.811,China,Asia,medium,title names 'china',,1782.4,None,,0.42,2017.0,Forest,IRGA
 13975.0,14825,Mongolia,Genhe,Kailaqi Forest,51.172,121.811,China,Asia,mismatch,label_wrong,437.2998143476878,51.172,121.811,China,Asia,medium,title names 'china',,1725.6,None,,0.42,2017.0,Forest,IRGA
-13976.0,13073,Germany,Freiamt,,48.233,7.15,France,Europe,mismatch,near_border,34.866451602712324,,,,,low,,,534.7,None,,1.0,2016.5,Forest,Gas chromatography
-13977.0,13073,Germany,Freiamt,,48.233,7.15,France,Europe,mismatch,near_border,34.866451602712324,,,,,low,,,439.8,None,,1.0,2016.5,Forest,Gas chromatography
+13976.0,13073,Germany,Freiamt,,48.233,7.15,France,Europe,mismatch,near_border,34.37256227464481,,,,,low,,,534.7,None,,1.0,2016.5,Forest,Gas chromatography
+13977.0,13073,Germany,Freiamt,,48.233,7.15,France,Europe,mismatch,near_border,34.37256227464481,,,,,low,,,439.8,None,,1.0,2016.5,Forest,Gas chromatography
 13978.0,14198,Finland,Juupajoki,,61.8,24.3,Finland,Europe,match,,0.0,,,,,,,,,None,,,2016.5,Forest,Gas chromatography
 13979.0,14198,Finland,Juupajoki,,61.8,24.3,Finland,Europe,match,,0.0,,,,,,,,,Biochar,,,2016.5,Forest,Gas chromatography
 13980.0,14198,Finland,Juupajoki,,61.8,24.3,Finland,Europe,match,,0.0,,,,,,,,,Biochar,,,2016.5,Forest,Gas chromatography

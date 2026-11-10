@@ -1,0 +1,74 @@
+strict Asia 42 {'baseline': -0.023, 'ols_P': 0.106, 'ols_TP': 0.12, 'xgb': 0.159}
+strict Asia 43 {'baseline': -0.005, 'ols_P': 0.122, 'ols_TP': 0.133, 'xgb': 0.204}
+strict Asia 44 {'baseline': -0.015, 'ols_P': 0.113, 'ols_TP': 0.104, 'xgb': 0.219}
+strict Asia 45 {'baseline': -0.003, 'ols_P': 0.12, 'ols_TP': 0.13, 'xgb': 0.215}
+strict Asia 46 {'baseline': -0.009, 'ols_P': 0.116, 'ols_TP': 0.129, 'xgb': 0.197}
+strict North America 42 {'baseline': -0.018, 'ols_P': 0.21, 'ols_TP': 0.22, 'xgb': 0.255}
+strict North America 43 {'baseline': -0.023, 'ols_P': 0.211, 'ols_TP': 0.216, 'xgb': 0.181}
+strict North America 44 {'baseline': -0.094, 'ols_P': 0.192, 'ols_TP': 0.218, 'xgb': 0.193}
+strict North America 45 {'baseline': -0.021, 'ols_P': 0.216, 'ols_TP': 0.227, 'xgb': 0.164}
+strict North America 46 {'baseline': -0.04, 'ols_P': 0.205, 'ols_TP': 0.238, 'xgb': 0.234}
+strict Europe 42 {'baseline': -0.05, 'ols_P': -0.034, 'ols_TP': -0.015, 'xgb': -0.075}
+strict Europe 43 {'baseline': -0.026, 'ols_P': -0.011, 'ols_TP': 0.01, 'xgb': -0.089}
+strict Europe 44 {'baseline': -0.007, 'ols_P': -0.003, 'ols_TP': -0.015, 'xgb': -0.046}
+strict Europe 45 {'baseline': -0.02, 'ols_P': -0.002, 'ols_TP': -0.004, 'xgb': -0.061}
+strict Europe 46 {'baseline': -0.002, 'ols_P': 0.007, 'ols_TP': 0.026, 'xgb': -0.042}
+strict South & Central America 42 {'baseline': -0.247, 'ols_P': -0.014, 'ols_TP': -0.119, 'xgb': 0.477}
+strict South & Central America 43 {'baseline': -0.13, 'ols_P': 0.151, 'ols_TP': 0.14, 'xgb': 0.402}
+strict South & Central America 44 {'baseline': -0.157, 'ols_P': 0.053, 'ols_TP': -0.12, 'xgb': 0.448}
+strict South & Central America 45 {'baseline': -0.117, 'ols_P': -0.088, 'ols_TP': -0.059, 'xgb': 0.361}
+strict South & Central America 46 {'baseline': -0.137, 'ols_P': 0.128, 'ols_TP': 0.117, 'xgb': 0.355}
+                  continent     model   mean    min    max    std
+0                      Asia  baseline -0.011 -0.023 -0.003  0.008
+1                      Asia     ols_P  0.115  0.106  0.122  0.006
+2                      Asia    ols_TP  0.123  0.104  0.133  0.012
+3                      Asia       xgb  0.199  0.159  0.219  0.024
+4                    Europe  baseline -0.021 -0.050 -0.002  0.019
+5                    Europe     ols_P -0.009 -0.034  0.007  0.015
+6                    Europe    ols_TP  0.001 -0.015  0.026  0.017
+7                    Europe       xgb -0.063 -0.089 -0.042  0.020
+8             North America  baseline -0.039 -0.094 -0.018  0.032
+9             North America     ols_P  0.207  0.192  0.216  0.009
+10            North America    ols_TP  0.224  0.216  0.238  0.009
+11            North America       xgb  0.205  0.164  0.255  0.038
+12  South & Central America  baseline -0.157 -0.247 -0.117  0.052
+13  South & Central America     ols_P  0.046 -0.088  0.151  0.099
+14  South & Central America    ols_TP -0.008 -0.120  0.140  0.127
+15  South & Central America       xgb  0.409  0.355  0.477  0.053
+incl_missing Asia 42 {'baseline': -0.006, 'ols_P': 0.132, 'ols_TP': 0.16, 'xgb': 0.19}
+incl_missing Asia 43 {'baseline': -0.012, 'ols_P': 0.132, 'ols_TP': 0.156, 'xgb': 0.193}
+incl_missing Asia 44 {'baseline': -0.033, 'ols_P': 0.144, 'ols_TP': 0.17, 'xgb': 0.184}
+incl_missing Asia 45 {'baseline': -0.006, 'ols_P': 0.144, 'ols_TP': 0.171, 'xgb': 0.188}
+incl_missing Asia 46 {'baseline': -0.009, 'ols_P': 0.132, 'ols_TP': 0.15, 'xgb': 0.192}
+incl_missing North America 42 {'baseline': -0.036, 'ols_P': 0.296, 'ols_TP': 0.287, 'xgb': 0.305}
+incl_missing North America 43 {'baseline': -0.068, 'ols_P': 0.312, 'ols_TP': 0.322, 'xgb': 0.263}
+incl_missing North America 44 {'baseline': -0.049, 'ols_P': 0.298, 'ols_TP': 0.309, 'xgb': 0.289}
+incl_missing North America 45 {'baseline': -0.036, 'ols_P': 0.301, 'ols_TP': 0.314, 'xgb': 0.3}
+incl_missing North America 46 {'baseline': -0.049, 'ols_P': 0.291, 'ols_TP': 0.298, 'xgb': 0.274}
+incl_missing Europe 42 {'baseline': -0.017, 'ols_P': -0.019, 'ols_TP': -0.005, 'xgb': -0.046}
+incl_missing Europe 43 {'baseline': -0.015, 'ols_P': -0.012, 'ols_TP': 0.015, 'xgb': -0.058}
+incl_missing Europe 44 {'baseline': -0.025, 'ols_P': -0.045, 'ols_TP': -0.025, 'xgb': -0.027}
+incl_missing Europe 45 {'baseline': -0.011, 'ols_P': -0.01, 'ols_TP': 0.021, 'xgb': -0.043}
+incl_missing Europe 46 {'baseline': -0.007, 'ols_P': -0.011, 'ols_TP': -0.002, 'xgb': -0.054}
+incl_missing South & Central America 42 {'baseline': -0.076, 'ols_P': 0.108, 'ols_TP': 0.042, 'xgb': 0.141}
+incl_missing South & Central America 43 {'baseline': -0.217, 'ols_P': -0.048, 'ols_TP': -0.059, 'xgb': 0.284}
+incl_missing South & Central America 44 {'baseline': -0.2, 'ols_P': -0.129, 'ols_TP': -0.319, 'xgb': 0.195}
+incl_missing South & Central America 45 {'baseline': -0.086, 'ols_P': 0.076, 'ols_TP': 0.049, 'xgb': 0.338}
+incl_missing South & Central America 46 {'baseline': -0.21, 'ols_P': -0.05, 'ols_TP': -0.201, 'xgb': 0.163}
+                  continent     model   mean    min    max    std
+0                      Asia  baseline -0.013 -0.033 -0.006  0.011
+1                      Asia     ols_P  0.137  0.132  0.144  0.007
+2                      Asia    ols_TP  0.161  0.150  0.171  0.009
+3                      Asia       xgb  0.189  0.184  0.193  0.004
+4                    Europe  baseline -0.015 -0.025 -0.007  0.006
+5                    Europe     ols_P -0.019 -0.045 -0.010  0.015
+6                    Europe    ols_TP  0.001 -0.025  0.021  0.018
+7                    Europe       xgb -0.046 -0.058 -0.027  0.012
+8             North America  baseline -0.048 -0.068 -0.036  0.013
+9             North America     ols_P  0.299  0.291  0.312  0.008
+10            North America    ols_TP  0.306  0.287  0.322  0.014
+11            North America       xgb  0.286  0.263  0.305  0.018
+12  South & Central America  baseline -0.158 -0.217 -0.076  0.070
+13  South & Central America     ols_P -0.009 -0.129  0.108  0.098
+14  South & Central America    ols_TP -0.097 -0.319  0.049  0.160
+15  South & Central America       xgb  0.224  0.141  0.338  0.084

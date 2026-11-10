@@ -8,7 +8,9 @@ mshi_common.COUNTRY_ALIASES).
 
 Status per record:
   match              point inside a map unit whose names include the stated country
-  match_political    stated/actual differ only across a disputed or de facto boundary
+  match_political    stated/actual differ only across a disputed or de facto boundary, and the point
+                     is within 50 km of the stated country, inside Crimea, or inside a disputed or
+                     partially recognised unit (Taiwan, Kosovo, Western Sahara, ...)
   match_tolerance    point outside but within 10 km of the stated country (1:10m coastline and
                      border generalisation, coordinate rounding)
   no_country         Country field empty (cannot disagree; kept)
@@ -21,6 +23,9 @@ Mismatch classes, decided in this order:
   2 lon_sign / lat_sign / both_signs / swap / swap_signs
                           flipping signs and/or exchanging lat and lon puts the point inside
                           (or within 10 km of) the stated country. Fix: transformed coordinates.
+                          If the original point is within 50 km of the stated country, the
+                          transform is accepted only when the Region field names an admin-1 unit
+                          within ~25 km of the fixed point (otherwise near_border/offshore_near).
   3 offshore_near         point in the sea, <= 50 km from the stated country (coastal or island
                           sites missing from 1:10m polygons, or rounding). No fix proposed.
     in_sea                point in the sea, > 50 km from the stated country.
@@ -143,6 +148,19 @@ class Admin1:
         c = self.tree.query(Point(lon, lat), predicate="intersects")
         return int(c[0]) if len(c) else None
 
+    def names_near(self, lat, lon, km):
+        """Union of the name sets of admin-1 units within about `km` of the point."""
+        import math as _m
+        from shapely.geometry import Point
+        r = km / 111.0
+        geom = Point(lon, lat).buffer(1.0, quad_segs=8)
+        from shapely import affinity
+        geom = affinity.scale(geom, r / max(_m.cos(_m.radians(min(abs(lat), 85.0))), 0.05), r, origin=(lon, lat))
+        out = set()
+        for k in self.tree.query(geom, predicate="intersects"):
+            out |= self.a.iloc[int(k)]["names"]
+        return out
+
 
 def political_ok(stated_norm: set, unit_names: set) -> bool:
     return any(stated_norm & grp and unit_names & grp for grp in C.POLITICAL_EQUIV)
@@ -222,12 +240,18 @@ def main() -> int:
             rec["status"] = "match"
             rows.append(rec)
             continue
-        if kind == "names" and u >= 0 and political_ok(payload, unit_names[u]):
-            rec["status"] = "match_political"
-            rows.append(rec)
-            continue
         if dist <= C.TOL_KM:
             rec["status"] = "match_tolerance"
+            rows.append(rec)
+            continue
+        # political equivalence only where the boundary itself is the issue: within NEAR_BORDER_KM of the
+        # stated country, or inside Crimea (review finding: without this, 'India' records 95 km inside
+        # Pakistan and 'Russia' records 150 km inside Ukraine were accepted)
+        in_crimea = 44.3 <= lat <= 46.3 and 32.4 <= lon <= 36.7
+        in_disputed_unit = u >= 0 and bool(unit_names[u] & C.DISPUTED_UNITS)
+        if (kind == "names" and u >= 0 and political_ok(payload, unit_names[u])
+                and (dist <= C.NEAR_BORDER_KM or in_crimea or in_disputed_unit)):
+            rec["status"] = "match_political"
             rows.append(rec)
             continue
         rec["status"] = "mismatch"
@@ -267,6 +291,14 @@ def main() -> int:
             dd = dist_target(la, lo, kind, payload, ids)
             if dd <= C.TOL_KM:
                 hits.append((name, la, lo, dd))
+        if hits and dist <= C.NEAR_BORDER_KM:
+            # a near-border point whose sign flip happens to land in the stated country (countries that
+            # straddle 0 deg) is not evidence of a sign error unless the Region agrees at the fixed point
+            la0, lo0 = hits[0][1], hits[0][2]
+            # Region support: the Region names an admin-1 unit within ~25 km of the fixed point (a fix
+            # that lands just across a provincial border, e.g. Toledo/Madrid, still counts)
+            if not text_has(region_txt, adm1.names_near(la0, lo0, 25.0)):
+                hits = []
         if hits:
             name, la, lo, dd = hits[0]
             rec["mismatch_class"] = name

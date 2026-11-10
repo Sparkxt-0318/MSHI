@@ -171,6 +171,11 @@ COUNTRY_ALIASES = {
 REGION_LABELS = {"europe": ("continent", "Europe"), "africa": ("continent", "Africa"),
                  "antarctica": ("continent", "Antarctica"), "arctic": ("lat_min", 60.0)}
 
+# Natural Earth units that are themselves disputed or partially recognised: a record labelled with the
+# claimant's name and located inside such a unit is a political naming difference, wherever it is
+DISPUTED_UNITS = {"taiwan", "kosovo", "western sahara", "w sahara", "northern cyprus", "n cyprus",
+                  "somaliland", "palestine", "siachen glacier"}
+
 # disputed / de facto areas where a stated-vs-polygon difference is political, not an error
 POLITICAL_EQUIV = [
     {"ukraine", "russia"},          # Crimea is drawn de facto in Natural Earth
@@ -228,8 +233,9 @@ def load_map_units():
 
 def continent_override(lat: float, lon: float, unit_name: str, cont: str) -> str:
     """Documented geographic overrides for units that span continents."""
-    if unit_name == "Russia" and lon >= 60.0:
-        return "Asia"  # Ural split; west of 60E stays Europe
+    if unit_name == "Russia" and (lon >= 60.0 or lon < 0.0):
+        return "Asia"  # Ural split (west of 60E stays Europe); lon < 0 = Chukotka east of the antimeridian
+        # (no SRDB/COSORE record is affected at 02163a7; checked 2026-11-10)
     if unit_name in ("United States of America",) and 18.0 <= lat <= 23.0 and -161.0 <= lon <= -154.0:
         return "Oceania"  # Hawaii (Polynesia)
     if unit_name == "Spain" and 27.0 <= lat <= 29.6 and -18.5 <= lon <= -13.0:
@@ -279,17 +285,41 @@ class CountryLocator:
         return out
 
     def dist_to_units_km(self, lat: float, lon: float, unit_ids) -> float:
-        """Approximate distance (km) from point to the nearest of the given units."""
-        from shapely.geometry import Point
-        from shapely.ops import nearest_points
+        """Distance (km) from the point to the nearest of the given units.
+        Step 1: the planar (lon/lat-degree) nearest point gives a real point on the polygon, so its
+        haversine distance d_up is an upper bound on the true minimum. Step 2 (added after review: the
+        planar nearest point is not the geodesic nearest at high latitude, e.g. 17.9 vs 9.8 km for
+        Kannus, Finland): clip the polygon to a box that contains every point within d_up of the point,
+        project it to an azimuthal-equidistant CRS centred on the point and take the exact distance.
+        The refinement is applied only when d_up <= 300 km."""
+        from shapely.geometry import Point, box
+        from shapely.ops import nearest_points, transform
+        import pyproj
         p = Point(lon, lat)
         best = np.inf
+        tr = None
         for u in unit_ids:
             g = self.geoms[u]
             if g.intersects(p):
                 return 0.0
             q = nearest_points(g, p)[0]
-            best = min(best, float(haversine_km(lat, lon, q.y, q.x)))
+            d_up = float(haversine_km(lat, lon, q.y, q.x))
+            d_u = d_up
+            if d_up > 300.0:
+                # far polygons: an equidistant projection centred on the point distorts straight edges
+                # near the antipode, and every decision threshold (10/50/100 km) is far below 300 km
+                best = min(best, d_u)
+                continue
+            dlat = d_up / 110.5 + 0.05
+            coslat = math.cos(math.radians(min(abs(lat) + dlat, 89.0)))
+            dlon = min(d_up / (111.3 * max(coslat, 0.02)) + 0.05, 180.0)
+            clip = g.intersection(box(lon - dlon, lat - dlat, lon + dlon, lat + dlat))
+            if not clip.is_empty:
+                if tr is None:
+                    tr = pyproj.Transformer.from_crs(
+                        "EPSG:4326", f"+proj=aeqd +lat_0={lat} +lon_0={lon} +datum=WGS84 +units=m", always_xy=True)
+                d_u = min(d_up, transform(tr.transform, clip).distance(Point(0.0, 0.0)) / 1000.0)
+            best = min(best, d_u)
         return best
 
     def nearest_unit(self, lat: float, lon: float, max_km: float):
@@ -514,7 +544,10 @@ XGB_GRID = [
     {"max_depth": md, "learning_rate": lr, "min_child_weight": mcw, "reg_lambda": lam}
     for md in (1, 2, 3, 4, 6) for lr in (0.03, 0.1) for mcw in (1, 5, 10) for lam in (1.0, 10.0)
 ]
-XGB_NEST = (50, 100, 150, 300, 600)  # n_estimators evaluated via iteration_range from one 600-tree fit
+# n_estimators evaluated via iteration_range from one 600-tree fit. 5-30 trees were added after review:
+# for Europe the best configuration sat on the 50-tree / lr 0.03 corner and was worse than a mean-only
+# model in block CV, so the grid has to contain near-constant models.
+XGB_NEST = (5, 10, 20, 30, 50, 100, 150, 300, 600)
 XGB_FIXED = {"subsample": 0.8, "colsample_bytree": 0.8, "objective": "reg:squarederror",
              "tree_method": "hist", "n_jobs": 1}
 
@@ -554,23 +587,34 @@ def xgb_tune(X, y, folds, n_jobs=4, seed=SEED):
     return params, int(best["n_estimators"]), tab
 
 
-def xgb_seed_predictions(Xtr, ytr, Xte_list, params, n_estimators, n_seeds=N_SEEDS, base_seed=SEED):
-    """Fit n_seeds models (seeds base_seed..base_seed+n_seeds-1); return list of (S, n_te) arrays
-    and the mean gain importance per feature."""
+def xgb_seed_predictions(Xtr, ytr, Xte_list, params, n_estimators, n_seeds=N_SEEDS, base_seed=SEED,
+                         return_both=False):
+    """Fit n_seeds models (seeds base_seed..base_seed+n_seeds-1); return list of (S, n_te) arrays and
+    the per-feature importance, as shares summed over seeds.
+    Default importance = share of TOTAL gain (XGBoost 'total_gain'), which is what R's
+    xgb.importance()$Gain and hence caret/CAST (Meyer & Pebesma DI weights) use. With
+    return_both=True also returns the share of AVERAGE gain per split ('gain'), the measure used in
+    the first run of 25_a1_coverage.py (kept as a sensitivity)."""
     Xtr = np.asarray(Xtr, float)
     outs = [np.zeros((n_seeds, len(x))) for x in Xte_list]
-    imp = np.zeros(Xtr.shape[1])
+    tot_imp = np.zeros(Xtr.shape[1])
+    avg_imp = np.zeros(Xtr.shape[1])
     for s in range(n_seeds):
         m = xgb_model(params, n_estimators, base_seed + s)
         m.set_params(n_jobs=4)
         m.fit(Xtr, np.asarray(ytr, float))
         for j, x in enumerate(Xte_list):
             outs[j][s] = m.predict(np.asarray(x, float))
-        g = m.get_booster().get_score(importance_type="gain")
-        for k, v in g.items():
-            imp[int(k[1:])] += v
-    tot = imp.sum()
-    return outs, (imp / tot if tot > 0 else imp)
+        b = m.get_booster()
+        for k, v in b.get_score(importance_type="total_gain").items():
+            tot_imp[int(k[1:])] += v
+        for k, v in b.get_score(importance_type="gain").items():
+            avg_imp[int(k[1:])] += v
+    tot_share = tot_imp / tot_imp.sum() if tot_imp.sum() > 0 else tot_imp
+    avg_share = avg_imp / avg_imp.sum() if avg_imp.sum() > 0 else avg_imp
+    if return_both:
+        return outs, tot_share, avg_share
+    return outs, tot_share
 
 
 # ----------------------------------------------------------------------------

@@ -36,7 +36,11 @@ def main() -> int:
         doi = str(r.doi).strip()
         rec = {"key": r.key, "doi": doi, "expected_title": r.expected_title, "cited_for": r.cited_for}
         try:
-            resp = requests.get(f"https://api.crossref.org/works/{quote(doi, safe='/')}", headers=UA, timeout=60)
+            for attempt in range(6):
+                resp = requests.get(f"https://api.crossref.org/works/{quote(doi, safe='/')}", headers=UA, timeout=60)
+                if resp.status_code != 429:
+                    break
+                time.sleep(2 ** attempt)  # Crossref rate limit: back off and retry
             rec["http"] = resp.status_code
             if resp.status_code == 200:
                 m = resp.json()["message"]
@@ -51,6 +55,8 @@ def main() -> int:
                 e, t = toks(str(r.expected_title)), toks(title)
                 rec["title_match"] = round(len(e & t) / max(len(e), 1), 2)
                 rec["status"] = "ok" if rec["title_match"] >= 0.6 else "TITLE_MISMATCH"
+            elif resp.status_code == 429:
+                rec["status"] = "RATE_LIMITED"
             else:
                 rec["status"] = "NOT_FOUND"
         except Exception as ex:  # noqa: BLE001

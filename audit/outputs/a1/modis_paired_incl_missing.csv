@@ -1,7 +1,11 @@
-variant,train,test,model_a,model_b,metric,diff,lo,hi
-incl_missing,Asia,North America,xgb_npp,xgb,r2,0.035338987580497805,0.0077464287478166164,0.0615303887642624
-incl_missing,Asia,North America,ols_TPN,ols_TP,r2,0.05533600373126446,0.029981614547834413,0.08276092668777763
-incl_missing,Asia,North America,xgb_npp,ols_TPN,r2,0.050353346750837524,-0.010584116854865084,0.10691208028527982
-incl_missing,North America,Asia,xgb_npp,xgb,r2,-0.11080789583176562,-0.15160130842441508,-0.07499087632608743
-incl_missing,North America,Asia,ols_TPN,ols_TP,r2,0.042119766623003985,-0.03465978772202983,0.12289129117262519
-incl_missing,North America,Asia,xgb_npp,ols_TPN,r2,-0.10720751406113874,-0.20370831818548132,-0.016320819897085632
+variant,train,test,model_a,model_b,metric,role,diff,lo,hi
+incl_missing,Asia,North America,xgb_npp@xgb,xgb,r2,primary: NPP effect at xgb's hyperparameters,0.032930485776168555,0.0088791920721217,0.05712415422850516
+incl_missing,Asia,North America,xgb_npp,xgb@xgb_npp,r2,primary: NPP effect at xgb_npp's hyperparameters,0.029370847050815302,0.00643726074141164,0.052669799518788515
+incl_missing,Asia,North America,ols_TPN,ols_TP,r2,"primary: NPP effect, OLS",0.05521768524606352,0.029871496530972225,0.0822603022542657
+incl_missing,Asia,North America,xgb_npp,xgb,r2,secondary: separately tuned (includes tuning-selection effect),0.032166660951146925,0.007967127742580404,0.057050325199334576
+incl_missing,Asia,North America,xgb_npp,ols_TPN,r2,model comparison,0.04460490256629435,-0.004306947633926117,0.0939364569543015
+incl_missing,North America,Asia,xgb_npp@xgb,xgb,r2,primary: NPP effect at xgb's hyperparameters,-0.03585968754288222,-0.08253191555799679,0.009308058900408102
+incl_missing,North America,Asia,xgb_npp,xgb@xgb_npp,r2,primary: NPP effect at xgb_npp's hyperparameters,-0.0014895318706749303,-0.04092038358323937,0.036977216255410825
+incl_missing,North America,Asia,ols_TPN,ols_TP,r2,"primary: NPP effect, OLS",0.04202171943039246,-0.04305168061455278,0.11993797254210352
+incl_missing,North America,Asia,xgb_npp,xgb,r2,secondary: separately tuned (includes tuning-selection effect),-0.13116716936013748,-0.17504434693252982,-0.08995599432590093
+incl_missing,North America,Asia,xgb_npp,ols_TPN,r2,model comparison,-0.12364604113364194,-0.2157446053307423,-0.024801652457765656

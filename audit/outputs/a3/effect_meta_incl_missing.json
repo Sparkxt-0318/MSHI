@@ -9,8 +9,8 @@
     },
     "sites_with_flagged_records": 0,
     "sites_by_continent": {
-      "Asia": 432,
-      "Europe": 243,
+      "Asia": 431,
+      "Europe": 244,
       "North America": 236,
       "South & Central America": 84,
       "Oceania": 35,
@@ -22,7 +22,7 @@
           "max_depth": 1,
           "learning_rate": 0.1,
           "min_child_weight": 10.0,
-          "reg_lambda": 1.0
+          "reg_lambda": 10.0
         },
         "n_estimators": 50
       },
@@ -37,12 +37,12 @@
       },
       "Europe": {
         "params": {
-          "max_depth": 1,
-          "learning_rate": 0.03,
-          "min_child_weight": 1.0,
+          "max_depth": 6,
+          "learning_rate": 0.1,
+          "min_child_weight": 10.0,
           "reg_lambda": 1.0
         },
-        "n_estimators": 50
+        "n_estimators": 5
       }
     }
   },
@@ -84,12 +84,12 @@
       },
       "Europe": {
         "params": {
-          "max_depth": 1,
+          "max_depth": 4,
           "learning_rate": 0.03,
           "min_child_weight": 1.0,
           "reg_lambda": 1.0
         },
-        "n_estimators": 50
+        "n_estimators": 5
       }
     }
   },
@@ -97,13 +97,13 @@
     "last_step": {
       "rule": "mismatches with a high/medium-confidence fix corrected, others excluded",
       "n_before": 3614,
-      "n_removed": 50,
-      "n_after": 3564,
-      "note": "31 records corrected"
+      "n_removed": 54,
+      "n_after": 3560,
+      "note": "27 records corrected"
     },
-    "sites_with_flagged_records": 12,
+    "sites_with_flagged_records": 11,
     "sites_by_continent": {
-      "Asia": 434,
+      "Asia": 433,
       "Europe": 246,
       "North America": 237,
       "South & Central America": 85,
@@ -114,29 +114,29 @@
       "Asia": {
         "params": {
           "max_depth": 1,
-          "learning_rate": 0.03,
+          "learning_rate": 0.1,
           "min_child_weight": 10.0,
-          "reg_lambda": 1.0
+          "reg_lambda": 10.0
         },
-        "n_estimators": 150
+        "n_estimators": 50
       },
       "North America": {
         "params": {
-          "max_depth": 2,
+          "max_depth": 4,
           "learning_rate": 0.1,
           "min_child_weight": 10.0,
           "reg_lambda": 1.0
         },
-        "n_estimators": 50
+        "n_estimators": 30
       },
       "Europe": {
         "params": {
           "max_depth": 1,
-          "learning_rate": 0.03,
+          "learning_rate": 0.1,
           "min_child_weight": 1.0,
           "reg_lambda": 1.0
         },
-        "n_estimators": 50
+        "n_estimators": 5
       }
     }
   }

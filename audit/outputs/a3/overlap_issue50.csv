@@ -1,8 +1,8 @@
 Record_number,Country,Latitude,Longitude,status,mismatch_class,confidence,unit_name,dist_to_stated_km,in_current_srdb
-426,Norway,78.0,19.0,match_tolerance,,,Svalbard Is. (coast),7.636359999393202,True
-427,Norway,78.0,19.0,match_tolerance,,,Svalbard Is. (coast),7.636359999393202,True
-428,Norway,78.0,19.0,match_tolerance,,,Svalbard Is. (coast),7.636359999393202,True
-803,Japan,32.0,135.42,mismatch,in_sea,low,,162.5230329073385,True
+426,Norway,78.0,19.0,match_tolerance,,,Svalbard Is. (coast),5.38355741601435,True
+427,Norway,78.0,19.0,match_tolerance,,,Svalbard Is. (coast),5.38355741601435,True
+428,Norway,78.0,19.0,match_tolerance,,,Svalbard Is. (coast),5.38355741601435,True
+803,Japan,32.0,135.42,mismatch,in_sea,low,,162.1206293028946,True
 1134,Micronesia,5.33,162.95,match,,,Micronesia,0.0,True
 1135,Micronesia,5.29,163.03,match,,,Micronesia,0.0,True
 1136,Micronesia,5.29,163.03,match,,,Micronesia,0.0,True
@@ -14,13 +14,13 @@ Record_number,Country,Latitude,Longitude,status,mismatch_class,confidence,unit_n
 1857,Belize,16.5,-88.1,mismatch,offshore_near,low,,26.244507771308943,True
 1858,Belize,16.5,-88.1,mismatch,offshore_near,low,,26.244507771308943,True
 1864,Australia,-21.97,113.95,match,,,Australia,0.0,True
-2655,Japan,36.13,135.42,mismatch,offshore_near,low,,43.406406501770284,True
-4032,Canada,48.96527778,-63.63027778,mismatch,offshore_near,low,,46.24433414398956,True
-4033,Canada,48.96527778,-63.63027778,mismatch,offshore_near,low,,46.24433414398956,True
-4034,Canada,48.96527778,-63.63027778,mismatch,offshore_near,low,,46.24433414398956,True
-4035,Canada,48.88722222,-63.40222222,mismatch,offshore_near,low,,45.05850642452906,True
-4036,Canada,48.88722222,-63.40222222,mismatch,offshore_near,low,,45.05850642452906,True
-4037,Canada,48.88722222,-63.40222222,mismatch,offshore_near,low,,45.05850642452906,True
+2655,Japan,36.13,135.42,mismatch,offshore_near,low,,43.34464589893134,True
+4032,Canada,48.96527778,-63.63027778,mismatch,offshore_near,low,,43.549691142748976,True
+4033,Canada,48.96527778,-63.63027778,mismatch,offshore_near,low,,43.549691142748976,True
+4034,Canada,48.96527778,-63.63027778,mismatch,offshore_near,low,,43.549691142748976,True
+4035,Canada,48.88722222,-63.40222222,mismatch,offshore_near,low,,44.58089973395203,True
+4036,Canada,48.88722222,-63.40222222,mismatch,offshore_near,low,,44.58089973395203,True
+4037,Canada,48.88722222,-63.40222222,mismatch,offshore_near,low,,44.58089973395203,True
 4708,Spain,28.1,-15.4,match_tolerance,,,Spain (coast),1.2254569131815858,True
 4709,Spain,28.1,-15.4,match_tolerance,,,Spain (coast),1.2254569131815858,True
 4710,Spain,28.1,-15.4,match_tolerance,,,Spain (coast),1.2254569131815858,True
@@ -67,9 +67,9 @@ Record_number,Country,Latitude,Longitude,status,mismatch_class,confidence,unit_n
 6606,England,49.78095556,-3.748027778,mismatch,offshore_near,low,,48.02113303564675,True
 6607,England,49.78095556,-3.748027778,mismatch,offshore_near,low,,48.02113303564675,True
 6608,England,49.78095556,-3.748027778,mismatch,offshore_near,low,,48.02113303564675,True
-6641,Japan,45.11666667,141.2,match_tolerance,,,Japan (coast),0.169949195833909,True
-6712,Republic of Congo,-4.7447,10.0211,mismatch,in_sea,low,,150.84112913775314,True
-6713,Republic of Congo,-4.7447,10.0211,mismatch,in_sea,low,,150.84112913775314,True
+6641,Japan,45.11666667,141.2,match_tolerance,,,Japan (coast),0.164779351953634,True
+6712,Republic of Congo,-4.7447,10.0211,mismatch,in_sea,low,,150.65709725851897,True
+6713,Republic of Congo,-4.7447,10.0211,mismatch,in_sea,low,,150.65709725851897,True
 6774,Malaysia,1.066,110.8633,match,,,Malaysia,0.0,True
 6775,Malaysia,1.066,110.8633,match,,,Malaysia,0.0,True
 6776,Malaysia,1.066,110.8633,match,,,Malaysia,0.0,True

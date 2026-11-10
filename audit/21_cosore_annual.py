@@ -134,9 +134,27 @@ def main() -> int:
         if (ports["CSR_PORT"] == 0).any() and len(ports) == 1:
             pmap = {p: (ports.iloc[0]["var"], ports.iloc[0]["trt"]) for p in data_ports}
         else:
-            pmap = {int(r.CSR_PORT): (r["var"], r["trt"]) for _, r in ports.iterrows() if pd.notna(r.CSR_PORT)}
-            if 0 in pmap and data_ports == [0]:
-                pass
+            pmap = {}
+            dup_rows = []
+            for _, r in ports.iterrows():
+                if pd.isna(r.CSR_PORT):
+                    continue
+                k = int(r.CSR_PORT)
+                if k in pmap:
+                    dup_rows.append((k, (r["var"], r["trt"])))
+                else:
+                    pmap[k] = (r["var"], r["trt"])
+            missing = [p for p in data_ports if p not in pmap]
+            if dup_rows:
+                entry["duplicate_port_rows"] = [k for k, _ in dup_rows]
+            # review finding (d20190821_LIU lists port 7 twice and omits port 6): if exactly one row is a
+            # repeat and exactly one data port is absent from PORTS.txt, the repeat describes that port
+            if len(dup_rows) == 1 and len(missing) == 1:
+                pmap[missing[0]] = dup_rows[0][1]
+                entry["port_remapped"] = f"repeated PORTS row for port {dup_rows[0][0]} assigned to data port {missing[0]}"
+                missing = []
+            if missing:
+                entry["data_ports_missing_from_PORTS"] = missing
         keep = [p for p in data_ports if pmap.get(p, ("?", "?")) == ("Rs", "None")]
         entry["ports_in_data"] = len(data_ports)
         entry["ports_rs_untreated"] = len(keep)

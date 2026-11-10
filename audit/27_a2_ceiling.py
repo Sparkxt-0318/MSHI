@@ -8,15 +8,24 @@ Question: what is the largest R2 that any model built on gridded predictors (con
    95% intervals: 2000 bootstrap resamples of cells (seed 42).
 2. Within-cell part split by record-pair type: same study & same year (plot-scale heterogeneity +
    measurement error), same study & different years (+ interannual variation), different studies
-   (+ between-study method differences), the last split by same/different year. Statistic: mean of
-   (y_i - y_j)^2 / 2 over pairs, averaging within cell first (each cell weighted equally); pair-weighted
-   version also reported. Bootstrap over cells.
+   (+ between-study method differences), the last split by same/different year. "Same year" = the two
+   12-month windows overlap (|delta Study_midyear| <= 0.5; SRDB codes calendar year X as X.5 and
+   Jul X-1..Jun X as X.0); pairs with a missing year form their own class. Sensitivities: exact
+   mid-year equality (first run), excluding multi-year means. Statistic: mean of (y_i - y_j)^2 / 2
+   over pairs, averaging within cell first (each cell weighted equally); pair-weighted version also
+   reported. Bootstrap over cells.
+   Nested model (primary noise model B2): same-study pairs estimate s2_rec, different-study pairs
+   s2_study + s2_rec (moments; REML with statsmodels as a check).
 3. Semivariogram of site-level log Rs (cell means) per large continent: great-circle lags, bins
    0-10-25-50-100-200-400-800-1600-3200 km, pair counts, first-bin semivariance / sill, and a weighted
    least-squares exponential model with nugget (Cressie weights N_h / gamma_h^2).
 4. Upper bound on R2 for a predictor constant within a cell:
-     records : R2max = 1 - s2_within / Var(records)
-     sites   : R2max = 1 - s2_within * mean(1/n_i) / Var(site means)   (n_i records in cell i)
+     B1 (one-way, records exchangeable): 1 - s2_within * mean(1/n_i) / Var(site means)
+     B2 (nested, primary): 1 - mean_i[s2_study * sum_j (n_ij/n_i)^2 + s2_rec / n_i] / Var(site means)
+     B3 (short-range): 1 - semivariance(0-10 km) / Var(site means)
+   Intervals are percentiles of the bound itself: conditional on the scope's sites (component
+   replicates only) and with the scope's sites resampled (the same seed-42 resamples as the A1 R2
+   intervals), which matters for small continents.
    Sensitivity: pooled (ANOVA, cells weighted by n_i - 1) vs equal cell weights; cells with >= 3
    records; by continent; excluding COSORE; excluding exact-duplicate values across studies.
    Semivariogram bound: 1 - nugget / sill.
@@ -95,23 +104,31 @@ def reml_check(rec):
 
 
 def pairs_table(rec):
-    """All within-cell record pairs with type labels and half squared differences."""
+    """All within-cell record pairs with type labels and half squared differences.
+    Same year = both mid-years known and |delta mid-year| <= 0.5, i.e. the two 12-month windows overlap
+    (SRDB convention: calendar year X = X.5, Jul X-1 to Jun X = X.0). Pairs with a missing year get
+    their own 'year_unknown' type. `same_year_exact` keeps the first-run definition (equal mid-year)
+    and `multi_year` marks pairs involving a multi-year mean (YearsOfData > 1), both for sensitivity."""
     rows = []
     for cell, g in rec.groupby("cell"):
         if len(g) < 2:
             continue
-        v = g[["log_rs", "study_id", "year", "meas_method", "ecosystem", "source", "rs_annual"]].values
+        v = g[["log_rs", "study_id", "year", "meas_method", "ecosystem", "source", "rs_annual",
+               "years_of_data"]].values
         for a, b in itertools.combinations(range(len(v)), 2):
-            ya, sa, ta, ma, ea, soa, ra = v[a]
-            yb, sb, tb, mb, eb, sob, rb = v[b]
+            ya, sa, ta, ma, ea, soa, ra, da = v[a]
+            yb, sb, tb, mb, eb, sob, rb, db = v[b]
             same_study = sa == sb
-            same_year = (pd.notna(ta) and pd.notna(tb) and ta == tb)
-            if same_study:
-                ptype = "same_study_same_year" if same_year else "same_study_diff_year"
-            else:
-                ptype = "diff_study_same_year" if same_year else "diff_study_diff_year"
-            rows.append({"cell": cell, "ptype": ptype, "hsd": 0.5 * (ya - yb) ** 2, "same_study": same_study,
-                         "same_year": same_year, "m_a": ma, "m_b": mb, "e_a": ea, "e_b": eb,
+            known = pd.notna(ta) and pd.notna(tb)
+            same_year = known and abs(float(ta) - float(tb)) <= 0.5
+            same_year_exact = known and ta == tb
+            pre = "same_study_" if same_study else "diff_study_"
+            ptype = pre + ("year_unknown" if not known else ("same_year" if same_year else "diff_year"))
+            ptype_exact = pre + ("year_unknown" if not known else ("same_year" if same_year_exact else "diff_year"))
+            multi = (pd.notna(da) and float(da) > 1) or (pd.notna(db) and float(db) > 1)
+            rows.append({"cell": cell, "ptype": ptype, "ptype_exact": ptype_exact, "hsd": 0.5 * (ya - yb) ** 2,
+                         "same_study": same_study, "same_year": same_year, "year_known": known,
+                         "multi_year": multi, "m_a": ma, "m_b": mb, "e_a": ea, "e_b": eb,
                          "cosore": (soa == "cosore") or (sob == "cosore"),
                          "exact_dup": (not same_study) and abs(ra - rb) < 1e-9})
     return pd.DataFrame(rows)
@@ -311,8 +328,16 @@ def main() -> int:
             "diff_study_any_year": ~pt["same_study"],
             "diff_study_same_year": pt["ptype"] == "diff_study_same_year",
             "diff_study_diff_year": pt["ptype"] == "diff_study_diff_year",
+            "year_unknown_any_study": ~pt["year_known"],
             "diff_study_excl_exact_dups": (~pt["same_study"]) & (~pt["exact_dup"]),
             "all_pairs_no_cosore": ~pt["cosore"],
+            "sens_exact_year: same_study_same_year": pt["ptype_exact"] == "same_study_same_year",
+            "sens_exact_year: same_study_diff_year": pt["ptype_exact"] == "same_study_diff_year",
+            "sens_exact_year: diff_study_same_year": pt["ptype_exact"] == "diff_study_same_year",
+            "sens_exact_year: diff_study_diff_year": pt["ptype_exact"] == "diff_study_diff_year",
+            "sens_no_multi_year: same_study_same_year": (pt["ptype"] == "same_study_same_year") & ~pt["multi_year"],
+            "sens_no_multi_year: same_study_diff_year": (pt["ptype"] == "same_study_diff_year") & ~pt["multi_year"],
+            "sens_no_multi_year: diff_study_any_year": (~pt["same_study"]) & ~pt["multi_year"],
         }
         for name, mk in masks.items():
             val, npairs, ncells = comp_stat(pt, mk, "cell")
@@ -356,7 +381,7 @@ def main() -> int:
             lo, hi = boot_comp(pt, mk)
             mrow.append({"group": "ecosystem", "label": eco, "half_sq_diff_cellw": val, "lo": lo, "hi": hi,
                          "n_pairs": npairs, "n_cells": ncells})
-        mk = pt["e_a"] != pt["e_b"]
+        mk = pt["e_a"].notna() & pt["e_b"].notna() & (pt["e_a"] != pt["e_b"])
         val, npairs, ncells = comp_stat(pt, mk)
         lo, hi = boot_comp(pt, mk)
         mrow.append({"group": "ecosystem", "label": "mixed ecosystem types", "half_sq_diff_cellw": val, "lo": lo,
@@ -406,7 +431,21 @@ def main() -> int:
             nested[f"continent_{c}"] = dict(zip(["s2_rec", "s2_study"], nested_components(ptc)))
         R["nested"] = nested
         # ---- 4. bounds ----
+        # Interval conventions (after independent review):
+        #   lo/hi           conditional on the scope's sites: percentiles of the bound over the 2000
+        #                   variance-component bootstrap replicates (cells resampled)
+        #   lo_uncond/hi_*  also resampling the scope's sites (C.boot_idx, seed 42 = the resamples used
+        #                   for the A1 R2 intervals), replicate b paired with component replicate b
         brow = []
+        boot_one = np.array([b["s2_within"] for b in bs])
+        comp_mats = {}  # per scope: (z, sum_w2, inv_n) aligned to the scope's site order
+
+        def site_terms(r, s):
+            cnt = r.groupby(["cell", "study_id"]).size().rename("nij").reset_index()
+            ni = cnt.groupby("cell")["nij"].transform("sum")
+            cnt["w2"] = (cnt["nij"] / ni) ** 2
+            agg = cnt.groupby("cell").agg(sum_w2=("w2", "sum"), n=("nij", "sum")).reindex(s["cell"])
+            return agg["sum_w2"].values, 1.0 / agg["n"].values
 
         def add_bound(scope, label, s, r, noise_sites, noise_rec, extra=None):
             var_s = float(s["log_rs"].var(ddof=1))
@@ -424,61 +463,95 @@ def main() -> int:
             if len(s) < 20:
                 continue
             rr = r.copy()
+            z = s["log_rs"].values
+            var_s = float(np.var(z, ddof=1))
+            sw2, inv_n = site_terms(rr, s)
+            comp_mats[scope] = (s["cell"].values, z, sw2, inv_n)
+            idx = C.boot_idx(len(s))
+            zb = z[idx]
+            var_b = zb.var(axis=1, ddof=1)
             # B1 pooled one-way ANOVA: records exchangeable within cell
             w = comp["s2_within"]
-            inv_n = float((1.0 / s["n_records"]).mean())
-            add_bound(scope, "B1 pooled one-way (records exchangeable)", s, r, w * inv_n, w,
-                      {"lo": 1 - comp["s2_within_hi"] * inv_n / s["log_rs"].var(ddof=1),
-                       "hi": 1 - comp["s2_within_lo"] * inv_n / s["log_rs"].var(ddof=1)})
+            b1_cond = 1 - boot_one * inv_n.mean() / var_s
+            b1_unc = 1 - boot_one * inv_n[idx].mean(axis=1) / var_b
+            add_bound(scope, "B1 pooled one-way (records exchangeable)", s, r, w * inv_n.mean(), w,
+                      {"lo": np.nanpercentile(b1_cond, 2.5), "hi": np.nanpercentile(b1_cond, 97.5),
+                       "lo_uncond": np.nanpercentile(b1_unc, 2.5), "hi_uncond": np.nanpercentile(b1_unc, 97.5),
+                       "share_boot_bound_le0": float(np.mean(b1_unc <= 0))})
             # B2 nested study effects (primary)
-            noise = site_noise_nested(rr, s2_study, s2_rec).reindex(s["cell"]).mean()
-            noise_hi = site_noise_nested(rr, nested["s2_study_hi"], nested["s2_rec_hi"]).reindex(s["cell"]).mean()
-            noise_lo = site_noise_nested(rr, nested["s2_study_lo"], nested["s2_rec_lo"]).reindex(s["cell"]).mean()
+            noise = s2_study * sw2.mean() + s2_rec * inv_n.mean()
+            b2_cond = 1 - (bn[:, 1] * sw2.mean() + bn[:, 0] * inv_n.mean()) / var_s
+            b2_unc = 1 - (bn[:, 1] * sw2[idx].mean(axis=1) + bn[:, 0] * inv_n[idx].mean(axis=1)) / var_b
             add_bound(scope, "B2 nested study effects (primary)", s, r, noise, s2_study + s2_rec,
-                      {"lo": 1 - noise_hi / s["log_rs"].var(ddof=1), "hi": 1 - noise_lo / s["log_rs"].var(ddof=1)})
+                      {"lo": np.nanpercentile(b2_cond, 2.5), "hi": np.nanpercentile(b2_cond, 97.5),
+                       "lo_uncond": np.nanpercentile(b2_unc, 2.5), "hi_uncond": np.nanpercentile(b2_unc, 97.5),
+                       "share_boot_bound_le0": float(np.mean(b2_unc <= 0))})
+            comp_mats[scope] = comp_mats[scope] + (b2_unc,)
             for lab, comps in [("B2 sensitivity: record-count (pair) weighting", nested["pair_weighted"]),
                                ("B2 sensitivity: cells with 3+ records", nested["cells_3plus"]),
                                ("B2 sensitivity: excluding COSORE", nested["no_cosore"]),
                                ("B2 sensitivity: same cells for both pair types",
                                 {"s2_rec": s2_rec_sc, "s2_study": s2_study_sc})]:
                 if np.isfinite(comps["s2_rec"]) and np.isfinite(comps["s2_study"]):
-                    nz = site_noise_nested(rr, comps["s2_study"], comps["s2_rec"]).reindex(s["cell"]).mean()
+                    nz = comps["s2_study"] * sw2.mean() + comps["s2_rec"] * inv_n.mean()
                     add_bound(scope, lab, s, r, nz, comps["s2_study"] + comps["s2_rec"])
             ck = f"continent_{scope}"
             if ck in nested and np.isfinite(nested[ck]["s2_rec"]):
-                nz = site_noise_nested(rr, nested[ck]["s2_study"], nested[ck]["s2_rec"]).reindex(s["cell"]).mean()
+                nz = nested[ck]["s2_study"] * sw2.mean() + nested[ck]["s2_rec"] * inv_n.mean()
                 add_bound(scope, "B2 sensitivity: continent-specific components", s, r, nz,
                           nested[ck]["s2_study"] + nested[ck]["s2_rec"])
-            # B3 short-range semivariance (predictors smooth beyond 10 km)
+            # B3 short-range semivariance (predictors smooth beyond 10 km); its interval already
+            # resamples sites
             if scope in sv_sum:
                 sd = sv_sum[scope]
                 brow.append({"scope": scope, "estimator": "B3 short-lag semivariance (0-10 km)", "n_sites": len(s),
                              "var_sites": sd["variance"], "mean_noise_sites": sd["gamma_0_10km"],
                              "r2max_sites": 1 - sd["gamma_0_10km_share"], "lo": 1 - sd["gamma_0_10km_share_hi"],
-                             "hi": 1 - sd["gamma_0_10km_share_lo"], "n_pairs": sd["n_pairs_0_10km"]})
+                             "hi": 1 - sd["gamma_0_10km_share_lo"], "lo_uncond": 1 - sd["gamma_0_10km_share_hi"],
+                             "hi_uncond": 1 - sd["gamma_0_10km_share_lo"], "n_pairs": sd["n_pairs_0_10km"]})
         bt = pd.DataFrame(brow)
         bt.to_csv(OUTD / f"bounds_{v}.csv", index=False)
         R["bounds"] = bt.to_dict("records")
         # ---- 5. Analysis 1 skill as a fraction of the bound ----
+        # ratio_b = R2_b / bound_b on the same 2000 test-site resamples (seed 42) as the A1 intervals.
+        # R2_b uses the seed-averaged XGBoost prediction stored in predictions_<v>.parquet, whose R2 is
+        # 0.0005-0.006 above the mean of per-seed R2 reported in A1 (point estimates use the A1 value).
         a1f = C.OUT / "a1" / f"transfer_{v}.csv"
-        if a1f.exists():
+        pf = C.OUT / "a1" / f"predictions_{v}.parquet"
+        if a1f.exists() and pf.exists():
             a1 = pd.read_csv(a1f)
+            preds = pd.read_parquet(pf)
             prim = bt[bt["estimator"] == "B2 nested study effects (primary)"].set_index("scope")
             b3 = bt[bt["estimator"].str.startswith("B3")].set_index("scope")
             fr = a1[a1["model"].isin(["ols_P", "ols_TP", "xgb"])].copy()
-            fr["bound_B2"] = fr["test"].map(prim["r2max_sites"])
-            fr["bound_B2_lo"] = fr["test"].map(prim["lo"])
-            fr["bound_B2_hi"] = fr["test"].map(prim["hi"])
-            fr["bound_B3"] = fr["test"].map(b3["r2max_sites"])
-            fr["fraction_of_B2"] = fr["r2"] / fr["bound_B2"]
-            fr["fraction_of_B2_lo"] = fr["r2_lo"] / fr["bound_B2"]
-            fr["fraction_of_B2_hi"] = fr["r2_hi"] / fr["bound_B2"]
-            fr["fraction_of_B3"] = fr["r2"] / fr["bound_B3"]
-            keep = ["kind", "train", "test", "n_train", "n_test", "model", "r2", "r2_lo", "r2_hi", "bound_B2",
-                    "bound_B2_lo", "bound_B2_hi", "fraction_of_B2", "fraction_of_B2_lo", "fraction_of_B2_hi",
-                    "bound_B3", "fraction_of_B3"]
-            fr[keep].to_csv(OUTD / f"fraction_of_bound_{v}.csv", index=False)
-            R["fraction_of_bound"] = fr[keep].to_dict("records")
+            rows5 = []
+            for _, r5 in fr.iterrows():
+                E = r5["test"]
+                if E not in comp_mats:
+                    continue
+                cells, z, sw2, inv_n, b2_unc = comp_mats[E]
+                pp = preds[(preds["kind"] == r5["kind"]) & (preds["train"] == r5["train"]) &
+                           (preds["test"] == E) & (preds["model"] == r5["model"])].set_index("cell").reindex(cells)
+                obs, pr = pp["obs"].values, pp["pred"].values
+                idx = C.boot_idx(len(obs))
+                ob, pb = obs[idx], pr[idx]
+                r2b = 1 - ((ob - pb) ** 2).sum(axis=1) / ((ob - ob.mean(axis=1, keepdims=True)) ** 2).sum(axis=1)
+                ratio = r2b / b2_unc
+                ok = b2_unc > 0
+                bound = prim.loc[E, "r2max_sites"]
+                rows5.append({"kind": r5["kind"], "train": r5["train"], "test": E, "n_train": r5["n_train"],
+                              "n_test": r5["n_test"], "model": r5["model"], "r2": r5["r2"], "r2_lo": r5["r2_lo"],
+                              "r2_hi": r5["r2_hi"], "bound_B2": bound, "bound_B2_lo": prim.loc[E, "lo_uncond"],
+                              "bound_B2_hi": prim.loc[E, "hi_uncond"], "fraction_of_B2": r5["r2"] / bound,
+                              "fraction_of_B2_lo": float(np.percentile(ratio[ok], 2.5)),
+                              "fraction_of_B2_hi": float(np.percentile(ratio[ok], 97.5)),
+                              "share_boot_bound_le0": float(np.mean(~ok)),
+                              "fraction_unstable": bool(np.mean(~ok) > 0.025 or prim.loc[E, "lo_uncond"] < 0.2),
+                              "bound_B3": b3["r2max_sites"].get(E, np.nan),
+                              "fraction_of_B3": r5["r2"] / b3["r2max_sites"].get(E, np.nan) if E in b3.index else np.nan})
+            fr5 = pd.DataFrame(rows5)
+            fr5.to_csv(OUTD / f"fraction_of_bound_{v}.csv", index=False)
+            R["fraction_of_bound"] = fr5.to_dict("records")
         results["variants"][v] = R
         print(f"[{v}] one-way: within={comp['s2_within']:.3f} [{comp['s2_within_lo']:.3f},{comp['s2_within_hi']:.3f}] "
               f"share_within={comp['share_within']:.3f} [{comp['share_within_lo']:.3f},{comp['share_within_hi']:.3f}] "
@@ -491,6 +564,25 @@ def main() -> int:
         print(me.round(3).to_string(), flush=True)
         print({c: {k: (round(x, 3) if isinstance(x, float) else x) for k, x in sd.items() if k != 'fit_exp_le1600km'} for c, sd in sv_sum.items()}, flush=True)
         print({c: sd["fit_exp_le1600km"] for c, sd in sv_sum.items()}, flush=True)
+    # SRDB's own per-record error fields as a cross-check of the within-study component.
+    # Rs_annual_err is "typically plot-to-plot" error in g C m-2; whether it is an SD or an SE is not
+    # recorded, so CV^2 is a lower bound for plot-scale variance on the log scale if it is an SE.
+    d = C.load_srdb()[["Record_number", "Rs_annual_err", "Rs_interann_err"]].copy()
+    for col in ["Rs_annual_err", "Rs_interann_err"]:
+        d[col + "_nonnumeric"] = d[col].notna() & pd.to_numeric(d[col], errors="coerce").isna()
+        d[col] = pd.to_numeric(d[col], errors="coerce")
+    cr = rec_all[rec_all["source"] == "srdb"].merge(d, left_on="record_number", right_on="Record_number", how="left")
+    out_err = {}
+    for col in ["Rs_annual_err", "Rs_interann_err"]:
+        e = cr[cr[col].notna() & (cr[col] > 0)]
+        cv = (e[col] / e["rs_annual"]).values
+        out_err[col] = {"n_records": int(len(e)), "share_of_srdb_clean_records": float(len(e) / len(cr)),
+                        "n_nonnumeric_in_clean_records": int(cr[col + "_nonnumeric"].sum()),
+                        "median_cv": float(np.median(cv)) if len(cv) else None,
+                        "mean_cv2_log_variance_approx": float(np.mean(cv ** 2)) if len(cv) else None,
+                        "median_cv2": float(np.median(cv ** 2)) if len(cv) else None}
+    results["srdb_error_fields_check"] = out_err
+    print("SRDB error fields:", out_err, flush=True)
     # COSORE plot-scale check
     py = pd.read_csv(C.OUT / "cosore_port_years.csv")
     py = py[py["full_year"] & py["rs_annual"].between(C.RS_MIN, C.RS_MAX)]

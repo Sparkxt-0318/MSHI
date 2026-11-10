@@ -1,7 +1,11 @@
-variant,train,test,model_a,model_b,metric,diff,lo,hi
-strict,Asia,North America,xgb_npp,xgb,r2,0.025148340377144807,0.006852274945588694,0.04489655119112809
-strict,Asia,North America,ols_TPN,ols_TP,r2,0.04645645762063344,0.02427653053312868,0.06749633940626511
-strict,Asia,North America,xgb_npp,ols_TPN,r2,0.03366843679642187,-0.04565923977401351,0.10278554475030459
-strict,North America,Asia,xgb_npp,xgb,r2,-0.02824303818788488,-0.0664806487246535,0.006055027240783057
-strict,North America,Asia,ols_TPN,ols_TP,r2,0.012828250433932209,-0.09235142295720163,0.10891409468187957
-strict,North America,Asia,xgb_npp,ols_TPN,r2,-0.10400013534652777,-0.20988933968877818,0.007006534040784237
+variant,train,test,model_a,model_b,metric,role,diff,lo,hi
+strict,Asia,North America,xgb_npp@xgb,xgb,r2,primary: NPP effect at xgb's hyperparameters,0.021366789516260837,0.006888800749813637,0.03759901326725077
+strict,Asia,North America,xgb_npp,xgb@xgb_npp,r2,primary: NPP effect at xgb_npp's hyperparameters,0.027359555347773845,0.008061736512897388,0.04834254299657978
+strict,Asia,North America,ols_TPN,ols_TP,r2,"primary: NPP effect, OLS",0.046072949252370154,0.02415721043452841,0.06668709055557373
+strict,Asia,North America,xgb_npp,xgb,r2,secondary: separately tuned (includes tuning-selection effect),0.03342877901126898,0.007365448722950541,0.05808427094793287
+strict,Asia,North America,xgb_npp,ols_TPN,r2,model comparison,0.03660007240750299,-0.04288655706146225,0.10580407282208883
+strict,North America,Asia,xgb_npp@xgb,xgb,r2,primary: NPP effect at xgb's hyperparameters,-0.016818875710622613,-0.06918697914707927,0.027329424675204307
+strict,North America,Asia,xgb_npp,xgb@xgb_npp,r2,primary: NPP effect at xgb_npp's hyperparameters,-0.016818875710622613,-0.06918697914707927,0.027329424675204307
+strict,North America,Asia,ols_TPN,ols_TP,r2,"primary: NPP effect, OLS",0.01272247027233453,-0.09179053144856933,0.10785008734208767
+strict,North America,Asia,xgb_npp,xgb,r2,secondary: separately tuned (includes tuning-selection effect),-0.016818875710622613,-0.06918697914707927,0.027329424675204307
+strict,North America,Asia,xgb_npp,ols_TPN,r2,model comparison,-0.10439947096362588,-0.21925031885173252,0.010042567424688197

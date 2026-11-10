@@ -91,6 +91,7 @@ def build_sites(policy: str, variant: str):
     srdb, steps, _ = S.srdb_records(policy)
     cos, _ = S.cosore_records()
     rec = pd.concat([srdb, cos.astype(srdb.dtypes.to_dict(), errors="ignore")], ignore_index=True)
+    rec, _ = S.drop_cosore_duplicates(rec)
     rec = S.add_continent(rec)
     rec = rec[~rec["continent"].isin(["Sea", "Other"])]
     rec = S.add_worldclim(rec)
@@ -153,8 +154,13 @@ def part2():
         dd = pd.DataFrame(drows)
         dd.to_csv(OUTD / f"effect_delta_{v}.csv", index=False)
         C.write_json(meta, OUTD / f"effect_meta_{v}.json")
-        print(dd[dd["model"].isin(["ols_P", "xgb"])].round(3).to_string(), flush=True)
-        print("max |d_r2|:", dd["d_r2"].abs().max(), "max |d_rmse_g|:", dd["d_rmse_g"].abs().max(), flush=True)
+        print(dd[dd["model"].isin(["ols_P", "xgb", "xgb_fixed"])].round(3).to_string(), flush=True)
+        # headline per model: the re-tuned xgb rows include hyperparameter re-selection, so the data
+        # effect is read from baseline/OLS and from xgb_fixed (same hyperparameters for every policy)
+        hl = dd.groupby(["policy", "model"]).agg(max_abs_d_r2=("d_r2", lambda x: x.abs().max()),
+                                                 max_abs_d_rmse_g=("d_rmse_g", lambda x: x.abs().max())).reset_index()
+        hl.to_csv(OUTD / f"effect_headline_{v}.csv", index=False)
+        print(hl.round(3).to_string(), flush=True)
 
 
 FLAGGED_IDS: set = set()

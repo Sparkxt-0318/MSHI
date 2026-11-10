@@ -140,7 +140,7 @@ def fig1(v):
         if k == 0:
             hs = [Line2D([], [], marker=CONT_MARK[c], color=CONT_COL[c], linestyle="", markersize=5,
                          markeredgecolor="white", label=f"trained on {c}") for c in CONT_COL]
-            ax.legend(handles=hs, loc="lower right", frameon=False, fontsize=6)
+            ax.legend(handles=hs, loc="upper left", frameon=False, fontsize=6)
     fig.text(0.01, 0.005, f"Variant: {v}. Diagonal = within-continent 5° spatial-block CV (outlined). Bracketed: "
              "95% bootstrap interval over test sites (2000 resamples). Descriptive only; no tests fitted to c-d.",
              fontsize=5.5, color=MUTED)

@@ -1,0 +1,212 @@
+                                     scope      mismatch_class confidence  n_records  n_studies
+0             all records with coordinates        coords_wrong     medium         22          9
+1             all records with coordinates              in_sea        low         29         10
+2             all records with coordinates         label_wrong       high          5          2
+3             all records with coordinates         label_wrong     medium         42         10
+4             all records with coordinates            lat_sign       high          3          2
+5             all records with coordinates            lat_sign     medium         11          1
+6             all records with coordinates            lon_sign       high         26          9
+7             all records with coordinates            lon_sign     medium         11          3
+8             all records with coordinates         near_border        low         42         12
+9             all records with coordinates       offshore_near        low         49         13
+10            all records with coordinates  same_site_conflict       high          3          3
+11            all records with coordinates                swap       high          4          1
+12            all records with coordinates             unclear        low         37         12
+13            all records with coordinates               TOTAL        all        284         86
+14                  records with Rs_annual        coords_wrong     medium         11          5
+15                  records with Rs_annual              in_sea        low          7          4
+16                  records with Rs_annual         label_wrong       high          5          2
+17                  records with Rs_annual         label_wrong     medium         26          7
+18                  records with Rs_annual            lat_sign       high          1          1
+19                  records with Rs_annual            lat_sign     medium         11          1
+20                  records with Rs_annual            lon_sign       high         16          5
+21                  records with Rs_annual            lon_sign     medium          4          1
+22                  records with Rs_annual         near_border        low         26          9
+23                  records with Rs_annual       offshore_near        low         27          6
+24                  records with Rs_annual  same_site_conflict       high          2          2
+25                  records with Rs_annual                swap       high          4          1
+26                  records with Rs_annual             unclear        low          9          3
+27                  records with Rs_annual               TOTAL        all        149         47
+28  records passing all other Step 0 rules        coords_wrong     medium         10          5
+29  records passing all other Step 0 rules         label_wrong       high          3          2
+30  records passing all other Step 0 rules         label_wrong     medium          4          2
+31  records passing all other Step 0 rules            lat_sign     medium         11          1
+32  records passing all other Step 0 rules            lon_sign       high          6          3
+33  records passing all other Step 0 rules            lon_sign     medium          1          1
+34  records passing all other Step 0 rules         near_border        low         22          7
+35  records passing all other Step 0 rules       offshore_near        low         17          2
+36  records passing all other Step 0 rules  same_site_conflict       high          1          1
+37  records passing all other Step 0 rules                swap       high          1          1
+38  records passing all other Step 0 rules             unclear        low          5          2
+39  records passing all other Step 0 rules               TOTAL        all         81         27
+{'flagged_passing_other_rules': 81, 'of_which_original_coords_in_asia_box': 50, 'of_which_in_asia_box_but_stated_country_outside_asia': 2, 'of_which_original_coords_in_us_box': 15, 'n_checked': 13772, 'n_flagged': 284, 'share_flagged': 0.02062155097298867}
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+strict exclude {'last_step': {'rule': 'country field agrees with coordinates (flagged records excluded)', 'n_before': 3614, 'n_removed': 81, 'n_after': 3533, 'note': ''}, 'sites_with_flagged_records': 0, 'sites_by_continent': {'Asia': 391, 'Europe': 227, 'North America': 210, 'South & Central America': 77, 'Oceania': 33, 'Africa': 27}, 'xgb': {'Asia': {'params': {'max_depth': 1, 'learning_rate': 0.03, 'min_child_weight': 10.0, 'reg_lambda': 1.0}, 'n_estimators': 100}, 'North America': {'params': {'max_depth': 6, 'learning_rate': 0.1, 'min_child_weight': 5.0, 'reg_lambda': 1.0}, 'n_estimators': 30}, 'Europe': {'params': {'max_depth': 1, 'learning_rate': 0.03, 'min_child_weight': 1.0, 'reg_lambda': 1.0}, 'n_estimators': 5}}}
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+strict asis {'last_step': {'rule': 'country/coordinate mismatches KEPT with original coordinates', 'n_before': 3614, 'n_removed': 0, 'n_after': 3614, 'note': ''}, 'sites_with_flagged_records': 20, 'sites_by_continent': {'Asia': 399, 'Europe': 231, 'North America': 214, 'South & Central America': 77, 'Oceania': 34, 'Africa': 28}, 'xgb': {'Asia': {'params': {'max_depth': 1, 'learning_rate': 0.03, 'min_child_weight': 10.0, 'reg_lambda': 1.0}, 'n_estimators': 100}, 'North America': {'params': {'max_depth': 6, 'learning_rate': 0.1, 'min_child_weight': 5.0, 'reg_lambda': 10.0}, 'n_estimators': 50}, 'Europe': {'params': {'max_depth': 3, 'learning_rate': 0.1, 'min_child_weight': 1.0, 'reg_lambda': 1.0}, 'n_estimators': 5}}}
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+strict corrected {'last_step': {'rule': 'mismatches with a high/medium-confidence fix corrected, others excluded', 'n_before': 3614, 'n_removed': 54, 'n_after': 3560, 'note': '27 records corrected'}, 'sites_with_flagged_records': 11, 'sites_by_continent': {'Asia': 393, 'Europe': 229, 'North America': 211, 'South & Central America': 78, 'Oceania': 35, 'Africa': 27}, 'xgb': {'Asia': {'params': {'max_depth': 1, 'learning_rate': 0.1, 'min_child_weight': 10.0, 'reg_lambda': 1.0}, 'n_estimators': 30}, 'North America': {'params': {'max_depth': 4, 'learning_rate': 0.1, 'min_child_weight': 5.0, 'reg_lambda': 1.0}, 'n_estimators': 30}, 'Europe': {'params': {'max_depth': 1, 'learning_rate': 0.1, 'min_child_weight': 1.0, 'reg_lambda': 1.0}, 'n_estimators': 5}}}
+   variant     policy          train           test      model  n_train  n_test  n_train_exclude  n_test_exclude   d_r2  d_rmse_g  d_mae_g  d_bias_g  d_spearman
+1   strict       asis           Asia  North America      ols_P      399     214              391             210 -0.016    -1.454   -0.001     4.273      -0.016
+3   strict       asis           Asia  North America        xgb      399     214              391             210 -0.012    -2.810   -0.537     8.890      -0.036
+4   strict       asis           Asia  North America  xgb_fixed      399     214              391             210 -0.012    -2.810   -0.537     8.890      -0.036
+6   strict       asis           Asia         Europe      ols_P      399     231              391             227 -0.001    -1.504   -0.022     1.026      -0.010
+8   strict       asis           Asia         Europe        xgb      399     231              391             227 -0.025     0.070    2.514     8.076      -0.014
+9   strict       asis           Asia         Europe  xgb_fixed      399     231              391             227 -0.025     0.070    2.514     8.076      -0.014
+11  strict       asis  North America           Asia      ols_P      214     399              210             391 -0.008    10.457    0.929   -10.531      -0.008
+13  strict       asis  North America           Asia        xgb      214     399              210             391  0.002     1.405    0.272    16.440      -0.008
+14  strict       asis  North America           Asia  xgb_fixed      214     399              210             391  0.004    -0.426   -3.708    -1.750      -0.009
+16  strict       asis  North America         Europe      ols_P      214     231              210             227  0.003    -1.431   -0.025    -3.786      -0.010
+18  strict       asis  North America         Europe        xgb      214     231              210             227 -0.029     4.626    2.271     0.013      -0.005
+19  strict       asis  North America         Europe  xgb_fixed      214     231              210             227 -0.092    12.972   13.557     4.493      -0.027
+21  strict       asis         Europe           Asia      ols_P      231     399              227             391 -0.010     7.109    2.524    -1.191      -0.008
+23  strict       asis         Europe           Asia        xgb      231     399              227             391  0.011    -0.177    0.408     9.640      -0.047
+24  strict       asis         Europe           Asia  xgb_fixed      231     399              227             391  0.007     2.968    1.072     2.393       0.011
+26  strict       asis         Europe  North America      ols_P      231     214              227             210 -0.008    -2.857   -1.455     5.042      -0.016
+28  strict       asis         Europe  North America        xgb      231     214              227             210  0.022    -5.900   -6.468     5.665      -0.068
+29  strict       asis         Europe  North America  xgb_fixed      231     214              227             210  0.006    -5.218   -3.342     8.590      -0.027
+31  strict  corrected           Asia  North America      ols_P      393     211              391             210 -0.002    -1.528   -1.294     3.117       0.000
+33  strict  corrected           Asia  North America        xgb      393     211              391             210  0.000    -2.105   -1.769     4.824      -0.023
+34  strict  corrected           Asia  North America  xgb_fixed      393     211              391             210 -0.000    -1.732   -1.641     3.805      -0.002
+36  strict  corrected           Asia         Europe      ols_P      393     229              391             227 -0.004     0.000    0.120     0.665      -0.007
+38  strict  corrected           Asia         Europe        xgb      393     229              391             227 -0.017     1.925    3.178    10.249      -0.004
+39  strict  corrected           Asia         Europe  xgb_fixed      393     229              391             227 -0.010     0.939    1.835     5.740       0.006
+41  strict  corrected  North America           Asia      ols_P      211     393              210             391 -0.006    -0.531   -0.139    -1.303      -0.004
+43  strict  corrected  North America           Asia        xgb      211     393              210             391  0.060   -21.309  -17.335    -6.558       0.022
+44  strict  corrected  North America           Asia  xgb_fixed      211     393              210             391  0.010    -9.067   -5.942   -13.068      -0.000
+46  strict  corrected  North America         Europe      ols_P      211     229              210             227 -0.007     1.103    0.960    -3.349      -0.007
+48  strict  corrected  North America         Europe        xgb      211     229              210             227  0.020    -3.150   -4.159     2.358       0.016
+49  strict  corrected  North America         Europe  xgb_fixed      211     229              210             227 -0.008     1.316    1.123    -8.652      -0.003
+51  strict  corrected         Europe           Asia      ols_P      229     393              227             391 -0.010    -1.793   -0.561    -2.938      -0.004
+53  strict  corrected         Europe           Asia        xgb      229     393              227             391 -0.001    -4.191   -0.617    -5.220       0.063
+54  strict  corrected         Europe           Asia  xgb_fixed      229     393              227             391  0.003    -5.683   -2.734     1.925       0.080
+56  strict  corrected         Europe  North America      ols_P      229     211              227             210 -0.009     0.251   -0.500     0.365       0.000
+58  strict  corrected         Europe  North America        xgb      229     211              227             210  0.025    -2.065   -4.480   -13.487       0.052
+59  strict  corrected         Europe  North America  xgb_fixed      229     211              227             210  0.007    -2.634   -2.622     2.087       0.059
+      policy      model  max_abs_d_r2  max_abs_d_rmse_g
+0       asis   baseline         0.008             5.613
+1       asis      ols_P         0.016            10.457
+2       asis     ols_TP         0.015            12.013
+3       asis        xgb         0.029             5.900
+4       asis  xgb_fixed         0.092            12.972
+5  corrected   baseline         0.002             5.054
+6  corrected      ols_P         0.010             1.793
+7  corrected     ols_TP         0.007             1.537
+8  corrected        xgb         0.060            21.309
+9  corrected  xgb_fixed         0.010             9.067
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+incl_missing exclude {'last_step': {'rule': 'country field agrees with coordinates (flagged records excluded)', 'n_before': 3614, 'n_removed': 81, 'n_after': 3533, 'note': ''}, 'sites_with_flagged_records': 0, 'sites_by_continent': {'Asia': 431, 'Europe': 244, 'North America': 236, 'South & Central America': 84, 'Oceania': 35, 'Africa': 31}, 'xgb': {'Asia': {'params': {'max_depth': 1, 'learning_rate': 0.1, 'min_child_weight': 10.0, 'reg_lambda': 10.0}, 'n_estimators': 50}, 'North America': {'params': {'max_depth': 2, 'learning_rate': 0.03, 'min_child_weight': 10.0, 'reg_lambda': 1.0}, 'n_estimators': 150}, 'Europe': {'params': {'max_depth': 6, 'learning_rate': 0.1, 'min_child_weight': 10.0, 'reg_lambda': 1.0}, 'n_estimators': 5}}}
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+incl_missing asis {'last_step': {'rule': 'country/coordinate mismatches KEPT with original coordinates', 'n_before': 3614, 'n_removed': 0, 'n_after': 3614, 'note': ''}, 'sites_with_flagged_records': 22, 'sites_by_continent': {'Asia': 439, 'Europe': 248, 'North America': 242, 'South & Central America': 84, 'Oceania': 36, 'Africa': 32}, 'xgb': {'Asia': {'params': {'max_depth': 1, 'learning_rate': 0.03, 'min_child_weight': 10.0, 'reg_lambda': 10.0}, 'n_estimators': 150}, 'North America': {'params': {'max_depth': 2, 'learning_rate': 0.03, 'min_child_weight': 10.0, 'reg_lambda': 1.0}, 'n_estimators': 150}, 'Europe': {'params': {'max_depth': 4, 'learning_rate': 0.03, 'min_child_weight': 1.0, 'reg_lambda': 1.0}, 'n_estimators': 5}}}
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+/home/user/MSHI/audit/mshi_common.py:438: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  "spearman": float(spearmanr(o, p).correlation) if np.std(p) > 0 else float("nan"),
+/home/user/venv-mshi/lib/python3.11/site-packages/numpy/lib/nanfunctions.py:1384: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+incl_missing corrected {'last_step': {'rule': 'mismatches with a high/medium-confidence fix corrected, others excluded', 'n_before': 3614, 'n_removed': 54, 'n_after': 3560, 'note': '27 records corrected'}, 'sites_with_flagged_records': 11, 'sites_by_continent': {'Asia': 433, 'Europe': 246, 'North America': 237, 'South & Central America': 85, 'Oceania': 37, 'Africa': 31}, 'xgb': {'Asia': {'params': {'max_depth': 1, 'learning_rate': 0.1, 'min_child_weight': 10.0, 'reg_lambda': 10.0}, 'n_estimators': 50}, 'North America': {'params': {'max_depth': 4, 'learning_rate': 0.1, 'min_child_weight': 10.0, 'reg_lambda': 1.0}, 'n_estimators': 30}, 'Europe': {'params': {'max_depth': 1, 'learning_rate': 0.1, 'min_child_weight': 1.0, 'reg_lambda': 1.0}, 'n_estimators': 5}}}
+         variant     policy          train           test      model  n_train  n_test  n_train_exclude  n_test_exclude   d_r2  d_rmse_g  d_mae_g  d_bias_g  d_spearman
+1   incl_missing       asis           Asia  North America      ols_P      439     242              431             236 -0.019    -2.087   -0.365     6.705      -0.021
+3   incl_missing       asis           Asia  North America        xgb      439     242              431             236 -0.022    -1.249    0.590     7.376      -0.041
+4   incl_missing       asis           Asia  North America  xgb_fixed      439     242              431             236 -0.017    -1.754   -0.165     7.446      -0.068
+6   incl_missing       asis           Asia         Europe      ols_P      439     248              431             244 -0.000    -1.624   -0.117     0.864      -0.009
+8   incl_missing       asis           Asia         Europe        xgb      439     248              431             244 -0.009     0.072    0.968     5.807      -0.014
+9   incl_missing       asis           Asia         Europe  xgb_fixed      439     248              431             244 -0.017     1.334    2.291     9.476      -0.014
+11  incl_missing       asis  North America           Asia      ols_P      242     439              236             431 -0.001     8.283   -0.215   -15.225      -0.008
+13  incl_missing       asis  North America           Asia        xgb      242     439              236             431 -0.007     6.119   -0.329    -6.094      -0.006
+14  incl_missing       asis  North America           Asia  xgb_fixed      242     439              236             431 -0.007     6.119   -0.329    -6.094      -0.006
+16  incl_missing       asis  North America         Europe      ols_P      242     248              236             244  0.004    -1.385   -0.135    -6.199      -0.009
+18  incl_missing       asis  North America         Europe        xgb      242     248              236             244  0.022    -3.920   -6.984   -16.267       0.004
+19  incl_missing       asis  North America         Europe  xgb_fixed      242     248              236             244  0.022    -3.920   -6.984   -16.267       0.004
+21  incl_missing       asis         Europe           Asia      ols_P      248     439              244             431 -0.009     6.562    2.599    -1.380      -0.008
+23  incl_missing       asis         Europe           Asia        xgb      248     439              244             431 -0.039    10.799    6.885    -8.054      -0.131
+24  incl_missing       asis         Europe           Asia  xgb_fixed      248     439              244             431  0.018    -1.287   -2.674    14.448      -0.014
+26  incl_missing       asis         Europe  North America      ols_P      248     242              244             236 -0.009    -3.830   -2.111     7.178      -0.021
+28  incl_missing       asis         Europe  North America        xgb      248     242              244             236 -0.050     3.826    5.005     2.712      -0.056
+29  incl_missing       asis         Europe  North America  xgb_fixed      248     242              244             236  0.012    -9.679   -7.089    17.756      -0.014
+31  incl_missing  corrected           Asia  North America      ols_P      433     237              431             236 -0.002    -1.361   -1.222     2.796       0.000
+33  incl_missing  corrected           Asia  North America        xgb      433     237              431             236 -0.000    -1.334   -1.981     1.681       0.001
+34  incl_missing  corrected           Asia  North America  xgb_fixed      433     237              431             236 -0.000    -1.334   -1.981     1.681       0.001
+36  incl_missing  corrected           Asia         Europe      ols_P      433     246              431             244 -0.003    -0.157    0.016     0.521      -0.006
+38  incl_missing  corrected           Asia         Europe        xgb      433     246              431             244 -0.006     0.805    0.659    -0.785      -0.004
+39  incl_missing  corrected           Asia         Europe  xgb_fixed      433     246              431             244 -0.006     0.805    0.659    -0.785      -0.004
+41  incl_missing  corrected  North America           Asia      ols_P      237     433              236             431 -0.006     0.113    0.551    -1.410      -0.003
+43  incl_missing  corrected  North America           Asia        xgb      237     433              236             431 -0.063    10.319   11.402    13.263      -0.023
+44  incl_missing  corrected  North America           Asia  xgb_fixed      237     433              236             431  0.001    -4.700   -2.381     2.039      -0.001
+46  incl_missing  corrected  North America         Europe      ols_P      237     246              236             244 -0.008     1.037    1.014    -3.162      -0.006
+48  incl_missing  corrected  North America         Europe        xgb      237     246              236             244  0.014     0.145   -5.952   -42.418      -0.020
+49  incl_missing  corrected  North America         Europe  xgb_fixed      237     246              236             244 -0.001    -0.063   -0.568    -5.520      -0.004
+51  incl_missing  corrected         Europe           Asia      ols_P      246     433              244             431 -0.010    -1.666   -0.268    -2.348      -0.003
+53  incl_missing  corrected         Europe           Asia        xgb      246     433              244             431 -0.035     4.067    3.790   -18.435       0.051
+54  incl_missing  corrected         Europe           Asia  xgb_fixed      246     433              244             431  0.013    -8.446   -5.020    10.153      -0.008
+56  incl_missing  corrected         Europe  North America      ols_P      246     237              244             236 -0.010     0.517    0.113     0.568       0.000
+58  incl_missing  corrected         Europe  North America        xgb      246     237              244             236 -0.005     6.235    1.929   -21.265       0.095
+59  incl_missing  corrected         Europe  North America  xgb_fixed      246     237              244             236  0.004    -2.306   -2.533     3.283      -0.002
+      policy      model  max_abs_d_r2  max_abs_d_rmse_g
+0       asis   baseline         0.008             5.975
+1       asis      ols_P         0.019             8.283
+2       asis     ols_TP         0.019            11.182
+3       asis        xgb         0.050            10.799
+4       asis  xgb_fixed         0.022             9.679
+5  corrected   baseline         0.002             4.595
+6  corrected      ols_P         0.010             1.666
+7  corrected     ols_TP         0.005             1.329
+8  corrected        xgb         0.063            10.319
+9  corrected  xgb_fixed         0.013             8.446

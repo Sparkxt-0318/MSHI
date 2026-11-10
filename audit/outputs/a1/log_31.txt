@@ -17,3 +17,22 @@ strict Europe done
 12  North America                   Europe    -0.083  -0.157  -0.083     -0.103        0.267        0.270     0.073
 13  North America                  Oceania    -0.463  -1.054  -0.463     -0.686        0.267        0.270     0.591
 14  North America  South & Central America    -0.356  -1.064  -0.356     -0.614        0.267        0.270     0.708
+incl_missing Asia done
+incl_missing North America done
+incl_missing Europe done
+            train                     test  r2_rank1  r2_min  r2_max  r2_median  cv_mse_best  cv_mse_10th  r2_range
+0            Asia                   Africa     0.303   0.281   0.306      0.299        0.307        0.309     0.025
+1            Asia                   Europe    -0.073  -0.073  -0.064     -0.065        0.307        0.309     0.008
+2            Asia            North America     0.289   0.266   0.289      0.282        0.307        0.309     0.024
+3            Asia                  Oceania    -0.081  -0.081  -0.040     -0.052        0.307        0.309     0.040
+4            Asia  South & Central America     0.100   0.048   0.100      0.083        0.307        0.309     0.052
+5          Europe                   Africa    -0.061  -0.118   0.053     -0.020        0.339        0.348     0.171
+6          Europe                     Asia    -0.106  -0.230  -0.010     -0.060        0.339        0.348     0.219
+7          Europe            North America     0.051   0.018   0.084      0.055        0.339        0.348     0.066
+8          Europe                  Oceania    -0.531  -0.901  -0.287     -0.373        0.339        0.348     0.615
+9          Europe  South & Central America    -1.097  -1.603  -0.790     -0.878        0.339        0.348     0.813
+10  North America                   Africa     0.256   0.234   0.270      0.253        0.282        0.287     0.037
+11  North America                     Asia     0.059  -0.078   0.137      0.052        0.282        0.287     0.216
+12  North America                   Europe    -0.066  -0.113  -0.025     -0.070        0.282        0.287     0.088
+13  North America                  Oceania    -0.293  -0.406  -0.162     -0.284        0.282        0.287     0.244
+14  North America  South & Central America    -0.231  -0.286  -0.194     -0.225        0.282        0.287     0.092

@@ -1,0 +1,81 @@
+variant,continent,n_sites,fold_seed,model,r2
+incl_missing,Asia,431,42,baseline,-0.00640963213227419
+incl_missing,Asia,431,42,ols_P,0.1321322369084501
+incl_missing,Asia,431,42,ols_TP,0.1603618165675449
+incl_missing,Asia,431,42,xgb,0.19012880986674185
+incl_missing,Asia,431,43,baseline,-0.012379428070566467
+incl_missing,Asia,431,43,ols_P,0.13192629197610162
+incl_missing,Asia,431,43,ols_TP,0.15557463959497064
+incl_missing,Asia,431,43,xgb,0.1933747822070495
+incl_missing,Asia,431,44,baseline,-0.03344692475860089
+incl_missing,Asia,431,44,ols_P,0.1441447080004965
+incl_missing,Asia,431,44,ols_TP,0.1695732240495016
+incl_missing,Asia,431,44,xgb,0.1837979995856186
+incl_missing,Asia,431,45,baseline,-0.006471869278329212
+incl_missing,Asia,431,45,ols_P,0.14381761598023302
+incl_missing,Asia,431,45,ols_TP,0.17075718432180353
+incl_missing,Asia,431,45,xgb,0.18792012397510371
+incl_missing,Asia,431,46,baseline,-0.008780058807058344
+incl_missing,Asia,431,46,ols_P,0.13193727504124275
+incl_missing,Asia,431,46,ols_TP,0.149565613609984
+incl_missing,Asia,431,46,xgb,0.19188143590231632
+incl_missing,North America,236,42,baseline,-0.03587333407996218
+incl_missing,North America,236,42,ols_P,0.2959851466271246
+incl_missing,North America,236,42,ols_TP,0.286771833302118
+incl_missing,North America,236,42,xgb,0.30484814422928797
+incl_missing,North America,236,43,baseline,-0.06796368063227276
+incl_missing,North America,236,43,ols_P,0.31157589526377427
+incl_missing,North America,236,43,ols_TP,0.3218821263013276
+incl_missing,North America,236,43,xgb,0.26268420191714725
+incl_missing,North America,236,44,baseline,-0.049316461297213676
+incl_missing,North America,236,44,ols_P,0.29760251515906777
+incl_missing,North America,236,44,ols_TP,0.3094120852222213
+incl_missing,North America,236,44,xgb,0.2887855002995522
+incl_missing,North America,236,45,baseline,-0.035609493402996906
+incl_missing,North America,236,45,ols_P,0.30146108130190774
+incl_missing,North America,236,45,ols_TP,0.31380767601307313
+incl_missing,North America,236,45,xgb,0.2997747512009181
+incl_missing,North America,236,46,baseline,-0.04910722382999966
+incl_missing,North America,236,46,ols_P,0.2905741175764126
+incl_missing,North America,236,46,ols_TP,0.2977040697994834
+incl_missing,North America,236,46,xgb,0.2741657476135726
+incl_missing,Europe,244,42,baseline,-0.016788179475486942
+incl_missing,Europe,244,42,ols_P,-0.01924355050557991
+incl_missing,Europe,244,42,ols_TP,-0.004959876759284887
+incl_missing,Europe,244,42,xgb,-0.045779821786723796
+incl_missing,Europe,244,43,baseline,-0.015168342756930686
+incl_missing,Europe,244,43,ols_P,-0.01167362234242808
+incl_missing,Europe,244,43,ols_TP,0.015384320658944683
+incl_missing,Europe,244,43,xgb,-0.0577993227775464
+incl_missing,Europe,244,44,baseline,-0.024702787223344513
+incl_missing,Europe,244,44,ols_P,-0.04511972876971315
+incl_missing,Europe,244,44,ols_TP,-0.024763382994313687
+incl_missing,Europe,244,44,xgb,-0.02744633610623115
+incl_missing,Europe,244,45,baseline,-0.011269194305145502
+incl_missing,Europe,244,45,ols_P,-0.010008282124583268
+incl_missing,Europe,244,45,ols_TP,0.021160208850754647
+incl_missing,Europe,244,45,xgb,-0.04292766408115645
+incl_missing,Europe,244,46,baseline,-0.007417959283437803
+incl_missing,Europe,244,46,ols_P,-0.01134498116078908
+incl_missing,Europe,244,46,ols_TP,-0.0020012079081326295
+incl_missing,Europe,244,46,xgb,-0.05408599979310558
+incl_missing,South & Central America,84,42,baseline,-0.0763840662520936
+incl_missing,South & Central America,84,42,ols_P,0.10822914551807972
+incl_missing,South & Central America,84,42,ols_TP,0.041775422918827076
+incl_missing,South & Central America,84,42,xgb,0.14128668547079648
+incl_missing,South & Central America,84,43,baseline,-0.21667303847226438
+incl_missing,South & Central America,84,43,ols_P,-0.048282489770313575
+incl_missing,South & Central America,84,43,ols_TP,-0.058709335826298004
+incl_missing,South & Central America,84,43,xgb,0.2838871248939925
+incl_missing,South & Central America,84,44,baseline,-0.2003052150666187
+incl_missing,South & Central America,84,44,ols_P,-0.12865038786810068
+incl_missing,South & Central America,84,44,ols_TP,-0.3187100104421008
+incl_missing,South & Central America,84,44,xgb,0.1948083875270583
+incl_missing,South & Central America,84,45,baseline,-0.0856992325492334
+incl_missing,South & Central America,84,45,ols_P,0.07593769695331187
+incl_missing,South & Central America,84,45,ols_TP,0.049261324709440335
+incl_missing,South & Central America,84,45,xgb,0.33821015112642383
+incl_missing,South & Central America,84,46,baseline,-0.20964059987324735
+incl_missing,South & Central America,84,46,ols_P,-0.05008999662272795
+incl_missing,South & Central America,84,46,ols_TP,-0.20110534546147996
+incl_missing,South & Central America,84,46,xgb,0.16307001706259894

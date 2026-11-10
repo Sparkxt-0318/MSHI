@@ -1,9 +1,57 @@
 {
   "flagged_passing_other_rules": 81,
-  "of_which_original_coords_in_asia_box": 44,
+  "of_which_original_coords_in_asia_box": 50,
   "of_which_in_asia_box_but_stated_country_outside_asia": 2,
   "of_which_original_coords_in_us_box": 15,
   "records_in_asia_box_listing": [
+    {
+      "Record_number": 3094.0,
+      "Country": "India",
+      "Latitude": 33.0,
+      "Longitude": 73.0,
+      "mismatch_class": "coords_wrong",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 3095.0,
+      "Country": "India",
+      "Latitude": 33.0,
+      "Longitude": 73.0,
+      "mismatch_class": "coords_wrong",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 3096.0,
+      "Country": "India",
+      "Latitude": 33.0,
+      "Longitude": 73.0,
+      "mismatch_class": "coords_wrong",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 3097.0,
+      "Country": "India",
+      "Latitude": 33.0,
+      "Longitude": 73.0,
+      "mismatch_class": "coords_wrong",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 3098.0,
+      "Country": "India",
+      "Latitude": 33.0,
+      "Longitude": 73.0,
+      "mismatch_class": "coords_wrong",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 3099.0,
+      "Country": "India",
+      "Latitude": 33.0,
+      "Longitude": 73.0,
+      "mismatch_class": "coords_wrong",
+      "confidence": "medium"
+    },
     {
       "Record_number": 5049.0,
       "Country": "Japan",
@@ -480,6 +528,6 @@
     }
   ],
   "n_checked": 13772,
-  "n_flagged": 283,
-  "share_flagged": 0.020548939878013362
+  "n_flagged": 284,
+  "share_flagged": 0.02062155097298867
 }

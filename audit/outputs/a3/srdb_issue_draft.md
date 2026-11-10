@@ -2,7 +2,7 @@
 
 Hello, and thanks for maintaining SRDB. While building a site table from `srdb-data.csv` at commit 02163a7 (data update 30 Dec 2025), I compared each record's `Country` field with the country its `Latitude`/`Longitude` fall in (Natural Earth 1:10m admin-0 map units and admin-1 provinces; country names normalised for spelling variants such as "USA"/"United States", trailing spaces, "Isreal").
 
-Of 13772 records with coordinates, 283 disagree with their Country field by more than 10 km. The records below are the ones where the fix is clear: flipping a sign or swapping latitude/longitude puts the point in the stated country (and usually in the stated Region), the Region field names the province the point actually lies in, or other records of the same site in the same study have consistent coordinates. None of them is caught by the USA-longitude check in `R/srdb_check.R`, and none is in the 'Low-land records' list of issue #50 (only 26 of the 283 mismatches are; most wrong points fall on land in another country, so a land mask cannot catch them).
+Of 13772 records with coordinates, 284 disagree with their Country field by more than 10 km. The records below are the ones where the fix is clear: flipping a sign or swapping latitude/longitude puts the point in the stated country (and usually in the stated Region), the Region field names the province the point actually lies in, or other records of the same site in the same study have consistent coordinates. None of them is caught by the USA-longitude check in `R/srdb_check.R`, and none is in the 'Low-land records' list of issue #50 (only 26 of the 284 mismatches are; most wrong points fall on land in another country, so a land mask cannot catch them).
 
 Please treat the proposed values as suggestions to check against the original papers; I have not verified each one against the publication.
 
@@ -72,4 +72,4 @@ Study references (from `srdb-studies.csv`):
 - 15902: Comparing GHG Emissions from Drained Oil Palm and Recovering Tropical Peatland Forests in  (doi 10.3390/w13233372)
 - 15924: Soil CO<sub>2</sub> emissions in cropland with fodder maize (<i>Zea mays</i> L.) with and  (doi 10.1007/s10457-022-00756-5)
 
-A further 85 medium- and 157 low-confidence mismatches (for example points slightly offshore or just across a border, or a Country label that disagrees with the study title) are listed in a CSV that I can share if useful. Issue #134 (coordinate cleaning) seems related.
+A further 86 medium- and 157 low-confidence mismatches (for example points slightly offshore or just across a border, or a Country label that disagrees with the study title) are listed in a CSV that I can share if useful. Issue #134 (coordinate cleaning) seems related.

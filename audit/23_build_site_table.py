@@ -8,7 +8,8 @@ and step0_summary.md):
   not a known duplicate (Duplicate_record empty; added rule, see prep_log); annual coverage >= 1 or
   missing; Country field agrees with the coordinates (22_country_check.py; mismatches excluded).
   COSORE: full-year (12 months, >= 5 days each) dataset-years of untreated Rs ports; Rs in [50, 4500].
-  Both: continent from Natural Earth map units; WorldClim 2.1 30" bioclim 1,4,5,6,12,14,15,17
+  Both: COSORE dataset-years that duplicate an SRDB record (same cell, overlapping year) dropped;
+  continent from Natural Earth map units; WorldClim 2.1 30" bioclim 1,4,5,6,12,14,15,17
   (nearest valid pixel within 3 px); records with no climate value dropped.
 Aggregation: one site per MODIS-aligned 0.05-degree cell = mean of log Rs over all records in the
 cell; n_records and within-cell SD kept. Two variants:
@@ -60,6 +61,10 @@ def main() -> int:
     cos, steps_c = S.cosore_records()
     rec = pd.concat([srdb, cos], ignore_index=True)
     steps_both = []
+    n0 = len(rec)
+    rec, dup_log = S.drop_cosore_duplicates(rec)
+    S._step(steps_both, "COSORE dataset-year not already in SRDB (same cell, overlapping year)", n0, len(rec),
+            note=f"{len(dup_log)} COSORE records dropped as duplicates of SRDB records")
     rec = S.add_continent(rec)
     n0 = len(rec)
     sea = rec["continent"].isin(["Sea", "Other"])
@@ -76,6 +81,7 @@ def main() -> int:
 
     variants = {"strict": rec[~rec["cov_missing"]], "incl_missing": rec}
     out = {"created": C.now_utc(), "versions": C.versions(), "steps_srdb": steps_s, "steps_cosore": steps_c,
+           "cosore_srdb_duplicates": dup_log,
            "steps_combined": steps_both, "marginal_counts_among_records_with_rs_annual": marginal,
            "variants": {}}
     md = ["# Step 0 site table: summary", "",

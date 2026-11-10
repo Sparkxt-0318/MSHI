@@ -19,7 +19,8 @@ import mshi_common as C  # noqa: E402
 A = C.CONT_ABBR
 MODEL_NAME = {"baseline": "training mean", "ols_P": "OLS log P", "ols_TP": "OLS MAT + log P", "xgb": "XGBoost",
               "xgb_fixed": "XGBoost (fixed hyperparameters)", "ols_TPN": "OLS MAT + log P + log NPP",
-              "xgb_npp": "XGBoost + NPP"}
+              "xgb_npp": "XGBoost + NPP", "xgb_npp@xgb": "XGBoost + NPP (XGBoost's hyperparameters)",
+              "xgb@xgb_npp": "XGBoost (hyperparameters of XGBoost + NPP)"}
 
 
 def ci(r, k, fmt="{:+.3f}"):
@@ -80,9 +81,12 @@ def main() -> int:
         for _, r in mo.iterrows():
             md.append(f"| {A[r['train']]} -> {A[r['test']]} | {r['n_train']} | {r['n_test']} | {MODEL_NAME[r['model']]} | "
                       f"{ci(r, 'r2')} | {ci(r, 'spearman', '{:+.2f}')} |")
-        md += ["", "| Train -> test | Comparison | R2 difference [95% CI] |", "|---|---|---|"]
+        md += ["", "Drops by cause: " + "; ".join(f"{d['continent']}: {d['cause']} = {d['n']}" for d in run.get("dropped_by_cause", [])),
+               "", "Selection effect (climate-only OLS on all A1 test sites): " + "; ".join(
+                   f"{A[d['train']]} -> {A[d['test']]} R2 {d['r2']:+.3f} (n = {d['n_test']})" for d in run.get("selection_effect", [])),
+               "", "| Train -> test | Role | Comparison | R2 difference [95% CI] |", "|---|---|---|---|"]
         for _, r in mp.iterrows():
-            md.append(f"| {A[r['train']]} -> {A[r['test']]} | {MODEL_NAME[r['model_a']]} minus {MODEL_NAME[r['model_b']]} | "
+            md.append(f"| {A[r['train']]} -> {A[r['test']]} | {r.get('role', '')} | {MODEL_NAME[r['model_a']]} minus {MODEL_NAME[r['model_b']]} | "
                       f"{r['diff']:+.3f} [{r['lo']:+.3f}, {r['hi']:+.3f}] |")
         md.append("")
         ts = C.OUT / "a1" / f"tuning_sensitivity_summary_{v}.csv"
@@ -95,6 +99,14 @@ def main() -> int:
                 md.append(f"| {A[r['train']]} -> {A[r['test']]} | {r['r2_rank1']:+.3f} | {r['r2_min']:+.3f} | "
                           f"{r['r2_median']:+.3f} | {r['r2_max']:+.3f} | {r['r2_range']:.3f} | "
                           f"{r['cv_mse_best']:.4f} / {r['cv_mse_10th']:.4f} |")
+            md.append("")
+        fs = C.OUT / "a1" / f"foldseed_summary_{v}.csv"
+        if fs.exists():
+            t = pd.read_csv(fs)
+            md += [f"### A1 within-continent block-CV R2 across fold seeds 42-46, `{v}` (XGBoost with 5 seeds per fit)", "",
+                   "| Continent | Model | mean | min | max |", "|---|---|---:|---:|---:|"]
+            for _, r in t.iterrows():
+                md.append(f"| {r['continent']} | {MODEL_NAME[r['model']]} | {r['mean']:+.3f} | {r['min']:+.3f} | {r['max']:+.3f} |")
             md.append("")
     a2 = json.loads((C.OUT / "a2" / "a2_results.json").read_text())
     for v, R in a2["variants"].items():
@@ -116,12 +128,20 @@ def main() -> int:
         for r in R["method_ecosystem"]:
             if r["n_pairs"]:
                 md.append(f"| {r['group']} | {r['label']} | {r['half_sq_diff_cellw']:.3f} [{r['lo']:.3f}, {r['hi']:.3f}] | {r['n_pairs']} | {r['n_cells']} |")
-        md += ["", "| Scope | Estimator | Sites | Var(site means) | Mean noise | R2 ceiling [95% CI] |", "|---|---|---:|---:|---:|---|"]
+        md += ["", "Ceiling intervals: 'conditional' = percentiles over variance-component bootstrap replicates "
+               "(cells resampled) for the scope's sites; 'with sites resampled' also resamples the scope's sites "
+               "(the A1 resamples), which is the relevant interval for small continents.", "",
+               "| Scope | Estimator | Sites | Var(site means) | Mean noise | R2 ceiling | 95% CI conditional | 95% CI with sites resampled | Share of resamples with ceiling <= 0 |",
+               "|---|---|---:|---:|---:|---:|---|---|---:|"]
+        def _ci(r, a, b):
+            lo, hi = r.get(a), r.get(b)
+            ok = lo is not None and hi is not None and np.isfinite(lo) and np.isfinite(hi)
+            return f"[{lo:.3f}, {hi:.3f}]" if ok else ""
         for r in R["bounds"]:
-            lo, hi = r.get("lo"), r.get("hi")
-            ci_s = f" [{lo:.3f}, {hi:.3f}]" if lo is not None and hi is not None and np.isfinite(lo) and np.isfinite(hi) else ""
+            sh = r.get("share_boot_bound_le0")
             md.append(f"| {r['scope']} | {r['estimator']} | {r['n_sites']} | {r['var_sites']:.3f} | {r['mean_noise_sites']:.3f} | "
-                      f"{r['r2max_sites']:.3f}{ci_s} |")
+                      f"{r['r2max_sites']:.3f} | {_ci(r, 'lo', 'hi')} | {_ci(r, 'lo_uncond', 'hi_uncond')} | "
+                      f"{'' if sh is None or not np.isfinite(sh) else f'{sh:.3f}'} |")
         md += ["", "Semivariogram summary (site level):", "", "| Continent | Sites | Variance | gamma(0-10 km)/var [95% CI] (pairs) | "
                "gamma(0-25 km)/var [95% CI] (pairs) | plateau 400-1600 km | exp. fit nugget/sill (range, km) |",
                "|---|---:|---:|---|---|---:|---|"]
@@ -135,11 +155,17 @@ def main() -> int:
         fr = pd.DataFrame(R.get("fraction_of_bound", []))
         if len(fr):
             fr = fr[fr["model"].isin(["ols_P", "xgb"])]
-            md += ["", "| Train -> test | Model | R2 | Ceiling B2 | R2 / ceiling [95% CI from R2 interval] |", "|---|---|---:|---:|---|"]
+            md += ["", "R2 / ceiling: interval from the ratio computed in each of the 2000 test-site resamples (ceiling "
+                   "recomputed on the same resample). 'unstable' = ceiling interval reaches below 0.2 or <= 0 in > 2.5% "
+                   "of resamples; such fractions should not be interpreted.", "",
+                   "| Train -> test | Model | R2 | Ceiling B2 [95% CI, sites resampled] | R2 / ceiling [95% CI] | Flag |",
+                   "|---|---|---:|---|---|---|"]
             for _, r in fr.iterrows():
                 lab = f"{A[r['train']]} -> {A[r['test']]}" if r["kind"] == "transfer" else f"{A[r['train']]} (block CV)"
-                md.append(f"| {lab} | {MODEL_NAME[r['model']]} | {r['r2']:+.3f} | {r['bound_B2']:.3f} | "
-                          f"{r['fraction_of_B2']:+.2f} [{r['fraction_of_B2_lo']:+.2f}, {r['fraction_of_B2_hi']:+.2f}] |")
+                md.append(f"| {lab} | {MODEL_NAME[r['model']]} | {r['r2']:+.3f} | {r['bound_B2']:.3f} "
+                          f"[{r['bound_B2_lo']:.3f}, {r['bound_B2_hi']:.3f}] | {r['fraction_of_B2']:+.2f} "
+                          f"[{r['fraction_of_B2_lo']:+.2f}, {r['fraction_of_B2_hi']:+.2f}] | "
+                          f"{'unstable' if r.get('fraction_unstable') else ''} |")
         md.append("")
     md += ["COSORE multi-chamber check (plot-scale variance of log annual Rs within a site-year): " +
            json.dumps(a2["cosore_port_level"]), ""]
