@@ -181,8 +181,16 @@ of 20 seeds.
 
 - AS -> NA: RMSE 485 [393, 583] g C m-2 yr-1 (OLS log P), bias -144 [-211, -84] (predictions too
   low), Spearman 0.40 (strict). It is the only cross-continent pair with a clearly positive interval
-  in both variants; its reverse is about zero (OLS) or negative (XGBoost, strict). Europe has no
-  skill as source, target, or within itself.
+  for all three models in both variants. Its reverse is about zero (OLS) or negative (XGBoost,
+  strict). Europe has no skill within itself or as a target.
+  As a source, Europe fails with XGBoost but not with the linear models: EU -> NA 0.115
+  [0.023, 0.176] (log P) and 0.243 [0.123, 0.339] (MAT + log P) in strict, 0.130 and 0.296 [0.177,
+  0.386] in incl_missing. XGBoost is worse than MAT + log P there by 0.295 [0.190, 0.402] (strict).
+  With MAT + log P, more pairs have intervals just above zero: EU -> SCA 0.341 [0.001, 0.520] in
+  strict; EU -> AS, EU -> SCA, EU -> AF, AS -> AF and NA -> AF in incl_missing (31-84 test sites
+  except EU -> AS).
+  Correction at the final check: this bullet earlier said AS -> NA was the only cross-continent pair
+  with a positive interval and that Europe had no skill as a source. That is true for XGBoost only.
 - XGBoost does not beat OLS on log precipitation for AS -> NA: difference -0.005 [-0.067, 0.050]
   (strict), +0.029 [-0.014, 0.075] (incl_missing). Within Asia XGBoost is slightly better (+0.053
   [-0.006, 0.106]; +0.057 [0.010, 0.107]). For NA -> AS XGBoost is worse than OLS in strict
@@ -190,14 +198,19 @@ of 20 seeds.
 - Tuning sensitivity (10 best configurations, each within 0.002-0.006 of the best CV MSE): Asia-
   trained models are stable (AS -> NA 0.195 to 0.210 strict, 0.254 to 0.289 incl_missing);
   North-America-trained models are not (NA -> AS -0.230 to -0.036 strict, -0.060 to +0.139
-  incl_missing; NA -> SCA and NA -> OC ranges 0.6). The qualitative pattern (only Asia transfers)
-  holds for every configuration; single XGBoost values for non-Asian sources should not be read
-  to two decimals.
+  incl_missing; NA -> SCA and NA -> OC ranges 0.6). Across configurations, Asia-trained XGBoost
+  stays positive for North America. European sources stay at or below about zero (maximum
+  +0.044, EU -> NA incl_missing). North-American sources swing: NA -> AF +0.234 to +0.264 in
+  incl_missing (31 test sites), NA -> AS -0.060 to +0.139. Single XGBoost values for non-Asian
+  sources should not be read to two decimals.
 - Coverage (15 pairs, descriptive only; total-gain-weighted DI): Asia's training climate puts 99% of
   North American sites inside its AOA; North America 49% of Asian sites; Europe 15-46% of any other
   continent (strict). Spearman rho between XGBoost R2 and mean DI -0.80 (strict), -0.58
-  (incl_missing); with the AOA share +0.57 / +0.32; for OLS log P -0.44 / -0.37 with mean DI.
-  Coverage is necessary, not sufficient: AS -> EU has 99.6% inside the AOA and R2 -0.13.
+  (incl_missing); with the AOA share +0.57 / +0.32. For OLS log P the association is weaker:
+  -0.44 / -0.38 (exactly -0.375) with mean DI, and +0.18 / +0.11 with the share of test sites
+  inside the training MAT-P range (Figure 1d). The coverage explanation therefore describes the
+  flexible model's failure to extrapolate, not transfer in general. For XGBoost, coverage is
+  necessary but not sufficient: AS -> EU has 99.6% of test sites inside the AOA and R2 -0.13.
 - MODIS NPP: the raster's data footprint is much smaller than its bounding box. Every column from
   66.0 W to 25.0 E is empty (all of Europe, eastern South America, West Africa) and North America
   has no data north of about 51-54 N. Strict: 38 North American sites dropped (8 west of 125 W, 3 in
