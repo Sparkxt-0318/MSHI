@@ -1,0 +1,143 @@
+{
+  "exclude": {
+    "last_step": {
+      "rule": "country field agrees with coordinates (flagged records excluded)",
+      "n_before": 3614,
+      "n_removed": 81,
+      "n_after": 3533,
+      "note": ""
+    },
+    "sites_with_flagged_records": 0,
+    "sites_by_continent": {
+      "Asia": 392,
+      "Europe": 226,
+      "North America": 210,
+      "South & Central America": 77,
+      "Oceania": 33,
+      "Africa": 27
+    },
+    "xgb": {
+      "Asia": {
+        "params": {
+          "max_depth": 1,
+          "learning_rate": 0.1,
+          "min_child_weight": 10.0,
+          "reg_lambda": 1.0
+        },
+        "n_estimators": 50
+      },
+      "North America": {
+        "params": {
+          "max_depth": 4,
+          "learning_rate": 0.03,
+          "min_child_weight": 10.0,
+          "reg_lambda": 1.0
+        },
+        "n_estimators": 100
+      },
+      "Europe": {
+        "params": {
+          "max_depth": 1,
+          "learning_rate": 0.03,
+          "min_child_weight": 1.0,
+          "reg_lambda": 1.0
+        },
+        "n_estimators": 50
+      }
+    }
+  },
+  "asis": {
+    "last_step": {
+      "rule": "country/coordinate mismatches KEPT with original coordinates",
+      "n_before": 3614,
+      "n_removed": 0,
+      "n_after": 3614,
+      "note": ""
+    },
+    "sites_with_flagged_records": 20,
+    "sites_by_continent": {
+      "Asia": 399,
+      "Europe": 231,
+      "North America": 214,
+      "South & Central America": 77,
+      "Oceania": 34,
+      "Africa": 28
+    },
+    "xgb": {
+      "Asia": {
+        "params": {
+          "max_depth": 1,
+          "learning_rate": 0.03,
+          "min_child_weight": 10.0,
+          "reg_lambda": 1.0
+        },
+        "n_estimators": 100
+      },
+      "North America": {
+        "params": {
+          "max_depth": 6,
+          "learning_rate": 0.1,
+          "min_child_weight": 5.0,
+          "reg_lambda": 10.0
+        },
+        "n_estimators": 50
+      },
+      "Europe": {
+        "params": {
+          "max_depth": 2,
+          "learning_rate": 0.03,
+          "min_child_weight": 1.0,
+          "reg_lambda": 1.0
+        },
+        "n_estimators": 50
+      }
+    }
+  },
+  "corrected": {
+    "last_step": {
+      "rule": "mismatches with a high/medium-confidence fix corrected, others excluded",
+      "n_before": 3614,
+      "n_removed": 50,
+      "n_after": 3564,
+      "note": "31 records corrected"
+    },
+    "sites_with_flagged_records": 12,
+    "sites_by_continent": {
+      "Asia": 394,
+      "Europe": 229,
+      "North America": 211,
+      "South & Central America": 78,
+      "Oceania": 35,
+      "Africa": 27
+    },
+    "xgb": {
+      "Asia": {
+        "params": {
+          "max_depth": 1,
+          "learning_rate": 0.03,
+          "min_child_weight": 10.0,
+          "reg_lambda": 1.0
+        },
+        "n_estimators": 100
+      },
+      "North America": {
+        "params": {
+          "max_depth": 4,
+          "learning_rate": 0.1,
+          "min_child_weight": 1.0,
+          "reg_lambda": 1.0
+        },
+        "n_estimators": 50
+      },
+      "Europe": {
+        "params": {
+          "max_depth": 1,
+          "learning_rate": 0.03,
+          "min_child_weight": 1.0,
+          "reg_lambda": 1.0
+        },
+        "n_estimators": 50
+      }
+    }
+  }
+}

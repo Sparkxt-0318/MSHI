@@ -1,0 +1,96 @@
+{
+  "variant": "strict",
+  "dropped_no_npp": {
+    "Asia": 23,
+    "North America": 38
+  },
+  "dropped_west_of_125W": 8,
+  "kept": {
+    "Asia": 369,
+    "North America": 172
+  },
+  "fits": {
+    "Asia->North America:xgb": {
+      "params": {
+        "max_depth": 1,
+        "learning_rate": 0.03,
+        "min_child_weight": 10.0,
+        "reg_lambda": 1.0
+      },
+      "n_estimators": 150,
+      "cv_mse": 0.2940253038927911,
+      "gain_importance": {
+        "bio1": 0.10647057492381079,
+        "bio4": 0.14541622515759892,
+        "bio5": 0.05588850272695099,
+        "bio6": 0.20040178608386866,
+        "bio12": 0.31341409245496404,
+        "bio14": 0.04918561445989478,
+        "bio15": 0.07820115019437358,
+        "bio17": 0.05102205399853823
+      }
+    },
+    "Asia->North America:xgb_npp": {
+      "params": {
+        "max_depth": 1,
+        "learning_rate": 0.1,
+        "min_child_weight": 10.0,
+        "reg_lambda": 1.0
+      },
+      "n_estimators": 50,
+      "cv_mse": 0.2926164284575299,
+      "gain_importance": {
+        "bio1": 0.09643908103760444,
+        "bio4": 0.12861560305909897,
+        "bio5": 0.036648232403102436,
+        "bio6": 0.18066235648273088,
+        "bio12": 0.29783709340152253,
+        "bio14": 0.04332589825916765,
+        "bio15": 0.06785079884661259,
+        "bio17": 0.028489877735825647,
+        "npp": 0.12013105877433487
+      }
+    },
+    "North America->Asia:xgb": {
+      "params": {
+        "max_depth": 4,
+        "learning_rate": 0.03,
+        "min_child_weight": 5.0,
+        "reg_lambda": 1.0
+      },
+      "n_estimators": 100,
+      "cv_mse": 0.2621181817740974,
+      "gain_importance": {
+        "bio1": 0.11282561532287345,
+        "bio4": 0.09647148801190435,
+        "bio5": 0.09121306745083982,
+        "bio6": 0.10729264292979622,
+        "bio12": 0.25120051918327524,
+        "bio14": 0.11123908386606322,
+        "bio15": 0.10786653348969623,
+        "bio17": 0.12189104974555146
+      }
+    },
+    "North America->Asia:xgb_npp": {
+      "params": {
+        "max_depth": 4,
+        "learning_rate": 0.03,
+        "min_child_weight": 5.0,
+        "reg_lambda": 10.0
+      },
+      "n_estimators": 150,
+      "cv_mse": 0.2638046883185138,
+      "gain_importance": {
+        "bio1": 0.10729396694143495,
+        "bio4": 0.07267839100187357,
+        "bio5": 0.07091564745678436,
+        "bio6": 0.10725987192566926,
+        "bio12": 0.263321336990624,
+        "bio14": 0.08273368010688426,
+        "bio15": 0.07628895463207451,
+        "bio17": 0.09591765648995719,
+        "npp": 0.12359049445469796
+      }
+    }
+  }
+}

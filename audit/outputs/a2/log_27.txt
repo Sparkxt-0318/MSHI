@@ -1,0 +1,159 @@
+[strict] one-way: within=0.095 [0.082,0.108] share_within=0.244 [0.209,0.286] cells=584 records=2839 REML={'s2_within': 0.0952468517055414, 's2_between': 0.33232713212057585, 'share_within': 0.222761101723803}
+[strict] nested: s2_rec=0.066 [0.057,0.075] s2_study=0.100 [0.063,0.145] same-cells=0.057/0.125 REML={'s2_cell': 0.2661101101629255, 's2_study': 0.08030684510040184, 's2_rec': 0.07274515434527812}
+                    component  half_sq_diff_cellw     lo     hi  half_sq_diff_pairw  n_pairs  n_cells
+0                   all_pairs               0.085  0.073  0.097               0.093    11169      584
+1        same_study_same_year               0.080  0.068  0.093               0.093     2747      400
+2        same_study_diff_year               0.045  0.036  0.054               0.066     3893      253
+3         diff_study_any_year               0.166  0.124  0.213               0.116     4529      168
+4        diff_study_same_year               0.124  0.067  0.195               0.149      403       55
+5        diff_study_diff_year               0.161  0.120  0.207               0.112     4126      152
+6  diff_study_excl_exact_dups               0.166  0.124  0.213               0.116     4512      168
+7         all_pairs_no_cosore               0.084  0.073  0.096               0.092    10832      575
+                      scope                                       estimator  n_sites  var_sites  mean_noise_sites  r2max_sites  n_records  var_records  r2max_records     lo     hi  n_pairs
+0                       All        B1 pooled one-way (records exchangeable)      965      0.392             0.055        0.858     3220.0        0.394          0.758  0.839  0.878      NaN
+1                       All               B2 nested study effects (primary)      965      0.392             0.130        0.668     3220.0        0.394          0.578  0.551  0.769      NaN
+2                       All   B2 sensitivity: record-count (pair) weighting      965      0.392             0.080        0.795     3220.0        0.394          0.706    NaN    NaN      NaN
+3                       All           B2 sensitivity: cells with 3+ records      965      0.392             0.139        0.646     3220.0        0.394          0.551    NaN    NaN      NaN
+4                       All                B2 sensitivity: excluding COSORE      965      0.392             0.131        0.664     3220.0        0.394          0.574    NaN    NaN      NaN
+5                       All  B2 sensitivity: same cells for both pair types      965      0.392             0.147        0.624     3220.0        0.394          0.538    NaN    NaN      NaN
+6                       All             B3 short-lag semivariance (0-10 km)      965      0.392             0.113        0.711        NaN          NaN            NaN  0.501  0.846    189.0
+7                      Asia        B1 pooled one-way (records exchangeable)      392      0.372             0.054        0.856     1401.0        0.383          0.751  0.836  0.875      NaN
+8                      Asia               B2 nested study effects (primary)      392      0.372             0.126        0.661     1401.0        0.383          0.566  0.542  0.765      NaN
+9                      Asia   B2 sensitivity: record-count (pair) weighting      392      0.372             0.078        0.791     1401.0        0.383          0.698    NaN    NaN      NaN
+10                     Asia           B2 sensitivity: cells with 3+ records      392      0.372             0.135        0.639     1401.0        0.383          0.538    NaN    NaN      NaN
+11                     Asia                B2 sensitivity: excluding COSORE      392      0.372             0.128        0.657     1401.0        0.383          0.562    NaN    NaN      NaN
+12                     Asia  B2 sensitivity: same cells for both pair types      392      0.372             0.143        0.616     1401.0        0.383          0.525    NaN    NaN      NaN
+13                     Asia   B2 sensitivity: continent-specific components      392      0.372             0.151        0.595     1401.0        0.383          0.498    NaN    NaN      NaN
+14                     Asia             B3 short-lag semivariance (0-10 km)      392      0.372             0.087        0.765        NaN          NaN            NaN  0.533  0.894     81.0
+15            North America        B1 pooled one-way (records exchangeable)      210      0.391             0.053        0.865      745.0        0.361          0.737  0.847  0.884      NaN
+16            North America               B2 nested study effects (primary)      210      0.391             0.129        0.669      745.0        0.361          0.540  0.551  0.771      NaN
+17            North America   B2 sensitivity: record-count (pair) weighting      210      0.391             0.078        0.799      745.0        0.361          0.680    NaN    NaN      NaN
+18            North America           B2 sensitivity: cells with 3+ records      210      0.391             0.138        0.647      745.0        0.361          0.511    NaN    NaN      NaN
+19            North America                B2 sensitivity: excluding COSORE      210      0.391             0.131        0.665      745.0        0.361          0.536    NaN    NaN      NaN
+20            North America  B2 sensitivity: same cells for both pair types      210      0.391             0.147        0.623      745.0        0.361          0.497    NaN    NaN      NaN
+21            North America   B2 sensitivity: continent-specific components      210      0.391             0.070        0.822      745.0        0.361          0.723    NaN    NaN      NaN
+22            North America             B3 short-lag semivariance (0-10 km)      210      0.391             0.130        0.667        NaN          NaN            NaN -0.008  0.922     46.0
+23                   Europe        B1 pooled one-way (records exchangeable)      226      0.324             0.058        0.822      739.0        0.338          0.719  0.798  0.847      NaN
+24                   Europe               B2 nested study effects (primary)      226      0.324             0.133        0.590      739.0        0.338          0.509  0.446  0.715      NaN
+25                   Europe   B2 sensitivity: record-count (pair) weighting      226      0.324             0.082        0.746      739.0        0.338          0.658    NaN    NaN      NaN
+26                   Europe           B2 sensitivity: cells with 3+ records      226      0.324             0.142        0.563      739.0        0.338          0.478    NaN    NaN      NaN
+27                   Europe                B2 sensitivity: excluding COSORE      226      0.324             0.134        0.585      739.0        0.338          0.504    NaN    NaN      NaN
+28                   Europe  B2 sensitivity: same cells for both pair types      226      0.324             0.150        0.536      739.0        0.338          0.463    NaN    NaN      NaN
+29                   Europe   B2 sensitivity: continent-specific components      226      0.324             0.120        0.630      739.0        0.338          0.542    NaN    NaN      NaN
+30                   Europe             B3 short-lag semivariance (0-10 km)      226      0.324             0.193        0.404        NaN          NaN            NaN -0.385  0.816     39.0
+31  South & Central America        B1 pooled one-way (records exchangeable)       77      0.411             0.057        0.861      208.0        0.421          0.774  0.842  0.880      NaN
+32  South & Central America               B2 nested study effects (primary)       77      0.411             0.131        0.681      208.0        0.421          0.605  0.569  0.778      NaN
+33  South & Central America   B2 sensitivity: record-count (pair) weighting       77      0.411             0.081        0.802      208.0        0.421          0.725    NaN    NaN      NaN
+34  South & Central America           B2 sensitivity: cells with 3+ records       77      0.411             0.140        0.660      208.0        0.421          0.580    NaN    NaN      NaN
+35  South & Central America                B2 sensitivity: excluding COSORE       77      0.411             0.133        0.677      208.0        0.421          0.602    NaN    NaN      NaN
+36  South & Central America  B2 sensitivity: same cells for both pair types       77      0.411             0.148        0.639      208.0        0.421          0.568    NaN    NaN      NaN
+37                   Africa        B1 pooled one-way (records exchangeable)       27      0.384             0.065        0.830       58.0        0.435          0.781  0.808  0.854      NaN
+38                   Africa               B2 nested study effects (primary)       27      0.384             0.142        0.630       58.0        0.435          0.618  0.502  0.741      NaN
+39                   Africa   B2 sensitivity: record-count (pair) weighting       27      0.384             0.090        0.766       58.0        0.435          0.734    NaN    NaN      NaN
+40                   Africa           B2 sensitivity: cells with 3+ records       27      0.384             0.151        0.606       58.0        0.435          0.594    NaN    NaN      NaN
+41                   Africa                B2 sensitivity: excluding COSORE       27      0.384             0.144        0.626       58.0        0.435          0.615    NaN    NaN      NaN
+42                   Africa  B2 sensitivity: same cells for both pair types       27      0.384             0.160        0.584       58.0        0.435          0.582    NaN    NaN      NaN
+43                  Oceania        B1 pooled one-way (records exchangeable)       33      0.263             0.068        0.742       69.0        0.209          0.544  0.707  0.777      NaN
+44                  Oceania               B2 nested study effects (primary)       33      0.263             0.146        0.445       69.0        0.209          0.205  0.254  0.611      NaN
+45                  Oceania   B2 sensitivity: record-count (pair) weighting       33      0.263             0.093        0.646       69.0        0.209          0.446    NaN    NaN      NaN
+46                  Oceania           B2 sensitivity: cells with 3+ records       33      0.263             0.155        0.409       69.0        0.209          0.154    NaN    NaN      NaN
+47                  Oceania                B2 sensitivity: excluding COSORE       33      0.263             0.147        0.439       69.0        0.209          0.197    NaN    NaN      NaN
+48                  Oceania  B2 sensitivity: same cells for both pair types       33      0.263             0.164        0.377       69.0        0.209          0.130    NaN    NaN      NaN
+        group                              label  half_sq_diff_cellw     lo     hi  n_pairs  n_cells
+0      method                          IRGA-IRGA               0.070  0.060  0.082     8522      460
+1      method  alkali/soda lime-alkali/soda lime               0.091  0.052  0.136      564       52
+2      method                              GC-GC               0.108  0.079  0.143      775       78
+3      method              IRGA-alkali/soda lime               0.260  0.058  0.589      101        8
+4      method                            IRGA-GC               0.223  0.136  0.336      803       26
+5      method               IRGA-IRGA diff study               0.134  0.096  0.185     3018      136
+6   ecosystem                             Forest               0.055  0.046  0.065     7160      410
+7   ecosystem                          Grassland               0.115  0.070  0.170      793       75
+8   ecosystem                        Agriculture               0.106  0.063  0.164      621       62
+9   ecosystem                          Shrubland               0.050  0.029  0.076      498       31
+10  ecosystem                            Wetland               0.208  0.123  0.294      210       22
+11  ecosystem                            Savanna               0.079  0.031  0.133       35        9
+12  ecosystem                             Desert               0.145  0.035  0.294       82       10
+13  ecosystem                             Tundra                 NaN    NaN    NaN        0        0
+14  ecosystem              mixed ecosystem types               0.228  0.171  0.291     1757       93
+{'Asia': {'n_sites': 392, 'variance': 0.372, 'gamma_0_10km_share': 0.235, 'gamma_0_10km_share_lo': 0.106, 'gamma_0_10km_share_hi': 0.467, 'n_pairs_0_10km': 81, 'gamma_0_25km_share': 0.382, 'gamma_0_25km_share_lo': 0.224, 'gamma_0_25km_share_hi': 0.628, 'n_pairs_0_25km': 209, 'gamma_plateau_400_1600km': 0.309, 'gamma_0_10km': 0.087}, 'North America': {'n_sites': 210, 'variance': 0.391, 'gamma_0_10km_share': 0.333, 'gamma_0_10km_share_lo': 0.078, 'gamma_0_10km_share_hi': 1.008, 'n_pairs_0_10km': 46, 'gamma_0_25km_share': 0.34, 'gamma_0_25km_share_lo': 0.154, 'gamma_0_25km_share_hi': 0.672, 'n_pairs_0_25km': 93, 'gamma_plateau_400_1600km': 0.324, 'gamma_0_10km': 0.13}, 'Europe': {'n_sites': 226, 'variance': 0.324, 'gamma_0_10km_share': 0.596, 'gamma_0_10km_share_lo': 0.184, 'gamma_0_10km_share_hi': 1.385, 'n_pairs_0_10km': 39, 'gamma_0_25km_share': 0.449, 'gamma_0_25km_share_lo': 0.212, 'gamma_0_25km_share_hi': 0.868, 'n_pairs_0_25km': 84, 'gamma_plateau_400_1600km': 0.309, 'gamma_0_10km': 0.193}, 'All': {'n_sites': 965, 'variance': 0.392, 'gamma_0_10km_share': 0.289, 'gamma_0_10km_share_lo': 0.154, 'gamma_0_10km_share_hi': 0.499, 'n_pairs_0_10km': 189, 'gamma_0_25km_share': 0.315, 'gamma_0_25km_share_lo': 0.214, 'gamma_0_25km_share_hi': 0.448, 'n_pairs_0_25km': 470, 'gamma_plateau_400_1600km': 0.311, 'gamma_0_10km': 0.113}}
+{'Asia': {'nugget': 0.08137423382390965, 'partial_sill': 0.23012103126590408, 'range_par_km': 55.0485133650526, 'practical_range_km': 165.1455400951578, 'sill': 0.31149526508981373, 'nugget_share': 0.26123746632375594, 'range_at_bound': False, 'fit_max_lag_km': 1600.0}, 'North America': {'nugget': 0.1330513072195029, 'partial_sill': 0.1930573025404985, 'range_par_km': 210.33376961546966, 'practical_range_km': 631.001308846409, 'sill': 0.3261086097600014, 'nugget_share': 0.40799691647951764, 'range_at_bound': False, 'fit_max_lag_km': 1600.0}, 'Europe': {'nugget': 0.24506532400845912, 'partial_sill': 0.08206422031972907, 'range_par_km': 666.5388587472812, 'practical_range_km': 1999.6165762418436, 'sill': 0.3271295443281882, 'nugget_share': 0.7491384629038602, 'range_at_bound': False, 'fit_max_lag_km': 1600.0}, 'All': {'nugget': 0.09356413780906918, 'partial_sill': 0.21612044634634467, 'range_par_km': 78.21699033705211, 'practical_range_km': 234.65097101115634, 'sill': 0.30968458415541383, 'nugget_share': 0.30212720489217, 'range_at_bound': False, 'fit_max_lag_km': 1600.0}}
+[incl_missing] one-way: within=0.099 [0.086,0.114] share_within=0.239 [0.203,0.281] cells=632 records=3159 REML={'s2_within': 0.09933399374644528, 's2_between': 0.35753300337663757, 'share_within': 0.21742431467354179}
+[incl_missing] nested: s2_rec=0.066 [0.058,0.075] s2_study=0.102 [0.066,0.144] same-cells=0.057/0.128 REML={'s2_cell': 0.2917255270033961, 's2_study': 0.08087269559159802, 's2_rec': 0.0750776331130616}
+                    component  half_sq_diff_cellw     lo     hi  half_sq_diff_pairw  n_pairs  n_cells
+0                   all_pairs               0.087  0.076  0.099               0.099    14002      632
+1        same_study_same_year               0.081  0.070  0.094               0.096     3201      436
+2        same_study_diff_year               0.046  0.038  0.055               0.069     4983      267
+3         diff_study_any_year               0.169  0.133  0.210               0.125     5818      193
+4        diff_study_same_year               0.121  0.069  0.184               0.206      500       66
+5        diff_study_diff_year               0.165  0.125  0.207               0.118     5318      175
+6  diff_study_excl_exact_dups               0.169  0.133  0.210               0.126     5796      193
+7         all_pairs_no_cosore               0.086  0.075  0.098               0.098    13656      623
+                      scope                                       estimator  n_sites  var_sites  mean_noise_sites  r2max_sites  n_records  var_records  r2max_records     lo     hi  n_pairs
+0                       All        B1 pooled one-way (records exchangeable)     1061      0.408             0.058        0.857     3588.0        0.417          0.762  0.836  0.876      NaN
+1                       All               B2 nested study effects (primary)     1061      0.408             0.132        0.676     3588.0        0.417          0.595  0.570  0.770      NaN
+2                       All   B2 sensitivity: record-count (pair) weighting     1061      0.408             0.088        0.784     3588.0        0.417          0.699    NaN    NaN      NaN
+3                       All           B2 sensitivity: cells with 3+ records     1061      0.408             0.141        0.654     3588.0        0.417          0.568    NaN    NaN      NaN
+4                       All                B2 sensitivity: excluding COSORE     1061      0.408             0.134        0.673     3588.0        0.417          0.591    NaN    NaN      NaN
+5                       All  B2 sensitivity: same cells for both pair types     1061      0.408             0.150        0.634     3588.0        0.417          0.557    NaN    NaN      NaN
+6                       All             B3 short-lag semivariance (0-10 km)     1061      0.408             0.103        0.747        NaN          NaN            NaN  0.551  0.858    221.0
+7                      Asia        B1 pooled one-way (records exchangeable)      432      0.382             0.056        0.852     1587.0        0.403          0.754  0.830  0.872      NaN
+8                      Asia               B2 nested study effects (primary)      432      0.382             0.129        0.663     1587.0        0.403          0.581  0.552  0.761      NaN
+9                      Asia   B2 sensitivity: record-count (pair) weighting      432      0.382             0.086        0.776     1587.0        0.403          0.689    NaN    NaN      NaN
+10                     Asia           B2 sensitivity: cells with 3+ records      432      0.382             0.138        0.640     1587.0        0.403          0.553    NaN    NaN      NaN
+11                     Asia                B2 sensitivity: excluding COSORE      432      0.382             0.130        0.660     1587.0        0.403          0.577    NaN    NaN      NaN
+12                     Asia  B2 sensitivity: same cells for both pair types      432      0.382             0.146        0.619     1587.0        0.403          0.542    NaN    NaN      NaN
+13                     Asia   B2 sensitivity: continent-specific components      432      0.382             0.167        0.563     1587.0        0.403          0.477    NaN    NaN      NaN
+14                     Asia             B3 short-lag semivariance (0-10 km)      432      0.382             0.077        0.797        NaN          NaN            NaN  0.626  0.898     92.0
+15            North America        B1 pooled one-way (records exchangeable)      236      0.426             0.058        0.863      794.0        0.377          0.737  0.843  0.881      NaN
+16            North America               B2 nested study effects (primary)      236      0.426             0.133        0.687      794.0        0.377          0.552  0.584  0.778      NaN
+17            North America   B2 sensitivity: record-count (pair) weighting      236      0.426             0.089        0.792      794.0        0.377          0.667    NaN    NaN      NaN
+18            North America           B2 sensitivity: cells with 3+ records      236      0.426             0.142        0.666      794.0        0.377          0.522    NaN    NaN      NaN
+19            North America                B2 sensitivity: excluding COSORE      236      0.426             0.135        0.684      794.0        0.377          0.548    NaN    NaN      NaN
+20            North America  B2 sensitivity: same cells for both pair types      236      0.426             0.151        0.646      794.0        0.377          0.510    NaN    NaN      NaN
+21            North America   B2 sensitivity: continent-specific components      236      0.426             0.055        0.871      794.0        0.377          0.783    NaN    NaN      NaN
+22            North America             B3 short-lag semivariance (0-10 km)      236      0.426             0.107        0.748        NaN          NaN            NaN  0.230  0.927     62.0
+23                   Europe        B1 pooled one-way (records exchangeable)      243      0.339             0.060        0.823      821.0        0.364          0.727  0.796  0.846      NaN
+24                   Europe               B2 nested study effects (primary)      243      0.339             0.135        0.602      821.0        0.364          0.536  0.471  0.717      NaN
+25                   Europe   B2 sensitivity: record-count (pair) weighting      243      0.339             0.090        0.733      821.0        0.364          0.656    NaN    NaN      NaN
+26                   Europe           B2 sensitivity: cells with 3+ records      243      0.339             0.144        0.574      821.0        0.364          0.505    NaN    NaN      NaN
+27                   Europe                B2 sensitivity: excluding COSORE      243      0.339             0.136        0.597      821.0        0.364          0.532    NaN    NaN      NaN
+28                   Europe  B2 sensitivity: same cells for both pair types      243      0.339             0.153        0.549      821.0        0.364          0.493    NaN    NaN      NaN
+29                   Europe   B2 sensitivity: continent-specific components      243      0.339             0.125        0.632      821.0        0.364          0.558    NaN    NaN      NaN
+30                   Europe             B3 short-lag semivariance (0-10 km)      243      0.339             0.183        0.461        NaN          NaN            NaN -0.219  0.840     42.0
+31  South & Central America        B1 pooled one-way (records exchangeable)       84      0.407             0.058        0.858      232.0        0.404          0.755  0.836  0.877      NaN
+32  South & Central America               B2 nested study effects (primary)       84      0.407             0.132        0.676      232.0        0.404          0.582  0.568  0.770      NaN
+33  South & Central America   B2 sensitivity: record-count (pair) weighting       84      0.407             0.088        0.784      232.0        0.404          0.690    NaN    NaN      NaN
+34  South & Central America           B2 sensitivity: cells with 3+ records       84      0.407             0.141        0.653      232.0        0.404          0.554    NaN    NaN      NaN
+35  South & Central America                B2 sensitivity: excluding COSORE       84      0.407             0.133        0.672      232.0        0.404          0.578    NaN    NaN      NaN
+36  South & Central America  B2 sensitivity: same cells for both pair types       84      0.407             0.149        0.632      232.0        0.404          0.543    NaN    NaN      NaN
+37                   Africa        B1 pooled one-way (records exchangeable)       31      0.594             0.063        0.893       71.0        0.701          0.858  0.877  0.907      NaN
+38                   Africa               B2 nested study effects (primary)       31      0.594             0.142        0.761       71.0        0.701          0.759  0.682  0.830      NaN
+39                   Africa   B2 sensitivity: record-count (pair) weighting       31      0.594             0.095        0.840       71.0        0.701          0.821    NaN    NaN      NaN
+40                   Africa           B2 sensitivity: cells with 3+ records       31      0.594             0.152        0.744       71.0        0.701          0.743    NaN    NaN      NaN
+41                   Africa                B2 sensitivity: excluding COSORE       31      0.594             0.144        0.758       71.0        0.701          0.757    NaN    NaN      NaN
+42                   Africa  B2 sensitivity: same cells for both pair types       31      0.594             0.161        0.730       71.0        0.701          0.736    NaN    NaN      NaN
+43                  Oceania        B1 pooled one-way (records exchangeable)       35      0.250             0.070        0.719       83.0        0.223          0.555  0.676  0.755      NaN
+44                  Oceania               B2 nested study effects (primary)       35      0.250             0.145        0.420       83.0        0.223          0.243  0.233  0.584      NaN
+45                  Oceania   B2 sensitivity: record-count (pair) weighting       35      0.250             0.100        0.600       83.0        0.223          0.438    NaN    NaN      NaN
+46                  Oceania           B2 sensitivity: cells with 3+ records       35      0.250             0.155        0.380       83.0        0.223          0.192    NaN    NaN      NaN
+47                  Oceania                B2 sensitivity: excluding COSORE       35      0.250             0.146        0.414       83.0        0.223          0.236    NaN    NaN      NaN
+48                  Oceania  B2 sensitivity: same cells for both pair types       35      0.250             0.162        0.350       83.0        0.223          0.172    NaN    NaN      NaN
+        group                              label  half_sq_diff_cellw     lo     hi  n_pairs  n_cells
+0      method                          IRGA-IRGA               0.074  0.063  0.086    10943      488
+1      method  alkali/soda lime-alkali/soda lime               0.085  0.052  0.126      662       61
+2      method                              GC-GC               0.113  0.084  0.146      882       85
+3      method              IRGA-alkali/soda lime               0.236  0.063  0.532      137        9
+4      method                            IRGA-GC               0.207  0.121  0.307      857       30
+5      method               IRGA-IRGA diff study               0.137  0.102  0.180     4086      155
+6   ecosystem                             Forest               0.059  0.050  0.070     8682      433
+7   ecosystem                          Grassland               0.108  0.070  0.156     1649       85
+8   ecosystem                        Agriculture               0.120  0.074  0.180      702       76
+9   ecosystem                          Shrubland               0.047  0.027  0.070      511       34
+10  ecosystem                            Wetland               0.197  0.122  0.277      233       25
+11  ecosystem                            Savanna               0.079  0.031  0.133       35        9
+12  ecosystem                             Desert               0.145  0.035  0.294       82       10
+13  ecosystem                             Tundra                 NaN    NaN    NaN        0        0
+14  ecosystem              mixed ecosystem types               0.228  0.176  0.288     2095      107
+{'Asia': {'n_sites': 432, 'variance': 0.382, 'gamma_0_10km_share': 0.203, 'gamma_0_10km_share_lo': 0.102, 'gamma_0_10km_share_hi': 0.374, 'n_pairs_0_10km': 92, 'gamma_0_25km_share': 0.367, 'gamma_0_25km_share_lo': 0.221, 'gamma_0_25km_share_hi': 0.578, 'n_pairs_0_25km': 246, 'gamma_plateau_400_1600km': 0.311, 'gamma_0_10km': 0.077}, 'North America': {'n_sites': 236, 'variance': 0.426, 'gamma_0_10km_share': 0.252, 'gamma_0_10km_share_lo': 0.073, 'gamma_0_10km_share_hi': 0.77, 'n_pairs_0_10km': 62, 'gamma_0_25km_share': 0.295, 'gamma_0_25km_share_lo': 0.15, 'gamma_0_25km_share_hi': 0.563, 'n_pairs_0_25km': 128, 'gamma_plateau_400_1600km': 0.312, 'gamma_0_10km': 0.107}, 'Europe': {'n_sites': 243, 'variance': 0.339, 'gamma_0_10km_share': 0.539, 'gamma_0_10km_share_lo': 0.16, 'gamma_0_10km_share_hi': 1.219, 'n_pairs_0_10km': 42, 'gamma_0_25km_share': 0.427, 'gamma_0_25km_share_lo': 0.205, 'gamma_0_25km_share_hi': 0.828, 'n_pairs_0_25km': 88, 'gamma_plateau_400_1600km': 0.322, 'gamma_0_10km': 0.183}, 'All': {'n_sites': 1061, 'variance': 0.408, 'gamma_0_10km_share': 0.253, 'gamma_0_10km_share_lo': 0.142, 'gamma_0_10km_share_hi': 0.449, 'n_pairs_0_10km': 221, 'gamma_0_25km_share': 0.301, 'gamma_0_25km_share_lo': 0.217, 'gamma_0_25km_share_hi': 0.42, 'n_pairs_0_25km': 549, 'gamma_plateau_400_1600km': 0.314, 'gamma_0_10km': 0.103}}
+{'Asia': {'nugget': 0.068422248711996, 'partial_sill': 0.24464503850865704, 'range_par_km': 48.048552038402114, 'practical_range_km': 144.14565611520635, 'sill': 0.313067287220653, 'nugget_share': 0.2185544498099263, 'range_at_bound': False, 'fit_max_lag_km': 1600.0}, 'North America': {'nugget': 0.11022089675904935, 'partial_sill': 0.2001370818356609, 'range_par_km': 101.69258084238781, 'practical_range_km': 305.0777425271634, 'sill': 0.31035797859471026, 'nugget_share': 0.3551411736154669, 'range_at_bound': False, 'fit_max_lag_km': 1600.0}, 'Europe': {'nugget': 0.2564085731488583, 'partial_sill': 0.11997450416827489, 'range_par_km': 1267.6254812195648, 'practical_range_km': 3802.8764436586944, 'sill': 0.37638307731713316, 'nugget_share': 0.6812436281050259, 'range_at_bound': False, 'fit_max_lag_km': 1600.0}, 'All': {'nugget': 0.08336801741317405, 'partial_sill': 0.23021151883425697, 'range_par_km': 66.30794862390304, 'practical_range_km': 198.92384587170915, 'sill': 0.313579536247431, 'nugget_share': 0.2658592407235153, 'range_at_bound': False, 'fit_max_lag_km': 1600.0}}
+COSORE port-level: {'n_dataset_years_multi_port': 43, 'n_datasets': 16, 'mean_within_site_year_var_log': 0.13049219143343596, 'pooled_within_var_log': 0.1559872806624241}

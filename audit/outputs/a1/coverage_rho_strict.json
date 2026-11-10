@@ -1,0 +1,22 @@
+{
+  "variant": "strict",
+  "n_pairs": 15,
+  "spearman_rho_descriptive_no_test": {
+    "r2_xgb~share_TP_in_range": 0.7025134730780009,
+    "r2_xgb~share_in_aoa_weighted": 0.6076856760775161,
+    "r2_xgb~di_weighted_mean": -0.8749999999999999,
+    "r2_xgb~share_in_aoa_unweighted": 0.7142857142857142,
+    "r2_ols_P~share_TP_in_range": 0.21147089240613293,
+    "r2_ols_P~share_in_aoa_weighted": 0.16443259470332788,
+    "r2_ols_P~di_weighted_mean": -0.5035714285714286,
+    "r2_ols_P~share_in_aoa_unweighted": 0.22499999999999998,
+    "r2_ols_TP~share_TP_in_range": -0.39068351308929644,
+    "r2_ols_TP~share_in_aoa_weighted": -0.3592494732105315,
+    "r2_ols_TP~di_weighted_mean": 0.075,
+    "r2_ols_TP~share_in_aoa_unweighted": -0.3428571428571428,
+    "spearman_xgb~share_TP_in_range": 0.598570153081766,
+    "spearman_xgb~share_in_aoa_weighted": 0.45218963543415164,
+    "spearman_xgb~di_weighted_mean": -0.8285714285714284,
+    "spearman_xgb~share_in_aoa_unweighted": 0.575
+  }
+}

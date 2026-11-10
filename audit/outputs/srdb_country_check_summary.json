@@ -1,0 +1,108 @@
+{
+  "created": "2026-11-10T07:36:18+00:00",
+  "srdb_commit": "02163a7",
+  "natural_earth": [
+    "ne_10m_admin_0_map_units.geojson",
+    "ne_10m_admin_1_states_provinces.geojson"
+  ],
+  "n_records_total": 14169,
+  "n_without_coordinates": 396,
+  "n_out_of_bounds": 1,
+  "n_checked": 13772,
+  "status_counts": {
+    "match": 13319,
+    "mismatch": 283,
+    "match_tolerance": 156,
+    "match_political": 12,
+    "no_country": 2
+  },
+  "mismatch_class_counts": {
+    "offshore_near": 49,
+    "label_wrong": 47,
+    "lon_sign": 44,
+    "near_border": 42,
+    "unclear": 37,
+    "in_sea": 29,
+    "coords_wrong": 14,
+    "lat_sign": 14,
+    "swap": 4,
+    "same_site_conflict": 3
+  },
+  "mismatch_confidence_counts": {
+    "low": 157,
+    "medium": 85,
+    "high": 41
+  },
+  "mismatch_studies": 86,
+  "mismatch_with_rs_annual": 149,
+  "class_by_confidence": [
+    {
+      "mismatch_class": "coords_wrong",
+      "confidence": "medium",
+      "n": 14
+    },
+    {
+      "mismatch_class": "in_sea",
+      "confidence": "low",
+      "n": 29
+    },
+    {
+      "mismatch_class": "label_wrong",
+      "confidence": "high",
+      "n": 5
+    },
+    {
+      "mismatch_class": "label_wrong",
+      "confidence": "medium",
+      "n": 42
+    },
+    {
+      "mismatch_class": "lat_sign",
+      "confidence": "high",
+      "n": 3
+    },
+    {
+      "mismatch_class": "lat_sign",
+      "confidence": "medium",
+      "n": 11
+    },
+    {
+      "mismatch_class": "lon_sign",
+      "confidence": "high",
+      "n": 26
+    },
+    {
+      "mismatch_class": "lon_sign",
+      "confidence": "medium",
+      "n": 18
+    },
+    {
+      "mismatch_class": "near_border",
+      "confidence": "low",
+      "n": 42
+    },
+    {
+      "mismatch_class": "offshore_near",
+      "confidence": "low",
+      "n": 49
+    },
+    {
+      "mismatch_class": "same_site_conflict",
+      "confidence": "high",
+      "n": 3
+    },
+    {
+      "mismatch_class": "swap",
+      "confidence": "high",
+      "n": 4
+    },
+    {
+      "mismatch_class": "unclear",
+      "confidence": "low",
+      "n": 37
+    }
+  ],
+  "unknown_country_names": {},
+  "tolerance_km": 10.0,
+  "near_border_km": 50.0
+}

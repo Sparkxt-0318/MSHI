@@ -1,0 +1,945 @@
+{
+  "started": "2026-11-10T07:04:52+00:00",
+  "cosore_dir": "/home/user/MSHI/data/raw/cosore_repo/inst/extdata/datasets",
+  "datasets": {
+    "d20190409_ANJILELI": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 2,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190409_ZOU": {
+      "ports_in_data": 7,
+      "ports_rs_untreated": 7,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 21,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190415_VARNER": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 8,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 32,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190424_ZHANG_maple": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 6,
+      "port_types": [
+        "Rh|Girdled",
+        "Rs|None"
+      ],
+      "port_years": 11,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190424_ZHANG_oak": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 4,
+      "port_types": [
+        "Rh|Girdled",
+        "Rs|None"
+      ],
+      "port_years": 8,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190430_DESAI": {
+      "ports_in_data": 4,
+      "ports_rs_untreated": 3,
+      "port_types": [
+        "Rh|Trenched",
+        "Rs|None"
+      ],
+      "port_years": 6,
+      "port_years_full": 3,
+      "status": "ok",
+      "records": 1
+    },
+    "d20190504_SAVAGE_hf006-03": {
+      "ports_in_data": 6,
+      "ports_rs_untreated": 6,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 6,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190504_SAVAGE_hf006-05": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 4,
+      "port_types": [
+        "Rh|Trenched",
+        "Rs|None"
+      ],
+      "port_years": 12,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190517_MAURITZ": {
+      "ports_in_data": 16,
+      "ports_rs_untreated": 8,
+      "port_types": [
+        "Rh|Root exclusion",
+        "Rs|None"
+      ],
+      "port_years": 16,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190520_RUEHR": {
+      "ports_in_data": 7,
+      "ports_rs_untreated": 7,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 7,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190526_MINIONS_BNZ": {
+      "status": "no_data_rds"
+    },
+    "d20190526_MINIONS_EML": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 3,
+      "port_years_full": 1,
+      "status": "ok",
+      "records": 1
+    },
+    "d20190526_MINIONS_HCB": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 2,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190526_MINIONS_HCU": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 2,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190526_MINIONS_IMNH": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 2,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190526_MINIONS_IMNL": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 2,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190526_MINIONS_NCU_OLD": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 2,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190526_PENNINGTON": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 8,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 16,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190526_RAICH_diel": {
+      "ports_in_data": 4,
+      "ports_rs_untreated": 4,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 10,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190526_RAICH_survey": {
+      "ports_in_data": 4,
+      "ports_rs_untreated": 4,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 28,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190527_GOULDEN": {
+      "ports_in_data": 15,
+      "ports_rs_untreated": 15,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 30,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190607_RUEHR": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 2,
+      "port_years_full": 1,
+      "status": "ok",
+      "records": 1
+    },
+    "d20190610_SIHI_H1": {
+      "ports_in_data": 6,
+      "ports_rs_untreated": 6,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 48,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190610_SIHI_H2": {
+      "ports_in_data": 15,
+      "ports_rs_untreated": 12,
+      "port_types": [
+        "Rh|Trenched",
+        "Rs|None"
+      ],
+      "port_years": 31,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190610_SIHI_H2wetland": {
+      "ports_in_data": 5,
+      "ports_rs_untreated": 5,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 14,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190617_SCOTT_SRM": {
+      "ports_in_data": 3,
+      "ports_rs_untreated": 3,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 6,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190617_SCOTT_WHS": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 8,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 8,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190617_SCOTT_WKG": {
+      "ports_in_data": 7,
+      "ports_rs_untreated": 4,
+      "port_types": [
+        "Rh|Trenched",
+        "Rs|None"
+      ],
+      "port_years": 12,
+      "port_years_full": 3,
+      "status": "ok",
+      "records": 1
+    },
+    "d20190619_GU": {
+      "status": "no_data_rds"
+    },
+    "d20190626_VARGAS": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 3,
+      "port_years_full": 2,
+      "status": "ok",
+      "records": 2
+    },
+    "d20190722_GORRES": {
+      "ports_in_data": 9,
+      "ports_rs_untreated": 9,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 9,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190821_LIU": {
+      "ports_in_data": 16,
+      "ports_rs_untreated": 11,
+      "port_types": [
+        "NEE|Clear chamber",
+        "Rs|None"
+      ],
+      "port_years": 77,
+      "port_years_full": 33,
+      "status": "ok",
+      "records": 3
+    },
+    "d20190830_LIANG": {
+      "ports_in_data": 15,
+      "ports_rs_untreated": 5,
+      "port_types": [
+        "Rh|Trench",
+        "Rh|Trench and warm",
+        "Rs|None"
+      ],
+      "port_years": 34,
+      "port_years_full": 18,
+      "status": "ok",
+      "records": 5
+    },
+    "d20190831_SIHI": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 8,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 16,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20190918_MIAO": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 3,
+      "port_years_full": 1,
+      "status": "ok",
+      "records": 1
+    },
+    "d20190919_MIGLIAVACCA": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 8,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 48,
+      "port_years_full": 32,
+      "status": "ok",
+      "records": 4
+    },
+    "d20191017_BALDOCCHI": {
+      "ports_in_data": 2,
+      "ports_rs_untreated": 2,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 2,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20191214_PANG": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 8,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 8,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200108_HE": {
+      "ports_in_data": 4,
+      "ports_rs_untreated": 4,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 20,
+      "port_years_full": 11,
+      "status": "ok",
+      "records": 4
+    },
+    "d20200108_JASSAL": {
+      "ports_in_data": 6,
+      "ports_rs_untreated": 6,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 51,
+      "port_years_full": 45,
+      "status": "ok",
+      "records": 8
+    },
+    "d20200109_HIRANO_PDB": {
+      "ports_in_data": 6,
+      "ports_rs_untreated": 0,
+      "port_types": [
+        "Rh|None"
+      ],
+      "status": "no_untreated_rs_port"
+    },
+    "d20200109_HIRANO_PDF": {
+      "ports_in_data": 7,
+      "ports_rs_untreated": 7,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 19,
+      "port_years_full": 5,
+      "status": "ok",
+      "records": 1
+    },
+    "d20200109_HIRANO_PUF": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 8,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 20,
+      "port_years_full": 5,
+      "status": "ok",
+      "records": 1
+    },
+    "d20200109_KISHIMOTO-MO": {
+      "status": "no_data_rds"
+    },
+    "d20200114_CARBONE_BURNS": {
+      "ports_in_data": 7,
+      "ports_rs_untreated": 7,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 7,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200114_CARBONE_JAMES": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 8,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 16,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200114_CARBONE_OWENS_GRASS": {
+      "ports_in_data": 7,
+      "ports_rs_untreated": 4,
+      "port_types": [
+        "Reco|None",
+        "Rs|None"
+      ],
+      "port_years": 6,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200114_CARBONE_OWENS_SHRUB": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 8,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 16,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200114_CARBONE_SC_EMBUDO": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 8,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 16,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200114_CARBONE_SC_SAUCE": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 8,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 16,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200120_CHANG": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 2,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200122_BLACK": {
+      "ports_in_data": 9,
+      "ports_rs_untreated": 6,
+      "port_types": [
+        "Rh|None",
+        "Rs|None"
+      ],
+      "port_years": 42,
+      "port_years_full": 36,
+      "status": "ok",
+      "records": 6
+    },
+    "d20200207_GUTIERREZ_DEL_ARROYO": {
+      "ports_in_data": 6,
+      "ports_rs_untreated": 6,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 24,
+      "port_years_full": 5,
+      "status": "ok",
+      "records": 1
+    },
+    "d20200212_ATAKA": {
+      "ports_in_data": 2,
+      "ports_rs_untreated": 2,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 7,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200212_KAYE_LNE": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 3,
+      "port_years_full": 1,
+      "status": "ok",
+      "records": 1
+    },
+    "d20200212_KAYE_LNW": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 3,
+      "port_years_full": 1,
+      "status": "ok",
+      "records": 1
+    },
+    "d20200212_KAYE_LSE": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 3,
+      "port_years_full": 1,
+      "status": "ok",
+      "records": 1
+    },
+    "d20200212_KAYE_LSW": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 3,
+      "port_years_full": 1,
+      "status": "ok",
+      "records": 1
+    },
+    "d20200212_KAYE_UNE": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 3,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200212_KAYE_UNW": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 3,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200212_KAYE_USE": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 3,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200212_KAYE_USW": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 3,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200213_SEIBT": {
+      "ports_in_data": 2,
+      "ports_rs_untreated": 2,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 2,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200214_SZUTU_BOULDINA": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 3,
+      "port_years_full": 1,
+      "status": "ok",
+      "records": 1
+    },
+    "d20200214_SZUTU_BOULDINC": {
+      "ports_in_data": 3,
+      "ports_rs_untreated": 3,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 6,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200214_SZUTU_TONZI": {
+      "ports_in_data": 2,
+      "ports_rs_untreated": 2,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 7,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200214_SZUTU_TWITCHELL": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 2,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200214_SZUTU_VAIRA": {
+      "ports_in_data": 3,
+      "ports_rs_untreated": 3,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 6,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200220_GAVAZZI": {
+      "ports_in_data": 1,
+      "ports_rs_untreated": 1,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 7,
+      "port_years_full": 3,
+      "status": "ok",
+      "records": 3
+    },
+    "d20200221_MATHES": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 8,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 8,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200224_MATHES": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 8,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 16,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200228_RENCHON": {
+      "ports_in_data": 3,
+      "ports_rs_untreated": 3,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 15,
+      "port_years_full": 3,
+      "status": "ok",
+      "records": 3
+    },
+    "d20200229_PHILLIPS": {
+      "ports_in_data": 12,
+      "ports_rs_untreated": 4,
+      "port_types": [
+        "Rs|Asymmetrically warmed",
+        "Rs|None",
+        "Rs|Symmetrically warmed"
+      ],
+      "port_years": 4,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200304_GALVAGNO": {
+      "status": "no_data_rds"
+    },
+    "d20200304_ZANCHI": {
+      "status": "no_data_rds"
+    },
+    "d20200305_VARGAS": {
+      "ports_in_data": 3,
+      "ports_rs_untreated": 3,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 9,
+      "port_years_full": 6,
+      "status": "ok",
+      "records": 2
+    },
+    "d20200328_UEYAMA_FAIRBANKS": {
+      "ports_in_data": 3,
+      "ports_rs_untreated": 0,
+      "port_types": [
+        "NEE|None"
+      ],
+      "status": "no_untreated_rs_port"
+    },
+    "d20200328_UEYAMA_HOKUROKU": {
+      "ports_in_data": 6,
+      "ports_rs_untreated": 0,
+      "port_types": [
+        "NEE|None"
+      ],
+      "status": "no_untreated_rs_port"
+    },
+    "d20200328_UEYAMA_TESHIO": {
+      "ports_in_data": 4,
+      "ports_rs_untreated": 3,
+      "port_types": [
+        "NEE|None",
+        "Rs|None"
+      ],
+      "port_years": 10,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200328_UEYAMA_YAMASHIRO": {
+      "ports_in_data": 4,
+      "ports_rs_untreated": 4,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 9,
+      "port_years_full": 1,
+      "status": "ok",
+      "records": 1
+    },
+    "d20200331_PEICHL": {
+      "ports_in_data": 12,
+      "ports_rs_untreated": 0,
+      "port_types": [
+        "NEE|None",
+        "Reco|None",
+        "Rh|None"
+      ],
+      "status": "no_untreated_rs_port"
+    },
+    "d20200407_WANG": {
+      "ports_in_data": 3,
+      "ports_rs_untreated": 0,
+      "port_types": [
+        "Reco|None"
+      ],
+      "status": "no_untreated_rs_port"
+    },
+    "d20200417_ARAIN_TP39": {
+      "ports_in_data": 8,
+      "ports_rs_untreated": 3,
+      "port_types": [
+        "Rh|Trenched",
+        "Rs|Drought",
+        "Rs|No litter",
+        "Rs|None"
+      ],
+      "port_years": 30,
+      "port_years_full": 5,
+      "status": "ok",
+      "records": 4
+    },
+    "d20200417_ARAIN_TP74": {
+      "ports_in_data": 4,
+      "ports_rs_untreated": 4,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 12,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200417_ARAIN_TPD": {
+      "ports_in_data": 5,
+      "ports_rs_untreated": 5,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 24,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200419_PEREZ-QUEZADA": {
+      "ports_in_data": 5,
+      "ports_rs_untreated": 5,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 21,
+      "port_years_full": 6,
+      "status": "ok",
+      "records": 2
+    },
+    "d20200423_OYONARTE": {
+      "ports_in_data": 2,
+      "ports_rs_untreated": 2,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 6,
+      "port_years_full": 2,
+      "status": "ok",
+      "records": 1
+    },
+    "d20200423_SANCHEZ-CANETE": {
+      "ports_in_data": 3,
+      "ports_rs_untreated": 3,
+      "port_types": [
+        "Rs|None"
+      ],
+      "port_years": 9,
+      "port_years_full": 6,
+      "status": "ok",
+      "records": 2
+    },
+    "d20200808_MINIAT": {
+      "ports_in_data": 80,
+      "ports_rs_untreated": 20,
+      "port_types": [
+        "Rs|In-growth core",
+        "Rs|Irrigated",
+        "Rs|None"
+      ],
+      "port_years": 20,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20200825_MINIAT": {
+      "ports_in_data": 120,
+      "ports_rs_untreated": 20,
+      "port_types": [
+        "Rs|Girdled",
+        "Rs|Girdled, partial O horizon",
+        "Rs|None",
+        "Rs|Partial O horizon",
+        "Rs|Woody adelgid",
+        "Rs|Woody adelgid, partial O horizon"
+      ],
+      "port_years": 60,
+      "port_years_full": 0,
+      "status": "no_full_year"
+    },
+    "d20201013_LIANG": {
+      "status": "no_data_rds"
+    }
+  },
+  "status_counts": {
+    "no_full_year": 52,
+    "ok": 28,
+    "no_data_rds": 6,
+    "no_untreated_rs_port": 5
+  },
+  "n_records_full_year": 63,
+  "n_datasets_with_records": 28,
+  "versions": {
+    "python": "3.11.18",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "scipy": "1.13.1",
+    "sklearn": "1.5.2",
+    "xgboost": "2.0.3",
+    "geopandas": "1.0.1",
+    "shapely": "2.0.6",
+    "pyproj": "3.7.0",
+    "rasterio": "1.4.3",
+    "matplotlib": "3.9.2",
+    "statsmodels": "0.14.4",
+    "rdata": "0.11.2",
+    "remotezip": "not installed",
+    "pyarrow": "17.0.0",
+    "gdal": "3.9.3"
+  }
+}

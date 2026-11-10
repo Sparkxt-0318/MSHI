@@ -1,0 +1,22 @@
+{
+  "variant": "incl_missing",
+  "n_pairs": 15,
+  "spearman_rho_descriptive_no_test": {
+    "r2_xgb~share_TP_in_range": 0.5698961337724598,
+    "r2_xgb~share_in_aoa_weighted": 0.532142857142857,
+    "r2_xgb~di_weighted_mean": -0.7642857142857141,
+    "r2_xgb~share_in_aoa_unweighted": 0.6107142857142855,
+    "r2_ols_P~share_TP_in_range": 0.1075275724098981,
+    "r2_ols_P~share_in_aoa_weighted": 0.05357142857142857,
+    "r2_ols_P~di_weighted_mean": -0.4392857142857142,
+    "r2_ols_P~share_in_aoa_unweighted": 0.15714285714285714,
+    "r2_ols_TP~share_TP_in_range": -0.21863939723345943,
+    "r2_ols_TP~share_in_aoa_weighted": -0.24642857142857136,
+    "r2_ols_TP~di_weighted_mean": -0.04642857142857142,
+    "r2_ols_TP~share_in_aoa_unweighted": -0.22142857142857136,
+    "spearman_xgb~share_TP_in_range": 0.43727879446691886,
+    "spearman_xgb~share_in_aoa_weighted": 0.39642857142857135,
+    "spearman_xgb~di_weighted_mean": -0.7464285714285712,
+    "spearman_xgb~share_in_aoa_unweighted": 0.5107142857142856
+  }
+}

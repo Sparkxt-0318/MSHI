@@ -1,0 +1,19 @@
+strict Asia done
+strict North America done
+strict Europe done
+            train                     test  r2_rank1  r2_min  r2_max  r2_median  cv_mse_best  cv_mse_10th  r2_range
+0            Asia                   Africa     0.418   0.390   0.418      0.410        0.288        0.293     0.028
+1            Asia                   Europe    -0.134  -0.138  -0.131     -0.132        0.288        0.293     0.007
+2            Asia            North America     0.210   0.194   0.210      0.206        0.288        0.293     0.016
+3            Asia                  Oceania    -0.136  -0.136  -0.071     -0.120        0.288        0.293     0.066
+4            Asia  South & Central America     0.159   0.114   0.180      0.155        0.288        0.293     0.066
+5          Europe                   Africa    -0.389  -0.389  -0.285     -0.351        0.344        0.356     0.104
+6          Europe                     Asia    -0.166  -0.216  -0.070     -0.107        0.344        0.356     0.146
+7          Europe            North America    -0.089  -0.171   0.010     -0.056        0.344        0.356     0.181
+8          Europe                  Oceania    -0.473  -0.486  -0.375     -0.408        0.344        0.356     0.111
+9          Europe  South & Central America    -1.032  -1.048  -0.915     -0.962        0.344        0.356     0.133
+10  North America                   Africa     0.160  -0.208   0.160     -0.022        0.267        0.270     0.368
+11  North America                     Asia    -0.042  -0.229  -0.042     -0.099        0.267        0.270     0.187
+12  North America                   Europe    -0.083  -0.157  -0.083     -0.103        0.267        0.270     0.073
+13  North America                  Oceania    -0.463  -1.054  -0.463     -0.686        0.267        0.270     0.591
+14  North America  South & Central America    -0.356  -1.064  -0.356     -0.614        0.267        0.270     0.708

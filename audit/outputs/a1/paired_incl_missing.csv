@@ -1,0 +1,343 @@
+variant,train,test,n_train,n_test,kind,model_a,model_b,metric,diff,lo,hi,share_boot_a_better
+incl_missing,Asia,North America,432,236,transfer,xgb,baseline,r2,0.29401989612946783,0.1882289513845322,0.38714749722123926,1.0
+incl_missing,Asia,North America,432,236,transfer,xgb,baseline,rmse_g,-26.425138686067385,-38.39529536861123,-16.297250123001213,1.0
+incl_missing,Asia,North America,432,236,transfer,xgb,baseline,spearman,,,,0.0
+incl_missing,Asia,North America,432,236,transfer,ols_P,baseline,r2,0.2606597881741757,0.17153362179015264,0.33829157931593584,1.0
+incl_missing,Asia,North America,432,236,transfer,ols_P,baseline,rmse_g,-30.1894756979745,-43.8907204213964,-17.401514361549005,1.0
+incl_missing,Asia,North America,432,236,transfer,ols_P,baseline,spearman,,,,0.0
+incl_missing,Asia,North America,432,236,transfer,ols_TP,baseline,r2,0.2575266316935655,0.15726234956100518,0.3443943445205258,1.0
+incl_missing,Asia,North America,432,236,transfer,ols_TP,baseline,rmse_g,-20.403042655054435,-33.28431279831934,-7.860893510341679,1.0
+incl_missing,Asia,North America,432,236,transfer,ols_TP,baseline,spearman,,,,0.0
+incl_missing,Asia,North America,432,236,transfer,xgb,ols_P,r2,0.03336010795529215,-0.011890904412128119,0.08053336424220155,0.9205
+incl_missing,Asia,North America,432,236,transfer,xgb,ols_P,rmse_g,3.7643370119071164,-5.147253112778254,12.464444559949621,0.2075
+incl_missing,Asia,North America,432,236,transfer,xgb,ols_P,spearman,0.009348992514862986,-0.05466946954416635,0.07749732226645867,0.626
+incl_missing,Asia,North America,432,236,transfer,xgb,ols_TP,r2,0.03649326443590234,-0.01254779056342782,0.086670661206155,0.919
+incl_missing,Asia,North America,432,236,transfer,xgb,ols_TP,rmse_g,-6.02209603101295,-13.556707911417284,1.1042718502953814,0.9505
+incl_missing,Asia,North America,432,236,transfer,xgb,ols_TP,spearman,-0.045249904849786415,-0.08985763253423797,-0.0011567740279799816,0.0225
+incl_missing,Asia,North America,432,236,transfer,ols_TP,ols_P,r2,-0.0031331564806101886,-0.05082614034177528,0.04085772028586634,0.4535
+incl_missing,Asia,North America,432,236,transfer,ols_TP,ols_P,rmse_g,9.786433042920066,1.4812922599830758,18.09308141472327,0.0075
+incl_missing,Asia,North America,432,236,transfer,ols_TP,ols_P,spearman,0.0545988973646494,-0.0032154523847304087,0.1183731986757795,0.966
+incl_missing,Asia,Europe,432,243,transfer,xgb,baseline,r2,0.021700901978042947,-0.059948635481299056,0.09946150703072269,0.704
+incl_missing,Asia,Europe,432,243,transfer,xgb,baseline,rmse_g,1.1613511572802508,-9.980229228074528,13.764164217823975,0.4375
+incl_missing,Asia,Europe,432,243,transfer,xgb,baseline,spearman,,,,0.0
+incl_missing,Asia,Europe,432,243,transfer,ols_P,baseline,r2,0.09087270609464237,-0.003961235185670852,0.1780959037970765,0.969
+incl_missing,Asia,Europe,432,243,transfer,ols_P,baseline,rmse_g,8.26181462769614,-7.539866880403961,24.186905047832415,0.1545
+incl_missing,Asia,Europe,432,243,transfer,ols_P,baseline,spearman,,,,0.0
+incl_missing,Asia,Europe,432,243,transfer,ols_TP,baseline,r2,0.13593999097361065,0.04115899412188667,0.21592507742679118,0.9975
+incl_missing,Asia,Europe,432,243,transfer,ols_TP,baseline,rmse_g,5.080124078449671,-10.63943714751071,21.219487645534045,0.26
+incl_missing,Asia,Europe,432,243,transfer,ols_TP,baseline,spearman,,,,0.0
+incl_missing,Asia,Europe,432,243,transfer,xgb,ols_P,r2,-0.06917180411659943,-0.13694018820490472,0.004328945544252071,0.031
+incl_missing,Asia,Europe,432,243,transfer,xgb,ols_P,rmse_g,-7.100463470415889,-19.739567921916795,5.917114831137578,0.8675
+incl_missing,Asia,Europe,432,243,transfer,xgb,ols_P,spearman,0.023709655942871596,-0.08729513705640929,0.13626091967112777,0.659
+incl_missing,Asia,Europe,432,243,transfer,xgb,ols_TP,r2,-0.1142390889955677,-0.1917996201573662,-0.027318160106276752,0.007
+incl_missing,Asia,Europe,432,243,transfer,xgb,ols_TP,rmse_g,-3.9187729211694204,-18.826691126694058,10.769071298067427,0.701
+incl_missing,Asia,Europe,432,243,transfer,xgb,ols_TP,spearman,-0.08236341396425197,-0.1659169365306779,-0.0029671666590668695,0.0225
+incl_missing,Asia,Europe,432,243,transfer,ols_TP,ols_P,r2,0.04506728487896827,-0.0050087595084329,0.09261020266485284,0.9655
+incl_missing,Asia,Europe,432,243,transfer,ols_TP,ols_P,rmse_g,-3.1816905492464684,-10.670177188217842,4.170361836535749,0.793
+incl_missing,Asia,Europe,432,243,transfer,ols_TP,ols_P,spearman,0.10607306990712356,-0.0016488324367556857,0.20588268062728718,0.9725
+incl_missing,Asia,South & Central America,432,84,transfer,xgb,baseline,r2,0.6000666195003349,0.3068392744221814,1.06528075700478,1.0
+incl_missing,Asia,South & Central America,432,84,transfer,xgb,baseline,rmse_g,-204.9727828665442,-248.19097025098932,-156.46560814956234,1.0
+incl_missing,Asia,South & Central America,432,84,transfer,xgb,baseline,spearman,,,,0.0
+incl_missing,Asia,South & Central America,432,84,transfer,ols_P,baseline,r2,0.5201976002337679,0.3198710484172394,0.8626520080853738,1.0
+incl_missing,Asia,South & Central America,432,84,transfer,ols_P,baseline,rmse_g,-143.80756655876223,-176.08748769561655,-110.17567496042942,1.0
+incl_missing,Asia,South & Central America,432,84,transfer,ols_P,baseline,spearman,,,,0.0
+incl_missing,Asia,South & Central America,432,84,transfer,ols_TP,baseline,r2,0.6554667713604287,0.41082493423518307,1.1214333836261297,1.0
+incl_missing,Asia,South & Central America,432,84,transfer,ols_TP,baseline,rmse_g,-201.38190691393027,-237.5074082907202,-160.39462441601168,1.0
+incl_missing,Asia,South & Central America,432,84,transfer,ols_TP,baseline,spearman,,,,0.0
+incl_missing,Asia,South & Central America,432,84,transfer,xgb,ols_P,r2,0.07986901926656695,-0.02632992887271428,0.22746879014989213,0.922
+incl_missing,Asia,South & Central America,432,84,transfer,xgb,ols_P,rmse_g,-61.165216307781975,-82.54481900410948,-36.859643532734374,1.0
+incl_missing,Asia,South & Central America,432,84,transfer,xgb,ols_P,spearman,-0.04074357298979647,-0.16375628423976749,0.06767235373963562,0.252
+incl_missing,Asia,South & Central America,432,84,transfer,xgb,ols_TP,r2,-0.055400151860093866,-0.1626038009471907,0.021286587805576976,0.0835
+incl_missing,Asia,South & Central America,432,84,transfer,xgb,ols_TP,rmse_g,-3.590875952613942,-17.626233661660248,10.977278566976567,0.695
+incl_missing,Asia,South & Central America,432,84,transfer,xgb,ols_TP,spearman,-0.12419927517357232,-0.22741121739716944,-0.034780498644860824,0.002
+incl_missing,Asia,South & Central America,432,84,transfer,ols_TP,ols_P,r2,0.13526917112666081,0.05949485288572406,0.274962036139214,1.0
+incl_missing,Asia,South & Central America,432,84,transfer,ols_TP,ols_P,rmse_g,-57.57434035516803,-68.46408992296806,-45.16087411187539,1.0
+incl_missing,Asia,South & Central America,432,84,transfer,ols_TP,ols_P,spearman,0.08345570218377585,0.018853504928118738,0.1551907383690337,0.9975
+incl_missing,Asia,Africa,432,31,transfer,xgb,baseline,r2,0.3214103647190046,0.08244885609305731,0.7215304448204999,0.995
+incl_missing,Asia,Africa,432,31,transfer,xgb,baseline,rmse_g,-127.69992327993566,-196.21181509729345,-72.52288807575296,0.9995
+incl_missing,Asia,Africa,432,31,transfer,xgb,baseline,spearman,,,,0.0
+incl_missing,Asia,Africa,432,31,transfer,ols_P,baseline,r2,0.19870265396929188,0.02089828150984277,0.44006580455456945,0.988
+incl_missing,Asia,Africa,432,31,transfer,ols_P,baseline,rmse_g,-48.26232014586117,-88.60553775042706,-22.635132047708776,0.9995
+incl_missing,Asia,Africa,432,31,transfer,ols_P,baseline,spearman,,,,0.0
+incl_missing,Asia,Africa,432,31,transfer,ols_TP,baseline,r2,0.23774921006439897,0.1413747354293703,0.5453573661099694,1.0
+incl_missing,Asia,Africa,432,31,transfer,ols_TP,baseline,rmse_g,-75.11617481661665,-136.32275526156013,-38.428249594816826,1.0
+incl_missing,Asia,Africa,432,31,transfer,ols_TP,baseline,spearman,,,,0.0
+incl_missing,Asia,Africa,432,31,transfer,xgb,ols_P,r2,0.1227077107497127,-0.022835302958955604,0.3738738010214726,0.9555
+incl_missing,Asia,Africa,432,31,transfer,xgb,ols_P,rmse_g,-79.4376031340745,-128.8612092031639,-27.68776167590589,0.997
+incl_missing,Asia,Africa,432,31,transfer,xgb,ols_P,spearman,0.08746804607450598,-0.1350527051606139,0.35044955010639495,0.766
+incl_missing,Asia,Africa,432,31,transfer,xgb,ols_TP,r2,0.08366115465460561,-0.12052093220524458,0.31384832837678467,0.785
+incl_missing,Asia,Africa,432,31,transfer,xgb,ols_TP,rmse_g,-52.58374846331901,-88.07131750404594,1.0391279849834987,0.971
+incl_missing,Asia,Africa,432,31,transfer,xgb,ols_TP,spearman,0.021742239622893123,-0.05871195376398512,0.11651968176606638,0.712
+incl_missing,Asia,Africa,432,31,transfer,ols_TP,ols_P,r2,0.0390465560951071,-0.11854553967481368,0.20795359976202182,0.685
+incl_missing,Asia,Africa,432,31,transfer,ols_TP,ols_P,rmse_g,-26.85385467075548,-65.30025554271029,-0.28275017645260203,0.9765
+incl_missing,Asia,Africa,432,31,transfer,ols_TP,ols_P,spearman,0.06572580645161286,-0.1400315597853827,0.3251938902841617,0.6885
+incl_missing,Asia,Oceania,432,35,transfer,xgb,baseline,r2,0.027113495452276565,-0.4808879949657683,0.5394253243947876,0.565
+incl_missing,Asia,Oceania,432,35,transfer,xgb,baseline,rmse_g,-55.06379178235835,-136.56490866174275,36.8580577685508,0.8755
+incl_missing,Asia,Oceania,432,35,transfer,xgb,baseline,spearman,,,,0.0
+incl_missing,Asia,Oceania,432,35,transfer,ols_P,baseline,r2,0.004061254592935715,-0.42045019710461623,0.3457409211610209,0.513
+incl_missing,Asia,Oceania,432,35,transfer,ols_P,baseline,rmse_g,-16.92711066900324,-74.62951773695383,51.97035404854446,0.6895
+incl_missing,Asia,Oceania,432,35,transfer,ols_P,baseline,spearman,,,,0.0
+incl_missing,Asia,Oceania,432,35,transfer,ols_TP,baseline,r2,0.06181702647544407,-0.25554395592552503,0.3899825252150467,0.654
+incl_missing,Asia,Oceania,432,35,transfer,ols_TP,baseline,rmse_g,-28.679840074112235,-88.00431780280618,43.4631981467743,0.7855
+incl_missing,Asia,Oceania,432,35,transfer,ols_TP,baseline,spearman,,,,0.0
+incl_missing,Asia,Oceania,432,35,transfer,xgb,ols_P,r2,0.02305224085934085,-0.21428489092885367,0.34489322704027603,0.583
+incl_missing,Asia,Oceania,432,35,transfer,xgb,ols_P,rmse_g,-38.13668111335511,-76.96343085544031,3.283198588549568,0.962
+incl_missing,Asia,Oceania,432,35,transfer,xgb,ols_P,spearman,0.023126197464341913,-0.2090360894638765,0.2517102342707955,0.573
+incl_missing,Asia,Oceania,432,35,transfer,xgb,ols_TP,r2,-0.034703531023167505,-0.3150639590173095,0.25634294136090185,0.419
+incl_missing,Asia,Oceania,432,35,transfer,xgb,ols_TP,rmse_g,-26.383951708246116,-62.79132915987096,13.813501041896586,0.905
+incl_missing,Asia,Oceania,432,35,transfer,xgb,ols_TP,spearman,0.015156668946097018,-0.08312882531989071,0.10808782481583228,0.6395
+incl_missing,Asia,Oceania,432,35,transfer,ols_TP,ols_P,r2,0.057755771882508355,-0.10951899235796607,0.28331232360252695,0.7265
+incl_missing,Asia,Oceania,432,35,transfer,ols_TP,ols_P,rmse_g,-11.752729405108994,-36.59620830827086,12.134158089014232,0.823
+incl_missing,Asia,Oceania,432,35,transfer,ols_TP,ols_P,spearman,0.007969528518244895,-0.18658723614598333,0.20109214907755324,0.5235
+incl_missing,North America,Asia,236,432,transfer,xgb,baseline,r2,0.06371237207317318,-0.06453889137367949,0.17822080751855812,0.845
+incl_missing,North America,Asia,236,432,transfer,xgb,baseline,rmse_g,-16.78038037990916,-37.38618556978521,4.365400218586582,0.94
+incl_missing,North America,Asia,236,432,transfer,xgb,baseline,spearman,,,,0.0
+incl_missing,North America,Asia,236,432,transfer,ols_P,baseline,r2,0.009721498527848316,-0.1605563962896284,0.16347179272720658,0.5545
+incl_missing,North America,Asia,236,432,transfer,ols_P,baseline,rmse_g,-19.889448866908083,-58.84500096268249,20.104657707635013,0.85
+incl_missing,North America,Asia,236,432,transfer,ols_P,baseline,spearman,,,,0.0
+incl_missing,North America,Asia,236,432,transfer,ols_TP,baseline,r2,-0.008995206540485468,-0.1812302103502705,0.15111839882026268,0.4665
+incl_missing,North America,Asia,236,432,transfer,ols_TP,baseline,rmse_g,-11.691797617288103,-59.806208965695376,37.08835580146379,0.6865
+incl_missing,North America,Asia,236,432,transfer,ols_TP,baseline,spearman,,,,0.0
+incl_missing,North America,Asia,236,432,transfer,xgb,ols_P,r2,0.053990873545324856,-0.040379866156066736,0.1621103830092574,0.852
+incl_missing,North America,Asia,236,432,transfer,xgb,ols_P,rmse_g,3.109068486998922,-28.398313282582333,37.929103647189116,0.425
+incl_missing,North America,Asia,236,432,transfer,xgb,ols_P,spearman,-0.14574232839113418,-0.2367609491087608,-0.056023318171891684,0.0
+incl_missing,North America,Asia,236,432,transfer,xgb,ols_TP,r2,0.07270757861365865,-0.019558521183912707,0.17282900512155633,0.9325
+incl_missing,North America,Asia,236,432,transfer,xgb,ols_TP,rmse_g,-5.0885827626210585,-43.96026152159511,35.56835755227017,0.6015
+incl_missing,North America,Asia,236,432,transfer,xgb,ols_TP,spearman,-0.18165664328989858,-0.2693491889705185,-0.09352995197738968,0.0
+incl_missing,North America,Asia,236,432,transfer,ols_TP,ols_P,r2,-0.018716705068333783,-0.056679218845324265,0.019743796956740663,0.1595
+incl_missing,North America,Asia,236,432,transfer,ols_TP,ols_P,rmse_g,8.19765124961998,-4.869428387022515,21.845172784842813,0.115
+incl_missing,North America,Asia,236,432,transfer,ols_TP,ols_P,spearman,0.0359143148987644,0.011897448689238208,0.06015911233941157,0.9985
+incl_missing,North America,Europe,236,243,transfer,xgb,baseline,r2,-0.012363457003318576,-0.16362528789501668,0.11559153305778636,0.419
+incl_missing,North America,Europe,236,243,transfer,xgb,baseline,rmse_g,6.2552909435999595,-17.537209412045783,29.379037474975597,0.2995
+incl_missing,North America,Europe,236,243,transfer,xgb,baseline,spearman,,,,0.0
+incl_missing,North America,Europe,236,243,transfer,ols_P,baseline,r2,-0.020685250600901872,-0.179085324746143,0.10865105892128947,0.3825
+incl_missing,North America,Europe,236,243,transfer,ols_P,baseline,rmse_g,26.58008667252824,5.602026758781273,47.83974077550628,0.0075
+incl_missing,North America,Europe,236,243,transfer,ols_P,baseline,spearman,,,,0.0
+incl_missing,North America,Europe,236,243,transfer,ols_TP,baseline,r2,0.05306436298569284,-0.07130358186659455,0.1566752853057966,0.812
+incl_missing,North America,Europe,236,243,transfer,ols_TP,baseline,rmse_g,10.170806409360011,-8.056148171577243,29.23342290178542,0.149
+incl_missing,North America,Europe,236,243,transfer,ols_TP,baseline,spearman,,,,0.0
+incl_missing,North America,Europe,236,243,transfer,xgb,ols_P,r2,0.008321793597583296,-0.10621008463851218,0.12753798331537639,0.5585
+incl_missing,North America,Europe,236,243,transfer,xgb,ols_P,rmse_g,-20.32479572892828,-40.93465240965792,0.890700214048287,0.971
+incl_missing,North America,Europe,236,243,transfer,xgb,ols_P,spearman,0.12840478018274573,0.019495773301817128,0.2405020821152248,0.9895
+incl_missing,North America,Europe,236,243,transfer,xgb,ols_TP,r2,-0.06542781998901141,-0.1642825115397503,0.0330928458737538,0.1065
+incl_missing,North America,Europe,236,243,transfer,xgb,ols_TP,rmse_g,-3.915515465760052,-22.08270402031341,14.828666430600888,0.665
+incl_missing,North America,Europe,236,243,transfer,xgb,ols_TP,spearman,0.0730618355266803,-0.01855694531763888,0.1658025991257963,0.939
+incl_missing,North America,Europe,236,243,transfer,ols_TP,ols_P,r2,0.07374961358659471,0.03095115819010074,0.12248669770330263,1.0
+incl_missing,North America,Europe,236,243,transfer,ols_TP,ols_P,rmse_g,-16.409280263168228,-22.310367129228105,-10.381419319879766,1.0
+incl_missing,North America,Europe,236,243,transfer,ols_TP,ols_P,spearman,0.05534294465606543,0.005710544718216622,0.10204240591665853,0.9835
+incl_missing,North America,South & Central America,236,84,transfer,xgb,baseline,r2,0.37244791337323213,0.02176655283059749,0.7817019743035307,0.9815
+incl_missing,North America,South & Central America,236,84,transfer,xgb,baseline,rmse_g,-135.43157649151487,-177.0402674329111,-85.35151001804492,1.0
+incl_missing,North America,South & Central America,236,84,transfer,xgb,baseline,spearman,,,,0.0
+incl_missing,North America,South & Central America,236,84,transfer,ols_P,baseline,r2,0.7467797037163263,0.34134552926531664,1.3940674101115422,0.9995
+incl_missing,North America,South & Central America,236,84,transfer,ols_P,baseline,rmse_g,-310.5686827847936,-399.07329453645957,-223.01274699901526,1.0
+incl_missing,North America,South & Central America,236,84,transfer,ols_P,baseline,spearman,,,,0.0
+incl_missing,North America,South & Central America,236,84,transfer,ols_TP,baseline,r2,0.794796579588856,0.3643015731255774,1.5119153283562057,0.9995
+incl_missing,North America,South & Central America,236,84,transfer,ols_TP,baseline,rmse_g,-347.13999283016506,-461.0000167755371,-234.45848774453148,1.0
+incl_missing,North America,South & Central America,236,84,transfer,ols_TP,baseline,spearman,,,,0.0
+incl_missing,North America,South & Central America,236,84,transfer,xgb,ols_P,r2,-0.37433179034309416,-0.7256688143312843,-0.15687022661968406,0.0
+incl_missing,North America,South & Central America,236,84,transfer,xgb,ols_P,rmse_g,175.13710629327875,115.60190993195462,238.91109673097267,0.0
+incl_missing,North America,South & Central America,236,84,transfer,xgb,ols_P,spearman,-0.28817883731592575,-0.5402327648600525,-0.025834059222375375,0.0155
+incl_missing,North America,South & Central America,236,84,transfer,xgb,ols_TP,r2,-0.42234866621562384,-0.8413229181817384,-0.17263279778943372,0.0005
+incl_missing,North America,South & Central America,236,84,transfer,xgb,ols_TP,rmse_g,211.70841633865018,128.23077420167854,297.0748323103301,0.0
+incl_missing,North America,South & Central America,236,84,transfer,xgb,ols_TP,spearman,-0.3422463041232524,-0.5901954666806742,-0.07499201076180186,0.0065
+incl_missing,North America,South & Central America,236,84,transfer,ols_TP,ols_P,r2,0.048016875872529674,-0.031304478094112374,0.16666137612288168,0.876
+incl_missing,North America,South & Central America,236,84,transfer,ols_TP,ols_P,rmse_g,-36.57131004537143,-73.85268367009995,2.768091692519057,0.9645
+incl_missing,North America,South & Central America,236,84,transfer,ols_TP,ols_P,spearman,0.05406746680732666,0.01573883626268035,0.09844667864834017,0.999
+incl_missing,North America,Africa,236,31,transfer,xgb,baseline,r2,0.2936722211930683,0.04538648185281147,0.6593767792851727,0.991
+incl_missing,North America,Africa,236,31,transfer,xgb,baseline,rmse_g,-108.6096478438335,-160.5168202120661,-45.034768920193905,0.9985
+incl_missing,North America,Africa,236,31,transfer,xgb,baseline,spearman,,,,0.0
+incl_missing,North America,Africa,236,31,transfer,ols_P,baseline,r2,0.29811012453455554,-0.06351177915643816,0.7938795804708914,0.9455
+incl_missing,North America,Africa,236,31,transfer,ols_P,baseline,rmse_g,-117.78208980972602,-202.27148779968323,-46.650208486324615,0.9985
+incl_missing,North America,Africa,236,31,transfer,ols_P,baseline,spearman,,,,0.0
+incl_missing,North America,Africa,236,31,transfer,ols_TP,baseline,r2,0.3251844531658884,0.03487180432479392,0.882796085301783,0.9885
+incl_missing,North America,Africa,236,31,transfer,ols_TP,baseline,rmse_g,-149.3754939234318,-256.7899950227495,-68.904109075221,0.9985
+incl_missing,North America,Africa,236,31,transfer,ols_TP,baseline,spearman,,,,0.0
+incl_missing,North America,Africa,236,31,transfer,xgb,ols_P,r2,-0.004437903341487248,-0.33961294722772883,0.1740636581795498,0.4545
+incl_missing,North America,Africa,236,31,transfer,xgb,ols_P,rmse_g,9.172441965892517,-59.201553568868526,117.62039477637971,0.416
+incl_missing,North America,Africa,236,31,transfer,xgb,ols_P,spearman,-0.09137277418558526,-0.4818528818073098,0.2957280873931922,0.3165
+incl_missing,North America,Africa,236,31,transfer,xgb,ols_TP,r2,-0.031512231972820104,-0.38382012536262033,0.11570906900312161,0.3665
+incl_missing,North America,Africa,236,31,transfer,xgb,ols_TP,rmse_g,40.765846079598305,-36.783581837788844,166.85224176797132,0.194
+incl_missing,North America,Africa,236,31,transfer,xgb,ols_TP,spearman,-0.1345179354759078,-0.5275854089026867,0.22438731825484767,0.2475
+incl_missing,North America,Africa,236,31,transfer,ols_TP,ols_P,r2,0.027074328631332856,-0.10895052436808389,0.16941052377048751,0.6645
+incl_missing,North America,Africa,236,31,transfer,ols_TP,ols_P,rmse_g,-31.593404113705787,-76.07745472355506,5.260079177041573,0.9605
+incl_missing,North America,Africa,236,31,transfer,ols_TP,ols_P,spearman,0.04314516129032253,-0.0793326534313433,0.2017605626882623,0.6925
+incl_missing,North America,Oceania,236,35,transfer,xgb,baseline,r2,-0.11896247424521916,-0.7175708348228831,0.45612824013030506,0.349
+incl_missing,North America,Oceania,236,35,transfer,xgb,baseline,rmse_g,-28.782965480790892,-96.9553151668234,49.0100648403162,0.788
+incl_missing,North America,Oceania,236,35,transfer,xgb,baseline,spearman,,,,0.0
+incl_missing,North America,Oceania,236,35,transfer,ols_P,baseline,r2,-0.46931349884757045,-1.6288766571879398,0.3497153269348665,0.1425
+incl_missing,North America,Oceania,236,35,transfer,ols_P,baseline,rmse_g,137.49669419809806,-93.59958090840412,376.90699277193954,0.132
+incl_missing,North America,Oceania,236,35,transfer,ols_P,baseline,spearman,,,,0.0
+incl_missing,North America,Oceania,236,35,transfer,ols_TP,baseline,r2,-0.43349639509596716,-1.5735151288618343,0.40674025040354106,0.1565
+incl_missing,North America,Oceania,236,35,transfer,ols_TP,baseline,rmse_g,169.46297601915745,-117.76571987248059,449.79752597996134,0.122
+incl_missing,North America,Oceania,236,35,transfer,ols_TP,baseline,spearman,,,,0.0
+incl_missing,North America,Oceania,236,35,transfer,xgb,ols_P,r2,0.3503510246023513,-0.20451006291554263,1.3750962913954392,0.867
+incl_missing,North America,Oceania,236,35,transfer,xgb,ols_P,rmse_g,-166.27965967888895,-393.54703631148755,50.021797192116026,0.934
+incl_missing,North America,Oceania,236,35,transfer,xgb,ols_P,spearman,-0.17358219405471112,-0.5743889888292664,0.26794110250474024,0.215
+incl_missing,North America,Oceania,236,35,transfer,xgb,ols_TP,r2,0.314533920850748,-0.3110940714260914,1.3770459363157583,0.8135
+incl_missing,North America,Oceania,236,35,transfer,xgb,ols_TP,rmse_g,-198.24594149994834,-464.8897102948237,77.93043906663996,0.923
+incl_missing,North America,Oceania,236,35,transfer,xgb,ols_TP,spearman,-0.2372979234239985,-0.6292552099507482,0.19234608203008524,0.1365
+incl_missing,North America,Oceania,236,35,transfer,ols_TP,ols_P,r2,0.035817103751603296,-0.18282481420199137,0.32885002299453175,0.5905
+incl_missing,North America,Oceania,236,35,transfer,ols_TP,ols_P,rmse_g,31.966281821059397,-32.06238598276463,79.68447565364838,0.144
+incl_missing,North America,Oceania,236,35,transfer,ols_TP,ols_P,spearman,0.06371572936928738,-0.005906128411422395,0.16303762883726478,0.963
+incl_missing,Europe,Asia,243,432,transfer,xgb,baseline,r2,-0.02235288496277421,-0.08605649581388655,0.03299362063605903,0.226
+incl_missing,Europe,Asia,243,432,transfer,xgb,baseline,rmse_g,8.61336233085126,3.396461094923197,14.342111842985426,0.0015
+incl_missing,Europe,Asia,243,432,transfer,xgb,baseline,spearman,,,,0.0
+incl_missing,Europe,Asia,243,432,transfer,ols_P,baseline,r2,0.16910813816342163,0.12777316540274172,0.21563442507859493,1.0
+incl_missing,Europe,Asia,243,432,transfer,ols_P,baseline,rmse_g,-36.46519660919239,-44.09495749568082,-29.26979206279737,1.0
+incl_missing,Europe,Asia,243,432,transfer,ols_P,baseline,spearman,,,,0.0
+incl_missing,Europe,Asia,243,432,transfer,ols_TP,baseline,r2,0.21359110912456736,0.08139388949374882,0.34228086093359683,0.9995
+incl_missing,Europe,Asia,243,432,transfer,ols_TP,baseline,rmse_g,-89.00724999747825,-125.42722630032702,-51.96663852716709,1.0
+incl_missing,Europe,Asia,243,432,transfer,ols_TP,baseline,spearman,,,,0.0
+incl_missing,Europe,Asia,243,432,transfer,xgb,ols_P,r2,-0.19146102312619584,-0.271972653561991,-0.1204981460052002,0.0
+incl_missing,Europe,Asia,243,432,transfer,xgb,ols_P,rmse_g,45.07855894004365,36.53173034461021,53.998289947046324,0.0
+incl_missing,Europe,Asia,243,432,transfer,xgb,ols_P,spearman,-0.22315006874905,-0.33484471807913846,-0.10338733318080301,0.0
+incl_missing,Europe,Asia,243,432,transfer,xgb,ols_TP,r2,-0.23594399408734157,-0.37566672840295373,-0.10699170528107993,0.0
+incl_missing,Europe,Asia,243,432,transfer,xgb,ols_TP,rmse_g,97.62061232832951,60.791716987810965,134.29668693293868,0.0
+incl_missing,Europe,Asia,243,432,transfer,xgb,ols_TP,spearman,-0.28665276110581195,-0.4010348555586192,-0.1663731673081476,0.0
+incl_missing,Europe,Asia,243,432,transfer,ols_TP,ols_P,r2,0.04448297096114573,-0.05595773436525043,0.13468527901810395,0.8215
+incl_missing,Europe,Asia,243,432,transfer,ols_TP,ols_P,rmse_g,-52.542053388285865,-82.75219103047313,-20.94047159001633,1.0
+incl_missing,Europe,Asia,243,432,transfer,ols_TP,ols_P,spearman,0.06350269235676193,0.015449985736238844,0.1130731621192449,0.9955
+incl_missing,Europe,North America,243,236,transfer,xgb,baseline,r2,0.09312414045758956,0.007558816878885269,0.17026913439508284,0.9855
+incl_missing,Europe,North America,243,236,transfer,xgb,baseline,rmse_g,-0.1771194983306259,-7.539739418070734,6.892638857915228,0.522
+incl_missing,Europe,North America,243,236,transfer,xgb,baseline,spearman,,,,0.0
+incl_missing,Europe,North America,243,236,transfer,ols_P,baseline,r2,0.17245721672167924,0.13613313094707347,0.20827340556482768,1.0
+incl_missing,Europe,North America,243,236,transfer,ols_P,baseline,rmse_g,-32.19251023628408,-38.39668048373777,-26.518073553966733,1.0
+incl_missing,Europe,North America,243,236,transfer,ols_P,baseline,spearman,,,,0.0
+incl_missing,Europe,North America,243,236,transfer,ols_TP,baseline,r2,0.34014052000306605,0.2339754261602064,0.4343620746740221,1.0
+incl_missing,Europe,North America,243,236,transfer,ols_TP,baseline,rmse_g,-75.56987726791766,-93.18841377521589,-55.18578894305631,1.0
+incl_missing,Europe,North America,243,236,transfer,ols_TP,baseline,spearman,,,,0.0
+incl_missing,Europe,North America,243,236,transfer,xgb,ols_P,r2,-0.07933307626408968,-0.16706678882232592,-0.0029873142370019975,0.021
+incl_missing,Europe,North America,243,236,transfer,xgb,ols_P,rmse_g,32.01539073795345,23.913641884445678,40.66844257192244,0.0
+incl_missing,Europe,North America,243,236,transfer,xgb,ols_P,spearman,-0.1633976505057343,-0.28798594469037636,-0.04367172082977102,0.0075
+incl_missing,Europe,North America,243,236,transfer,xgb,ols_TP,r2,-0.2470163795454765,-0.34264646050737135,-0.15854512996898357,0.0
+incl_missing,Europe,North America,243,236,transfer,xgb,ols_TP,rmse_g,75.39275776958704,55.192424475124724,94.19907142834988,0.0
+incl_missing,Europe,North America,243,236,transfer,xgb,ols_TP,spearman,-0.20999169090881492,-0.33571006808928616,-0.0915409024272267,0.001
+incl_missing,Europe,North America,243,236,transfer,ols_TP,ols_P,r2,0.1676833032813868,0.0874525848907978,0.2402905368858208,1.0
+incl_missing,Europe,North America,243,236,transfer,ols_TP,ols_P,rmse_g,-43.37736703163358,-57.978176085704604,-26.923309496642915,1.0
+incl_missing,Europe,North America,243,236,transfer,ols_TP,ols_P,spearman,0.04659404040308063,-0.02206448640737426,0.117940757491733,0.9085
+incl_missing,Europe,South & Central America,243,84,transfer,xgb,baseline,r2,-0.11885110952084155,-0.20247443899136294,-0.07344544321084223,0.0
+incl_missing,Europe,South & Central America,243,84,transfer,xgb,baseline,rmse_g,13.961610424685432,10.063647726155324,18.32163480664764,0.0
+incl_missing,Europe,South & Central America,243,84,transfer,xgb,baseline,spearman,,,,0.0
+incl_missing,Europe,South & Central America,243,84,transfer,ols_P,baseline,r2,0.5731035676341951,0.3741466713244659,0.9813135218314892,1.0
+incl_missing,Europe,South & Central America,243,84,transfer,ols_P,baseline,rmse_g,-99.3537717268855,-113.90491665204628,-83.76277530449208,1.0
+incl_missing,Europe,South & Central America,243,84,transfer,ols_P,baseline,spearman,,,,0.0
+incl_missing,Europe,South & Central America,243,84,transfer,ols_TP,baseline,r2,1.275054205368632,0.7499089564415616,2.323967839564328,1.0
+incl_missing,Europe,South & Central America,243,84,transfer,ols_TP,baseline,rmse_g,-415.0094813302893,-496.24171956717475,-329.6926527904587,1.0
+incl_missing,Europe,South & Central America,243,84,transfer,ols_TP,baseline,spearman,,,,0.0
+incl_missing,Europe,South & Central America,243,84,transfer,xgb,ols_P,r2,-0.6919546771550367,-1.1709551419446582,-0.4607316879335433,0.0
+incl_missing,Europe,South & Central America,243,84,transfer,xgb,ols_P,rmse_g,113.31538215157093,96.83699044899618,128.1024865585374,0.0
+incl_missing,Europe,South & Central America,243,84,transfer,xgb,ols_P,spearman,-0.8380474070106829,-1.0770480122460364,-0.5409045860640844,0.0
+incl_missing,Europe,South & Central America,243,84,transfer,xgb,ols_TP,r2,-1.3939053148894736,-2.5214099463928936,-0.8318195948453017,0.0
+incl_missing,Europe,South & Central America,243,84,transfer,xgb,ols_TP,rmse_g,428.97109175497474,343.29269334658136,509.9515920068019,0.0
+incl_missing,Europe,South & Central America,243,84,transfer,xgb,ols_TP,spearman,-0.9237208981494698,-1.1506663353071265,-0.6256712615962603,0.0
+incl_missing,Europe,South & Central America,243,84,transfer,ols_TP,ols_P,r2,0.7019506377344369,0.3678243301938214,1.3572409232677471,1.0
+incl_missing,Europe,South & Central America,243,84,transfer,ols_TP,ols_P,rmse_g,-315.6557096034038,-384.1616622953155,-242.97403070217604,1.0
+incl_missing,Europe,South & Central America,243,84,transfer,ols_TP,ols_P,spearman,0.08567349113878697,0.015188467349802332,0.16408528760786736,0.9925
+incl_missing,Europe,Africa,243,31,transfer,xgb,baseline,r2,0.07597212896797768,0.011547238496455772,0.12252116946793823,0.9875
+incl_missing,Europe,Africa,243,31,transfer,xgb,baseline,rmse_g,-9.232732615867235,-18.00074954404817,-0.1738000607763733,0.976
+incl_missing,Europe,Africa,243,31,transfer,xgb,baseline,spearman,,,,0.0
+incl_missing,Europe,Africa,243,31,transfer,ols_P,baseline,r2,0.17647601697812887,0.04451181493560112,0.5010008178432485,0.997
+incl_missing,Europe,Africa,243,31,transfer,ols_P,baseline,rmse_g,-46.547848292390086,-65.79089535807466,-31.97949195042131,1.0
+incl_missing,Europe,Africa,243,31,transfer,ols_P,baseline,spearman,,,,0.0
+incl_missing,Europe,Africa,243,31,transfer,ols_TP,baseline,r2,0.3798146869538055,0.10042632564886349,1.2654166798541917,0.9975
+incl_missing,Europe,Africa,243,31,transfer,ols_TP,baseline,rmse_g,-172.73495754116607,-285.03323724290146,-95.4076180829302,1.0
+incl_missing,Europe,Africa,243,31,transfer,ols_TP,baseline,spearman,,,,0.0
+incl_missing,Europe,Africa,243,31,transfer,xgb,ols_P,r2,-0.10050388801015119,-0.4498332499669224,0.057392888390413795,0.1205
+incl_missing,Europe,Africa,243,31,transfer,xgb,ols_P,rmse_g,37.31511567652285,16.73332558979727,62.35815727634204,0.001
+incl_missing,Europe,Africa,243,31,transfer,xgb,ols_P,spearman,-0.3633539197457412,-0.8384887346887155,0.1407332831056646,0.0845
+incl_missing,Europe,Africa,243,31,transfer,xgb,ols_TP,r2,-0.3038425579858278,-1.2292322401441937,0.0030671455324284163,0.027
+incl_missing,Europe,Africa,243,31,transfer,xgb,ols_TP,rmse_g,163.50222492529883,81.61898114204652,280.6567372391925,0.0005
+incl_missing,Europe,Africa,243,31,transfer,xgb,ols_TP,spearman,-0.40891843587477356,-0.8727024766020608,0.02723617492900594,0.031
+incl_missing,Europe,Africa,243,31,transfer,ols_TP,ols_P,r2,0.20333866997567662,-0.01909898437563814,0.7916514083429305,0.961
+incl_missing,Europe,Africa,243,31,transfer,ols_TP,ols_P,rmse_g,-126.18710924877598,-223.17175080705954,-55.70300698676036,0.998
+incl_missing,Europe,Africa,243,31,transfer,ols_TP,ols_P,spearman,0.04556451612903234,-0.18269365261719916,0.3277599247064629,0.609
+incl_missing,Europe,Oceania,243,35,transfer,xgb,baseline,r2,-0.054379192611015426,-0.17387106320454862,0.031598326798616766,0.122
+incl_missing,Europe,Oceania,243,35,transfer,xgb,baseline,rmse_g,6.365212330766326,-3.126289444694187,16.007634231882815,0.1035
+incl_missing,Europe,Oceania,243,35,transfer,xgb,baseline,spearman,,,,0.0
+incl_missing,Europe,Oceania,243,35,transfer,ols_P,baseline,r2,0.2967179237384616,0.06854690791001716,0.7033572287832239,0.9955
+incl_missing,Europe,Oceania,243,35,transfer,ols_P,baseline,rmse_g,-50.21390494385224,-73.58245066149567,-21.08289720736756,0.9985
+incl_missing,Europe,Oceania,243,35,transfer,ols_P,baseline,spearman,,,,0.0
+incl_missing,Europe,Oceania,243,35,transfer,ols_TP,baseline,r2,0.31156553832509304,-0.36599635073314196,1.2292016267345585,0.8045
+incl_missing,Europe,Oceania,243,35,transfer,ols_TP,baseline,rmse_g,-60.581610711953374,-202.49298090477149,96.29294879672267,0.769
+incl_missing,Europe,Oceania,243,35,transfer,ols_TP,baseline,spearman,,,,0.0
+incl_missing,Europe,Oceania,243,35,transfer,xgb,ols_P,r2,-0.35109711634947705,-0.8320508286151544,-0.09697578497760453,0.0025
+incl_missing,Europe,Oceania,243,35,transfer,xgb,ols_P,rmse_g,56.57911727461857,25.409344472134016,82.76969366220534,0.0
+incl_missing,Europe,Oceania,243,35,transfer,xgb,ols_P,spearman,-0.38715421088252217,-0.8233997516560452,0.10260252673394822,0.063
+incl_missing,Europe,Oceania,243,35,transfer,xgb,ols_TP,r2,-0.36594473093610846,-1.3786327170645518,0.3482783317593044,0.158
+incl_missing,Europe,Oceania,243,35,transfer,xgb,ols_TP,rmse_g,66.9468230427197,-92.47261341531605,211.26068909926667,0.208
+incl_missing,Europe,Oceania,243,35,transfer,xgb,ols_TP,spearman,-0.3878403161739977,-0.8815828313610452,0.15359682990343798,0.0815
+incl_missing,Europe,Oceania,243,35,transfer,ols_TP,ols_P,r2,0.014847614586631419,-0.536412206096773,0.6301279704746312,0.516
+incl_missing,Europe,Oceania,243,35,transfer,ols_TP,ols_P,rmse_g,-10.367705768101132,-136.39338869818155,133.90175997131877,0.574
+incl_missing,Europe,Oceania,243,35,transfer,ols_TP,ols_P,spearman,0.0006861052914755861,-0.21791226390109922,0.20578988415807833,0.493
+incl_missing,Asia,Asia,432,432,within_blockcv,xgb,baseline,r2,0.19146047535349459,0.09891309073491111,0.27811166472874205,1.0
+incl_missing,Asia,Asia,432,432,within_blockcv,xgb,baseline,rmse_g,-34.61433470178861,-52.909911879153405,-16.338543001920595,1.0
+incl_missing,Asia,Asia,432,432,within_blockcv,xgb,baseline,spearman,0.43889105140374807,0.29605938924745523,0.584254324500617,1.0
+incl_missing,Asia,Asia,432,432,within_blockcv,ols_P,baseline,r2,0.15030789657791377,0.06447070142643703,0.23172591775175633,1.0
+incl_missing,Asia,Asia,432,432,within_blockcv,ols_P,baseline,rmse_g,-28.44633082602877,-45.84646745703583,-12.348967493748365,1.0
+incl_missing,Asia,Asia,432,432,within_blockcv,ols_P,baseline,spearman,0.4261248466553176,0.28363892568834964,0.5703545862055244,1.0
+incl_missing,Asia,Asia,432,432,within_blockcv,ols_TP,baseline,r2,0.16418806067614566,0.0746951978953452,0.24476868130248888,1.0
+incl_missing,Asia,Asia,432,432,within_blockcv,ols_TP,baseline,rmse_g,-37.9648671881107,-57.88305942346178,-18.441269115333636,1.0
+incl_missing,Asia,Asia,432,432,within_blockcv,ols_TP,baseline,spearman,0.4658117928074922,0.3255462561773719,0.6109630740114795,1.0
+incl_missing,Asia,Asia,432,432,within_blockcv,xgb,ols_P,r2,0.04115257877558082,-0.006012116257166985,0.08775060442274567,0.9505
+incl_missing,Asia,Asia,432,432,within_blockcv,xgb,ols_P,rmse_g,-6.168003875759837,-17.18951831711465,5.880266886523204,0.852
+incl_missing,Asia,Asia,432,432,within_blockcv,xgb,ols_P,spearman,0.012766204748430432,-0.05063616673984751,0.07520822520707167,0.6495
+incl_missing,Asia,Asia,432,432,within_blockcv,xgb,ols_TP,r2,0.027272414677348922,-0.016043299148618684,0.06680999290881935,0.895
+incl_missing,Asia,Asia,432,432,within_blockcv,xgb,ols_TP,rmse_g,3.350532486322095,-4.878762784929455,11.878643333289281,0.2085
+incl_missing,Asia,Asia,432,432,within_blockcv,xgb,ols_TP,spearman,-0.02692074140374412,-0.06351539558487204,0.01015892378741028,0.077
+incl_missing,Asia,Asia,432,432,within_blockcv,ols_TP,ols_P,r2,0.013880164098231895,-0.01838467955759672,0.04519823987616655,0.8005
+incl_missing,Asia,Asia,432,432,within_blockcv,ols_TP,ols_P,rmse_g,-9.518536362081932,-16.71129980003699,-2.2706486159631556,0.9965
+incl_missing,Asia,Asia,432,432,within_blockcv,ols_TP,ols_P,spearman,0.03968694615217455,-0.000574811081382542,0.0782135087139325,0.972
+incl_missing,North America,North America,236,236,within_blockcv,xgb,baseline,r2,0.332519094814579,0.20762714706091837,0.4385559619692768,1.0
+incl_missing,North America,North America,236,236,within_blockcv,xgb,baseline,rmse_g,-63.41331407898451,-87.5094572999001,-38.218053255517226,1.0
+incl_missing,North America,North America,236,236,within_blockcv,xgb,baseline,spearman,0.6547311793508797,0.4719756645874797,0.8190715528953663,1.0
+incl_missing,North America,North America,236,236,within_blockcv,ols_P,baseline,r2,0.3324071275599009,0.17613421943012755,0.46210383223265855,1.0
+incl_missing,North America,North America,236,236,within_blockcv,ols_P,baseline,rmse_g,-52.310307879207755,-83.89695589544819,-16.501786921502276,0.9985
+incl_missing,North America,North America,236,236,within_blockcv,ols_P,baseline,spearman,0.6569040574926397,0.47264443379192167,0.8183772929875139,1.0
+incl_missing,North America,North America,236,236,within_blockcv,ols_TP,baseline,r2,0.32264306839139056,0.16552607041677633,0.4488674662618496,0.999
+incl_missing,North America,North America,236,236,within_blockcv,ols_TP,baseline,rmse_g,-56.55811974943907,-87.20139310762013,-19.634020007731934,0.9995
+incl_missing,North America,North America,236,236,within_blockcv,ols_TP,baseline,spearman,0.678844244426954,0.4967739174295396,0.8513197915459375,1.0
+incl_missing,North America,North America,236,236,within_blockcv,xgb,ols_P,r2,0.00011196725467810253,-0.08825588835064281,0.08972534061057735,0.508
+incl_missing,North America,North America,236,236,within_blockcv,xgb,ols_P,rmse_g,-11.103006199776758,-43.56907376235726,22.037463657294964,0.7485
+incl_missing,North America,North America,236,236,within_blockcv,xgb,ols_P,spearman,-0.0021728781417600374,-0.09909783003292552,0.10251412392211585,0.4865
+incl_missing,North America,North America,236,236,within_blockcv,xgb,ols_TP,r2,0.009876026423188411,-0.06867737004543738,0.10014055388060616,0.5865
+incl_missing,North America,North America,236,236,within_blockcv,xgb,ols_TP,rmse_g,-6.855194329545441,-37.5942527799045,23.44441246066997,0.669
+incl_missing,North America,North America,236,236,within_blockcv,xgb,ols_TP,spearman,-0.024113065076074358,-0.11459658411814669,0.07475388134644977,0.314
+incl_missing,North America,North America,236,236,within_blockcv,ols_TP,ols_P,r2,-0.009764059168510308,-0.05706658969934161,0.033084389116626464,0.3535
+incl_missing,North America,North America,236,236,within_blockcv,ols_TP,ols_P,rmse_g,-4.247811870231317,-13.58997631259339,6.142481507281661,0.792
+incl_missing,North America,North America,236,236,within_blockcv,ols_TP,ols_P,spearman,0.02194018693431432,-0.006652507318388519,0.05290592309563808,0.9345
+incl_missing,Europe,Europe,243,243,within_blockcv,xgb,baseline,r2,-0.04541362466480943,-0.1183732870511155,0.02115732182503472,0.1005
+incl_missing,Europe,Europe,243,243,within_blockcv,xgb,baseline,rmse_g,4.194557942107394,-6.421682544628896,15.202693006631286,0.217
+incl_missing,Europe,Europe,243,243,within_blockcv,xgb,baseline,spearman,0.12422980131717139,-0.05201929272070295,0.29909649909903224,0.9135
+incl_missing,Europe,Europe,243,243,within_blockcv,ols_P,baseline,r2,0.010009080380000812,-0.026671686897642766,0.043755931314605645,0.709
+incl_missing,Europe,Europe,243,243,within_blockcv,ols_P,baseline,rmse_g,-0.20799522019450478,-5.708861571961269,5.8321036495553376,0.5295
+incl_missing,Europe,Europe,243,243,within_blockcv,ols_P,baseline,spearman,0.17119249829388064,-0.005262592166080417,0.3401087600688993,0.97
+incl_missing,Europe,Europe,243,243,within_blockcv,ols_TP,baseline,r2,0.021079484384031177,-0.05540738037611842,0.09380813335008502,0.693
+incl_missing,Europe,Europe,243,243,within_blockcv,ols_TP,baseline,rmse_g,-5.605006525588465,-18.48284210251488,7.71267865590373,0.8
+incl_missing,Europe,Europe,243,243,within_blockcv,ols_TP,baseline,spearman,0.29246960100312647,0.11193599432940411,0.4615616088316912,1.0
+incl_missing,Europe,Europe,243,243,within_blockcv,xgb,ols_P,r2,-0.05542270504481024,-0.1340950161537771,0.012380961357378118,0.058
+incl_missing,Europe,Europe,243,243,within_blockcv,xgb,ols_P,rmse_g,4.402553162301899,-6.412840626162709,16.05742950542782,0.207
+incl_missing,Europe,Europe,243,243,within_blockcv,xgb,ols_P,spearman,-0.04696269697670926,-0.20159379360158916,0.09380981937804908,0.2645
+incl_missing,Europe,Europe,243,243,within_blockcv,xgb,ols_TP,r2,-0.0664931090488406,-0.12005135292894657,-0.01303659715597681,0.01
+incl_missing,Europe,Europe,243,243,within_blockcv,xgb,ols_TP,rmse_g,9.799564467695859,0.98011857116868,18.862624622767168,0.015
+incl_missing,Europe,Europe,243,243,within_blockcv,xgb,ols_TP,spearman,-0.1682397996859551,-0.2737207866229903,-0.06515897303781075,0.001
+incl_missing,Europe,Europe,243,243,within_blockcv,ols_TP,ols_P,r2,0.011070404004030365,-0.0544053866949067,0.07401295108893771,0.6075
+incl_missing,Europe,Europe,243,243,within_blockcv,ols_TP,ols_P,rmse_g,-5.39701130539396,-15.69672315471883,5.308562080402723,0.8495
+incl_missing,Europe,Europe,243,243,within_blockcv,ols_TP,ols_P,spearman,0.12127710270924585,-0.009455867142350608,0.24758009735086078,0.966
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,xgb,baseline,r2,0.2313958542257946,-0.1299833909109395,0.4872728508451633,0.9085
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,xgb,baseline,rmse_g,-105.86699393401409,-174.82451358443086,-28.562692318166448,0.9945
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,xgb,baseline,spearman,0.850448335324518,0.5784101379941253,1.0761929085386297,1.0
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,ols_P,baseline,r2,0.1842743972840537,-0.09025445106877175,0.3893753690842984,0.913
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,ols_P,baseline,rmse_g,-85.45167927927719,-137.40302106350597,-29.47928943894109,0.9985
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,ols_P,baseline,spearman,0.725434054095834,0.4547855577810241,0.9639322759712761,1.0
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,ols_TP,baseline,r2,0.11824811340209351,-0.316426161713689,0.4100079721235156,0.728
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,ols_TP,baseline,rmse_g,-110.4863370402602,-170.77731677396616,-40.35900975328463,0.9985
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,ols_TP,baseline,spearman,0.8541468286081249,0.563682576319341,1.0870051165793249,1.0
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,xgb,ols_P,r2,0.047121456941740886,-0.16407687367577928,0.2610397146755531,0.657
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,xgb,ols_P,rmse_g,-20.415314654736903,-69.12283981127942,28.189702948034046,0.8035
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,xgb,ols_P,spearman,0.12501428122868408,-0.01358715373435453,0.2705786896961445,0.9605
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,xgb,ols_TP,r2,0.11314774082370108,-0.08284846531955402,0.33650287859595845,0.8555
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,xgb,ols_TP,rmse_g,4.619343106246106,-40.44108683560852,50.71902510833929,0.4345
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,xgb,ols_TP,spearman,-0.003698493283606885,-0.10132292863491435,0.10695998574717112,0.458
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,ols_TP,ols_P,r2,-0.06602628388196019,-0.25861897537730627,0.06589474746165849,0.174
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,ols_TP,ols_P,rmse_g,-25.03465776098301,-47.74331368499409,-1.8122674140880406,0.9835
+incl_missing,South & Central America,South & Central America,84,84,within_blockcv,ols_TP,ols_P,spearman,0.12871277451229096,0.02475507554635199,0.2459880415875378,0.994

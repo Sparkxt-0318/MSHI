@@ -1,0 +1,485 @@
+{
+  "flagged_passing_other_rules": 81,
+  "of_which_original_coords_in_asia_box": 44,
+  "of_which_in_asia_box_but_stated_country_outside_asia": 2,
+  "of_which_original_coords_in_us_box": 15,
+  "records_in_asia_box_listing": [
+    {
+      "Record_number": 5049.0,
+      "Country": "Japan",
+      "Latitude": 34.08,
+      "Longitude": 133.29,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 5458.0,
+      "Country": "Indonesia",
+      "Latitude": 2.82,
+      "Longitude": 111.85,
+      "mismatch_class": "label_wrong",
+      "confidence": "high"
+    },
+    {
+      "Record_number": 5460.0,
+      "Country": "Indonesia",
+      "Latitude": 2.78,
+      "Longitude": 111.83,
+      "mismatch_class": "label_wrong",
+      "confidence": "high"
+    },
+    {
+      "Record_number": 6967.0,
+      "Country": "China",
+      "Latitude": 21.5,
+      "Longitude": 100.83,
+      "mismatch_class": "near_border",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 6968.0,
+      "Country": "China",
+      "Latitude": 21.5,
+      "Longitude": 100.83,
+      "mismatch_class": "near_border",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 7401.0,
+      "Country": "China",
+      "Latitude": 21.744,
+      "Longitude": 104.314,
+      "mismatch_class": "coords_wrong",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 9842.0,
+      "Country": "Denmark",
+      "Latitude": 55.5,
+      "Longitude": 55.65,
+      "mismatch_class": "unclear",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 9843.0,
+      "Country": "Denmark",
+      "Latitude": 55.5,
+      "Longitude": 55.65,
+      "mismatch_class": "unclear",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 9959.0,
+      "Country": "China",
+      "Latitude": 27.47,
+      "Longitude": 89.73,
+      "mismatch_class": "label_wrong",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 10088.0,
+      "Country": "Indonesia",
+      "Latitude": 2.3,
+      "Longitude": 114.0,
+      "mismatch_class": "lat_sign",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 10089.0,
+      "Country": "Indonesia",
+      "Latitude": 2.3,
+      "Longitude": 114.0,
+      "mismatch_class": "lat_sign",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 10090.0,
+      "Country": "Indonesia",
+      "Latitude": 2.3,
+      "Longitude": 114.0,
+      "mismatch_class": "lat_sign",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 10091.0,
+      "Country": "Indonesia",
+      "Latitude": 2.3,
+      "Longitude": 114.0,
+      "mismatch_class": "lat_sign",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 10092.0,
+      "Country": "Indonesia",
+      "Latitude": 2.3,
+      "Longitude": 114.0,
+      "mismatch_class": "lat_sign",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 10093.0,
+      "Country": "Indonesia",
+      "Latitude": 2.3,
+      "Longitude": 114.0,
+      "mismatch_class": "lat_sign",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 10094.0,
+      "Country": "Indonesia",
+      "Latitude": 2.3,
+      "Longitude": 114.0,
+      "mismatch_class": "lat_sign",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 10095.0,
+      "Country": "Indonesia",
+      "Latitude": 2.3,
+      "Longitude": 114.0,
+      "mismatch_class": "lat_sign",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 10096.0,
+      "Country": "Indonesia",
+      "Latitude": 2.3,
+      "Longitude": 114.0,
+      "mismatch_class": "lat_sign",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 10097.0,
+      "Country": "Indonesia",
+      "Latitude": 2.3,
+      "Longitude": 114.0,
+      "mismatch_class": "lat_sign",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 10098.0,
+      "Country": "Indonesia",
+      "Latitude": 2.3,
+      "Longitude": 114.0,
+      "mismatch_class": "lat_sign",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 10578.0,
+      "Country": "Mexico",
+      "Latitude": 19.41,
+      "Longitude": 99.13,
+      "mismatch_class": "lon_sign",
+      "confidence": "high"
+    },
+    {
+      "Record_number": 10579.0,
+      "Country": "Mexico",
+      "Latitude": 19.41,
+      "Longitude": 99.13,
+      "mismatch_class": "lon_sign",
+      "confidence": "high"
+    },
+    {
+      "Record_number": 10599.0,
+      "Country": "China",
+      "Latitude": 21.27,
+      "Longitude": 101.07,
+      "mismatch_class": "near_border",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 10601.0,
+      "Country": "China",
+      "Latitude": 21.27,
+      "Longitude": 101.07,
+      "mismatch_class": "near_border",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12818.0,
+      "Country": "Turkey",
+      "Latitude": 37.16,
+      "Longitude": 58.98,
+      "mismatch_class": "unclear",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12819.0,
+      "Country": "Turkey",
+      "Latitude": 37.16,
+      "Longitude": 58.98,
+      "mismatch_class": "unclear",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12820.0,
+      "Country": "Turkey",
+      "Latitude": 37.16,
+      "Longitude": 58.98,
+      "mismatch_class": "unclear",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12885.0,
+      "Country": "Iran",
+      "Latitude": 53.27,
+      "Longitude": 36.51,
+      "mismatch_class": "swap",
+      "confidence": "high"
+    },
+    {
+      "Record_number": 12975.0,
+      "Country": "Taiwan",
+      "Latitude": 22.31,
+      "Longitude": 120.36,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12976.0,
+      "Country": "Taiwan",
+      "Latitude": 22.31,
+      "Longitude": 120.36,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12977.0,
+      "Country": "Taiwan",
+      "Latitude": 22.31,
+      "Longitude": 120.36,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12978.0,
+      "Country": "Taiwan",
+      "Latitude": 22.31,
+      "Longitude": 120.36,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12979.0,
+      "Country": "Taiwan",
+      "Latitude": 22.31,
+      "Longitude": 120.36,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12980.0,
+      "Country": "Taiwan",
+      "Latitude": 22.31,
+      "Longitude": 120.36,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12981.0,
+      "Country": "Taiwan",
+      "Latitude": 22.31,
+      "Longitude": 120.36,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12982.0,
+      "Country": "Taiwan",
+      "Latitude": 22.31,
+      "Longitude": 120.36,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12983.0,
+      "Country": "Taiwan",
+      "Latitude": 22.31,
+      "Longitude": 120.36,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12984.0,
+      "Country": "Taiwan",
+      "Latitude": 22.31,
+      "Longitude": 120.36,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12985.0,
+      "Country": "Taiwan",
+      "Latitude": 22.31,
+      "Longitude": 120.36,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12986.0,
+      "Country": "Taiwan",
+      "Latitude": 22.31,
+      "Longitude": 120.36,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12987.0,
+      "Country": "Taiwan",
+      "Latitude": 22.31,
+      "Longitude": 120.36,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12988.0,
+      "Country": "Taiwan",
+      "Latitude": 22.31,
+      "Longitude": 120.36,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12989.0,
+      "Country": "Taiwan",
+      "Latitude": 22.31,
+      "Longitude": 120.36,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 12990.0,
+      "Country": "Taiwan",
+      "Latitude": 22.31,
+      "Longitude": 120.36,
+      "mismatch_class": "offshore_near",
+      "confidence": "low"
+    }
+  ],
+  "records_in_us_box_listing": [
+    {
+      "Record_number": 938.0,
+      "Country": "USA",
+      "Latitude": 49.42,
+      "Longitude": -119.12,
+      "mismatch_class": "near_border",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 939.0,
+      "Country": "USA",
+      "Latitude": 49.42,
+      "Longitude": -119.12,
+      "mismatch_class": "near_border",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 1794.0,
+      "Country": "Canada",
+      "Latitude": 40.4,
+      "Longitude": -75.6,
+      "mismatch_class": "coords_wrong",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 6645.0,
+      "Country": "USA",
+      "Latitude": 48.87833333,
+      "Longitude": -76.125,
+      "mismatch_class": "coords_wrong",
+      "confidence": "medium"
+    },
+    {
+      "Record_number": 9384.0,
+      "Country": "Canada",
+      "Latitude": 42.35,
+      "Longitude": -83.27,
+      "mismatch_class": "near_border",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 9385.0,
+      "Country": "Canada",
+      "Latitude": 42.35,
+      "Longitude": -83.27,
+      "mismatch_class": "near_border",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 9386.0,
+      "Country": "Canada",
+      "Latitude": 42.35,
+      "Longitude": -83.27,
+      "mismatch_class": "near_border",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 9387.0,
+      "Country": "Canada",
+      "Latitude": 42.35,
+      "Longitude": -83.27,
+      "mismatch_class": "near_border",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 9388.0,
+      "Country": "Canada",
+      "Latitude": 42.35,
+      "Longitude": -83.27,
+      "mismatch_class": "near_border",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 9389.0,
+      "Country": "Canada",
+      "Latitude": 42.35,
+      "Longitude": -83.27,
+      "mismatch_class": "near_border",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 9390.0,
+      "Country": "Canada",
+      "Latitude": 42.35,
+      "Longitude": -83.27,
+      "mismatch_class": "near_border",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 9391.0,
+      "Country": "Canada",
+      "Latitude": 42.35,
+      "Longitude": -83.27,
+      "mismatch_class": "near_border",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 9594.0,
+      "Country": "USA",
+      "Latitude": 49.12,
+      "Longitude": -122.98,
+      "mismatch_class": "near_border",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 9595.0,
+      "Country": "USA",
+      "Latitude": 49.12,
+      "Longitude": -122.98,
+      "mismatch_class": "near_border",
+      "confidence": "low"
+    },
+    {
+      "Record_number": 10220.0,
+      "Country": "USA",
+      "Latitude": 44.73,
+      "Longitude": -78.34,
+      "mismatch_class": "label_wrong",
+      "confidence": "high"
+    }
+  ],
+  "n_checked": 13772,
+  "n_flagged": 283,
+  "share_flagged": 0.020548939878013362
+}

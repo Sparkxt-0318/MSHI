@@ -1,0 +1,385 @@
+{
+  "variant": "incl_missing",
+  "counts": {
+    "Asia": 432,
+    "Europe": 243,
+    "North America": 236,
+    "South & Central America": 84,
+    "Oceania": 35,
+    "Africa": 31
+  },
+  "train": [
+    "Asia",
+    "North America",
+    "Europe"
+  ],
+  "test": [
+    "Asia",
+    "North America",
+    "Europe",
+    "South & Central America",
+    "Africa",
+    "Oceania"
+  ],
+  "versions": {
+    "python": "3.11.18",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "scipy": "1.13.1",
+    "sklearn": "1.5.2",
+    "xgboost": "2.0.3",
+    "geopandas": "1.0.1",
+    "shapely": "2.0.6",
+    "pyproj": "3.7.0",
+    "rasterio": "1.4.3",
+    "matplotlib": "3.9.2",
+    "statsmodels": "0.14.4",
+    "rdata": "0.11.2",
+    "remotezip": "not installed",
+    "pyarrow": "17.0.0",
+    "gdal": "3.9.3"
+  },
+  "fits": {
+    "Asia": {
+      "ols_P_coef": [
+        4.055313338114601,
+        0.3639976583000822
+      ],
+      "ols_TP_coef": [
+        4.729986818908775,
+        0.01763990170258481,
+        0.23012735996285152
+      ],
+      "xgb_params": {
+        "max_depth": 1,
+        "learning_rate": 0.1,
+        "min_child_weight": 10.0,
+        "reg_lambda": 1.0
+      },
+      "xgb_n_estimators": 50,
+      "xgb_cv_mse_best": 0.30685536882134884,
+      "tune_seconds": 9.8,
+      "xgb_gain_importance": {
+        "bio1": 0.12462951065644776,
+        "bio4": 0.15104283077859296,
+        "bio5": 0.04610525882092187,
+        "bio6": 0.1966869514581561,
+        "bio12": 0.3023325772782287,
+        "bio14": 0.046678715561457716,
+        "bio15": 0.05990312920933848,
+        "bio17": 0.07262102623685644
+      }
+    },
+    "North America": {
+      "ols_P_coef": [
+        1.9113393255176334,
+        0.687302449387532
+      ],
+      "ols_TP_coef": [
+        2.4826520761633137,
+        0.016030615007120663,
+        0.5797097613712445
+      ],
+      "xgb_params": {
+        "max_depth": 2,
+        "learning_rate": 0.03,
+        "min_child_weight": 10.0,
+        "reg_lambda": 1.0
+      },
+      "xgb_n_estimators": 150,
+      "xgb_cv_mse_best": 0.28195563856847505,
+      "tune_seconds": 6.7,
+      "xgb_gain_importance": {
+        "bio1": 0.15371328532042147,
+        "bio4": 0.06834356560682593,
+        "bio5": 0.058809774704084036,
+        "bio6": 0.10046016012921519,
+        "bio12": 0.3261008488643754,
+        "bio14": 0.09375617050363931,
+        "bio15": 0.07122821878038456,
+        "bio17": 0.1275879760910541
+      }
+    },
+    "Europe": {
+      "ols_P_coef": [
+        5.195123254676833,
+        0.18458503093157913
+      ],
+      "ols_TP_coef": [
+        4.290402274899198,
+        0.028552918302938407,
+        0.2832411775208402
+      ],
+      "xgb_params": {
+        "max_depth": 1,
+        "learning_rate": 0.03,
+        "min_child_weight": 1.0,
+        "reg_lambda": 1.0
+      },
+      "xgb_n_estimators": 50,
+      "xgb_cv_mse_best": 0.3388585890973604,
+      "tune_seconds": 6.6,
+      "xgb_gain_importance": {
+        "bio1": 0.19785982908324404,
+        "bio4": 0.13894446505233649,
+        "bio5": 0.19090999710944714,
+        "bio6": 0.17811972696544237,
+        "bio12": 0.13094073436738182,
+        "bio14": 0.09996040750988454,
+        "bio15": 0.0632648399122636,
+        "bio17": 0.0
+      }
+    }
+  },
+  "within": {
+    "Asia": [
+      {
+        "fold": 0,
+        "n_train": 328,
+        "n_test": 104,
+        "xgb_params": {
+          "max_depth": 1,
+          "learning_rate": 0.03,
+          "min_child_weight": 1.0,
+          "reg_lambda": 1.0
+        },
+        "n_est": 100
+      },
+      {
+        "fold": 1,
+        "n_train": 338,
+        "n_test": 94,
+        "xgb_params": {
+          "max_depth": 1,
+          "learning_rate": 0.03,
+          "min_child_weight": 10.0,
+          "reg_lambda": 1.0
+        },
+        "n_est": 150
+      },
+      {
+        "fold": 2,
+        "n_train": 348,
+        "n_test": 84,
+        "xgb_params": {
+          "max_depth": 1,
+          "learning_rate": 0.03,
+          "min_child_weight": 5.0,
+          "reg_lambda": 10.0
+        },
+        "n_est": 150
+      },
+      {
+        "fold": 3,
+        "n_train": 357,
+        "n_test": 75,
+        "xgb_params": {
+          "max_depth": 1,
+          "learning_rate": 0.03,
+          "min_child_weight": 10.0,
+          "reg_lambda": 1.0
+        },
+        "n_est": 100
+      },
+      {
+        "fold": 4,
+        "n_train": 357,
+        "n_test": 75,
+        "xgb_params": {
+          "max_depth": 1,
+          "learning_rate": 0.1,
+          "min_child_weight": 1.0,
+          "reg_lambda": 1.0
+        },
+        "n_est": 50
+      }
+    ],
+    "North America": [
+      {
+        "fold": 0,
+        "n_train": 193,
+        "n_test": 43,
+        "xgb_params": {
+          "max_depth": 6,
+          "learning_rate": 0.03,
+          "min_child_weight": 10.0,
+          "reg_lambda": 1.0
+        },
+        "n_est": 100
+      },
+      {
+        "fold": 1,
+        "n_train": 187,
+        "n_test": 49,
+        "xgb_params": {
+          "max_depth": 1,
+          "learning_rate": 0.03,
+          "min_child_weight": 10.0,
+          "reg_lambda": 1.0
+        },
+        "n_est": 100
+      },
+      {
+        "fold": 2,
+        "n_train": 181,
+        "n_test": 55,
+        "xgb_params": {
+          "max_depth": 1,
+          "learning_rate": 0.1,
+          "min_child_weight": 5.0,
+          "reg_lambda": 10.0
+        },
+        "n_est": 100
+      },
+      {
+        "fold": 3,
+        "n_train": 196,
+        "n_test": 40,
+        "xgb_params": {
+          "max_depth": 3,
+          "learning_rate": 0.03,
+          "min_child_weight": 10.0,
+          "reg_lambda": 10.0
+        },
+        "n_est": 150
+      },
+      {
+        "fold": 4,
+        "n_train": 187,
+        "n_test": 49,
+        "xgb_params": {
+          "max_depth": 1,
+          "learning_rate": 0.03,
+          "min_child_weight": 10.0,
+          "reg_lambda": 10.0
+        },
+        "n_est": 150
+      }
+    ],
+    "Europe": [
+      {
+        "fold": 0,
+        "n_train": 209,
+        "n_test": 34,
+        "xgb_params": {
+          "max_depth": 1,
+          "learning_rate": 0.03,
+          "min_child_weight": 1.0,
+          "reg_lambda": 1.0
+        },
+        "n_est": 50
+      },
+      {
+        "fold": 1,
+        "n_train": 173,
+        "n_test": 70,
+        "xgb_params": {
+          "max_depth": 1,
+          "learning_rate": 0.03,
+          "min_child_weight": 10.0,
+          "reg_lambda": 10.0
+        },
+        "n_est": 300
+      },
+      {
+        "fold": 2,
+        "n_train": 197,
+        "n_test": 46,
+        "xgb_params": {
+          "max_depth": 1,
+          "learning_rate": 0.03,
+          "min_child_weight": 5.0,
+          "reg_lambda": 10.0
+        },
+        "n_est": 50
+      },
+      {
+        "fold": 3,
+        "n_train": 196,
+        "n_test": 47,
+        "xgb_params": {
+          "max_depth": 1,
+          "learning_rate": 0.03,
+          "min_child_weight": 5.0,
+          "reg_lambda": 10.0
+        },
+        "n_est": 50
+      },
+      {
+        "fold": 4,
+        "n_train": 197,
+        "n_test": 46,
+        "xgb_params": {
+          "max_depth": 1,
+          "learning_rate": 0.03,
+          "min_child_weight": 1.0,
+          "reg_lambda": 1.0
+        },
+        "n_est": 50
+      }
+    ],
+    "South & Central America": [
+      {
+        "fold": 0,
+        "n_train": 73,
+        "n_test": 11,
+        "xgb_params": {
+          "max_depth": 2,
+          "learning_rate": 0.1,
+          "min_child_weight": 10.0,
+          "reg_lambda": 1.0
+        },
+        "n_est": 600
+      },
+      {
+        "fold": 1,
+        "n_train": 70,
+        "n_test": 14,
+        "xgb_params": {
+          "max_depth": 1,
+          "learning_rate": 0.1,
+          "min_child_weight": 1.0,
+          "reg_lambda": 1.0
+        },
+        "n_est": 50
+      },
+      {
+        "fold": 2,
+        "n_train": 66,
+        "n_test": 18,
+        "xgb_params": {
+          "max_depth": 4,
+          "learning_rate": 0.03,
+          "min_child_weight": 1.0,
+          "reg_lambda": 10.0
+        },
+        "n_est": 100
+      },
+      {
+        "fold": 3,
+        "n_train": 54,
+        "n_test": 30,
+        "xgb_params": {
+          "max_depth": 4,
+          "learning_rate": 0.03,
+          "min_child_weight": 1.0,
+          "reg_lambda": 10.0
+        },
+        "n_est": 100
+      },
+      {
+        "fold": 4,
+        "n_train": 73,
+        "n_test": 11,
+        "xgb_params": {
+          "max_depth": 4,
+          "learning_rate": 0.03,
+          "min_child_weight": 1.0,
+          "reg_lambda": 10.0
+        },
+        "n_est": 100
+      }
+    ]
+  },
+  "seconds": 162.3
+}

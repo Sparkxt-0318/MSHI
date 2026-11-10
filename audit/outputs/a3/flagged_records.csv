@@ -1,0 +1,284 @@
+Record_number,Study_number,Country,Region,Site_name,Latitude,Longitude,unit_name,continent_at_coords,mismatch_class,confidence,fix_lat,fix_lon,fix_country,fix_continent,evidence,corroborated_by,dist_to_stated_km,Rs_annual,passes_other_step0_rules,original_in_asia_box,original_in_us_box
+5458.0,7228,Indonesia,Sarawak,,2.82,111.85,Malaysia,Asia,label_wrong,high,2.82,111.85,Malaysia,Asia,Region 'Sarawak' = admin-1 'sarawak' at the coordinates,,154.48749181084932,681.0,True,True,False
+5459.0,7228,Indonesia,Sarawak,,2.82,111.93,Malaysia,Asia,label_wrong,high,2.82,111.93,Malaysia,Asia,Region 'Sarawak' = admin-1 'sarawak' at the coordinates,,151.1641905140063,494.0,False,True,False
+5460.0,7228,Indonesia,Sarawak,,2.78,111.83,Malaysia,Asia,label_wrong,high,2.78,111.83,Malaysia,Asia,Region 'Sarawak' = admin-1 'sarawak' at the coordinates,,151.02693704353757,436.0,True,True,False
+10220.0,11148,USA,Ontario,Catchacoma,44.73,-78.34,Canada,North America,label_wrong,high,44.73,-78.34,Canada,North America,Region 'Ontario' = admin-1 'ontario' at the coordinates,,122.24826736188014,640.0,True,False,True
+10221.0,11148,USA,Ontario,Catchacoma,44.73,-78.34,Canada,North America,label_wrong,high,44.73,-78.34,Canada,North America,Region 'Ontario' = admin-1 'ontario' at the coordinates,,122.24826736188014,680.0,False,False,True
+6611.0,8077,Indonesia,Jambi,J-OP-6,1.637622222,103.7800278,Malaysia,Asia,lat_sign,high,-1.637622222,103.7800278,,Asia,Region matches admin-1 'jambi' at the fixed point,,57.259766491487646,1036.0,False,True,False
+12427.0,12976,New Zeland,Waikato region of Te Ika-a-Māui,Kopuatai,37.38,175.55,,Sea,lat_sign,high,-37.38,175.55,,Oceania,Region matches admin-1 'waikato' at the fixed point,,5377.9982690414645,,False,True,False
+12428.0,12976,New Zeland,Waikato region of Te Ika-a-Māui,Moanatuatua,37.92,175.36,,Sea,lat_sign,high,-37.92,175.36,,Oceania,Region matches admin-1 'waikato' at the fixed point,,5440.2875934068525,,False,True,False
+536.0,1371,Netherlands,,Fochtelooër,53.00833333,-6.397777778,Ireland,Europe,lon_sign,high,53.00833333,6.397777778,,Europe,,,688.1724662538873,,False,False,False
+7651.0,8137,Brazil,Sao Paulo,,-21.4,48.15,Madagascar,Africa,lon_sign,high,-21.4,-48.15,,South & Central America,,,7908.011869048072,,False,False,False
+7652.0,8137,Brazil,Sao Paulo,,-21.4,48.15,Madagascar,Africa,lon_sign,high,-21.4,-48.15,,South & Central America,,,7908.011869048072,,False,False,False
+7653.0,8137,Brazil,Sao Paulo,,-21.4,48.15,Madagascar,Africa,lon_sign,high,-21.4,-48.15,,South & Central America,,,7908.011869048072,,False,False,False
+7654.0,8137,Brazil,Sao Paulo,,-21.4,48.15,Madagascar,Africa,lon_sign,high,-21.4,-48.15,,South & Central America,,,7908.011869048072,,False,False,False
+9965.0,10905,Spain,Lanjaron,,36.9,3.5,,Sea,lon_sign,high,36.9,-3.5,,Europe,,,250.8788236788686,1073.1,True,False,False
+9966.0,10905,Spain,Lanjaron,,36.9,3.5,,Sea,lon_sign,high,36.9,-3.5,,Europe,,,250.8788236788686,1379.7,True,False,False
+9967.0,10905,Spain,Lanjaron,,36.9,3.5,,Sea,lon_sign,high,36.9,-3.5,,Europe,,,250.8788236788686,850.45,True,False,False
+10433.0,12011,Canada,Quebec,Laurentide Wildlife Reserve,48.21,71.25,Kazakhstan,Asia,lon_sign,high,48.21,-71.25,,North America,Region matches admin-1 'quebec' at the fixed point,,8072.17463696732,,False,True,False
+10434.0,12014,France,Auvergne,Laqueuille,45.63,-2.73,,Sea,lon_sign,high,45.63,2.73,,Europe,,,122.60579718623424,,False,False,False
+10435.0,12014,France,Auvergne,Laqueuille,45.63,-2.73,,Sea,lon_sign,high,45.63,2.73,,Europe,,,122.60579718623424,,False,False,False
+10436.0,12014,France,Auvergne,Laqueuille,45.63,-2.73,,Sea,lon_sign,high,45.63,2.73,,Europe,,,122.60579718623424,,False,False,False
+10437.0,12014,France,Auvergne,Laqueuille,45.63,-2.73,,Sea,lon_sign,high,45.63,2.73,,Europe,,,122.60579718623424,,False,False,False
+10578.0,14034,Mexico,Mexico Valley,Eucalypt plantation,19.41,99.13,Thailand,Asia,lon_sign,high,19.41,-99.13,,South & Central America,Region matches admin-1 'mexico' at the fixed point,,15455.25414840308,164.69,True,True,False
+10579.0,14034,Mexico,Mexico Valley,Grass–subshrub site,19.41,99.13,Thailand,Asia,lon_sign,high,19.41,-99.13,,South & Central America,Region matches admin-1 'mexico' at the fixed point,,15455.25414840308,98.31,True,True,False
+13585.0,14342,Canada,Alberta,LoamyRested,50.873,111.875,Russia,Asia,lon_sign,high,50.873,-111.875,,North America,Region matches admin-1 'alberta' at the fixed point,,8973.959094103417,824.9,False,True,False
+13586.0,14342,Canada,Alberta,LoamyGrazed,50.873,111.875,Russia,Asia,lon_sign,high,50.873,-111.875,,North America,Region matches admin-1 'alberta' at the fixed point,,8973.959094103417,730.0,False,True,False
+13587.0,14342,Canada,Alberta,SandyRested,50.894,111.881,Russia,Asia,lon_sign,high,50.894,-111.881,,North America,Region matches admin-1 'alberta' at the fixed point,,8971.740401924962,996.45,False,True,False
+13588.0,14342,Canada,Alberta,SandyGrazed,50.894,111.881,Russia,Asia,lon_sign,high,50.894,-111.881,,North America,Region matches admin-1 'alberta' at the fixed point,,8971.740401924962,806.65,False,True,False
+11197.0,14877,Australia,Tasmania,Central Plateau,-42.15,-147.133,,Sea,lon_sign,high,-42.15,147.133,,Oceania,Region matches admin-1 'tasmania' at the fixed point,,4263.828162336753,2137.96,True,False,False
+11198.0,14877,Australia,Tasmania,Central Plateau,-42.15,-147.133,,Sea,lon_sign,high,-42.15,147.133,,Oceania,Region matches admin-1 'tasmania' at the fixed point,,4263.828162336753,3041.39,False,False,False
+13210.0,15924,United Kingdom,Devon,Rothamsted Research,50.77,3.9,Flemish,Europe,lon_sign,high,50.77,-3.9,,Europe,Region matches admin-1 'devon' at the fixed point,,184.33181414004605,1044.0,False,False,False
+13211.0,15924,United Kingdom,Devon,Rothamsted Research,50.77,3.9,Flemish,Europe,lon_sign,high,50.77,-3.9,,Europe,Region matches admin-1 'devon' at the fixed point,,184.33181414004605,533.0,False,False,False
+13212.0,15924,United Kingdom,Devon,Rothamsted Research,50.77,3.9,Flemish,Europe,lon_sign,high,50.77,-3.9,,Europe,Region matches admin-1 'devon' at the fixed point,,184.33181414004605,1655.0,False,False,False
+13213.0,15924,United Kingdom,Devon,Rothamsted Research,50.77,3.9,Flemish,Europe,lon_sign,high,50.77,-3.9,,Europe,Region matches admin-1 'devon' at the fixed point,,184.33181414004605,1005.0,False,False,False
+13214.0,15924,United Kingdom,Devon,Rothamsted Research,50.77,3.9,Flemish,Europe,lon_sign,high,50.77,-3.9,,Europe,Region matches admin-1 'devon' at the fixed point,,184.33181414004605,2041.0,False,False,False
+1543.0,4564,Denmark,,Mols,53.05,3.47,,Sea,same_site_conflict,high,56.38,10.95,,Sea,was in_sea; 1 other record(s) of the same study and site name lie in the stated country (spread 0.00 deg),1546;1971;2099;2103;3584,408.8538307046823,597.0,True,False,False
+7724.0,11042,Greenland,West Greenland,Kangerlussuaq,67.1,60.267,Russia,Asia,same_site_conflict,high,67.1,-50.267,,North America,was unclear; 13 other record(s) of the same study and site name lie in the stated country (spread 0.00 deg),7725;7726;7727;7728;7729,2412.222428936789,,False,True,False
+14205.0,15902,Malaysia,Selangor,Raja Musa Peat Swamp Forest Reserve,3.426663889,10.33572222,Cameroon,Africa,same_site_conflict,high,3.4010212305,101.3351042,,Asia,was coords_wrong; 2 other record(s) of the same study and site name lie in the stated country (spread 0.05 deg),14204;14206,9889.06351622903,680.06,False,False,False
+12885.0,15290,Iran,Mazandaran Province,Sari City,53.27,36.51,Russia,Europe,swap,high,36.51,53.27,,Asia,Region matches admin-1 'mazandaran' at the fixed point,,1620.7202633799757,1007.5,True,True,False
+12886.0,15290,Iran,Mazandaran Province,Sari City,53.27,36.51,Russia,Europe,swap,high,36.51,53.27,,Asia,Region matches admin-1 'mazandaran' at the fixed point,,1620.7202633799757,1068.8,False,True,False
+12887.0,15290,Iran,Mazandaran Province,Sari City,53.27,36.51,Russia,Europe,swap,high,36.51,53.27,,Asia,Region matches admin-1 'mazandaran' at the fixed point,,1620.7202633799757,1235.2,False,True,False
+12888.0,15290,Iran,Mazandaran Province,Sari City,53.27,36.51,Russia,Europe,swap,high,36.51,53.27,,Asia,Region matches admin-1 'mazandaran' at the fixed point,,1620.7202633799757,1524.3,False,True,False
+803.0,243,Japan,,Nara,32.0,135.42,,Sea,in_sea,low,,,,,,,162.5230329073385,494.0,False,True,False
+5900.0,8187,Indonesia,Central Kalimantan,Cla,-2.28,-2.28,,Sea,in_sea,low,,,,,Region names 'central kalimantan' in the stated country,,10839.287979204666,2703.0,False,False,False
+5901.0,8187,Indonesia,Central Kalimantan,CLb,-2.28,-2.28,,Sea,in_sea,low,,,,,Region names 'central kalimantan' in the stated country,,10839.287979204666,2393.0,False,False,False
+5902.0,8187,Indonesia,Central Kalimantan,CLc,-2.28,-2.28,,Sea,in_sea,low,,,,,Region names 'central kalimantan' in the stated country,,10839.287979204666,3060.0,False,False,False
+7961.0,8306,Indonesia,Central Kalimantan Province,,-2.21,0.92,,Sea,in_sea,low,,,,,Region names 'central kalimantan' in the stated country,,10484.645518059444,,False,False,False
+7962.0,8306,Indonesia,Central Kalimantan Province,,-2.21,0.92,,Sea,in_sea,low,,,,,Region names 'central kalimantan' in the stated country,,10484.645518059444,,False,False,False
+7963.0,8306,Indonesia,Central Kalimantan Province,,-2.21,0.92,,Sea,in_sea,low,,,,,Region names 'central kalimantan' in the stated country,,10484.645518059444,,False,False,False
+7964.0,8306,Indonesia,Central Kalimantan Province,,-2.21,0.92,,Sea,in_sea,low,,,,,Region names 'central kalimantan' in the stated country,,10484.645518059444,,False,False,False
+7965.0,8306,Indonesia,Central Kalimantan Province,,-2.21,0.92,,Sea,in_sea,low,,,,,Region names 'central kalimantan' in the stated country,,10484.645518059444,,False,False,False
+7966.0,8306,Indonesia,Central Kalimantan Province,,-2.21,0.92,,Sea,in_sea,low,,,,,Region names 'central kalimantan' in the stated country,,10484.645518059444,,False,False,False
+6712.0,10442,Republic of Congo,Kissoko Village,,-4.7447,10.0211,,Sea,in_sea,low,,,,,,,150.84112913775314,653.0,False,False,False
+6713.0,10442,Republic of Congo,Kissoko Village,,-4.7447,10.0211,,Sea,in_sea,low,,,,,,,150.84112913775314,662.0,False,False,False
+9721.0,10803,USA,California,Twitchell Island,33.115,-121.646,,Sea,in_sea,low,,,,,Region names 'california' in the stated country,,150.71182659242734,,False,False,True
+7930.0,11086,Korea,Gyeonggi,Ansan,37.286,137.921,,Sea,in_sea,low,,,,,Region names 'gyeonggi' in the stated country,,536.0709844105494,,False,True,False
+7931.0,11086,Korea,Gyeonggi,Ansan,37.286,137.921,,Sea,in_sea,low,,,,,Region names 'gyeonggi' in the stated country,,536.0709844105494,,False,True,False
+7932.0,11086,Korea,Gyeonggi,Ansan,37.286,137.921,,Sea,in_sea,low,,,,,Region names 'gyeonggi' in the stated country,,536.0709844105494,,False,True,False
+8787.0,11450,Spain,San Fernando,,40.43,7.52,,Sea,in_sea,low,,,,,,,277.6579743228045,876.0,False,False,False
+7120.0,11842,Argentina,Santa Cruz province,Southern Patagonia,-60.13,-69.65,,Sea,in_sea,low,,,,,Region names 'santa cruz' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.40 deg),,586.0884148327401,,False,False,False
+11918.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,in_sea,low,,,,,Region names 'jiangsu' in the stated country,,247.2742976098376,,False,True,False
+11919.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,in_sea,low,,,,,Region names 'jiangsu' in the stated country,,247.2742976098376,,False,True,False
+11920.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,in_sea,low,,,,,Region names 'jiangsu' in the stated country,,247.2742976098376,,False,True,False
+11921.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,in_sea,low,,,,,Region names 'jiangsu' in the stated country,,247.2742976098376,,False,True,False
+11922.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,in_sea,low,,,,,Region names 'jiangsu' in the stated country,,247.2742976098376,,False,True,False
+11923.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,in_sea,low,,,,,Region names 'jiangsu' in the stated country,,247.2742976098376,,False,True,False
+11924.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,in_sea,low,,,,,Region names 'jiangsu' in the stated country,,247.2742976098376,,False,True,False
+11925.0,13493,China,Jiangsu,Nanjing Agricultural University experimental station,32.33,124.33,,Sea,in_sea,low,,,,,Region names 'jiangsu' in the stated country,,247.2742976098376,,False,True,False
+10903.0,14958,China,Liaohe Delta,Liaohe Delta,36.076,122.393,,Sea,in_sea,low,,,,,,,83.3137876316708,,False,True,False
+10904.0,14958,China,Liaohe Delta,Liaohe Delta,36.076,122.393,,Sea,in_sea,low,,,,,,,83.3137876316708,,False,True,False
+10905.0,14958,China,Liaohe Delta,Liaohe Delta,36.076,122.393,,Sea,in_sea,low,,,,,,,83.3137876316708,,False,True,False
+938.0,1850,USA,Washington,Kettle River Range,49.42,-119.12,Canada,North America,near_border,low,,,,,,,47.53422887363287,856.0,True,False,True
+939.0,1850,USA,Washington,Kettle River Range,49.42,-119.12,Canada,North America,near_border,low,,,,,,,47.53422887363287,849.0,True,False,True
+1846.0,4435,Finland,,Kannus-1,65.92,23.85,Sweden,Europe,near_border,low,,,,,,,17.902522947845913,682.0,True,False,False
+1847.0,4435,Finland,,Kannus-2,65.92,23.85,Sweden,Europe,near_border,low,,,,,,,17.902522947845913,805.0,True,False,False
+1848.0,4435,Finland,,Kannus-3,65.92,23.85,Sweden,Europe,near_border,low,,,,,,,17.902522947845913,559.0,True,False,False
+1849.0,4435,Finland,,Kannus-4,65.92,23.85,Sweden,Europe,near_border,low,,,,,,,17.902522947845913,524.0,True,False,False
+1850.0,4435,Finland,,Kannus-5,65.92,23.85,Sweden,Europe,near_border,low,,,,,,,17.902522947845913,938.0,True,False,False
+1851.0,4435,Finland,,Kannus-6,65.92,23.85,Sweden,Europe,near_border,low,,,,,,,17.902522947845913,668.0,True,False,False
+1521.0,4544,Austria,,Northern Limestone Alps,47.71,11.64,Germany,Europe,near_border,low,,,,,,,13.425221216430064,,False,False,False
+3650.0,4974,Finland,,,65.91666667,23.85,Sweden,Europe,near_border,low,,,,,,,18.25481576169876,,False,False,False
+5084.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,near_border,low,,,,,,,12.929143971962024,,False,False,False
+5085.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,near_border,low,,,,,,,12.929143971962024,,False,False,False
+5086.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,near_border,low,,,,,,,12.929143971962024,,False,False,False
+5087.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,near_border,low,,,,,,,12.929143971962024,,False,False,False
+5088.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,near_border,low,,,,,,,12.929143971962024,,False,False,False
+5089.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,near_border,low,,,,,,,12.929143971962024,,False,False,False
+5090.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,near_border,low,,,,,,,12.929143971962024,,False,False,False
+5091.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,near_border,low,,,,,,,12.929143971962024,,False,False,False
+5092.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,near_border,low,,,,,,,12.929143971962024,,False,False,False
+5093.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,near_border,low,,,,,,,12.929143971962024,,False,False,False
+5094.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,near_border,low,,,,,,,12.929143971962024,,False,False,False
+5095.0,6502,Austria,,,47.70555556,11.63916667,Germany,Europe,near_border,low,,,,,,,12.929143971962024,,False,False,False
+6006.0,9844,Estonia,,Erastvere,57.13,26.93,Latvia,Europe,near_border,low,,,,,,,47.98484865427474,817.0,False,True,False
+9384.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,near_border,low,,,,,,,16.045058245729297,817.6,True,False,True
+9385.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,near_border,low,,,,,,,16.045058245729297,777.45,True,False,True
+9386.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,near_border,low,,,,,,,16.045058245729297,1197.2,True,False,True
+9387.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,near_border,low,,,,,,,16.045058245729297,861.4,True,False,True
+9388.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,near_border,low,,,,,,,16.045058245729297,978.2,True,False,True
+9389.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,near_border,low,,,,,,,16.045058245729297,1011.05,True,False,True
+9390.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,near_border,low,,,,,,,16.045058245729297,876.0,True,False,True
+9391.0,10585,Canada,Ontario,Woodslee,42.35,-83.27,United States of America,North America,near_border,low,,,,,,,16.045058245729297,952.65,True,False,True
+9591.0,10690,France,Lonzée,,50.55,4.7,Walloon,Europe,near_border,low,,,,,,,44.00422828573632,370.5,False,False,False
+9594.0,10692,USA,BBECA,,49.12,-122.98,Canada,North America,near_border,low,,,,,,,14.739180600496294,186.15,True,False,True
+9595.0,10692,USA,BBECA,,49.12,-122.98,Canada,North America,near_border,low,,,,,,,14.739180600496294,182.5,True,False,True
+6967.0,11780,China,Yunnan,Xishuangbanna,21.5,100.83,Myanmar,Asia,near_border,low,,,,,,,10.859443456389103,1006.64,True,True,False
+6968.0,11780,China,Yunnan,Xishuangbanna,21.5,100.83,Myanmar,Asia,near_border,low,,,,,,,10.859443456389103,779.57,True,True,False
+10599.0,12184,China,Yunnan,Xishuangbanna,21.27,101.07,Laos,Asia,near_border,low,,,,,,,14.658770651867574,855.26,True,True,False
+10600.0,12184,China,Yunnan,Xishuangbanna,21.27,101.07,Laos,Asia,near_border,low,,,,,,,14.658770651867574,862.82,False,True,False
+10601.0,12184,China,Yunnan,Xishuangbanna,21.27,101.07,Laos,Asia,near_border,low,,,,,,,14.658770651867574,995.28,True,True,False
+10602.0,12184,China,Yunnan,Xishuangbanna,21.27,101.07,Laos,Asia,near_border,low,,,,,,,14.658770651867574,946.08,False,True,False
+13976.0,13073,Germany,Freiamt,,48.233,7.15,France,Europe,near_border,low,,,,,,,34.866451602712324,534.7,True,False,False
+13977.0,13073,Germany,Freiamt,,48.233,7.15,France,Europe,near_border,low,,,,,,,34.866451602712324,439.8,True,False,False
+1818.0,2305,Japan,Hokkaido,Tomakomai Experimental Forest,42.4,141.4,,Sea,offshore_near,low,,,,,Region names 'hokkaido' in the stated country,,13.403878903708376,,False,True,False
+1114.0,2355,Japan,,Mount Norikura,37.33,137.43,,Sea,offshore_near,low,,,,,,,14.625620191814043,,False,True,False
+2096.0,2962,Japan,,Tomakomai Experimental Forest,42.4,141.4,,Sea,offshore_near,low,,,,,,,13.403878903708376,878.0,False,True,False
+2655.0,3445,Japan,,Takayama Experimental Field Station,36.13,135.42,,Sea,offshore_near,low,,,,,,,43.406406501770284,,False,True,False
+1857.0,4426,Belize,,Twin Cays-dwarf,16.5,-88.1,,Sea,offshore_near,low,,,,,,,26.244507771308943,416.0,False,False,False
+1858.0,4426,Belize,,Twin Cays-fringe,16.5,-88.1,,Sea,offshore_near,low,,,,,,,26.244507771308943,738.0,False,False,False
+1862.0,4426,Australia,Western Australia,Giralia-dwarf,-21.73,114.58,,Sea,offshore_near,low,,,,,Region names 'western australia' in the stated country,,14.36541175394596,189.0,False,False,False
+1863.0,4426,Australia,Western Australia,Giralia-fringe,-21.73,114.58,,Sea,offshore_near,low,,,,,Region names 'western australia' in the stated country,,14.36541175394596,984.0,False,False,False
+4032.0,5016,Canada,Newfoundland and Labrador,,48.96527778,-63.63027778,,Sea,offshore_near,low,,,,,Region names 'newfoundland' in the stated country,,46.24433414398956,,False,False,False
+4033.0,5016,Canada,Newfoundland and Labrador,,48.96527778,-63.63027778,,Sea,offshore_near,low,,,,,Region names 'newfoundland' in the stated country,,46.24433414398956,,False,False,False
+4034.0,5016,Canada,Newfoundland and Labrador,,48.96527778,-63.63027778,,Sea,offshore_near,low,,,,,Region names 'newfoundland' in the stated country,,46.24433414398956,,False,False,False
+4035.0,5016,Canada,Newfoundland and Labrador,,48.88722222,-63.40222222,,Sea,offshore_near,low,,,,,Region names 'newfoundland' in the stated country,,45.05850642452906,,False,False,False
+4036.0,5016,Canada,Newfoundland and Labrador,,48.88722222,-63.40222222,,Sea,offshore_near,low,,,,,Region names 'newfoundland' in the stated country,,45.05850642452906,,False,False,False
+4037.0,5016,Canada,Newfoundland and Labrador,,48.88722222,-63.40222222,,Sea,offshore_near,low,,,,,Region names 'newfoundland' in the stated country,,45.05850642452906,,False,False,False
+5049.0,6497,Japan,,Kurose River Estuary,34.08,133.29,,Sea,offshore_near,low,,,,,,,10.39002171375648,92.0,True,True,False
+5142.0,6589,Japan,,Takayama experimental forest,37.13333333,137.4166667,,Sea,offshore_near,low,,,,,,,21.14925440284383,,False,True,False
+5143.0,6589,Japan,,Takayama experimental forest,37.13333333,137.4166667,,Sea,offshore_near,low,,,,,,,21.14925440284383,,False,True,False
+5144.0,6589,Japan,,Takayama experimental forest,37.13333333,137.4166667,,Sea,offshore_near,low,,,,,,,21.14925440284383,,False,True,False
+5145.0,6589,Japan,,Takayama experimental forest,37.13333333,137.4166667,,Sea,offshore_near,low,,,,,,,21.14925440284383,,False,True,False
+5933.0,9181,Belize,,Twin Cays,16.83,-88.1,,Sea,offshore_near,low,,,,,,,15.765586177943918,734.4,False,False,False
+5934.0,9181,Belize,,Twin Cays,16.83,-88.1,,Sea,offshore_near,low,,,,,,,15.765586177943918,416.4,False,False,False
+5935.0,9181,Belize,,Twin Cays,16.83,-88.1,,Sea,offshore_near,low,,,,,,,15.765586177943918,1112.4,False,False,False
+8964.0,9370,USA,Florida,Ona,27.4,-82.93,,Sea,offshore_near,low,,,,,Region names 'florida' in the stated country,,23.13689338132968,,False,False,True
+8965.0,9370,USA,Florida,Ona,27.4,-82.93,,Sea,offshore_near,low,,,,,Region names 'florida' in the stated country,,23.13689338132968,,False,False,True
+8966.0,9370,USA,Florida,Ona,27.4,-82.93,,Sea,offshore_near,low,,,,,Region names 'florida' in the stated country,,23.13689338132968,,False,False,True
+10156.0,11105,China,Jiuduansha,,31.2,121.95,,Sea,offshore_near,low,,,,,,,12.39552928965582,5084.1,False,True,False
+10157.0,11105,China,Jiuduansha,,31.2,121.96,,Sea,offshore_near,low,,,,,,,13.170085758510783,5840.1,False,True,False
+6603.0,11264,England,,Exmoor National Park-Aclands,49.78101667,-3.812333333,,Sea,offshore_near,low,,,,,,,47.99542920472274,,False,False,False
+6604.0,11264,England,,Exmoor National Park-Aclands,49.78101667,-3.812333333,,Sea,offshore_near,low,,,,,,,47.99542920472274,,False,False,False
+6605.0,11264,England,,Exmoor National Park-Aclands,49.78101667,-3.812333333,,Sea,offshore_near,low,,,,,,,47.99542920472274,,False,False,False
+6606.0,11264,England,,Exmoor National Park-Spooners,49.78095556,-3.748027778,,Sea,offshore_near,low,,,,,,,48.02113303564675,,False,False,False
+6607.0,11264,England,,Exmoor National Park-Spooners,49.78095556,-3.748027778,,Sea,offshore_near,low,,,,,,,48.02113303564675,,False,False,False
+6608.0,11264,England,,Exmoor National Park-Spooners,49.78095556,-3.748027778,,Sea,offshore_near,low,,,,,,,48.02113303564675,,False,False,False
+12975.0,15324,Taiwan,,,22.31,120.36,,Sea,offshore_near,low,,,,,,,18.68384032704021,1021.77,True,True,False
+12976.0,15324,Taiwan,,,22.31,120.36,,Sea,offshore_near,low,,,,,,,18.68384032704021,1048.26,True,True,False
+12977.0,15324,Taiwan,,,22.31,120.36,,Sea,offshore_near,low,,,,,,,18.68384032704021,1036.9,True,True,False
+12978.0,15324,Taiwan,,,22.31,120.36,,Sea,offshore_near,low,,,,,,,18.68384032704021,1165.57,True,True,False
+12979.0,15324,Taiwan,,,22.31,120.36,,Sea,offshore_near,low,,,,,,,18.68384032704021,1044.47,True,True,False
+12980.0,15324,Taiwan,,,22.31,120.36,,Sea,offshore_near,low,,,,,,,18.68384032704021,1029.34,True,True,False
+12981.0,15324,Taiwan,,,22.31,120.36,,Sea,offshore_near,low,,,,,,,18.68384032704021,900.67,True,True,False
+12982.0,15324,Taiwan,,,22.31,120.36,,Sea,offshore_near,low,,,,,,,18.68384032704021,1116.37,True,True,False
+12983.0,15324,Taiwan,,,22.31,120.36,,Sea,offshore_near,low,,,,,,,18.68384032704021,1097.45,True,True,False
+12984.0,15324,Taiwan,,,22.31,120.36,,Sea,offshore_near,low,,,,,,,18.68384032704021,1089.88,True,True,False
+12985.0,15324,Taiwan,,,22.31,120.36,,Sea,offshore_near,low,,,,,,,18.68384032704021,1101.24,True,True,False
+12986.0,15324,Taiwan,,,22.31,120.36,,Sea,offshore_near,low,,,,,,,18.68384032704021,1120.16,True,True,False
+12987.0,15324,Taiwan,,,22.31,120.36,,Sea,offshore_near,low,,,,,,,18.68384032704021,1078.53,True,True,False
+12988.0,15324,Taiwan,,,22.31,120.36,,Sea,offshore_near,low,,,,,,,18.68384032704021,1017.98,True,True,False
+12989.0,15324,Taiwan,,,22.31,120.36,,Sea,offshore_near,low,,,,,,,18.68384032704021,1070.96,True,True,False
+12990.0,15324,Taiwan,,,22.31,120.36,,Sea,offshore_near,low,,,,,,,18.68384032704021,1120.16,True,True,False
+2122.0,4212,Sweden,,Polana,48.63,19.53,Slovakia,Europe,unclear,low,,,,,,,869.6128182594613,,False,False,False
+4040.0,5390,Denmark,Greenland,Adventdalen,78.16666667,16.1,Svalbard Is.,Europe,unclear,low,,,,,,,643.479060437192,125.0,False,False,False
+4041.0,5390,Denmark,Greenland,Adventdalen,78.16666667,16.1,Svalbard Is.,Europe,unclear,low,,,,,,,643.479060437192,162.0,False,False,False
+4042.0,5390,Denmark,Greenland,Adventdalen,78.16666667,16.1,Svalbard Is.,Europe,unclear,low,,,,,,,643.479060437192,144.0,False,False,False
+4043.0,5390,Denmark,Greenland,Adventdalen,78.16666667,16.1,Svalbard Is.,Europe,unclear,low,,,,,,,643.479060437192,196.0,False,False,False
+5174.0,6617,Italy,South Tyrol,Renon,49.58333333,11.43333333,Germany,Europe,unclear,low,,,,,,,286.48084507852946,,False,False,False
+8398.0,8949,Antarctica,Antarctic Bird Island,,-54.0,-38.05,S. Geo. and the Is. (coast),Other,unclear,low,,,,,,,inf,,False,False,False
+9575.0,10679,Switzerland,Innertkirchen,Soca,46.33,13.55,Slovenia,Europe,unclear,low,,,,,,,237.8548346900565,,False,False,False
+9842.0,10800,Denmark,Danish ICOS RI site,,55.5,55.65,Russia,Europe,unclear,low,,,,,,,2526.331806889745,808.9,True,True,False
+9843.0,10800,Denmark,Danish ICOS RI site,,55.5,55.65,Russia,Europe,unclear,low,,,,,,,2526.331806889745,666.6,True,True,False
+7925.0,11098,Serbia,,Bugac,46.69,19.6,Hungary,Europe,unclear,low,,,,,,,57.507469822738486,,False,False,False
+7926.0,11098,Serbia,,Bugac,46.69,19.6,Hungary,Europe,unclear,low,,,,,,,57.507469822738486,,False,False,False
+7927.0,11098,Serbia,,Bugac,46.69,19.6,Hungary,Europe,unclear,low,,,,,,,57.507469822738486,,False,False,False
+7928.0,11098,Serbia,,Bugac,46.69,19.6,Hungary,Europe,unclear,low,,,,,,,57.507469822738486,,False,False,False
+7929.0,11098,Serbia,,Bugac,46.69,19.6,Hungary,Europe,unclear,low,,,,,,,57.507469822738486,,False,False,False
+8427.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,unclear,low,,,,,,,171.89071812543244,,False,True,False
+8428.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,unclear,low,,,,,,,171.89071812543244,,False,True,False
+8429.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,unclear,low,,,,,,,171.89071812543244,,False,True,False
+8430.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,unclear,low,,,,,,,171.89071812543244,,False,True,False
+8431.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,unclear,low,,,,,,,171.89071812543244,,False,True,False
+8432.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,unclear,low,,,,,,,171.89071812543244,,False,True,False
+8433.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,unclear,low,,,,,,,171.89071812543244,,False,True,False
+8434.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,unclear,low,,,,,,,171.89071812543244,,False,True,False
+8435.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,unclear,low,,,,,,,171.89071812543244,,False,True,False
+8436.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,unclear,low,,,,,,,171.89071812543244,,False,True,False
+8437.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,unclear,low,,,,,,,171.89071812543244,,False,True,False
+8438.0,11251,Mongolia,Dalbay,Long-Term Ecological Research,41.0234,100.76,China,Asia,unclear,low,,,,,,,171.89071812543244,,False,True,False
+8751.0,11434,Guinea,Britain Province,Bebere,-5.61,150.23,Papua New Guinea,Oceania,unclear,low,,,,,,,17556.326623421053,,False,True,False
+7263.0,11950,South Africa,Khawa,Khawa,-26.25,21.35,Botswana,Africa,unclear,low,,,,,,,52.41150310934553,,False,False,False
+7264.0,11950,South Africa,Tsabong,Tsabong,-25.57,22.25,Botswana,Africa,unclear,low,,,,,,,53.855649209088334,,False,False,False
+7265.0,11950,South Africa,Tshane,Tshane,-24.12,21.52,Botswana,Africa,unclear,low,,,,,,,154.90786533006582,,False,False,False
+7266.0,11950,South Africa,Takatshwaane,Takatshwaane,-22.47,21.57,Botswana,Africa,unclear,low,,,,,,,301.00785012612835,,False,False,False
+7267.0,11950,South Africa,Ngami,Ngami,-20.44,22.3,Botswana,Africa,unclear,low,,,,,,,535.3122900109043,,False,False,False
+10427.0,11966,Russia,Far East,,46.63,132.26,China,Asia,unclear,low,,,,,,,118.10205528882229,,False,True,False
+12818.0,13853,Turkey,,Harran University Experimental Farm,37.16,58.98,Iran,Asia,unclear,low,,,,,,,1254.2563034279397,2568.8,True,True,False
+12819.0,13853,Turkey,,Harran University Experimental Farm,37.16,58.98,Iran,Asia,unclear,low,,,,,,,1254.2563034279397,3780.4,True,True,False
+12820.0,13853,Turkey,,Harran University Experimental Farm,37.16,58.98,Iran,Asia,unclear,low,,,,,,,1254.2563034279397,2792.4,True,True,False
+537.0,1118,USA,Maine,Simmons-1,48.81,-69.1,Canada,North America,coords_wrong,medium,,,,,Region names 'maine' in the stated country,,150.42057131329227,,False,False,True
+1794.0,2095,Canada,Ontario,Mer Bleue,40.4,-75.6,United States of America,North America,coords_wrong,medium,,,,,Region names 'ontario' in the stated country,,373.0260848766311,305.0,True,False,True
+463.0,2347,Canada,Ontario,Turkey Lakes Watershed #31,47.05,-87.4,United States of America,North America,coords_wrong,medium,,,,,Region names 'ontario' in the stated country,,87.328779412749,,False,False,True
+464.0,2347,Canada,Ontario,Turkey Lakes Watershed #31,47.05,-87.4,United States of America,North America,coords_wrong,medium,,,,,Region names 'ontario' in the stated country,,87.328779412749,,False,False,True
+6645.0,7996,USA,New York,,48.87833333,-76.125,Canada,North America,coords_wrong,medium,,,,,Region names 'new york' in the stated country,,440.5219835456292,742.0,True,False,True
+6649.0,7996,USA,New York,,48.87833333,-76.125,Canada,North America,coords_wrong,medium,,,,,Region names 'new york' in the stated country,,440.5219835456292,758.0,False,False,True
+7401.0,8568,China,Guangxi,Shi Kang township,21.744,104.314,Vietnam,Asia,coords_wrong,medium,,,,,Region names 'guangxi' in the stated country,,92.37572689177269,1022.72,True,True,False
+7307.0,9343,Italy,,Tuscany,10.29,13.05,Nigeria,Africa,coords_wrong,medium,,,,,Region names 'tuscany' in the stated country,,2802.383661625708,1108.81,True,False,False
+11851.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.169,114.683,Mongolia,Asia,coords_wrong,medium,,,,,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,82.5049878864847,,False,True,False
+11852.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.168,114.683,Mongolia,Asia,coords_wrong,medium,,,,,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,82.39381336091677,,False,True,False
+11853.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.118,114.683,Mongolia,Asia,coords_wrong,medium,,,,,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,76.83516292488869,,False,True,False
+11855.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.952,114.683,Mongolia,Asia,coords_wrong,medium,,,,,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,125.89711423069178,,False,True,False
+11856.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.949,114.683,Mongolia,Asia,coords_wrong,medium,,,,,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,126.1804244899804,,False,True,False
+11857.0,13355,China,Hebei,Luancheng Agro- Ecosystem Experimental Station,46.849,114.683,Mongolia,Asia,coords_wrong,medium,,,,,Region names 'hebei' in the stated country; 2 other record(s) of the same study and site name lie in the stated country (spread 0.78 deg),,134.53661495597748,,False,True,False
+777.0,1599,Norway,,Skogaby,56.55,13.22,Sweden,Europe,label_wrong,medium,56.55,13.22,Sweden,Europe,title names 'sweden',,279.2307078143126,,False,False,False
+778.0,1599,Norway,,Skogaby,56.55,13.22,Sweden,Europe,label_wrong,medium,56.55,13.22,Sweden,Europe,title names 'sweden',,279.2307078143126,,False,False,False
+779.0,1599,Norway,,Skogaby,56.55,13.22,Sweden,Europe,label_wrong,medium,56.55,13.22,Sweden,Europe,title names 'sweden',,279.2307078143126,,False,False,False
+4038.0,5389,Denmark,Greenland,Adventdalen,78.16666667,16.1,Svalbard Is.,Europe,label_wrong,medium,78.16666667,16.1,Svalbard Is.,Europe,title names 'svalbard',,643.479060437192,204.0,False,False,False
+4039.0,5389,Denmark,Greenland,Adventdalen,78.16666667,16.1,Svalbard Is.,Europe,label_wrong,medium,78.16666667,16.1,Svalbard Is.,Europe,title names 'svalbard',,643.479060437192,292.0,False,False,False
+4047.0,5391,Denmark,Greenland,Adventdalen,78.16666667,16.1,Svalbard Is.,Europe,label_wrong,medium,78.16666667,16.1,Svalbard Is.,Europe,title names 'svalbard',,643.479060437192,494.0,False,False,False
+4048.0,5391,Denmark,Greenland,Adventdalen,78.16666667,16.1,Svalbard Is.,Europe,label_wrong,medium,78.16666667,16.1,Svalbard Is.,Europe,title names 'svalbard',,643.479060437192,646.0,False,False,False
+5692.0,7135,New Zealand,,La Foa River,-21.71138889,165.8183333,New Caledonia,Oceania,label_wrong,medium,-21.71138889,165.8183333,New Caledonia,Oceania,title names 'new caledonia',,1513.677513226024,175.0,True,False,False
+5693.0,7135,New Zealand,,La Foa River,-21.71138889,165.8183333,New Caledonia,Oceania,label_wrong,medium,-21.71138889,165.8183333,New Caledonia,Oceania,title names 'new caledonia',,1513.677513226024,319.0,False,False,False
+5694.0,7135,New Zealand,,La Foa River,-21.71138889,165.8183333,New Caledonia,Oceania,label_wrong,medium,-21.71138889,165.8183333,New Caledonia,Oceania,title names 'new caledonia',,1513.677513226024,386.0,True,False,False
+5695.0,7135,New Zealand,,La Foa River,-21.71138889,165.8183333,New Caledonia,Oceania,label_wrong,medium,-21.71138889,165.8183333,New Caledonia,Oceania,title names 'new caledonia',,1513.677513226024,872.0,False,False,False
+5696.0,7135,New Zealand,,La Foa River,-21.71138889,165.8183333,New Caledonia,Oceania,label_wrong,medium,-21.71138889,165.8183333,New Caledonia,Oceania,title names 'new caledonia',,1513.677513226024,319.0,True,False,False
+5697.0,7135,New Zealand,,La Foa River,-21.71138889,165.8183333,New Caledonia,Oceania,label_wrong,medium,-21.71138889,165.8183333,New Caledonia,Oceania,title names 'new caledonia',,1513.677513226024,689.0,False,False,False
+6651.0,10374,Norway,,Elva,58.33055556,26.52638889,Estonia,Europe,label_wrong,medium,58.33055556,26.52638889,Estonia,Europe,title names 'estonian',,1139.878829596469,490.0,False,True,False
+6652.0,10374,Norway,,Elva,58.33055556,26.52638889,Estonia,Europe,label_wrong,medium,58.33055556,26.52638889,Estonia,Europe,title names 'estonian',,1139.878829596469,510.0,False,True,False
+6653.0,10374,Norway,,Rouge,57.70944444,26.75583333,Estonia,Europe,label_wrong,medium,57.70944444,26.75583333,Estonia,Europe,title names 'estonian',,1209.6332206791892,370.0,False,True,False
+6654.0,10374,Norway,,Rouge,57.70944444,26.75583333,Estonia,Europe,label_wrong,medium,57.70944444,26.75583333,Estonia,Europe,title names 'estonian',,1209.6332206791892,390.0,False,True,False
+9959.0,10897,China,Eastern Himalayas,,27.47,89.73,Bhutan,Asia,label_wrong,medium,27.47,89.73,Bhutan,Asia,title names 'bhutan',,58.944428194378034,1280.0,True,True,False
+10320.0,11211,Bennin,Georgia,Columbus,32.32,-85.1,United States of America,North America,label_wrong,medium,32.32,-85.1,United States of America,North America,Region/Site_name names 'georgia',,8991.252022970297,,False,False,True
+11806.0,13249,Italy,Malta,Xrobb L-Ghaġin Nature park,35.84278,14.56865,Malta (coast),Europe,label_wrong,medium,35.84278,14.56865,Malta,Europe,Region/Site_name names 'malta',,97.12805231579122,345.887,False,False,False
+11807.0,13249,Italy,Malta,Xrobb L-Ghaġin Nature park,35.84372,14.56652,Malta (coast),Europe,label_wrong,medium,35.84372,14.56652,Malta,Europe,Region/Site_name names 'malta',,97.0631352539218,658.093,False,False,False
+11808.0,13249,Italy,Malta,Xrobb L-Ghaġin Nature park,35.8417,14.5697,Malta (coast),Europe,label_wrong,medium,35.8417,14.5697,Malta,Europe,Region/Site_name names 'malta',,97.22748445944768,1591.307,False,False,False
+13968.0,14825,Mongolia,Genhe,Kailaqi Forest,51.172,121.811,China,Asia,label_wrong,medium,51.172,121.811,China,Asia,title names 'china',,437.2998143476878,1025.6,False,True,False
+13969.0,14825,Mongolia,Genhe,Kailaqi Forest,51.172,121.811,China,Asia,label_wrong,medium,51.172,121.811,China,Asia,title names 'china',,437.2998143476878,666.0,False,True,False
+13970.0,14825,Mongolia,Genhe,Kailaqi Forest,51.172,121.811,China,Asia,label_wrong,medium,51.172,121.811,China,Asia,title names 'china',,437.2998143476878,1271.5,False,True,False
+13971.0,14825,Mongolia,Genhe,Kailaqi Forest,51.172,121.811,China,Asia,label_wrong,medium,51.172,121.811,China,Asia,title names 'china',,437.2998143476878,1055.8,False,True,False
+13972.0,14825,Mongolia,Genhe,Kailaqi Forest,51.172,121.811,China,Asia,label_wrong,medium,51.172,121.811,China,Asia,title names 'china',,437.2998143476878,1491.0,False,True,False
+13973.0,14825,Mongolia,Genhe,Kailaqi Forest,51.172,121.811,China,Asia,label_wrong,medium,51.172,121.811,China,Asia,title names 'china',,437.2998143476878,1146.6,False,True,False
+13974.0,14825,Mongolia,Genhe,Kailaqi Forest,51.172,121.811,China,Asia,label_wrong,medium,51.172,121.811,China,Asia,title names 'china',,437.2998143476878,1782.4,False,True,False
+13975.0,14825,Mongolia,Genhe,Kailaqi Forest,51.172,121.811,China,Asia,label_wrong,medium,51.172,121.811,China,Asia,title names 'china',,437.2998143476878,1725.6,False,True,False
+12934.0,15332,Zamibia,,Waterberg Plateau Park,-20.24,17.17,Namibia,Africa,label_wrong,medium,-20.24,17.17,Namibia,Africa,title names 'namibia',,663.5182701081703,,False,False,False
+12935.0,15332,Zamibia,,Waterberg Plateau Park,-20.24,17.17,Namibia,Africa,label_wrong,medium,-20.24,17.17,Namibia,Africa,title names 'namibia',,663.5182701081703,,False,False,False
+12936.0,15332,Zamibia,,Waterberg Plateau Park,-20.24,17.17,Namibia,Africa,label_wrong,medium,-20.24,17.17,Namibia,Africa,title names 'namibia',,663.5182701081703,,False,False,False
+12937.0,15332,Zamibia,,Waterberg Plateau Park,-20.24,17.17,Namibia,Africa,label_wrong,medium,-20.24,17.17,Namibia,Africa,title names 'namibia',,663.5182701081703,,False,False,False
+12938.0,15332,Zamibia,,Waterberg Plateau Park,-20.24,17.17,Namibia,Africa,label_wrong,medium,-20.24,17.17,Namibia,Africa,title names 'namibia',,663.5182701081703,,False,False,False
+12939.0,15332,Zamibia,,Waterberg Plateau Park,-20.24,17.17,Namibia,Africa,label_wrong,medium,-20.24,17.17,Namibia,Africa,title names 'namibia',,663.5182701081703,,False,False,False
+12940.0,15332,Zamibia,,Waterberg Plateau Park,-20.24,17.17,Namibia,Africa,label_wrong,medium,-20.24,17.17,Namibia,Africa,title names 'namibia',,663.5182701081703,,False,False,False
+12941.0,15332,Zamibia,,Waterberg Plateau Park,-20.24,17.17,Namibia,Africa,label_wrong,medium,-20.24,17.17,Namibia,Africa,title names 'namibia',,663.5182701081703,,False,False,False
+12942.0,15332,Zamibia,,Waterberg Plateau Park,-20.24,17.17,Namibia,Africa,label_wrong,medium,-20.24,17.17,Namibia,Africa,title names 'namibia',,663.5182701081703,,False,False,False
+12943.0,15332,Zamibia,,Waterberg Plateau Park,-20.24,17.17,Namibia,Africa,label_wrong,medium,-20.24,17.17,Namibia,Africa,title names 'namibia',,663.5182701081703,,False,False,False
+12944.0,15332,Zamibia,,Waterberg Plateau Park,-20.24,17.17,Namibia,Africa,label_wrong,medium,-20.24,17.17,Namibia,Africa,title names 'namibia',,663.5182701081703,,False,False,False
+12945.0,15332,Zamibia,,Waterberg Plateau Park,-20.24,17.17,Namibia,Africa,label_wrong,medium,-20.24,17.17,Namibia,Africa,title names 'namibia',,663.5182701081703,,False,False,False
+10088.0,10951,Indonesia,Kalimantan,,2.3,114.0,Malaysia,Asia,lat_sign,medium,-2.3,114.0,,Asia,,,85.13888396119805,867.24,True,True,False
+10089.0,10951,Indonesia,Kalimantan,,2.3,114.0,Malaysia,Asia,lat_sign,medium,-2.3,114.0,,Asia,,,85.13888396119805,630.72,True,True,False
+10090.0,10951,Indonesia,Kalimantan,,2.3,114.0,Malaysia,Asia,lat_sign,medium,-2.3,114.0,,Asia,,,85.13888396119805,1016.16,True,True,False
+10091.0,10951,Indonesia,Kalimantan,,2.3,114.0,Malaysia,Asia,lat_sign,medium,-2.3,114.0,,Asia,,,85.13888396119805,972.36,True,True,False
+10092.0,10951,Indonesia,Kalimantan,,2.3,114.0,Malaysia,Asia,lat_sign,medium,-2.3,114.0,,Asia,,,85.13888396119805,3074.76,True,True,False
+10093.0,10951,Indonesia,Kalimantan,,2.3,114.0,Malaysia,Asia,lat_sign,medium,-2.3,114.0,,Asia,,,85.13888396119805,2768.16,True,True,False
+10094.0,10951,Indonesia,Kalimantan,,2.3,114.0,Malaysia,Asia,lat_sign,medium,-2.3,114.0,,Asia,,,85.13888396119805,2890.8,True,True,False
+10095.0,10951,Indonesia,Kalimantan,,2.3,114.0,Malaysia,Asia,lat_sign,medium,-2.3,114.0,,Asia,,,85.13888396119805,1462.92,True,True,False
+10096.0,10951,Indonesia,Kalimantan,,2.3,114.0,Malaysia,Asia,lat_sign,medium,-2.3,114.0,,Asia,,,85.13888396119805,823.44,True,True,False
+10097.0,10951,Indonesia,Kalimantan,,2.3,114.0,Malaysia,Asia,lat_sign,medium,-2.3,114.0,,Asia,,,85.13888396119805,902.28,True,True,False
+10098.0,10951,Indonesia,Kalimantan,,2.3,114.0,Malaysia,Asia,lat_sign,medium,-2.3,114.0,,Asia,,,85.13888396119805,2268.84,True,True,False
+6878.0,10491,Spain,Toledo,El Regajal-Mar del Ontígola,40.0,3.6,,Sea,lon_sign,medium,40.0,-3.6,,Europe,,,17.385459662864793,416.0,False,False,False
+6879.0,10491,Spain,Toledo,El Regajal-Mar del Ontígola,40.0,3.6,,Sea,lon_sign,medium,40.0,-3.6,,Europe,,,17.385459662864793,495.0,False,False,False
+6880.0,10491,Spain,Toledo,El Regajal-Mar del Ontígola,40.0,3.6,,Sea,lon_sign,medium,40.0,-3.6,,Europe,,,17.385459662864793,492.0,False,False,False
+6881.0,10491,Spain,Toledo,El Regajal-Mar del Ontígola,40.0,3.6,,Sea,lon_sign,medium,40.0,-3.6,,Europe,,,17.385459662864793,549.0,True,False,False
+6904.0,10520,Burkina Faso,Laba,,11.67,2.83,Benin,Africa,lon_sign,medium,11.67,-2.83,,Africa,,,53.62224153240571,,False,False,False
+6905.0,10520,Burkina Faso,Laba,,11.67,2.83,Benin,Africa,lon_sign,medium,11.67,-2.83,,Africa,,,53.62224153240571,,False,False,False
+6906.0,10520,Burkina Faso,Laba,,11.67,2.83,Benin,Africa,lon_sign,medium,11.67,-2.83,,Africa,,,53.62224153240571,,False,False,False
+6907.0,10520,Burkina Faso,Tiogo,,12.23,2.7,Benin,Africa,lon_sign,medium,12.23,-2.7,,Africa,,,50.09956616592138,,False,False,False
+6908.0,10520,Burkina Faso,Tiogo,,12.23,2.7,Benin,Africa,lon_sign,medium,12.23,-2.7,,Africa,,,50.09956616592138,,False,False,False
+6909.0,10520,Burkina Faso,Tiogo,,12.23,2.7,Benin,Africa,lon_sign,medium,12.23,-2.7,,Africa,,,50.09956616592138,,False,False,False
+7814.0,11058,Senegal,Dahra,Sahel,15.4,15.43,Chad,Africa,lon_sign,medium,15.4,-15.43,,Africa,other transforms also land in stated country: swap_signs,,2901.863041596891,,False,False,False
+7815.0,11058,Senegal,Dahra,Sahel,15.4,15.43,Chad,Africa,lon_sign,medium,15.4,-15.43,,Africa,other transforms also land in stated country: swap_signs,,2901.863041596891,,False,False,False
+7816.0,11058,Senegal,Dahra,Sahel,15.4,15.43,Chad,Africa,lon_sign,medium,15.4,-15.43,,Africa,other transforms also land in stated country: swap_signs,,2901.863041596891,,False,False,False
+7817.0,11058,Senegal,Dahra,Sahel,15.4,15.43,Chad,Africa,lon_sign,medium,15.4,-15.43,,Africa,other transforms also land in stated country: swap_signs,,2901.863041596891,,False,False,False
+10170.0,11120,Spain,Iberian Peninsula,Prades Mountains,42.62,2.42,France,Europe,lon_sign,medium,42.62,-2.42,,Europe,,,25.201998572273425,1135.15,True,False,False
+10171.0,11120,Spain,Iberian Peninsula,Prades Mountains,42.62,2.42,France,Europe,lon_sign,medium,42.62,-2.42,,Europe,,,25.201998572273425,1069.45,True,False,False
+10172.0,11120,Spain,Iberian Peninsula,Prades Mountains,42.62,2.42,France,Europe,lon_sign,medium,42.62,-2.42,,Europe,,,25.201998572273425,1065.8,True,False,False
+10173.0,11120,Spain,Iberian Peninsula,Prades Mountains,42.62,2.42,France,Europe,lon_sign,medium,42.62,-2.42,,Europe,,,25.201998572273425,792.05,True,False,False

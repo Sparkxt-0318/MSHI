@@ -15,3 +15,6 @@ tiles/intermediate/zoom6.tif
 tiles/intermediate/zoom5.tif
 tiles/intermediate/master_3857.tif
 tiles/intermediate/asia_anomaly_rgba_3857_z6.tif
+
+# audit: regenerable raster-sampling cache
+audit/outputs/cache/

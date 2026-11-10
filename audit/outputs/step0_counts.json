@@ -1,0 +1,316 @@
+{
+  "created": "2026-11-10T07:15:43+00:00",
+  "versions": {
+    "python": "3.11.18",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "scipy": "1.13.1",
+    "sklearn": "1.5.2",
+    "xgboost": "2.0.3",
+    "geopandas": "1.0.1",
+    "shapely": "2.0.6",
+    "pyproj": "3.7.0",
+    "rasterio": "1.4.3",
+    "matplotlib": "3.9.2",
+    "statsmodels": "0.14.4",
+    "rdata": "0.11.2",
+    "remotezip": "not installed",
+    "pyarrow": "17.0.0",
+    "gdal": "3.9.3"
+  },
+  "steps_srdb": [
+    {
+      "rule": "all SRDB records (srdb-data.csv @02163a7)",
+      "n_before": 14169,
+      "n_removed": 0,
+      "n_after": 14169,
+      "note": ""
+    },
+    {
+      "rule": "Rs_annual reported",
+      "n_before": 14169,
+      "n_removed": 6377,
+      "n_after": 7792,
+      "note": ""
+    },
+    {
+      "rule": "unmanipulated (Manipulation == 'None' or missing)",
+      "n_before": 7792,
+      "n_removed": 2828,
+      "n_after": 4964,
+      "note": ""
+    },
+    {
+      "rule": "coordinates present and in bounds",
+      "n_before": 4964,
+      "n_removed": 134,
+      "n_after": 4830,
+      "note": ""
+    },
+    {
+      "rule": "Rs_annual within 50-4500 g C m-2 yr-1",
+      "n_before": 4830,
+      "n_removed": 60,
+      "n_after": 4770,
+      "note": ""
+    },
+    {
+      "rule": "no quality flag Q10-Q14",
+      "n_before": 4770,
+      "n_removed": 262,
+      "n_after": 4508,
+      "note": ""
+    },
+    {
+      "rule": "not a known duplicate (Duplicate_record empty)",
+      "n_before": 4508,
+      "n_removed": 13,
+      "n_after": 4495,
+      "note": ""
+    },
+    {
+      "rule": "annual coverage >= 1 or missing",
+      "n_before": 4495,
+      "n_removed": 881,
+      "n_after": 3614,
+      "note": ""
+    },
+    {
+      "rule": "country field agrees with coordinates (flagged records excluded)",
+      "n_before": 3614,
+      "n_removed": 81,
+      "n_after": 3533,
+      "note": ""
+    }
+  ],
+  "steps_cosore": [
+    {
+      "rule": "COSORE full-year dataset-year records (Rs ports, treatment None)",
+      "n_before": 63,
+      "n_removed": 0,
+      "n_after": 63,
+      "note": ""
+    },
+    {
+      "rule": "Rs_annual within 50-4500 and coordinates present",
+      "n_before": 63,
+      "n_removed": 0,
+      "n_after": 63,
+      "note": ""
+    }
+  ],
+  "steps_combined": [
+    {
+      "rule": "record located on land or within 10 km of land (continent assigned)",
+      "n_before": 3596,
+      "n_removed": 0,
+      "n_after": 3596,
+      "note": ""
+    },
+    {
+      "rule": "WorldClim value found within 3 pixels (~2.7 km)",
+      "n_before": 3596,
+      "n_removed": 8,
+      "n_after": 3588,
+      "note": "12 records used a neighbouring pixel"
+    }
+  ],
+  "marginal_counts_among_records_with_rs_annual": {
+    "manipulated (Manipulation not 'None' or missing)": 2828,
+    "no/invalid coordinates": 162,
+    "Rs_annual outside 50-4500": 72,
+    "quality flag Q10-Q14": 318,
+    "known duplicate (Duplicate_record set)": 64,
+    "annual coverage < 1": 1482,
+    "annual coverage missing": 613,
+    "country/coordinate mismatch": 149
+  },
+  "variants": {
+    "strict": {
+      "n_records": 3220,
+      "n_sites": 965,
+      "share_cells_multi_record": 0.6051813471502591,
+      "cells_spanning_two_continents": 0,
+      "sites_with_npp": 576,
+      "by_continent": [
+        {
+          "continent": "Asia",
+          "records": 1401,
+          "records_srdb": 1386,
+          "records_cosore": 15,
+          "studies": 490,
+          "sites": 392,
+          "sites_with_2plus_records": 245,
+          "sites_with_3plus_records": 168,
+          "median_rs_gm": 771.4754920712155,
+          "var_log_rs_sites": 0.37225522889303003
+        },
+        {
+          "continent": "North America",
+          "records": 745,
+          "records_srdb": 713,
+          "records_cosore": 32,
+          "studies": 205,
+          "sites": 210,
+          "sites_with_2plus_records": 135,
+          "sites_with_3plus_records": 95,
+          "median_rs_gm": 767.0335472829495,
+          "var_log_rs_sites": 0.3908769069041444
+        },
+        {
+          "continent": "Europe",
+          "records": 739,
+          "records_srdb": 731,
+          "records_cosore": 8,
+          "studies": 199,
+          "sites": 226,
+          "sites_with_2plus_records": 130,
+          "sites_with_3plus_records": 84,
+          "median_rs_gm": 653.0369147911945,
+          "var_log_rs_sites": 0.32381065038834095
+        },
+        {
+          "continent": "South & Central America",
+          "records": 208,
+          "records_srdb": 203,
+          "records_cosore": 5,
+          "studies": 73,
+          "sites": 77,
+          "sites_with_2plus_records": 47,
+          "sites_with_3plus_records": 28,
+          "median_rs_gm": 1401.335599235017,
+          "var_log_rs_sites": 0.410931266398038
+        },
+        {
+          "continent": "Africa",
+          "records": 58,
+          "records_srdb": 58,
+          "records_cosore": 0,
+          "studies": 25,
+          "sites": 27,
+          "sites_with_2plus_records": 13,
+          "sites_with_3plus_records": 8,
+          "median_rs_gm": 893.0999999999999,
+          "var_log_rs_sites": 0.3844446322396852
+        },
+        {
+          "continent": "Oceania",
+          "records": 69,
+          "records_srdb": 66,
+          "records_cosore": 3,
+          "studies": 28,
+          "sites": 33,
+          "sites_with_2plus_records": 14,
+          "sites_with_3plus_records": 10,
+          "median_rs_gm": 907.9999999999995,
+          "var_log_rs_sites": 0.26274086811078873
+        },
+        {
+          "continent": "Total",
+          "records": 3220,
+          "records_srdb": 3157,
+          "records_cosore": 63,
+          "studies": 1018,
+          "sites": 965,
+          "sites_with_2plus_records": 584,
+          "sites_with_3plus_records": 393,
+          "median_rs_gm": 767.1998969899224,
+          "var_log_rs_sites": 0.3915340056589003
+        }
+      ]
+    },
+    "incl_missing": {
+      "n_records": 3588,
+      "n_sites": 1061,
+      "share_cells_multi_record": 0.5956644674835061,
+      "cells_spanning_two_continents": 0,
+      "sites_with_npp": 639,
+      "by_continent": [
+        {
+          "continent": "Asia",
+          "records": 1587,
+          "records_srdb": 1572,
+          "records_cosore": 15,
+          "studies": 537,
+          "sites": 432,
+          "sites_with_2plus_records": 267,
+          "sites_with_3plus_records": 186,
+          "median_rs_gm": 764.7539865865359,
+          "var_log_rs_sites": 0.38177281227529775
+        },
+        {
+          "continent": "North America",
+          "records": 794,
+          "records_srdb": 762,
+          "records_cosore": 32,
+          "studies": 228,
+          "sites": 236,
+          "sites_with_2plus_records": 141,
+          "sites_with_3plus_records": 97,
+          "median_rs_gm": 764.4263445602418,
+          "var_log_rs_sites": 0.4256067753723354
+        },
+        {
+          "continent": "Europe",
+          "records": 821,
+          "records_srdb": 813,
+          "records_cosore": 8,
+          "studies": 217,
+          "sites": 243,
+          "sites_with_2plus_records": 139,
+          "sites_with_3plus_records": 93,
+          "median_rs_gm": 649.9130711102833,
+          "var_log_rs_sites": 0.3388096406111055
+        },
+        {
+          "continent": "South & Central America",
+          "records": 232,
+          "records_srdb": 227,
+          "records_cosore": 5,
+          "studies": 81,
+          "sites": 84,
+          "sites_with_2plus_records": 53,
+          "sites_with_3plus_records": 33,
+          "median_rs_gm": 1348.069649414333,
+          "var_log_rs_sites": 0.4065730327853141
+        },
+        {
+          "continent": "Africa",
+          "records": 71,
+          "records_srdb": 71,
+          "records_cosore": 0,
+          "studies": 29,
+          "sites": 31,
+          "sites_with_2plus_records": 17,
+          "sites_with_3plus_records": 11,
+          "median_rs_gm": 872.3499999999998,
+          "var_log_rs_sites": 0.5941956032676052
+        },
+        {
+          "continent": "Oceania",
+          "records": 83,
+          "records_srdb": 80,
+          "records_cosore": 3,
+          "studies": 33,
+          "sites": 35,
+          "sites_with_2plus_records": 15,
+          "sites_with_3plus_records": 11,
+          "median_rs_gm": 898.2113634357398,
+          "var_log_rs_sites": 0.24982008418863402
+        },
+        {
+          "continent": "Total",
+          "records": 3588,
+          "records_srdb": 3525,
+          "records_cosore": 63,
+          "studies": 1121,
+          "sites": 1061,
+          "sites_with_2plus_records": 632,
+          "sites_with_3plus_records": 431,
+          "median_rs_gm": 763.5099999999995,
+          "var_log_rs_sites": 0.4083888383031782
+        }
+      ]
+    }
+  }
+}

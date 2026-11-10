@@ -1,0 +1,30 @@
+key,doi,expected_title,cited_for
+Jian2021_SRDBV5,10.5194/essd-13-255-2021,A restructured and updated global soil respiration database (SRDB-V5),SRDB data source; A2/A3 novelty
+Jian2018,10.1111/gcb.14301,Constraining estimates of global soil respiration by quantifying sources of variability,A2 novelty (sources of variability)
+BondLamberty2010,10.5194/bg-7-1915-2010,A global database of soil respiration data,SRDB original paper
+BondLamberty2020_COSORE,10.1111/gcb.15353,COSORE: A community database for continuous soil respiration and other soil-atmosphere greenhouse gas flux data,COSORE data source
+MeyerPebesma2021,10.1111/2041-210X.13650,Predicting into unknown space? Estimating the area of applicability of spatial prediction models,A1 dissimilarity index / AOA
+MeyerPebesma2022,10.1038/s41467-022-29838-9,Machine learning-based global maps of ecological variables and the challenge of assessing them,A1 background
+Ploton2020,10.1038/s41467-020-18321-y,Spatial validation reveals poor predictive performance of large-scale ecological mapping models,A1 background
+Roberts2017,10.1111/ecog.02881,"Cross-validation strategies for data with temporal, spatial, hierarchical, or phylogenetic structure",A1 background
+Ludwig2023,10.1111/geb.13635,Assessing and improving the transferability of current global spatial prediction models,A1 background
+Wadoux2021,10.1016/j.ecolmodel.2021.109692,Spatial cross-validation is not the right way to evaluate map accuracy,A1 background (counterpoint)
+Mila2022,10.1111/2041-210X.13851,Nearest neighbour distance matching Leave-One-Out Cross-Validation for map validation,A1 background
+Valavi2019,10.1111/2041-210X.13107,blockCV: An r package for generating spatially or environmentally separated folds for k-fold cross-validation of species distribution models,A1 block CV
+FickHijmans2017,10.1002/joc.5086,WorldClim 2: new 1-km spatial resolution climate surfaces for global land areas,WorldClim data source
+Zizka2019,10.1111/2041-210X.13152,CoordinateCleaner: Standardized cleaning of occurrence records from biological collection databases,A3 precedent (SRDB issue 134)
+NakagawaSchielzeth2010,10.1111/j.1469-185X.2010.00141.x,Repeatability for Gaussian and non-Gaussian data: a practical guide for biologists,A2 concept (repeatability)
+Cressie1985,10.1007/BF01032109,Fitting variogram models by weighted least squares,A2 semivariogram fitting
+ChenGuestrin2016,10.1145/2939672.2939785,XGBoost: A Scalable Tree Boosting System,A1 model
+Stell2021,10.1111/gcb.15666,Spatial biases of information influence global estimates of soil respiration: How can we improve global predictions?,A1 novelty (prior Rs upscaling)
+Warner2019,10.1029/2019GB006264,Spatial predictions and associated uncertainty of annual soil respiration at the global scale,A1 novelty (prior Rs upscaling)
+Hashimoto2015,10.5194/bg-12-4121-2015,Global spatiotemporal distribution of soil respiration modeled using a global database,A1 novelty (prior Rs upscaling)
+Huang2020,10.1126/sciadv.abb8508,Spatial and temporal variations in global soil respiration and their relationships with climate and land cover,A1 novelty (prior Rs upscaling)
+BondLamberty2018,10.1038/s41586-018-0358-x,Globally rising soil heterotrophic respiration over recent decades,A1 novelty (prior Rh)
+Tang2020,10.5194/essd-12-1037-2020,Spatial and temporal patterns of global soil heterotrophic respiration in terrestrial ecosystems,A1 novelty (prior Rh upscaling)
+Yao2021,10.1029/2020GB006918,A data-driven global soil heterotrophic respiration dataset and the drivers of its inter-annual variability,A1 novelty (prior Rh upscaling)
+Konings2019,10.5194/bg-16-2269-2019,Global satellite-driven estimates of heterotrophic respiration,A1 novelty (prior Rh)
+Nissan2023,10.1038/s41467-023-38981-w,Global warming accelerates soil heterotrophic respiration,A1 novelty (prior Rh)
+Tramontana2016,10.5194/bg-13-4291-2016,Predicting carbon dioxide and energy fluxes across global FLUXNET sites with regression algorithms,A1 adjacent (FLUXCOM)
+Jung2020,10.5194/bg-17-1343-2020,Scaling carbon fluxes from eddy covariance sites to globe: synthesis and evaluation of the FLUXCOM approach,A1 adjacent (FLUXCOM)
+Jucker2022_Tallo,10.1111/gcb.16302,Tallo: A global tree allometry and crown architecture database,A3 novelty (source of the sentence quoted in SRDB issue 134)

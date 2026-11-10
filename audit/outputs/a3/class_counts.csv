@@ -1,0 +1,41 @@
+scope,mismatch_class,confidence,n_records,n_studies
+all records with coordinates,coords_wrong,medium,14,7
+all records with coordinates,in_sea,low,29,10
+all records with coordinates,label_wrong,high,5,2
+all records with coordinates,label_wrong,medium,42,10
+all records with coordinates,lat_sign,high,3,2
+all records with coordinates,lat_sign,medium,11,1
+all records with coordinates,lon_sign,high,26,9
+all records with coordinates,lon_sign,medium,18,4
+all records with coordinates,near_border,low,42,12
+all records with coordinates,offshore_near,low,49,13
+all records with coordinates,same_site_conflict,high,3,3
+all records with coordinates,swap,high,4,1
+all records with coordinates,unclear,low,37,12
+all records with coordinates,TOTAL,all,283,86
+records with Rs_annual,coords_wrong,medium,5,4
+records with Rs_annual,in_sea,low,7,4
+records with Rs_annual,label_wrong,high,5,2
+records with Rs_annual,label_wrong,medium,26,7
+records with Rs_annual,lat_sign,high,1,1
+records with Rs_annual,lat_sign,medium,11,1
+records with Rs_annual,lon_sign,high,16,5
+records with Rs_annual,lon_sign,medium,8,2
+records with Rs_annual,near_border,low,28,9
+records with Rs_annual,offshore_near,low,27,6
+records with Rs_annual,same_site_conflict,high,2,2
+records with Rs_annual,swap,high,4,1
+records with Rs_annual,unclear,low,9,3
+records with Rs_annual,TOTAL,all,149,47
+records passing all other Step 0 rules,coords_wrong,medium,4,4
+records passing all other Step 0 rules,label_wrong,high,3,2
+records passing all other Step 0 rules,label_wrong,medium,4,2
+records passing all other Step 0 rules,lat_sign,medium,11,1
+records passing all other Step 0 rules,lon_sign,high,6,3
+records passing all other Step 0 rules,lon_sign,medium,5,2
+records passing all other Step 0 rules,near_border,low,24,7
+records passing all other Step 0 rules,offshore_near,low,17,2
+records passing all other Step 0 rules,same_site_conflict,high,1,1
+records passing all other Step 0 rules,swap,high,1,1
+records passing all other Step 0 rules,unclear,low,5,2
+records passing all other Step 0 rules,TOTAL,all,81,27
